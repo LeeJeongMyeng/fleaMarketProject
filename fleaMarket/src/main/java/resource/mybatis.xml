@@ -6,13 +6,12 @@
 
 
 	<typeAliases>
-		<typeAlias alias="" type=""/>
-		
+		<typeAlias alias="member" type="vo.Member"/>
 	</typeAliases>
 
 	<!-- 2. 사용 XXXMapper.xml을 추가 -->
 	<mappers>
-		<mapper resource=""/>
+		<mapper resource="resource/a03_Mapper.xml"/>
 	</mappers>
 
 </configuration>

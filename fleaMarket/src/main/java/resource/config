@@ -5,7 +5,7 @@ jdbc.user=scott
 jdbc.pass=tiger
 
 # 2. 파일 업로드 정보(서버위치 정보)
-board.upload=C:/a01_javaxep/workspace/board2/src/main/webapp/z01_upload/
+file.upload=C:/a01_javaxep/workspace/board2/src/main/webapp/z01_upload/
 board.upload2=
 board.upload3=
 board.upload4=
