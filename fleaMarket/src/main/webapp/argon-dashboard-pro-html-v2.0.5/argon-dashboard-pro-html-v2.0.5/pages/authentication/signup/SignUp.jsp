@@ -157,12 +157,12 @@
 	const secondSection = document.querySelector('#SignUp_secondSection');
 	secondSection.style.display ='none';
     function SignUpNext(){
-    firstSection.classList.add('animate__fadeOutUp'); // 엘리먼트에 애니메이션 클래스 부여
+    firstSection.classList.add('animate__fadeOutLeft'); // 엘리먼트에 애니메이션 클래스 부여
     }
     
     firstSection.addEventListener('animationend', () => {
     	secondSection.style.display ='block';
-    	secondSection.classList.add('animate__fadeInUp');
+    	secondSection.classList.add('animate__fadeInRight');
     	
     });
     
