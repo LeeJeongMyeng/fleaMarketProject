@@ -11,9 +11,12 @@
 
 <head>
   <meta charset="utf-8" />
+ 
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  
   <link rel="apple-touch-icon" sizes="76x76" href="../../../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="../../../assets/img/favicon.png">
   <title>
@@ -35,7 +38,10 @@
 #SignUp_secondSection{
  display:none;
  position: absolute;
- top: 108px;
+ top: 80px;
+}
+.SignUp_wrap{
+margin-top: -5px;
 }
 </style>
 <body class="">
@@ -54,50 +60,63 @@
             <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
               <div class="card card-plain">
                 <div class="card-header pb-0 text-left">
-                  <h4 class="font-weight-bolder">Sign Up</h4>
-                  <p class="mb-0">가입하실 회원님의 정보를 입력해주세요.</p>
+                  <h4 class="font-weight-bolder">Sign Up </h4>
+                  
                 </div>
-                <div class="card-body pb-3">
+                <div class="card-body pb-3 SignUp_wrap">
                   <form role="form">
                   <div class="container animate__animated" id="SignUp_firstSection">
-	                  <label>이름</label>
+                  <p class="mb-0"><span class="font-weight-bolder">step 1/2</span><br>가입하실 회원님의 정보를 입력해주세요.</p>
+	                     <label>이메일</label>
 	                    <div class="mb-3">
-	                      <input type="text" class="form-control" placeholder="Name" aria-label="Name" name="name">
-	                    </div>
-	                    <label>이메일</label>
-	                    <div class="mb-3">
-	                      <input type="email" class="form-control" placeholder="Email" aria-label="Email">
+	                      <input type="email" class="form-control" placeholder="example@doamin.com" aria-label="email">
 	                    </div>
 	                    <label>비밀번호</label>
 	                    <div class="mb-3">
-	                      <input type="password" class="form-control" placeholder="Password" aria-label="Password">
+	                      <input type="password" class="form-control" placeholder="비밀번호" aria-label="password">
 	                    </div>
 	                    <label>비밀번호 확인</label>
 	                    <div class="mb-3">
-	                      <input type="password" class="form-control" placeholder="Password" aria-label="Password">
+	                      <input type="password" class="form-control" placeholder="비밀번호확인" aria-label="password2">
 	                    </div>
+	                    <label>이름</label>
+	                    <div class="mb-3">
+	                      <input type="text" class="form-control" placeholder="홍길동" aria-label="name" name="name">
+	                    </div>
+	                    <label>주민등록번호</label>
+	                    <div class="mb-3">
+	                      <input type="text" class="form-control" placeholder="123456-1234567" aria-label="personalNumber" name="personalnumber">
+	                    </div>	                    
 	                    <div class="text-center">
 	                      <button type="button" id="SignUp_nextBtn" onclick=" SignUpNext()" class="btn btn-primary w-100 mt-4 mb-0">다음 단계</button>
-	                    </div>
+	                    </div>	        
                   </div>
                   
                   
                   <div class="container animate__animated" id="SignUp_secondSection">
-	                  <label>이름</label>
+                   <p class="mb-0"><span class="font-weight-bolder">step 2/2</span><br>추가 정보를 입력해주시고,<br> 회원가입 완료를 진행해주세요!</p> <br>     
+	                    <label>핸드폰번호</label>
 	                    <div class="mb-3">
-	                      <input type="text" class="form-control" placeholder="Name" aria-label="Name" name="rrn">
+	                      <input type="text" class="form-control" placeholder="PhoneNumber" aria-label="PhoneNumber" name=phonenumber>
 	                    </div>
-	                    <label>이메일</label>
+	                    <label>주소</label>
 	                    <div class="mb-3">
-	                      <input type="email" class="form-control" placeholder="Email" aria-label="Email">
-	                    </div>
-	                    <label>비밀번호</label>
-	                    <div class="mb-3">
-	                      <input type="password" class="form-control" placeholder="Password" aria-label="Password">
+	                      <input type="password" class="form-control" placeholder="password" aria-label="password">
 	                    </div>
 	                    <label>비밀번호 확인</label>
 	                    <div class="mb-3">
-	                      <input type="password" class="form-control" placeholder="Password" aria-label="Password">
+	                      <input type="password" class="form-control" placeholder="password2" aria-label="password2">
+	                    </div>
+	                    <label>이름</label>
+	                    <div class="mb-3">
+	                      <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+							  <option selected>Open this select menu</option>
+							  <option value="1" title="http://www.w3.org/2000/svg">여성의류</option>
+							  <option value="1" title="">남성의류</option>
+							  <option value="1" title="">공통의류</option>
+							  <option value="2">Two</option>
+							  <option value="3">Three</option>
+							</select>
 	                    </div>
 	                    <div class="form-check form-check-info text-left">
 	                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
@@ -125,7 +144,7 @@
               <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signup-ill.jpg');
           background-size: cover;">
                 <span class="mask bg-primary opacity-4"></span>
-                <h4 class="mt-5 text-white font-weight-bolder position-relative">당신의 플리마켓 여정의 시작을<br> 진심으로 응원합니다.</h4>
+                <h4 class="mt-5 text-white font-weight-bolder position-relative">당신의 <span>플리마켓</span> 여정의 시작을<br> 진심으로 응원합니다.</h4>
                 <p class="text-white position-relative">ㅋㅋ!!! 좋은글귀넣기 ㅋㅋㅋㅋ!!!</p>
               </div>
             </div>
