@@ -1,0 +1,60 @@
+@charset "UTF-8";
+
+
+#SignUp_secondSection{
+	display:none;
+	position: absolute;
+	top: 80px;
+}
+.SignUp_wrap{ /* 회원가입틀 wrap */
+	margin-top: -5px;
+}
+.Signup_infomation{ /* step1/2 글자 위치 */
+	position: absolute;
+    top: 17px;
+    right: -50px;
+}
+.SecondSectionBtnWrap{ /* 2번째 섹션 버튼그룹 wrap */
+	display:flex;
+	margin-top: -20px;
+	margin-left: 22px;
+    width: 351px;
+}
+.SignUp_container{ /* 회원가입 틀 위치조정 */
+	margin-top: -10px;
+	margin-left: 141px;
+}
+.SignUp_cardgroup{ /* 사업자/셀러 카드그룹 크기 */
+	width: 553px;
+	margin-left: -76px;
+}
+.SignUp_cardgroup .card{
+	border:1px solid;
+}
+.SignUp_cardgroup .card img{
+	width: 57px;
+    margin-left: 112px;
+    margin-top: 17px;
+}
+.SignUp_cardgroup .card p{
+	font-size:12px;
+}
+.SignUp_cardgroup .card p span{
+	font-weight:bold;
+}
+#Signup_authSpan{
+	margin-left: 108px;
+    margin-top: 22px;
+}
+#SignUp_nextBtn{
+    position: absolute;
+    top: 44%;
+    right: -38%;
+    background-color: #a28adf;
+}
+#SignUp_nextBtn img{
+   width: 24px;
+}
+#SignUp_prevBtn{
+	background-color: #a28adf;
+}

@@ -33,66 +33,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 </head>
-<style>
-
-#SignUp_secondSection{
-	display:none;
-	position: absolute;
-	top: 80px;
-}
-.SignUp_wrap{ /* 회원가입틀 wrap */
-	margin-top: -5px;
-}
-.Signup_infomation{ /* step1/2 글자 위치 */
-	position: absolute;
-    top: 17px;
-    right: -50px;
-}
-.SecondSectionBtnWrap{ /* 2번째 섹션 버튼그룹 wrap */
-	display:flex;
-	margin-top: -20px;
-	margin-left: 22px;
-    width: 351px;
-}
-.SignUp_container{ /* 회원가입 틀 위치조정 */
-	margin-top: -10px;
-	margin-left: 141px;
-}
-.SignUp_cardgroup{ /* 사업자/셀러 카드그룹 크기 */
-	width: 553px;
-	margin-left: -76px;
-}
-.SignUp_cardgroup .card{
-	border:1px solid;
-}
-.SignUp_cardgroup .card img{
-	width: 57px;
-    margin-left: 112px;
-    margin-top: 17px;
-}
-.SignUp_cardgroup .card p{
-	font-size:12px;
-}
-.SignUp_cardgroup .card p span{
-	font-weight:bold;
-}
-#Signup_authSpan{
-	margin-left: 108px;
-    margin-top: 22px;
-}
-#SignUp_nextBtn{
-    position: absolute;
-    top: 44%;
-    right: -38%;
-    background-color: #a28adf;
-}
-#SignUp_nextBtn img{
-   width: 24px;
-}
-#SignUp_prevBtn{
-	background-color: #a28adf;
-}
-</style>
+<link href="${path}/resource/css/Req1000/SignUp.css" rel="stylesheet" />
 <body class="">
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
@@ -202,7 +143,7 @@
 	                      </label>
 	                    </div>
 	                    <div class="text-center SecondSectionBtnWrap">
-	                      <button type="button" id="SignUp_prevBtn" onclick="SignUpNext()" class="btn btn-primary w-50 mt-4 me-3 mb-0">이전 단계</button><br>
+	                      <button type="button" id="SignUp_prevBtn" onclick="SignUpPrev()" class="btn btn-primary w-50 mt-4 me-3 mb-0">이전 단계</button><br>
 	                      <button type="button" onclick="SignUp_Ok()" class="btn btn-primary w-50 mt-4 mb-0">가입완료</button>
 	                    </div>
                   </div>
@@ -255,29 +196,14 @@
     }
     
     
-    //회원가입 양식 애니메이션
-    const firstSection = document.querySelector('#SignUp_firstSection');
-	const secondSection = document.querySelector('#SignUp_secondSection');
-	secondSection.style.display ='none';
-	//다음버튼눌렀을 때,
-    function SignUpNext(){
-    firstSection.classList.add('animate__fadeOutLeft'); // 엘리먼트에 애니메이션 클래스 부여
-    }
-    firstSection.addEventListener('animationend', () => {
-    	secondSection.style.display ='block';
-    	secondSection.classList.add('animate__fadeInRight');
-    });
-    
-    
-    
-    function SignUp_Ok(){
-    	console.log($('[name=name]').val()+":"+$('[name=rrn]').val())
-    }
+
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
+  <%--회원단 js파일 --%>
+  <script src="${path}/resource/js/Req1000/SignUp.js"></script>
 </body>
 
 </html>
