@@ -223,7 +223,7 @@
           background-size: cover;">
                 <span class="mask bg-primary opacity-4"></span>
                 <h4 class="mt-5 text-white font-weight-bolder position-relative">당신의 <span>플리마켓</span> 여정의 시작을<br> 진심으로 응원합니다.</h4>
-                <p class="text-white position-relative">ㅋㅋ!!! 좋은글귀넣기 ㅋㅋㅋㅋ!!!</p>
+                <p class="text-white position-relative">ㅋㅋ!!! 좋은글귀넣기 ㅋㅋㅋ!!!</p>
               </div>
                 <div class="card-footer text-center pt-0 px-sm-4 px-1" id="SignUp_Login">
                   <p class="mb-4 mx-auto">
