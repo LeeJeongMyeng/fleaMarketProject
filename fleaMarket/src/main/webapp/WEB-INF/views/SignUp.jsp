@@ -51,7 +51,7 @@
               <div class="card card-plain">
                 <div class="card-header pb-0 text-left">
                   <h4 class="font-weight-bolder">Sign Up </h4>
-                  <p class="mb-0 Signup_infomation"><span class="font-weight-bolder">step 1/2</span><br>가입하실 회원님의 정보를 입력해주세요.</p>
+                  <p class="mb-0 Signup_infomation"><span class="font-weight-bolder">step 1/3</span><br>다음 정보를 입력해주세요.</p>
                   
                 </div>
                 <div class="card-body pb-3 SignUp_wrap">
@@ -59,56 +59,65 @@
                   <div class="container animate__animated" id="SignUp_firstSection">              
 	                     <label>이메일</label>
 	                    <div class="mb-1">
-	                      <input type="email" class="form-control form-control-sm" placeholder="example@doamin.com" aria-label="email">
+	                      <input type="email" class="form-control form-control mb-3" placeholder="example@doamin.com" aria-label="email">
 	                    </div>
 	                    <label>비밀번호</label>
 	                    <div class="mb-1">
-	                      <input type="password" class="form-control form-control-sm " placeholder="비밀번호" aria-label="password">
+	                      <input type="password" class="form-control form-control mb-3 " placeholder="비밀번호" aria-label="password">
 	                    </div>
 	                    <label>비밀번호 확인</label>
 	                    <div class="mb-1">
-	                      <input type="password" class="form-control form-control-sm" placeholder="비밀번호확인" aria-label="password2">
+	                      <input type="password" class="form-control form-control mb-3" placeholder="비밀번호확인" aria-label="password2">
 	                    </div>
 	                    <label>이름</label>
 	                    <div class="mb-1">
-	                      <input type="text" class="form-control form-control-sm" placeholder="홍길동" aria-label="name" name="name">
+	                      <input type="text" class="form-control form-control mb-3" placeholder="홍길동" aria-label="name" name="name">
 	                    </div>
 	                    <label>주민등록번호</label>
 	                    <div class="mb-1">
-	                      <input type="text" class="form-control form-control-sm" placeholder="123456-1234567" aria-label="personalNumber" name="personalnumber">
+	                      <input type="text" class="form-control form-control mb-3" placeholder="123456-1234567" aria-label="personalNumber" name="personalnumber">
 	                    </div>	
-	                    <label>핸드폰번호</label>
-	                    <div class="mb-2">
-	                      <input type="text" class="form-control form-control-sm" placeholder="PhoneNumber" aria-label="PhoneNumber" name=phonenumber>
-	                    </div>
-	                    <label>주소</label>
-	                    <div class="mb-1">
-	                       <div class="row">
-	                       	<div class="col-4">
-	                        	<input type="text" class="form-control form-control-sm" id="sample6_postcode" placeholder="우편번호">
-	                        </div>
-	                        <div class="col-8">
-	                        	<input type="button" class="btn btn-primary w-50" style="font-size: x-small"  onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-	                        </div>
-	                       </div>
-							<input type="text" class="form-control form-control-sm mt-n1" id="sample6_address" placeholder="주소"><br>
-							<input type="text" class="form-control form-control-sm  mt-n3" id="sample6_extraAddress" placeholder="참고항목"><br>
-							<input type="text" class="form-control form-control-sm  mt-n3" id="sample6_detailAddress" placeholder="상세주소">
-	                    </div>                    
+	                               
 	                    <div class="text-center">
-	                      <button type="button" id="SignUp_nextBtn" onclick="SignUpNext()" class="btn btn-primary w-25 mt-4 mb-0">다음 단계<img src="${path}/resource/img/Member/SignUp/next_w.png"/></button>
+	                      <button type="button" id="SignUp_nextBtn" onclick="SignUpHandler(1)" class="btn btn-primary w-100 mt-4 mb-0">다음 단계<img src="${path}/resource/img/Member/SignUp/next_w.png"/></button>
 	                    </div>	        
                   </div>
                   
                   
                   <div class="container animate__animated" id="SignUp_secondSection">
-	                    <label id="Signup_authSpan" style="font-size:large;">가입 용도 선택해주세요</label>
+	                     <label>핸드폰번호</label>
+	                    <div class="mb-2">
+	                      <input type="text" class="form-control form-control mb-3" placeholder="PhoneNumber" aria-label="PhoneNumber" name=phonenumber>
+	                    </div>
+	                    <label>주소</label>
+	                    <div class="mb-1">
+	                       <div class="row">
+	                       	<div class="col-4">
+	                        	<input type="text" class="form-control form-control" id="sample6_postcode" placeholder="우편번호">
+	                        </div>
+	                        <div class="col-8">
+	                        	<input type="button" class="btn btn-primary w-50" style="font-size: x-small"  onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+	                        </div>
+	                       </div>
+							<input type="text" class="form-control form-control mt-n1" id="sample6_address" placeholder="주소"><br>
+							<input type="text" class="form-control form-control  mt-n3" id="sample6_extraAddress" placeholder="참고항목"><br>
+							<input type="text" class="form-control form-control  mt-n3 mb-6" id="sample6_detailAddress" placeholder="상세주소">
+	                    </div>        
+	                    
+	                    <div class="text-center SecondSectionBtnWrap">
+	                      <button type="button" id="SignUp_prevBtn" onclick="SignUpHandler(-1)" class="btn btn-primary w-50 mt-4 me-3 mb-0">이전 단계</button><br>
+	                      <button type="button" onclick="SignUpHandler(2)" class="btn btn-primary w-50 mt-4 mb-0">최종단계 Go!</button>
+	                    </div>
+                  </div>
+                  <div class="container animate__animated" id="SignUp_thirdSection">
+	                    <label id="Signup_authSpan" style="font-size:large;">&#60;가입 용도 선택해주세요&#62;</label>
 	                    <div class="card-group SignUp_cardgroup">
 						  <div class="card">
 						    <img src="https://cdn-icons-png.flaticon.com/512/3981/3981072.png" class="card-img-top" alt="...">
 						    <div class="card-body">
 						      <h6 class="card-title">일반회원(셀러)</h5>
-						      <p class="card-text">일반 회원으로 <span>플리마켓 홍보글 작성외</span>에는 플랫폼을 자유로이 이용가능합니다.</p>
+						      <p class="card-text">일반 회원으로 <span>플리마켓 홍보글 작성외</span>에는 플랫폼을 자유로이 이용가능합니다.
+						      <br><br> 가입 이후에도,<br><span>사업자 전환 신청<span>이 가능합니다!</p>
 						    </div>
 						  </div>
 						  <div class="card">
@@ -124,7 +133,7 @@
 						    </div>
 						  </div>
 						</div>
-	                    <label style="font-size:large; margin:21px 0 -1px 55px;">셀러님의 주 판매 용품이 무엇인가요?</label>
+	                    <label style="font-size:large; margin:21px 0 -1px 39px;">&#60;셀러님의 주 판매 용품이 무엇인가요?&#62;</label>
 	                    <label style="font-size:5px; color:#7c6da1; margin-left:30px; width: 350px;">통계에 활용됩니다. 통계창에서 최근 유행하는 상품 카테고리를 확인해보세요!</label>
 	                    <div class="mb-2" >
 	                      <select class="form-select form-select-md mb-3 ms-4" aria-label=".form-select-lg example">
@@ -143,7 +152,7 @@
 	                      </label>
 	                    </div>
 	                    <div class="text-center SecondSectionBtnWrap">
-	                      <button type="button" id="SignUp_prevBtn" onclick="SignUpPrev()" class="btn btn-primary w-50 mt-4 me-3 mb-0">이전 단계</button><br>
+	                      <button type="button" id="SignUp_prevBtn" onclick="SignUpHandler(-2)" class="btn btn-primary w-50 mt-4 me-3 mb-0">이전 단계</button><br>
 	                      <button type="button" onclick="SignUp_Ok()" class="btn btn-primary w-50 mt-4 mb-0">가입완료</button>
 	                    </div>
                   </div>

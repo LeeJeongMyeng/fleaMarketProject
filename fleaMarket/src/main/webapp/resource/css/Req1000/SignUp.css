@@ -1,11 +1,20 @@
 @charset "UTF-8";
 
-
+#SignUp_firstSection{
+	margin-bottom: -153px;
+	margin-top: 27px;
+}
 #SignUp_secondSection{
 	display:none;
 	position: absolute;
-	top: 80px;
+	top: 152px;
 }
+#SignUp_thirdSection{
+	display:none;
+	position: absolute;
+	top: 91px;
+}
+
 .SignUp_wrap{ /* 회원가입틀 wrap */
 	margin-top: -5px;
 }
@@ -13,6 +22,7 @@
 	position: absolute;
     top: 17px;
     right: -50px;
+    width: 267px;
 }
 .SecondSectionBtnWrap{ /* 2번째 섹션 버튼그룹 wrap */
 	display:flex;
@@ -21,7 +31,7 @@
     width: 351px;
 }
 .SignUp_container{ /* 회원가입 틀 위치조정 */
-	margin-top: -10px;
+	margin-top: -204px;
 	margin-left: 141px;
 }
 .SignUp_cardgroup{ /* 사업자/셀러 카드그룹 크기 */
@@ -46,14 +56,10 @@
 	margin-left: 108px;
     margin-top: 22px;
 }
-#SignUp_nextBtn{
-    position: absolute;
-    top: 44%;
-    right: -38%;
-    background-color: #a28adf;
-}
 #SignUp_nextBtn img{
    width: 24px;
+   margin-left: 14px;
+   margin-top: -5px;
 }
 #SignUp_prevBtn{
 	background-color: #a28adf;
