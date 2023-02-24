@@ -41,10 +41,19 @@
 .SignUp_cardgroup .card{
 	border:1px solid;
 }
+
 .SignUp_cardgroup .card img{
 	width: 57px;
     margin-left: 112px;
     margin-top: 17px;
+    transition: all 0.2s linear;
+}
+.SignUp_cardgroup .card:hover img{
+	transform: scale(1.4);
+}
+.SignUp_cardgroup .card:hover{
+	cursor:pointer;
+	background-color:#f5f2f6;	
 }
 .SignUp_cardgroup .card p{
 	font-size:12px;

@@ -58,8 +58,14 @@
                   <form role="form">
                   <div class="container animate__animated" id="SignUp_1Section">              
 	                     <label>이메일</label>
-	                    <div class="mb-1">
-	                      <input type="email" class="form-control form-control mb-3" placeholder="example@doamin.com" aria-label="email">
+	                    <div class="row mb-1">
+	                    	<div class="col-8">
+	                    	 <input type="email" class="form-control form-control mb-3" placeholder="example@doamin.com" aria-label="email">
+	                    	</div>
+	                    	<div class="col-4">
+	                    	<input type="button" class="btn btn-primary w-100" style="font-size: x-small" onclick="" value="계정중복검사"><br>
+	                    	</div>
+	                     
 	                    </div>
 	                    <label>비밀번호</label>
 	                    <div class="mb-1">
@@ -74,8 +80,13 @@
 	                      <input type="text" class="form-control form-control mb-3" placeholder="홍길동" aria-label="name" name="name">
 	                    </div>
 	                    <label>주민등록번호</label>
-	                    <div class="mb-1">
-	                      <input type="text" class="form-control form-control mb-3" placeholder="123456-1234567" aria-label="personalNumber" name="personalnumber">
+	                    <div class="row mb-1">
+	                    	<div class="col-8">
+	                           <input type="text" class="form-control form-control mb-3" placeholder="123456-1234567" aria-label="personalNumber" name="personalnumber">	                    	
+	                    	</div>
+	                    	<div class="col-4">
+	                    		<input type="button" class="btn btn-primary w-100" style="font-size: x-small" onclick="" value="중복확인"><br>
+	                    	</div>
 	                    </div>	
 	                               
 	                    <div class="text-center">
@@ -112,7 +123,7 @@
                   <div class="container animate__animated" id="SignUp_3Section">
 	                    <label id="Signup_authSpan" style="font-size:large;">&#60;가입 용도 선택해주세요&#62;</label>
 	                    <div class="card-group SignUp_cardgroup">
-						  <div class="card">
+						  <div class="card" id="SignUp_SellerCard">
 						    <img src="https://cdn-icons-png.flaticon.com/512/3981/3981072.png" class="card-img-top" alt="...">
 						    <div class="card-body">
 						      <h6 class="card-title">일반회원(셀러)</h5>
@@ -120,7 +131,7 @@
 						      <br><br> 가입 이후에도,<br><span>사업자 전환 신청<span>이 가능합니다!</p>
 						    </div>
 						  </div>
-						  <div class="card">
+						  <div class="card" id="SignUp_buisnessmanCard">
 						    <img src="https://cdn-icons-png.flaticon.com/512/1378/1378542.png" class="card-img-top" alt="...">
 						    <div class="card-body">
 						      <h6 class="card-title">사업자(플리마켓 홍보자)</h5>
