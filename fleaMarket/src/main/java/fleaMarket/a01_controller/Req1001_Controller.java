@@ -9,14 +9,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller("Req1001")
 public class Req1001_Controller {
-	//http://localhost:7080/fleaMarket/MemberSearch.do
-	@RequestMapping("MemberSearch.do")
-	public String MemberSearch() {
-			return "MemberSearch";
+	//http://localhost:7080/fleaMarket/AdminSearch.do
+	@RequestMapping("AdminSearch.do")
+	public String AdminSearch() {
+			return "AdminSearch";
 	}
-	//http://localhost:7080/fleaMarket/MemberMypost.do
-	@RequestMapping("MemberMypost.do")
-	public String MemberMypost() {
-		return "MemberMypost";
+	
+	//http://localhost:7080/fleaMarket/AdminPost.do
+	@RequestMapping("AdminPost.do")
+	public String AdminPost() {
+		return "AdminPost";
 	}
 }
