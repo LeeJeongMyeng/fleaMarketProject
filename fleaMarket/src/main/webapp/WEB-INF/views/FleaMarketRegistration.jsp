@@ -8,7 +8,6 @@
 <fmt:requestEncoding value="utf-8"/>     
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -31,6 +30,11 @@
 
 <!-- 아이태그 -->
 <link href="/assets/vendor/nucleo/css/nucleo.css" rel="stylesheet">
+
+<%-- gps --%>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=491d6062da8be4de279d8ef2a5a72e75&libraries=services,clusterer,drawing"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=988e9a63068ba57348f275cb10ecb3fb"></script>
+
 </head>
 <link href="${path}/resource/css/FleaMarketRe/FleaMarketRe.css" rel="stylesheet" />
 
@@ -173,24 +177,24 @@
       <div class="row">
         <div class="col-lg-9 col-12 mx-auto">
           <div class="card card-body mt-4">
-            <h6 class="mb-0">플리마켓 등록</h6>
+            <h6 class="mb-0 fleamarket">플리마켓 등록</h6>
             <hr class="horizontal dark my-3">
-            <label for="title" class="form-label">제목</label>
-            <input type="text" class="form-control" id="projectName">
+            <label for="title" class="form-label labelFont" >제목</label>
+            <input type="text" class="form-control" id="projectName" name="title">
             <div class="row mt-4">
               <div class="col-12 col-md-6">
                 <div class="form-group">
-                  <label>플리마켓 진행기간</label>
+                  <label class="labelFont">플리마켓 진행기간</label>
                   <input type="text" class="form-control" placeholder="플리마켓기간">                
                 </div>
-                  <i class="ni ni-calendar-grid-58"></i>
+                  <i class="ni ni-calendar-grid-58" id="calendar01" onclick></i>
               </div>
             </div>
             
             <div class="row">
               <div class="col-6">
-                <label class="form-label">모집 인원</label>
-                <input class="form-control datetimepicker" type="text" placeholder="시작일을 선택해주세요" data-input>
+                <label class="form-label labelFont">모집 인원</label>
+                <input class="form-control datetimepicker" type="text" placeholder="시작일을 선택해주세요" name="approvalMaxCnt" data-input>
               </div>
            </div>
             
@@ -200,49 +204,54 @@
             
            <div class="row">
               <div class="col-6">
-                <label class="form-label">모집 시작일</label>
-                <input class="form-control datetimepicker" type="text" placeholder="시작일을 선택해주세요" data-input>
+                <label class="form-label labelFont" >모집 시작일</label>
+                <input class="form-control datetimepicker" type="text" placeholder="시작일을 선택해주세요" name="recruitmentStartDate" data-input>
               </div>
               <div class="col-6">
-                <label class="form-label">모집 종료일</label>
-                <input class="form-control datetimepicker" type="text" placeholder="종료일을 선택해주세요" data-input>
+                <label class="form-label labelFont" >모집 종료일</label>
+                <input class="form-control datetimepicker" type="text" placeholder="종료일을 선택해주세요" name="recruitmentEndDate" data-input>
               </div>
            </div>
            
            <div class="row">
               <div class="col-6">
-                <label class="form-label">장소</label>
+                <label class="form-label labelFont" >장소</label>
                 
               </div>
-         
-           </div>
-
-            <label class="mt-4">Project Description</label>
-            <p class="form-text text-muted text-xs ms-1">
-              This is how others will learn about the project, so make it good!
-            </p>
+            
+<!-- gps -->          
+    <div class="map_wrap">
+    <div id="map" style="width:580px;height:300px;position:relative;overflow:hidden;"></div>
+    <div class="hAddr">
+	        <span class="title">지도중심기준 주소정보</span>
+	        <span id="centerAddr"></span>
+	               
+	        <span class="title">선택한 위치의 주소정보</span>
+	        <span id="centerAddr2">  </span>
+	        <span id="centerAddr3">  </span>
+	    </div>
+	     <input Type="text" name="addressval" value="">    
+	     <input Type="text" name="daddressval" placeholder="상세주소">    
+       
+     </div>          
+            
+            <label class="mt-4 labelFont">내용</label>
+        
             <div id="editor">
               <p>Hello World!</p>
               <p>Some initial <strong>bold</strong> text</p>
               <p><br></p>
             </div>
-            <label class="mt-4 form-label">Project Tags</label>
-            <select class="form-control" name="choices-multiple-remove-button" id="choices-multiple-remove-button" multiple>
-              <option value="Choice 1" selected>Choice 1</option>
-              <option value="Choice 2">Choice 2</option>
-              <option value="Choice 3">Choice 3</option>
-              <option value="Choice 4">Choice 4</option>
-            </select>
         
-            <label class="mt-4 form-label">Starting Files</label>
+        
+            <label class="mt-4 form-label labelFont">첨부파일</label>
             <form action="/file-upload" class="form-control dropzone" id="dropzone">
               <div class="fallback">
-                <input name="file" type="file" multiple />
+                <input name="filePath" type="file" multiple />
               </div>
             </form>
             <div class="d-flex justify-content-end mt-4">
-              <button type="button" name="button" class="btn btn-light m-0">Cancel</button>
-              <button type="button" name="button" class="btn bg-gradient-primary m-0 ms-2">Create Project</button>
+              <button type="button" name="button" class="btn bg-gradient-primary m-0 ms-2">등록하기</button>
             </div>
           </div>
         </div>
@@ -314,6 +323,7 @@
             <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
           </div>
         </a>
+       
         <!-- Sidenav Type -->
         <div class="mt-3">
           <h6 class="mb-0">Sidenav Type</h6>
@@ -371,6 +381,9 @@
   <script src="${path}/assets/js/plugins/flatpickr.min.js"></script>
   <script src="${path}/assets/js/plugins/dropzone.min.js"></script>
   <script>
+  
+   //템플릿
+  
     if (document.getElementById('editor')) {
       var quill = new Quill('#editor', {
         theme: 'snow' // Specify theme in configuration
@@ -431,6 +444,12 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+  
+
+
+
+  
+  
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->

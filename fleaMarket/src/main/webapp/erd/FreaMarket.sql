@@ -112,7 +112,7 @@ CREATE TABLE FleaMarket
 (
 	postingNumber varchar2(100) NOT NULL,
 	title varchar2(100),
-	registDate date,
+	registDate date, 
 	content varchar2(500),
 	bisenessNumber varchar2(100),
 	email varchar2(50) NOT NULL,
