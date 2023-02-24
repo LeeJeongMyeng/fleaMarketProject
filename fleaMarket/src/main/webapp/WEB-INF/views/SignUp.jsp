@@ -60,7 +60,7 @@
 	                     <label>이메일</label>
 	                    <div class="row mb-1">
 	                    	<div class="col-8">
-	                    	 <input type="email" class="form-control form-control mb-3" placeholder="example@doamin.com" aria-label="email">
+	                    	 <input type="email" name="email" class="form-control form-control mb-3" placeholder="example@doamin.com" aria-label="email">
 	                    	</div>
 	                    	<div class="col-4">
 	                    	<input type="button" class="btn btn-primary w-100" style="font-size: x-small" onclick="" value="계정중복검사"><br>
@@ -69,20 +69,20 @@
 	                    </div>
 	                    <label>비밀번호</label>
 	                    <div class="mb-1">
-	                      <input type="password" class="form-control form-control mb-3 " placeholder="비밀번호" aria-label="password">
+	                      <input type="password" name="password" class="form-control form-control mb-3 " placeholder="비밀번호" aria-label="password">
 	                    </div>
 	                    <label>비밀번호 확인</label>
 	                    <div class="mb-1">
-	                      <input type="password" class="form-control form-control mb-3" placeholder="비밀번호확인" aria-label="password2">
+	                      <input type="password" name="password2" class="form-control form-control mb-3" placeholder="비밀번호확인" aria-label="password2">
 	                    </div>
 	                    <label>이름</label>
 	                    <div class="mb-1">
-	                      <input type="text" class="form-control form-control mb-3" placeholder="홍길동" aria-label="name" name="name">
+	                      <input type="text" name="name" class="form-control form-control mb-3" placeholder="홍길동" aria-label="name">
 	                    </div>
 	                    <label>주민등록번호</label>
 	                    <div class="row mb-1">
 	                    	<div class="col-8">
-	                           <input type="text" class="form-control form-control mb-3" placeholder="123456-1234567" aria-label="personalNumber" name="personalnumber">	                    	
+	                           <input type="text" name="personalnumber" class="form-control form-control mb-3" placeholder="123456-1234567" aria-label="personalNumber" >	                    	
 	                    	</div>
 	                    	<div class="col-4">
 	                    		<input type="button" class="btn btn-primary w-100" style="font-size: x-small" onclick="" value="중복확인"><br>
@@ -96,9 +96,13 @@
                   
                   
                   <div class="container animate__animated" id="SignUp_2Section">
+                  		<label>닉네임</label>
+	                    <div class="mb-1">
+	                      <input type="text" name="nickname" class="form-control form-control mb-3" placeholder="닉네임" aria-label="name">
+	                    </div>
 	                     <label>핸드폰번호</label>
 	                    <div class="mb-2">
-	                      <input type="text" class="form-control form-control mb-3" placeholder="PhoneNumber" aria-label="PhoneNumber" name=phonenumber>
+	                      <input type="text" name="phonenumber" class="form-control form-control mb-3" placeholder="010-1234-1234" aria-label="PhoneNumber" >
 	                    </div>
 	                    <label>주소</label>
 	                    <div class="mb-1">
@@ -110,9 +114,10 @@
 	                        	<input type="button" class="btn btn-primary w-50" style="font-size: x-small"  onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 	                        </div>
 	                       </div>
-							<input type="text" class="form-control form-control mt-n1" id="sample6_address" placeholder="주소"><br>
+							<input type="text" name="FAddress" class="form-control form-control mt-n1" id="sample6_address" placeholder="주소"><br>
 							<input type="text" class="form-control form-control  mt-n3" id="sample6_extraAddress" placeholder="참고항목"><br>
-							<input type="text" class="form-control form-control  mt-n3 mb-6" id="sample6_detailAddress" placeholder="상세주소">
+							<input type="text" name="DAddress" class="form-control form-control  mt-n3 mb-6" id="sample6_detailAddress" placeholder="상세주소">
+	                    	<input type="hidden" name="address"/> <%--실제 주소로 입력될 input --%>
 	                    </div>        
 	                    
 	                    <div class="text-center SecondSectionBtnWrap">
@@ -144,10 +149,11 @@
 						    </div>
 						  </div>
 						</div>
+						<input type="hidden" name="authority"/>
 	                    <label style="font-size:large; margin:21px 0 -1px 39px;">&#60;셀러님의 주 판매 용품이 무엇인가요?&#62;</label>
 	                    <label style="font-size:5px; color:#7c6da1; margin-left:30px; width: 350px;">통계에 활용됩니다. 통계창에서 최근 유행하는 상품 카테고리를 확인해보세요!</label>
 	                    <div class="mb-2" >
-	                      <select class="form-select form-select-md mb-3 ms-4" aria-label=".form-select-lg example">
+	                      <select name="category" class="form-select form-select-md mb-3 ms-4" aria-label=".form-select-lg example">
 							  <option selected>카테고리 선택</option>
 							  <option value="1" title="http://www.w3.org/2000/svg">여성의류</option>
 							  <option value="1" title="">남성의류</option>

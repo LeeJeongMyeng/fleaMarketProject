@@ -136,7 +136,7 @@ CREATE TABLE friend
 );
 
 
-CREATE TABLE Member
+CREATE TABLE fleamarketmember
 (
 	email varchar2(50) NOT NULL,
 	password varchar2(50),
