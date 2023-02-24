@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
+  <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
   <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <title>
@@ -64,7 +65,7 @@
 		                    	 <div id="emailfeedback" class="invalid-feedback">이메일 양식이 맞지않습니다.</div>
 	                    	</div>
 		                    	<div class="col-4">
-		                    	<input type="button" class="btn btn-primary w-100" style="font-size: x-small" id="CheckEmailBtn" value="이메일 인증"><br>
+		                    	<input type="button" class="btn btn-primary w-100" style="font-size: x-small;background: #8451ce;" id="CheckEmailBtn" value="이메일 인증"><br>
 	                    	</div>                     
 	                    </div>
 	                    <div class="mb-3">
@@ -92,11 +93,11 @@
 	                           <input type="text" name="personalnumber" class="form-control form-control mb-3" placeholder="123456-1234567" aria-label="personalNumber" >	                    	
 	                    	</div>
 	                    	<div class="col-4">
-	                    		<input type="button" class="btn btn-primary w-100" style="font-size: x-small" onclick="" value="중복확인"><br>
+	                    		<input type="button" class="btn btn-primary w-100" style="font-size: x-small;background: #8451ce;" onclick="CheckUser()" value="중복확인"><br>
 	                    	</div>
 	                    </div>	                 
 	                    <div class="text-center">
-	                      <button type="button" id="SignUp_nextBtn" onclick="SignUpHandler(1)" class="btn btn-primary w-100 mt-4 mb-0">다음 단계<img src="${path}/resource/img/Member/SignUp/next_w.png"/></button>
+	                      <button type="button" id="SignUp_nextBtn" onclick="CheckStepHandler(1)" class="btn btn-primary w-100 mt-4 mb-0">다음 단계<img src="${path}/resource/img/Member/SignUp/next_w.png"/></button>
 	                    </div>	        
                   </div>
                   
@@ -124,21 +125,21 @@
 	                    <div class="mb-1">
 	                       <div class="row">
 	                       	<div class="col-4">
-	                        	<input type="text" class="form-control form-control" id="sample6_postcode" placeholder="우편번호">
+	                        	<input type="text" class="form-control form-control-sm" id="sample6_postcode" placeholder="우편번호">
 	                        </div>
 	                        <div class="col-8">
-	                        	<input type="button" class="btn btn-primary w-50" style="font-size: x-small"  onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+	                        	<input type="button" class="btn btn-primary w-50" style="font-size: x-small;background: #8451ce;"  onclick="AddressApi()" value="우편번호 찾기"><br>
 	                        </div>
 	                       </div>
-							<input type="text" name="FAddress" class="form-control form-control mt-n1" id="sample6_address" placeholder="주소"><br>
-							<input type="text" class="form-control form-control  mt-n3" id="sample6_extraAddress" placeholder="참고항목"><br>
-							<input type="text" name="DAddress" class="form-control form-control  mt-n3 mb-5" id="sample6_detailAddress" placeholder="상세주소">
+							<input type="text" name="FAddress" class="form-control form-control-sm mt-n1" id="sample6_address" placeholder="주소"><br>
+							<input type="text" class="form-control form-control-sm  mt-n3" id="sample6_extraAddress" placeholder="참고항목"><br>
+							<input type="text" name="DAddress" class="form-control form-control-sm  mt-n3 mb-5" id="sample6_detailAddress" placeholder="상세주소">
 	                    	<input type="hidden" name="address"/> <%--실제 주소로 입력될 input --%>
 	                    </div>        
 	                    
 	                    <div class="text-center SecondSectionBtnWrap">
-	                      <button type="button" id="SignUp_prevBtn" onclick="SignUpHandler(-1)" class="btn btn-primary w-50 mt-4 me-3 mb-0">이전 단계</button><br>
-	                      <button type="button" onclick="SignUpHandler(2)" class="btn btn-primary w-50 mt-4 mb-0">최종단계 Go!</button>
+	                      <button type="button" id="SignUp_prevBtn" onclick="CheckStepHandler(-1)" class="btn btn-primary w-50 mt-4 me-3 mb-0">이전 단계</button><br>
+	                      <button type="button" onclick="CheckStepHandler(2)" class="btn btn-primary w-50 mt-4 mb-0">최종단계 Go!</button>
 	                    </div>
                   </div>
                   <div class="container animate__animated" id="SignUp_3Section">
@@ -191,7 +192,7 @@
 	                      </label>
 	                    </div>
 	                    <div class="text-center SecondSectionBtnWrap">
-	                      <button type="button" id="SignUp_prevBtn" onclick="SignUpHandler(-2)" class="btn btn-primary w-50 mt-4 me-3 mb-0">이전 단계</button><br>
+	                      <button type="button" id="SignUp_prevBtn" onclick="CheckStepHandler(-2)" class="btn btn-primary w-50 mt-4 me-3 mb-0">이전 단계</button><br>
 	                      <button type="button" onclick="SignUp_Ok()" class="btn btn-primary w-50 mt-4 mb-0">가입완료</button>
 	                    </div>
                   </div>

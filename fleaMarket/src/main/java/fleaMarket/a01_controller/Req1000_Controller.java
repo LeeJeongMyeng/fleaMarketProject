@@ -28,9 +28,17 @@ public class Req1000_Controller {
 		return "SignUp";
 	}
 	
-	@PostMapping("DuplicateEmail.do")
+	@PostMapping("DuplicateEmail.do") //이메일 중복검사
 	public String DuplicateEmail(@RequestParam("email") String email,Model d) {
+		System.out.println(email);
 		d.addAttribute("DuplicateEmail",service.DuplicateEmail(email));
-		return "";
+		return "pageJsonReport";
+	}
+	@PostMapping("DuplicateMem.do") //이름,주민 중복검사
+	public String DuplicateMem(@RequestParam("name") String name
+							   ,@RequestParam("personalnumber") String personalnumber
+							   ,Model d) {	
+		d.addAttribute("DuplicateMem",service.DuplicateMem(name,personalnumber));
+		return "pageJsonReport";
 	}
 }

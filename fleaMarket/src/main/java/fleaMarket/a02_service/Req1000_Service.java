@@ -7,4 +7,5 @@ import vo.Member;
 @Service
 public interface Req1000_Service {
 	public Member DuplicateEmail(String email);
+	public Member DuplicateMem(String name,String personalnumber);
 }

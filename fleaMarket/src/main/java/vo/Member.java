@@ -5,32 +5,14 @@ public class Member {
 	private String password;
 	private String nickname;
 	private String personalnumber;
-	private String phoneNumber;
+	private String phonenumber;
 	private String address;
 	private String authority;
-	private String businessNumber;
+	private String businessnumber;
 	private String kakaoemail;
 	private String naveremail;
 	private String category;
 	private String name;
-	public Member() {
-	}
-	public Member(String email, String password, String nickname, String personalnumber, String phoneNumber,
-			String address, String authority, String businessNumber, String kakaoemail, String naveremail,
-			String category, String name) {
-		this.email = email;
-		this.password = password;
-		this.nickname = nickname;
-		this.personalnumber = personalnumber;
-		this.phoneNumber = phoneNumber;
-		this.address = address;
-		this.authority = authority;
-		this.businessNumber = businessNumber;
-		this.kakaoemail = kakaoemail;
-		this.naveremail = naveremail;
-		this.category = category;
-		this.name = name;
-	}
 	public String getEmail() {
 		return email;
 	}
@@ -55,11 +37,11 @@ public class Member {
 	public void setPersonalnumber(String personalnumber) {
 		this.personalnumber = personalnumber;
 	}
-	public String getPhoneNumber() {
-		return phoneNumber;
+	public String getPhonenumber() {
+		return phonenumber;
 	}
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
+	public void setPhonenumber(String phonenumber) {
+		this.phonenumber = phonenumber;
 	}
 	public String getAddress() {
 		return address;
@@ -73,11 +55,11 @@ public class Member {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-	public String getBusinessNumber() {
-		return businessNumber;
+	public String getBusinessnumber() {
+		return businessnumber;
 	}
-	public void setBusinessNumber(String businessNumber) {
-		this.businessNumber = businessNumber;
+	public void setBusinessnumber(String businessnumber) {
+		this.businessnumber = businessnumber;
 	}
 	public String getKakaoemail() {
 		return kakaoemail;
