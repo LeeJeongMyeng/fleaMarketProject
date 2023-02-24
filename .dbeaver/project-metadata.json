@@ -1,0 +1,1 @@
+{"resources":{"fleaMarket/src/main/webapp/erd/FreaMarket.sql":{"default-datasource":"oracle_thin-18682756be1-353098f134699f4d","default-schema":"SCOTT"},"fleaMarket/src/main/webapp/erd/Member.sql":{"default-datasource":"oracle_thin-18682756be1-353098f134699f4d","default-schema":"SCOTT"}}}
