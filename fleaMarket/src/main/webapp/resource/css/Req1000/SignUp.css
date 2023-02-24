@@ -1,15 +1,15 @@
 @charset "UTF-8";
 
-#SignUp_firstSection{
+#SignUp_1Section{
 	margin-bottom: -153px;
 	margin-top: 27px;
 }
-#SignUp_secondSection{
+#SignUp_2Section{
 	display:none;
 	position: absolute;
 	top: 152px;
 }
-#SignUp_thirdSection{
+#SignUp_3Section{
 	display:none;
 	position: absolute;
 	top: 91px;
