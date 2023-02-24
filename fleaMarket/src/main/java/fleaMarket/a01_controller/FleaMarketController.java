@@ -15,4 +15,8 @@ public class FleaMarketController {
 		return "FleaMarketRegistration";
 	}
 	
+	@RequestMapping("fleaMarketView.do")
+	public String fleaMarketView() {
+		return "fleaMarketView";
+	}
 }
