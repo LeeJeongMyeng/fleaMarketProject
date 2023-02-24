@@ -62,7 +62,7 @@
            
        
         <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-           <property name="basePackage" value="fleaMarket.dao"/>
+           <property name="basePackage" value="fleaMarket.a03_dao"/>
         </bean>
                
         

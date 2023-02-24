@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-  
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
   <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <title>
@@ -50,34 +50,41 @@
             <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
               <div class="card card-plain">
                 <div class="card-header pb-0 text-left">
-                  <h4 class="font-weight-bolder">Sign Up </h4>
-                  <p class="mb-0 Signup_infomation"><span class="font-weight-bolder">step 1/3</span><br>다음 정보를 입력해주세요.</p>
+                  <h4 class="font-weight-bolder mt-n3">Sign Up </h4>
+                  <p class="mb-0 Signup_infomation"><span class="font-weight-bolder">step 1/3&nbsp;&nbsp;&nbsp;다음 정보를 입력해주세요.</p>
                   
                 </div>
                 <div class="card-body pb-3 SignUp_wrap">
                   <form role="form">
                   <div class="container animate__animated" id="SignUp_1Section">              
 	                     <label>이메일</label>
-	                    <div class="row mb-1">
+	                    <div class="row mb-n2">
 	                    	<div class="col-8">
-	                    	 <input type="email" name="email" class="form-control form-control mb-3" placeholder="example@doamin.com" aria-label="email">
+		                    	 <input type="email" name="email" class="form-control form-control mb-3" placeholder="example@doamin.com">
+		                    	 <div id="emailfeedback" class="invalid-feedback">이메일 양식이 맞지않습니다.</div>
 	                    	</div>
-	                    	<div class="col-4">
-	                    	<input type="button" class="btn btn-primary w-100" style="font-size: x-small" onclick="" value="계정중복검사"><br>
-	                    	</div>
-	                     
+		                    	<div class="col-4">
+		                    	<input type="button" class="btn btn-primary w-100" style="font-size: x-small" id="CheckEmailBtn" value="이메일 인증"><br>
+	                    	</div>                     
 	                    </div>
-	                    <label>비밀번호</label>
+	                    <div class="mb-3">
+	                    <input type="text" class="form-control form-control-sm w-50 mt-3" id="checkEmailCode" placeholder="인증번호"/>
+	                    </div>
+	                    <label>비밀번호(8자 이상 / 16자리 이하)</label>
+	                    <div id="passHelp" class="form-text mt-n1" style="font-size:10px; font-weight:bold;">숫자/영문/특수문자 중 2가지 이상 혼합</div>
 	                    <div class="mb-1">
 	                      <input type="password" name="password" class="form-control form-control mb-3 " placeholder="비밀번호" aria-label="password">
+	                      <div class="invalid-feedback" id="pass1feedback"></div>
 	                    </div>
 	                    <label>비밀번호 확인</label>
 	                    <div class="mb-1">
 	                      <input type="password" name="password2" class="form-control form-control mb-3" placeholder="비밀번호확인" aria-label="password2">
+	                      <div class="invalid-feedback">비밀번호가 일치하지 않습니다.</div>
 	                    </div>
 	                    <label>이름</label>
 	                    <div class="mb-1">
 	                      <input type="text" name="name" class="form-control form-control mb-3" placeholder="홍길동" aria-label="name">
+	                      <div class="invalid-feedback">이름은 2글자이상 적어주세요.</div>
 	                    </div>
 	                    <label>주민등록번호</label>
 	                    <div class="row mb-1">
@@ -87,8 +94,7 @@
 	                    	<div class="col-4">
 	                    		<input type="button" class="btn btn-primary w-100" style="font-size: x-small" onclick="" value="중복확인"><br>
 	                    	</div>
-	                    </div>	
-	                               
+	                    </div>	                 
 	                    <div class="text-center">
 	                      <button type="button" id="SignUp_nextBtn" onclick="SignUpHandler(1)" class="btn btn-primary w-100 mt-4 mb-0">다음 단계<img src="${path}/resource/img/Member/SignUp/next_w.png"/></button>
 	                    </div>	        
@@ -96,13 +102,23 @@
                   
                   
                   <div class="container animate__animated" id="SignUp_2Section">
+                  		<div class="row">
+                  		<div class="col-8">
+						  <label for="profileimg" class="form-label">프로필 사진 등록</label>
+						  <input class="form-control form-control-sm mb-4 w-100" type="file" id="profileimg">
+						</div>
+						<div class="col-4">
+							<img src="https://cdn-icons-png.flaticon.com/512/8053/8053055.png" style="border:1px solid #e3dee4;border-radius:50%" class="img-circle" width="70px" height="70px">
+						</div>
+						</div>
                   		<label>닉네임</label>
 	                    <div class="mb-1">
-	                      <input type="text" name="nickname" class="form-control form-control mb-3" placeholder="닉네임" aria-label="name">
+	                      <input type="text" name="nickname" class="form-control form-control mb-3" placeholder="미기재시, 이메일의 아이디로 활동됩니다.">
 	                    </div>
 	                     <label>핸드폰번호</label>
 	                    <div class="mb-2">
-	                      <input type="text" name="phonenumber" class="form-control form-control mb-3" placeholder="010-1234-1234" aria-label="PhoneNumber" >
+	                      <input type="text" name="phonenumber" class="form-control form-control mb-3" placeholder="010-1234-1234">
+	                      <div class="invalid-feedback">13자리가 아닙니다.</div>	
 	                    </div>
 	                    <label>주소</label>
 	                    <div class="mb-1">
@@ -116,7 +132,7 @@
 	                       </div>
 							<input type="text" name="FAddress" class="form-control form-control mt-n1" id="sample6_address" placeholder="주소"><br>
 							<input type="text" class="form-control form-control  mt-n3" id="sample6_extraAddress" placeholder="참고항목"><br>
-							<input type="text" name="DAddress" class="form-control form-control  mt-n3 mb-6" id="sample6_detailAddress" placeholder="상세주소">
+							<input type="text" name="DAddress" class="form-control form-control  mt-n3 mb-5" id="sample6_detailAddress" placeholder="상세주소">
 	                    	<input type="hidden" name="address"/> <%--실제 주소로 입력될 input --%>
 	                    </div>        
 	                    
@@ -149,23 +165,29 @@
 						    </div>
 						  </div>
 						</div>
-						<input type="hidden" name="authority"/>
+						<input type="hidden" name="authority" value="S"/>
+						<input type="hidden" name="authoritycheck" value="false"/>
+						
+	                    <div class="SignUp_ProfileWrap" style="margin-left: 26px;">
+						  <label for="formFile" class="form-label" style="color:red;">사업자등록등 첨부</label>
+						  <input class="form-control form-control-sm" type="file" id="formFile">
+						</div>
 	                    <label style="font-size:large; margin:21px 0 -1px 39px;">&#60;셀러님의 주 판매 용품이 무엇인가요?&#62;</label>
 	                    <label style="font-size:5px; color:#7c6da1; margin-left:30px; width: 350px;">통계에 활용됩니다. 통계창에서 최근 유행하는 상품 카테고리를 확인해보세요!</label>
 	                    <div class="mb-2" >
-	                      <select name="category" class="form-select form-select-md mb-3 ms-4" aria-label=".form-select-lg example">
+	                      <select name="category" class="form-select form-select-sm mb-3 ms-4" aria-label=".form-select-lg example">
 							  <option selected>카테고리 선택</option>
-							  <option value="1" title="http://www.w3.org/2000/svg">여성의류</option>
-							  <option value="1" title="">남성의류</option>
-							  <option value="1" title="">공통의류</option>
-							  <option value="2">Two</option>
-							  <option value="3">Three</option>
+							  <option title="">여성의류</option>
+							  <option title="">남성의류</option>
+							  <option title="">공통의류</option>
+							  <option>Two</option>
+							  <option>Three</option>
 							</select>
 	                    </div>
 	                    <div class="form-check form-check-info text-left">
-	                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+	                      <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" >
 	                      <label class="form-check-label" for="flexCheckDefault">
-	                        <a href="../../../pages/privacy.html" class="text-dark font-weight-bolder">이용약관</a>에 동의합니다.
+	                        <a href="" class="text-dark font-weight-bolder">이용약관</a>에 동의합니다.
 	                      </label>
 	                    </div>
 	                    <div class="text-center SecondSectionBtnWrap">

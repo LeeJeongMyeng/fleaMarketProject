@@ -16,4 +16,28 @@ CREATE TABLE fleamarketmember(
 	PRIMARY KEY (email)
 );
 
+DROP SEQUENCE FLEAMARKETMEMBER_seq;
+CREATE SEQUENCE FLEAMARKETMEMBER_seq 
+      increment by 1
+      start with 1
+      nocache
+      MINVALUE 0
+      MAXVALUE 100000;
+
 SELECT * FROM FLEAMARKETMEMBER;
+SELECT count(*) FROM FLEAMARKETMEMBER WHERE email = 'aoddl56@nate.com';
+
+INSERT INTO FLEAMARKETMEMBER values(
+'aoddl56@nate.com',
+'!dnfwlq12',
+'맹이',
+'950828-1111111',
+'010-5293-0247',
+'창원시 성산구 사파동',
+'m',
+NULL,
+NULL,
+NULL,
+NULL,
+'이정명'
+);
