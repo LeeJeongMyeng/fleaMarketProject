@@ -56,7 +56,7 @@
                 </div>
                 <div class="card-body pb-3 SignUp_wrap">
                   <form role="form">
-                  <div class="container animate__animated" id="SignUp_firstSection">              
+                  <div class="container animate__animated" id="SignUp_1Section">              
 	                     <label>이메일</label>
 	                    <div class="mb-1">
 	                      <input type="email" class="form-control form-control mb-3" placeholder="example@doamin.com" aria-label="email">
@@ -84,7 +84,7 @@
                   </div>
                   
                   
-                  <div class="container animate__animated" id="SignUp_secondSection">
+                  <div class="container animate__animated" id="SignUp_2Section">
 	                     <label>핸드폰번호</label>
 	                    <div class="mb-2">
 	                      <input type="text" class="form-control form-control mb-3" placeholder="PhoneNumber" aria-label="PhoneNumber" name=phonenumber>
@@ -109,7 +109,7 @@
 	                      <button type="button" onclick="SignUpHandler(2)" class="btn btn-primary w-50 mt-4 mb-0">최종단계 Go!</button>
 	                    </div>
                   </div>
-                  <div class="container animate__animated" id="SignUp_thirdSection">
+                  <div class="container animate__animated" id="SignUp_3Section">
 	                    <label id="Signup_authSpan" style="font-size:large;">&#60;가입 용도 선택해주세요&#62;</label>
 	                    <div class="card-group SignUp_cardgroup">
 						  <div class="card">
