@@ -47,7 +47,7 @@ function SNSResult(platforms,snsemail,name){
 							if(platforms=='kakao'){
 								if(data.CheckPeristalsisSNS.kakaoemail==null){
 									$('#SNSLoginbnt').text('카카오연동 및 바로 로그인')
-									.css({"color":"black","background":"yellow","border":"1px solid black"})
+									.css({"color":"black","background-color":"yellow"})
 									$('#snsemail').val(snsemail)
 									ResultModal('ok',snsemail)	 
 								}else{
@@ -102,10 +102,12 @@ $('#SNSLoginbnt').click(function(){
 		 location.href='SnsEmailPlus.do?naveremail='+snsemail+"&name="+snsname 
 	  }
   })
+  
+  
   //네이버 로그인 로고
   	var naver_id_login = new naver_id_login("WQO4B5GCMQKA06XHFOuA", "http://localhost:8090/fleaMarket/SignIn.do");
   	var state = naver_id_login.getUniqState();
-  	naver_id_login.setButton("white", 2,40);
+  	naver_id_login.setButton("white", 3,40);
   	naver_id_login.setDomain("http://localhost:8090/fleaMarket/SignIn.do");
   	naver_id_login.setState(state);
   	naver_id_login.setPopup();

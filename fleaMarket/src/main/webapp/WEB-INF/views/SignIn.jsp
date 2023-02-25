@@ -75,10 +75,17 @@ $(document).ready(function(){
                       <label class="form-check-label" for="rememberMe">이 계정 기억하기</label>
                     </div>
                     <div class="text-center">
-                      <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">로 그 인</button>
+                      <button type="submit" class="btn btn-primary btn-md w-75 mt-4 mb-0">로 그 인</button>
+                       <div class="row mt-3">
                        <input type="hidden" name="snsemail">
-					   <img src="${path}/resource/img/Member/SignIn/kakao_login_medium_narrow.png" onclick="kakaoLogin()">
-					   <div id="naver_id_login"></div>
+	                       <div class="col-6">
+	 							<img src="${path}/resource/img/Member/SignIn/kakao_login_medium_narrow.png" style="height:41px;" onclick="kakaoLogin()">
+	                       
+	                       </div>
+	                       <div class="col-6 ms-n3">
+	                       		   <div id="naver_id_login"></div>
+	                       </div>
+					   </div>
                     </div>
                   </form>
                 </div>
@@ -107,7 +114,7 @@ $(document).ready(function(){
   <div data-bs-toggle="modal" data-bs-target="#SnsresultModal" id="SnsresultModalbtn"></div>
 	<div class="modal fade" id="SnsresultModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	  <div class="modal-dialog">
-	    <div class="modal-content SnsresultModalContent">
+	    <div class="modal-content SnsresultModalContent" style="top:119px;">
 	      <div class="modal-header">
 	        <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">Result</h1>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
