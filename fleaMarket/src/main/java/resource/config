@@ -6,7 +6,8 @@ jdbc.user=scott
 jdbc.pass=tiger
 
 # 2. 파일 업로드 정보(서버위치 정보)
-file.upload=C:/a01_javaxep/workspace/board2/src/main/webapp/z01_upload/
+//회원가입시 프로필사진 업로드
+profile.upload=C:/a01_javaxep/workspace/git/fleaMarketProject/fleaMarket/src/main/webapp/resource/img/Member/profileimg/
 board.upload2=
 board.upload3=
 board.upload4=

@@ -16,6 +16,7 @@ CREATE TABLE fleamarketmember(
 	PRIMARY KEY (email)
 );
 
+
 DROP SEQUENCE FLEAMARKETMEMBER_seq;
 CREATE SEQUENCE FLEAMARKETMEMBER_seq 
       increment by 1
@@ -28,6 +29,7 @@ SELECT * FROM FLEAMARKETMEMBER;
 SELECT count(*) FROM FLEAMARKETMEMBER WHERE email = 'aoddl56@nate.com';
 SELECT * FROM FLEAMARKETMEMBER WHERE name = '이지은' and personalnumber = '940909-2222222';
 
+DELETE FLEAMARKETMEMBER WHERE NICKNAME ='28888wjdaud';
 INSERT INTO FLEAMARKETMEMBER values(
 'aoddl56@nate.com',
 '!dnfwlq12',
@@ -42,3 +44,16 @@ NULL,
 NULL,
 '이정명'
 );
+
+----------------------------------------------------------------------------------
+DROP TABLE profile;
+CREATE TABLE Profile
+(
+email varchar2(50) NOT NULL,
+profileImg varchar2(200)
+	
+);
+
+SELECT * FROM PROFILE;
+DELETE profile WHERE EMAIL ='28888wjdaud@naver.com';
+INSERT INTO PROFILE VALUES(#{email},#{profileimg});

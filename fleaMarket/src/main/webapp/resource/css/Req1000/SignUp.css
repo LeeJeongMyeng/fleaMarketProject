@@ -7,19 +7,19 @@
 }
 
 #SignUp_1Section{
-	margin-bottom: -153px;
-	margin-top: 27px;
-	width: 390px;
+	margin-bottom: -187px;
+    margin-top: -8px;
+    width: 390px;
 }
 #SignUp_2Section{
-	display:none;
-	position: absolute;
-    top: 90px;
+	display: none;
+    position: absolute;
+    top: 72px;
 }
 #SignUp_3Section{
 	display:none;
 	position: absolute;
-	top: 49px;
+    top: 23px;
 }
 
 .SignUp_wrap{ /* 회원가입틀 wrap */
@@ -31,6 +31,11 @@
     right: -50px;
     width: 280px;
 }
+
+.SignUp_container .SignUp_MustSpan{
+	color:red;
+}
+
 .SecondSectionBtnWrap{ /* 2번째 섹션 버튼그룹 wrap */
 	display:flex;
 	margin-top: -20px;
@@ -48,14 +53,23 @@
 .SignUp_cardgroup .card{
 	border:1px solid;
 }
-
 .SignUp_cardgroup .card img{
+    transition: all 0.2s linear;
+}
+.SignUp_cardgroup .card #AuthImg{
 	width: 57px;
     margin-left: 112px;
     margin-top: 17px;
-    transition: all 0.2s linear;
 }
-.SignUp_cardgroup .card:hover img{
+.SignUp_cardgroup .card #AuthCheckImg{
+	position: absolute;
+    top: 0;
+    right: 13px;
+    width: 40px;
+    display:none;
+}
+
+.SignUp_cardgroup .card:hover #AuthImg{
 	transform: scale(1.4);
 }
 .SignUp_cardgroup .card:hover{

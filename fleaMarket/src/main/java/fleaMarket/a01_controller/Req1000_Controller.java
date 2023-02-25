@@ -7,8 +7,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import fleaMarket.a02_service.Req1000_Service;
+import vo.Member;
+import vo.ProfileImg;
 
 @Controller("Req1000")
 public class Req1000_Controller {
@@ -20,7 +23,7 @@ public class Req1000_Controller {
 	
 	@GetMapping("login.do")
 	public String login() {
-		return "login";
+		return "SignIn";
 	}
 	
 	@RequestMapping("SignUp.do")
@@ -40,5 +43,24 @@ public class Req1000_Controller {
 							   ,Model d) {	
 		d.addAttribute("DuplicateMem",service.DuplicateMem(name,personalnumber));
 		return "pageJsonReport";
+	}
+	
+	@RequestMapping("insSignUp.do")
+	public String SignUp(Member ins,
+			@RequestParam("profileimg") MultipartFile profile
+			){
+			//1. 기본 회원가입 양식
+				service.SignUp(ins);
+			//2. 파일처리
+				ProfileImg fins = new ProfileImg();
+				fins.setEmail(ins.getEmail());
+				fins.setProfileimg("defaultprofile.png");
+				if(profile.getOriginalFilename()!="") {
+				  fins.setProfileimg(service.insprofileimg(profile));
+				}
+				service.insprofile(fins);			
+			//3. 신청처리
+				
+		return "SignIn";
 	}
 }

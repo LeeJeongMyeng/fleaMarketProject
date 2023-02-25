@@ -177,7 +177,7 @@ CREATE TABLE NEW_TABLE
 CREATE TABLE Profile
 (
 	profileImg varchar2(200),
-	filePath varchar2(200),
+	--filePath varchar2(200),
 	email varchar2(50) NOT NULL
 );
 

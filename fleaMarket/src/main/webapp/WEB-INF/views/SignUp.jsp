@@ -56,9 +56,9 @@
                   
                 </div>
                 <div class="card-body pb-3 SignUp_wrap">
-                  <form role="form">
+                  <form id="SignUpForm"  action="insSignUp.do" method="post" enctype="multipart/form-data">
                   <div class="container animate__animated" id="SignUp_1Section">              
-	                     <label>이메일</label>
+	                     <span class="SignUp_MustSpan"> *</span><label>이메일</label>
 	                    <div class="row mb-n2">
 	                    	<div class="col-8">
 		                    	 <input type="email" name="email" class="form-control form-control mb-3" placeholder="example@doamin.com">
@@ -71,23 +71,23 @@
 	                    <div class="mb-3">
 	                    <input type="text" class="form-control form-control-sm w-50 mt-3" id="checkEmailCode" placeholder="인증번호"/>
 	                    </div>
-	                    <label>비밀번호(8자 이상 / 16자리 이하)</label>
+	                    <span class="SignUp_MustSpan"> *</span><label>비밀번호(8자 이상 / 16자리 이하)</label>
 	                    <div id="passHelp" class="form-text mt-n1" style="font-size:10px; font-weight:bold;">숫자/영문/특수문자 중 2가지 이상 혼합</div>
 	                    <div class="mb-1">
 	                      <input type="password" name="password" class="form-control form-control mb-3 " placeholder="비밀번호" aria-label="password">
 	                      <div class="invalid-feedback" id="pass1feedback"></div>
 	                    </div>
-	                    <label>비밀번호 확인</label>
+	                   <span class="SignUp_MustSpan"> *</span> <label>비밀번호 확인</label>
 	                    <div class="mb-1">
 	                      <input type="password" name="password2" class="form-control form-control mb-3" placeholder="비밀번호확인" aria-label="password2">
 	                      <div class="invalid-feedback">비밀번호가 일치하지 않습니다.</div>
 	                    </div>
-	                    <label>이름</label>
+	                    <span class="SignUp_MustSpan"> *</span><label>이름</label>
 	                    <div class="mb-1">
 	                      <input type="text" name="name" class="form-control form-control mb-3" placeholder="홍길동" aria-label="name">
 	                      <div class="invalid-feedback">이름은 2글자이상 적어주세요.</div>
 	                    </div>
-	                    <label>주민등록번호</label>
+	                    <span class="SignUp_MustSpan"> *</span><label>주민등록번호</label>
 	                    <div class="row mb-1">
 	                    	<div class="col-8">
 	                           <input type="text" name="personalnumber" class="form-control form-control mb-3" placeholder="123456-1234567" aria-label="personalNumber" >	                    	
@@ -106,33 +106,33 @@
                   		<div class="row">
                   		<div class="col-8">
 						  <label for="profileimg" class="form-label">프로필 사진 등록</label>
-						  <input class="form-control form-control-sm mb-4 w-100" type="file" id="profileimg">
+						  <input class="form-control form-control-sm mb-4 w-100" type="file" id="profileimg" name="profileimg">
 						</div>
 						<div class="col-4">
 							<img src="https://cdn-icons-png.flaticon.com/512/8053/8053055.png" style="border:1px solid #e3dee4;border-radius:50%" class="img-circle" width="70px" height="70px">
 						</div>
 						</div>
-                  		<label>닉네임</label>
+                  		<label>닉네임(2자이상)</label>
 	                    <div class="mb-1">
 	                      <input type="text" name="nickname" class="form-control form-control mb-3" placeholder="미기재시, 이메일의 아이디로 활동됩니다.">
 	                    </div>
-	                     <label>핸드폰번호</label>
+	                     <span class="SignUp_MustSpan"> *</span><label>핸드폰번호</label>
 	                    <div class="mb-2">
 	                      <input type="text" name="phonenumber" class="form-control form-control mb-3" placeholder="010-1234-1234">
 	                      <div class="invalid-feedback">13자리가 아닙니다.</div>	
 	                    </div>
-	                    <label>주소</label>
+	                    <span class="SignUp_MustSpan"> *</span><label>주소</label>
 	                    <div class="mb-1">
 	                       <div class="row">
 	                       	<div class="col-4">
-	                        	<input type="text" class="form-control form-control-sm" id="sample6_postcode" placeholder="우편번호">
+	                        	<input type="text" class="form-control form-control-sm" id="sample6_postcode" placeholder="우편번호" readonly>
 	                        </div>
 	                        <div class="col-8">
 	                        	<input type="button" class="btn btn-primary w-50" style="font-size: x-small;background: #8451ce;"  onclick="AddressApi()" value="우편번호 찾기"><br>
 	                        </div>
 	                       </div>
-							<input type="text" name="FAddress" class="form-control form-control-sm mt-n1" id="sample6_address" placeholder="주소"><br>
-							<input type="text" class="form-control form-control-sm  mt-n3" id="sample6_extraAddress" placeholder="참고항목"><br>
+							<input type="text" name="FAddress" class="form-control form-control-sm mt-n1" id="sample6_address" placeholder="주소" readonly><br>
+							<input type="text" class="form-control form-control-sm  mt-n3" id="sample6_extraAddress" placeholder="참고항목" readonly><br>
 							<input type="text" name="DAddress" class="form-control form-control-sm  mt-n3 mb-5" id="sample6_detailAddress" placeholder="상세주소">
 	                    	<input type="hidden" name="address"/> <%--실제 주소로 입력될 input --%>
 	                    </div>        
@@ -143,18 +143,20 @@
 	                    </div>
                   </div>
                   <div class="container animate__animated" id="SignUp_3Section">
-	                    <label id="Signup_authSpan" style="font-size:large;">&#60;가입 용도 선택해주세요&#62;</label>
+	                    <label id="Signup_authSpan" style="font-size:large;"><span class="SignUp_MustSpan"> *</span>&#60;가입 용도 선택해주세요&#62;</label>
 	                    <div class="card-group SignUp_cardgroup">
 						  <div class="card" id="SignUp_SellerCard">
-						    <img src="https://cdn-icons-png.flaticon.com/512/3981/3981072.png" class="card-img-top" alt="...">
+						    <img id="AuthImg" src="https://cdn-icons-png.flaticon.com/512/3981/3981072.png" class="card-img-top" alt="...">
+						    <img id="AuthCheckImg" src="https://cdn-icons-png.flaticon.com/512/390/390973.png" class="" alt="...">				    						    
 						    <div class="card-body">
 						      <h6 class="card-title">일반회원(셀러)</h5>
 						      <p class="card-text">일반 회원으로 <span>플리마켓 홍보글 작성외</span>에는 플랫폼을 자유로이 이용가능합니다.
 						      <br><br> 가입 이후에도,<br><span>사업자 전환 신청<span>이 가능합니다!</p>
 						    </div>
 						  </div>
-						  <div class="card" id="SignUp_buisnessmanCard">
-						    <img src="https://cdn-icons-png.flaticon.com/512/1378/1378542.png" class="card-img-top" alt="...">
+						  <div class="card" id="SignUp_buisnessmanCard">		  	
+						    <img id="AuthImg" src="https://cdn-icons-png.flaticon.com/512/1378/1378542.png" class="card-img-top" alt="...">			
+						    <img id="AuthCheckImg" src="https://cdn-icons-png.flaticon.com/512/390/390973.png" class="" alt="...">				    
 						    <div class="card-body">
 						      <h6 class="card-title">사업자(플리마켓 홍보자)</h5>
 						      <p class="card-text">
@@ -167,13 +169,13 @@
 						  </div>
 						</div>
 						<input type="hidden" name="authority" value="S"/>
-						<input type="hidden" name="authoritycheck" value="false"/>
+						<input type="hidden" name="buisnesscheck" value="false"/> <%--사업자인지 아닌지 구분해서 백단에서 신청처리--%>
 						
 	                    <div class="SignUp_ProfileWrap" style="margin-left: 26px;">
 						  <label for="formFile" class="form-label" style="color:red;">사업자등록등 첨부</label>
-						  <input class="form-control form-control-sm" type="file" id="formFile">
+						  <input class="form-control form-control-sm is-invalid" type="file" id="formFile" name="buisnessfile" >
 						</div>
-	                    <label style="font-size:large; margin:21px 0 -1px 39px;">&#60;셀러님의 주 판매 용품이 무엇인가요?&#62;</label>
+	                    <label style="font-size:large; margin:21px 0 -1px 32px;"><span class="SignUp_MustSpan"> *</span>&#60;셀러님의 주 판매 용품이 무엇인가요?&#62;</label>
 	                    <label style="font-size:5px; color:#7c6da1; margin-left:30px; width: 350px;">통계에 활용됩니다. 통계창에서 최근 유행하는 상품 카테고리를 확인해보세요!</label>
 	                    <div class="mb-2" >
 	                      <select name="category" class="form-select form-select-sm mb-3 ms-4" aria-label=".form-select-lg example">
@@ -193,7 +195,7 @@
 	                    </div>
 	                    <div class="text-center SecondSectionBtnWrap">
 	                      <button type="button" id="SignUp_prevBtn" onclick="CheckStepHandler(-2)" class="btn btn-primary w-50 mt-4 me-3 mb-0">이전 단계</button><br>
-	                      <button type="button" onclick="SignUp_Ok()" class="btn btn-primary w-50 mt-4 mb-0">가입완료</button>
+	                      <button type="button" onclick=" SignUp_Ok()" class="btn btn-primary w-50 mt-4 mb-0">가입완료</button>
 	                    </div>
                   </div>
                     

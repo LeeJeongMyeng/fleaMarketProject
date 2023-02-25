@@ -14,8 +14,9 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
 public class DownloadView extends AbstractView {
+	
 	// 다운로드할 특정한 폴드공통위치
-	@Value("${file.upload}")
+	/* @Value("${file.upload}") */
 	private String upload;
 	
 	@Override

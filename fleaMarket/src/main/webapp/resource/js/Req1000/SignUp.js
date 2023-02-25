@@ -7,31 +7,13 @@
 	var OkCheckName = false;
 	var OkPhonenum = false;
 	var OkAddress =false;
-	var OkAuth=false;	
+	var OkAuth=false;
+	var OkBusiness =false;	
+	var OkCategory=false;
 	$('.SignUp_ProfileWrap').slideUp('slow') //사업자등록증 input
 	
 	
-   //마지막스탭 이쁘게 하는고
-   	$('.SignUp_cardgroup .card').click(function(){
-		   //이뿌게하기
-		   if($(this).attr('id')=="SignUp_SellerCard"){   
-		   	$(this).children('img').attr('src','https://cdn-icons-png.flaticon.com/512/3981/3981099.png').css("transform","scale(1.4)")		
-			$('#SignUp_buisnessmanCard img').attr('src','https://cdn-icons-png.flaticon.com/512/1378/1378542.png')
-						.css("transform","scale(1.0)")
-			$('#SignUp_buisnessmanCard').css('background-color','white');
-			$('.SignUp_ProfileWrap').slideUp('slow')
-			
-		   }else{
-			//이뿌게하기
-		   	$(this).children('img').attr('src','https://cdn-icons-png.flaticon.com/512/1378/1378644.png').css('transform','scale(1.4)')
-			$('#SignUp_SellerCard img').attr('src','https://cdn-icons-png.flaticon.com/512/3981/3981072.png')
-						.css("transform","scale(1.0)")
-			$('#SignUp_SellerCard').css('background-color','white');
-			alert("사업자 가입은 사업자등록증이 필수로 첨부되어야합니다.")
-			$('.SignUp_ProfileWrap').slideDown('slow')			
-		   }
-		   $(this).css('background-color','#f5f2f6')
-	   })
+   
 	 
 	 
 	//이메일 양식확인
@@ -286,19 +268,64 @@ function CheckUser(){
             document.getElementById("sample6_address").value = addr;
             // 커서를 상세주소 필드로 이동한다.
             document.getElementById("sample6_detailAddress").focus();
+            OkAddress=true;
         }
     }).open();
 }
-	
+	//마지막스탭 이쁘게 하는고
+   	$('.SignUp_cardgroup .card').click(function(){
+		   //이뿌게하기
+		   if($(this).attr('id')=="SignUp_SellerCard"){ //셀러를 고를경우  
+		   	$(this).children('#AuthImg').attr('src','https://cdn-icons-png.flaticon.com/512/3981/3981099.png').css("transform","scale(1.4)")		
+			$('#SignUp_buisnessmanCard #AuthImg').attr('src','https://cdn-icons-png.flaticon.com/512/1378/1378542.png')
+						.css("transform","scale(1.0)")
+			$('#SignUp_buisnessmanCard').css('background-color','white');
+			$(this).children('#AuthCheckImg').css('display','block')
+			$('#SignUp_buisnessmanCard').children('#AuthCheckImg').css('display','none')
+			$('.SignUp_ProfileWrap').slideUp('slow')
+			OkAuth=true;
+			OkBusiness=true;
+		   }else{ //사업자를 고를경우
+			//이뿌게하기
+		   	$(this).children('#AuthImg').attr('src','https://cdn-icons-png.flaticon.com/512/1378/1378644.png').css('transform','scale(1.4)')
+			$('#SignUp_SellerCard #AuthImg').attr('src','https://cdn-icons-png.flaticon.com/512/3981/3981072.png')
+						.css("transform","scale(1.0)")
+			$('#SignUp_SellerCard').css('background-color','white');
+			$(this).children('#AuthCheckImg').css('display','block')
+			$('#SignUp_SellerCard').children('#AuthCheckImg').css('display','none')
+			alert("사업자 가입은 사업자등록증이 필수로 첨부되어야합니다.")
+			$('.SignUp_ProfileWrap').slideDown('slow')
+			$('[name=buisnesscheck]').val('true');
+			OkAuth=false;// 사업자등록등 넣게 유효성 검사			
+		   }
+		   $(this).css('background-color','#f5f2f6')//선택한 카드 배경색처리
+		   
+	   })
+	  
+	 $('[name=buisnessfile]').change(function(){
+		 if($(this).val()==''){
+			 $(this).removeClass('is-valid')
+			 $(this).addClass('is-invalid')			 
+		 }else{
+			 $(this).removeClass('is-invalid')
+			 $(this).addClass('is-valid')	
+		 }
+	 })
+	   
+	   
 	//스탭넘기기전 유효성검사
 	function CheckStepHandler(number){
 		if(number==1){
-			
 			//if(!OkEamil){alert("이메일 인증을 완료해주세요."); return false;}
 			//if(!OkPass2){alert("비밀번호를 알맞게 입력해주세요."); return false;}
 			//if(!OkCheckName){alert("기존 회원 여부 체크를 진행해주세요"); return false;}
 		}else if(number==2){
-			if(!OkPhonenum){alert("핸드폰번호를 정확하게 입력부탁드립니다."); return false;}
+			//if(!OkPhonenum){alert("핸드폰번호를 정확하게 입력부탁드립니다."); return false;}
+			//if(!OkAddress){alert("우편번호 찾기를 통해서 주소기재 부탁드립니다."); return false;}
+			//console.log($('[name=profileimg]').val())
+			//if($('[name=nickname').val().length<2){
+				$('[name=nickname]').val($('[name=email]').val().split('@')[0])
+			//}
 			$('[name=address]').val($('#sample6_address').val()+"&"+$('#sample6_extraAddress').val()+"&"+$('#sample6_detailAddress').val())
 			console.log($('[name=address]').val())
 		}		
@@ -350,5 +377,22 @@ function CheckUser(){
 
 	//회원가입 완료 버튼
     function SignUp_Ok(){
-    	console.log($('[name=name]').val()+":"+$('[name=rrn]').val())
+		console.log("##가입체크##")
+		console.log($('[name=email]').val())		
+		console.log($('[name=password]').val())		
+		console.log($('[name=name]').val())		
+		console.log($('[name=personalnumber]').val())		
+		console.log($('[name=profileimg]').val())		
+		console.log($('[name=nickname]').val())		
+		console.log($('[name=phonenumber]').val())		
+		console.log($('[name=address]').val())		
+		console.log($('[name=authority]').val())		
+		console.log($('[name=buisnesscheck]').val())		
+		console.log($('[name=buisnessfile]').val())		
+		console.log($('[name=category]').val())		
+	
+		
+    	if(!OkAuth){alert("가입 유형을 선택해주세요."); return false;}
+    	if($('[name=category]').val()=='카테고리 선택'){alert('카테고리를 선택해주세요.'); return false;}
+    	$('#SignUpForm').submit()
     }
