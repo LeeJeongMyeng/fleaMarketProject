@@ -32,9 +32,16 @@
 				)
     	</insert>
     	
+    	<!--회원가입시 해당 회원 프로필사진 삽입  -->
     	<insert id="insprofile" parameterType="profileimg">
     		INSERT INTO PROFILE VALUES(#{email},#{profileimg})
     	</insert>
+    	
+    	<select id="Login" parameterType="member" resultType="member">
+    		SELECT * FROM FLEAMARKETMEMBER
+    		WHERE EMAIL = #{email}
+    		AND PASSWORD = #{password}
+    	</select>
     </mapper>
     
     

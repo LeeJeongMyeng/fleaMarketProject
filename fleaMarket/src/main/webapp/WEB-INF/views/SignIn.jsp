@@ -27,8 +27,16 @@
   <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+<script type="text/javascript">
+$(document).ready(function(){
+	var msg = "${LoginMsg}"
+		if(msg!=""){
+			alert(msg)
+			}
+		}	
+});
+</script>
 </head>
-
 <body class="">
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
@@ -49,19 +57,19 @@
                   <p class="mb-0">플리마켓 통합 플랫폼입니다.ㅋㅋ!!</p>
                 </div>
                 <div class="card-body">
-                  <form role="form">
+                  <form role="form" id="LoginForm" action="Login.do" method="post">
                     <div class="mb-3">
-                      <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email">
+                      <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email" required>
                     </div>
                     <div class="mb-3">
-                      <input type="email" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
+                      <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" required>
                     </div>
                     <div class="form-check form-switch">
                       <input class="form-check-input" type="checkbox" id="rememberMe">
                       <label class="form-check-label" for="rememberMe">이 계정 기억하기</label>
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">Sign in</button>
+                      <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">로 그 인</button>
                       <button type="button" class="btn btn-lg btn-warning btn-lg w-100 mt-4 mb-0">카카오 로그인</button>
                       <button type="button" class="btn btn-lg btn-success btn-lg w-100 mt-4 mb-0">네이버 로그인</button>
                     </div>
@@ -70,7 +78,7 @@
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                   <p class="mb-4 text-sm mx-auto">
                     아직 계정이 없으신가요?&nbsp;&nbsp;
-                    <a href="javascript:;" class="text-primary text-gradient font-weight-bold">Sign up</a>
+                    <a href="SignUp.do" class="text-primary text-gradient font-weight-bold">회원가입</a>
                   </p>
                 </div>
               </div>

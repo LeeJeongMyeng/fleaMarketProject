@@ -1,5 +1,7 @@
 package fleaMarket.a01_controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,7 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-
 import fleaMarket.a02_service.Req1000_Service;
 import vo.Member;
 import vo.ProfileImg;
@@ -21,7 +22,7 @@ public class Req1000_Controller {
 		this.service = service;
 	}
 	
-	@GetMapping("SignIn.do")
+	@RequestMapping("SignIn.do")
 	public String login() {
 		return "SignIn";
 	}
@@ -67,5 +68,24 @@ public class Req1000_Controller {
 				}
 				*/
 		return "SignIn";
+	}
+	
+	@PostMapping("Login.do") //일반로그인
+	public String Loign(Member log,Model d,HttpSession session) {
+		System.out.println(log.getEmail()+":"+log.getPassword());
+		
+		String msg = "로그인 실패";
+		String path = "SignIn";
+		Member mem = service.Login(log);
+		if(mem!=null) {
+		session.setAttribute("Login", mem);
+		System.out.println(mem.getEmail());
+		msg = "로그인 성공";
+		path="main";
+		}
+		d.addAttribute("LoginMsg",msg);
+		
+		return path;
+	
 	}
 }

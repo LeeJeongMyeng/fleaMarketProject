@@ -23,21 +23,24 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	public Req1000_ServiceImp(Req1000_Dao dao) {
 		this.dao = dao;
 	}
-	
+	// 이메일 중복검사
 	public Member DuplicateEmail(String email) {
 		System.out.println("dd:"+email);
 		return dao.DuplicateEmail(email);
 	}
+	// 이름,주민 중복검사
 	public Member DuplicateMem(String name,String personalnumber) {
 		HashMap<String,String> map = new HashMap<String,String>();
 		map.put("name", name);
 		map.put("personalnumber", personalnumber);
 		return dao.DuplicateMem(map);
 	}
+	//회원가입
 	public void SignUp(Member ins) {
 		dao.SignUp(ins);
 	}
-	public String insprofileimg(MultipartFile report) {
+	//회원가입 처리 후,이미지 업로드 처리
+	public String insprofileimg(MultipartFile report) { 
 			String fname = report.getOriginalFilename();
 			File f = new File(profilepath+fname);
 			try {
@@ -48,9 +51,15 @@ public class Req1000_ServiceImp implements Req1000_Service {
 				System.out.println("파일업로드 예외2:"+e.getMessage());
 			} 
 		
-		return fname; //일단  db업로드 해야하니까 
+		return fname; //db업로드 해야하니까 네임 리턴
 	}
+	// 테이블에 프로필사진 삽입
 	public void insprofile(ProfileImg fins) {
 		dao.insprofile(fins);
+	}
+	
+	//일반로그인
+	public Member Login(Member log) {
+		return dao.Login(log);
 	}
 }

@@ -13,4 +13,5 @@ public interface Req1000_Service {
 	public void SignUp(Member ins);
 	public String insprofileimg(MultipartFile report); //파일 업로드 처리
 	public void insprofile(ProfileImg fins); //회원 이미지파일 테이블insert
+	public Member Login(Member log);
 }

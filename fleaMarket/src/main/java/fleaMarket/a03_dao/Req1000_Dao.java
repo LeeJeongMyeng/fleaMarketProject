@@ -10,4 +10,5 @@ public interface Req1000_Dao {
 	public Member DuplicateMem(HashMap<String,String> map);
 	public void SignUp(Member ins);
 	public void insprofile(ProfileImg fins);
+	public Member Login(Member log);
 }
