@@ -14,7 +14,7 @@
 <link rel="apple-touch-icon" sizes="76x76"
 	href="${path}/assets/img/apple-icon.png">
 <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
-<title>공지사항</title>
+<title>내 정보 조회 및 수정</title>
 <!--     Fonts and icons     -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
@@ -57,7 +57,7 @@
 						<div
 							class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
 							<i class="ni ni-shop text-primary text-sm opacity-10"></i>
-						</div> <span class="nav-link-text ms-1">관리자페이지</span>
+						</div> <span class="nav-link-text ms-1">마이페이지</span>
 				</a>
 					<div class="collapse " id="dashboardsExamples">
 						<ul class="nav ms-4">
@@ -89,7 +89,7 @@
 					<h6
 						class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGES</h6>
 				</li>
-				<li class="nav-item"><a data-bs-toggle="collapse"
+				<li class="nav-item active"><a data-bs-toggle="collapse"
 					href="#pagesExamples" class="nav-link"
 					aria-controls="pagesExamples" role="button" aria-expanded="false">
 						<div
@@ -102,9 +102,9 @@
 
 					<div class="collapse " id="pagesExamples">
 						<ul class="nav ms-4">
-							<li class="nav-item "><a class="nav-link"
+							<li class="nav-item active"><a class="nav-link"
 								href="#profileExample"> <span class="sidenav-mini-icon">
-										P </span> <span class="sidenav-normal"> 회원조회 <b class="caret"></b></span>
+										P </span> <span class="sidenav-normal"> 내 정보 조회 <b class="caret"></b></span>
 							</a>
 								</li>
 							<li class="nav-item "><a class="nav-link "
@@ -115,7 +115,7 @@
 						</ul>
 					</div></li>
 				<li class="nav-item"><a data-bs-toggle="collapse"
-					href="#applicationsExamples" class="nav-link active"
+					href="#applicationsExamples" class="nav-link"
 					aria-controls="applicationsExamples" role="button"
 					aria-expanded="false">
 						<div
@@ -125,12 +125,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 				</a>
 					<div class="collapse " id="applicationsExamples">
 						<ul class="nav ms-4">
-							<li class="nav-item "><a class="nav-link active"
-								href="${path}/pages/applications/kanban.html"> <span
-									class="sidenav-mini-icon"> K </span> <span
-									class="sidenav-normal"> 공지사항 </span>
-							</a></li>
-							<li class="nav-item "><a class="nav-link "
+							<li class="nav-item "><a class="nav-link"
 								href="${path}/pages/applications/wizard.html"> <span
 									class="sidenav-mini-icon"> W </span> <span
 									class="sidenav-normal"> 1:1문의 </span>
@@ -349,12 +344,12 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 					<ol
 						class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
 						<li class="breadcrumb-item text-sm"><a class="text-white"
-							href="javascript:;"> <i class="ni ni-ui-04"></i>
+							href="javascript:;"> <i class="ni ni-single-02"></i>
 						</a></li>
 						<li class="breadcrumb-item text-sm text-white"><a
-							class="opacity-5 text-white" href="javascript:;">게시글</a></li>
+							class="opacity-5 text-white" href="javascript:;">회원</a></li>
 						<li class="breadcrumb-item text-sm text-white active"
-							aria-current="page">작성한 공지사항</li>
+							aria-current="page">내 정보 조회 및 수정</li>
 					</ol>
 				</nav>
 				<div
@@ -370,10 +365,6 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 				<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
 					id="navbar">
 					<div class="ms-md-auto pe-md-3 d-flex align-items-center">
-						<div class="input-group">
-							<span class="input-group-text text-body"><i
-								class="fas fa-search" aria-hidden="true"></i></span> <input type="text"
-								class="form-control" placeholder="Type here...">
 						</div>
 					</div>
 					<ul class="navbar-nav  justify-content-end">
@@ -493,84 +484,156 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 						<div class="card-header pb-0">
 							<div class="d-lg-flex">
 								<div>
-									<h5 class="mb-0">작성한 공지사항</h5>
-									<p class="text-sm mb-0">검색할 공지사항을 상단 검색창에 제목을 입력해주세요</p>
-								</div>
-								<div class="ms-auto my-auto mt-lg-0 mt-4">
-									<div class="ms-auto my-auto">
-										<a href="./new-product.html"
-											class="btn bg-gradient-primary btn-sm mb-0" target="_blank">+&nbsp;
-											New Product</a>
-										<button type="button"
-											class="btn btn-outline-primary btn-sm mb-0"
-											data-bs-toggle="modal" data-bs-target="#import">
-											Import</button>
-										<div class="modal fade" id="import" tabindex="-1"
-											aria-hidden="true">
-											<div class="modal-dialog mt-lg-10">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="ModalLabel">Import CSV</h5>
-														<i class="fas fa-upload ms-3"></i>
-														<button type="button" class="btn-close"
-															data-bs-dismiss="modal" aria-label="Close"></button>
-													</div>
-													<div class="modal-body">
-														<p>You can browse your computer for a file.</p>
-														<input type="text" placeholder="Browse file..."
-															class="form-control mb-3">
-														<div class="form-check">
-															<input class="form-check-input" type="checkbox" value=""
-																id="importCheck" checked=""> <label
-																class="custom-control-label" for="importCheck">I
-																accept the terms and conditions</label>
-														</div>
-													</div>
-													<div class="modal-footer">
-														<button type="button"
-															class="btn bg-gradient-secondary btn-sm"
-															data-bs-dismiss="modal">Close</button>
-														<button type="button"
-															class="btn bg-gradient-primary btn-sm">Upload</button>
-													</div>
-												</div>
-											</div>
-										</div>
-										<button
-											class="btn btn-outline-primary btn-sm export mb-0 mt-sm-0 mt-1"
-											data-type="csv" type="button" name="button">Export</button>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="card-body px-0 pb-0">
-							<div class="table-responsive">
-								<table class="table table-flush" id="products-list">
-									<thead class="thead-light">
-										<tr>
-											<th width="10%">　</th>
-											<th width="10%">글 번호</th>
-											<th width="40%">제목</th>
-											<th width="20%">등록일</th>
-											<th width="20%">수정일</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>
-												<div class="d-flex">
-													<div class="form-check my-auto">
-														<input class="form-check-input" type="checkbox"
-															id="customCheck3">
-													</div>
-												</div>
-											</td>
-											<td class="text-sm">1</td>
-											<td class="text-sm">공지사항입니다.</td>
-											<td class="text-sm">2023-02-20</td>
-											<td class="text-sm">2023-02-25</td>
-										</tr>
-								</table>
+								  <div class="col-sm-auto col-8 my-auto">
+                <div class="h-100">
+                  <h5 class="mb-1 font-weight-bolder">
+                    Mark Johnson
+                  </h5>
+                  <p class="mb-0 font-weight-bold text-sm">
+                    CEO / Co-Founder
+                  </p>
+                </div>
+              </div>
+              <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
+                <label class="form-check-label mb-0">
+                  <small id="profileVisibility">
+                    Switch to invisible
+                  </small>
+                </label>
+                <div class="form-check form-switch ms-2">
+                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault23" checked onchange="visible()">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card Basic Info -->
+          <div class="card mt-4" id="basic-info">
+            <div class="card-header">
+              <h5>Basic Info</h5>
+            </div>
+            <div class="card-body pt-0">
+              <div class="row">
+                <div class="col-6">
+                  <label class="form-label">First Name</label>
+                  <div class="input-group">
+                    <input id="firstName" name="firstName" class="form-control" type="text" placeholder="Alec" required="required">
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label class="form-label">Last Name</label>
+                  <div class="input-group">
+                    <input id="lastName" name="lastName" class="form-control" type="text" placeholder="Thompson" required="required">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4 col-6">
+                  <label class="form-label mt-4">I'm</label>
+                  <select class="form-control" name="choices-gender" id="choices-gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                </div>
+                <div class="col-sm-8">
+                  <div class="row">
+                    <div class="col-sm-5 col-5">
+                      <label class="form-label mt-4">Birth Date</label>
+                      <select class="form-control" name="choices-month" id="choices-month"></select>
+                    </div>
+                    <div class="col-sm-4 col-3">
+                      <label class="form-label mt-4">&nbsp;</label>
+                      <select class="form-control" name="choices-day" id="choices-day"></select>
+                    </div>
+                    <div class="col-sm-3 col-4">
+                      <label class="form-label mt-4">&nbsp;</label>
+                      <select class="form-control" name="choices-year" id="choices-year"></select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label class="form-label mt-4">Email</label>
+                  <div class="input-group">
+                    <input id="email" name="email" class="form-control" type="email" placeholder="example@email.com">
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label class="form-label mt-4">Confirmation Email</label>
+                  <div class="input-group">
+                    <input id="confirmation" name="confirmation" class="form-control" type="email" placeholder="example@email.com">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <label class="form-label mt-4">Your location</label>
+                  <div class="input-group">
+                    <input id="location" name="location" class="form-control" type="text" placeholder="Sydney, A">
+                  </div>
+                </div>
+                <div class="col-6">
+                  <label class="form-label mt-4">Phone Number</label>
+                  <div class="input-group">
+                    <input id="phone" name="phone" class="form-control" type="number" placeholder="+40 735 631 620">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-6 align-self-center">
+                  <label class="form-label mt-4">Language</label>
+                  <select class="form-control" name="choices-language" id="choices-language">
+                    <option value="English">English</option>
+                    <option value="French">French</option>
+                    <option value="Spanish">Spanish</option>
+                  </select>
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label mt-4">Skills</label>
+                  <input class="form-control" id="choices-skills" type="text" value="vuejs, angular, react" placeholder="Enter something" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Card Change Password -->
+          <div class="card mt-4" id="password">
+            <div class="card-header">
+              <h5>Change Password</h5>
+            </div>
+            <div class="card-body pt-0">
+              <label class="form-label">Current password</label>
+              <div class="form-group">
+                <input class="form-control" type="password" placeholder="Current password">
+              </div>
+              <label class="form-label">New password</label>
+              <div class="form-group">
+                <input class="form-control" type="password" placeholder="New password">
+              </div>
+              <label class="form-label">Confirm new password</label>
+              <div class="form-group">
+                <input class="form-control" type="password" placeholder="Confirm password">
+              </div>
+              <h5 class="mt-5">Password requirements</h5>
+              <p class="text-muted mb-2">
+                Please follow this guide for a strong password:
+              </p>
+              <ul class="text-muted ps-4 mb-0 float-start">
+                <li>
+                  <span class="text-sm">One special characters</span>
+                </li>
+                <li>
+                  <span class="text-sm">Min 6 characters</span>
+                </li>
+                <li>
+                  <span class="text-sm">One number (2 are recommended)</span>
+                </li>
+                <li>
+                  <span class="text-sm">Change it often</span>
+                </li>
+              </ul>
+              <button class="btn bg-gradient-dark btn-sm float-end mt-6 mb-0">Update password</button>
+            </div>
+          </div>
 							</div>
 						</div>
 					</div>

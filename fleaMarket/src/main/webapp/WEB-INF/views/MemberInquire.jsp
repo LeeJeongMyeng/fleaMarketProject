@@ -14,7 +14,7 @@
 <link rel="apple-touch-icon" sizes="76x76"
 	href="${path}/assets/img/apple-icon.png">
 <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
-<title>공지사항</title>
+<title>내가 쓴 1:1문의</title>
 <!--     Fonts and icons     -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
@@ -57,7 +57,7 @@
 						<div
 							class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
 							<i class="ni ni-shop text-primary text-sm opacity-10"></i>
-						</div> <span class="nav-link-text ms-1">관리자페이지</span>
+						</div> <span class="nav-link-text ms-1">마이페이지</span>
 				</a>
 					<div class="collapse " id="dashboardsExamples">
 						<ul class="nav ms-4">
@@ -104,7 +104,7 @@
 						<ul class="nav ms-4">
 							<li class="nav-item "><a class="nav-link"
 								href="#profileExample"> <span class="sidenav-mini-icon">
-										P </span> <span class="sidenav-normal"> 회원조회 <b class="caret"></b></span>
+										P </span> <span class="sidenav-normal"> 내 정보 조회 <b class="caret"></b></span>
 							</a>
 								</li>
 							<li class="nav-item "><a class="nav-link "
@@ -126,11 +126,6 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 					<div class="collapse " id="applicationsExamples">
 						<ul class="nav ms-4">
 							<li class="nav-item "><a class="nav-link active"
-								href="${path}/pages/applications/kanban.html"> <span
-									class="sidenav-mini-icon"> K </span> <span
-									class="sidenav-normal"> 공지사항 </span>
-							</a></li>
-							<li class="nav-item "><a class="nav-link "
 								href="${path}/pages/applications/wizard.html"> <span
 									class="sidenav-mini-icon"> W </span> <span
 									class="sidenav-normal"> 1:1문의 </span>
@@ -354,7 +349,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 						<li class="breadcrumb-item text-sm text-white"><a
 							class="opacity-5 text-white" href="javascript:;">게시글</a></li>
 						<li class="breadcrumb-item text-sm text-white active"
-							aria-current="page">작성한 공지사항</li>
+							aria-current="page">작성한 1:1문의</li>
 					</ol>
 				</nav>
 				<div
@@ -370,10 +365,6 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 				<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
 					id="navbar">
 					<div class="ms-md-auto pe-md-3 d-flex align-items-center">
-						<div class="input-group">
-							<span class="input-group-text text-body"><i
-								class="fas fa-search" aria-hidden="true"></i></span> <input type="text"
-								class="form-control" placeholder="Type here...">
 						</div>
 					</div>
 					<ul class="navbar-nav  justify-content-end">
@@ -493,8 +484,8 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 						<div class="card-header pb-0">
 							<div class="d-lg-flex">
 								<div>
-									<h5 class="mb-0">작성한 공지사항</h5>
-									<p class="text-sm mb-0">검색할 공지사항을 상단 검색창에 제목을 입력해주세요</p>
+									<h5 class="mb-0">작성한 1:1문의</h5>
+									<p class="text-sm mb-0">작성한 1:1 문의글 입니다.</p>
 								</div>
 								<div class="ms-auto my-auto mt-lg-0 mt-4">
 									<div class="ms-auto my-auto">
@@ -548,7 +539,14 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 								<table class="table table-flush" id="products-list">
 									<thead class="thead-light">
 										<tr>
-											<th width="10%">　</th>
+											<th width="10%">
+											<div class="d-flex">
+													<div class="form-check my-auto">
+														<input class="form-check-input" type="checkbox"
+															id="customCheck3">
+													</div>
+												</div>
+											</th>
 											<th width="10%">글 번호</th>
 											<th width="40%">제목</th>
 											<th width="20%">등록일</th>
@@ -566,7 +564,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 												</div>
 											</td>
 											<td class="text-sm">1</td>
-											<td class="text-sm">공지사항입니다.</td>
+											<td class="text-sm">사업자 인증 관련 문의입니다.</td>
 											<td class="text-sm">2023-02-20</td>
 											<td class="text-sm">2023-02-25</td>
 										</tr>

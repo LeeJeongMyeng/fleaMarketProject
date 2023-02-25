@@ -352,7 +352,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 							href="javascript:;"> <i class="ni ni-single-02"></i>
 						</a></li>
 						<li class="breadcrumb-item text-sm text-white"><a
-							class="opacity-5 text-white" href="javascript:;">회원관리</a></li>
+							class="opacity-5 text-white" href="javascript:;">회원</a></li>
 						<li class="breadcrumb-item text-sm text-white active"
 							aria-current="page">회원목록조회</li>
 					</ol>
@@ -548,6 +548,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 								<table class="table table-flush" id="products-list">
 									<thead class="thead-light">
 										<tr>
+											<th width="10%" >　</th>
 											<th width="10%" >사진</th>
 											<th width="10%" >회원명</th>
 											<th width="20%">이메일</th>
