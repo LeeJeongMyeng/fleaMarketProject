@@ -14,6 +14,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  
   <title>
     플리마켓 회원가입
   </title>
@@ -30,10 +32,10 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	var msg = "${LoginMsg}"
+	console.log("dddd"+msg)
 		if(msg!=""){
 			alert(msg)
-			}
-		}	
+			}	
 });
 </script>
 </head>

@@ -74,7 +74,7 @@ public class Req1000_Controller {
 	public String Loign(Member log,Model d,HttpSession session) {
 		System.out.println(log.getEmail()+":"+log.getPassword());
 		
-		String msg = "로그인 실패";
+		String msg = "일치하는 회원이 없습니다. 다시 시도 부탁드립니다.";
 		String path = "SignIn";
 		Member mem = service.Login(log);
 		if(mem!=null) {
@@ -83,8 +83,7 @@ public class Req1000_Controller {
 		msg = "로그인 성공";
 		path="main";
 		}
-		d.addAttribute("LoginMsg",msg);
-		
+		d.addAttribute("LoginMsg",msg);	
 		return path;
 	
 	}
