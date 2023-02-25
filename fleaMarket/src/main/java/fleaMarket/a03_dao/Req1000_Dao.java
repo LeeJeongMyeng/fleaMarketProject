@@ -13,6 +13,7 @@ public interface Req1000_Dao {
 	public Member Login(Member log);
 	public Member kakaoLogin(Member log);
 	public Member naverLogin(Member log);
-	public Member CheckPeristalsisSNS(String snsemail);
+	public Member CheckPeristalsisSNS_K(String snsemail);
+	public Member CheckPeristalsisSNS_N(String name);	
 	public void SnsEmailPlus(Member upt);
 }

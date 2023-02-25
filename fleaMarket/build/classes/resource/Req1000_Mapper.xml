@@ -51,16 +51,27 @@
     		WHERE NAVEREMAIL=#{naveremail}
     	</select>
     	
-    	<select id="CheckPeristalsisSNS" parameterType="string" resultType="member">
-    		SELECT EMAIL,KAKAOEMAIL,NAVEREMAIL FROM FLEAMARKETMEMBER 
-    		WHERE (EMAIL || KAKAOEMAIL || NAVEREMAIL) LIKE '%'||#{snsemail}||'%'
+    	<select id="CheckPeristalsisSNS_K" parameterType="string" resultType="member">
+    		SELECT * FROM FLEAMARKETMEMBER 		
+    			WHERE EMAIL = #{snsemail}
+    	</select>
+    	<select id="CheckPeristalsisSNS_N" parameterType="string" resultType="member">
+    		SELECT * FROM FLEAMARKETMEMBER 		
+    			WHERE NAME = #{name}
     	</select>
     	
     	<update id="SnsEmailPlus" parameterType="member">
     		UPDATE FLEAMARKETMEMBER 
-			SET KAKAOEMAIL = #{kakaoemail}
-			WHERE EMAIL =#{kakaoemail}
-    		
+    		<choose>
+    			<when test="name==null">
+    				SET KAKAOEMAIL = #{kakaoemail}
+					WHERE EMAIL =#{kakaoemail}
+    			</when>
+    			<otherwise>
+    				SET NAVEREMAIL=#{naveremail}
+					where name=#{name}
+    			</otherwise>
+    		</choose>
     	</update>
     	
     </mapper>

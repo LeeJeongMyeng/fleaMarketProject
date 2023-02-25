@@ -49,10 +49,10 @@ NULL,
 );
 
 UPDATE FLEAMARKETMEMBER 
-SET KAKAOEMAIL = NULL 
-WHERE EMAIL ='aoddl56@nate.com';
+SET authority = '일반셀러'
+WHERE EMAIL ='28888wjdaud@naver.com';
 
-
+ALTER TABLE FLEAMARKETMEMBER MODIFY authority varchar2(100);
 ----------------------------------------------------------------------------------
 DROP TABLE profile;
 CREATE TABLE Profile

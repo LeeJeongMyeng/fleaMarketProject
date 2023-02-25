@@ -64,7 +64,6 @@ public class Req1000_Controller {
 		
 		String msg = "일치하는 회원이 없습니다. 다시 시도 부탁드립니다.";
 		String path = "SignIn";
-		
 		if(d.asMap().get("SnsEmailPlus")!=null) {
 			mem = (Member)d.asMap().get("SnsEmailPlus");
 			mem = service.Login(mem);
@@ -84,8 +83,9 @@ public class Req1000_Controller {
 	@RequestMapping("SnsEmailPlus.do")//기존계정에 연동계정 업데이트
 	public String SnsEmailPlus(Member upt,
 									RedirectAttributes redirectAttributes) {
+		System.out.println("여긴가?:"+upt.getName()+upt.getNaveremail());
 		service.SnsEmailPlus(upt);
 		redirectAttributes.addFlashAttribute("SnsEmailPlus",upt);
-		return "redirect:Login.do";	
+		return "redirect:Login.do";
 	}
 }

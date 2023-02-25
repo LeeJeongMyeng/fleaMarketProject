@@ -70,10 +70,15 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		
 	}
 	
-	//SNS연동 여부확인
-	public Member CheckPeristalsisSNS(String snsemail) {
-		return dao.CheckPeristalsisSNS(snsemail);
+	//카카오연동 여부확인
+	public Member CheckPeristalsisSNS_K(String snsemail) {
+		return dao.CheckPeristalsisSNS_K(snsemail);
 	}
+	//네이버 연동
+	public Member CheckPeristalsisSNS_N(String name) {
+		return dao.CheckPeristalsisSNS_N(name);
+	}
+	
 	public void SnsEmailPlus(Member upt) {
 		dao.SnsEmailPlus(upt);
 	}

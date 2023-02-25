@@ -16,8 +16,9 @@
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+  <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
   <title>
-    플리마켓 회원가입
+    콘티고 로그인
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -75,9 +76,9 @@ $(document).ready(function(){
                     </div>
                     <div class="text-center">
                       <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">로 그 인</button>
-                      <button type="button" class="btn btn-lg btn-warning btn-lg w-100 mt-4 mb-0">네이버</button>
                        <input type="hidden" name="snsemail">
 					   <img src="${path}/resource/img/Member/SignIn/kakao_login_medium_narrow.png" onclick="kakaoLogin()">
+					   <div id="naver_id_login"></div>
                     </div>
                   </form>
                 </div>
@@ -119,6 +120,7 @@ $(document).ready(function(){
 			<div class="mb-3 mt-3" style="color:red; font-weight:bold" id="SNSLoginTextAreaAfter"></div>
 			<div class="mb-3">
 				<input type="hidden" id="snsemail">
+				<input type="hidden" id="snsname">
 				<button type="button" class="btn btn-primary" id="SNSLoginbnt"></button>
 			</div>
 	      </div>

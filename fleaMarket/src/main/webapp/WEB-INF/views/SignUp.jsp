@@ -169,7 +169,7 @@
 						    </div>
 						  </div>
 						</div>
-						<input type="hidden" name="authority" value="S"/>
+						<input type="hidden" name="authority" value="일반셀러"/>
 						<input type="hidden" name="buisnesscheck" value="false"/> <%--사업자인지 아닌지 구분해서 백단에서 신청처리--%>
 						
 	                    <div class="SignUp_ProfileWrap" style="margin-left: 26px;">

@@ -17,8 +17,7 @@ function kakaoLogin(){
             	  kakaoemail = kakao_account.email;         	
               }
               if(Loginemail==''){SNSResult('kakao',kakaoemail)} //로그인 전이면
-              //else{LinkSns('kakao',kakaoemail)} //로그인상태에서 
-        	  	 
+              //else{LinkSns('kakao',kakaoemail)} //로그인상태에서  	  	 
           },
           fail: function (error) {
             console.log(error)
@@ -33,8 +32,8 @@ function kakaoLogin(){
   
   
   //sns로그인 시도 존재유무 확인
-function SNSResult(platforms,snsemail){
-	var qstr ="snsemail="+snsemail
+function SNSResult(platforms,snsemail,name){
+	var qstr = platforms=='kakao'?"snsemail="+snsemail:"name="+name
 				$.ajax({
 					url:"CheckPeristalsisSNS.do",
 					type:"post",
@@ -49,19 +48,21 @@ function SNSResult(platforms,snsemail){
 								if(data.CheckPeristalsisSNS.kakaoemail==null){
 									$('#SNSLoginbnt').text('카카오연동 및 바로 로그인')
 									.css({"color":"black","background":"yellow","border":"1px solid black"})
-									ResultModal('ok',data.CheckPeristalsisSNS.email)	 
+									$('#snsemail').val(snsemail)
+									ResultModal('ok',snsemail)	 
 								}else{
 									location.href="Login.do?kakaoemail="+data.CheckPeristalsisSNS.kakaoemail
 								}
-							}/*else{
-								if(data.googleemail==null){
-									$('#SNSLoginbnt').text('구글연동 및 바로 로그인')
+							}else{
+								if(data.CheckPeristalsisSNS.naveremail==null){
+									$('#SNSLoginbnt').text('네이버연동 및 바로 로그인')
 									.css({"color":"black","background":"green","border":"1px solid black"})
-									ResultModal('ok',data.email)
+									$('#snsemail').val(snsemail)
+									$('#snsname').val(name)
+									ResultModal('ok',data.CheckPeristalsisSNS.email,name)
 								}else{
-									
-								}
-							}*/
+									location.href="Login.do?naveremail="+data.CheckPeristalsisSNS.naveremail								}
+							}
 						}
 					},
 					error:function(xhr,status,error){
@@ -78,7 +79,6 @@ function ResultModal(sign,snsemail){
 		$('#SNSLoginTextArea').val("<"+snsemail+">"+'로 가입된 기존 아이디가 있습니다.\r\n해당 SNS계정을 연동하시겠습니까?')
 		$('#SNSLoginTextAreaAfter').text('')
 		$('#SNSLoginbnt').removeAttr('data-bs-dismiss',"modal")
-		$('#snsemail').val(snsemail)
 		$('#SnsresultModalbtn').click()
 	}else{
 		$('#SNSLoginTextArea').attr('rows','5')
@@ -93,11 +93,35 @@ function ResultModal(sign,snsemail){
 //연동확인 후, 연동안되있을 때 연동하도록하기
 $('#SNSLoginbnt').click(function(){
 	  var snsemail = $('#snsemail').val()
+	  var snsname = $('#snsname').val()
 	  if($(this).text()=='카카오연동 및 바로 로그인'){
 		  location.href='SnsEmailPlus.do?kakaoemail='+snsemail
 	  }else if($(this).text()=='확인'){
 		  
 	  }else{
-		  
+		 location.href='SnsEmailPlus.do?naveremail='+snsemail+"&name="+snsname 
 	  }
   })
+  //네이버 로그인 로고
+  	var naver_id_login = new naver_id_login("WQO4B5GCMQKA06XHFOuA", "http://localhost:8090/fleaMarket/SignIn.do");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("white", 2,40);
+  	naver_id_login.setDomain("http://localhost:8090/fleaMarket/SignIn.do");
+  	naver_id_login.setState(state);
+  	naver_id_login.setPopup();
+  	naver_id_login.init_naver_id_login();
+  	
+// 네이버 로그인 기능
+// var naver_id_login = new naver_id_login("WQO4B5GCMQKA06XHFOuA", "http://localhost:8090/fleaMarket/SignIn.do");
+  // 접근 토큰 값 출력
+ // alert(naver_id_login.oauthParams.access_token);
+  // 네이버 사용자 프로필 조회
+  naver_id_login.get_naver_userprofile("naverSignInCallback()");
+  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+  function naverSignInCallback() {
+   console.log(naver_id_login.getProfileData('phonenumber'))
+   console.log(naver_id_login.getProfileData('email'));
+   window.opener.SNSResult('naver',naver_id_login.getProfileData('email'),naver_id_login.getProfileData('name'))
+   window.close();
+   
+  }

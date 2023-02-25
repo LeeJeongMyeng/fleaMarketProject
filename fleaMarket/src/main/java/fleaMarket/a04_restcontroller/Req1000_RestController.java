@@ -37,8 +37,14 @@ public class Req1000_RestController {
 	
 	//Sns확인
 	@RequestMapping("CheckPeristalsisSNS.do")
-	public String CheckPeristalsisSNS(@RequestParam("snsemail") String snsemail,Model d){
-		d.addAttribute("CheckPeristalsisSNS",service.CheckPeristalsisSNS(snsemail));
+	public String CheckPeristalsisSNS(@RequestParam(value="snsemail", required=false) String snsemail,
+			@RequestParam(value="name", required=false) String name,Model d){
+		if(name==null) {
+			d.addAttribute("CheckPeristalsisSNS",service.CheckPeristalsisSNS_K(snsemail));
+		}else if(snsemail==null) {
+			d.addAttribute("CheckPeristalsisSNS",service.CheckPeristalsisSNS_N(name));
+		}
+		
 		return "pageJsonReport";
 	}
 }
