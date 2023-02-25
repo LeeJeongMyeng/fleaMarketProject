@@ -21,7 +21,7 @@ public class Req1000_Controller {
 		this.service = service;
 	}
 	
-	@GetMapping("login.do")
+	@GetMapping("SignIn.do")
 	public String login() {
 		return "SignIn";
 	}
@@ -48,6 +48,7 @@ public class Req1000_Controller {
 	@RequestMapping("insSignUp.do")
 	public String SignUp(Member ins,
 			@RequestParam("profileimg") MultipartFile profile
+			//@RequestParam("buisnessfile") MultipartFile buisnessfile
 			){
 			//1. 기본 회원가입 양식
 				service.SignUp(ins);
@@ -60,7 +61,11 @@ public class Req1000_Controller {
 				}
 				service.insprofile(fins);			
 			//3. 신청처리
-				
+				/*
+				if(profile.getOriginalFilename()!="") {
+					//여기는 신청받는 부분으로 채워야할듯
+				}
+				*/
 		return "SignIn";
 	}
 }
