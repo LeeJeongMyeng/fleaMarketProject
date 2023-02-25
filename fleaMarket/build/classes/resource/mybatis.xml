@@ -13,6 +13,7 @@
 	<!-- 2. 사용 XXXMapper.xml을 추가 -->
 	<mappers>
 		<mapper resource="resource/Req1000_Mapper.xml"/>
+		<mapper resource="resource/Req1001_Mapper.xml"/>
 	</mappers>
 
 </configuration>

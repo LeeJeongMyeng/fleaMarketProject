@@ -29,6 +29,14 @@
 <!-- CSS Files -->
 <link id="pagestyle"
 	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+	
+
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		
+	});
+</script>	
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -128,12 +136,12 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 							<li class="nav-item "><a class="nav-link"
 								href="${path}/pages/applications/kanban.html"> <span
 									class="sidenav-mini-icon"> K </span> <span
-									class="sidenav-normal"> 공지사항 </span>
+									class="sidenav-normal" id="AdminInquire"> 공지사항 </span>
 							</a></li>
 							<li class="nav-item "><a class="nav-link active"
 								href="${path}/pages/applications/wizard.html"> <span
 									class="sidenav-mini-icon"> W </span> <span
-									class="sidenav-normal"> 1:1문의 </span>
+									class="sidenav-normal" id="AdminPost"> 1:1문의 </span>
 							</a></li>
 						</ul>
 					</div></li>

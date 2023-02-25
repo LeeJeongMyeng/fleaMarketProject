@@ -373,7 +373,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 						<div class="input-group">
 							<span class="input-group-text text-body"><i
 								class="fas fa-search" aria-hidden="true"></i></span> <input type="text"
-								class="form-control" placeholder="Type here...">
+								class="form-control" value="${sch.nickname}" placeholder="Type here...">
 						</div>
 					</div>
 					<ul class="navbar-nav  justify-content-end">
@@ -548,79 +548,41 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 								<table class="table table-flush" id="products-list">
 									<thead class="thead-light">
 										<tr>
-											<th width="10%" >　</th>
-											<th width="10%" >사진</th>
-											<th width="10%" >회원명</th>
-											<th width="20%">이메일</th>
-											<th width="30%">주소</th>
-											<th width="10%">권한</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>
-												<div class="d-flex">
-													<div class="form-check my-auto">
-														<input class="form-check-input" type="checkbox"
-															id="customCheck1" checked>
-													</div>
-													<img class="w-10 ms-3"
-														src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/ecommerce/adidas-hoodie.jpg"
-														alt="hoodie">
-												</div>
-											</td>
-											<td class="text-sm">김세진</td>
-											<td class="text-sm">abc123@naver.com</td>
-											<td class="text-sm">서울시 마포구 서교동</td>
-											<td class="text-sm">사업자</td>
-											<td><span class="badge badge-danger badge-sm">Out
-													of Stock</span></td>
-										</tr>
-										<tr>
-											<td>
-												<div class="d-flex">
-													<div class="form-check my-auto">
-														<input class="form-check-input" type="checkbox"
-															id="customCheck2" checked>
-													</div>
-													<img class="w-10 ms-3"
-														src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/ecommerce/macbook-pro.jpg"
-														alt="mac">
-												</div>
-											</td>
-											<td class="text-sm">김세진</td>
-											<td class="text-sm">abc123@naver.com</td>
-											<td class="text-sm">서울시 마포구 서교동</td>
-											<td class="text-sm">사업자</td>
-											<td><span class="badge badge-danger badge-sm">Out
-													of Stock</span></td>
-										</tr>
-										<tr>
-											<td>
-												<div class="d-flex">
+											<th width="10%">
+													<div class="d-flex">
 													<div class="form-check my-auto">
 														<input class="form-check-input" type="checkbox"
 															id="customCheck3">
 													</div>
-													<img class="w-10 ms-3"
-														src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/ecommerce/metro-chair.jpg"
-														alt="metro-chair">
 												</div>
-											</td>
-											<td class="text-sm">김세진</td>
-											<td class="text-sm">abc123@naver.com</td>
-											<td class="text-sm">서울시 마포구 서교동</td>
-											<td class="text-sm">사업자</td>
-											<td><span class="badge badge-success badge-sm">in
-													Stock</span></td>
+											
+											
+											</th>
+											<th width="25%">이메일</th>
+											<th width="20%">회원명</th>
+											<th width="10%">권한(m/s)</th>
+											<th width="40%">주소</th>
 										</tr>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			
+									</thead>
+									<tbody>
+										<c:forEach var="Member" items="${MemberList}">
+							    		<tr>
+							    		<td>
+							    		<div class="d-flex">
+													<div class="form-check my-auto">
+														<input class="form-check-input" type="checkbox"
+															id="customCheck3">
+													</div>
+												</div>
+							    		</td>
+							    		<td>${Member.email}</td>
+							    		<td>${Member.nickname}</td>
+							    		<td>${Member.authority}</td>
+							    		<td>${Member.address}</td>
+							    		</tr>
+							    		</c:forEach>
+										
+										</tbody></table></div></div></div></div></div>
 			<footer class="footer pt-3  ">
 				<div class="container-fluid">
 					<div class="row align-items-center justify-content-lg-between">

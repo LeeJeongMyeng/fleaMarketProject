@@ -1,17 +1,24 @@
 package fleaMarket.a01_controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import fleaMarket.a02_service.Req1001_Service;
+import vo.Member;
 
 
 @Controller("Req1001")
 public class Req1001_Controller {
+	
+	@Autowired
+	private Req1001_Service service;
 	//http://localhost:7080/fleaMarket/AdminSearch.do 관리자 회원조회
 	@RequestMapping("AdminSearch.do")
-	public String AdminSearch() {
+	public String AdminSearch(@ModelAttribute("sch")Member sch, Model d) {
+		d.addAttribute("MemberList",service.MemberList(sch));
 			return "AdminSearch";
 	}
 	//http://localhost:7080/fleaMarket/AdminInquire.do 관리자 문의사항 답변 조회

@@ -90,7 +90,7 @@
 						class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGES</h6>
 				</li>
 				<li class="nav-item active"><a data-bs-toggle="collapse"
-					href="#pagesExamples" class="nav-link"
+					href="#pagesExamples" class="nav-link active"
 					aria-controls="pagesExamples" role="button" aria-expanded="false">
 						<div
 							class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
@@ -486,68 +486,27 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 								<div>
 								  <div class="col-sm-auto col-8 my-auto">
                 <div class="h-100">
-                  <h5 class="mb-1 font-weight-bolder">
-                    Mark Johnson
-                  </h5>
-                  <p class="mb-0 font-weight-bold text-sm">
-                    CEO / Co-Founder
-                  </p>
                 </div>
               </div>
               <div class="col-sm-auto ms-sm-auto mt-sm-0 mt-3 d-flex">
                 <label class="form-check-label mb-0">
-                  <small id="profileVisibility">
-                    Switch to invisible
                   </small>
                 </label>
                 <div class="form-check form-switch ms-2">
-                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault23" checked onchange="visible()">
                 </div>
               </div>
             </div>
           </div>
           <!-- Card Basic Info -->
+            <h5>내 정보 조회 및 수정</h5>
           <div class="card mt-4" id="basic-info">
-            <div class="card-header">
-              <h5>Basic Info</h5>
-            </div>
+            
             <div class="card-body pt-0">
               <div class="row">
                 <div class="col-6">
-                  <label class="form-label">First Name</label>
+                  <label class="form-label">이름</label>
                   <div class="input-group">
                     <input id="firstName" name="firstName" class="form-control" type="text" placeholder="Alec" required="required">
-                  </div>
-                </div>
-                <div class="col-6">
-                  <label class="form-label">Last Name</label>
-                  <div class="input-group">
-                    <input id="lastName" name="lastName" class="form-control" type="text" placeholder="Thompson" required="required">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-4 col-6">
-                  <label class="form-label mt-4">I'm</label>
-                  <select class="form-control" name="choices-gender" id="choices-gender">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                  </select>
-                </div>
-                <div class="col-sm-8">
-                  <div class="row">
-                    <div class="col-sm-5 col-5">
-                      <label class="form-label mt-4">Birth Date</label>
-                      <select class="form-control" name="choices-month" id="choices-month"></select>
-                    </div>
-                    <div class="col-sm-4 col-3">
-                      <label class="form-label mt-4">&nbsp;</label>
-                      <select class="form-control" name="choices-day" id="choices-day"></select>
-                    </div>
-                    <div class="col-sm-3 col-4">
-                      <label class="form-label mt-4">&nbsp;</label>
-                      <select class="form-control" name="choices-year" id="choices-year"></select>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -559,57 +518,51 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
                   </div>
                 </div>
                 <div class="col-6">
-                  <label class="form-label mt-4">Confirmation Email</label>
+                  <label class="form-label mt-4">닉네임</label>
                   <div class="input-group">
                     <input id="confirmation" name="confirmation" class="form-control" type="email" placeholder="example@email.com">
                   </div>
                 </div>
-              </div>
               <div class="row">
                 <div class="col-6">
-                  <label class="form-label mt-4">Your location</label>
+                  <label class="form-label mt-4">핸드폰번호</label>
                   <div class="input-group">
-                    <input id="location" name="location" class="form-control" type="text" placeholder="Sydney, A">
+                    <input id="email" name="email" class="form-control" type="email" placeholder="example@email.com">
                   </div>
-                </div>
-                <div class="col-6">
-                  <label class="form-label mt-4">Phone Number</label>
-                  <div class="input-group">
-                    <input id="phone" name="phone" class="form-control" type="number" placeholder="+40 735 631 620">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-6 align-self-center">
-                  <label class="form-label mt-4">Language</label>
-                  <select class="form-control" name="choices-language" id="choices-language">
-                    <option value="English">English</option>
-                    <option value="French">French</option>
-                    <option value="Spanish">Spanish</option>
-                  </select>
                 </div>
                 <div class="col-md-6">
-                  <label class="form-label mt-4">Skills</label>
+                  <label class="form-label mt-4">주소</label>
                   <input class="form-control" id="choices-skills" type="text" value="vuejs, angular, react" placeholder="Enter something" />
                 </div>
               </div>
+                   <div class="row">
+                 <div class="row">
+                <div class="col-sm-4 col-6">
+                  <label class="form-label mt-4">카테고리</label>
+                  <select class="form-control" name="choices-gender" id="choices-gender">
+                    <option value="">주얼리</option>
+                    <option value="">잡화</option>
+                    <option value="">먹거리</option>
+                  </select>
+                </div>
+                </div>
             </div>
           </div>
           <!-- Card Change Password -->
           <div class="card mt-4" id="password">
             <div class="card-header">
-              <h5>Change Password</h5>
+              <h5>비밀번호 변경</h5>
             </div>
             <div class="card-body pt-0">
-              <label class="form-label">Current password</label>
+              <label class="form-label">현재 비밀번호</label>
               <div class="form-group">
                 <input class="form-control" type="password" placeholder="Current password">
               </div>
-              <label class="form-label">New password</label>
+              <label class="form-label">새로운 비밀번호</label>
               <div class="form-group">
                 <input class="form-control" type="password" placeholder="New password">
               </div>
-              <label class="form-label">Confirm new password</label>
+              <label class="form-label">비밀번호 확인</label>
               <div class="form-group">
                 <input class="form-control" type="password" placeholder="Confirm password">
               </div>
@@ -631,7 +584,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
                   <span class="text-sm">Change it often</span>
                 </li>
               </ul>
-              <button class="btn bg-gradient-dark btn-sm float-end mt-6 mb-0">Update password</button>
+              <button class="btn bg-gradient-dark btn-sm float-end mt-6 mb-0">비밀번호변경</button>
             </div>
           </div>
 							</div>
