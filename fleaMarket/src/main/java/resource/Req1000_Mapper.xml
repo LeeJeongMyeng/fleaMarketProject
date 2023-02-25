@@ -42,7 +42,26 @@
     		WHERE EMAIL = #{email}
     		AND PASSWORD = #{password}
     	</select>
+    	<select id="kakaoLogin" parameterType="member" resultType="member">
+    		SELECT * FROM FLEAMARKETMEMBER
+    		WHERE KAKAOEMAIL=#{kakaoemail}
+    	</select>
+    	<select id="naverLogin" parameterType="member" resultType="member">
+    		SELECT * FROM FLEAMARKETMEMBER
+    		WHERE NAVEREMAIL=#{naveremail}
+    	</select>
     	
+    	<select id="CheckPeristalsisSNS" parameterType="string" resultType="member">
+    		SELECT EMAIL,KAKAOEMAIL,NAVEREMAIL FROM FLEAMARKETMEMBER 
+    		WHERE (EMAIL || KAKAOEMAIL || NAVEREMAIL) LIKE '%'||#{snsemail}||'%'
+    	</select>
+    	
+    	<update id="SnsEmailPlus" parameterType="member">
+    		UPDATE FLEAMARKETMEMBER 
+			SET KAKAOEMAIL = #{kakaoemail}
+			WHERE EMAIL =#{kakaoemail}
+    		
+    	</update>
     	
     </mapper>
     

@@ -15,7 +15,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-  
+  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   <title>
     플리마켓 회원가입
   </title>
@@ -30,6 +30,9 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 <script type="text/javascript">
+
+var Loginemail = '${mem.email}'
+
 $(document).ready(function(){
 	var msg = "${LoginMsg}"
 	console.log("dddd"+msg)
@@ -72,8 +75,9 @@ $(document).ready(function(){
                     </div>
                     <div class="text-center">
                       <button type="submit" class="btn btn-lg btn-primary btn-lg w-100 mt-4 mb-0">로 그 인</button>
-                      <button type="button" class="btn btn-lg btn-warning btn-lg w-100 mt-4 mb-0">카카오 로그인</button>
-                      <button type="button" class="btn btn-lg btn-success btn-lg w-100 mt-4 mb-0">네이버 로그인</button>
+                      <button type="button" class="btn btn-lg btn-warning btn-lg w-100 mt-4 mb-0">네이버</button>
+                       <input type="hidden" name="snsemail">
+					   <img src="${path}/resource/img/Member/SignIn/kakao_login_medium_narrow.png" onclick="kakaoLogin()">
                     </div>
                   </form>
                 </div>
@@ -98,6 +102,34 @@ $(document).ready(function(){
       </div>
     </section>
   </main>
+  <!-- SNS연동 모달 창 -->
+  <div data-bs-toggle="modal" data-bs-target="#SnsresultModal" id="SnsresultModalbtn"></div>
+	<div class="modal fade" id="SnsresultModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content SnsresultModalContent">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">Result</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	     
+	      <div class="modal-body">
+			<div class="mb-3">
+			  <textarea class="form-control" rows="3" id="SNSLoginTextArea"></textarea>
+			</div>
+			<div class="mb-3 mt-3" style="color:red; font-weight:bold" id="SNSLoginTextAreaAfter"></div>
+			<div class="mb-3">
+				<input type="hidden" id="snsemail">
+				<button type="button" class="btn btn-primary" id="SNSLoginbnt"></button>
+			</div>
+	      </div>
+	      
+	      <div class="modal-footer">
+	        회사소개 | 이용약관 | <strong>개인정보처리방침</strong>
+	      </div>
+	     
+	    </div>
+	  </div>
+	</div> <!-- sns확인모달 모달끝 -->
   <!--   Core JS Files   -->
   <script src="${path}/assets/js/core/popper.min.js"></script>
   <script src="${path}/assets/js/core/bootstrap.min.js"></script>
@@ -119,6 +151,7 @@ $(document).ready(function(){
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
+   <script src="${path}/resource/js/Req1000/SignIn.js"></script>	
 </body>
 
 </html>

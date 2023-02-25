@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
 import fleaMarket.a02_service.Req1000_Service;
 import vo.Member;
 import vo.ProfileImg;
@@ -30,20 +32,6 @@ public class Req1000_Controller {
 	@RequestMapping("SignUp.do")
 	public String SignUp() {
 		return "SignUp";
-	}
-	
-	@PostMapping("DuplicateEmail.do") //이메일 중복검사
-	public String DuplicateEmail(@RequestParam("email") String email,Model d) {
-		System.out.println(email);
-		d.addAttribute("DuplicateEmail",service.DuplicateEmail(email));
-		return "pageJsonReport";
-	}
-	@PostMapping("DuplicateMem.do") //이름,주민 중복검사
-	public String DuplicateMem(@RequestParam("name") String name
-							   ,@RequestParam("personalnumber") String personalnumber
-							   ,Model d) {	
-		d.addAttribute("DuplicateMem",service.DuplicateMem(name,personalnumber));
-		return "pageJsonReport";
 	}
 	
 	@RequestMapping("insSignUp.do")
@@ -70,21 +58,34 @@ public class Req1000_Controller {
 		return "SignIn";
 	}
 	
-	@PostMapping("Login.do") //일반로그인
+	@RequestMapping("Login.do") //일반로그인
 	public String Loign(Member log,Model d,HttpSession session) {
-		System.out.println(log.getEmail()+":"+log.getPassword());
+		Member mem;
 		
 		String msg = "일치하는 회원이 없습니다. 다시 시도 부탁드립니다.";
 		String path = "SignIn";
-		Member mem = service.Login(log);
+		
+		if(d.asMap().get("SnsEmailPlus")!=null) {
+			mem = (Member)d.asMap().get("SnsEmailPlus");
+			mem = service.Login(mem);
+		}else {
+			mem = service.Login(log);
+		}
 		if(mem!=null) {
 		session.setAttribute("Login", mem);
-		System.out.println(mem.getEmail());
 		msg = "로그인 성공";
 		path="main";
 		}
 		d.addAttribute("LoginMsg",msg);	
 		return path;
+	}
 	
+	//Sns연동처리
+	@RequestMapping("SnsEmailPlus.do")//기존계정에 연동계정 업데이트
+	public String SnsEmailPlus(Member upt,
+									RedirectAttributes redirectAttributes) {
+		service.SnsEmailPlus(upt);
+		redirectAttributes.addFlashAttribute("SnsEmailPlus",upt);
+		return "redirect:Login.do";	
 	}
 }

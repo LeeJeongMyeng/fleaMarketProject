@@ -58,8 +58,23 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		dao.insprofile(fins);
 	}
 	
-	//일반로그인
+	//로그인 처리
 	public Member Login(Member log) {
-		return dao.Login(log);
+		if(log.getKakaoemail()!=null) {
+			return dao.kakaoLogin(log);
+		}else if(log.getNaveremail()!=null) {
+			return dao.naverLogin(log);
+		}else {
+			return dao.Login(log);
+		}
+		
+	}
+	
+	//SNS연동 여부확인
+	public Member CheckPeristalsisSNS(String snsemail) {
+		return dao.CheckPeristalsisSNS(snsemail);
+	}
+	public void SnsEmailPlus(Member upt) {
+		dao.SnsEmailPlus(upt);
 	}
 }

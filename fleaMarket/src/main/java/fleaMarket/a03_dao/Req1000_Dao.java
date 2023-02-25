@@ -11,4 +11,8 @@ public interface Req1000_Dao {
 	public void SignUp(Member ins);
 	public void insprofile(ProfileImg fins);
 	public Member Login(Member log);
+	public Member kakaoLogin(Member log);
+	public Member naverLogin(Member log);
+	public Member CheckPeristalsisSNS(String snsemail);
+	public void SnsEmailPlus(Member upt);
 }
