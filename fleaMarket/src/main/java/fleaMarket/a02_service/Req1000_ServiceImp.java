@@ -24,24 +24,31 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	public Req1000_ServiceImp(Req1000_Dao dao) {
 		this.dao = dao;
 	}
+	HashMap<String,String> map;
+	
+	
 	// 이메일 중복검사
 	public Member DuplicateEmail(String email) {
 		System.out.println("dd:"+email);
 		return dao.DuplicateEmail(email);
 	}
 	// 이름,주민 중복검사
-	public Member DuplicateMem(String name,String personalnumber) {
-		HashMap<String,String> map = new HashMap<String,String>();
+	public Member DuplicateMem(String name,String personalnumber,String email) {
+		map = new HashMap<String,String>();
 		map.put("name", name);
 		map.put("personalnumber", personalnumber);
+		map.put("email",null);
+		if(email!=null) {map.put("email",email);}
 		return dao.DuplicateMem(map);
 	}
+	
 	//회원가입
 	public void SignUp(Member ins) {
 		String EncPass = Bcrypter(ins.getPassword());
 		ins.setPassword(EncPass);
 		dao.SignUp(ins);
 	}
+	
 	//회원가입 처리 후,이미지 업로드 처리
 	public String insprofileimg(MultipartFile report) { 
 			String fname = report.getOriginalFilename();
@@ -56,11 +63,11 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		
 		return fname; //db업로드 해야하니까 네임 리턴
 	}
+	
 	// 테이블에 프로필사진 삽입
 	public void insprofile(ProfileImg fins) {
 		dao.insprofile(fins);
 	}
-	
 	
 	//로그인 처리
 	public Member Login(Member log) {
@@ -92,6 +99,14 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	public void SnsEmailPlus(Member upt) {
 		dao.SnsEmailPlus(upt);
 	}
+	public void MemberFindPassword(String name,String personalnumber,String email) {
+		map = new HashMap<String,String>();
+		map.put("name", name);
+		map.put("personalnumber", personalnumber);
+		map.put("email",email);
+		dao.MemberFindPassword(map);
+	}
+	
 	
 /*=======================================================*/	
 	public String Bcrypter(String password) {

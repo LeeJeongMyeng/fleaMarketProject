@@ -170,11 +170,20 @@
 						  </div>
 						</div>
 						<input type="hidden" name="authority" value="일반셀러"/>
-						<input type="hidden" name="buisnesscheck" value="false"/> <%--사업자인지 아닌지 구분해서 백단에서 신청처리--%>
+						
 						
 	                    <div class="SignUp_ProfileWrap" style="margin-left: 26px;">
-						  <label for="formFile" class="form-label" style="color:red;">사업자등록등 첨부</label>
-						  <input class="form-control form-control-sm is-invalid" type="file" id="formFile" name="buisnessfile" >
+						  <label for="formFile" class="form-label" style="color:red;">사업자등록번호 확인(-제외)</label>
+						   <div class="row mb-n2">
+	                    	<div class="col-8">
+		                    	 <input type="text" name="buisnessnumber" class="form-control form-control mb-3" placeholder="사업자번호 (-제외)"
+		                    	 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
+		                    	 <div id="buisnessnumberfeedback" class="invalid-feedback">등록되지않은 사업자 번호입니다.</div>
+	                    	</div>
+		                    	<div class="col-4">
+		                    	<input type="button" class="btn btn-primary w-100" style="font-size: x-small;background: #8451ce;" onclick="exp0101()" value="사업자인증"><br>
+	                    	</div>                     
+	                    </div>
 						</div>
 	                    <label style="font-size:large; margin:21px 0 -1px 32px;"><span class="SignUp_MustSpan"> *</span>&#60;셀러님의 주 판매 용품이 무엇인가요?&#62;</label>
 	                    <label style="font-size:5px; color:#7c6da1; margin-left:30px; width: 350px;">통계에 활용됩니다. 통계창에서 최근 유행하는 상품 카테고리를 확인해보세요!</label>
@@ -221,7 +230,7 @@
                 <div class="card-footer text-center pt-0 px-sm-4 px-1" id="SignUp_Login">
                   <p class="mb-4 mx-auto">
                     이미 계정이 있으신가요??
-                    <a href="../../../pages/sign-in/sign-in-cover.html" class="text-primary font-weight-bold">로그인</a>
+                    <a href="SignIn.do" class="text-primary font-weight-bold">로그인</a>
                   </p>
                 </div>
             </div>

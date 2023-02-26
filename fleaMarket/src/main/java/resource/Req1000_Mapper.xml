@@ -11,7 +11,12 @@
     	</select>
     	<!-- 이름/주민 중복검사 -->
     	<select id="DuplicateMem" parameterType="hashmap" resultType="member">
-    	SELECT * FROM FLEAMARKETMEMBER WHERE name = #{name} and personalnumber = #{personalnumber}
+    	SELECT * FROM FLEAMARKETMEMBER 
+    	WHERE name = #{name} 
+    	and personalnumber = #{personalnumber}
+    	<if test="email!=null">
+    	and email=#{email}
+    	</if>
     	</select>
     	
     	<!--회원가입 -->
@@ -24,7 +29,7 @@
 				#{phonenumber},
 				#{address},
 				#{authority},
-				NULL,
+				#{buisnessnumber},
 				NULL,
 				NULL,
 				#{category},
@@ -71,6 +76,14 @@
 					where name=#{name}
     			</otherwise>
     		</choose>
+    	</update>
+    	
+    	<update id="MemberFindPassword" parameterType="hashmap">
+    		UPDATE FLEAMARKETMEMBER 
+				SET password = '1111' 
+				WHERE NAME = #{name}
+				AND PERSONALNUMBER  = #{personalnumber}
+				AND EMAIL  =#{email}
     	</update>
     	
     </mapper>

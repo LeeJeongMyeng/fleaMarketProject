@@ -27,11 +27,12 @@ public class Req1000_RestController {
 		return "pageJsonReport";
 	}
 	//이름,주민 중복검사
+	//아이디 찾기
 	@PostMapping("DuplicateMem.do") 
 	public String DuplicateMem(@RequestParam("name") String name
-							   ,@RequestParam("personalnumber") String personalnumber
+							   ,@RequestParam("personalnumber") String personalnumber						   
 							   ,Model d) {	
-		d.addAttribute("DuplicateMem",service.DuplicateMem(name,personalnumber));
+		d.addAttribute("DuplicateMem",service.DuplicateMem(name,personalnumber,null));
 		return "pageJsonReport";
 	}
 	
@@ -45,6 +46,23 @@ public class Req1000_RestController {
 			d.addAttribute("CheckPeristalsisSNS",service.CheckPeristalsisSNS_N(name));
 		}
 		
+		return "pageJsonReport";
+	}
+	
+	
+	@PostMapping("MemberFindPassword.do")
+	public String MemberFindPassword(Model d,@RequestParam(value="name", required=false) String name,
+									  @RequestParam(value="personalnumber", required=false) String personalnumber,
+									  @RequestParam(value="email", required=false) String email) {
+		String MemberFindPassword="";
+		if(service.DuplicateMem(name,personalnumber,email)!=null) {
+			service.MemberFindPassword(name,personalnumber,email);
+			  MemberFindPassword = name+"님 ("+email+")계정의 임시 비밀번호로 <1111>로 변경되었습니다.";
+		}else {
+			MemberFindPassword="조회 된 계정이 없습니다.";
+		}
+		
+		d.addAttribute("MemberFindPassword",MemberFindPassword);	
 		return "pageJsonReport";
 	}
 }

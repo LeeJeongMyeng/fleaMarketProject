@@ -30,6 +30,7 @@
   <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+  <link href="${path}/resource/css/Req1000/SignIn.css" rel="stylesheet" />
 <script type="text/javascript">
 
 var Loginemail = '${mem.email}'
@@ -70,10 +71,17 @@ $(document).ready(function(){
                     <div class="mb-3">
                       <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" required>
                     </div>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="rememberMe">
-                      <label class="form-check-label" for="rememberMe">이 계정 기억하기</label>
+                    <div class="row">
+	                    <div class="form-check form-switch col-6">
+	                      <input class="form-check-input" type="checkbox" id="rememberMe">
+	                      <label class="form-check-label" for="rememberMe">이 계정 기억하기</label>
+	                    </div>
+                        <div class="col-6" id="Memberfind_Wrap">
+                           <button type="button" onclick="MemberFindModal('id')">아이디 찾기</button>	
+                           <button type="button" onclick="MemberFindModal('pass')">비밀번호찾기</button>	
+                        </div>
                     </div>
+                    
                     <div class="text-center">
                       <button type="submit" class="btn btn-primary btn-md w-75 mt-4 mb-0">로 그 인</button>
                        <div class="row mt-3">
@@ -116,8 +124,8 @@ $(document).ready(function(){
 	  <div class="modal-dialog">
 	    <div class="modal-content SnsresultModalContent" style="top:119px;">
 	      <div class="modal-header">
-	        <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">Result</h1>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	        <h1 class="modal-title fs-5 text-center" id="staticBackdropLabel">연동 결과</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">닫기</button>
 	      </div>
 	     
 	      <div class="modal-body">
@@ -130,6 +138,54 @@ $(document).ready(function(){
 				<input type="hidden" id="snsname">
 				<button type="button" class="btn btn-primary" id="SNSLoginbnt"></button>
 			</div>
+	      </div>
+	      
+	      <div class="modal-footer">
+	        회사소개 | 이용약관 | <strong>개인정보처리방침</strong>
+	      </div>
+	     
+	    </div>
+	  </div>
+	</div> <!-- sns확인모달 모달끝 -->
+	
+<!-- 아이디 비밀번호 찾기 모달창 -->
+  <div data-bs-toggle="modal" data-bs-target="#MemberFindModal" id="MemberFindModalbtn"></div>
+	<div class="modal fade" id="MemberFindModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content" style="top:119px;">
+	      <div class="modal-header">
+	        <h3 class="modal-title fs-6 text-center" id="MemberFindTitle">아이디 찾기</h3>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          		<span aria-hidden="true" style="color:black;">&times;</span></button>
+	      	</div>
+	     
+	      <div class="modal-body">
+			<div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
+                    <div class="multisteps-form__content">
+                      <div class="row mt-3 mb-3">
+                        <div class="col-12 col-sm-6">
+                          <label>성함</label>
+                          <input class="multisteps-form__input form-control" name="name" type="text" placeholder="홍길동" />
+                        </div>
+                        <div class="col-12 col-sm-6 mt-3 mt-sm-0">
+                          <label>주민등록번호 (-포함)</label>
+                          <input class="multisteps-form__input form-control" name="personalnumber" type="text" placeholder="950101-1234567" />
+                        </div>
+                      </div>
+                      <div class="row mt-3 MemberFindEmail_Wrap">
+                        <div class="col-12 mt-3 mt-sm-0">
+                          <label>이메일</label>
+                          <input class="multisteps-form__input form-control mb-5" type="email" name="email" placeholder="Contigo@contigo.com" />
+                        </div>
+                      </div>
+                      <div id="MemberFindResult" style="border:1px solid gray;">아이디:aoddl56@nate.com</div>
+                      <div class="button-row d-flex mt-4">
+                        <button class="btn bg-gradient-dark ms-auto me-3" type="button" onclick="MemberFindHandler()">찾기</button>
+                    	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                      </div>
+                    </div>
+                  </div>
+                  <!--single form panel-->
 	      </div>
 	      
 	      <div class="modal-footer">

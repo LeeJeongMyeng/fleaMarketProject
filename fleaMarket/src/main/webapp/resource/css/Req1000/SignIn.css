@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+#Memberfind_Wrap{
+	display:flex;
+	font-size:11px;
+}
+#Memberfind_Wrap button{
+	border:none;
+	background-color:white; 
+ 	margin-left:auto; 
+  	font-weight:bold;
+}

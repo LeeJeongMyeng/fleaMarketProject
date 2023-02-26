@@ -283,6 +283,7 @@ function CheckUser(){
 			$(this).children('#AuthCheckImg').css('display','block')
 			$('#SignUp_buisnessmanCard').children('#AuthCheckImg').css('display','none')
 			$('.SignUp_ProfileWrap').slideUp('slow')
+			$('[name=authority]').val('사업자')
 			OkAuth=true;
 			OkBusiness=true;
 		   }else{ //사업자를 고를경우
@@ -293,10 +294,11 @@ function CheckUser(){
 			$('#SignUp_SellerCard').css('background-color','white');
 			$(this).children('#AuthCheckImg').css('display','block')
 			$('#SignUp_SellerCard').children('#AuthCheckImg').css('display','none')
-			alert("사업자 가입은 사업자등록증이 필수로 첨부되어야합니다.")
+			alert("사업자 가입은 사업자 번호 인증을 완료해야합니다.")
 			$('.SignUp_ProfileWrap').slideDown('slow')
 			$('[name=buisnesscheck]').val('true');
-			OkAuth=false;// 사업자등록등 넣게 유효성 검사			
+			OkAuth=true;// 사업자등록등 넣게 유효성 검사
+			OkBusiness=false;			
 		   }
 		   $(this).css('background-color','#f5f2f6')//선택한 카드 배경색처리
 		   
@@ -311,17 +313,61 @@ function CheckUser(){
 			 $(this).addClass('is-valid')	
 		 }
 	 })
-	   
+	  
+	  
+// 사업자번호 확인 api
+
+function exp0101(){
+	
+var buisnum = $('[name=buisnessnumber]')
+buisnum.removeClass('is-invalid');
+if(buisnum.val().length<10){
+	$("#buisnessnumberfeedback").text('사업자 번호를 10자리입니다.')
+	buisnum.addClass('is-invalid');
+	return false;
+}
+if(buisnum.val().length>10){
+	$("#buisnessnumberfeedback").text('숫자만으로 10자리를 입력해야합니다.')
+	buisnum.addClass('is-invalid');
+	return false;
+}
+var data = {"b_no":[buisnum.val()]};   
+	$.ajax({
+	  url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=qaJs1GHTyoLGcztYwOmuuQrV8qrgsos8R3r%2FpIQdyqX2HWAX%2Fy8tlU33sKXL0L0XkV%2FBAGqk8BT8KMVPoZn25g%3D%3D",  // serviceKey 값을 xxxxxx에 입력
+	  type: "POST",
+	  data: JSON.stringify(data), // json 을 string으로 변환하여 전송
+	  dataType: "JSON",
+	  contentType: "application/json",
+	  accept: "application/json",
+	  success: function(result) {
+	      console.log(result);
+	      var buisstatus=result.data[0].b_stt; //폐업자 / ''
+	      if(buisstatus=='폐업자' || buisstatus==''){
+			  $("#buisnessnumberfeedback").text('폐업자 혹은 존재하지않는 사업자번호입니다.')
+			  buisnum.addClass('is-invalid');
+		  }else{
+			   buisnum.addClass('is-valid');
+			   buisnum.attr('readonly',true);
+			   $('[name=authority]').val('사업자')
+			   OkbOkBusiness=true;
+			   alert('사업자 확인되었습니다. 감사합니다.')
+		  }
+	  },
+	  error: function(result) {
+	      console.log(result.responseText); //responseText의 에러메세지 확인
+	  }
+	});
+} 
 	   
 	//스탭넘기기전 유효성검사
 	function CheckStepHandler(number){
 		if(number==1){
-			//if(!OkEamil){alert("이메일 인증을 완료해주세요."); return false;}
-			//if(!OkPass2){alert("비밀번호를 알맞게 입력해주세요."); return false;}
-			//if(!OkCheckName){alert("기존 회원 여부 체크를 진행해주세요"); return false;}
+			if(!OkEamil){alert("이메일 인증을 완료해주세요."); return false;}
+			if(!OkPass2){alert("비밀번호를 알맞게 입력해주세요."); return false;}
+			if(!OkCheckName){alert("기존 회원 여부 체크를 진행해주세요"); return false;}
 		}else if(number==2){
-			//if(!OkPhonenum){alert("핸드폰번호를 정확하게 입력부탁드립니다."); return false;}
-			//if(!OkAddress){alert("우편번호 찾기를 통해서 주소기재 부탁드립니다."); return false;}
+			if(!OkPhonenum){alert("핸드폰번호를 정확하게 입력부탁드립니다."); return false;}
+			if(!OkAddress){alert("우편번호 찾기를 통해서 주소기재 부탁드립니다."); return false;}
 			console.log($('[name=profileimg]').val())
 			if($('[name=nickname').val().length<2){
 				$('[name=nickname]').val($('[name=email]').val().split('@')[0])
@@ -331,6 +377,7 @@ function CheckUser(){
 		}		
 		return SignUpHandler(number);
 	}
+	
 	
 	
 	//회원가입 다음스탭 이전스탭 넘기는 핸들러

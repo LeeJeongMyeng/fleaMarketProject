@@ -9,7 +9,7 @@ import vo.ProfileImg;
 @Service
 public interface Req1000_Service  {
 	public Member DuplicateEmail(String email);
-	public Member DuplicateMem(String name,String personalnumber);
+	public Member DuplicateMem(String name,String personalnumber,String email);
 	public void SignUp(Member ins);
 	public String insprofileimg(MultipartFile report); //파일 업로드 처리
 	public void insprofile(ProfileImg fins); //회원 이미지파일 테이블insert
@@ -17,4 +17,5 @@ public interface Req1000_Service  {
 	public Member CheckPeristalsisSNS_K(String snsemail);
 	public Member CheckPeristalsisSNS_N(String naveremail);
 	public void SnsEmailPlus(Member upt);
+	public void MemberFindPassword(String name,String personalnumber,String email);
 }

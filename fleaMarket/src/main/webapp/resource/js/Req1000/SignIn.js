@@ -125,5 +125,68 @@ $('#SNSLoginbnt').click(function(){
    console.log(naver_id_login.getProfileData('email'));
    window.opener.SNSResult('naver',naver_id_login.getProfileData('email'),naver_id_login.getProfileData('name'))
    window.close();
-   
   }
+  
+ 
+ function MemberFindModal(method){
+	 if(method=='id'){
+		 $('#MemberFindTitle').text('아이디 찾기');
+		 $('.MemberFindEmail_Wrap').slideUp();
+	 }else if('pass'){
+		 $('#MemberFindTitle').text('비밀번호 찾기');
+		 $('.MemberFindEmail_Wrap').slideDown(); 
+	 }
+	 $('#MemberFindModalbtn').click()
+ }
+ 
+ function MemberFindHandler(){
+	 var FindName = $('#MemberFindModal [name=name]');
+	 var FindRrn = $('#MemberFindModal [name=personalnumber]');
+	 var FindEmail = $('#MemberFindModal [name=email]');
+	 var qstr;
+	 var url;
+	 
+	 if(FindName.val().length<2){alert("이름은 2글자 이상입니다."); return false;}
+	 if(FindRrn.val().length!=14){alert("주민번호는 -포함 14자리입니다."); return false;}
+	 
+	 
+	 if( $('#MemberFindTitle').text()=='아이디 찾기'){
+		 qstr = "name="+FindName.val()+"&personalnumber="+FindRrn.val()
+		 url = "DuplicateMem.do" //회원가입시 중복검사 코드랑 동일해서 똑같이 사용함
+		// MemberFindEmail(url,qstr)
+	 }else{
+		 if(FindEmail.val().length==0){alert("이메일을 기입해주세요");return false;}
+		 qstr = "name="+FindName.val()+"&personalnumber="+FindRrn.val()+"&email="+FindEmail.val()
+		 console.log(qstr)
+		 url = "MemberFindPassword.do" 
+		// MemberFindPass(url,qstr)
+	 }
+	 
+	  $.ajax({
+		url:url,
+		type:"post",
+		data:qstr,
+		dataType:"json",
+		success:function(data){
+		 if( $('#MemberFindTitle').text()=='아이디 찾기'){
+			console.log(data.DuplicateMem.email)
+			
+		}else{
+			console.log(data.MemberFindPassword)
+		}
+		},
+		error:function(xhr,status,error){
+		    console.log(xhr)
+		    console.log(status)
+		    console.log(error)
+		}
+	 })
+	 
+ }
+ 
+ function MemberFindEmail(url,qstr){
+	
+ }
+ 
+
+ 

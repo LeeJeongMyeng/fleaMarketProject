@@ -35,11 +35,7 @@ public class Req1000_Controller {
 	}
 	
 	@RequestMapping("insSignUp.do")
-	public String SignUp(Member ins,
-			@RequestParam("profileimg") MultipartFile profile,
-			@RequestParam("buisnessfile") MultipartFile buisnessfile,
-			@RequestParam("buisnesscheck") String buisnesscheck
-			){
+	public String SignUp(Member ins,@RequestParam("profileimg") MultipartFile profile){
 			//1. 기본 회원가입 양식
 				service.SignUp(ins);
 			//2. 파일처리
@@ -50,10 +46,7 @@ public class Req1000_Controller {
 				  fins.setProfileimg(service.insprofileimg(profile));
 				}
 				service.insprofile(fins);			
-			//3. 신청처리
-				if(buisnesscheck=="true") {
-					
-				}
+			
 		return "SignIn";
 	}
 	

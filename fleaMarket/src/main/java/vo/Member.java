@@ -8,7 +8,7 @@ public class Member {
 	private String phonenumber;
 	private String address;
 	private String authority;
-	private String businessnumber;
+	private String buisnessnumber;
 	private String kakaoemail;
 	private String naveremail;
 	private String category;
@@ -55,12 +55,7 @@ public class Member {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-	public String getBusinessnumber() {
-		return businessnumber;
-	}
-	public void setBusinessnumber(String businessnumber) {
-		this.businessnumber = businessnumber;
-	}
+	
 	public String getKakaoemail() {
 		return kakaoemail;
 	}
@@ -84,6 +79,12 @@ public class Member {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public String getBuisnessnumber() {
+		return buisnessnumber;
+	}
+	public void setBuisnessnumber(String buisnessnumber) {
+		this.buisnessnumber = buisnessnumber;
 	}
 	
 	
