@@ -15,6 +15,11 @@ public class Req1001_Controller {
 	
 	@Autowired
 	private Req1001_Service service;
+	//http://localhost:7080/fleaMarket/AdminIntro.do 회사소개
+	@RequestMapping("AdminIntro.do")
+	public String AdminIntro() {
+		return "AdminIntro";
+	}
 	//http://localhost:7080/fleaMarket/AdminSearch.do 관리자 회원조회
 	@RequestMapping("AdminSearch.do")
 	public String AdminSearch(@ModelAttribute("sch")Member sch, Model d) {

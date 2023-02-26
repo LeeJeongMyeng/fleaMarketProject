@@ -107,11 +107,7 @@
 										P </span> <span class="sidenav-normal"> 내 정보 조회 <b class="caret"></b></span>
 							</a>
 								</li>
-							<li class="nav-item "><a class="nav-link "
-								href="${path}/pages/pages/pricing-page.html"> <span
-									class="sidenav-mini-icon"> P </span> <span
-									class="sidenav-normal"> 사업자인증요청</span>
-							</a></li>
+							
 						</ul>
 					</div></li>
 				<li class="nav-item"><a data-bs-toggle="collapse"
@@ -121,14 +117,29 @@
 						<div
 class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
 							<i class="ni ni-ui-04 text-info text-sm opacity-10"></i>
-						</div> <span class="nav-link-text ms-1">게시글</span>
+						</div> <span class="nav-link-text ms-1">내가 쓴 글</span>
 				</a>
 					<div class="collapse " id="applicationsExamples">
 						<ul class="nav ms-4">
+							<li class="nav-item "><a class="nav-link "
+								href="${path}/pages/pages/pricing-page.html"> <span
+									class="sidenav-mini-icon"> P </span> <span
+									class="sidenav-normal"> 플리마켓 모집</span>
+							</a></li>
+							<li class="nav-item "><a class="nav-link "
+								href="${path}/pages/pages/pricing-page.html"> <span
+									class="sidenav-mini-icon"> P </span> <span
+									class="sidenav-normal"> 플리마켓 신청</span>
+							</a></li>
 							<li class="nav-item "><a class="nav-link"
 								href="${path}/pages/applications/wizard.html"> <span
 									class="sidenav-mini-icon"> W </span> <span
 									class="sidenav-normal"> 1:1문의 </span>
+							</a></li>
+							<li class="nav-item "><a class="nav-link"
+								href="${path}/pages/applications/wizard.html"> <span
+									class="sidenav-mini-icon"> W </span> <span
+									class="sidenav-normal"> 커뮤니티 </span>
 							</a></li>
 						</ul>
 					</div></li>
@@ -512,7 +523,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
               </div>
               <div class="row">
                 <div class="col-6">
-                  <label class="form-label mt-4">Email</label>
+                  <label class="form-label mt-4">이메일</label>
                   <div class="input-group">
                     <input id="email" name="email" class="form-control" type="email" placeholder="example@email.com">
                   </div>
@@ -530,20 +541,35 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
                     <input id="email" name="email" class="form-control" type="email" placeholder="example@email.com">
                   </div>
                 </div>
-                <div class="col-md-6">
-                  <label class="form-label mt-4">주소</label>
-                  <input class="form-control" id="choices-skills" type="text" value="vuejs, angular, react" placeholder="Enter something" />
-                </div>
-              </div>
-                   <div class="row">
-                 <div class="row">
-                <div class="col-sm-4 col-6">
+                     <div class="col-sm-4 col-6">
                   <label class="form-label mt-4">카테고리</label>
                   <select class="form-control" name="choices-gender" id="choices-gender">
                     <option value="">주얼리</option>
                     <option value="">잡화</option>
                     <option value="">먹거리</option>
                   </select>
+                </div>
+               <div class="row">
+                <div class="col-6">
+                  <label class="form-label">주소</label>
+                  <div class="input-group">
+                    <input id="firstName" name="firstName" class="form-control" type="text" placeholder="Alec" required="required">
+                  </div>
+              <ul class="text-muted ps-4 mb-0 float-start">
+                <li>
+                  <span class="text-sm">One special characters</span>
+                </li>
+                <li>
+                  <span class="text-sm">Min 6 characters</span>
+                </li>
+                <li>
+                  <span class="text-sm">One number (2 are recommended)</span>
+                </li>
+                <li>
+                  <span class="text-sm">Change it often</span>
+                </li>
+              </ul>
+                    <button class="btn bg-gradient-dark btn-sm float-end mt-6 mb-0">내 정보 수정</button>
                 </div>
                 </div>
             </div>
