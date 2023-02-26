@@ -37,16 +37,15 @@
     		INSERT INTO PROFILE VALUES(#{email},#{profileimg})
     	</insert>
     	
-    	<select id="Login" parameterType="member" resultType="member">
+    	<select id="Login" parameterType="string" resultType="member">
     		SELECT * FROM FLEAMARKETMEMBER
     		WHERE EMAIL = #{email}
-    		AND PASSWORD = #{password}
     	</select>
-    	<select id="kakaoLogin" parameterType="member" resultType="member">
+    	<select id="kakaoLogin" parameterType="string" resultType="member">
     		SELECT * FROM FLEAMARKETMEMBER
     		WHERE KAKAOEMAIL=#{kakaoemail}
     	</select>
-    	<select id="naverLogin" parameterType="member" resultType="member">
+    	<select id="naverLogin" parameterType="string" resultType="member">
     		SELECT * FROM FLEAMARKETMEMBER
     		WHERE NAVEREMAIL=#{naveremail}
     	</select>

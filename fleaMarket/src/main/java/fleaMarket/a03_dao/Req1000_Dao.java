@@ -10,9 +10,9 @@ public interface Req1000_Dao {
 	public Member DuplicateMem(HashMap<String,String> map);
 	public void SignUp(Member ins);
 	public void insprofile(ProfileImg fins);
-	public Member Login(Member log);
-	public Member kakaoLogin(Member log);
-	public Member naverLogin(Member log);
+	public Member Login(String email);
+	public Member kakaoLogin(String kakaoemail);
+	public Member naverLogin(String naveremail);
 	public Member CheckPeristalsisSNS_K(String snsemail);
 	public Member CheckPeristalsisSNS_N(String name);	
 	public void SnsEmailPlus(Member upt);

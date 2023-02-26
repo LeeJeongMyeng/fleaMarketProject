@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -37,6 +38,8 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	}
 	//회원가입
 	public void SignUp(Member ins) {
+		String EncPass = Bcrypter(ins.getPassword());
+		ins.setPassword(EncPass);
 		dao.SignUp(ins);
 	}
 	//회원가입 처리 후,이미지 업로드 처리
@@ -58,16 +61,23 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		dao.insprofile(fins);
 	}
 	
+	
 	//로그인 처리
 	public Member Login(Member log) {
-		if(log.getKakaoemail()!=null) {
-			return dao.kakaoLogin(log);
-		}else if(log.getNaveremail()!=null) {
-			return dao.naverLogin(log);
-		}else {
-			return dao.Login(log);
+		Member mem;
+		if(log.getKakaoemail()!=null) { //카카오이메일로그인시
+			mem = dao.kakaoLogin(log.getKakaoemail());
+		}else if(log.getNaveremail()!=null) { //네이버 이메일로그인시
+			mem = dao.naverLogin(log.getNaveremail());
+		}else { //일반로그인
+			mem = dao.Login(log.getEmail());
+			 if(CheckBcrypt(log.getPassword(),mem.getPassword())) {
+				 mem = dao.Login(log.getEmail());
+			 }else {
+				return null;
+				 }	
 		}
-		
+		return mem;
 	}
 	
 	//카카오연동 여부확인
@@ -82,4 +92,17 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	public void SnsEmailPlus(Member upt) {
 		dao.SnsEmailPlus(upt);
 	}
+	
+/*=======================================================*/	
+	public String Bcrypter(String password) {
+		return BCrypt.hashpw(password, BCrypt.gensalt());
+	}
+	
+	public Boolean CheckBcrypt(String OrinPass,String EncPass) {
+		return BCrypt.checkpw(OrinPass, EncPass);
+	}
+
 }
+
+
+	

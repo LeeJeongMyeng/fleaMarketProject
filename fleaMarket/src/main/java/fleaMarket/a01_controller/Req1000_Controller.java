@@ -60,32 +60,40 @@ public class Req1000_Controller {
 	
 	@RequestMapping("Login.do") //일반로그인
 	public String Loign(Member log,Model d,HttpSession session) {
-		Member mem;
-		
+		Member mem;		
 		String msg = "일치하는 회원이 없습니다. 다시 시도 부탁드립니다.";
 		String path = "SignIn";
+		
+		// sns이메일값
 		if(d.asMap().get("SnsEmailPlus")!=null) {
-			mem = (Member)d.asMap().get("SnsEmailPlus");
-			mem = service.Login(mem);
+			mem = service.Login((Member)d.asMap().get("SnsEmailPlus"));
+		// 기본이메일/패스워드
 		}else {
 			mem = service.Login(log);
 		}
+		
+		//여기서 부터 Service단
 		if(mem!=null) {
 		session.setAttribute("Login", mem);
-		msg = "로그인 성공";
-		path="main";
+		msg = "로그인 성공";  path="main";	
 		}
+		
 		d.addAttribute("LoginMsg",msg);	
 		return path;
 	}
 	
 	//Sns연동처리
 	@RequestMapping("SnsEmailPlus.do")//기존계정에 연동계정 업데이트
-	public String SnsEmailPlus(Member upt,
-									RedirectAttributes redirectAttributes) {
-		System.out.println("여긴가?:"+upt.getName()+upt.getNaveremail());
+	public String SnsEmailPlus(Member upt,RedirectAttributes redirectAttributes) {
 		service.SnsEmailPlus(upt);
+		// 연동처리 후, 해당 이메일값 전달
 		redirectAttributes.addFlashAttribute("SnsEmailPlus",upt);
 		return "redirect:Login.do";
+	}
+	
+	@RequestMapping("Logout.do")
+	public String Logout(HttpSession session) {
+		session.removeAttribute("Login");
+		return "SignIn";
 	}
 }
