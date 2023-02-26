@@ -251,7 +251,7 @@
 <!--  
 페이지네이션  style="margin:auto;"
 -->            
-<nav aria-label="Page navigation example">
+<nav aria-label="Page navigation example" style="margin: auto;">
   <ul class="pagination">
     <li class="page-item">
       <a class="page-link" aria-label="Previous">
@@ -480,7 +480,7 @@ function callPageSelector(){
 	      for(let item of pageListArr){
 	         item.style.display=''; //배열.slice를 통해 나온 페이지번호들만 display=none를 취소하여 보이도록함
 	      }
-	      if(pageActiveIdx==0){
+	   /*    if(pageActiveIdx==0){
 	         prevPageBtn.style.display='none'; //가장 앞자리의 번호면 이전버튼이 안보이도록 설정
 	      }else{
 	         prevPageBtn.style.display='';
@@ -490,7 +490,7 @@ function callPageSelector(){
 	      }else{
 	         nextPageBtn.style.display='';
 	      }
-	   }
+	   } */
 	   displayPage(0); //시작하자마자 보여줘야하니까 실행되도록 함
 	   
 	   // -> 버튼 

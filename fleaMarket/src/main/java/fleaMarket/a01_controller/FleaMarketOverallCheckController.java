@@ -9,7 +9,7 @@ public class FleaMarketOverallCheckController {
 //	http://localhost:7030/fleaMarket/totalSearch.do
 		@RequestMapping("totalSearch.do")
 		public String totalSearch() {
-		int a=1;
+		
 			return "FleaMarketOverallCheck";
 		}
 }
