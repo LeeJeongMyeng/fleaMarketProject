@@ -10,12 +10,26 @@ public class CommunityController_jyj {
 	public String communityInsert() {
 		return "communityInsert";
 	}
+	
 	@RequestMapping("communityUpdate.do")
 	public String communityUpdate() {
 		return "communityUpdate";
 	}
+	
 	@RequestMapping("chatting.do")
 	public String chatting() {
 		return "communityChatAll";
+	}
+	@RequestMapping("chattingdivide.do")
+	public String chattingdivide() {
+		return "communityChatAll(divide)";
+	}
+	@RequestMapping("communityFollowMember.do")
+	public String communityFollowMember() {
+		return "communityFollowMember";
+	}
+	@RequestMapping("communityMemberRoom.do")
+	public String communityMemberRoom() {
+		return "communityMemberRoom";
 	}
 }

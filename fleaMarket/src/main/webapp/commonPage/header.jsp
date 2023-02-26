@@ -6,40 +6,27 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <fmt:requestEncoding value="utf-8"/>     
-<!--
-=========================================================
-* Argon Dashboard 2 PRO - v2.0.5
-=========================================================
-
-* Product Page:  https://www.creative-tim.com/product/argon-dashboard-pro 
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
--->
 <!DOCTYPE html>
 <html lang="utf-8">
 
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
-  <link rel="icon" type="image/png" href="../assets/img/favicon.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
+  <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <title>
-    Argon Dashboard 2 PRO by Creative Tim
+   	head
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
   <!-- Nucleo Icons -->
-  <link href="../assets/css/nucleo-icons.css" rel="stylesheet" />
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="${path}/assets/css/nucleo-icons.css" rel="stylesheet" />
+  <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  <link href="../assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
-  <link id="pagestyle" href="../assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+  <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
   <style>
   .profile{
     display: flex;
@@ -68,14 +55,16 @@
 </head>
 
 <body class="">
+  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
       <div class="col-12">
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-absolute mt-4 py-2 start-0 end-0 mx-4">
           <div class="container-fluid ps-2 pe-0">
-            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="../pages/dashboards/default.html">
-              <img class = "logo_width" src="../assets/img/contico_logo.png" alt="..." class="avatar shadow">
+            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="${path}/pages/dashboards/default.html">
+              <img src="${path}/resource/img/fleamarketLOGO.png" alt="..." class="avatar shadow" style="width:220px;">
             </a>
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-icon mt-2">
@@ -89,8 +78,8 @@
                 <li class="nav-item dropdown dropdown-hover mx-2">   
                   <a role="button" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center " id="dropdownMenuAccount" data-bs-toggle="dropdown" aria-expanded="false">
                     플리마켓
-                    <img src="../assets/img/down-arrow-dark.svg " alt="down-arrow" class="arrow ms-1 d-lg-block d-none">
-                    <img src="../assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1 d-lg-none d-block">
+                    <img src="${path}/assets/img/down-arrow-dark.svg " alt="down-arrow" class="arrow ms-1 d-lg-block d-none">
+                    <img src="${path}/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1 d-lg-none d-block">
                   </a>
                   <div class="dropdown-menu dropdown-menu-animation dropdown-lg border-radius-xl p-3 mt-0 mt-lg-3 shadow-none" aria-labelledby="dropdownMenuAccount">
                     <div class="row d-none d-lg-flex">
@@ -107,16 +96,16 @@
                           <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
                             <a class="dropdown-item border-radius-md ps-3 d-flex align-items-center justify-content-between mb-1" id="dropdownSignIn">
                               <span>Sign In</span>
-                              <img src="../assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
+                              <img src="${path}/assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
                             </a>
                             <div class="dropdown-menu mt-0 py-3 px-2" aria-labelledby="dropdownSignIn">
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/signin/basic.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/signin/basic.html">
                                 <span>Basic</span>
                               </a>
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/signin/cover.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/signin/cover.html">
                                 <span>Cover</span>
                               </a>
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/signin/illustration.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/signin/illustration.html">
                                 <span>Illustration</span>
                               </a>
                             </div>
@@ -124,16 +113,16 @@
                           <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
                             <a class="dropdown-item border-radius-md ps-3 d-flex align-items-center justify-content-between mb-1" id="dropdownSignUp">
                               <span>Sign Up</span>
-                              <img src="../assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
+                              <img src="${path}/assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
                             </a>
                             <div class="dropdown-menu mt-0 py-3 px-2" aria-labelledby="dropdownSignUp">
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/signup/basic.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/signup/basic.html">
                                 <span>Basic</span>
                               </a>
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/signup/cover.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/signup/cover.html">
                                 <span>Cover</span>
                               </a>
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/signup/illustration.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/signup/illustration.html">
                                 <span>Illustration</span>
                               </a>
                             </div>
@@ -141,16 +130,16 @@
                           <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
                             <a class="dropdown-item border-radius-md ps-3 d-flex align-items-center justify-content-between mb-1" id="dropdownPasswordReset">
                               <span>Reset Password</span>
-                              <img src="../assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
+                              <img src="${path}/assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
                             </a>
                             <div class="dropdown-menu mt-0 py-3 px-2" aria-labelledby="dropdownPasswordReset">
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/reset/basic.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/reset/basic.html">
                                 <span>Basic</span>
                               </a>
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/reset/cover.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/reset/cover.html">
                                 <span>Cover</span>
                               </a>
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/reset/illustration.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/reset/illustration.html">
                                 <span>Illustration</span>
                               </a>
                             </div>
@@ -158,16 +147,16 @@
                           <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
                             <a class="dropdown-item border-radius-md ps-3 d-flex align-items-center justify-content-between mb-1" id="dropdownLock">
                               <span>Lock</span>
-                              <img src="../../../assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
+                              <img src="${path}/${path}/${path}/assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
                             </a>
                             <div class="dropdown-menu mt-0 py-3 px-2" aria-labelledby="dropdownLock">
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/lock/basic.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/lock/basic.html">
                                 <span>Basic</span>
                               </a>
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/lock/cover.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/lock/cover.html">
                                 <span>Cover</span>
                               </a>
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/lock/illustration.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/lock/illustration.html">
                                 <span>Illustration</span>
                               </a>
                             </div>
@@ -175,16 +164,16 @@
                           <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
                             <a class="dropdown-item border-radius-md ps-3 d-flex align-items-center justify-content-between mb-1" id="dropdown2fa">
                               <span>2-Step Verification</span>
-                              <img src="../../../assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
+                              <img src="${path}/${path}/${path}/assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
                             </a>
                             <div class="dropdown-menu mt-0 py-3 px-2" aria-labelledby="dropdown2fa">
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/verification/basic.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/verification/basic.html">
                                 <span>Basic</span>
                               </a>
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/verification/cover.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/verification/cover.html">
                                 <span>Cover</span>
                               </a>
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/verification/illustration.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/verification/illustration.html">
                                 <span>Illustration</span>
                               </a>
                             </div>
@@ -192,13 +181,13 @@
                           <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
                             <a class="dropdown-item border-radius-md ps-3 d-flex align-items-center justify-content-between mb-1" id="dropdownError">
                               <span>Error</span>
-                              <img src="../../../assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
+                              <img src="${path}/${path}/${path}/assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
                             </a>
                             <div class="dropdown-menu mt-0 py-3 px-2" aria-labelledby="dropdownError">
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/error/404.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/error/404.html">
                                 <span>404</span>
                               </a>
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/error/500.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/error/500.html">
                                 <span>500</span>
                               </a>
                             </div>
@@ -215,8 +204,8 @@
                 <li class="nav-item dropdown dropdown-hover mx-2">
                   <a role="button" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center " id="dropdownMenuAccount" data-bs-toggle="dropdown" aria-expanded="false">
                     커뮤니티 
-                    <img src="../assets/img/down-arrow-dark.svg " alt="down-arrow" class="arrow ms-1 d-lg-block d-none">
-                    <img src="../assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1 d-lg-none d-block">
+                    <img src="${path}/assets/img/down-arrow-dark.svg " alt="down-arrow" class="arrow ms-1 d-lg-block d-none">
+                    <img src="${path}/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1 d-lg-none d-block">
                   </a>
                   <div class="dropdown-menu dropdown-menu-animation dropdown-lg border-radius-xl p-3 mt-0 mt-lg-3 shadow-none" aria-labelledby="dropdownMenuAccount">
                     <div class="row d-none d-lg-flex">
@@ -233,19 +222,19 @@
                           <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
                             <a class="dropdown-item border-radius-md ps-3 d-flex align-items-center justify-content-between mb-1" id="dropdownSignIn">
                               <span>커뮤니티보기</span>
-                              <img src="../assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
+                              <img src="${path}/assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
                             </a>
                             <div class="dropdown-menu mt-0 py-3 px-2" aria-labelledby="dropdownSignIn">
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/signin/basic.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/signin/basic.html">
                                 <span>홍보</span>
                               </a>
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/signin/cover.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/signin/cover.html">
                                 <span>사는 이야기</span>
                               </a>
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/signin/illustration.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/signin/illustration.html">
                                 <span>꿀팁</span>
                               </a>
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/signin/illustration.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/signin/illustration.html">
                                 <span>사업 아이디어</span>
                               </a>
                             </div>
@@ -253,93 +242,64 @@
                           <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
                             <a class="dropdown-item border-radius-md ps-3 d-flex align-items-center justify-content-between mb-1" id="dropdownSignUp">
                               <span>소통</span>
-                              <img src="../assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
+                              <img src="${path}/assets/img/down-arrow.svg" alt="down-arrow" class="arrow">
                             </a>
                             <div class="dropdown-menu mt-0 py-3 px-2" aria-labelledby="dropdownSignUp">
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/signup/basic.html">
-                                <span>내 채팅함</span>
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/signup/basic.html">
+                                <span>나의 채팅목록</span>
                               </a>
-                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="../pages/authentication/signup/cover.html">
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/signup/cover.html">
                                 <span>my Room</span>
+                              </a>                         
+                              <a class="dropdown-item ps-3 border-radius-md mb-1" href="${path}/pages/authentication/signup/cover.html">
+                                <span>나의 팔로워목록</span>
                               </a>                         
                             </div>
                           </li>
-                         
                         </ul>
                       </div>
                     </div>
-                    <div class="row d-lg-none">
-                      <div class="col-12 d-flex justify-content-center flex-column">
-                        <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0">
-                          커뮤니티 보기
-                        </h6>
-                        <a href="../pages/authentication/signin/basic.html" class="dropdown-item border-radius-md">
-                          홍보
-                        </a>
-                        <a href="../pages/authentication/signin/cover.html" class="dropdown-item border-radius-md">
-                          사는 이야기 
-                        </a>
-                        <a href="../pages/authentication/signin/illustration.html" class="dropdown-item border-radius-md">
-                          꿀팁
-                        </a>
-                        <a href="../pages/authentication/signin/illustration.html" class="dropdown-item border-radius-md">
-                          사업 아이디어
-                        </a>
-                        <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center mt-3 px-0">
-                          소통
-                        </h6>
-                        <a href="../pages/authentication/signup/basic.html" class="dropdown-item border-radius-md">
-                          내 채팅함
-                        </a>
-                        <a href="../pages/authentication/signup/cover.html" class="dropdown-item border-radius-md">
-                          my Room
-                        </a>
-                      </div>
-                    </div>
-                  </div>
+                   </div>
                 </li>
               </ul>
      
-              <ul class="navbar-nav d-lg-block d-none">
-                <div class="author align-items-center">
-                <div class = "profile">
-      <img src="../assets/img/kit/pro/team-2.jpg" alt="..." class="avatar shadow">
-      <div class="name ps-3 profilename">
-        <span>Mathew Glock</span>
-      </div>
- </div>
-        <div class="row lav">
-          <div class="col-auto m-auto">
-            <a class="cursor-pointer">
-              <i class="fa fa-cog fixed-plugin-button-nav"></i>
-            </a>
-          </div>
-          <div class="col-auto m-auto">
-            <div class="dropdown">
-              <a class="cursor-pointer" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-bell"></i>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-right px-2 py-3 ms-n4" aria-labelledby="dropdownMenuButton">
-                ...
-              </ul>
+		      <img src="${path}/assets/img/kit/pro/team-2.jpg" alt="..." class="avatar shadow">
+		      <div class="name ps-3 profilename">
+		        <div class="col-2 m-auto">
+		        	<span>Mathew Glock</span>
+		        </div>
+		      </div>
+		      <div class="row lav">
+		        <div class="col-1 m-auto">
+		          <a class="cursor-pointer">
+		            <i class="fa fa-cog fixed-plugin-button-nav"></i>
+		          </a>
+		        </div>
+		        <div class="col-1 m-auto">
+		          <div class="dropdown">
+		            <a class="cursor-pointer" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+		              <i class="fa fa-bell"></i>
+		            </a>
+		            <ul class="dropdown-menu dropdown-menu-right px-2 py-3 ms-n4" aria-labelledby="dropdownMenuButton">
+		              <li>알람내역
+		            </ul>
+		          </div>
+		        </div>
+		      </div>
+	       			</nav>
+    			</div>
             </div>
           </div>
-        </div>
-      </ul>
-    </div>
-              </ul>
-            </div>
-          </div>
-        </nav>
-        <!-- End Navbar -->
+       
+ 
   <!--   Core JS Files   -->
-  <script src="../assets/js/core/popper.min.js"></script>
-  <script src="../assets/js/core/bootstrap.min.js"></script>
-  <script src="../assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="../assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="${path}/assets/js/core/popper.min.js"></script>
+  <script src="${path}/assets/js/core/bootstrap.min.js"></script>
+  <script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
+  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
   <!-- Kanban scripts -->
-  <script src="../assets/js/plugins/dragula/dragula.min.js"></script>
-  <script src="../assets/js/plugins/jkanban/jkanban.js"></script>
+  <script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
+  <script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -352,7 +312,7 @@
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="../assets/js/argon-dashboard.min.js?v=2.0.5"></script>
+  <script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
 </body>
 
 </html>
