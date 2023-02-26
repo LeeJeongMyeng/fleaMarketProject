@@ -178,7 +178,7 @@ $(document).ready(function(){
                           <input class="multisteps-form__input form-control mb-5" type="email" name="email" placeholder="Contigo@contigo.com" />
                         </div>
                       </div>
-                      <div id="MemberFindResult" style="border:1px solid gray;">아이디:aoddl56@nate.com</div>
+                      <div id="MemberFindResult"></div>
                       <div class="button-row d-flex mt-4">
                         <button class="btn bg-gradient-dark ms-auto me-3" type="button" onclick="MemberFindHandler()">찾기</button>
                     	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>

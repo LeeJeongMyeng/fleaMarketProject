@@ -10,3 +10,8 @@
  	margin-left:auto; 
   	font-weight:bold;
 }
+
+#MemberFindResult{
+	/* border:1px solid gray; */
+	/* border-radius:5px; */
+}

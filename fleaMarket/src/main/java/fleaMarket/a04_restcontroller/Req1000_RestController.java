@@ -57,7 +57,7 @@ public class Req1000_RestController {
 		String MemberFindPassword="";
 		if(service.DuplicateMem(name,personalnumber,email)!=null) {
 			service.MemberFindPassword(name,personalnumber,email);
-			  MemberFindPassword = name+"님 ("+email+")계정의 임시 비밀번호로 <1111>로 변경되었습니다.";
+			  MemberFindPassword = name+"님 ("+email+")계정 <br> <span style='color:red;'>임시 비밀번호</span>로 <<span style='color:red;'>1111</span>>로 변경되었습니다.";
 		}else {
 			MemberFindPassword="조회 된 계정이 없습니다.";
 		}

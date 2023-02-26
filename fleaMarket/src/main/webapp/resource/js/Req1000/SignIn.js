@@ -170,9 +170,11 @@ $('#SNSLoginbnt').click(function(){
 		success:function(data){
 		 if( $('#MemberFindTitle').text()=='아이디 찾기'){
 			console.log(data.DuplicateMem.email)
+			$('#MemberFindResult').html("<span style='font-weight:bold;'>"+FindName.val()+"</span>님의 계정은<span style='font-weight:bold;'>"+data.DuplicateMem.email+"</span>입니다.")
 			
 		}else{
 			console.log(data.MemberFindPassword)
+			$('#MemberFindResult').html(data.MemberFindPassword)
 		}
 		},
 		error:function(xhr,status,error){
