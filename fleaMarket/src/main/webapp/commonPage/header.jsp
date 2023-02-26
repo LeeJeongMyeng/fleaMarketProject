@@ -191,9 +191,7 @@
                                 <span>500</span>
                               </a>
                             </div>
-                            
                           </li>
-                          
                         </ul>
                       </div>
                     </div>               
@@ -262,36 +260,35 @@
                    </div>
                 </li>
               </ul>
-     
-		      <img src="${path}/assets/img/kit/pro/team-2.jpg" alt="..." class="avatar shadow">
-		      <div class="name ps-3 profilename">
-		        <div class="col-2 m-auto">
-		        	<span>Mathew Glock</span>
-		        </div>
-		      </div>
-		      <div class="row lav">
-		        <div class="col-1 m-auto">
-		          <a class="cursor-pointer">
-		            <i class="fa fa-cog fixed-plugin-button-nav"></i>
-		          </a>
-		        </div>
-		        <div class="col-1 m-auto">
-		          <div class="dropdown">
-		            <a class="cursor-pointer" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-		              <i class="fa fa-bell"></i>
-		            </a>
-		            <ul class="dropdown-menu dropdown-menu-right px-2 py-3 ms-n4" aria-labelledby="dropdownMenuButton">
-		              <li>알람내역
-		            </ul>
-		          </div>
-		        </div>
-		      </div>
-	       			</nav>
-    			</div>
-            </div>
-          </div>
-       
- 
+              <ul>
+			      <img src="${path}/assets/img/kit/pro/team-2.jpg" alt="..." class="avatar shadow">
+			      <div class="name ps-3 profilename">
+			        <div class="col-2 m-auto">
+			        	<span>Mathew Glock</span>
+			        </div>
+			      </div>
+			        <div class="col-1 m-auto">
+			          <a class="cursor-pointer">
+			            <i class="fa fa-cog fixed-plugin-button-nav"></i>
+			          </a>
+			        </div>
+			        <div class="col-1 m-auto">
+			          <div class="dropdown">
+			            <a class="cursor-pointer" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+			              <i class="fa fa-bell"></i>
+			            </a>
+			            <ul class="dropdown-menu dropdown-menu-right px-2 py-3 ms-n4" aria-labelledby="dropdownMenuButton">
+			              <li>알람내역
+			            </ul>
+			          </div>
+			        </div>
+			      </div>
+			      </div>
+		      </ul>
+			</nav>
+		</div>
+	</div>
+	</div>
   <!--   Core JS Files   -->
   <script src="${path}/assets/js/core/popper.min.js"></script>
   <script src="${path}/assets/js/core/bootstrap.min.js"></script>
