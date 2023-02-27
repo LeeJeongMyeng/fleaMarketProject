@@ -1,5 +1,5 @@
 package vo;
-
+// vo.Capplication
 public class Capplication {
 	private String communitynumber;
 	private String title;
