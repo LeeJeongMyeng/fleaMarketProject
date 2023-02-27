@@ -50,7 +50,17 @@ $('#editor .ql-editor').keyup(function(){
 });
 
 
-
+function checkOnlyOne(element) {
+	  
+	  const checkboxes 
+	      = document.getElementsByName("checkForm");
+	  
+	  checkboxes.forEach((cb) => {
+	    cb.checked = false;
+	  })
+	  
+	  element.checked = true;
+	}
 
 </script>
 </head>
@@ -273,7 +283,28 @@ $('#editor .ql-editor').keyup(function(){
             </div>
         <input type="hidden" name="content" id="content"value="">
         
-
+         <div class="row">
+              <div class="col-6">
+                <label class="form-label labelFont" >첨부파일 유무</label>
+                  <div class="card">
+		        <!-- 양식유무 -->
+		         <div class="form-check"> 
+		             <input class="form-check-input" name="checkForm" type="checkbox" value="N" onclick='checkOnlyOne(this)'>
+		             <label>첨부파일x</label>
+		         </div> 
+		         <div class="form-check"> 		         
+		             <input class="form-check-input" name="checkForm" type="checkbox" value="P" onclick='checkOnlyOne(this)'>
+		             <label>개인 첨부파일</label>
+		         </div> 
+		         <div class="form-check"> 
+		             <input class="form-check-input" name="checkForm" type="checkbox" value="C" onclick='checkOnlyOne(this)'>
+		             <label>공통 첨부파일</label>
+		          
+		         </div>
+		      </div>
+             </div>
+         </div>
+         
             <label class="mt-4 form-label labelFont">첨부파일</label>
             <div class="form-control dropzone" id="dropzone">
               <div class="fallback">

@@ -1,9 +1,9 @@
 sql 
 insert into FleaMarket
-       values(#{title},sysdate,
+       values(flea01_seq.nextval,#{title},sysdate,
          #{content},#{bisenessNumber},#{email},#{approvalMaxCnt},
          #{recruitmentStartDate},#{recruitmentEndDate},#{openDate},#{closeDate},
-         #{})
+         #{checkForm},#{viewCnt},#{address})
 
 	postingNumber varchar2(100) NOT NULL,--게시글 번호: 시퀀스
 	title varchar2(100),
