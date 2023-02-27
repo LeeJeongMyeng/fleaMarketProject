@@ -2,7 +2,6 @@
     pageEncoding="UTF-8"
     import="java.util.*"
     %>
-   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
@@ -51,12 +50,13 @@ console.log($("input[name=content]").val("#contents"));
    display:none;
 }
 </style>
-
+<%@include file="header.jsp" %>  
 <body class="g-sidenav-show   bg-gray-100">
+
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
  
   <main class="main-content position-relative border-radius-lg ">
-    <!-- Navbar -->
+<!--     Navbar
     <nav class="navbar navbar-main navbar-expand-lg  px-0 mx-4 shadow-none border-radius-xl z-index-sticky " id="navbarBlur" data-scroll="false">
       <div class="container-fluid py-1 px-3">
         <nav aria-label="breadcrumb">
@@ -70,7 +70,7 @@ console.log($("input[name=content]").val("#contents"));
             <li class="breadcrumb-item text-sm text-white active" aria-current="page">New Project</li>
           </ol>
           <h6 class="font-weight-bolder mb-0 text-white">New Project</h6>
-        </nav>
+        </nav> -->
         <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none ">
           <a href="javascript:;" class="nav-link p-0">
             <div class="sidenav-toggler-inner">
@@ -189,6 +189,7 @@ console.log($("input[name=content]").val("#contents"));
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-lg-9 col-12 mx-auto">
+        <form  action="/file-upload" method="post" id="aform" name="aform">
           <div class="card card-body mt-4">
             <h6 class="mb-0 fleamarket">플리마켓 등록</h6>
             <hr class="horizontal dark my-3">
@@ -199,11 +200,11 @@ console.log($("input[name=content]").val("#contents"));
              <div class="row">
               <div class="col-6">
                 <label class="form-label labelFont" >플리마켓 시작일</label>
-                <input class="form-control datetimepicker" type="text" placeholder="시작일을 선택해주세요" name="recruitmentStartDate" data-input>
+                <input class="form-control datetimepicker" type="text" placeholder="시작일을 선택해주세요" name="openDate" data-input>
               </div>
               <div class="col-6">
                 <label class="form-label labelFont" >플리마켓 종료일</label>
-                <input class="form-control datetimepicker" type="text" placeholder="종료일을 선택해주세요" name="recruitmentEndDate" data-input>
+                <input class="form-control datetimepicker" type="text" placeholder="종료일을 선택해주세요" name="closeDate" data-input>
               </div>
            </div>
             
@@ -243,15 +244,12 @@ console.log($("input[name=content]").val("#contents"));
    <div class="map_wrap">
     <div id="map" style="width:580px;height:300px;position:relative;overflow:hidden;"></div>
     <div class="hAddr">
-	        <span class="title">지도중심기준 주소정보</span>
-	        <span id="centerAddr"></span>
-	               
-	        <span class="title">선택한 위치의 주소정보</span>
+     
 	        <span id="centerAddr2">  </span>
 	        <span id="centerAddr3">  </span>
 	    </div>
-	     <input Type="text" name="addressval" value="">    
-	     <input Type="text" name="daddressval" placeholder="상세주소">    
+	     <input Type="text" name="address" value="">    
+	<!--      <input Type="text" name="daddressval" placeholder="상세주소">     -->
        
      </div>  
             
@@ -266,11 +264,13 @@ console.log($("input[name=content]").val("#contents"));
         
 
             <label class="mt-4 form-label labelFont">첨부파일</label>
-            <form action="/file-upload" class="form-control dropzone" id="dropzone">
+            <div class="form-control dropzone" id="dropzone">
               <div class="fallback">
                 <input name="filePath" type="file" multiple />
               </div>
+            </div>
             </form>
+        
             <div class="d-flex justify-content-end mt-4">
               <button type="button" name="button" class="btn bg-gradient-primary m-0 ms-2">등록하기</button>
             </div>
@@ -399,10 +399,6 @@ console.log($("input[name=content]").val("#contents"));
 
 
   <!--   Core JS Files   -->
-  <script src="${path}/assets/js/core/popper.min.js"></script>
-  <script src="${path}/assets/js/core/bootstrap.min.js"></script>
-  <script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="${path}/assets/js/plugins/choices.min.js"></script>
   <script src="${path}/assets/js/plugins/quill.min.js"></script>
   <script src="${path}/assets/js/plugins/flatpickr.min.js"></script>
@@ -568,8 +564,8 @@ function displayCenterInfo(result, status) {
 /* function serar */
 //동에 대한 default 
 geocoder.addressSearch('판교', function(result, status) {
-   var infoDiv2 = document.getElementById('centerAddr2');
-   var infoDiv3 = document.getElementById('centerAddr3');
+   var infoDiv2 = document.getElementById('centerAddr2'); 
+   var infoDiv3 = document.getElementById('centerAddr3'); 
 
     // 정상적으로 검색이 완료됐으면 
      if (status === kakao.maps.services.Status.OK) {
@@ -591,7 +587,7 @@ geocoder.addressSearch('판교', function(result, status) {
         // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
         map.setCenter(coords);
         
-        var infoDiv = document.getElementById('centerAddr');
+        var infoDiv = document.getElementById('centerAddr'); 
 
         for(var i = 0; i < result.length; i++) {
             // 행정동의 region_type 값은 'H' 이므로
@@ -629,8 +625,9 @@ geocoder.addressSearch('판교', function(result, status) {
                    
                    // 지도 선택한 부분 input 들어감 
                    var aform = document.querySelector("#aform")
-                   aform.addressval.value = document.getElementById("centerAddr2").innerText;
-                   
+                   aform.address.value = document.getElementById("centerAddr3").innerText;
+              /*      var address =$("#centerAddr3").val()
+                   $("input[name=addressval]").val()=address; */
                    //aform.addressval2.value = document.getElementById("centerAddr3").innerText;
                    
                }   

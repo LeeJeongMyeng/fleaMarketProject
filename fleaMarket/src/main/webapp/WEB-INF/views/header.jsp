@@ -395,7 +395,7 @@
                               </div>
                               <div class="w-100 d-flex align-items-center justify-content-between">
                                 <div>
-                                  <p class="dropdown-header text-dark p-0">전체조회(플리마켓 전체조회)</p>
+                                  <p class="dropdown-header text-dark p-0">전체조회</p>
                                 </div>
                               </div>
                             </div>
@@ -409,7 +409,7 @@
                               </div>
                               <div class="w-100 d-flex align-items-center justify-content-between">
                                 <div>
-                                  <p class="dropdown-header text-dark p-0">플리마켓 등록(상세조회)</p>
+                                  <p class="dropdown-header text-dark p-0">플리마켓 등록</p>
                                 </div>
                               </div>
                             </div>
