@@ -65,27 +65,25 @@
                         </div>
                         <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                           <label class="postInsertTitle">작성자</label>
-                          <input class="multisteps-form__input form-control" type="text" value="ID값" readonly/>
+                          <input class="multisteps-form__input form-control" name="email" type="text" value="사용자아이디" readonly/>
                         </div>
                       </div>
                       <div class="row mt-3" style="width:99%; margin-left:0.5%;">
                           <label class="postInsertTitle" style="margin-left:-0.5%;">제목</label>
-                          <input class="multisteps-form__input form-control" type="text" placeholder="eg. Off-White" />
+                          <input class="multisteps-form__input form-control" name="title" type="text" placeholder="제목을 작성해주세요." />
                        </div>
                       <div class="row" style="width:99%; margin-left:0.5%;">
                          <label class="mt-4 postInsertTitle" style="margin-left:-0.5%;">게시글 내용</label>
                          <div id="edit-deschiption" style="height:400px;">
                            <p>Some initial <strong>bold</strong> text</p>
                          </div>
+                         <input type="text" id="contentInput" name="content" hidden/>
                       </div>
                       <div class="row">
                         <div class="col-12">
                           <label class="mt-4 form-label postInsertTitle">태그(#)</label>
-                          <select class="form-control" name="choices-tags" id="choices-tags" multiple>
-                            <option value="Choice 1" selected>In Stock</option>
-                            <option value="Choice 2">Out of Stock</option>
-                            <option value="Choice 3">Sale</option>
-                            <option value="Choice 4">Black Friday</option>
+                          <select class="form-control" name="hashtag" id="choices-tags" multiple>
+                            <option value="Choice 1" selected>#구분자로 있는 태그들로 드롭다운시키기</option>
                           </select>
                         </div>
                       </div>

@@ -1,14 +1,14 @@
 package vo;
 // vo.BoardImg
 public class BoardImg {
-	private String imgName;
+	private String imgname;
 	private String imgpath;
 	private String communitynumber;
-	public String getImgName() {
-		return imgName;
+	public String getImgname() {
+		return imgname;
 	}
-	public void setImgName(String imgName) {
-		this.imgName = imgName;
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
 	}
 	public String getImgpath() {
 		return imgpath;

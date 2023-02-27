@@ -3,24 +3,14 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-   
 
     <mapper namespace="fleaMarket.a03_dao.CommunityDao_jyj">
-    	<insert id="communityInsert" parameterType="member">
-    		INSERT INTO FLEAMARKETMEMBER values(
-				#{email},
-				#{password},
-				#{nickname},
-				#{personalnumber},
-				#{phonenumber},
-				#{address},
-				#{authority},
-				#{buisnessnumber},
-				NULL,
-				NULL,
-				#{category},
-				#{name}
-				)
+    	<insert id="communityInsert" parameterType="capplicaion">
+    		INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval,
+    		 #{title},#{content},sysdate,NULL,'#{category},#{email},#{hashtag},0);
     	</insert>
-    	
+    	<insert id="insertUploadFile" parameterType="boardfile">
+			insert into boardfile values(board_seq.currval, 
+			#{fname},#{etc},sysdate,sysdate)
+		</insert>
     </mapper>

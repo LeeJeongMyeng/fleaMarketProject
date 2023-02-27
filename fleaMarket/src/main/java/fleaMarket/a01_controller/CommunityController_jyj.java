@@ -32,8 +32,5 @@ public class CommunityController_jyj {
 	public String communityMemberRoom() {
 		return "communityMemberRoom";
 	}
-	@RequestMapping("header.do")
-	public String header() {
-		return "header";
-	}
+	
 }
