@@ -53,7 +53,21 @@ NULL,
 NULL,
 '이정명'
 );
-
+--윤아 연습용 관리자
+INSERT INTO FLEAMARKETMEMBER values(
+'admin@contigo.com',
+'admin',
+'관리자',
+'000000-0000000',
+'010-0000-0000',
+'서울시 마포구 서교동',
+'관리자',
+NULL,
+NULL,
+NULL,
+NULL,
+'관리자'
+);
 UPDATE FLEAMARKETMEMBER 
 SET password = '1111' 
 WHERE EMAIL ='28888wjdaud@naver.com'

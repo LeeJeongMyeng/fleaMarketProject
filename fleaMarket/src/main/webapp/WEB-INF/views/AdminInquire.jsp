@@ -180,9 +180,6 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 					id="navbar">
 					<div class="ms-md-auto pe-md-3 d-flex align-items-center">
 						<div class="input-group">
-							<span class="input-group-text text-body"><i
-								class="fas fa-search" aria-hidden="true"></i></span> <input type="text"
-								class="form-control" placeholder="Type here...">
 						</div>
 					</div>
 					<ul class="navbar-nav  justify-content-end">
@@ -190,7 +187,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 							href="${path}/pages/authentication/signin/illustration.html"
 							class="nav-link text-white font-weight-bold px-0" target="_blank">
 								<i class="fa fa-user me-sm-1"></i> <span
-								class="d-sm-inline d-none">Sign In</span>
+								class="d-sm-inline d-none">세션닉네임</span>
 						</a></li>
 						<li class="nav-item d-xl-none ps-3 d-flex align-items-center">
 							<a href="javascript:;" class="nav-link text-white p-0"
@@ -353,6 +350,11 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 							</div>
 						</div>
 						<div class="card-body px-0 pb-0">
+							
+							<div class="input-group mb-3">
+  <button class="btn btn-outline-primary mb-0" type="submit" id="button-addon1">　검색　</button>
+  <input type="text" class="form-control"  name="nickname" value="${sch.nickname}" placeholder="　제목(내용)을 입력하세요">
+</div>
 							<div class="table-responsive">
 								<table class="table table-flush" id="products-list">
 									<thead class="thead-light">
