@@ -31,20 +31,7 @@
 	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 </head>
 <script type="text/javascript">
-	$(document).ready(function(){
-			$("#AdminPost").click(function(){
-		location.href="${path}/AdminPost.do"
-		})
-		$("#goProduct").click(function(){
-		location.href="${path}/ovProductrList.do"
-		})
-		$("#goMain").click(function(){
-			location.href="${path}/main.do"	
-		})
-		$("#goLogin").click(function(){
-			location.href="${path}/login.do"		
-		});
-	});
+	
 </script>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
@@ -55,7 +42,7 @@
 			<i
 				class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
 				aria-hidden="true" id="iconSidenav"></i> <a class="navbar-brand m-0"
-				href=" https://demos.creative-tim.com/argon-dashboard-pro/pages/dashboards/default.html "
+				href="${path}/Main.do"
 				target="_blank"> <img src="${path}/assets/img/logo2.png"
 				class="navbar-brand-img h-100" alt="main_logo"> <span
 				class="ms-1 font-weight-bold">CONTIGO 당신과 함께</span>
@@ -340,7 +327,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 							href="${path}/pages/authentication/signin/illustration.html"
 							class="nav-link text-white font-weight-bold px-0" target="_blank">
 								<i class="fa fa-user me-sm-1"></i> <span
-								class="d-sm-inline d-none">Sign In</span>
+								class="d-sm-inline d-none">세션닉네임</span>
 						</a></li>
 						<li class="nav-item d-xl-none ps-3 d-flex align-items-center">
 							<a href="javascript:;" class="nav-link text-white p-0"
@@ -457,40 +444,35 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 								</div>
 								<div class="ms-auto my-auto mt-lg-0 mt-4">
 									<div class="ms-auto my-auto">
-										<a href="./new-product.html"
-											class="btn bg-gradient-primary btn-sm mb-0" target="_blank">+&nbsp;
-											New Product</a>
+										
 										<button type="button"
 											class="btn btn-outline-primary btn-sm mb-0"
 											data-bs-toggle="modal" data-bs-target="#import">
-											Import</button>
+											회원탈퇴</button>
 										<div class="modal fade" id="import" tabindex="-1"
 											aria-hidden="true">
 											<div class="modal-dialog mt-lg-10">
 												<div class="modal-content">
 													<div class="modal-header">
-														<h5 class="modal-title" id="ModalLabel">Import CSV</h5>
+														<h5 class="modal-title" id="ModalLabel">회원 탈퇴</h5>
 														<i class="fas fa-upload ms-3"></i>
 														<button type="button" class="btn-close"
 															data-bs-dismiss="modal" aria-label="Close"></button>
 													</div>
 													<div class="modal-body">
-														<p>You can browse your computer for a file.</p>
-														<input type="text" placeholder="Browse file..."
-															class="form-control mb-3">
+														<p>선택한 회원을 탈퇴시키겠습니까?</p>
 														<div class="form-check">
 															<input class="form-check-input" type="checkbox" value=""
-																id="importCheck" checked=""> <label
-																class="custom-control-label" for="importCheck">I
-																accept the terms and conditions</label>
+																id="importCheck"> 
+																* 탈퇴처리에 동의하시면 다시 한 번 체크를 해주세요.
 														</div>
 													</div>
 													<div class="modal-footer">
 														<button type="button"
 															class="btn bg-gradient-secondary btn-sm"
-															data-bs-dismiss="modal">Close</button>
+															data-bs-dismiss="modal">취소</button>
 														<button type="button"
-															class="btn bg-gradient-primary btn-sm">Upload</button>
+															class="btn bg-gradient-primary btn-sm">탈퇴</button>
 													</div>
 												</div>
 											</div>
