@@ -39,8 +39,18 @@
 <script src="${path}/assets/js/plugins/fullcalendar.min.js"></script>
 <%--모달창 --%>
 <script>
-$("input[name=content]").val("#contents")
-console.log($("input[name=content]").val("#contents"));
+$(document).ready(function(){
+
+$('#editor .ql-editor').keyup(function(){
+
+ 	var expeditor=$(this).html() 
+	console.log("dd",expeditor);
+	$('input[name=content]').val(expeditor); 
+})
+});
+
+
+
 
 </script>
 </head>
@@ -189,7 +199,8 @@ console.log($("input[name=content]").val("#contents"));
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-lg-9 col-12 mx-auto">
-        <form  action="/file-upload" method="post" id="aform" name="aform">
+        
+        <form  action="/file-upload.do" method="post" id="aform" name="aform" enctype="multipart/form-data">
           <div class="card card-body mt-4">
             <h6 class="mb-0 fleamarket">플리마켓 등록</h6>
             <hr class="horizontal dark my-3">
@@ -260,7 +271,7 @@ console.log($("input[name=content]").val("#contents"));
               <p>Some initial <strong>bold</strong> text</p> -->
               <p id="contents"><br></p>
             </div>
-        <input type="hidden" name="content" value="">
+        <input type="hidden" name="content" id="content"value="">
         
 
             <label class="mt-4 form-label labelFont">첨부파일</label>
@@ -272,7 +283,7 @@ console.log($("input[name=content]").val("#contents"));
             </form>
         
             <div class="d-flex justify-content-end mt-4">
-              <button type="button" name="button" class="btn bg-gradient-primary m-0 ms-2">등록하기</button>
+              <button type="submit" name="button" class="btn bg-gradient-primary m-0 ms-2">등록하기</button>
             </div>
           </div>
         </div>
