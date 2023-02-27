@@ -1,6 +1,6 @@
 package vo;
 
-public class Capplicaion {
+public class Capplication {
 	private String communitynumber;
 	private String title;
 	private String content;
@@ -64,5 +64,4 @@ public class Capplicaion {
 	public void setViewCnt(String viewCnt) {
 		this.viewCnt = viewCnt;
 	}
-	
 }
