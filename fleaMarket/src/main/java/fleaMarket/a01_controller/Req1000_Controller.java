@@ -64,7 +64,7 @@ public class Req1000_Controller {
 			mem = service.Login(log);
 		}
 		
-		//여기서 부터 Service단
+		
 		if(mem!=null) {
 		session.setAttribute("Login", mem);
 		msg = "로그인 성공";  path="main";	

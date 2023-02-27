@@ -703,7 +703,7 @@
 	                    <div class="d-none d-lg-block">
 	                      <ul class="list-group">
 	                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-	                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/kanban.html">
+	                          <a class="dropdown-item py-2 ps-3 border-radius-md" onclick="GoToPage('Logout')">
 	                            <div class="d-flex">
 	                              <div class="icon h-10 me-3 d-flex mt-1">
 	                                <i class="ni ni-single-copy-04 text-primary"></i>
@@ -717,7 +717,14 @@
 	                          </a>
 	                        </li>
 	                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-	                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/wizard.html">
+	                        <c:choose>
+	                       	  <c:when test="${Login.authority=='관리자'}">
+	                         	 <a class="dropdown-item py-2 ps-3 border-radius-md" onclick="GoToPage('AdminSearch')">
+	                       	  </c:when>
+	                       	  <c:otherwise>
+	                       	  	 <a class="dropdown-item py-2 ps-3 border-radius-md" onclick="GoToPage('MemberInfo')">
+	                       	  </c:otherwise>
+	                        </c:choose>   
 	                            <div class="d-flex">
 	                             <div class="icon h-10 me-3 d-flex mt-1">
 	                               <i class="ni ni-laptop text-primary"></i>
@@ -861,10 +868,12 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
     
-    $('#HeaderSignUp').click(function(){
-    	$('#HeaderBackground').removeClass('bg-primary')
-    	location.href="SignUp.do"
-    })
+    
+    
+    //페이지 이동처리
+    function GoToPage(page){
+    	location.href=page+".do"   	
+    }
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
