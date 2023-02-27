@@ -1,6 +1,6 @@
 package vo;
-// vo.capplicaion
-public class capplicaion {
+// vo.Capplicaion
+public class Capplicaion {
 	private String communitynumber;
 	private String title;
 	private String content;

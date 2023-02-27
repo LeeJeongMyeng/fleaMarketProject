@@ -8,8 +8,8 @@
 	<typeAliases>
 		<typeAlias alias="member" type="vo.Member"/>
 		<typeAlias alias="profileimg" type="vo.ProfileImg"/>
-		<typeAlias alias="profileimg" type="vo.capplicaion"/>
-		<typeAlias alias="profileimg" type="vo.BoardImg"/>
+		<typeAlias alias="capplicaion" type="vo.Capplicaion"/>
+		<typeAlias alias="boardImg" type="vo.BoardImg"/>
 	</typeAliases>
 
 	<!-- 2. 사용 XXXMapper.xml을 추가 -->

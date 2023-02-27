@@ -6,6 +6,21 @@
    
 
     <mapper namespace="fleaMarket.a03_dao.CommunityDao_jyj">
-    	
+    	<insert id="communityInsert" parameterType="member">
+    		INSERT INTO FLEAMARKETMEMBER values(
+				#{email},
+				#{password},
+				#{nickname},
+				#{personalnumber},
+				#{phonenumber},
+				#{address},
+				#{authority},
+				#{buisnessnumber},
+				NULL,
+				NULL,
+				#{category},
+				#{name}
+				)
+    	</insert>
     	
     </mapper>
