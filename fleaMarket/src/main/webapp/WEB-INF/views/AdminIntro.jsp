@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8" import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <fmt:requestEncoding value="utf-8" />
 <!DOCTYPE html>
@@ -28,6 +29,7 @@
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
+<%@ include file="/WEB-INF/views/header.jsp" %>
   <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
     <span class="mask bg-primary opacity-6"></span>
   </div>
@@ -168,10 +170,10 @@
           <div class="col-auto my-auto">
             <div class="h-100">
               <h5 class="mb-1">
-                CONTIGO
+               회사소개
               </h5>
               <p class="mb-0 font-weight-bold text-sm">
-                당신과 함께
+              
               </p>
             </div>
           </div>
@@ -180,8 +182,10 @@
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0 p-3">
-              
-              회사소개
+             <img src="${path}/assets/img/intro.jpg" class="w-100">
+             <br>
+              <h6>CONTIGO는 스페인어로 당신과 함께라는 뜻으로</h6>
+              <h6>지역사회와 함께 성장하는 올바른 가치를 추구합니다.</h6>
             </div>
           
                
@@ -307,10 +311,6 @@
     </div>
   </div>
   <!--   Core JS Files   -->
-  <script src="${path}/assets/js/core/popper.min.js"></script>
-  <script src="${path}/assets/js/core/bootstrap.min.js"></script>
-  <script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
   <!-- Kanban scripts -->
   <script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
   <script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>

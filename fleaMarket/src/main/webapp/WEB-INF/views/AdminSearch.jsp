@@ -30,10 +30,23 @@
 <link id="pagestyle"
 	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 </head>
-
+<script type="text/javascript">
+	$(document).ready(function(){
+			$("#AdminPost").click(function(){
+		location.href="${path}/AdminPost.do"
+		})
+		$("#goProduct").click(function(){
+		location.href="${path}/ovProductrList.do"
+		})
+		$("#goMain").click(function(){
+			location.href="${path}/main.do"	
+		})
+		$("#goLogin").click(function(){
+			location.href="${path}/login.do"		
+		});
+	});
+</script>
 <body class="g-sidenav-show   bg-gray-100">
-
-
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
 	<aside
 		class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 "
@@ -105,13 +118,10 @@
 					<div class="collapse " id="pagesExamples">
 						<ul class="nav ms-4">
 							<li class="nav-item "><a class="nav-link active"
-								href="#profileExample"> <span class="sidenav-mini-icon">
+								href="${path}/AdminSearch.do"> <span class="sidenav-mini-icon">
 										P </span> <span class="sidenav-normal"> 회원조회 <b class="caret"></b></span>
 							</a>
 								</li>
-						
-						
-						
 						</ul>
 					</div></li>
 				<li class="nav-item"><a data-bs-toggle="collapse"
@@ -126,68 +136,20 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 					<div class="collapse " id="applicationsExamples">
 						<ul class="nav ms-4">
 							<li class="nav-item "><a class="nav-link "
-								href="${path}/pages/applications/kanban.html"> <span
+								href="${path}/AdminPost.do"> <span
 									class="sidenav-mini-icon"> K </span> <span
-									class="sidenav-normal"> 공지사항 </span>
+									class="sidenav-normal" id="AdminPost"> 공지사항 </span>
 							</a></li>
 							<li class="nav-item "><a class="nav-link "
-								href="${path}/pages/applications/wizard.html"> <span
+								href="${path}/AdminInquire.do"> <span
 									class="sidenav-mini-icon"> W </span> <span
 									class="sidenav-normal"> 1:1문의 </span>
 							</a></li>
 						</ul>
 					</div></li>
-				<li class="nav-item"><a data-bs-toggle="collapse"
-					href="#ecommerceExamples" class="nav-link"
-					aria-controls="ecommerceExamples" role="button"
-					aria-expanded="false">
-						<div
-							class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-							<i class="ni ni-archive-2 text-success text-sm opacity-10"></i>
-						</div> <span class="nav-link-text ms-1">기타</span>
-				</a>
-					<div class="collapse  show " id="ecommerceExamples">
-						<ul class="nav ms-4">
-							<li class="nav-item "><a class="nav-link "
-								href="${path}/pages/ecommerce/overview.html"> <span
-									class="sidenav-mini-icon"> O </span> <span
-									class="sidenav-normal"> Overview </span>
-							</a></li>
-							<li class="nav-item "><a class="nav-link "
-								data-bs-toggle="collapse" aria-expanded="false"
-								href="#ordersExample"> <span class="sidenav-mini-icon">
-										O </span> <span class="sidenav-normal"> Orders <b
-										class="caret"></b></span>
-							</a>
-								<div class="collapse " id="ordersExample">
-									<ul class="nav nav-sm flex-column">
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/ecommerce/orders/list.html"> <span
-												class="sidenav-mini-icon text-xs"> O </span> <span
-												class="sidenav-normal"> Order List </span>
-										</a></li>
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/ecommerce/orders/details.html"> <span
-												class="sidenav-mini-icon text-xs"> O </span> <span
-												class="sidenav-normal"> Order Details </span>
-										</a></li>
-									</ul>
-								</div></li>
-							<li class="nav-item "><a class="nav-link "
-								href="${path}/pages/ecommerce/referral.html"> <span
-									class="sidenav-mini-icon"> R </span> <span
-									class="sidenav-normal"> Referral </span>
-							</a></li>
-						</ul>
-					</div></li>
-				<li class="nav-item"><a data-bs-toggle="collapse"
-					href="#authExamples" class="nav-link " aria-controls="authExamples"
-					role="button" aria-expanded="false">
-						<div
-							class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-							<i class="ni ni-single-copy-04 text-danger text-sm opacity-10"></i>
-						</div> <span class="nav-link-text ms-1">Authentication</span>
-				</a>
+				
+				
+				
 					<div class="collapse " id="authExamples">
 						<ul class="nav ms-4">
 							<li class="nav-item "><a class="nav-link "
@@ -371,9 +333,6 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 					id="navbar">
 					<div class="ms-md-auto pe-md-3 d-flex align-items-center">
 						<div class="input-group">
-							<span class="input-group-text text-body"><i
-								class="fas fa-search" aria-hidden="true"></i></span> <input type="text"
-								class="form-control" value="${sch.nickname}" placeholder="Type here...">
 						</div>
 					</div>
 					<ul class="navbar-nav  justify-content-end">
@@ -485,7 +444,6 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 			</div>
 		</nav>
 		<!-- End Navbar -->
-		<!-- 중앙 -->
 		<div class="container-fluid py-4">
 			<div class="row">
 				<div class="col-12">
@@ -495,7 +453,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 							<div class="d-lg-flex">
 								<div>
 									<h5 class="mb-0">회원목록조회</h5>
-									<p class="text-sm mb-0">검색할 회원명을 상단 검색창에 입력해주세요</p>
+									<p class="text-sm mb-0">검색할 회원명을 하단 검색창에 입력해주세요</p>
 								</div>
 								<div class="ms-auto my-auto mt-lg-0 mt-4">
 									<div class="ms-auto my-auto">
@@ -544,7 +502,14 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 								</div>
 							</div>
 						</div>
-						<div class="card-body px-0 pb-0">
+							<div class="card-body px-0 pb-0">
+							</div>
+							<form id="frm01" class="form"  method="post"> 
+							
+							<div class="input-group mb-3">
+  <button class="btn btn-outline-primary mb-0" type="submit" id="button-addon1">　검색　</button>
+  <input type="text" class="form-control"  name="nickname" value="${sch.nickname}" placeholder="　회원명을 입력하세요">
+</div>
 							<div class="table-responsive">
 								<table class="table table-flush" id="products-list">
 									<thead class="thead-light">
@@ -553,11 +518,9 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 													<div class="d-flex">
 													<div class="form-check my-auto">
 														<input class="form-check-input" type="checkbox"
-															 id="">
+															id="customCheck3">
 													</div>
 												</div>
-											
-											
 											</th>
 											<th width="25%">이메일</th>
 											<th width="20%">회원명</th>
@@ -584,11 +547,6 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 							    		</c:forEach>
 										
 										</tbody></table></div></div></div></div></div>
-										
-										
-										
-										
-										
 			<footer class="footer pt-3  ">
 				<div class="container-fluid">
 					<div class="row align-items-center justify-content-lg-between">

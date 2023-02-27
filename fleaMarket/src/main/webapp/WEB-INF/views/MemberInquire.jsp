@@ -132,49 +132,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 							</a></li>
 						</ul>
 					</div></li>
-				<li class="nav-item"><a data-bs-toggle="collapse"
-					href="#ecommerceExamples" class="nav-link"
-					aria-controls="ecommerceExamples" role="button"
-					aria-expanded="false">
-						<div
-							class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-							<i class="ni ni-archive-2 text-success text-sm opacity-10"></i>
-						</div> <span class="nav-link-text ms-1">기타</span>
-				</a>
-					<div class="collapse  show " id="ecommerceExamples">
-						<ul class="nav ms-4">
-							<li class="nav-item "><a class="nav-link "
-								href="${path}/pages/ecommerce/overview.html"> <span
-									class="sidenav-mini-icon"> O </span> <span
-									class="sidenav-normal"> Overview </span>
-							</a></li>
-							<li class="nav-item "><a class="nav-link "
-								data-bs-toggle="collapse" aria-expanded="false"
-								href="#ordersExample"> <span class="sidenav-mini-icon">
-										O </span> <span class="sidenav-normal"> Orders <b
-										class="caret"></b></span>
-							</a>
-								<div class="collapse " id="ordersExample">
-									<ul class="nav nav-sm flex-column">
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/ecommerce/orders/list.html"> <span
-												class="sidenav-mini-icon text-xs"> O </span> <span
-												class="sidenav-normal"> Order List </span>
-										</a></li>
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/ecommerce/orders/details.html"> <span
-												class="sidenav-mini-icon text-xs"> O </span> <span
-												class="sidenav-normal"> Order Details </span>
-										</a></li>
-									</ul>
-								</div></li>
-							<li class="nav-item "><a class="nav-link "
-								href="${path}/pages/ecommerce/referral.html"> <span
-									class="sidenav-mini-icon"> R </span> <span
-									class="sidenav-normal"> Referral </span>
-							</a></li>
-						</ul>
-					</div></li>
+				
 				<li class="nav-item"><a data-bs-toggle="collapse"
 					href="#authExamples" class="nav-link " aria-controls="authExamples"
 					role="button" aria-expanded="false">

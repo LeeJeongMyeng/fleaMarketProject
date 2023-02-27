@@ -18,4 +18,7 @@ public class Req1001_Service {
 		if(sch.getAddress()==null) sch.setAddress("");
 		return dao.MemberList(sch);
 }
+	public Member getMember(String nickname) {
+		return dao.getMember(nickname);
+	}
 }

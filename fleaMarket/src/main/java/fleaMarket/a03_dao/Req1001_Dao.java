@@ -6,5 +6,5 @@ import vo.Member;
 
 public interface Req1001_Dao {
 	public List<Member> MemberList(Member sch);
-
+	public Member getMember(String nickname);	
 }
