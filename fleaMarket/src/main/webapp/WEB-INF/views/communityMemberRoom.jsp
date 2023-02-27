@@ -228,7 +228,7 @@
         </div>
       </div>
       <div class="mt-3 kanban-container" style="width:100%;">
-        <div class="py-2 min-vh-100 d-inline-flex" style="overflow-x: auto">
+        <div class="py-2 min-vh-100 d-inline-flex">
           <div id="myKanban"></div>
         </div>
       </div>
@@ -461,7 +461,7 @@
         var KanbanTest = new jKanban({
           element: "#myKanban",
           gutter: "5px",
-          widthBoard: "450px",
+          widthBoard: "340px",
           click: el => {
             let jkanbanInfoModal = document.getElementById("jkanban-info-modal");
 
