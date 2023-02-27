@@ -161,7 +161,7 @@ CREATE TABLE MemberFile
 );
 
 
-CREATE TABLE NEW_TABLE
+CREATE TABLE Reply
 (
 	repContent varchar2(10000),
 	repNo number NOT NULL,

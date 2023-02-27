@@ -56,12 +56,11 @@
                       <div class="row" style="padding:5px; margin-top:2%;">
                         <div class="col-12 col-sm-6">
                          <label class="postInsertTitle">카테고리</label>
-                          <select class="form-control" name="choices-category" id="choices-category">
-                            <option value="Choice 1" selected="">Clothing</option>
-                            <option value="Choice 2">Real Estate</option>
-                            <option value="Choice 3">Electronics</option>
-                            <option value="Choice 4">Furniture</option>
-                            <option value="Choice 5">Others</option>
+                          <select class="form-control" name="category" id="choices-category">
+                            <option value="Choice 1" selected="">홍보글</option>
+                            <option value="Choice 2">사업아이디어</option>
+                            <option value="Choice 3">사는이야기</option>
+                            <option value="Choice 4">꿀팁</option>
                           </select>
                         </div>
                         <div class="col-12 col-sm-6 mt-3 mt-sm-0">

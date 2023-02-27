@@ -8,12 +8,15 @@
 	<typeAliases>
 		<typeAlias alias="member" type="vo.Member"/>
 		<typeAlias alias="profileimg" type="vo.ProfileImg"/>
+		<typeAlias alias="profileimg" type="vo.capplicaion"/>
+		<typeAlias alias="profileimg" type="vo.BoardImg"/>
 	</typeAliases>
 
 	<!-- 2. 사용 XXXMapper.xml을 추가 -->
 	<mappers>
 		<mapper resource="resource/Req1000_Mapper.xml"/>
 		<mapper resource="resource/Req1001_Mapper.xml"/>
+		<mapper resource="resource/community_Mapper_jyj.xml"/>
 	</mappers>
 
 </configuration>
