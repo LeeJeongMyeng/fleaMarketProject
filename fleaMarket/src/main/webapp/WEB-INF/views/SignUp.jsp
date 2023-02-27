@@ -10,6 +10,7 @@
 <html lang="en">
 
 <head>
+
   <meta charset="utf-8" />
  
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,6 +35,8 @@
   <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+
+<%@include file="header.jsp" %>
 </head>
 <link href="${path}/resource/css/Req1000/SignUp.css" rel="stylesheet" />
 <body class="">
@@ -47,7 +50,7 @@
   <main class="main-content  mt-0">
     <section>
       <div class="page-header min-vh-100">
-        <div class="container SignUp_container">
+        <div class="container SignUp_container mt-n6">
           <div class="row">
             <div class="col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0 mx-auto">
               <div class="card card-plain">
@@ -240,10 +243,7 @@
     </section>
   </main>
   <!--   Core JS Files   -->
-  <script src="${path}/assets/js/core/popper.min.js"></script>
-  <script src="${path}/assets/js/core/bootstrap.min.js"></script>
-  <script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
+ 
   <!-- Kanban scripts -->
   <script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
   <script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>
@@ -255,9 +255,6 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-    
-    
-
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

@@ -11,7 +11,7 @@
 	var OkBusiness =false;	
 	var OkCategory=false;
 	$('.SignUp_ProfileWrap').slideUp('slow') //사업자등록증 input
-	
+	$('#headerBackground').removeClass('bg-primary')
 	
    
 	 
@@ -362,12 +362,12 @@ var data = {"b_no":[buisnum.val()]};
 	//스탭넘기기전 유효성검사
 	function CheckStepHandler(number){
 		if(number==1){
-			if(!OkEamil){alert("이메일 인증을 완료해주세요."); return false;}
+			/*if(!OkEamil){alert("이메일 인증을 완료해주세요."); return false;}
 			if(!OkPass2){alert("비밀번호를 알맞게 입력해주세요."); return false;}
-			if(!OkCheckName){alert("기존 회원 여부 체크를 진행해주세요"); return false;}
+			if(!OkCheckName){alert("기존 회원 여부 체크를 진행해주세요"); return false;}*/
 		}else if(number==2){
-			if(!OkPhonenum){alert("핸드폰번호를 정확하게 입력부탁드립니다."); return false;}
-			if(!OkAddress){alert("우편번호 찾기를 통해서 주소기재 부탁드립니다."); return false;}
+			/*if(!OkPhonenum){alert("핸드폰번호를 정확하게 입력부탁드립니다."); return false;}
+			if(!OkAddress){alert("우편번호 찾기를 통해서 주소기재 부탁드립니다."); return false;}*/
 			console.log($('[name=profileimg]').val())
 			if($('[name=nickname').val().length<2){
 				$('[name=nickname]').val($('[name=email]').val().split('@')[0])

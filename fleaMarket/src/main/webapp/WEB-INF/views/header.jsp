@@ -43,7 +43,7 @@
 </head>
 
 <body class="">
-  <div class="min-height-300 bg-primary position-absolute w-100"></div>
+  <div class="min-height-300 bg-primary position-absolute w-100" id="HeaderBackground"></div>
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
       <div class="col-12">
