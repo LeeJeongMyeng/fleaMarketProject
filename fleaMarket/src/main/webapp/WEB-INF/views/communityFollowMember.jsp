@@ -38,8 +38,8 @@
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
-	
-  <main class="main-content position-relative border-radius-lg ">
+  <jsp:include page="header.jsp"></jsp:include>
+  <main class="main-content position-relative border-radius-lg" style="margin-top:18%;">
     <!-- End Navbar -->
           <div class="card" style="width:95%; margin-left:2.5%; margin-top:10%;">
           <div class="card-header p-3">
@@ -464,10 +464,10 @@
 	  </div>
 	</div>
   <!--   Core JS Files   -->
-  <script src="${path}/assets/js/core/popper.min.js"></script>
+  <%-- <script src="${path}/assets/js/core/popper.min.js"></script>
   <script src="${path}/assets/js/core/bootstrap.min.js"></script>
   <script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script> --%>
   <script src="${path}/assets/js/plugins/chartjs.min.js"></script>
   <!-- Kanban scripts -->
   <script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>

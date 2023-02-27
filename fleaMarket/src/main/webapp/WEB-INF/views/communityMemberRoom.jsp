@@ -39,7 +39,8 @@
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
-  <main class="main-content position-relative border-radius-lg ">
+  <main class="main-content position-relative border-radius-lg">
+  	<jsp:include page="header.jsp"></jsp:include>
     <!-- End Navbar -->
      <div class="card shadow-lg mx-4 card-profile-bottom">
       <div class="card-body p-3">
@@ -306,10 +307,10 @@
     </div>
   </main>
   <!--   Core JS Files   -->
-  <script src="${path}/assets/js/core/popper.min.js"></script>
+  <%-- <script src="${path}/assets/js/core/popper.min.js"></script>
   <script src="${path}/assets/js/core/bootstrap.min.js"></script>
   <script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script> --%>
   <!-- Kanban scripts -->
   <script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
   <script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>

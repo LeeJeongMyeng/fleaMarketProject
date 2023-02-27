@@ -30,7 +30,8 @@
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-    <div class="container-fluid py-4">
+	<jsp:include page="header.jsp"></jsp:include>
+    <div class="container-fluid py-4" style="margin-top:8%;">
       <div class="row">
         <div class="col-12">
           <div class="multisteps-form">
@@ -118,10 +119,10 @@
       </div>
     </div>
   <!--   Core JS Files   -->
-  <script src="${path}/assets/js/core/popper.min.js"></script>
+  <%-- <script src="${path}/assets/js/core/popper.min.js"></script>
   <script src="${path}/assets/js/core/bootstrap.min.js"></script>
   <script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script> --%>
   <script src="${path}/assets/js/plugins/choices.min.js"></script>
   <script src="${path}/assets/js/plugins/dropzone.min.js"></script>
   <script src="${path}/assets/js/plugins/quill.min.js"></script>

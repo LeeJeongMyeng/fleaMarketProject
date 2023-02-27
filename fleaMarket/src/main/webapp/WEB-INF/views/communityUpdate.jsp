@@ -37,8 +37,9 @@
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-      <div class="row mt-4">
-         <div class="card h-100">
+	<jsp:include page="header.jsp"></jsp:include>
+      <div class="row mt-4" >
+         <div class="card h-100" style="margin-top:8%;">
            <div class="card-body">
              <h5 class="font-weight-bolder" style="text-align:center; font-size:20pt;">카테고리 게시글 변경</h5>
              <div class="row">
@@ -119,11 +120,15 @@
              <button class="btn btn-primary" type="button" name="button" style="margin-top:2%; margin-left:28%; width:50%; font-size:18pt;">수정</button>
         </div>
       </div>
+     </div>
+    </div>
+   </div>
+  </div>
   <!--   Core JS Files   -->
-  <script src="${path}/assets/js/core/popper.min.js"></script>
+  <%-- <script src="${path}/assets/js/core/popper.min.js"></script>
   <script src="${path}/assets/js/core/bootstrap.min.js"></script>
   <script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script> --%>
   <script src="${path}/assets/js/plugins/choices.min.js"></script>
   <script src="${path}/assets/js/plugins/quill.min.js"></script>
   

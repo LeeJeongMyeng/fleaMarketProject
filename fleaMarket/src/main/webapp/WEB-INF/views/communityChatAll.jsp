@@ -42,7 +42,8 @@
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-  <div class="main-content position-relative max-height-vh-100 h-100">
+  <jsp:include page="header.jsp"></jsp:include>
+  <div class="main-content position-relative max-height-vh-100 h-100" style="margin-top:10%;">
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-lg-4 col-md-5 col-12">
@@ -540,10 +541,10 @@
 	  </div>
 	</div>
   <!--   Core JS Files   -->
-  <script src="${path}/assets/js/core/popper.min.js"></script>
+  <%-- <script src="${path}/assets/js/core/popper.min.js"></script>
   <script src="${path}/assets/js/core/bootstrap.min.js"></script>
   <script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
+  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script> --%>
   <!-- Kanban scripts -->
   <script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
   <script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>
