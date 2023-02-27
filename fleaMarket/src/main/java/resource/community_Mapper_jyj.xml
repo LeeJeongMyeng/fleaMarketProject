@@ -9,8 +9,7 @@
     		INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval,
     		 #{title},#{content},sysdate,NULL,'#{category},#{email},#{hashtag},0);
     	</insert>
-    	<insert id="insertUploadFile" parameterType="boardfile">
-			insert into boardfile values(board_seq.currval, 
-			#{fname},#{etc},sysdate,sysdate)
+    	<insert id="communityFileInsert" parameterType="boardimg">
+			INSERT INTO BoardImg values(#{imgname},#{imgpath},'comBoard'||communityNumber_seq.curval)
 		</insert>
     </mapper>

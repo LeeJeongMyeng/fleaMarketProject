@@ -8,7 +8,7 @@ jdbc.pass=tiger
 # 2. 파일 업로드 정보(서버위치 정보)
 //회원가입시 프로필사진 업로드
 profile.upload=C:/a01_javaxep/workspace/git/fleaMarketProject/fleaMarket/src/main/webapp/resource/img/Member/profileimg/
-board.upload2=
+board.upload2=C:/a01_javaexp/workspace/fleaMarketProject/fleaMarket/src/main/webapp/resource/community
 board.upload3=
 board.upload4=
 

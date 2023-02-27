@@ -6,6 +6,8 @@
 	<typeAliases>
 		<typeAlias alias="member" type="vo.Member"/>
 		<typeAlias alias="profileimg" type="vo.ProfileImg"/>
+		<typeAlias alias="capplication" type="vo.Capplication"/>
+		<typeAlias alias="boardimg" type="vo.BoardImg"/>
 	</typeAliases>
 
 	<!-- 2. 사용 XXXMapper.xml을 추가 -->
