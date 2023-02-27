@@ -31,6 +31,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
   <link href="${path}/resource/css/Req1000/SignIn.css" rel="stylesheet" />
+  <%@include file="header.jsp" %>
 <script type="text/javascript">
 
 var Loginemail = '${mem.email}'
@@ -153,10 +154,9 @@ $(document).ready(function(){
 	<div class="modal fade" id="MemberFindModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content" style="top:119px;">
-	      <div class="modal-header">
-	        <h3 class="modal-title fs-6 text-center" id="MemberFindTitle">아이디 찾기</h3>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-          		<span aria-hidden="true" style="color:black;">&times;</span></button>
+	      <div class="modal-header" style="background-color: #596cff;">
+	        <h3 class="modal-title fs-6 text-center" id="MemberFindTitle" style="color: white;">아이디 찾기</h3>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      	</div>
 	     
 	      <div class="modal-body">
@@ -180,7 +180,7 @@ $(document).ready(function(){
                       </div>
                       <div id="MemberFindResult"></div>
                       <div class="button-row d-flex mt-4">
-                        <button class="btn bg-gradient-dark ms-auto me-3" type="button" onclick="MemberFindHandler()">찾기</button>
+                        <button class="btn ms-auto me-3" type="button" style="background-color:#596cff; color:white;" onclick="MemberFindHandler()">찾기</button>
                     	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                       </div>
                     </div>

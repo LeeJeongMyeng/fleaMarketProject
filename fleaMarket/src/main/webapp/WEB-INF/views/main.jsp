@@ -33,6 +33,7 @@
 		console.log(mem)
 	});
 </script>
+<%@include file="header.jsp" %>
 </head>
 
 <body>

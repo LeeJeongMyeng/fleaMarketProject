@@ -1,5 +1,8 @@
 @charset "UTF-8";
 
+#HeaderBackground{
+	  background-color: white !important;
+}
 #Memberfind_Wrap{
 	display:flex;
 	font-size:11px;

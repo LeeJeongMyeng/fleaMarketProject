@@ -688,13 +688,13 @@
               	 <div class="row">
               	 <c:choose>
               	 	<c:when test="${not empty Login}">
-              		<div class="col-2">
+              		<div class="col-3">
 						<img src="${path}/resource/img/Member/profileimg/dafaultprofile.png" alt="..." class="avatar shadow">
               		</div>
-              		<div class="col-6" style="margin-top:4%; text-align:center;">
+              		<div class="col-4" style="margin-top:4%; text-align:center;">
 						<span>${Login.nickname}</span>
 					</div>
-			       <div class="col-2" style="margin-top:3%; text-align:center;"> 
+			       <div class="col-3" style="margin-top:3%; text-align:center;"> 
 				      <li class="nav-item dropdown dropdown-hover mx-2">
 	                  <a role="button" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center " id="dropdownMenuBlocks" data-bs-toggle="dropdown" aria-expanded="false">
 	                   <i class="fa fa-cog fixed-plugin-button-nav"></i>
