@@ -41,9 +41,13 @@
 	});
 </script>
 </head>
-
+<style>
+#HeaderBackground{
+	  background-color: #5e72e4;
+}
+</style>
 <body class="">
-  <div class="min-height-300 bg-primary position-absolute w-100" id="HeaderBackground"></div>
+  <div class="min-height-300 position-absolute w-100" id="HeaderBackground"></div>
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">
       <div class="col-12">
@@ -682,12 +686,13 @@
               </ul>
               <ul class="navbar-nav d-lg-block d-none">
               	 <div class="row">
+              	 <c:choose>
+              	 	<c:when test="${not empty Login}">
               		<div class="col-2">
-						<img src="${path}/assets/img/kit/pro/team-2.jpg" alt="..." class="avatar shadow">
+						<img src="${path}/resource/img/Member/profileimg/dafaultprofile.png" alt="..." class="avatar shadow">
               		</div>
-          
               		<div class="col-6" style="margin-top:4%; text-align:center;">
-						<span>Mathew Glock</span>
+						<span>${Login.nickname}</span>
 					</div>
 			       <div class="col-2" style="margin-top:3%; text-align:center;"> 
 				      <li class="nav-item dropdown dropdown-hover mx-2">
@@ -741,7 +746,16 @@
 				            </ul>
 				         </div>
 				     </div>
-		          </div>
+				     </div>
+				     </c:when>
+				     <c:when test="${empty Login }">
+				     <div class="row" style="width:240px; font-size:14px; font-weight:bold;">
+				     	<div class="col-6" ><a href="SignIn.do">로그인</a></div>
+				     	<div class="col-6"><a href="#" id="HeaderSignUp">회원가입</a></div>
+				     </div>
+				     </c:when>
+				     </c:choose>
+		          
               </ul>
             </div>
           </div>
@@ -846,6 +860,11 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
+    
+    $('#HeaderSignUp').click(function(){
+    	$('#HeaderBackground').removeClass('bg-primary')
+    	location.href="SignUp.do"
+    })
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

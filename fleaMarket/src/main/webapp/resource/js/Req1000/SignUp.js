@@ -11,7 +11,7 @@
 	var OkBusiness =false;	
 	var OkCategory=false;
 	$('.SignUp_ProfileWrap').slideUp('slow') //사업자등록증 input
-	$('#headerBackground').removeClass('bg-primary')
+
 	
    
 	 
