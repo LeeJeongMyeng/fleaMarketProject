@@ -25,7 +25,7 @@ public class Req1000_Controller {
 	}
 	
 	@RequestMapping("SignIn.do")
-	public String login() {
+	public String login(HttpSession session) {
 		return "SignIn";
 	}
 	
@@ -54,7 +54,7 @@ public class Req1000_Controller {
 	public String Loign(Member log,Model d,HttpSession session) {
 		Member mem;		
 		String msg = "일치하는 회원이 없습니다. 다시 시도 부탁드립니다.";
-		String path = "SignIn";
+		String path = "redirect:SignIn.do";
 		
 		// sns이메일값
 		if(d.asMap().get("SnsEmailPlus")!=null) {
@@ -63,8 +63,6 @@ public class Req1000_Controller {
 		}else {
 			mem = service.Login(log);
 		}
-		
-		
 		if(mem!=null) {
 		session.setAttribute("Login", mem);
 		msg = "로그인 성공";  path="main";	
@@ -88,5 +86,5 @@ public class Req1000_Controller {
 		session.removeAttribute("Login");
 		return "SignIn";
 	}
-	
+	 
 }

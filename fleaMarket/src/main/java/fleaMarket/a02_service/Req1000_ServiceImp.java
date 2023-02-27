@@ -31,7 +31,7 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	public Member DuplicateEmail(String email) {
 		System.out.println("dd:"+email);
 		return dao.DuplicateEmail(email);
-	}
+	} 
 	// 이름,주민 중복검사
 	public Member DuplicateMem(String name,String personalnumber,String email) {
 		map = new HashMap<String,String>();
@@ -77,17 +77,11 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		}else if(log.getNaveremail()!=null) { //네이버 이메일로그인시
 			mem = dao.naverLogin(log.getNaveremail());
 		}else { //일반로그인
-			if(log.getPassword().equals("1111") && log.getPassword().equals(dao.Login(log.getEmail()).getPassword())) {
-				mem = dao.Login(log.getEmail());
-			}
-			else if(log.getPassword().equals("admin") && log.getPassword().equals(dao.Login(log.getEmail()).getPassword())) {
-				mem = dao.Login(log.getEmail());
-			}
-			else if(!log.getPassword().equals("1111")&& CheckBcrypt(log.getPassword(),dao.Login(log.getEmail()).getPassword())){
-				mem = dao.Login(log.getEmail());
-			}
-			else {
-				mem=null;
+			mem = dao.Login(log.getEmail());
+			if(mem.getPassword().equals("1111") || mem.getPassword().equals("admin")) {
+				mem = log.getPassword().equals(mem.getPassword())?mem:null;
+			}else {
+				mem = CheckBcrypt(log.getPassword(),dao.Login(log.getEmail()).getPassword())?mem:null;
 			}
 		}
 		return mem;
