@@ -73,34 +73,7 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-        <!-- 날씨 -->
-
-      <div class="row">
-        <div class="col-xl-4 h-500" style="width:20%; ">
-          <div class="row">
-            <div class="col-12">
-              <div class="card" >
-                <div class="card-body p-3">
-                  <div class="row">
-                    <div class="col-8 my-auto">
-                      <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold opacity-7">Wheather today</p>
-                        <h5 class="font-weight-bolder mb-0">
-                         위치고민 날씨 <br>San Francisco - 29°C
-                        </h5>
-                      </div>
-                    </div>
-                    <div class="col-4 text-end">
-                      <img class="w-50" src="${path}/assets/img/small-logos/icon-sun-cloud.png" alt="image sun">
-                      <h5 class="mb-0 text-end me-1">Cloudy</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-         </div>
-     
+      
       <!--달력넣기  -->
       <div class="row" style="height:400px;">
         <div class="col-lg-6 mb-4 mb-lg-0">
@@ -155,12 +128,45 @@
           </div>
         </div>
       </div>
+      
+      
+        <!-- 날씨 -->
+
+      <div class="row">
+        <div class="col-xl-4 h-500" style="width:20%; ">
+          <div class="row">
+            <div class="col-12">
+              <div class="card" >
+                <div class="card-body p-3">
+                  <div class="row">
+                    <div class="col-8 my-auto">
+                      <div class="numbers">
+                        <p class="text-sm mb-0 text-capitalize font-weight-bold opacity-7">Wheather today</p>
+                        <h5 class="font-weight-bolder mb-0">
+                         위치고민 날씨 <br>San Francisco - 29°C
+                        </h5>
+                      </div>
+                    </div>
+                    <div class="col-4 text-end">
+                      <img class="w-50" src="${path}/assets/img/small-logos/icon-sun-cloud.png" alt="image sun">
+                      <h5 class="mb-0 text-end me-1">Cloudy</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         </div>
+            <!-- <div class="row"> -->
+              	<h4 style="text-align:center;">지도</h4>
+              <!-- </div> -->
+      
   <!-- 커뮤니티/플리마켓 미리보기 -->
-  <div class="row" style="margin-top:5%; width:100%;">
-        <div class="col-xl-11">
-          <div class="card">
-            <div class="card-header d-flex pb-0 p-3">
-              <h6 class="my-auto">게시글 정보는</h6>
+  <div class="row" style="margin-top:5%;">
+        <div class="col-xl-11"  style="width:100%;">
+          <div class="card" >
+            <div class="card-header d-flex pb-0 p-3" >
+              <h6 class="my-auto" >게시글 정보는</h6>
               <div class="nav-wrapper position-relative ms-auto">
                 <ul class="nav nav-pills nav-fill p-1" role="tablist">
                   <li class="nav-item">
