@@ -20,6 +20,12 @@ public class Req1001_Controller {
 	public String AdminIntro() {
 		return "AdminIntro";
 	}
+	//http://localhost:7080/fleaMarket/QNA.do 고객센터
+	@RequestMapping("QNA.do")
+	public String QNA() {
+		return "QNA";
+	}
+	
 	//http://localhost:7080/fleaMarket/AdminSearch.do 관리자 회원조회
 	@RequestMapping("AdminSearch.do")
 	public String AdminSearch(@ModelAttribute("sch")Member sch, Model d) {

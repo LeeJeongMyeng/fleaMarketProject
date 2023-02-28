@@ -187,7 +187,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 							href="${path}/pages/authentication/signin/illustration.html"
 							class="nav-link text-white font-weight-bold px-0" target="_blank">
 								<i class="fa fa-user me-sm-1"></i> <span
-								class="d-sm-inline d-none">세션닉네임</span>
+								class="d-sm-inline d-none">${Login.nickname}</span>
 						</a></li>
 						<li class="nav-item d-xl-none ps-3 d-flex align-items-center">
 							<a href="javascript:;" class="nav-link text-white p-0"
@@ -300,7 +300,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 							<div class="d-lg-flex">
 								<div>
 									<h5 class="mb-0">작성한 1:1문의 답변</h5>
-									<p class="text-sm mb-0">검색할 1:1문의 답변을 상단 검색창에 제목을 입력해주세요</p>
+									<p class="text-xs mb-0">검색할 1:1문의 답변을 상단 검색창에 제목을 입력해주세요</p>
 								</div>
 								<div class="ms-auto my-auto mt-lg-0 mt-4">
 									<div class="ms-auto my-auto">
