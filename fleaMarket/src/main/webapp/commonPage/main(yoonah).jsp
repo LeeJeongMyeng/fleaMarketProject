@@ -42,17 +42,47 @@
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
-    <!-- 헤더 
    	<jsp:include page="header.jsp"></jsp:include>
-   	-->
+
    	<!-- 배너  -->
-	<div class="mask bg-gradient-primary" style="background:white; width:100%; height:500px; margin-top:8%; border-top:0.5px solid grey; border-bottom:0.5px solid grey;"></div>
-      <!--배너 안에 사진 밑 글  -->
-      <div class="row" style="height:400px; margin-top:10%; margin-left:10%;">
+	<div class="mask bg-gradient-primary" style="background:white; width:100%; height:300px; margin-top:8%; border-top:0.5px solid grey; border-bottom:0.5px solid grey;"></div>
+       <!-- 이미지 -->
+      <img src="${path}/assets/img/intro.jpg" class="w-100 z-index-2" style="z-index:3;">
+      
+      
+       <!-- 날씨/지도 -->
+
+      <div class="row">
+        <div class="col-xl-4 h-500"  style="margin-left:12%;">
+          <div class="row">
+            <div class="col-12">
+              <div class="card" >
+                <div class="card-body p-3">
+                  <div class="row">
+                    <div class="col-8 my-auto">
+                      <div class="numbers">
+                        <p class="text-sm mb-0 text-capitalize font-weight-bold opacity-7">Wheather today</p>
+                        <h5 class="font-weight-bolder mb-0">
+                         날씨 San Francisco - 29°C
+                        </h5>
+                      </div>
+                    </div>
+                    <div class="col-4 text-end">
+                      <img class="w-50" src="${path}/assets/img/small-logos/icon-sun-cloud.png" alt="image sun">
+                      <h5 class="mb-0 text-end me-1">Cloudy</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         </div>
+      <!--달력넣기  -->
+      <div class="row" style="height:400px;  margin-left:10%;">
         <div class="col-lg-6 mb-4 mb-lg-0">
           <div class="card z-index-2 h-100">
-          	<h2 style="text-align:center; margin-top:20%;">플리마켓+커뮤니티</h2>
-          	<p>설명 샬라샬라</p>
+          	<h2 style="text-align:center; margin-top:20%;">Calendar위치</h2>
+          	
           </div>
         </div>
         <div class="col-lg-5">
@@ -102,8 +132,9 @@
           </div>
         </div>
       </div>
+      
   <!-- 커뮤니티/플리마켓 미리보기 -->
-  <div class="row" style="margin-top:5%; margin-left:13%;">
+  <div class="row" style="margin-top:5%; margin-left:10%;">
         <div class="col-xl-11">
           <div class="card">
             <div class="card-header d-flex pb-0 p-3">
@@ -164,60 +195,7 @@
           </div>
         </div>
        </div>
-  <!-- 날씨/지도 -->
-  <div class="container-fluid py-4" style="margin-top:1%; margin-left:11.5%;">
-      <div class="row">
-        <div class="col-xl-4 h-500">
-          <div class="row">
-            <div class="col-12">
-              <div class="card" >
-                <div class="card-body p-3">
-                  <div class="row">
-                    <div class="col-8 my-auto">
-                      <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold opacity-7">Wheather today</p>
-                        <h5 class="font-weight-bolder mb-0">
-                          San Francisco - 29°C
-                        </h5>
-                      </div>
-                    </div>
-                    <div class="col-4 text-end">
-                      <img class="w-50" src="${path}/assets/img/small-logos/icon-sun-cloud.png" alt="image sun">
-                      <h5 class="mb-0 text-end me-1">Cloudy</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-         </div>
-         <div class="col-xl-6">
-          <div class="card">
-            <div class="card-header d-flex pb-0 p-3">
-              <!-- <div class="row"> -->
-              	<h4 style="text-align:center;">지도</h4>
-              <!-- </div> -->
-              <div class="row" style="width:100%;">
-	            <div class="card-header bg-transparent">
-		            <div class="row">
-		                  <div class="input-group input-group-lg">
-		                    <span class="input-group-text text-body bg-transparent border-0">
-		                      <i class="ni ni-zoom-split-in text-lg" aria-hidden="true"></i>
-		                    </span>
-		                    <input type="text" class="form-control bg-transparent border-0" placeholder="Search anything..." onfocus="focused(this)" onfocusout="defocused(this)">
-		                  </div>
-		            </div>
-		            <hr class="horizontal light">
-		            <div class="card-body px-0 py-0" >
-		              <div id="mapid" class="leaflet"></div>
-		            </div>
-	         	</div>
-          	  </div>
-          	</div>
-       	   </div>
-     	  </div>
-     </div>
-   </div>
+ 
   <!--   Core JS Files   -->
   <script src="${path}/assets/js/core/popper.min.js"></script>
   <script src="${path}/assets/js/core/bootstrap.min.js"></script>
@@ -350,6 +328,7 @@
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
   </script>
+    <script src="../../assets/js/plugins/fullcalendar.min.js"></script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->

@@ -104,9 +104,9 @@
 						<ul class="nav ms-4">
 							<li class="nav-item "><a class="nav-link"
 								href="#profileExample"> <span class="sidenav-mini-icon">
-										P </span> <span class="sidenav-normal"> 내 정보 조회 <b class="caret"></b></span>
-							</a>
-								</li>
+										P </span> <span class="sidenav-normal"> 내 정보 조회 <b
+										class="caret"></b></span>
+							</a></li>
 							<li class="nav-item "><a class="nav-link "
 								href="${path}/pages/pages/pricing-page.html"> <span
 									class="sidenav-mini-icon"> P </span> <span
@@ -119,7 +119,7 @@
 					aria-controls="applicationsExamples" role="button"
 					aria-expanded="false">
 						<div
-class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+							class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
 							<i class="ni ni-ui-04 text-info text-sm opacity-10"></i>
 						</div> <span class="nav-link-text ms-1">게시글</span>
 				</a>
@@ -132,165 +132,41 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 							</a></li>
 						</ul>
 					</div></li>
-				
+
 				<li class="nav-item"><a data-bs-toggle="collapse"
-					href="#authExamples" class="nav-link " aria-controls="authExamples"
-					role="button" aria-expanded="false">
+					href="#ecommerceExamples" class="nav-link "
+					aria-controls="ecommerceExamples" role="button"
+					aria-expanded="false">
 						<div
 							class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
 							<i class="ni ni-single-copy-04 text-danger text-sm opacity-10"></i>
-						</div> <span class="nav-link-text ms-1">Authentication</span>
+						</div> <span class="nav-link-text ms-1">메인페이지</span>
 				</a>
-					<div class="collapse " id="authExamples">
+					<div class="collapse " id="ecommerceExamples">
 						<ul class="nav ms-4">
 							<li class="nav-item "><a class="nav-link "
-								data-bs-toggle="collapse" aria-expanded="false"
-								href="#signinExample"> <span class="sidenav-mini-icon">
-										S </span> <span class="sidenav-normal"> Sign In <b
-										class="caret"></b></span>
-							</a>
-								<div class="collapse " id="signinExample">
-									<ul class="nav nav-sm flex-column">
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/signin/basic.html"> <span
-												class="sidenav-mini-icon text-xs"> B </span> <span
-												class="sidenav-normal"> Basic </span>
-										</a></li>
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/signin/cover.html"> <span
-												class="sidenav-mini-icon text-xs"> C </span> <span
-												class="sidenav-normal"> Cover </span>
-										</a></li>
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/signin/illustration.html">
-												<span class="sidenav-mini-icon text-xs"> I </span> <span
-												class="sidenav-normal"> Illustration </span>
-										</a></li>
-									</ul>
-								</div></li>
+								href="AdminIntro.do"> <span class="sidenav-mini-icon">
+										O </span> <span class="sidenav-normal"> 회사소개 </span>
+							</a></li>
 							<li class="nav-item "><a class="nav-link "
-								data-bs-toggle="collapse" aria-expanded="false"
-								href="#signupExample"> <span class="sidenav-mini-icon">
-										S </span> <span class="sidenav-normal"> Sign Up <b
-										class="caret"></b></span>
-							</a>
-								<div class="collapse " id="signupExample">
-									<ul class="nav nav-sm flex-column">
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/signup/basic.html"> <span
-												class="sidenav-mini-icon text-xs"> B </span> <span
-												class="sidenav-normal"> Basic </span>
-										</a></li>
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/signup/cover.html"> <span
-												class="sidenav-mini-icon text-xs"> C </span> <span
-												class="sidenav-normal"> Cover </span>
-										</a></li>
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/signup/illustration.html">
-												<span class="sidenav-mini-icon text-xs"> I </span> <span
-												class="sidenav-normal"> Illustration </span>
-										</a></li>
-									</ul>
-								</div></li>
+								href="../../../pages/ecommerce/referral.html"> <span
+									class="sidenav-mini-icon"> R </span> <span
+									class="sidenav-normal"> 플리마켓 </span>
+							</a></li>
 							<li class="nav-item "><a class="nav-link "
-								data-bs-toggle="collapse" aria-expanded="false"
-								href="#resetExample"> <span class="sidenav-mini-icon">
-										R </span> <span class="sidenav-normal"> Reset Password <b
-										class="caret"></b></span>
-							</a>
-								<div class="collapse " id="resetExample">
-									<ul class="nav nav-sm flex-column">
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/reset/basic.html"> <span
-												class="sidenav-mini-icon text-xs"> B </span> <span
-												class="sidenav-normal"> Basic </span>
-										</a></li>
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/reset/cover.html"> <span
-												class="sidenav-mini-icon text-xs"> C </span> <span
-												class="sidenav-normal"> Cover </span>
-										</a></li>
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/reset/illustration.html">
-												<span class="sidenav-mini-icon text-xs"> I </span> <span
-												class="sidenav-normal"> Illustration </span>
-										</a></li>
-									</ul>
-								</div></li>
-							<li class="nav-item "><a class="nav-link "
-								data-bs-toggle="collapse" aria-expanded="false"
-								href="#lockExample"> <span class="sidenav-mini-icon">
-										L </span> <span class="sidenav-normal"> Lock <b class="caret"></b></span>
-							</a>
-								<div class="collapse " id="lockExample">
-									<ul class="nav nav-sm flex-column">
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/lock/basic.html"> <span
-												class="sidenav-mini-icon text-xs"> B </span> <span
-												class="sidenav-normal"> Basic </span>
-										</a></li>
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/lock/cover.html"> <span
-												class="sidenav-mini-icon text-xs"> C </span> <span
-												class="sidenav-normal"> Cover </span>
-										</a></li>
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/lock/illustration.html">
-												<span class="sidenav-mini-icon text-xs"> I </span> <span
-												class="sidenav-normal"> Illustration </span>
-										</a></li>
-									</ul>
-								</div></li>
-							<li class="nav-item "><a class="nav-link "
-								data-bs-toggle="collapse" aria-expanded="false"
-								href="#StepExample"> <span class="sidenav-mini-icon">
-										2 </span> <span class="sidenav-normal"> 2-Step Verification <b
-										class="caret"></b></span>
-							</a>
-								<div class="collapse " id="StepExample">
-									<ul class="nav nav-sm flex-column">
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/verification/basic.html">
-												<span class="sidenav-mini-icon text-xs"> B </span> <span
-												class="sidenav-normal"> Basic </span>
-										</a></li>
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/verification/cover.html">
-												<span class="sidenav-mini-icon text-xs"> C </span> <span
-												class="sidenav-normal"> Cover </span>
-										</a></li>
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/verification/illustration.html">
-												<span class="sidenav-mini-icon text-xs"> I </span> <span
-												class="sidenav-normal"> Illustration </span>
-										</a></li>
-									</ul>
-								</div></li>
-							<li class="nav-item "><a class="nav-link "
-								data-bs-toggle="collapse" aria-expanded="false"
-								href="#errorExample"> <span class="sidenav-mini-icon">
-										E </span> <span class="sidenav-normal"> Error <b class="caret"></b></span>
-							</a>
-								<div class="collapse " id="errorExample">
-									<ul class="nav nav-sm flex-column">
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/error/404.html"> <span
-												class="sidenav-mini-icon text-xs"> E </span> <span
-												class="sidenav-normal"> Error 404 </span>
-										</a></li>
-										<li class="nav-item"><a class="nav-link "
-											href="${path}/pages/authentication/error/500.html"> <span
-												class="sidenav-mini-icon text-xs"> E </span> <span
-												class="sidenav-normal"> Error 500 </span>
-										</a></li>
-									</ul>
-								</div></li>
+								href="../../../pages/ecommerce/referral.html"> <span
+									class="sidenav-mini-icon"> R </span> <span
+									class="sidenav-normal"> 커뮤니티 </span>
+							</a></li>
+							<li class="nav-item "><a class="nav-link " href="QNA.do">
+									<span class="sidenav-mini-icon"> R </span> <span
+									class="sidenav-normal"> 공지사항 </span>
+							</a></li>
 						</ul>
 					</div></li>
 			</ul>
 		</div>
-	</aside> 
+	</aside>
 	<main class="main-content position-relative border-radius-lg ">
 		<!-- Navbar -->
 		<!-- 상단 -->
@@ -322,115 +198,114 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 				</div>
 				<div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4"
 					id="navbar">
-					<div class="ms-md-auto pe-md-3 d-flex align-items-center">
-						</div>
-					</div>
-					<ul class="navbar-nav  justify-content-end">
-						<li class="nav-item d-flex align-items-center"><a
-							href="${path}/pages/authentication/signin/illustration.html"
-							class="nav-link text-white font-weight-bold px-0" target="_blank">
-								<i class="fa fa-user me-sm-1"></i> <span
-								class="d-sm-inline d-none">${Login.nickname}</span>
-						</a></li>
-						<li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-							<a href="javascript:;" class="nav-link text-white p-0"
-							id="iconNavbarSidenav">
-								<div class="sidenav-toggler-inner">
-									<i class="sidenav-toggler-line bg-white"></i> <i
-										class="sidenav-toggler-line bg-white"></i> <i
-										class="sidenav-toggler-line bg-white"></i>
-								</div>
-						</a>
-						</li>
-						<li class="nav-item px-3 d-flex align-items-center"><a
-							href="javascript:;" class="nav-link text-white p-0"> <i
-								class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-						</a></li>
-						<li class="nav-item dropdown pe-2 d-flex align-items-center">
-							<a href="javascript:;" class="nav-link text-white p-0"
-							id="dropdownMenuButton" data-bs-toggle="dropdown"
-							aria-expanded="false"> <i class="fa fa-bell cursor-pointer"></i>
-						</a>
-							<ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4"
-								aria-labelledby="dropdownMenuButton">
-								<li class="mb-2"><a class="dropdown-item border-radius-md"
-									href="javascript:;">
-										<div class="d-flex py-1">
-											<div class="my-auto">
-												<img src="${path}/assets/img/team-2.jpg"
-													class="avatar avatar-sm  me-3 " alt="user image">
-											</div>
-											<div class="d-flex flex-column justify-content-center">
-												<h6 class="text-sm font-weight-normal mb-1">
-													<span class="font-weight-bold">New message</span> from Laur
-												</h6>
-												<p class="text-xs text-secondary mb-0">
-													<i class="fa fa-clock me-1"></i> 13 minutes ago
-												</p>
-											</div>
+					<div class="ms-md-auto pe-md-3 d-flex align-items-center"></div>
+				</div>
+				<ul class="navbar-nav  justify-content-end">
+					<li class="nav-item d-flex align-items-center"><a
+						href="${path}/pages/authentication/signin/illustration.html"
+						class="nav-link text-white font-weight-bold px-0" target="_blank">
+							<i class="fa fa-user me-sm-1"></i> <span
+							class="d-sm-inline d-none">${Login.nickname}</span>
+					</a></li>
+					<li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+						<a href="javascript:;" class="nav-link text-white p-0"
+						id="iconNavbarSidenav">
+							<div class="sidenav-toggler-inner">
+								<i class="sidenav-toggler-line bg-white"></i> <i
+									class="sidenav-toggler-line bg-white"></i> <i
+									class="sidenav-toggler-line bg-white"></i>
+							</div>
+					</a>
+					</li>
+					<li class="nav-item px-3 d-flex align-items-center"><a
+						href="javascript:;" class="nav-link text-white p-0"> <i
+							class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
+					</a></li>
+					<li class="nav-item dropdown pe-2 d-flex align-items-center">
+						<a href="javascript:;" class="nav-link text-white p-0"
+						id="dropdownMenuButton" data-bs-toggle="dropdown"
+						aria-expanded="false"> <i class="fa fa-bell cursor-pointer"></i>
+					</a>
+						<ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4"
+							aria-labelledby="dropdownMenuButton">
+							<li class="mb-2"><a class="dropdown-item border-radius-md"
+								href="javascript:;">
+									<div class="d-flex py-1">
+										<div class="my-auto">
+											<img src="${path}/assets/img/team-2.jpg"
+												class="avatar avatar-sm  me-3 " alt="user image">
 										</div>
-								</a></li>
-								<li class="mb-2"><a class="dropdown-item border-radius-md"
-									href="javascript:;">
-										<div class="d-flex py-1">
-											<div class="my-auto">
-												<img src="${path}/assets/img/small-logos/logo-spotify.svg"
-													class="avatar avatar-sm bg-gradient-dark  me-3 "
-													alt="logo spotify">
-											</div>
-											<div class="d-flex flex-column justify-content-center">
-												<h6 class="text-sm font-weight-normal mb-1">
-													<span class="font-weight-bold">New album</span> by Travis
-													Scott
-												</h6>
-												<p class="text-xs text-secondary mb-0">
-													<i class="fa fa-clock me-1"></i> 1 day
-												</p>
-											</div>
+										<div class="d-flex flex-column justify-content-center">
+											<h6 class="text-sm font-weight-normal mb-1">
+												<span class="font-weight-bold">New message</span> from Laur
+											</h6>
+											<p class="text-xs text-secondary mb-0">
+												<i class="fa fa-clock me-1"></i> 13 minutes ago
+											</p>
 										</div>
-								</a></li>
-								<li><a class="dropdown-item border-radius-md"
-									href="javascript:;">
-										<div class="d-flex py-1">
-											<div
-												class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-												<svg width="12px" height="12px" viewBox="0 0 43 36"
-													version="1.1" xmlns="http://www.w3.org/2000/svg"
-													xmlns:xlink="http://www.w3.org/1999/xlink">
+									</div>
+							</a></li>
+							<li class="mb-2"><a class="dropdown-item border-radius-md"
+								href="javascript:;">
+									<div class="d-flex py-1">
+										<div class="my-auto">
+											<img src="${path}/assets/img/small-logos/logo-spotify.svg"
+												class="avatar avatar-sm bg-gradient-dark  me-3 "
+												alt="logo spotify">
+										</div>
+										<div class="d-flex flex-column justify-content-center">
+											<h6 class="text-sm font-weight-normal mb-1">
+												<span class="font-weight-bold">New album</span> by Travis
+												Scott
+											</h6>
+											<p class="text-xs text-secondary mb-0">
+												<i class="fa fa-clock me-1"></i> 1 day
+											</p>
+										</div>
+									</div>
+							</a></li>
+							<li><a class="dropdown-item border-radius-md"
+								href="javascript:;">
+									<div class="d-flex py-1">
+										<div
+											class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
+											<svg width="12px" height="12px" viewBox="0 0 43 36"
+												version="1.1" xmlns="http://www.w3.org/2000/svg"
+												xmlns:xlink="http://www.w3.org/1999/xlink">
                           <title>credit-card</title>
                           <g stroke="none" stroke-width="1" fill="none"
-														fill-rule="evenodd">
+													fill-rule="evenodd">
                             <g
-														transform="translate(-2169.000000, -745.000000)"
-														fill="#FFFFFF" fill-rule="nonzero">
+													transform="translate(-2169.000000, -745.000000)"
+													fill="#FFFFFF" fill-rule="nonzero">
                               <g
-														transform="translate(1716.000000, 291.000000)">
+													transform="translate(1716.000000, 291.000000)">
                                 <g
-														transform="translate(453.000000, 454.000000)">
+													transform="translate(453.000000, 454.000000)">
                                   <path class="color-background"
-														d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
-														opacity="0.593633743"></path>
+													d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z"
+													opacity="0.593633743"></path>
                                   <path class="color-background"
-														d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
+													d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
                                 </g>
                               </g>
                             </g>
                           </g>
                         </svg>
-											</div>
-											<div class="d-flex flex-column justify-content-center">
-												<h6 class="text-sm font-weight-normal mb-1">Payment
-													successfully completed</h6>
-												<p class="text-xs text-secondary mb-0">
-													<i class="fa fa-clock me-1"></i> 2 days
-												</p>
-											</div>
 										</div>
-								</a></li>
-							</ul>
-						</li>
-					</ul>
-				</div>
+										<div class="d-flex flex-column justify-content-center">
+											<h6 class="text-sm font-weight-normal mb-1">Payment
+												successfully completed</h6>
+											<p class="text-xs text-secondary mb-0">
+												<i class="fa fa-clock me-1"></i> 2 days
+											</p>
+										</div>
+									</div>
+							</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
 			</div>
 		</nav>
 		<!-- End Navbar -->
@@ -498,7 +373,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 									<thead class="thead-light">
 										<tr>
 											<th width="10%">
-											<div class="d-flex">
+												<div class="d-flex">
 													<div class="form-check my-auto">
 														<input class="form-check-input" type="checkbox"
 															id="customCheck3">
@@ -532,7 +407,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 					</div>
 				</div>
 			</div>
-			
+
 			<footer class="footer pt-3  ">
 				<div class="container-fluid">
 					<div class="row align-items-center justify-content-lg-between">
@@ -543,9 +418,9 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 								<script>
                   document.write(new Date().getFullYear())
                 </script>
-								, made by <a
-									href="https://www.creative-tim.com" class="font-weight-bold"
-									target="_blank">CONTIGO</a> for a better FleaMarket.
+								, made by <a href="https://www.creative-tim.com"
+									class="font-weight-bold" target="_blank">CONTIGO</a> for a
+								better FleaMarket.
 							</div>
 						</div>
 						<div class="col-lg-6">
