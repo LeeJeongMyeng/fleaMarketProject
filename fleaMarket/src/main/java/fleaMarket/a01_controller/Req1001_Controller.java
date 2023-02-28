@@ -90,7 +90,7 @@ public class Req1001_Controller {
 				service.UpdateProfile(fupt);	
 			}
 		session.setAttribute("Login",service.getLogin(upt.getEmail()));
-		 d.addAttribute("uptmsg","비밀번호 변경이 완료되었습니다.");
+		 d.addAttribute("uptmsg","회원 수정이 완료되었습니다.");
 		return "MemberInfo";
 	}
 	
