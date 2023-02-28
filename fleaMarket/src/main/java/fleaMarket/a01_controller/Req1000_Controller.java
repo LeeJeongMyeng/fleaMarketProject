@@ -75,9 +75,8 @@ public class Req1000_Controller {
 		}
 		if(mem!=null) {
 		session.setAttribute("Login", mem);
-		msg = "로그인 성공";  path="main";	
+		path="main";	
 		}
-
 		d.addAttribute("LoginMsg",msg);	
 		return path;
 	}

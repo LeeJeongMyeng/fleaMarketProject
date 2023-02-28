@@ -110,7 +110,7 @@ function UpdatePassword(){
 	var uptPassword = $('#UpdatePasswordForm input[name=password]')
 	var uptPassword2 = $('#UpdatePasswordForm #password2')
 	
-	if(MatchPassword(CurrentPassword.val(),SessPassword)==false){
+	if(MatchPassword(CurrentPassword.val())==false){
 		CurrentPassword.addClass('is-invalid')
 		alert('비밀번호가 일치하지않습니다.')
 		return false;
@@ -127,21 +127,18 @@ function UpdatePassword(){
 	}
 	return true;
 }
-
-function MatchPassword(pass,sespass){
-	var qstr ="password="+pass+"&sespassword="+sespass
+//암호화 비번이랑 일치하는지 확인하는 친구!
+function MatchPassword(pass){
+	var qstr ="password="+pass+"&sespassword="+SessPassword
 		$.ajax({
 			url:"MatchPassword.do",
 			type:"post",
 			data:qstr,
 			dataType:"json",
 			success:function(data){
-				console.log(data.MatchPassword)
-				if(data.MatchPassword=='false'){
-					return false;
-				}else{
-					return true;
-				}		
+				
+					return data.MatchPassword;
+				
 			},
 			error:function(xhr,status,error){
                   console.log(xhr)
@@ -177,3 +174,23 @@ function chkPW2(pass1val,pass2val){
 	
 }
 
+function LeaveMember(){
+	var deletecheck = MatchPassword($('#LeaveMemberForm input[name=password]').val())
+	console.log(deletecheck)
+	return false;
+	/*if(MatchPassword($('#LeaveMemberForm input[name=password]').val())==false){
+		$('#LeaveMemberForm input[name=password]').addClass('is-invalid')
+		alert("비밀번호가 일치하지 않습니다.")
+		return false;
+	}else{
+		if(!comfirm("정말 탈퇴하시겠습니까?")){
+			return false;
+		}else{
+			return true;
+		}
+	}*/
+
+}
+	
+	
+		

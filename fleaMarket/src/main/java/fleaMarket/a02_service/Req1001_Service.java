@@ -48,6 +48,12 @@ public class Req1001_Service {
 	public Member getLogin(String email){
 		return dao.Login(email);
 	}
+	public void DelelteProfile(String email) {
+		dao.DelelteProfile(email);
+	}
+	public void DelelteMember(String email) {
+		dao.DelelteMember(email);
+	}
 	
 	
 	

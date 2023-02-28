@@ -46,7 +46,7 @@ AND PERSONALNUMBER = '950828-1111111';
 --비번찾기
 --비번 초기화 후에,알려주기
 
-DELETE FLEAMARKETMEMBER WHERE email ='288888wjdaud@gmail.com';
+DELETE FLEAMARKETMEMBER WHERE email ='aoddl56@nate.com';
 INSERT INTO FLEAMARKETMEMBER values(
 'aoddl56@nate.com',
 '!dnfwlq12',
@@ -96,9 +96,9 @@ DELETE profile
 WHERE email
 
 SELECT * FROM PROFILE;
-DELETE profile WHERE EMAIL ='288888wjdaud@gmail.com';
+DELETE profile WHERE EMAIL ='aoddl56@nate.com';
 INSERT INTO PROFILE VALUES('aoddl56@nate.com','defaultprofile.png');
 
 UPDATE PROFILE 
-SET PROFILEIMG ='프사.jpg'
-WHERE EMAIL ='28888wjdaud@naver.com';
+SET PROFILEIMG ='고릴라.jpg'
+WHERE EMAIL ='admin@contigo.com';

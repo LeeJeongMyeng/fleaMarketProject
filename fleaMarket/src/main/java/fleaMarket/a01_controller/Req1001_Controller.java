@@ -7,11 +7,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import fleaMarket.a02_service.Req1000_Service;
 import fleaMarket.a02_service.Req1001_Service;
 import fleaMarket.util.FileService;
 import vo.Member;
@@ -107,5 +107,19 @@ public class Req1001_Controller {
 		 
 		 d.addAttribute("uptmsg","비밀번호 변경이 완료되었습니다.");
 		return "MemberInfo";
+	}
+	
+	@PostMapping("LeaveMember.do")
+	public String LeaveMember(Member del,Model d,HttpSession session){
+		//탈퇴전 해당 프로필삭제
+		service.DelelteProfile(del.getEmail());
+		//탈퇴처리
+		service.DelelteMember(del.getEmail());
+		//프로필 파일 삭제
+		fileservice.DeleteFile(profilepath,del.getProfileimgname());
+		//세션삭제 처리.. ㅂㅂ
+		session.removeAttribute("Login");
+		
+		return "main";
 	}
 }

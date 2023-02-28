@@ -196,10 +196,7 @@ $(document).ready(function(){
 	  </div>
 	</div> <!-- sns확인모달 모달끝 -->
   <!--   Core JS Files   -->
-  <script src="${path}/assets/js/core/popper.min.js"></script>
-  <script src="${path}/assets/js/core/bootstrap.min.js"></script>
-  <script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
+ 
   <!-- Kanban scripts -->
   <script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
   <script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>

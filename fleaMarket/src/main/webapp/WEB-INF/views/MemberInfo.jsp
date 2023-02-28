@@ -423,7 +423,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 
 	                <button type="submit" style="margin-left:auto;" class="btn btn-primary btn-md mb-0">회원정보수정</button>
 
-                  	<button type="button" style="margin:0 13px;" class="btn btn-outline-danger btn-md mb-0">회원탈퇴</button>                  
+                  	<button type="button" style="margin:0 13px;" data-bs-toggle="modal" data-bs-target="#LeaveMemberModal" id="LeaveMemberModalbtn" class="btn btn-outline-danger btn-md mb-0">회원탈퇴</button>                  
                   </div>
                 </div>          
           </div>
@@ -601,6 +601,47 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 			</div>
 		</div>
 	</div>
+	
+	<div data-bs-toggle="modal" data-bs-target="#LeaveMemberModal" id="LeaveMemberModalbtn"></div>
+	<div class="modal fade" id="LeaveMemberModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content" style="top:119px;">
+	      <div class="modal-header" style="background-color: #df4343;">
+	        <h3 class="modal-title fs-6 text-center" id="MemberFindTitle" style="color: white;">회원탈퇴</h3>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      	</div>
+	     
+	      <div class="modal-body">
+			<div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
+                    <form id="LeaveMemberForm" action="LeaveMember.do" method="post" onsubmit="return LeaveMember()">
+                    <div class="multisteps-form__content">
+                      <div class="row mt-3 mb-3">
+                        <div class="col-12">
+                          <label>탈퇴를 위해 회원님의 비밀번호를 입력해주세요.</label>
+                          <input type="hidden" name="email" value="${Login.email }"/>
+                          <input type="hidden" name="profileimgname" value="${Login.profileimgname }"/>
+                          <input class="multisteps-form__input form-control" name="password" type="password" placeholder="떠나지 마세요.." />
+                          <div class="invalid-feedback">기존 비밀번호와 일치하지 않습니다.</div>
+                        </div>
+                      </div>
+                      <div id="MemberFindResult"></div>
+                      <div class="button-row d-flex mt-4">
+                        <button class="btn ms-auto me-3" type="submit" style="background-color:#df4343; color:white;">탈퇴</button>
+                    	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                      </div>
+                    </div>
+                 </form>   
+           </div>
+                  <!--single form panel-->
+	      </div>
+	      
+	      <div class="modal-footer">
+	        회사소개 | 이용약관 | <strong>개인정보처리방침</strong>
+	      </div>
+	     
+	    </div>
+	  </div>
+	</div> <!-- sns확인모달 모달끝 -->
 	<!--   Core JS Files   -->
 	<script src="${path}/assets/js/core/popper.min.js"></script>
 	<script src="${path}/assets/js/core/bootstrap.min.js"></script>

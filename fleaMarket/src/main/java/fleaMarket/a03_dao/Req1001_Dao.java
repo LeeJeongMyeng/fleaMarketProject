@@ -12,4 +12,8 @@ public interface Req1001_Dao {
 	public void UpdateProfile(ProfileImg upt);
 	public void UpdatePassword(Member upt);
 	public Member Login(String email);
+	public void DelelteProfile(String email);
+	public void DelelteMember(String email);
+	
+	
 }
