@@ -4,12 +4,14 @@ import java.io.File;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import fleaMarket.a03_dao.Req4002_Dao;
 import vo.BoardImg;
 import vo.Capplication;
 
+@Service
 public class Req4002_Service {
 	@Autowired(required=false)
 	private Req4002_Dao dao;
@@ -28,13 +30,14 @@ public class Req4002_Service {
 		}			
 	}
 	public void communityInsert(Capplication ins) {
+		if(ins.getHashtag()==null) ins.setHashtag("");
 		dao.communityInsert(ins);
 		String fname = ins.getReport().getOriginalFilename();
 		if( !fname.equals("") ){
 			uploadFile(ins.getReport());
 			BoardImg f = new BoardImg();
 			f.setImgname(fname);
-			f.setImgpath(ins.getTitle());
+			f.setImgpath(upload);
 			dao.communityFileInsert(f);
 		}
 	}

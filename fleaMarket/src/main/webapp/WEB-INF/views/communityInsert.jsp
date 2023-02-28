@@ -24,13 +24,22 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
   <link href="${path}/resource/css/Community/CommunityBoard.css" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
   <script type="text/javascript">
 	  $(document).ready(function(){
-		  $('#editor .ql-editor').keyup(function(){
-		      var expeditor=$(this).html() 
-		     console.log("dd",expeditor);
-		     $('input[name=content]').val(expeditor); 
+		  // 내용에 파일업로드 버튼 숨김처리
+		  $(".ql-link").hide()
+		  
+		  //등록 버튼 클릭 시,
+		  $("#send").click(function(){
+			  //내용 입력에 따른 content Input에 데이터 넣기(내용입력란이 input태그가 아니라서))
+			  var expeditor=$('#edit-deschiption .ql-editor').html()
+			  console.log("keyup없이",expeditor)
+			  $('input[name=content]').val(expeditor);
+			  $("form").submit()
+		  
 		  })
+		  console.log($('#productImg').val())
 	  });
   </script>
 </head>
@@ -45,7 +54,7 @@
               <div class="col-12 col-lg-8 mx-auto mt-4 mb-sm-5 mb-3">
                 <div class="multisteps-form__progress">
                   <button class="multisteps-form__progress-btn js-active" type="button" title="Product Info">
-                    <span>1. 게시글 등록</span>
+                    <span style="">1. 게시글 등록</span>
                   </button>
                   <button class="multisteps-form__progress-btn" type="button" title="Media">2. 이미지 등록</button>
                 </div>
@@ -54,24 +63,24 @@
             <!--form panels-->
             <div class="row">
               <div class="col-12 col-lg-8 m-auto">
-                <form class="multisteps-form__form mb-8">
+                <form class="multisteps-form__form mb-8" method="post" enctype="multipart/form-data" action="${path}/communityInsert.do">
                   <!--single form panel-->
                   <div class="card multisteps-form__panel r-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
-                    <h5 class="font-weight-bolder" style="text-align:center; font-size:20pt;">커뮤니티 게시글 등록</h5>
+                    <h5 class="font-weight-bolder mt-4" style="text-align:center; font-size:20pt;">커뮤니티 게시글 등록</h5>
                     <div class="multisteps-form__content">
                       <div class="row" style="padding:5px; margin-top:2%;">
                         <div class="col-12 col-sm-6">
                          <label class="postInsertTitle">카테고리</label>
                           <select class="form-control" name="category" id="choices-category">
-                            <option value="Choice 1" selected="">홍보글</option>
-                            <option value="Choice 2">사업아이디어</option>
-                            <option value="Choice 3">사는이야기</option>
-                            <option value="Choice 4">꿀팁</option>
+                            <option selected="">홍보글</option>
+                            <option>사업아이디어</option>
+                            <option>사는이야기</option>
+                            <option>꿀팁</option>
                           </select>
                         </div>
                         <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                           <label class="postInsertTitle">작성자</label>
-                          <input class="multisteps-form__input form-control" name="email" type="text" value="사용자아이디" readonly/>
+                          <input class="multisteps-form__input form-control" name="email" type="text" value="사용자이메일" readonly/>
                         </div>
                       </div>
                       <div class="row mt-3" style="width:99%; margin-left:0.5%;">
@@ -81,36 +90,53 @@
                       <div class="row" style="width:99%; margin-left:0.5%;">
                          <label class="mt-4 postInsertTitle" style="margin-left:-0.5%;">게시글 내용</label>
                          <div id="edit-deschiption" style="height:400px;">
-                           <p>Some initial <strong>bold</strong> text</p>
+                         <!-- 	<p class="ql-editor"></p> -->
                          </div>
-                         <input type="text" id="contentInput" name="content" hidden/>
+                         <input type="hidden" id="contentInput" name="content" />
                       </div>
                       <div class="row">
                         <div class="col-12">
-                          <label class="mt-4 form-label postInsertTitle">태그(#)</label>
+                          <label class="mt-4 form-label postInsertTitle">태그(#)</label><!--태그 기능 넣기 #클릭시 드롭다운하기/아니면 입력값넣기  -->
                           <select class="form-control" name="hashtag" id="choices-tags" multiple>
-                            <option value="Choice 1" selected>#구분자로 있는 태그들로 드롭다운시키기</option>
+                            <option selected>#구분자로 있는 태그들로 드롭다운시키기</option>
                           </select>
                         </div>
                       </div>
                       <div class="button-row d-flex mt-4">
-                        <button class="btn bg-gradient-dark ms-auto mb-0 js-btn-next" type="button" title="Next">다음</button>
+                        <button class="btn bg-gradient-dark ms-auto mb-2 me-2 js-btn-next" type="button" title="Next" id="next">다음</button>
                       </div>
                     </div>
                   </div>
                   <!--single form panel-->
-                  <div class="card multisteps-form__panel p-3 border-radius-xl bg-white" data-animation="FadeIn">
+                  <div class="card multisteps-form__panel p-3 border-radius-xl bg-white" data-animation="FadeIn" style="height:400px;">
                     <h5 class="font-weight-bolder postInsertTitle" style="text-align:center; font-size:20pt;">커뮤니티 게시글 이미지 등록</h5>
-                    <div class="multisteps-form__content">
+                    <div class="multisteps-form__content" >
                       <div class="row mt-3">
-                        <div class="col-12">
-                          <label>게시글 이미지</label>
-                          <div action="/file-upload" class="form-control dropzone" id="productImg"></div>
+                        <div class="col-2" style="height:120px;">
+                          <label class="postInsertTitle">게시글 이미지</label>
+                          <input type="file" name="report" class="form-control" style="width:230px"
+                          		id="productImg" accept="image/*" onchange="setThumbnail(event);" >
+                           <div id="image_container"></div>
                         </div>
                       </div>
+                      <script>
+                     
+                      function setThumbnail(event) {
+                          var reader = new FileReader();
+                          reader.onload = function(event) {
+                            var img = document.createElement("img");
+                            img.setAttribute("src", event.target.result);
+                            document.querySelector("#image_container").appendChild(img);
+                            //document.querySelector("#image_container").innerHTML = img;
+                            img.width=230
+                            img.height=180
+                          };
+                          reader.readAsDataURL(event.target.files[0]);
+                        }
+                      </script>
                       <div class="button-row d-flex mt-4">
-                        <button class="btn bg-gradient-secondary mb-0 js-btn-prev" type="button" title="Prev">이전</button>
-                        <button class="btn bg-gradient-dark ms-auto mb-0" type="button" title="Send">등록</button>
+                        <button class="btn bg-gradient-secondary mb-0 js-btn-prev mt-8"  type="button" title="Prev">이전</button>
+                        <button class="btn bg-gradient-dark ms-auto mb-0 mt-8" type="button" title="Send" id="send">등록</button>
                       </div>
                     </div>
                   </div>

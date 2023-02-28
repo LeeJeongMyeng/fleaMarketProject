@@ -31,7 +31,7 @@ INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval, '제목'
 CREATE TABLE BoardImg
 (
 	imgName varchar2(100), -- 파일명
-	imgPath varchar2(100), -- 파일경로
+	imgPath varchar2(500), -- 파일경로
 	communityNumber varchar2(100) NOT NULL -- 커뮤니티 번호(FK)
 );
 DROP TABLE BoardImg CASCADE CONSTRAINTS;
@@ -39,6 +39,9 @@ DROP TABLE BoardImg CASCADE CONSTRAINTS;
 INSERT INTO BoardImg values('파일명','파일경로','comBoard0');
 
 SELECT * FROM BoardImg;
+
+SELECT * FROM BoardImg i,capplicaion c
+WHERE i.communityNumber=c.communityNumber;
 -- 채팅
 CREATE TABLE chat
 (
