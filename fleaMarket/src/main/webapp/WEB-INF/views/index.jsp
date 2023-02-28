@@ -143,7 +143,7 @@
                       <div class="numbers">
                         <p class="text-sm mb-0 text-capitalize font-weight-bold opacity-7">Wheather today</p>
                         <h5 class="font-weight-bolder mb-0">
-                         위치고민 날씨 <br>San Francisco - 29°C
+                         날씨 위치 고민 <br>San Francisco - 29°C
                         </h5>
                       </div>
                     </div>
@@ -157,9 +157,9 @@
             </div>
           </div>
          </div>
-            <!-- <div class="row"> -->
-              	<h4 style="text-align:center;">지도</h4>
-              <!-- </div> -->
+            <div class="row"> 
+              	<h4 style="text-align:center;">지도<br> 플리마켓 열리는 장소 좌표 찍을거임</h4>
+             </div> 
       
   <!-- 커뮤니티/플리마켓 미리보기 -->
   <div class="row" style="margin-top:5%;">
@@ -261,10 +261,6 @@
       </footer>
      
   <!--   Core JS Files   -->
-  <script src="${path}/assets/js/core/popper.min.js"></script>
-  <script src="${path}/assets/js/core/bootstrap.min.js"></script>
-  <script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
   <!-- Kanban scripts -->
   <script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
   <script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>
@@ -352,50 +348,6 @@
       },
     });
   </script>
-  <script>
-    // Initialize the map and assign it to a variable for later use
-    // there's a few ways to declare a VARIABLE in javascript.
-    // you might also see people declaring variables using `const` and `let`
-    var map = L.map('mapid', {
-      // Set latitude and longitude of the map center (required)
-      center: [38.89, -77.03],
-      // Set the initial zoom level, values 0-18, where 0 is most zoomed-out (required)
-      zoom: 11
-    });
 
-
-    // Create a Tile Layer and add it to the map
-    var tiles = new L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: '19'
-    }).addTo(map);
-
-
-    // Init slider
-    var slider = document.getElementById("sliderRegular");
-    noUiSlider.create(slider, {
-      start: 40,
-      connect: [true, false],
-      range: {
-        min: 0,
-        max: 100
-      }
-    });
-  </script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
-    <script src="../../assets/js/plugins/fullcalendar.min.js"></script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
 </body>
 </html>
