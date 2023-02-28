@@ -110,7 +110,7 @@
                   		<div class="row">
                   		<div class="col-8">
 						  <label for="profileimg" class="form-label">프로필 사진 등록</label>
-						  <input class="form-control form-control-sm mb-4 w-100" type="file" id="profileimg" name="profileimg">
+						  <input class="form-control form-control-sm mb-4 w-100" type="file" id="profileimg" name="profileimg" onchange="RenderImg(this);">
 						</div>
 						<div class="col-4">
 							<img id="SignUp_Profileimg" src="https://cdn-icons-png.flaticon.com/512/8053/8053055.png" style="border:1px solid #e3dee4;border-radius:50%" class="img-circle" width="70px" height="70px">
