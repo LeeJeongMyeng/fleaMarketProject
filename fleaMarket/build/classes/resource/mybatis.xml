@@ -8,6 +8,7 @@
 		<typeAlias alias="profileimg" type="vo.ProfileImg"/>
 		<typeAlias alias="capplication" type="vo.Capplication"/>
 		<typeAlias alias="boardimg" type="vo.BoardImg"/>
+		<typeAlias alias="fleamarket" type="vo.FleaMarket"/>
 	</typeAliases>
 
 	<!-- 2. 사용 XXXMapper.xml을 추가 -->
@@ -15,5 +16,6 @@
 		<mapper resource="resource/Req1000_Mapper.xml"/>
 		<mapper resource="resource/Req1001_Mapper.xml"/>
 		<mapper resource="resource/Req4002_Mapper.xml"/>
+		<mapper resource="resource/Req3000_Mapper.xml"/>
 	</mappers>
 </configuration>

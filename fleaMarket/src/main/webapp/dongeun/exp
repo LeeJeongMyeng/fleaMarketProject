@@ -1,74 +1,52 @@
 sql 
+//플리마켓 erd
 insert into FleaMarket
        values(flea01_seq.nextval,#{title},sysdate,
          #{content},#{bisenessNumber},#{email},#{approvalMaxCnt},
          #{recruitmentStartDate},#{recruitmentEndDate},#{openDate},#{closeDate},
          #{checkForm},#{viewCnt},#{address})
 
-	postingNumber varchar2(100) NOT NULL,--게시글 번호: 시퀀스
-	title varchar2(100),
-	registDate date, 
-	content varchar2(500),
-	bisenessNumber varchar2(100),
-	email varchar2(50) NOT NULL, -- 회원 테이블
-	approvalMaxCnt number,
-	recruitmentStartDate date,
-	recruitmentEndDate date,
-	openDate date,
-	closeDate date,
-	-- N,P,C 
-	checkForm varchar2(10),
-	viewCnt number,
-	address varchar2(200),
-	PRIMARY KEY (postingNumber)
+*주의* : 플리마켓 개최글 등록 이후 해당 게시물 번호를 해당 파일 업로드 테이블에 넣어주기
+//파일 업로드          
+INSERT INTO PROFILE VALUES(#{postingNumber},#{filename},#{filePath})
+
 
 vo
-Member
+//플리마켓 
+private String title;
+private String registDate;
+private String content;
+private String bisenessNumber;
+private String email;
+private int approvalMaxCnt;
+private String recruitmentStartDate;
+private String recruitmentEndDate;
+private String openDate;
+private String closeDate;
+private String checkForm;
+private int viewCnt;
+private String address;
+
+//플리마켓 신청
+private String filename;
+private String filePath;
+
+
 
 dao
-public void insertMember(Member ins);
+public void insertFleaMarket(FleaMarket ins);
 
 mapper.xml
-	 <insert id="insertMember" parameterType="member">
-       insert into member100
-       values(#{id},
-         #{pass},#{name},#{grade},#{point},#{rday})
+	 <insert id="insertFleaMarket" parameterType="FleaMarket">
+    insert into FleaMarket
+       values(flea01_seq.nextval,#{title},sysdate,
+         #{content},#{bisenessNumber},#{email},#{approvalMaxCnt},
+         #{recruitmentStartDate},#{recruitmentEndDate},#{openDate},#{closeDate},
+         #{checkForm},#{viewCnt},#{address})
       </insert> 
 
 service
- public void insMember(Member ins) {
-    	dao.insertMember(ins);
+public void insertFleaMarket(FleaMarket ins){
+    	dao.insertFleaMarket(ins);
     }
 
-view
-	if(proc=="ins"){
-			if(confirm("등록성공!\n조회화면이동하시겠습니까?")){
-				$("#frm01").submit()
-			}
-		}
-		
-//등록 버튼 클릭시
-		$("#insBtn").click(function(){
-			console.log("#1")
-			var passVal=$("#frm02 [name=pass]").val()
-			var passFrmVal = $("#frm02 #passFrm").val()
-			if(passVal!=passFrmVal){
-				alert("패스워드 패드워드 확인 동일하여야 합니다.")
-				return;
-			}
-			console.log("#2")
-			var gradeVal = $("#frm02 [name=grade]").val()
-			if(gradeVal==""){
-				alert("권한을 선택하여야 합니다.")
-				return;
-			}
-			console.log("#3")
-			if(confirm("등록하시겠습니까?")){
-				$("#frm02 [name=proc]").val("ins");
-				$("#frm02").attr("action","${path}/memberins.do");
-				$("#frm02").submit();
-			}
-		})
-		
-//등록버튼
-      <button id="insBtn" type="button" class="btn btn-warning">등록</button>				

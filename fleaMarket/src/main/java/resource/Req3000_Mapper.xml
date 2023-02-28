@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+   
+    <mapper namespace="fleaMarket.a03_dao.Req3000_Dao">
+    	 <insert id="insertFleaMarket" parameterType="FleaMarket">
+    insert into FleaMarket
+       values(flea01_seq.nextval,#{title},sysdate,
+         #{content},#{bisenessNumber},#{email},#{approvalMaxCnt},
+         #{recruitmentStartDate},#{recruitmentEndDate},#{openDate},#{closeDate},
+         #{checkForm},#{viewCnt},#{address})
+      </insert> 
+    </mapper>
+    
+    
