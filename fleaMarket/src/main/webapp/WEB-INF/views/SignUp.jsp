@@ -62,7 +62,7 @@
                 <div class="card-body pb-3 SignUp_wrap">
                   <form id="SignUpForm"  action="insSignUp.do" method="post" enctype="multipart/form-data">
                   <div class="container animate__animated" id="SignUp_1Section">              
-	                     <span class="SignUp_MustSpan"> *</span><label>이메일</label>
+	                    <span class="SignUp_MustSpan"> *</span><label>이메일</label>
 	                    <div class="row mb-n2">
 	                    	<div class="col-8">
 		                    	 <input type="email" name="email" class="form-control form-control mb-3" placeholder="example@doamin.com">
@@ -113,7 +113,7 @@
 						  <input class="form-control form-control-sm mb-4 w-100" type="file" id="profileimg" name="profileimg">
 						</div>
 						<div class="col-4">
-							<img src="https://cdn-icons-png.flaticon.com/512/8053/8053055.png" style="border:1px solid #e3dee4;border-radius:50%" class="img-circle" width="70px" height="70px">
+							<img id="SignUp_Profileimg" src="https://cdn-icons-png.flaticon.com/512/8053/8053055.png" style="border:1px solid #e3dee4;border-radius:50%" class="img-circle" width="70px" height="70px">
 						</div>
 						</div>
                   		<label>닉네임(2자이상)</label>
@@ -179,7 +179,7 @@
 						  <label for="formFile" class="form-label" style="color:red;">사업자등록번호 확인(-제외)</label>
 						   <div class="row mb-n2">
 	                    	<div class="col-8">
-		                    	 <input type="text" name="buisnessnumber" class="form-control form-control mb-3" placeholder="사업자번호 (-제외)"
+		                    	 <input type="text" name="businessnumber" class="form-control form-control mb-3" placeholder="사업자번호 (-제외)"
 		                    	 oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 		                    	 <div id="buisnessnumberfeedback" class="invalid-feedback">등록되지않은 사업자 번호입니다.</div>
 	                    	</div>

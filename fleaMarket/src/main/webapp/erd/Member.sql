@@ -31,14 +31,22 @@ SELECT * FROM FLEAMARKETMEMBER WHERE name = '이지은' and personalnumber = '94
 SELECT * FROM FLEAMARKETMEMBER WHERE (KAKAOEMAIL || NAVEREMAIL) LIKE '%'||#{snsemail}||'%';
 SELECT EMAIL,KAKAOEMAIL,NAVEREMAIL FROM FLEAMARKETMEMBER 
     		WHERE (KAKAOEMAIL || NAVEREMAIL) LIKE '%'||''||'%';
+    	
+
+
+SELECT f.*,p.PROFILEIMG as profileimgname FROM FLEAMARKETMEMBER f,PROFILE p
+WHERE f.EMAIL(+) = p.EMAIL
+AND f.NAVEREMAIL = '28888wjdaud@naver.com';
+
+
 --아디찾기
-SELECT EMAIL FROM FLEAMARKETMEMBER
+SELECT g FROM FLEAMARKETMEMBER
 WHERE name='이정명'
 AND PERSONALNUMBER = '950828-1111111';
 --비번찾기
 --비번 초기화 후에,알려주기
 
-DELETE FLEAMARKETMEMBER WHERE NICKNAME ='28888wjdaud';
+DELETE FLEAMARKETMEMBER WHERE email ='288888wjdaud@gmail.com';
 INSERT INTO FLEAMARKETMEMBER values(
 'aoddl56@nate.com',
 '!dnfwlq12',
@@ -69,7 +77,7 @@ NULL,
 '관리자'
 );
 UPDATE FLEAMARKETMEMBER 
-SET password = '1111' 
+SET ADDRESS  = '07932&서울 양천구 목동중앙남로16나길 38-10& (목동, 월드메르디앙)&201호' 
 WHERE EMAIL ='28888wjdaud@naver.com'
 AND NAME  = ''
 AND PERSONALNUMBER  =''; 
@@ -84,6 +92,13 @@ profileImg varchar2(200)
 	
 );
 
+DELETE profile
+WHERE email
+
 SELECT * FROM PROFILE;
-DELETE profile WHERE EMAIL ='28888wjdaud@naver.com';
-INSERT INTO PROFILE VALUES(#{email},#{profileimg});
+DELETE profile WHERE EMAIL ='288888wjdaud@gmail.com';
+INSERT INTO PROFILE VALUES('aoddl56@nate.com','defaultprofile.png');
+
+UPDATE PROFILE 
+SET PROFILEIMG ='프사.jpg'
+WHERE EMAIL ='28888wjdaud@naver.com';

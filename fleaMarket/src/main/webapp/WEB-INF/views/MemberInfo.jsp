@@ -9,10 +9,10 @@
 
 <head>
 <meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="apple-touch-icon" sizes="76x76"
-	href="${path}/assets/img/apple-icon.png">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
 <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
 <title>내 정보 조회 및 수정</title>
 <!--     Fonts and icons     -->
@@ -293,8 +293,8 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
 		</nav>
 		<!-- End Navbar -->
 		<div class="container-fluid py-4">
-			<div class="row">
-				<div class="col-12">
+			<div class="row ms-10">
+				<div class="col-10">
 					<div class="card">
 						<!-- Card header -->
 						<div class="card-header pb-0">
@@ -316,69 +316,111 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
           <!-- Card Basic Info -->
             <h5>내 정보 조회 및 수정</h5>
           <div class="card mt-4" id="basic-info">
-            
+            <form id="MemberInfoForm" action="UpdateMemberInfo.do" method="post" enctype="multipart/form-data" onsubmit="return UpdateInfo()">
             <div class="card-body pt-0">
-              <div class="row">
+            
+            <div class="row mt-2 mb-6">
+                <div class="col-2 ms-3">
+                <label for="profileimg" class="form-label">프로필</label><br>
+					<img id="MemberInfo_Profileimg" src="${path}/resource/img/Member/profileimg/${Login.profileimgname}" style="border:1px solid #e3dee4;border-radius:50%; position: absolute; left: 52px;" class="img-circle" width="70px" height="70px">
+					<input type="hidden" name="profileimgname" value="${Login.profileimgname }"/>
+				</div>
+				<div class="col-4">
+					<label class="form-label">프로필사진 변경</label>
+					<input class="form-control form-control-sm mb-0 w-100" type="file" id="profileimg" name="profileimg" onchange="RenderImg(this);">
+				</div>
+			</div>
+              <div class="row mb-5">
                 <div class="col-6">
                   <label class="form-label">이름</label>
-                  <div class="input-group">
-                    <input id="firstName" name="firstName" class="form-control" type="text" placeholder="Alec" required="required">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-6">
-                  <label class="form-label mt-4">이메일</label>
-                  <div class="input-group">
-                    <input id="email" name="email" class="form-control" type="email" placeholder="example@email.com">
-                  </div>
+                  
+                    <input id="firstName" name="name" class="form-control" type="text" value="${Login.name }" readonly>
+                  
                 </div>
                 <div class="col-6">
-                  <label class="form-label mt-4">닉네임</label>
-                  <div class="input-group">
-                    <input id="confirmation" name="confirmation" class="form-control" type="email" placeholder="example@email.com">
-                  </div>
+                  <label class="form-label">이메일</label>
+                  
+                    <input id="email" name="email" class="form-control" type="email" value="${Login.email }" readonly>
+                  
                 </div>
-              <div class="row">
+              </div>          
+              <div class="row mb-4">
+              	<div class="col-6">
+              		<div class="row">
+			          		
+				          <div class="col-6">
+				          <label>가입유형(권한)</label>
+					      	<input type="text" name="authority" class="form-control form-control mb-3" value="${Login.authority }" readonly>
+				          </div>
+				         <c:choose>			         
+				         <c:when test="${Login.authority=='일반셀러'}">
+					      <div class="col-4">
+					      <label>사업자로 변환</label>
+					      	<input type="button" class="btn btn-primary w-100" style="font-size: x-small;background: #8451ce;" id="" value="사업자 신청"><br>
+				          </div>  
+				          </c:when>	          
+				         <c:when test="${Login.authority=='사업자'}">				        
+					      <div class="col-4">
+					       <label>사업자번호</label>	 
+							<input type="text" name="businessnumber" class="form-control form-control mb-3" value="${Login.businessnumber }" readonly>				          </div>  
+				          </c:when>
+				          </c:choose>                   
+	         		 </div>
+              	</div>
+              </div>   
+	          
+              <div class="row mb-5">
                 <div class="col-6">
-                  <label class="form-label mt-4">핸드폰번호</label>
-                  <div class="input-group">
-                    <input id="email" name="email" class="form-control" type="email" placeholder="example@email.com">
-                  </div>
+                  <label class="form-label">닉네임</label>
+                 
+                    <input id="confirmation" name="nickname" class="form-control" type="text" value="${Login.nickname }">
+                 	 <div class="invalid-feedback">닉네임은 2자이상 부탁드립니다.</div>	
+                 	
                 </div>
-                     <div class="col-sm-4 col-6">
-                  <label class="form-label mt-4">카테고리</label>
-                  <select class="form-control" name="choices-gender" id="choices-gender">
-                    <option value="">주얼리</option>
-                    <option value="">잡화</option>
-                    <option value="">먹거리</option>
-                  </select>
-                </div>
-               <div class="row">
                 <div class="col-6">
-                  <label class="form-label">주소</label>
-                  <div class="input-group">
-                    <input id="firstName" name="firstName" class="form-control" type="text" placeholder="Alec" required="required">
+                  <label class="form-label">핸드폰번호</label>
+                  
+                    <input name="phonenumber" class="form-control" type="text" value="${Login.phonenumber }">
+                  	 <div class="invalid-feedback">13자리가 아닙니다.</div>	
+                  
+                </div>
+                </div>
+                <div class="row">
+                  <div class="col-6">
+	                <label>주소</label>
+		             <div class="">
+			              <div class="row">
+			              <div class="col-4">
+			              <input type="text" class="form-control form-control-sm" id="sample6_postcode" value="" readonly>
+			              </div>
+			              <div class="col-8">
+			              <input type="button" class="btn btn-primary w-50" style="font-size: x-small;background: #8451ce;"  onclick="AddressApi()" value="주소 수정"><br>
+			              </div>
+			              </div>
+						  <input type="text" class="form-control form-control-sm mt-n1" id="sample6_address" placeholder="주소" readonly><br>
+						  <input type="text" class="form-control form-control-sm  mt-n3" id="sample6_extraAddress" placeholder="참고항목" readonly><br>
+						  <input type="text" class="form-control form-control-sm  mt-n3 mb-5" id="sample6_detailAddress" placeholder="상세주소" readonly>
+			              <div class="invalid-feedback">주소를 입력해주세요.</div>
+			              <input type="hidden" name="address"/> <%--실제 주소로 입력될 input --%>
+		              </div>  
                   </div>
-              <ul class="text-muted ps-4 mb-0 float-start">
-                <li>
-                  <span class="text-sm">One special characters</span>
-                </li>
-                <li>
-                  <span class="text-sm">Min 6 characters</span>
-                </li>
-                <li>
-                  <span class="text-sm">One number (2 are recommended)</span>
-                </li>
-                <li>
-                  <span class="text-sm">Change it often</span>
-                </li>
-              </ul>
-                    <button class="btn bg-gradient-dark btn-sm float-end mt-6 mb-0">내 정보 수정</button>
-                </div>
-                </div>
-            </div>
+                  <div class="col-6">
+                  		<label class="form-label">카테고리</label>
+		                  <select class="form-control" name="category" id="MemberInfo_category">		                    
+		                      <option>여성의류</option>
+							  <option>남성의류</option>
+							  <option>공통의류</option>
+		                  </select>
+                  </div>
+                  <div class="" style="display:flex;">
+
+	                <button type="submit" style="margin-left:auto;" class="btn btn-primary btn-md mb-0">회원정보수정</button>
+
+                  	<button type="button" style="margin:0 13px;" class="btn btn-outline-danger btn-md mb-0">회원탈퇴</button>                  
+                  </div>
+                </div>          
           </div>
+          </form>
           <!-- Card Change Password -->
           <div class="card mt-4" id="password">
             <div class="card-header">
@@ -419,6 +461,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
             </div>
           </div>
 							</div>
+							
 						</div>
 					</div>
 				</div>
@@ -606,11 +649,17 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
+    
+    var SessAddress = '${Login.address}' //세션주소값
+    var SessCategory = '${Login.category}'
+    //console.log('ㅎㅇㅎㅇ   ${Login.businessnumber}')
+    
   </script>
 	<!-- Github buttons -->
 	<script async defer src="https://buttons.github.io/buttons.js"></script>
 	<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
+	<script src="${path}/resource/js/Req1001/MemberInfo.js"></script>
 </body>
 
 </html>

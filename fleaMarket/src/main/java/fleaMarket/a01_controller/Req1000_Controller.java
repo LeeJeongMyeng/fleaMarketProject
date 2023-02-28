@@ -3,6 +3,7 @@ package fleaMarket.a01_controller;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fleaMarket.a02_service.Req1000_Service;
+import fleaMarket.util.FileService;
 import vo.Member;
 import vo.ProfileImg;
 
@@ -23,6 +25,14 @@ public class Req1000_Controller {
 	public Req1000_Controller(Req1000_Service service) {
 		this.service = service;
 	}
+
+	@Autowired
+	private FileService fileservice;
+	
+	@Value("${profile.upload}")
+	private String profilepath;
+	
+//=================================================================================
 	
 	@RequestMapping("SignIn.do")
 	public String login(HttpSession session) {
@@ -43,7 +53,7 @@ public class Req1000_Controller {
 				fins.setEmail(ins.getEmail());
 				fins.setProfileimg("defaultprofile.png");
 				if(profile.getOriginalFilename()!="") {
-				  fins.setProfileimg(service.insprofileimg(profile));
+				  fins.setProfileimg(fileservice.insprofileimg(profilepath,profile));
 				}
 				service.insprofile(fins);			
 			
@@ -67,10 +77,12 @@ public class Req1000_Controller {
 		session.setAttribute("Login", mem);
 		msg = "로그인 성공";  path="main";	
 		}
-		
+
 		d.addAttribute("LoginMsg",msg);	
 		return path;
 	}
+	
+	
 	
 	//Sns연동처리
 	@RequestMapping("SnsEmailPlus.do")//기존계정에 연동계정 업데이트

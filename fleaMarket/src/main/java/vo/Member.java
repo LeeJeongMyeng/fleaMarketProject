@@ -8,11 +8,12 @@ public class Member {
 	private String phonenumber;
 	private String address;
 	private String authority;
-	private String buisnessnumber;
+	private String businessnumber;
 	private String kakaoemail;
 	private String naveremail;
 	private String category;
 	private String name;
+	private String profileimgname;
 	public String getEmail() {
 		return email;
 	}
@@ -80,11 +81,17 @@ public class Member {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBuisnessnumber() {
-		return buisnessnumber;
+	public String getBusinessnumber() {
+		return businessnumber;
 	}
-	public void setBuisnessnumber(String buisnessnumber) {
-		this.buisnessnumber = buisnessnumber;
+	public void setBuisnessnumber(String businessnumber) {
+		this.businessnumber = businessnumber;
+	}
+	public String getProfileimgname() {
+		return profileimgname;
+	}
+	public void setProfileimgname(String profileimgname) {
+		this.profileimgname = profileimgname;
 	}
 	
 	

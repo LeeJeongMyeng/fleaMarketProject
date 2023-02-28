@@ -200,6 +200,21 @@ function CheckUser(){
 	}	
 }
 	
+//프사 이미지 미리보기
+function RenderImg(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+		console.log(e.target.result[0])
+      $('#SignUpForm #SignUp_Profileimg').attr('src',e.target.result) ;
+    };
+    reader.readAsDataURL(input.files[0]);
+  } else {
+    document.getElementById('preview').src = "https://cdn-icons-png.flaticon.com/512/8053/8053055.png";
+  }
+}
+
+
 //폰번호 확인
 	$('[name=phonenumber]').keyup(function(){
 	var regPhone=/^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
@@ -283,7 +298,7 @@ function CheckUser(){
 			$(this).children('#AuthCheckImg').css('display','block')
 			$('#SignUp_buisnessmanCard').children('#AuthCheckImg').css('display','none')
 			$('.SignUp_ProfileWrap').slideUp('slow')
-			$('[name=authority]').val('사업자')
+			$('[name=authority]').val('일반셀러')
 			OkAuth=true;
 			OkBusiness=true;
 		   }else{ //사업자를 고를경우
@@ -372,7 +387,7 @@ var data = {"b_no":[buisnum.val()]};
 			if($('[name=nickname').val().length<2){
 				$('[name=nickname]').val($('[name=email]').val().split('@')[0])
 			}
-			$('[name=address]').val($('#sample6_address').val()+"&"+$('#sample6_extraAddress').val()+"&"+$('#sample6_detailAddress').val())
+			$('[name=address]').val($('#sample6_postcode').val()+"&"+$('#sample6_address').val()+"&"+$('#sample6_extraAddress').val()+"&"+$('#sample6_detailAddress').val())
 			console.log($('[name=address]').val())
 		}		
 		return SignUpHandler(number);

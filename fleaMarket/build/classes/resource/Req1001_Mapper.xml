@@ -9,6 +9,21 @@
 		from FLEAMARKETMEMBER
 		where nickname like '%'||#{nickname}||'%'	
 		</select>
+		
+		<update id="UpdateMemberInfo" parameterType="member">
+			UPDATE FLEAMARKETMEMBER
+			SET NICKNAME = #{nickname},
+			PHONENUMBER = #{phonenumber},
+			ADDRESS = #{address},
+			category = #{category}
+			where email = #{email}    
+		</update>
+		
+		<update id="UpdateProfile" parameterType="profileimg">
+			UPDATE PROFILE
+			SET PROFILEIMG = #{profileimg}
+			WHERE EMAIL = #{email}
+		</update>
     </mapper>
     
     

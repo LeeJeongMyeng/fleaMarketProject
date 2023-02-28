@@ -29,7 +29,12 @@
 				#{phonenumber},
 				#{address},
 				#{authority},
-				#{buisnessnumber},
+			<if test="businessnumber!=null">
+				#{businessnumber},
+			</if>
+			<if test="businessnumber==null">
+				NULL,
+			</if>
 				NULL,
 				NULL,
 				#{category},
@@ -42,17 +47,23 @@
     		INSERT INTO PROFILE VALUES(#{email},#{profileimg})
     	</insert>
     	
+
+    	
+    	
     	<select id="Login" parameterType="string" resultType="member">
-    		SELECT * FROM FLEAMARKETMEMBER
-    		WHERE EMAIL = #{email}
+    		SELECT f.*,p.PROFILEIMG as profileimgname FROM FLEAMARKETMEMBER f,PROFILE p
+			WHERE f.EMAIL(+) = p.EMAIL
+			AND f.email = #{email}
     	</select>
     	<select id="kakaoLogin" parameterType="string" resultType="member">
-    		SELECT * FROM FLEAMARKETMEMBER
-    		WHERE KAKAOEMAIL=#{kakaoemail}
+    		SELECT f.*,p.PROFILEIMG as profileimgname FROM FLEAMARKETMEMBER f,PROFILE p
+			WHERE f.EMAIL(+) = p.EMAIL
+    		WHERE f.KAKAOEMAIL=#{kakaoemail}
     	</select>
     	<select id="naverLogin" parameterType="string" resultType="member">
-    		SELECT * FROM FLEAMARKETMEMBER
-    		WHERE NAVEREMAIL=#{naveremail}
+    		SELECT f.*,p.PROFILEIMG as profileimgname FROM FLEAMARKETMEMBER f,PROFILE p
+			WHERE f.EMAIL(+) = p.EMAIL
+			AND f.NAVEREMAIL = #{naveremail}
     	</select>
     	
     	<select id="CheckPeristalsisSNS_K" parameterType="string" resultType="member">

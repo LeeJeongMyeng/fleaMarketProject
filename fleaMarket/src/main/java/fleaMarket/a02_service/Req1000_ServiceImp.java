@@ -11,19 +11,22 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import fleaMarket.a03_dao.Req1000_Dao;
+import fleaMarket.util.FileService;
 import vo.Member;
 import vo.ProfileImg;
 
 @Service
 public class Req1000_ServiceImp implements Req1000_Service {
-	@Value("${profile.upload}")
-	private String profilepath;
+	
 	
 	private Req1000_Dao dao;
 	@Autowired
 	public Req1000_ServiceImp(Req1000_Dao dao) {
 		this.dao = dao;
 	}
+	
+	
+	
 	HashMap<String,String> map;
 	
 	
@@ -50,19 +53,10 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	}
 	
 	//회원가입 처리 후,이미지 업로드 처리
+	/*
 	public String insprofileimg(MultipartFile report) { 
-			String fname = report.getOriginalFilename();
-			File f = new File(profilepath+fname);
-			try {
-				report.transferTo(f); // 필수예외 처리 (IO발생)
-			} catch (IllegalStateException e) {
-				System.out.println("파일업로드 예외1:"+e.getMessage());
-			} catch (IOException e) {
-				System.out.println("파일업로드 예외2:"+e.getMessage());
-			} 
-		
-		return fname; //db업로드 해야하니까 네임 리턴
-	}
+		return fileservice.insprofileimg(profilepath, report); //db업로드 해야하니까 네임 리턴
+	}*/
 	
 	// 테이블에 프로필사진 삽입
 	public void insprofile(ProfileImg fins) {
