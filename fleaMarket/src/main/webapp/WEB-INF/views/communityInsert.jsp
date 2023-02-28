@@ -7,10 +7,7 @@
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <fmt:requestEncoding value="utf-8"/>     
 <!DOCTYPE html>
-<%--
 
-
- --%>
 <html>
 <head>
   <meta charset="utf-8" />
@@ -27,6 +24,15 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
   <link href="${path}/resource/css/Community/CommunityBoard.css" rel="stylesheet" />
+  <script type="text/javascript">
+	  $(document).ready(function(){
+		  $('#editor .ql-editor').keyup(function(){
+		      var expeditor=$(this).html() 
+		     console.log("dd",expeditor);
+		     $('input[name=content]').val(expeditor); 
+		  })
+	  });
+  </script>
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -50,7 +56,7 @@
               <div class="col-12 col-lg-8 m-auto">
                 <form class="multisteps-form__form mb-8">
                   <!--single form panel-->
-                  <div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
+                  <div class="card multisteps-form__panel r-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
                     <h5 class="font-weight-bolder" style="text-align:center; font-size:20pt;">커뮤니티 게시글 등록</h5>
                     <div class="multisteps-form__content">
                       <div class="row" style="padding:5px; margin-top:2%;">

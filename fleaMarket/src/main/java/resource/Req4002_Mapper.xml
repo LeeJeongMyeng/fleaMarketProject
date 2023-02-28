@@ -4,7 +4,7 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-    <mapper namespace="fleaMarket.a03_dao.CommunityDao_jyj">
+    <mapper namespace="fleaMarket.a03_dao.Req4002_Dao">
     	<insert id="communityInsert" parameterType="capplicaion">
     		INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval,
     		 #{title},#{content},sysdate,NULL,'#{category},#{email},#{hashtag},0);

@@ -14,5 +14,6 @@
 	<mappers>
 		<mapper resource="resource/Req1000_Mapper.xml"/>
 		<mapper resource="resource/Req1001_Mapper.xml"/>
+		<mapper resource="resource/Req4002_Mapper.xml"/>
 	</mappers>
 </configuration>

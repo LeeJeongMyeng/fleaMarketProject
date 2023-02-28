@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class CommunityController_jyj {
+public class Req4002_Controller {
 	
 	@RequestMapping("communityinsert.do")
 	public String communityInsert() {

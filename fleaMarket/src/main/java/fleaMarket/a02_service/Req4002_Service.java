@@ -2,13 +2,13 @@ package fleaMarket.a02_service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import fleaMarket.a03_dao.CommunityDao_jyj;
+import fleaMarket.a03_dao.Req4002_Dao;
 import vo.BoardImg;
 import vo.Capplication;
 
-public class CommunityService_jyj {
+public class Req4002_Service {
 	@Autowired(required=false)
-	private CommunityDao_jyj dao;
+	private Req4002_Dao dao;
 	
 	public void communityInsert(Capplication ins) {
 		dao.communityInsert(ins);
