@@ -3,7 +3,7 @@ package vo;
 public class BoardImg {
 	private String imgname;
 	private String imgpath;
-	private String communitynumber;
+	private String communitynumber; // 외래키(커뮤니티 번호)
 	public String getImgname() {
 		return imgname;
 	}
