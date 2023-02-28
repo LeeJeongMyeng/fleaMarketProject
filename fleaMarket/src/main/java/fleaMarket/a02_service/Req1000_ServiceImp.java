@@ -46,9 +46,8 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	}
 	
 	//회원가입
-	public void SignUp(Member ins) {
-		String EncPass = Bcrypter(ins.getPassword());
-		ins.setPassword(EncPass);
+	public void SignUp(Member ins) {		
+		ins.setPassword(BCrypt.hashpw(ins.getPassword(), BCrypt.gensalt()));
 		dao.SignUp(ins);
 	}
 	
@@ -75,7 +74,7 @@ public class Req1000_ServiceImp implements Req1000_Service {
 			if(mem.getPassword().equals("1111") || mem.getPassword().equals("admin")) {
 				mem = log.getPassword().equals(mem.getPassword())?mem:null;
 			}else {
-				mem = CheckBcrypt(log.getPassword(),dao.Login(log.getEmail()).getPassword())?mem:null;
+				mem = BCrypt.checkpw(log.getPassword(),dao.Login(log.getEmail()).getPassword())?mem:null;
 			}
 		}
 		return mem;
@@ -101,15 +100,11 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		dao.MemberFindPassword(map);
 	}
 	
-	
-/*=======================================================*/	
-	public String Bcrypter(String password) {
-		return BCrypt.hashpw(password, BCrypt.gensalt());
+	public Member ReLogin(String email){
+		return dao.Login(email);
 	}
 	
-	public Boolean CheckBcrypt(String OrinPass,String EncPass) {
-		return BCrypt.checkpw(OrinPass, EncPass);
-	}
+	
 
 }
 

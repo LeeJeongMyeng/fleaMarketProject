@@ -24,6 +24,18 @@
 			SET PROFILEIMG = #{profileimg}
 			WHERE EMAIL = #{email}
 		</update>
+		
+		<update id="UpdatePassword" parameterType="member">
+			UPDATE FLEAMARKETMEMBER
+			SET PASSWORD = #{password}
+			WHERE EMAIL=#{email}
+		</update>
+		
+		<select id="Login" parameterType="string" resultType="member">
+    		SELECT f.*,p.PROFILEIMG as profileimgname FROM FLEAMARKETMEMBER f,PROFILE p
+			WHERE f.EMAIL(+) = p.EMAIL
+			AND f.email = #{email}
+    	</select>
     </mapper>
     
     

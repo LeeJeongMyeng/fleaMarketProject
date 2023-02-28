@@ -35,7 +35,7 @@ public class Req1000_Controller {
 //=================================================================================
 	
 	@RequestMapping("SignIn.do")
-	public String login(HttpSession session) {
+	public String login() {
 		return "SignIn";
 	}
 	

@@ -18,4 +18,5 @@ public interface Req1000_Service  {
 	public Member CheckPeristalsisSNS_N(String naveremail);
 	public void SnsEmailPlus(Member upt);
 	public void MemberFindPassword(String name,String personalnumber,String email);
+	public Member ReLogin(String email);
 }

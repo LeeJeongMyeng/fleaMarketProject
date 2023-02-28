@@ -1,6 +1,7 @@
 package fleaMarket.a04_restcontroller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -63,6 +64,17 @@ public class Req1000_RestController {
 		}
 		
 		d.addAttribute("MemberFindPassword",MemberFindPassword);	
+		return "pageJsonReport";
+	}
+	
+	//비번 맞는지 확인
+	@PostMapping("MatchPassword.do")
+	public String MatchPassword(Model d,@RequestParam(value="password", required=false) String password,
+			@RequestParam(value="sespassword", required=false) String sespassword) {
+		String MatchPassword = "false";
+		if(BCrypt.checkpw(password,sespassword)) {MatchPassword = "true";}
+
+		d.addAttribute("MatchPassword",MatchPassword);
 		return "pageJsonReport";
 	}
 }

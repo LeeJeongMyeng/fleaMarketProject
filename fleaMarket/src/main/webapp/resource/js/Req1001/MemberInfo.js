@@ -97,4 +97,83 @@ function UpdateInfo(){
 	}
 	return true;
 	}
+	
+	$('#UpdatePasswordForm input').keyup(function(){
+		$(this).removeClass('is-invalid')
+	})
+		
+	
+
+
+function UpdatePassword(){
+	var CurrentPassword = $('#UpdatePasswordForm #CurrentPassword')
+	var uptPassword = $('#UpdatePasswordForm input[name=password]')
+	var uptPassword2 = $('#UpdatePasswordForm #password2')
+	
+	if(MatchPassword(CurrentPassword.val(),SessPassword)==false){
+		CurrentPassword.addClass('is-invalid')
+		alert('비밀번호가 일치하지않습니다.')
+		return false;
+	}
+	if(!chkPW(uptPassword.val())){
+		uptPassword.addClass('is-invalid')
+		alert('비밀번호 형식이 올바르지 않습니다..')
+		return false;
+	}
+	if(!chkPW2(uptPassword.val(),uptPassword2.val())){
+		uptPassword2.addClass('is-invalid')
+		alert('1차 비밀번호와 일치하지 않습니다.')
+		return false;
+	}
+	return true;
+}
+
+function MatchPassword(pass,sespass){
+	var qstr ="password="+pass+"&sespassword="+sespass
+		$.ajax({
+			url:"MatchPassword.do",
+			type:"post",
+			data:qstr,
+			dataType:"json",
+			success:function(data){
+				console.log(data.MatchPassword)
+				if(data.MatchPassword=='false'){
+					return false;
+				}else{
+					return true;
+				}		
+			},
+			error:function(xhr,status,error){
+                  console.log(xhr)
+                  console.log(status)
+                  console.log(error)
+            }
+		})
+}
+
+//비밀번호1 유효성
+function chkPW(pass){
+	 var pw = pass;
+	 var num = pw.search(/[0-9]/g);
+	 var eng = pw.search(/[a-z]/ig);
+	 var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩';:₩/?]/gi);
+		 if(pw.length < 8 || pw.length > 16){	 
+			return false;		 
+		 }else if(pw.search(/\s/) != -1){	
+			 	return false;
+		 }else if( (num < 0 && eng < 0) || (eng < 0 && spe < 0) || (spe < 0 && num < 0) ){
+			 	return false;
+		 }else {
+			 	return true;
+		 }
+}
+//비번확인	
+function chkPW2(pass1val,pass2val){
+		if(pass1val!=pass2val){		
+			return false;
+		}else{	
+			return true;
+		}
+	
+}
 

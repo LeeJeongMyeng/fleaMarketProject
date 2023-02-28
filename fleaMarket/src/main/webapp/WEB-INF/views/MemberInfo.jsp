@@ -30,7 +30,14 @@
 <link id="pagestyle"
 	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 </head>
-
+<script type="text/javascript">
+$(document).ready(function(){
+	var uptmsg = '${uptmsg}'
+	if(uptmsg!=''){
+		alert(uptmsg)
+	}
+})
+</script>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
 	<aside
@@ -426,39 +433,27 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
             <div class="card-header">
               <h5>비밀번호 변경</h5>
             </div>
+            <form id="UpdatePasswordForm" action="UpdatePassword.do" method="post" onsubmit="return UpdatePassword()">
+           	<input type="hidden" name="email" value="${Login.email }"/>
             <div class="card-body pt-0">
               <label class="form-label">현재 비밀번호</label>
               <div class="form-group">
-                <input class="form-control" type="password" placeholder="Current password">
+                <input class="form-control" id="CurrentPassword" type="password" placeholder="Current password">
+                <div class="invalid-feedback">기존 비밀번호와 일치하지 않습니다.</div>	
               </div>
-              <label class="form-label">새로운 비밀번호</label>
+              <label class="form-label">새로운 비밀번호(8~16자 영/숫/특수 중 2가지이상)</label>	
               <div class="form-group">
-                <input class="form-control" type="password" placeholder="New password">
+                <input class="form-control" name="password" type="password" placeholder="New password">
+                <div class="invalid-feedback">형식이 올바르지 않습니다.</div>	
               </div>
               <label class="form-label">비밀번호 확인</label>
               <div class="form-group">
-                <input class="form-control" type="password" placeholder="Confirm password">
+                <input class="form-control" id="password2" type="password" placeholder="Confirm password">
+                <div class="invalid-feedback">비밀번호와 일치하지않습니다.</div>	
               </div>
-              <h5 class="mt-5">Password requirements</h5>
-              <p class="text-muted mb-2">
-                Please follow this guide for a strong password:
-              </p>
-              <ul class="text-muted ps-4 mb-0 float-start">
-                <li>
-                  <span class="text-sm">One special characters</span>
-                </li>
-                <li>
-                  <span class="text-sm">Min 6 characters</span>
-                </li>
-                <li>
-                  <span class="text-sm">One number (2 are recommended)</span>
-                </li>
-                <li>
-                  <span class="text-sm">Change it often</span>
-                </li>
-              </ul>
               <button class="btn bg-gradient-dark btn-sm float-end mt-6 mb-0">비밀번호변경</button>
             </div>
+            </form>
           </div>
 							</div>
 							
@@ -652,6 +647,7 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
     
     var SessAddress = '${Login.address}' //세션주소값
     var SessCategory = '${Login.category}'
+    var SessPassword = '${Login.password}'
     //console.log('ㅎㅇㅎㅇ   ${Login.businessnumber}')
     
   </script>

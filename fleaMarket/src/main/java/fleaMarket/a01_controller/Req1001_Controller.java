@@ -1,5 +1,7 @@
 package fleaMarket.a01_controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -63,28 +65,47 @@ public class Req1001_Controller {
 	}
 	
 	@RequestMapping("UpdateMemberInfo.do")
-	public String UpdateMemberInfo(Member upt,@RequestParam("profileimg") MultipartFile profile) {
-		System.out.println("수정 벨류확인:"+upt.getNickname());
-		System.out.println("수정 벨류확인:"+upt.getAddress());
-		System.out.println("수정 벨류확인:"+upt.getPhonenumber());
-		System.out.println("수정 벨류확인:"+upt.getCategory());
-		System.out.println("수정 벨류확인:"+upt.getEmail());
-			//정보 수정
-			service.UpdateMemberInfo(upt);
+	public String UpdateMemberInfo(Member upt,@RequestParam("profileimg") MultipartFile profile,
+			Model d,HttpSession session) {
+		//값 변경할꺼니까 세션먼저 지우기
+		session.removeAttribute("Login");
+		
+			//정보 수정 (대신 기본 사진은 삭제되면 안되니까 변경하게끔만 처리)
+			if(!upt.getProfileimgname().equals("defaultprofile.png")) {
+				service.UpdateMemberInfo(upt);
+			}	
+			
 			//수정 시, 이미지파일이 null이아니면
 			if(profile.getOriginalFilename()!=null) {
+				
 				// 파일 삭제처리
-				fileservice.DeleteFile(profilepath,upt.getProfileimgname());			
-				// 테이블에 수정을 위해 값 할당 이메일/새 프로필이미지
-				// 새 프로필 이미지넣을겸 파일 다시 폴더에 삽입처리
+				fileservice.DeleteFile(profilepath,upt.getProfileimgname());
+				
+				// 새 프로필 이미지넣을겸 파일 다시 폴더에 삽입처리 // 테이블에 수정을 위해 값 할당 이메일/새 프로필이미지
 				ProfileImg fupt = new ProfileImg();
 				fupt.setEmail(upt.getEmail());
 				fupt.setProfileimg(fileservice.insprofileimg(profilepath,profile));
-				//테이블 파일 업데이트 처리
-				service.UpdateProfile(fupt);
 				
+				//테이블 파일 업데이트 처리
+				service.UpdateProfile(fupt);	
 			}
+		session.setAttribute("Login",service.getLogin(upt.getEmail()));
+		 d.addAttribute("uptmsg","비밀번호 변경이 완료되었습니다.");
 		return "MemberInfo";
 	}
 	
+	@RequestMapping("UpdatePassword.do")
+	public String UpdatePassword(Member upt,HttpSession session,Model d) {
+		//변경될거니까 세션 지우기
+		System.out.println(session.getAttribute("Login"));
+		
+		//비번변경
+		 service.UpdatePassword(upt);
+		 
+		//다시 세션처리
+		 session.setAttribute("Login",service.getLogin(upt.getEmail()));
+		 
+		 d.addAttribute("uptmsg","비밀번호 변경이 완료되었습니다.");
+		return "MemberInfo";
+	}
 }

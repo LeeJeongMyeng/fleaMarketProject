@@ -689,7 +689,7 @@
               	 <c:choose>
               	 	<c:when test="${not empty Login}">
               		<div class="col-3">
-						<img src="${path}/resource/img/Member/profileimg/dafaultprofile.png" alt="..." class="avatar shadow">
+						<img src="${path}/resource/img/Member/profileimg/${Login.profileimgname}" alt="..." class="avatar shadow">
               		</div>
               		<div class="col-4" style="margin-top:4%; text-align:center;">
 						<span>${Login.nickname}</span>
