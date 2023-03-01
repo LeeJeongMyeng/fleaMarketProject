@@ -71,9 +71,9 @@ public class Req1000_RestController {
 	@PostMapping("MatchPassword.do")
 	public String MatchPassword(Model d,@RequestParam(value="password", required=false) String password,
 			@RequestParam(value="sespassword", required=false) String sespassword) {
-		String MatchPassword = "";
+		String MatchPassword = "false";
 		if(BCrypt.checkpw(password,sespassword)) {MatchPassword = "true";}
-		else {MatchPassword = "false";}
+		
 
 		d.addAttribute("MatchPassword",MatchPassword);
 		return "pageJsonReport";

@@ -116,12 +116,16 @@ public class Req1001_Controller {
 	
 	@PostMapping("LeaveMember.do")
 	public String LeaveMember(Member del,Model d,HttpSession session){
-		//탈퇴전 해당 프로필삭제
+		
+		
 		service.DelelteProfile(del.getEmail());
+		
 		//탈퇴처리
 		service.DelelteMember(del.getEmail());
 		//프로필 파일 삭제
+		if(!del.getProfileimgname().equals("defaultprofile.png")) {
 		fileservice.DeleteFile(profilepath,del.getProfileimgname());
+		}
 		//세션삭제 처리.. ㅂㅂ
 		session.removeAttribute("Login");
 		

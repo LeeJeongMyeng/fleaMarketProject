@@ -109,8 +109,14 @@ function UpdatePassword(){
 	var CurrentPassword = $('#UpdatePasswordForm #CurrentPassword')
 	var uptPassword = $('#UpdatePasswordForm input[name=password]')
 	var uptPassword2 = $('#UpdatePasswordForm #password2')
-	
-	if(MatchPassword(CurrentPassword.val())=='false'){
+	if(SessPassword=='1111' && SessPassword!=CurrentPassword.val()){
+		console.log('여긴가?'+SessPassword+":"+CurrentPassword)
+		CurrentPassword.addClass('is-invalid')
+		alert('비밀번호가 일치하지않습니다.')
+		return false;
+	}
+	if(SessPassword!='1111' && MatchPassword(CurrentPassword.val())=='false'){
+		console.log('아니면 여긴가?'+SessPassword+":"+CurrentPassword)
 		CurrentPassword.addClass('is-invalid')
 		alert('비밀번호가 일치하지않습니다.')
 		return false;

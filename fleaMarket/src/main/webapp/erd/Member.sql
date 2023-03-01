@@ -96,9 +96,9 @@ DELETE profile
 WHERE email
 
 SELECT * FROM PROFILE;
-DELETE profile WHERE EMAIL ='aoddl56@nate.com';
+DELETE profile WHERE EMAIL ='28888wjdaud@naver.com';
 INSERT INTO PROFILE VALUES('aoddl56@nate.com','defaultprofile.png');
 
 UPDATE PROFILE 
 SET PROFILEIMG ='고릴라.jpg'
-WHERE EMAIL ='admin@contigo.com';
+WHERE EMAIL ='dbwls8382@naver.com';
