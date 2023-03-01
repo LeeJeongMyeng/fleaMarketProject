@@ -53,7 +53,7 @@
           <div class="col-auto my-auto">
             <div class="h-100">
               <h5 class="mb-1">
-                Sayo Kravits 
+               	들어올 값
               </h5>
               <p class="mb-0 font-weight-bold text-sm">
                 님의 Room  <i class="ni ni-shop"></i>

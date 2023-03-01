@@ -96,7 +96,6 @@
 				AND PERSONALNUMBER  = #{personalnumber}
 				AND EMAIL  =#{email}
     	</update>
-    	
     </mapper>
     
     

@@ -1,14 +1,16 @@
 package fleaMarket.a01_controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import fleaMarket.a02_service.Req4002_Service;
 import vo.Capplication;
+import vo.FollowMemberInfo;
 
 @Controller
 public class Req4002_Controller {
@@ -44,20 +46,22 @@ public class Req4002_Controller {
 	}
 	
 	@RequestMapping("communityFollowMember.do")
-	public String communityFollowMember(@RequestParam("myemail") String myemail, Model d) {
-		d.addAttribute("follower", service.followerSelect(myemail));
-		System.out.println(service.followerSelect(myemail));
+	public String communityFollowMember(FollowMemberInfo sel, Model d,HttpSession session) {
+		session.getAttribute("Login");
+		d.addAttribute("follower", service.followerSelect(sel));
+		// System.out.println(service.followerSelect(sel));
 		return "communityFollowMember";
 	}
 	
-	@RequestMapping("communityFollowMemberIndex.do")
-	public String communityFollowMemberIndex() {
+	@RequestMapping("communityFollowDelete.do")
+	public String communityFollowDelete(FollowMemberInfo del, Model d) {
+		service.followmemberdelete(del);
 		return "communityFollowMember";
 	}
 	
 	@RequestMapping("communityMemberRoom.do")
-	public String communityMemberRoom() {
+	public String communityMemberRoom(FollowMemberInfo sel, Model d) {
+		d.addAttribute("room", service.followerSelect(sel));
 		return "communityMemberRoom";
 	}
-	
 }

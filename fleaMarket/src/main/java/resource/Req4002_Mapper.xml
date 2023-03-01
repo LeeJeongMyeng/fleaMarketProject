@@ -26,11 +26,18 @@
     	<!-- <update id="communityFileUpdate" parameterType="boardimg">
     		
 		</update> -->
-		<select id="followerSelect" parameterType="String" resultType="followmemberinfo">
+		<select id="followerSelect" parameterType="followmemberinfo" resultType="followmemberinfo">
 			select *
 			FROM FLEAMARKETMEMBER m,friend f,profile pro
 			WHERE f.following=m.email
 			AND f.following=pro.email
 			AND myemail=#{myemail}
+			AND (m.email LIKE '%'||#{keyword}||'%'
+			OR m.nickname LIKE '%'||#{keyword}||'%')
 		</select>
+		<delete id="followmemberdelete" parameterType="followmemberinfo">
+			DELETE FROM friend
+			WHERE myemail=${myemail}
+			AND FOLLOWING=${following}
+		</delete>
     </mapper>

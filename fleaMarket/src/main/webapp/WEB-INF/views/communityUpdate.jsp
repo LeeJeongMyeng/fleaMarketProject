@@ -135,7 +135,7 @@
                 </div>
                 <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                   <label class="postUpdateTitle">작성자</label>
-                  <input class="form-control" onclick="updateImpossible('작성자')" value="로그인한 세션값" type="text" readonly style="width:90%;"/>
+                  <input class="form-control" onclick="updateImpossible('작성자')" value="${Login.email}" type="text" readonly style="width:90%;"/>
                 </div>
               </div>
               <div class="row" style="--bs-gutter-x:0;">

@@ -76,7 +76,7 @@
                         </div>
                         <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                           <label class="postInsertTitle">작성자</label>
-                          <input class="multisteps-form__input form-control" name="email" type="text" value="dbwls8382@naver.com" readonly/>
+                          <input class="multisteps-form__input form-control" name="email" type="text" value="${Login.email}" readonly/>
                         </div>
                       </div>
                       <div class="row mt-3" style="width:99%; margin-left:0.5%;">

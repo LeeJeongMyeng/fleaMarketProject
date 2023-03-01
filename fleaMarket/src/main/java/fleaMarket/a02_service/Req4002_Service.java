@@ -1,6 +1,7 @@
 package fleaMarket.a02_service;
 
 import java.io.File;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -48,7 +49,12 @@ public class Req4002_Service {
 		dao.communityUpdate(upt);
 	}
 	
-	public FollowMemberInfo followerSelect(String myemail) {
-		return dao.followerSelect(myemail);
+	public List<FollowMemberInfo> followerSelect(FollowMemberInfo index) {
+		if(index.getKeyword()==null) index.setKeyword("");
+		return dao.followerSelect(index);
+	}
+	
+	public void followmemberdelete(FollowMemberInfo del) {
+		dao.followmemberdelete(del);
 	}
 }

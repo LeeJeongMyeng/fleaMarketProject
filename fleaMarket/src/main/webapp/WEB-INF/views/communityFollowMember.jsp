@@ -28,11 +28,23 @@
 	  <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
 	  <!-- CSS Files -->
 	  <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+	  
 	<script type="text/javascript">
 		$(document).ready(function(){
-			<%-- 
+			if($("#index").keycode==13){
+				$("#indextform").submit()
+			}
+			$("#roomGo").click(function(){
+				location.href="communityMemberRoom.do?myemail="+$("#email").val()
+			})
+			$("#chatGo").click(function(){
+				location.href="chatting.do?myemail="+$("#email").val()
+			})
+			$("#unfollowGo").click(function(){
+				location.href="communityFollowDelete.do?myemail="+${Login.email}+"&following="+$("#email").val()
+			})
 			
-			--%>	
+			
 		});
 	</script>
 </head>
@@ -43,8 +55,11 @@
     <!-- End Navbar -->
           <div class="card" style="width:95%; margin-left:2.5%; margin-top:10%;">
           <div class="card-header p-3">
-		       <h6 style="font-size:20pt;">로그인한 닉네임님의 팔로우 회원목록</h6>
-		       <input type="email" class="form-control" placeholder="회원검색" aria-label="Email">
+		       <h6 style="font-size:20pt;">${Login.nickname}님의 팔로우 회원목록</h6>
+		       <form id="indexform">
+		       	<input type="hidden" name="myemail" value="dbwls8382@naver.com" />
+		       	<input type="text" id="index" name="keyword" class="form-control" placeholder="회원검색(닉네임/이메일)" />
+		       </form>
 	      </div>
             <div class="table-responsive">
               <table class="table align-items-center mb-0">
@@ -59,7 +74,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                <%-- <c:forEach var="followers" items="${follower}"> --%>
+                <c:forEach var="followers" items="${follower}">
                   <tr>
                     <td>
                       <div class="d-flex px-2 py-1">
@@ -76,20 +91,21 @@
                     </td>
                     <td class="align-middle text-center text-sm">
                       <p class="text-secondary mb-0 text-sm">${followers.email}</p>
+                      <input type="hidden" id="email" name="email" value="${followers.email}"/>
                     </td>
                     <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-shop"></i></button>
+                      <button type="button" id="roomGo" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-shop"></i></button>
                     </td>
                     <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" 
+                      <button type="button" id="chatGo" class="text-secondary text-sm" 
                       	style="border:none; background:none;"
                       	data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="ni ni-chat-round"></i></button>
                     </td>
                     <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-scissors"></i></button>
+                      <button type="button" id="unfollowGo" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-scissors"></i></button>
                     </td>
                   </tr>
-              <%--   </c:forEach> --%>
+           		 </c:forEach>
                 </tbody>
               </table>
             </div>

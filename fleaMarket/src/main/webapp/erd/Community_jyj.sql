@@ -35,7 +35,7 @@ WHERE communityNumber='comBoard23';
 SELECT * FROM capplicaion
 WHERE communityNumber='comBoard23';
 
-INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'카테고리','이메일@gmail.com','#태그1 #태그2',0);
+INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','dbwls8392@gmail.com','#태그1 #태그2',0);
 -- 커뮤니티 게시글 이미지
 CREATE TABLE BoardImg
 (
@@ -133,3 +133,15 @@ FROM FLEAMARKETMEMBER m,friend f,profile pro
 WHERE f.following=m.email
 AND f.following=pro.email
 AND myemail='dbwls8382@naver.com';
+
+select *
+FROM FLEAMARKETMEMBER m,friend f,profile pro
+WHERE f.following=m.email
+AND f.following=pro.email
+AND myemail='dbwls8382@naver.com'
+AND (m.email LIKE '%'||''||'%'
+OR m.nickname LIKE '%'||''||'%');
+
+DELETE FROM friend
+WHERE myemail='dbwls8382@naver.com'
+AND FOLLOWING='222@naver.com';

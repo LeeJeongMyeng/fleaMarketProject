@@ -133,7 +133,7 @@
                             <a href="${path}/communityMemberRoom.do" class="dropdown-item border-radius-md">
                               <span class="ps-3">MyRoom</span>
                             </a>
-                            <a href="${path}/communityFollowMember.do?myemail=dbwls8382@naver.com" class="dropdown-item border-radius-md">
+                            <a href="${path}/communityFollowMember.do" class="dropdown-item border-radius-md">
                               <span class="ps-3">나의 팔로워 조회</span>
                             </a>
                           </div>
@@ -522,7 +522,7 @@
                             <a href="${path}/communityMemberRoom.do" class="dropdown-item border-radius-md">
                               <span class="ps-3">My Room</span>
                             </a>
-                            <a href="${path}/communityFollowMember.do?myemail=dbwls8382@naver.com" class="dropdown-item border-radius-md">
+                            <a href="${path}/communityFollowMember.do" class="dropdown-item border-radius-md">
                               <span class="ps-3">나의 팔로워 목록</span>
                             </a>
                           </div>
