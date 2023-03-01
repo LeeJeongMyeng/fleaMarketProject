@@ -20,7 +20,12 @@ import vo.ProfileImg;
 
 @Controller("Req1001")
 public class Req1001_Controller {
-	
+	//http://localhost:7080/fleaMarket/callmain.do 회사소개
+	@RequestMapping("callmain.do")
+	public String callmain() {
+		return "main";
+	}
+
 	@Autowired
 	private Req1001_Service service;
 	
