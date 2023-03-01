@@ -24,9 +24,7 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	public Req1000_ServiceImp(Req1000_Dao dao) {
 		this.dao = dao;
 	}
-	
-	
-	
+
 	HashMap<String,String> map;
 	
 	

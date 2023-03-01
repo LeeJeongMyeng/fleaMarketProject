@@ -67,10 +67,12 @@ $(document).ready(function(){
                 <div class="card-body">
                   <form role="form" id="LoginForm" action="Login.do" method="post">
                     <div class="mb-3">
-                      <input type="email" name="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email" required>
+                      <input type="email" name="email" class="form-control form-control-lg"
+                       		placeholder="Email" aria-label="Email" required>
                     </div>
                     <div class="mb-3">
-                      <input type="password" name="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" required>
+                      <input type="password" name="password" class="form-control form-control-lg"
+                      		 placeholder="Password" aria-label="Password" required>
                     </div>
                     <div class="row">
 	                    <div class="form-check form-switch col-6">

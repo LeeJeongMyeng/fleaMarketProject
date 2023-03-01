@@ -60,7 +60,7 @@ public class Req1000_Controller {
 		return "SignIn";
 	}
 	
-	@RequestMapping("Login.do") //일반로그인
+	@RequestMapping("Login.do") //로그인
 	public String Loign(Member log,Model d,HttpSession session) {
 		Member mem;		
 		String msg = "일치하는 회원이 없습니다. 다시 시도 부탁드립니다.";

@@ -438,22 +438,7 @@ var data = {"b_no":[buisnum.val()]};
     
 
 	//회원가입 완료 버튼
-    function SignUp_Ok(){
-		console.log("##가입체크##")
-		console.log($('[name=email]').val())		
-		console.log($('[name=password]').val())		
-		console.log($('[name=name]').val())		
-		console.log($('[name=personalnumber]').val())		
-		console.log($('[name=profileimg]').val())		
-		console.log($('[name=nickname]').val())		
-		console.log($('[name=phonenumber]').val())		
-		console.log($('[name=address]').val())		
-		console.log($('[name=authority]').val())		
-		console.log($('[name=buisnesscheck]').val())		
-		console.log($('[name=buisnessfile]').val())		
-		console.log($('[name=category]').val())		
-	
-		
+    function SignUp_Ok(){	
     	if(!OkAuth){alert("가입 유형을 선택해주세요."); return false;}
     	if($('[name=category]').val()=='카테고리 선택'){alert('카테고리를 선택해주세요.'); return false;}
     	$('#SignUpForm').submit()
