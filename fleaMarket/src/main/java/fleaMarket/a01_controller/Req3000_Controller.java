@@ -29,7 +29,7 @@ public class Req3000_Controller {
 
 		return "redirect:fRegistration.do"; // 조회페이지로 이동
 	}
-
+	 
 	@RequestMapping("fileupload.do")
 	public String fileupload(@RequestParam("filePath") MultipartFile profile) {
 		System.out.println("getName:" + profile.getName());
@@ -39,4 +39,7 @@ public class Req3000_Controller {
 		// redirect:fRegistration.do
 		return "redirect:fRegistration.do";
 	}
+
+	
+	
 }

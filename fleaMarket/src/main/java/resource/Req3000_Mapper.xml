@@ -39,13 +39,15 @@
  	 	</association>
  	 </resultMap>
        
-    	 <insert id="insertFleaMarket" parameterType="totjoin">
+    	 <insert id="insertFleaMarket" parameterType="fleamarket">
     insert into FleaMarket
        values(flea01_seq.nextval,#{title},sysdate,
          #{content},#{bisenessNumber},#{email},#{approvalMaxCnt},
          #{recruitmentStartDate},#{recruitmentEndDate},#{openDate},#{closeDate},
-         #{checkForm},#{viewCnt},#{address})
+         #{checkForm},#{viewCnt},#{address}),
+         insert into FFile values(flea_seq.nextval,#{filename},#{filePath})
       </insert> 
+  
     </mapper>
     
     
