@@ -35,6 +35,7 @@ private String filePath;
 
 dao
 public void insertFleaMarket(FleaMarket ins);
+public void insFFile(FFile ins);
 
 mapper.xml
 	 <insert id="insertFleaMarket" parameterType="FleaMarket">
