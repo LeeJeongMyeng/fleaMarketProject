@@ -44,6 +44,7 @@
 <body class="g-sidenav-show   bg-gray-100">
    <%@ include file="/WEB-INF/views/header.jsp" %>
 
+
    	<!-- 배너  -->
 	<div class="mask bg-gradient-primary" style="background:white; width:100%; height:300px; margin-top:8%; border-top:0.5px solid grey; border-bottom:0.5px solid grey;"></div>
        <!-- 메인 이미지 변경할 것 z-index참고 -->

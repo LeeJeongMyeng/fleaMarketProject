@@ -73,7 +73,13 @@
         <span class="sr-only">Next</span>
       </a>
     </div>
-      
+      <!- 사이트 소개글 -->
+      <h5 style="text-align:center;">
+		사이트소개글
+	콘티고는 플리마켓 플랫폼을 제공 어쩌고 하면서
+	지역사회와 함께 성장하는 올바른 가치를 추구합니다.</h5>
+	
+
       <!--달력넣기  -->
       <div class="row" style="height:400px;">
         <div class="col-lg-6 mb-4 mb-lg-0">
