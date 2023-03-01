@@ -51,6 +51,7 @@ public class Req4002_Service {
 	
 	public List<FollowMemberInfo> followerSelect(FollowMemberInfo index) {
 		if(index.getKeyword()==null) index.setKeyword("");
+		if(index.getMyemail()==null) index.setMyemail("");
 		return dao.followerSelect(index);
 	}
 	

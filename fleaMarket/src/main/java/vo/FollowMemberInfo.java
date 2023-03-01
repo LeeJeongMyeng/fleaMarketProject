@@ -1,7 +1,7 @@
 package vo;
 //vo.FollowMemberInfo
 public class FollowMemberInfo {
-	private String email; // 이메일
+	private String email; // 이메일 // 팔로우한 계정정보
 	private String password; // 패스워드
 	private String nickname; // 닉네임
 	private String personalnumber; // 주민번호
@@ -13,7 +13,7 @@ public class FollowMemberInfo {
 	private String naveremail;	// 네이버이메일
 	private String category;	// 판매품목(여성의류,남성의류 등등)
 	private String name;	//이름
-	private String myemail;	//이름
+	private String myemail;	// 세션값이메일
 	private String following;	// 팔로잉(
 	private String profileimg;	// 프로필이미지
 	private String keyword; // 검색기능

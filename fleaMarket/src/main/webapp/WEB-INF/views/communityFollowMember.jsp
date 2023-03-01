@@ -35,16 +35,14 @@
 				$("#indextform").submit()
 			}
 			$("#roomGo").click(function(){
-				location.href="communityMemberRoom.do?myemail="+$("#email").val()
+				location.href="communityMemberRoom.do?myemail="+$("#email").text()
 			})
 			$("#chatGo").click(function(){
-				location.href="chatting.do?myemail="+$("#email").val()
+				location.href="chatting.do?myemail="+$("#email").text()
 			})
 			$("#unfollowGo").click(function(){
-				location.href="communityFollowDelete.do?myemail="+${Login.email}+"&following="+$("#email").val()
+				location.href="communityFollowDelete.do?myemail="+${Login.email}+"&following="+$("#email").text()
 			})
-			
-			
 		});
 	</script>
 </head>
@@ -57,7 +55,7 @@
           <div class="card-header p-3">
 		       <h6 style="font-size:20pt;">${Login.nickname}님의 팔로우 회원목록</h6>
 		       <form id="indexform">
-		       	<input type="hidden" name="myemail" value="dbwls8382@naver.com" />
+		       	<input type="hidden" name="myemail" value="${Login.email}" />
 		       	<input type="text" id="index" name="keyword" class="form-control" placeholder="회원검색(닉네임/이메일)" />
 		       </form>
 	      </div>
@@ -90,8 +88,8 @@
                       <p class="text-sm text-secondary mb-0">${followers.authority}</p>
                     </td>
                     <td class="align-middle text-center text-sm">
-                      <p class="text-secondary mb-0 text-sm">${followers.email}</p>
-                      <input type="hidden" id="email" name="email" value="${followers.email}"/>
+                      <p id="email" class="text-secondary mb-0 text-sm">${followers.email}</p>
+                     <%--  <input type="hidden" id="emailinput" name="email" value="${followers.email}"/> --%>
                     </td>
                     <td class="align-middle text-center">
                       <button type="button" id="roomGo" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-shop"></i></button>
