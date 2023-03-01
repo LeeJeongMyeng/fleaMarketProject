@@ -12,6 +12,7 @@
 		<typeAlias alias="ffile" type="vo.FFile"/>
 		<typeAlias alias="totfleamarket" type="vo.TotFleaMarket"/>
 		<typeAlias alias="followmemberinfo" type="vo.FollowMemberInfo"/>
+		<typeAlias alias="capplicationList" type = "vo.CapplicationList"/>
 	</typeAliases>
 
 	<!-- 2. 사용 XXXMapper.xml을 추가 -->
@@ -20,5 +21,6 @@
 		<mapper resource="resource/Req1001_Mapper.xml"/>
 		<mapper resource="resource/Req4002_Mapper.xml"/>
 		<mapper resource="resource/Req3000_Mapper.xml"/>
+		<mapper resource="resource/communitySelect_Mapper.xml"/>
 	</mappers>
 </configuration>
