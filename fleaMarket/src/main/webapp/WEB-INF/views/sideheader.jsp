@@ -97,66 +97,122 @@ main{
 						</ul>
 					</div></li>
 				<li class="nav-item mt-3">
-					<h6
-						class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGES</h6>
+					<h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGES</h6>
 				</li>
-				<li class="nav-item active"><a data-bs-toggle="collapse"
-					href="#pagesExamples" class="nav-link active"
-					aria-controls="pagesExamples" role="button" aria-expanded="false">
-						<div
-							class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
-							<i class="ni ni-single-02 text-warning text-sm opacity-10"></i>
-						</div> <span class="nav-link-text ms-1">회원</span>
+				<li class="nav-item active">
+				<a data-bs-toggle="collapse" href="#pagesExamples" class="nav-link" aria-controls="pagesExamples" role="button" aria-expanded="false">
+					<div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+						<i class="ni ni-single-02 text-warning text-sm opacity-10"></i>
+					</div>
+					<span class="nav-link-text ms-1">회원</span>
 				</a>
-
-
-
+				<c:choose>
+				<%--관리자로 들어오면 나오는 메뉴 --%>
+				<c:when test="${Login.authority!='관리자'}">
 					<div class="collapse " id="pagesExamples">
 						<ul class="nav ms-4">
-							<li class="nav-item active"><a class="nav-link"
-								href="#profileExample"> <span class="sidenav-mini-icon">
-										P </span> <span class="sidenav-normal"> 내 정보 조회 <b class="caret"></b></span>
-							</a>
-								</li>
-							
+							<li class="nav-item active">
+								<a class="nav-link" href="MemberInfo.do">
+								 <span class="sidenav-mini-icon">P</span>
+								  <span class="sidenav-normal">내 정보 조회<b class="caret"></b></span>
+								</a>
+							</li>	
 						</ul>
-					</div></li>
-				<li class="nav-item"><a data-bs-toggle="collapse"
-					href="#applicationsExamples" class="nav-link"
-					aria-controls="applicationsExamples" role="button"
-					aria-expanded="false">
-						<div
-class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+					</div>		
+				</c:when>
+				<%--회원으로 들어오면 나오는 메뉴들 --%>
+				<c:otherwise>
+					<div class="collapse " id="pagesExamples">
+						<ul class="nav ms-4">
+							<li class="nav-item active">
+								<a class="nav-link" href="AdminSearch.do">
+								 <span class="sidenav-mini-icon">P</span>
+								  <span class="sidenav-normal">가입회원 목록조회<b class="caret"></b></span>
+								</a>
+							</li>	
+						</ul>
+					</div>
+				</c:otherwise>
+				</c:choose>
+				
+				
+				</li>
+				
+				<li class="nav-item">
+				<a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+						<div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
 							<i class="ni ni-ui-04 text-info text-sm opacity-10"></i>
-						</div> <span class="nav-link-text ms-1">내가 쓴 글</span>
+						</div> 
+						<span class="nav-link-text ms-1">내가 쓴 글</span>
 				</a>
 					<div class="collapse " id="applicationsExamples">
 						<ul class="nav ms-4">
-							<li class="nav-item "><a class="nav-link "
-								href="${path}/pages/pages/pricing-page.html"> <span
-									class="sidenav-mini-icon"> P </span> <span
-									class="sidenav-normal"> 플리마켓 모집</span>
-							</a></li>
-							<li class="nav-item "><a class="nav-link "
-								href="${path}/pages/pages/pricing-page.html"> <span
-									class="sidenav-mini-icon"> P </span> <span
-									class="sidenav-normal"> 플리마켓 신청</span>
-							</a></li>
-							<li class="nav-item "><a class="nav-link"
-								href="${path}/pages/applications/wizard.html"> <span
-									class="sidenav-mini-icon"> W </span> <span
-									class="sidenav-normal"> 커뮤니티 </span>
-							</a></li>
-							<li class="nav-item "><a class="nav-link"
-								href="${path}/pages/applications/wizard.html"> <span
-									class="sidenav-mini-icon"> W </span> <span
-									class="sidenav-normal"> 1:1문의 </span>
-							</a></li>
+						<c:if test="${Login.authority=='사업자'}">
+							<li class="nav-item ">
+								<a class="nav-link " href="#"> 
+									<span class="sidenav-normal">내가 쓴 모집글</span>
+								</a>
+							</li>
+						</c:if>
+							<li class="nav-item ">
+								<a class="nav-link " href="#"> 
+									<span class="sidenav-normal">내 참가신청 글목록</span>
+								</a>
+							</li>
+							<li class="nav-item ">
+								<a class="nav-link " href="#"> 
+									<span class="sidenav-normal">나의 문의글</span>
+								</a>
+							</li>
+							<li class="nav-item ">
+								<a class="nav-link " href="${path}/pages/pages/pricing-page.html"> 
+									<span class="sidenav-normal">커뮤니티</span>
+								</a>
+							</li>
+							
 						</ul>
-					</div></li>
-								</div></li>
+					</div>
+			</li><%--nav-item --%>
+			
+				<li class="nav-item">
+				<a data-bs-toggle="collapse" href="#PageMove" class="nav-link" aria-controls="applicationsExamples" role="button" aria-expanded="false">
+						<div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+ 							<i class="ni ni-single-copy-04 text-danger text-sm opacity-10"></i>						</div> 
+						<span class="nav-link-text ms-1">이동하기</span>
+				</a>
+					<div class="collapse " id="PageMove">
+						<ul class="nav ms-4">
+							<li class="nav-item ">
+								<a class="nav-link " href="#"> 
+									<span class="sidenav-normal">플리마켓</span>
+								</a>
+							</li>
+					
+							<li class="nav-item ">
+								<a class="nav-link " href="#"> 
+									<span class="sidenav-normal">커뮤니티</span>
+								</a>
+							</li>
+							<li class="nav-item ">
+								<a class="nav-link " href="#"> 
+									<span class="sidenav-normal">메뉴1</span>
+								</a>
+							</li>
+							<li class="nav-item ">
+								<a class="nav-link " href="#"> 
+									<span class="sidenav-normal">메뉴2</span>
+								</a>
+							</li>
+							
 						</ul>
-					</div></li>
+					</div>
+			</li><%--nav-item --%>
+				
+				</div>
+			</li>
+		</ul>
+	</div>
+	</li>
 			</ul>
 		</div>
 	</aside> 
