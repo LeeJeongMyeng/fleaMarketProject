@@ -11,6 +11,7 @@
 		<typeAlias alias="fleamarket" type="vo.FleaMarket"/>
 		<typeAlias alias="ffile" type="vo.FFile"/>
 		<typeAlias alias="totfleamarket" type="vo.TotFleaMarket"/>
+		<typeAlias alias="followmemberinfo" type="vo.FollowMemberInfo"/>
 	</typeAliases>
 
 	<!-- 2. 사용 XXXMapper.xml을 추가 -->
