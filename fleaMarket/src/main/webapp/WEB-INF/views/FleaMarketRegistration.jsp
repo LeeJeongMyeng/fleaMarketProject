@@ -50,15 +50,21 @@ $('#editor .ql-editor').keyup(function(){
 	console.log("dd",expeditor);
 	$('input[name=content]').val(expeditor); 
 })
-
-//등록 버튼 클릭시
+//
+var msg = "${msg}"
+		if (msg != "") {
+			alert(msg)
+			if (msg + "\n 조회화면으로 이동하시겠습니까?") {
+				location.href = "${path}/totalSearch.do"
+			}
+		}
+/* //등록 버튼 클릭시
 $("#insBtn").click(function(){
 	if(confirm("등록하시겠습니까?")){ 
-/* 		$("form").attr("action","${path}/fleaMarketins.do"); */
-		$("form").submit();
+
 	}
 	
-})
+}) */
 
 
 });
@@ -83,8 +89,7 @@ $("#insBtn").click(function(){
 		<div class="container-fluid py-4">
 			<div class="row">
 				<div class="col-lg-9 col-12 mx-auto">
-
-					<form action="/file-upload.do" method="post" id="aform"
+					<form  method="post"  action="fleaMarketins.do" id="aform"
 						name="aform" enctype="multipart/form-data">
 						<div class="card card-body mt-4">
 							<h6 class="mb-0 fleamarket">플리마켓 등록</h6>
@@ -168,8 +173,8 @@ $("#insBtn").click(function(){
 
 								<div class="row">
 									<div class="col-sm-4 col-6">
-										<label class="form-label mt-4">첨부파일 유무</label> <select
-											class="form-control" name="checkForm" id="choices-gender">
+										<label class="form-label mt-4">첨부파일 유무</label> 
+										<select	class="form-control" name="checkForm" id="choices-gender">
 											<option value="N">필요없음</option>
 											<option value="P">개인양식</option>
 											<option value="C">공통파일</option>
@@ -186,7 +191,7 @@ $("#insBtn").click(function(){
 					</form>
 
 					<div class="d-flex justify-content-end mt-4">
-						<button type="button" id="insBtn"
+						<button type="submit" id="insBtn"
 							class="btn bg-gradient-primary m-0 ms-2">등록하기</button>
 					</div>
 				</div>

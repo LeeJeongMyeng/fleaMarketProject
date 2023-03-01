@@ -1,6 +1,6 @@
 package vo;
 
-public class FleaMarket {
+public class TotFleaMarket {
 
 	private String title;
 	private String registDate;
@@ -15,7 +15,7 @@ public class FleaMarket {
 	private String checkForm; 
 	private int viewCnt;
 	private String address;
-	
+	private FFile fFile;
 	public String getTitle() {
 		return title;
 	}
@@ -55,6 +55,9 @@ public class FleaMarket {
 	public String getAddress() {
 		return address;
 	}
+	public FFile getfFile() {
+		return fFile;
+	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
@@ -93,6 +96,9 @@ public class FleaMarket {
 	}
 	public void setAddress(String address) {
 		this.address = address;
+	}
+	public void setfFile(FFile fFile) {
+		this.fFile = fFile;
 	}
 	
 	
