@@ -51,5 +51,4 @@ public class Req4002_Service {
 	public FollowMemberInfo followerSelect(String id) {
 		return dao.followerSelect(id);
 	}
-	
 }

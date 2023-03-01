@@ -116,16 +116,25 @@
                               커뮤니티
                             </div>
                             <a href="${path}/pages/pages/projects/general.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">홍보게시글</span>
+                              <span class="ps-3">홍보글</span>
                             </a>
                             <a href="${path}/pages/pages/projects/timeline.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">사업아이디어게시글</span>
+                              <span class="ps-3">사업아이디어</span>
                             </a>
                             <a href="${path}/pages/pages/projects/new-project.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">사는이야기게시글</span>
+                              <span class="ps-3">사는이야기</span>
                             </a>
                             <a href="${path}/pages/pages/projects/new-project.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">꿀팁게시글</span>
+                              <span class="ps-3">꿀팁</span>
+                            </a>
+                            <a href="${path}/chatting.do" class="dropdown-item border-radius-md">
+                              <span class="ps-3">채팅목록</span>
+                            </a>
+                            <a href="${path}/communityMemberRoom.do" class="dropdown-item border-radius-md">
+                              <span class="ps-3">MyRoom</span>
+                            </a>
+                            <a href="${path}/communityFollowMember.do?id='dbwls8382@naver.com'" class="dropdown-item border-radius-md">
+                              <span class="ps-3">나의 팔로워 조회</span>
                             </a>
                           </div>
                           <div class="col-4">
@@ -507,13 +516,13 @@
                               <i class="ni ni-box-2 text-primary me-3"></i>
                               소통
                             </div>
-                            <a href="${path}/pages/ecommerce/overview.html" class="dropdown-item border-radius-md">
+                            <a href="${path}/chatting.do" class="dropdown-item border-radius-md">
                               <span class="ps-3">채팅목록</span>
                             </a>
-                            <a href="${path}/pages/ecommerce/referral.html" class="dropdown-item border-radius-md">
+                            <a href="${path}/communityMemberRoom.do" class="dropdown-item border-radius-md">
                               <span class="ps-3">My Room</span>
                             </a>
-                            <a href="${path}/pages/ecommerce/referral.html" class="dropdown-item border-radius-md">
+                            <a href="${path}/communityFollowMember.do?id='dbwls8382@naver.com'" class="dropdown-item border-radius-md">
                               <span class="ps-3">나의 팔로워 목록</span>
                             </a>
                           </div>
