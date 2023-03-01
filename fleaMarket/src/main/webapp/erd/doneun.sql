@@ -26,13 +26,14 @@ CREATE TABLE FleaMarket
 
 SELECT * FROM FleaMarket;
 
-
+DROP SEQUENCE fleaMarket_seq;
 --파일 시퀀스 번호
-   create sequence flea01_seq
-        start with 1
-        minvalue 1
-        nocache;
-        
+CREATE SEQUENCE fleaMarket_seq
+      INCREMENT BY 1
+      START WITH 1
+      MINVALUE 0
+      MAXVALUE 100000
+      nocache;
        
 --플리마켓 파일
 CREATE TABLE FFile
@@ -42,3 +43,6 @@ CREATE TABLE FFile
 	postingNumber varchar2(100) NOT NULL
 );
 SELECT * FROM ffile;       
+
+
+INSERT INTO fleaMarket VALUES (fleaMarket_seq.nextval,'소상공인 행복마켓',sysdate,'주최 : 중소벤처기업부, 소상공인연합회<br>지역별 우수 소상공인 상품의 전시와 판매를 중심으로 플리마켓, 푸드트럭, 체험존 운영 예정<br>소상공인 업체의 지역 제품 판매','3762801384','28888wjdaud@naver.com',30,'20230101','20230131','20230301','20230307','P',NULL,NULL);

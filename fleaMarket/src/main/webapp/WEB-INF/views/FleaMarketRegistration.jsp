@@ -51,20 +51,14 @@ $('#editor .ql-editor').keyup(function(){
 	$('input[name=content]').val(expeditor); 
 })
 //
-var msg = "${msg}"
+	var msg = "${msg}"
 		if (msg != "") {
 			alert(msg)
 			if (msg + "\n 조회화면으로 이동하시겠습니까?") {
 				location.href = "${path}/totalSearch.do"
 			}
 		}
-/* //등록 버튼 클릭시
-$("#insBtn").click(function(){
-	if(confirm("등록하시겠습니까?")){ 
 
-	}
-	
-}) */
 
 
 });
@@ -94,6 +88,8 @@ $("#insBtn").click(function(){
 						<div class="card card-body mt-4">
 							<h6 class="mb-0 fleamarket">플리마켓 등록</h6>
 							<hr class="horizontal dark my-3">
+							<input type="hidden" name="email" value="ehddms2909@naver.com">
+							<input type="hidden" name="bisenessNumber" value="예시~">
 							<label for="title" class="form-label labelFont">제목</label> 
 							<input type="text" class="form-control" id="projectName" name="title">
 

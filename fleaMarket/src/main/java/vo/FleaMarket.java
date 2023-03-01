@@ -3,7 +3,6 @@ package vo;
 public class FleaMarket {
 
 	private String title;
-	private String registDate;
 	private String content;
 	private String bisenessNumber;
 	private String email;
@@ -15,12 +14,8 @@ public class FleaMarket {
 	private String checkForm; 
 	private int viewCnt;
 	private String address;
-	
 	public String getTitle() {
 		return title;
-	}
-	public String getRegistDate() {
-		return registDate;
 	}
 	public String getContent() {
 		return content;
@@ -58,9 +53,6 @@ public class FleaMarket {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public void setRegistDate(String registDate) {
-		this.registDate = registDate;
-	}
 	public void setContent(String content) {
 		this.content = content;
 	}
@@ -94,6 +86,7 @@ public class FleaMarket {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+	
 	
 	
 }

@@ -4,9 +4,12 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
    
     <mapper namespace="fleaMarket.a03_dao.Req3000_Dao">
-    <!--  
-    	private String title;
-	private String registDate;
+
+        
+        
+<!--  
+
+	private String title;
 	private String content;
 	private String bisenessNumber;
 	private String email;
@@ -16,37 +19,18 @@
 	private String openDate;
 	private String closeDate;
 	private String checkForm; 
-	private int viewCnt;
 	private String address;
-    -->
-     <resultMap type="totfleamarket" id="totjoin" >
- 	 	<association property="fleamarket" javaType="fleamarket" >
- 	 		<result column="email" property="email"/>
- 	 		<result column="bisenessNumber" property="bisenessNumber"/>
- 	 		<result column="title" property="title"/>
- 	 		<result column="openDate" property="openDate"/>
- 	 		<result column="closeDate" property="closeDate"/>
- 	 		<result column="approvalMaxCnt" property="approvalMaxCnt"/>
- 	 		<result column="recruitmentStartDate" property="recruitmentStartDate"/>
- 	 		<result column="recruitmentEndDate" property="recruitmentEndDate"/>
- 	 		<result column="address" property="address"/>
- 	 		<result column="content" property="content"/>
- 	 		<result column="checkForm" property="checkForm"/>
- 	 	</association>
- 	 	<association property="ffile"  javaType="ffile">
- 	 		<result column="filename" property="filename"/>
- 	 		<result column="filePath" property="filePath"/>
- 	 	</association>
- 	 </resultMap>
-       
-    	 <insert id="insertFleaMarket" parameterType="fleamarket">
+	
+-->        
+       <insert id="insertFleaMarket" parameterType="fleamarket">
     insert into FleaMarket
-       values(flea01_seq.nextval,#{title},sysdate,
+       values(fleaMarket_seq.nextval,#{title}, sysdate,
          #{content},#{bisenessNumber},#{email},#{approvalMaxCnt},
          #{recruitmentStartDate},#{recruitmentEndDate},#{openDate},#{closeDate},
-         #{checkForm},#{viewCnt},#{address}),
-         insert into FFile values(flea_seq.nextval,#{filename},#{filePath})
+         #{checkForm},#{viewCnt},#{address})
       </insert> 
+      
+  
   
     </mapper>
     
