@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fleaMarket.a02_service.Req4002_Service;
 import vo.Capplication;
@@ -22,20 +23,35 @@ public class Req4002_Controller {
 	public String communityInsert(Capplication ins, Model d) {
 		service.communityInsert(ins);
 		d.addAttribute("msg", "등록 성공");
-		return "communityInsert"; // 조회페이지로 이동
+		return "communityInsert"; // 전체조회페이지로 이동
 	}
 	
-	@RequestMapping("communityUpdate.do")
-	public String communityUpdate() {
+	@RequestMapping("communityUpdatePage.do")
+	public String communityUpdatePage() {
 		return "communityUpdate";
+	}
+	
+	@PostMapping("communityUpdate.do")
+	public String communityUpdate(Capplication upt, Model d) {
+		service.communityUpdate(upt);
+		d.addAttribute("msg", "수정 성공");
+		return "communityUpdate"; // 상세조회페이지로 이동
 	}
 	
 	@RequestMapping("chatting.do")
 	public String chatting() {
 		return "communityChatAll";
 	}
+	
 	@RequestMapping("communityFollowMember.do")
-	public String communityFollowMember() {
+	public String communityFollowMember(@RequestParam("id") String id, Model d) {
+		d.addAttribute("follower", service.followerSelect(id));
+		System.out.println(service.followerSelect(id));
+		return "communityFollowMember";
+	}
+	
+	@RequestMapping("communityFollowMemberIndex.do")
+	public String communityFollowMemberIndex() {
 		return "communityFollowMember";
 	}
 	

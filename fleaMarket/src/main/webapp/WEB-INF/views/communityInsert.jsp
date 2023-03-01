@@ -11,6 +11,7 @@
 <html>
 <head>
   <meta charset="utf-8" />
+  <title>커뮤니티 게시글 등록</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -27,17 +28,12 @@
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
   <script type="text/javascript">
 	  $(document).ready(function(){
-		  // 내용에 파일업로드 버튼 숨김처리
-		  $(".ql-link").hide()
-		  
-		  //등록 버튼 클릭 시,
-		  $("#send").click(function(){
+			// 등록 버튼 클릭 시,
+		  $("#insert").click(function(){
 			  //내용 입력에 따른 content Input에 데이터 넣기(내용입력란이 input태그가 아니라서))
 			  var expeditor=$('#edit-deschiption .ql-editor').html()
-			  console.log("keyup없이",expeditor)
 			  $('input[name=content]').val(expeditor);
 			  $("form").submit()
-		  
 		  })
 		  console.log($('#productImg').val())
 	  });
@@ -80,7 +76,7 @@
                         </div>
                         <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                           <label class="postInsertTitle">작성자</label>
-                          <input class="multisteps-form__input form-control" name="email" type="text" value="사용자이메일" readonly/>
+                          <input class="multisteps-form__input form-control" name="email" type="text" value="dbwls8382@naver.com" readonly/>
                         </div>
                       </div>
                       <div class="row mt-3" style="width:99%; margin-left:0.5%;">
@@ -98,7 +94,7 @@
                         <div class="col-12">
                           <label class="mt-4 form-label postInsertTitle">태그(#)</label><!--태그 기능 넣기 #클릭시 드롭다운하기/아니면 입력값넣기  -->
                           <select class="form-control" name="hashtag" id="choices-tags" multiple>
-                            <option selected>#구분자로 있는 태그들로 드롭다운시키기</option>
+                            <!-- <option selected>#구분자로 있는 태그들로 드롭다운시키기</option> -->
                           </select>
                         </div>
                       </div>
@@ -136,7 +132,7 @@
                       </script>
                       <div class="button-row d-flex mt-4">
                         <button class="btn bg-gradient-secondary mb-0 js-btn-prev mt-8"  type="button" title="Prev">이전</button>
-                        <button class="btn bg-gradient-dark ms-auto mb-0 mt-8" type="button" title="Send" id="send">등록</button>
+                        <button class="btn bg-gradient-dark ms-auto mb-0 mt-8" type="button" title="Send" id="insert">등록</button>
                       </div>
                     </div>
                   </div>
@@ -224,6 +220,7 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
+  <script src="${path}/resource/js/Req4002/InsertContent.js"></script>
 </body>
 <script type="text/javascript">
 	$(document).ready(function(){

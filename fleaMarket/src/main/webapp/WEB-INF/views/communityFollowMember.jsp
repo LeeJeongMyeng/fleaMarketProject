@@ -37,7 +37,7 @@
 	</script>
 </head>
 
-<body class="g-sidenav-show   bg-gray-100">
+<body class="g-sidenav-show  bg-gray-100">
   <jsp:include page="header.jsp"></jsp:include>
   <main class="main-content position-relative border-radius-lg" style="margin-top:18%;">
     <!-- End Navbar -->
@@ -53,32 +53,29 @@
                     <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">프로필&닉네임</th>
                     <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">구분</th>
                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">이메일</th>
-                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">등록일자</th>
                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">room이동</th>
                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">채팅하기</th>
                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">팔로잉</th>
                   </tr>
                 </thead>
                 <tbody>
+                <c:forEach var="follower" items="${follower}">
                   <tr>
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div>
-                          <img src="${path}/assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="avatar image">
+                          <img src="${path}/resource/img/Member/profileimg/${follower.profileimg}" class="avatar avatar-sm me-3" alt="avatar image">
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">John Michael</h6>
+                          <h6 class="mb-0 text-sm">${follower.nickname}</h6>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <p class="text-sm text-secondary mb-0">Manager</p>
+                      <p class="text-sm text-secondary mb-0">${follower.authority}</p>
                     </td>
                     <td class="align-middle text-center text-sm">
-                      <p class="text-secondary mb-0 text-sm">john@user.com</p>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-sm">23/04/18</span>
+                      <p class="text-secondary mb-0 text-sm">${follower.email}</p>
                     </td>
                     <td class="align-middle text-center">
                       <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-shop"></i></button>
@@ -92,159 +89,7 @@
                       <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-scissors"></i></button>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="${path}/assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="avatar image">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Alexa Liras</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-sm text-secondary mb-0">Programator</p>
-                    </td>
-                    
-                    <td class="align-middle text-center text-sm">
-                      <p class="text-secondary mb-0 text-sm">alexa@user.com</p>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">11/01/19</span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-shop"></i></button>
-                    </td>
-                    <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" 
-                      	style="border:none; background:none;"><i class="ni ni-chat-round"></i></button>
-                    </td>
-                   <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-scissors"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="${path}/assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="avatar image">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Laurent Perrier</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-sm text-secondary mb-0">Executive</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <p class="text-secondary mb-0 text-sm">laurent@user.com</p>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">19/09/17</span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-shop"></i></button>
-                    </td>
-                    <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-chat-round"></i></button>
-                    </td>
-                    <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-scissors"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="${path}/assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="avatar image">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Michael Levi</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-sm text-secondary mb-0">Backend developer</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <p class="text-secondary mb-0 text-sm">michael@user.com</p>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">24/12/08</span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-shop"></i></button>
-                    </td>
-                    <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-chat-round"></i></button>
-                    </td>
-                    <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-scissors"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="${path}/assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="avatar image">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Richard Gran</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-sm text-secondary mb-0">Manager</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <p class="text-secondary mb-0 text-sm">richard@user.com</p>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">04/10/21</span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-shop"></i></button>
-                    </td>
-                    <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-chat-round"></i></button>
-                    </td>
-                    <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-scissors"></i></button>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="${path}/assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="avatar image">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">Miriam Eric</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-sm text-secondary mb-0">Programtor</p>
-                    </td>
-                    
-                    <td class="align-middle text-center text-sm">
-                      <p class="text-secondary mb-0 text-sm">miriam@user.com</p>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold">14/09/20</span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-shop"></i></button>
-                    </td>
-                    <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-chat-round"></i></button>
-                    </td>
-                    <td class="align-middle text-center">
-                      <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-scissors"></i></button>
-                    </td>
-                  </tr>
+                </c:forEach>
                 </tbody>
               </table>
             </div>

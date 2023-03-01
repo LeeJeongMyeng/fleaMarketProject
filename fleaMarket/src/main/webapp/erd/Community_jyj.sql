@@ -26,6 +26,15 @@ SELECT communityNumber_seq.currval FROM dual;
 DROP TABLE capplicaion CASCADE CONSTRAINTS;
 SELECT * FROM capplicaion;
 
+UPDATE capplicaion 
+SET title='',
+	content='',
+	hashtag='#태그할수 있을까?',
+	updatedate=sysdate
+WHERE communityNumber='comBoard23';
+SELECT * FROM capplicaion
+WHERE communityNumber='comBoard23';
+
 INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'카테고리','이메일@gmail.com','#태그1 #태그2',0);
 -- 커뮤니티 게시글 이미지
 CREATE TABLE BoardImg
@@ -108,7 +117,19 @@ DROP TABLE rereLike CASCADE CONSTRAINTS;
 --팔로우/팔로잉
 CREATE TABLE friend
 (
-	follower varchar2(50) NOT NULL,
-	following varchar2(50) NOT NULL
+	myemail varchar2(50) NOT NULL, -- 회원 이메일(FK 처리) 세션값
+	following varchar2(50) NOT NULL -- 내가 팔로우 한사람
 );
 DROP TABLE friend CASCADE CONSTRAINTS;
+
+INSERT INTO friend VALUES('dbwls8382@naver.com','222@naver.com');
+
+SELECT * FROM friend;
+select * FROM FLEAMARKETMEMBER;
+SELECT * FROM profile;
+
+select *
+FROM FLEAMARKETMEMBER m,friend f,profile pro
+WHERE f.following=m.email
+AND f.following=pro.email
+AND myemail='dbwls8382@naver.com';
