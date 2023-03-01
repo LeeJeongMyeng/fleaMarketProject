@@ -438,20 +438,20 @@ class="icon icon-shape icon-sm text-center d-flex align-items-center justify-con
             <div class="card-body pt-0">
               <label class="form-label">현재 비밀번호</label>
               <div class="form-group">
-                <input class="form-control" id="CurrentPassword" type="password" placeholder="Current password">
+                <input class="form-control w-50" id="CurrentPassword" type="password" placeholder="Current password">
                 <div class="invalid-feedback">기존 비밀번호와 일치하지 않습니다.</div>	
               </div>
               <label class="form-label">새로운 비밀번호(8~16자 영/숫/특수 중 2가지이상)</label>	
               <div class="form-group">
-                <input class="form-control" name="password" type="password" placeholder="New password">
+                <input class="form-control w-50" name="password" type="password" placeholder="New password">
                 <div class="invalid-feedback">형식이 올바르지 않습니다.</div>	
               </div>
               <label class="form-label">비밀번호 확인</label>
               <div class="form-group">
-                <input class="form-control" id="password2" type="password" placeholder="Confirm password">
+                <input class="form-control w-50" id="password2" type="password" placeholder="Confirm password">
                 <div class="invalid-feedback">비밀번호와 일치하지않습니다.</div>	
               </div>
-              <button class="btn bg-gradient-dark btn-sm float-end mt-6 mb-0">비밀번호변경</button>
+              <button class="btn btn-primary mt-3 mb-0">비밀번호변경</button>
             </div>
             </form>
           </div>
