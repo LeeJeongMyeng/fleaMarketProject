@@ -44,9 +44,9 @@ public class Req4002_Controller {
 	}
 	
 	@RequestMapping("communityFollowMember.do")
-	public String communityFollowMember(@RequestParam("id") String id, Model d) {
-		d.addAttribute("follower", service.followerSelect(id));
-		System.out.println(service.followerSelect(id));
+	public String communityFollowMember(@RequestParam("myemail") String myemail, Model d) {
+		d.addAttribute("follower", service.followerSelect(myemail));
+		System.out.println(service.followerSelect(myemail));
 		return "communityFollowMember";
 	}
 	

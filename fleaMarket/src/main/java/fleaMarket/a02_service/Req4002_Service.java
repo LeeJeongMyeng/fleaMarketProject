@@ -48,7 +48,7 @@ public class Req4002_Service {
 		dao.communityUpdate(upt);
 	}
 	
-	public FollowMemberInfo followerSelect(String id) {
-		return dao.followerSelect(id);
+	public FollowMemberInfo followerSelect(String myemail) {
+		return dao.followerSelect(myemail);
 	}
 }

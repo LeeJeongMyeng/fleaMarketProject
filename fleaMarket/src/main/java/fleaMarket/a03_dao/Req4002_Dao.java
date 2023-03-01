@@ -13,5 +13,5 @@ public interface Req4002_Dao {
 	// 커뮤니티 글 수정
 	public void communityUpdate(Capplication ins);
 	// 팔로우 조회
-	public FollowMemberInfo followerSelect(String id);
+	public FollowMemberInfo followerSelect(String myemail);
 }

@@ -59,23 +59,23 @@
                   </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="follower" items="${follower}">
+                <%-- <c:forEach var="followers" items="${follower}"> --%>
                   <tr>
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div>
-                          <img src="${path}/resource/img/Member/profileimg/${follower.profileimg}" class="avatar avatar-sm me-3" alt="avatar image">
+                          <img src="${path}/resource/img/Member/profileimg/${followers.profileimg}" class="avatar avatar-sm me-3" alt="avatar image">
                         </div>
                         <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">${follower.nickname}</h6>
+                          <h6 class="mb-0 text-sm">${followers.nickname}</h6>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <p class="text-sm text-secondary mb-0">${follower.authority}</p>
+                      <p class="text-sm text-secondary mb-0">${followers.authority}</p>
                     </td>
                     <td class="align-middle text-center text-sm">
-                      <p class="text-secondary mb-0 text-sm">${follower.email}</p>
+                      <p class="text-secondary mb-0 text-sm">${followers.email}</p>
                     </td>
                     <td class="align-middle text-center">
                       <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-shop"></i></button>
@@ -89,7 +89,7 @@
                       <button type="button" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-scissors"></i></button>
                     </td>
                   </tr>
-                </c:forEach>
+              <%--   </c:forEach> --%>
                 </tbody>
               </table>
             </div>
