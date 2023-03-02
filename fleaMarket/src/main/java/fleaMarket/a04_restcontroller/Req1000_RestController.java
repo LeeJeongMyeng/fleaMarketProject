@@ -1,5 +1,7 @@
 package fleaMarket.a04_restcontroller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fleaMarket.a02_service.Req1000_Service;
+import vo.Member;
 
 
 
@@ -23,8 +26,9 @@ public class Req1000_RestController {
 	 //이메일 중복검사
 	@PostMapping("DuplicateEmail.do")
 	public String DuplicateEmail(@RequestParam("email") String email,Model d) {
-		System.out.println(email);
+		
 		d.addAttribute("DuplicateEmail",service.DuplicateEmail(email));
+		
 		return "pageJsonReport";
 	}
 	//이름,주민 중복검사
@@ -52,11 +56,15 @@ public class Req1000_RestController {
 	
 	
 	@PostMapping("MemberFindPassword.do")
-	public String MemberFindPassword(Model d,@RequestParam(value="name", required=false) String name,
+	public String MemberFindPassword(Model d,
+									  @RequestParam(value="name", required=false) String name,
 									  @RequestParam(value="personalnumber", required=false) String personalnumber,
-									  @RequestParam(value="email", required=false) String email) {
+									  @RequestParam(value="email", required=false) String email
+									  ,HttpSession session) {
 		String MemberFindPassword="";
 		if(service.DuplicateMem(name,personalnumber,email)!=null) {
+			
+			// 비번 업데이트 처리
 			service.MemberFindPassword(name,personalnumber,email);
 			  MemberFindPassword = name+"님 ("+email+")계정 <br> <span style='color:red;'>임시 비밀번호</span>로 <<span style='color:red;'>1111</span>>로 변경되었습니다.";
 		}else {
@@ -70,9 +78,15 @@ public class Req1000_RestController {
 	//비번 맞는지 확인
 	@PostMapping("MatchPassword.do")
 	public String MatchPassword(Model d,@RequestParam(value="password", required=false) String password,
-			@RequestParam(value="sespassword", required=false) String sespassword) {
+										@RequestParam(value="sespassword", required=false) String sespassword) {
 		String MatchPassword = "false";
-		if(BCrypt.checkpw(password,sespassword)) {MatchPassword = "true";}
+		
+		if(sespassword.equals("1111") || sespassword.equals("admin")){
+			MatchPassword = sespassword.equals(password)?"true":"false";
+		}else {
+			MatchPassword = BCrypt.checkpw(password,sespassword)?"true":"false";
+		}
+		
 		
 
 		d.addAttribute("MatchPassword",MatchPassword);

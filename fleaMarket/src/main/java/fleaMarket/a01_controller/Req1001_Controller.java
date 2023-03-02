@@ -1,5 +1,7 @@
 package fleaMarket.a01_controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,11 +99,12 @@ public class Req1001_Controller {
 		 d.addAttribute("uptmsg","회원 수정이 완료되었습니다.");
 		return "MemberInfo";
 	}
+	
 	//비밀번호 변경
 	@RequestMapping("UpdatePassword.do")
 	public String UpdatePassword(Member upt,HttpSession session,Model d) {
 		//변경될거니까 세션 지우기
-		System.out.println(session.getAttribute("Login"));
+		//session.removeAttribute("Login");
 		
 		//비번변경
 		 service.UpdatePassword(upt);
@@ -112,23 +115,7 @@ public class Req1001_Controller {
 		 d.addAttribute("uptmsg","비밀번호 변경이 완료되었습니다.");
 		return "MemberInfo";
 	}
-	// 탈퇴
-	@PostMapping("LeaveMember.do")
-	public String LeaveMember(Member del,Model d,HttpSession session){
-		
-		
-		service.DelelteProfile(del.getEmail());
-		
-		//탈퇴처리
-		service.DelelteMember(del.getEmail());
-		//프로필 파일 삭제
-		if(!del.getProfileimgname().equals("defaultprofile.png")) {
-		fileservice.DeleteFile(profilepath,del.getProfileimgname());
-		}
-		//세션삭제 처리.. ㅂㅂ
-		session.removeAttribute("Login");
-		return "main";
-	}
+	
 	// 회원 내가 쓴 플리마켓 모집글
 	@RequestMapping("MemberFmReg.do")
 	public String MemberFmReg(@RequestParam("email")String email, Model d, HttpSession session) {
@@ -136,5 +123,57 @@ public class Req1001_Controller {
 			return "MemberFmReg";
 	}
 	
+	// 자진탈퇴
+	@PostMapping("LeaveMember.do")
+	public String LeaveMember(Member del,Model d,HttpSession session){
+		//밑에 모듈처리함
+		DeleteMemberModule(del.getEmail());
+		//세션삭제 처리.. ㅂㅂ
+		session.removeAttribute("Login");
+		return "main";
+	}
+	
+	//관리자 = 회원삭제처리 여러개 ㅇㅇ
+	@PostMapping("DeleteMembers.do")
+    public String DeleteMembers(@RequestParam("email") List<String> email){
+		System.out.println(email.get(2));
+		
+        for (String c : email) {  		
+        	DeleteMemberModule(c);	
+        }
+        
+        return "redirect:AdminSearch.do";
+    }
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+ //=======================================================================================   
+	//탈퇴 처리 모듈화
+	public void DeleteMemberModule(String email) {
+		//1.이미지테이블의 회원이메일/프로필이름 불러오기
+		ProfileImg pfile = (ProfileImg)service.getMemberProfile(email);
+		//프로필테이블 삭제처리
+		service.DeleteProfile(pfile.getEmail());
+		//탈퇴처리
+		service.DeleteMember(pfile.getEmail());
+		//프로필 파일 삭제
+		if(!pfile.getProfileimg().equals("defaultprofile.png")) {
+		fileservice.DeleteFile(profilepath,pfile.getProfileimg());
+		}
+	}
 	
 }

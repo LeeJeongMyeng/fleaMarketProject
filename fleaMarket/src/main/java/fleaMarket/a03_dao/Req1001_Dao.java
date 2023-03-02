@@ -13,8 +13,11 @@ public interface Req1001_Dao {
 	public void UpdateProfile(ProfileImg upt);
 	public void UpdatePassword(Member upt);
 	public Member Login(String email);
-	public void DelelteProfile(String email);
-	public void DelelteMember(String email);
+	public void DeleteProfile(String email);
+	public void DeleteMember(String email);
 	public List<FleaMarket> FleaMarketList(String email);
+	public ProfileImg getMemberProfile(String email);
+	
+	
 	
 }

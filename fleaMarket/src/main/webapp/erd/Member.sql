@@ -46,9 +46,9 @@ AND PERSONALNUMBER = '950828-1111111';
 --비번찾기
 --비번 초기화 후에,알려주기
 
-DELETE FLEAMARKETMEMBER WHERE email ='aoddl56@nate.com';
+DELETE FLEAMARKETMEMBER WHERE email ='288888wjdaud@gmail.com';
 INSERT INTO FLEAMARKETMEMBER values(
-'aoddl56@nate.com',
+'123@nate.com',
 '!dnfwlq12',
 '맹이',
 '950828-1111111',
@@ -81,10 +81,9 @@ SET AUTHORITY  = '사업자'
 WHERE EMAIL ='222@naver.com';
 
 UPDATE FLEAMARKETMEMBER 
-SET ADDRESS  = '07932&서울 양천구 목동중앙남로16나길 38-10& (목동, 월드메르디앙)&201호' 
-WHERE EMAIL ='28888wjdaud@naver.com'
-AND NAME  = ''
-AND PERSONALNUMBER  =''; 
+SET AUTHORITY  = '관리자' 
+WHERE EMAIL ='admin@contigo.com'
+
 
 ALTER TABLE FLEAMARKETMEMBER MODIFY password varchar2(300);
 ----------------------------------------------------------------------------------
@@ -96,13 +95,13 @@ profileImg varchar2(200)
 	
 );
 
-DELETE profile
-WHERE email
 
 SELECT * FROM PROFILE;
+WHERE EMAIL = 'admin@contigo.com';
 DELETE profile WHERE EMAIL ='28888wjdaud@naver.com';
 INSERT INTO PROFILE VALUES('aoddl56@nate.com','defaultprofile.png');
 
 UPDATE PROFILE 
 SET PROFILEIMG ='고릴라.jpg'
 WHERE EMAIL ='dbwls8382@naver.com';
+

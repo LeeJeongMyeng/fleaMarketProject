@@ -9,6 +9,7 @@
 		select *
 		from FLEAMARKETMEMBER
 		where name like '%'||#{name}||'%'	
+		and authority !='관리자'
 		</select>
 		<!-- 회원정보 수정! -->
 		<update id="UpdateMemberInfo" parameterType="member">
@@ -39,21 +40,25 @@
     	</select>
     	
     	<!-- 회원탈퇴 전 이미지삭제 -->
-    	<delete id="DelelteProfile" parameterType="string">
+    	<delete id="DeleteProfile" parameterType="string">
     		DELETE PROFILE
     		WHERE EMAIL=#{email}
     	</delete>
     	<!-- 회원탈퇴  -->
-    	<delete id="DelelteMember" parameterType="string">
+    	<delete id="DeleteMember" parameterType="string">
     		DELETE FLEAMARKETMEMBER
     		WHERE EMAIL=#{email}
     	</delete>
     	<!-- 내가 쓴 플리마켓글 -->
-    	<select id="FleaMarketList" resultType="FleaMarket"
-		parameterType="String">
-		SELECT * 
-		FROM FleaMarket 
+    	<select id="FleaMarketList" resultType="FleaMarket" parameterType="String">
+		SELECT * FROM FleaMarket 
 		WHERE email =#{email}
+		</select>
+		
+		<!-- 관리자 회원탈퇴용 이메일/프로필이미지 가져오기 -->
+		<select id="getMemberProfile" parameterType="string" resultType="profileimg">
+			SELECT * FROM PROFILE
+			WHERE EMAIL = #{email}
 		</select>
     </mapper>
     

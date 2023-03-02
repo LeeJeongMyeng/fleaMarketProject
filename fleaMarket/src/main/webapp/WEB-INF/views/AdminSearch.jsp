@@ -34,6 +34,51 @@
 <script type="text/javascript">
 	
 </script>
+<style>
+/*페이지네이션*/
+.pagination_wrap{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+}
+
+.pagination{
+	background: #fff;
+    padding-top: 9px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    height: 37px;
+    width: 400px;
+}
+#numbers{
+	padding:0;
+	margin: 0 2rem;
+	list-style-type:none;
+	display:flex; 
+}
+#numbers li a{
+	color:#333;
+	padding: .5rem 1rem;
+	text-decoration:none;
+	opacity:0.7;
+}
+#numbers li a:hover{
+	opacity:1;
+}
+#numbers li a.active{
+	opacity:1;
+	background:#333;
+	color:#fff;
+}
+
+.pagination i{
+	color:#333;
+	font-size:1.2em;
+}
+
+</style>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
 
@@ -73,11 +118,8 @@
 														</div>
 													</div>
 													<div class="modal-footer">
-														<button type="button"
-															class="btn bg-gradient-secondary btn-sm"
-															data-bs-dismiss="modal">취소</button>
-														<button type="button"
-															class="btn bg-gradient-primary btn-sm">탈퇴</button>
+														<button type="button" class="btn bg-gradient-secondary btn-sm" data-bs-dismiss="modal">취소</button>
+														<button type="button" class="btn bg-gradient-primary btn-sm" onclick="javascript:$('#DeleteMembersForm').submit()">탈퇴</button>
 													</div>
 												</div>
 											</div>
@@ -89,8 +131,6 @@
 						</div>
 							<div class="card-body px-0 pb-0">
 							</div>
-							<form id="frm01" class="form"  method="post"> 
-							
 							<div class="row">
 								<div class="col-10 input-group mb-3 w-25">
 								  <button class="btn btn-outline-primary bg-primary mb-0 ms-3" type="submit" style="color:white;" id="button-addon1">　검색　</button>
@@ -102,14 +142,15 @@
 								</div>
 							</div>
 							<div class="table-responsive mt-3">
-								<table class="table table-flush" id="products-list">
+								<form id="DeleteMembersForm" action="DeleteMembers.do" class="form"  method="post">
+								<table class="table table-flush" id="MembersListTable">
 									<thead class="thead-light">
 										<tr style="background-color: #ebebeb;">
 											<th width="10%">
-													<div class="d-flex">
+												<div class="d-flex">
 													<div class="form-check my-auto">
-														<input class="form-check-input" type="checkbox"
-															id="customCheck3">
+														<%--전체 체크박스 --%>
+														<input class="form-check-input" type="checkbox" id="cbx_chkAll">
 													</div>
 												</div>
 											</th>
@@ -125,11 +166,10 @@
 							    		<tr>
 							    		<td>
 							    		<div class="d-flex">
-													<div class="form-check my-auto">
-														<input class="form-check-input" type="checkbox"
-															id="customCheck3">
-													</div>
-												</div>
+											<div class="form-check my-auto">
+												<input class="form-check-input " type="checkbox" name="email" value="${Member.email}" id="customCheck3">
+											</div>
+										</div>
 							    		</td>
 							    		<td>${Member.email}</td>
 							    		<td>${Member.name}</td>
@@ -139,7 +179,25 @@
 							    		</tr>
 							    		</c:forEach>
 										
-										</tbody></table></div></div></div></div></div>
+									 </tbody>
+								</table>
+								</form>
+							</div>
+							
+							<div class="pagination_wrap">
+								<div class="pagination">
+									<i class="fa-solid fa-arrow-left"></i>
+									<ol id="numbers">
+									<!-- 페이지네이션 번호들이 오는곳 -->
+									</ol>
+									<i class="fa-solid fa-arrow-right"></i>
+								</div>			
+							</div> 
+							
+						</div>
+					</div>
+				</div>
+			</div>
 			<footer class="footer pt-3  ">
 				<div class="container-fluid">
 					<div class="row align-items-center justify-content-lg-between">
@@ -175,5 +233,6 @@
 				</div>
 			</footer>
 	</main>
+<script src="${path}/resource/js/Req1001/AdminSearch.js"></script>
 </body>
 </html>

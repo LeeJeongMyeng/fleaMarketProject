@@ -41,15 +41,18 @@ public class Req1001_Service {
 	public Member getLogin(String email){
 		return dao.Login(email);
 	}
-	public void DelelteProfile(String email) {
-		dao.DelelteProfile(email);
+	public void DeleteProfile(String email) {
+		dao.DeleteProfile(email);
 	}
-	public void DelelteMember(String email) {
-		dao.DelelteMember(email);
+	public void DeleteMember(String email) {
+		dao.DeleteMember(email);
 	}
 	public List<FleaMarket> FleaMarketList(String email){
 		return dao.FleaMarketList(email);
-}
+	}
+	public ProfileImg getMemberProfile(String email) {
+		return dao.getMemberProfile(email);
+	}
 	
 	
 	
