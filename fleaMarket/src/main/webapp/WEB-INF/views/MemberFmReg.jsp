@@ -48,8 +48,8 @@
 						<div class="card-header pb-0">
 							<div class="d-lg-flex">
 								<div>
-									<h5 class="mb-0">플리마켓 모집글 조회</h5>
-									<p class="text-sm mb-0">검색할 내용을 하단 검색창에 입력해주세요</p>
+									<h5 class="mb-0"  style="margin-top:15%;">내가 쓴 플리마켓 모집글</h5>
+								<p class="text-sm mb-0">사업자님께서 작성하신 플리마켓 모집글 입니다.</p>
 								</div>
 								<div class="ms-auto my-auto mt-lg-0 mt-4">
 									<div class="ms-auto my-auto">
@@ -73,12 +73,7 @@
 							<div class="card-body px-0 pb-0">
 							</div>
 							<form id="frm01" class="form"  method="post"> 
-							
 							<div class="row">
-								<div class="col-10 input-group mb-3 w-25">
-								  <button class="btn btn-outline-primary bg-primary mb-0 ms-3" type="submit" style="color:white;" id="button-addon1">　검색　</button>
-								  <input type="text" class="form-control form-control-outline-primary" style="border: 1px solid #5e72e4;"  name="title" value="${sch.title}" placeholder="제목을 입력하세요">
-								</div>
 								<div class="col-2 ms-auto my-auto">
 								</div>
 							</div>
@@ -87,18 +82,19 @@
 									<thead class="thead-light">
 										<tr style="background-color: #ebebeb;">
 											<th width="15%">제목</th>
-											<th width="15%">모집시작일</th>
-											<th width="15%">모집마감일</th>
-											<th width="15%">개최일</th>
-											<th width="15%">마감일</th>
-											<th width="15%">개최장소</th>
+											<th width="15%">공고시작일</th>
+											<th width="15%">공고마감일</th>
+											<th width="15%">플리마켓개최일</th>
+											<th width="15%">플리마켓종료일</th>
+											<th width="15%">플리마켓장소</th>
 											<th width="15%">조회수</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach var="FleaMarket" items="${FleaMarketList}">
 							    		<tr>
-							    		<td>${Login.email}</td>
+							    		  <input type="hidden" td:value="${Login.email}" />
+							    		
 							    		<td>${FleaMarket.title}</td>
 							    		<td>${FleaMarket.recruitmentStartDate}</td>
 							    		<td>${FleaMarket.recruitmentEndDate}</td>

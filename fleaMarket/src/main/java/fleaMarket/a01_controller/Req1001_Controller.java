@@ -129,7 +129,6 @@ public class Req1001_Controller {
 		session.removeAttribute("Login");
 		return "main";
 	}
-	//http://localhost:7080/fleaMarket/MemberFmReg.do 
 	// 회원 내가 쓴 플리마켓 모집글
 	@RequestMapping("MemberFmReg.do")
 	public String MemberFmReg(@RequestParam("email")String email, Model d, HttpSession session) {
