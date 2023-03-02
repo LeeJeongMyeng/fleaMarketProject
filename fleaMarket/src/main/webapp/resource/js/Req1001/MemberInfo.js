@@ -178,7 +178,7 @@ function LeaveMember(){
 			return true;
 		}
 	}
-
+ return false;
 }
 function MatchPassword(pass){
 	var MatchResult="";
