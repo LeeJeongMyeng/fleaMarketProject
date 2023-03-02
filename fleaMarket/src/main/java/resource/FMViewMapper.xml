@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >	
+<mapper namespace="fleaMarket.a03_dao.FMViewDao">
+	<select id="fmList" resultType="fleamarket"
+		parameterType="fleamarket">
+		SELECT rownum cnt, fm.*
+		FROM fleamarket fm
+	</select>
+	<select id="getFm" resultType="fleamarket" parameterType="string">
+		SELECT * FROM fleamarket
+		WHERE postingNumber = #{postingNumber}			
+	</select>	
+</mapper>		
+		

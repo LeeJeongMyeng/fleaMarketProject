@@ -15,7 +15,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <title>
-    Argon Dashboard 2 PRO by Creative Tim
+    CONTIGO 플리마켓
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -27,139 +27,24 @@
   <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+  <!-- 카카오맵 api -->
+  <script type="text/javascript"
+	   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=91e22fb67ec6ac7eabb75fa26b7d3d4d&libraries=services,clusterer,drawing"></script>
+	<script type="text/javascript"
+	   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=91e22fb67ec6ac7eabb75fa26b7d3d4d"></script>
 </head>
-
+<%@include file="header.jsp" %>
 <body class="g-sidenav-show   bg-gray-100">
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
 
   <main class="main-content position-relative border-radius-lg ">
-    <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg  px-0 mx-4 shadow-none border-radius-xl z-index-sticky " id="navbarBlur" data-scroll="false">
-      <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm">
-              <a class="text-white" href="javascript:;">
-                <i class="ni ni-box-2"></i>
-              </a>
-            </li>
-            <li class="breadcrumb-item text-sm text-white"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Product Page</li>
-          </ol>
-          <h6 class="font-weight-bolder mb-0 text-white">Product Page</h6>
-        </nav>
-        
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group">
-              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here...">
-            </div>
-          </div>
-          <ul class="navbar-nav  justify-content-end">
-            <li class="nav-item d-flex align-items-center">
-              <a href="${path}/pages/authentication/signin/illustration.html" class="nav-link text-white font-weight-bold px-0" target="_blank">
-                <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
-              </a>
-            </li>
-            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
-                <div class="sidenav-toggler-inner">
-                  <i class="sidenav-toggler-line bg-white"></i>
-                  <i class="sidenav-toggler-line bg-white"></i>
-                  <i class="sidenav-toggler-line bg-white"></i>
-                </div>
-              </a>
-            </li>
-            <li class="nav-item px-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white p-0">
-                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-              </a>
-            </li>
-            <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-bell cursor-pointer"></i>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
-                    <div class="d-flex py-1">
-                      <div class="my-auto">
-                        <img src="${path}/assets/img/team-2.jpg" class="avatar avatar-sm  me-3 " alt="user image">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">New message</span> from Laur
-                        </h6>
-                        <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          13 minutes ago
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
-                    <div class="d-flex py-1">
-                      <div class="my-auto">
-                        <img src="${path}/assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 " alt="logo spotify">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">New album</span> by Travis Scott
-                        </h6>
-                        <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          1 day
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
-                    <div class="d-flex py-1">
-                      <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                          <title>credit-card</title>
-                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                              <g transform="translate(1716.000000, 291.000000)">
-                                <g transform="translate(453.000000, 454.000000)">
-                                  <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
-                                  <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                                </g>
-                              </g>
-                            </g>
-                          </g>
-                        </svg>
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1">
-                          Payment successfully completed
-                        </h6>
-                        <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          2 days
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
           <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="margin-top:80px">
               <h5 class="mb-4">플리마켓</h5>
               <div class="row">
                 <div class="col-xl-5 col-lg-6 text-center">
@@ -237,30 +122,39 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                   </div>
                 </div>
                 <div class="col-lg-5 mx-auto">
-                  <h3 class="mt-lg-0 mt-4">소상공인 행복마켓</h3>
+                  <h3 class="mt-lg-0 mt-4">${fleamarket.title}</h3>
                   <div class="rating">
-                    <i class="fas" aria-hidden="true">2023.03.01 - 2023.03.07</i>
+                    <i class="fas" aria-hidden="true"><fmt:formatDate pattern='yyyy.MM.dd' value="${fleamarket.openDate}"/> - <fmt:formatDate pattern='yyyy.MM.dd' value="${fleamarket.closeDate}"/></i>
                   </div>
                   <br>
                   <h6 class="mb-0 mt-3">모집기간</h6>
-                  <h5>2023.01.01 - 2023.01.31</h5>
+                  <h5><fmt:formatDate pattern='yyyy.MM.dd' value="${fleamarket.recruitmentStartDate}"/> - <fmt:formatDate pattern='yyyy.MM.dd' value="${fleamarket.recruitmentEndDate}"/></h5>
                   <span class="badge badge-success">모집중</span>
-                  <br><br>
-                  주최 : 중소벤처기업부, 소상공인연합회
-				  <br>
-				  지역별 우수 소상공인 상품의 전시와 판매를 중심으로 플리마켓, 푸드트럭, 체험존 운영 예정
-				  <br>
-				  소상공인 업체의 지역 제품 판매
+                  <p  style="margin-top:15px;">
+                  ${fleamarket.content}
+                  </p>
                   <div class="row mt-4">
-                  	<div id="mapid" class="leaflet"></div>
-                    <div class="col-12">
+                  	<!-- gps -->
+                     <div class="map_wrap">
+                        <div id="map"
+                           style="width: 580px; height: 300px; position: relative; overflow: hidden;"></div>
+                        <div class="hAddr">
+                           <span>${fleamarket.address}</span>
+                           <!-- 지도에서 선택한 주소 표시
+                           <span id="centerAddr2"></span>
+                           <span id="centerAddr3"></span>
+                            -->
+                        </div>
+                     </div>
+                  </div>
+                    <div class="col-12"> <!-- 첨부파일 -->
                       <label>파일 다운로드</label>
                       <div action="/file-upload" class="form-control dropzone" id="productImg"></div>
                     </div>
-                  </div>
-                  <div class="row mt-4">
-                    <div class="col-lg-5">
-                      <button class="btn btn-primary mb-0 mt-lg-auto w-100" type="button" name="button">신청하기</button>
+                    <div class="row mt-4">
+	                    <div class="col-lg-5 ms-auto">
+	                      <button class="btn btn-primary mb-0 mt-lg-auto w-100" type="button" name="button" data-bs-toggle="modal" data-bs-target="#jkanban-info-modal">신청하기</button>
+	                    </div>
                     </div>
                   </div>
                 </div>
@@ -322,120 +216,93 @@ It's a separate element, as animating opacity is faster than rgba(). -->
         <!-- End Toggle Button -->
       </div>
       <hr class="horizontal dark my-1">
-      <div class="card-body pt-sm-3 pt-0 overflow-auto">
-        <!-- Sidebar Backgrounds -->
-        <div>
-          <h6 class="mb-0">Sidebar Colors</h6>
+    </div>
+  </div>
+  
+  <!-- 신청하기 모달창 (양식 O) -->
+  <div class="modal fade" id="jkanban-info-modal" style="display: none" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="h5 modal-title">신청하기</h5>
+          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-        <a href="javascript:void(0)" class="switch-trigger background-color">
-          <div class="badge-colors my-2 text-start">
-            <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
+        <div class="pt-4 modal-body">
+          <div class="form-group">
+          	<label>파일 첨부</label> <!-- 첨부파일 -->
+            <div action="/file-upload" class="form-control dropzone" id="productImg"></div>
           </div>
-        </a>
-        <!-- Sidenav Type -->
-        <div class="mt-3">
-          <h6 class="mb-0">Sidenav Type</h6>
-          <p class="text-sm">Choose between 2 different sidenav types.</p>
-        </div>
-        <div class="d-flex">
-          <button class="btn bg-gradient-primary w-100 px-3 mb-2 active me-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
-          <button class="btn bg-gradient-primary w-100 px-3 mb-2" data-class="bg-default" onclick="sidebarType(this)">Dark</button>
-        </div>
-        <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
-        <!-- Navbar Fixed -->
-        <div class="d-flex my-3">
-          <h6 class="mb-0">Navbar Fixed</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
+          <div class="alert alert-success d-none">Changes saved!</div>
+          <div class="text-end">
+            <button class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
+              확인
+            </button>
+            <button class="m-1 btn btn-secondary" data-target="#jkanban-info-modal" data-bs-dismiss="modal">
+              취소
+            </button>
           </div>
-        </div>
-        <hr class="horizontal dark mb-1">
-        <div class="d-flex my-4">
-          <h6 class="mb-0">Sidenav Mini</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarMinimize" onclick="navbarMinimize(this)">
-          </div>
-        </div>
-        <hr class="horizontal dark my-sm-4">
-        <div class="mt-2 mb-5 d-flex">
-          <h6 class="mb-0">Light / Dark</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
-          </div>
-        </div>
-        <a class="btn btn-primary w-100" href="https://www.creative-tim.com/product/argon-dashboard-pro">Buy now</a>
-        <a class="btn btn-dark w-100" href="https://www.creative-tim.com/product/argon-dashboard">Free demo</a>
-        <a class="btn btn-outline-dark w-100" href="https://www.creative-tim.com/learning-lab/bootstrap/overview/argon-dashboard">View documentation</a>
-        <div class="w-100 text-center">
-          <a class="github-button" href="https://github.com/creativetimofficial/ct-argon-dashboard-pro" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/argon-dashboard on GitHub">Star</a>
-          <h6 class="mt-3">Thank you for sharing!</h6>
-          <a href="https://twitter.com/intent/tweet?text=Check%20Argon%20Dashboard%20PRO%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fargon-dashboard-pro" class="btn btn-dark mb-0 me-2" target="_blank">
-            <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
-          </a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/argon-dashboard-pro" class="btn btn-dark mb-0 me-2" target="_blank">
-            <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
-          </a>
         </div>
       </div>
     </div>
   </div>
+  
+  
+  <!-- 신청하기 모달창 (양식 X) -->
+  <div class="modal fade" id="jkanban-info-modal-nofile" style="display: none" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="h5 modal-title">신청하기</h5>
+          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="pt-4 modal-body">
+          <div class="form-group text-center">신청하시겠습니까?</div>
+          <div class="text-end">
+            <button class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
+              확인
+            </button>
+            <button class="m-1 btn btn-secondary" data-target="#jkanban-info-modal" data-bs-dismiss="modal">
+              취소
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <!-- 신청 완료 알림 모달창 (양식 X) -->
+  <div class="modal fade" id="jkanban-info-modal-done" style="display: none" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="h5 modal-title">신청하기</h5>
+          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="pt-4 modal-body">
+          <div class="form-group text-center">신청되었습니다.</div>
+          <div class="text-end">
+            <button class="btn btn-primary btn-block" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
+              확인
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!--   Core JS Files   -->
-  <script src="${path}/assets/js/core/popper.min.js"></script>
-  <script src="${path}/assets/js/core/bootstrap.min.js"></script>
-  <script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="${path}/assets/js/plugins/choices.min.js"></script>
-  <script src="${path}/assets/js/plugins/leaflet.js"></script> <!-- map -->
   <script src="${path}/assets/js/plugins/dropzone.min.js"></script> <!-- file box -->
   <script src="${path}/assets/js/plugins/photoswipe.min.js"></script>
   <script src="${path}/assets/js/plugins/photoswipe-ui-default.min.js"></script>
   <script>
-	  // Initialize the map and assign it to a variable for later use
-	  // there's a few ways to declare a VARIABLE in javascript.
-	  // you might also see people declaring variables using `const` and `let`
-	  var map = L.map('mapid', {
-	    // Set latitude and longitude of the map center (required)
-	    center: [37.541, 126.986],
-	    // Set the initial zoom level, values 0-18, where 0 is most zoomed-out (required)
-	    zoom: 11
-	  });
-	
-	
-	  // Create a Tile Layer and add it to the map
-	  var tiles = new L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png', {
-	    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-	    subdomains: 'abcd',
-	    maxZoom: '19'
-	  }).addTo(map);
-
-    if (document.getElementById('choices-quantity')) {
-      var element = document.getElementById('choices-quantity');
-      const example = new Choices(element, {
-        searchEnabled: false,
-        itemSelectText: ''
-      });
-    };
-
-    if (document.getElementById('choices-material')) {
-      var element = document.getElementById('choices-material');
-      const example = new Choices(element, {
-        searchEnabled: false,
-        itemSelectText: ''
-      });
-    };
-
-    if (document.getElementById('choices-colors')) {
-      var element = document.getElementById('choices-colors');
-      const example = new Choices(element, {
-        searchEnabled: false,
-        itemSelectText: ''
-      });
-    };
 
     // Gallery Carousel
     if (document.getElementById('products-carousel')) {
@@ -652,6 +519,22 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 
     // execute above function
     initPhotoSwipeFromDOM('.my-gallery');
+    
+    // 모달창 확인 버튼 클릭 - 수정 필요...
+    var updateTask = document.getElementById("jkanban-update-task");
+    updateTask.addEventListener("click", function() {
+      let jkanbanInfoModalTaskId = document.querySelector(
+        "#jkanban-info-modal #productImg"
+      );
+      KanbanTest.replaceElement(jkanbanInfoModalTaskId.value);
+      jkanbanInfoModalTaskId.value = jkanbanInfoModalTaskId.value;
+      document.querySelector('#jkanban-info-modal').classList.remove('show');
+      document.querySelector('body').classList.remove('modal-open');
+      document.querySelector('.modal-backdrop').remove();
+
+
+    });
+    
   </script>
   <!-- Kanban scripts -->
   <script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
@@ -670,5 +553,131 @@ It's a separate element, as animating opacity is faster than rgba(). -->
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
 </body>
-
+<script>
+	//gps 
+	var container = document.getElementById('map');// 지도를 표시할 div 
+	var options = {
+	   center: new kakao.maps.LatLng(33.450701, 126.570667),// 지도의 중심좌표
+	   level: 3 // 지도의 확대 레벨
+	};
+	
+	//지도를 생성합니다    
+	var map = new kakao.maps.Map(container, options);
+	
+	// 주소-좌표 변환 객체를 생성합니다
+	var geocoder = new kakao.maps.services.Geocoder();
+	
+	var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커
+	    infowindow = new kakao.maps.InfoWindow({zindex:1}); 
+	
+	// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시
+	searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+	
+	// 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
+	// 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
+	kakao.maps.event.addListener(map, 'idle', function() {
+	    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
+	});
+	function searchAddrFromCoords(coords, callback) {// 좌표로 주소 정보를 요청합니다
+	   geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
+	}
+	
+	function searchDetailAddrFromCoords(coords, callback) {// 좌표로 상세 주소 정보를 요청합니다
+	   geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
+	   
+	}
+	
+	
+	//지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
+	function displayCenterInfo(result, status) {
+	   if (status === kakao.maps.services.Status.OK) {
+	     var infoDiv = document.getElementById('centerAddr');
+	
+	       for(var i = 0; i < result.length; i++) {
+	           // 행정동의 region_type 값은 'H' 이므로
+	           if (result[i].region_type === 'H') {
+	               infoDiv.innerHTML = result[i].address_name;
+	               break;
+	           }
+	       }
+	   }    
+	} 
+	
+	/* function serar */
+	//동에 대한 default 
+	geocoder.addressSearch('${fleamarket.address}', function(result, status) {
+		/*
+		지도에서 선택한 주소 표시
+	   var infoDiv2 = document.getElementById('centerAddr2'); 
+	   var infoDiv3 = document.getElementById('centerAddr3'); 
+	   */
+	
+	    // 정상적으로 검색이 완료됐으면 
+	     if (status === kakao.maps.services.Status.OK) {
+	
+	        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+	
+	        // 결과값으로 받은 위치를 마커로 표시합니다
+	        var marker = new kakao.maps.Marker({
+	            map: map,
+	            position: coords
+	        });
+	
+	        // 인포윈도우로 장소에 대한 설명을 표시합니다
+	        var infowindow = new kakao.maps.InfoWindow({
+	           content: '<div style="width:150px;text-align:center;padding:6px 0;">요기!</div>'
+	        });
+	        infowindow.open(map, marker);
+	
+	        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+	        map.setCenter(coords);
+	        
+	        var infoDiv = document.getElementById('centerAddr'); 
+	 
+	        for(var i = 0; i < result.length; i++) {
+	            // 행정동의 region_type 값은 'H' 이므로
+	            if (result[i].region_type === 'H') {         
+	                infoDiv.innerHTML = result[i].address_name;       
+	                break;
+	            }
+	        }
+	    }
+	     kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+	           searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
+	               if (status === kakao.maps.services.Status.OK) {
+	                   var detailAddr2 = !!result[0].road_address ? result[0].road_address.address_name : '';
+	                   detailAddr3 = result[0].address.address_name;
+	                        
+	                         
+	                      /* console.log("도로명주소:"+result[0].road_address.address_name)
+	                      console.log("지번주소:"+result[0].address.address_name) */
+	                   
+	                   var content = '<div class="bAddr">' +
+	                                   '<span class="title">주소정보</span>' + 
+	                                   detailAddr2 + 
+	                               '</div>';
+	
+	                   // 마커를 클릭한 위치에 표시합니다 
+	                   marker.setPosition(mouseEvent.latLng);
+	                   marker.setMap(map);
+	
+	                   // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
+	                   infowindow.setContent(content);
+	                   infowindow.open(map, marker);
+	                   infoDiv=detailAddr2;
+	                   infoDiv2.innerHTML=detailAddr2;
+	                   infoDiv3.innerHTML=detailAddr3;
+	                   
+	                   // 지도 선택한 부분 input 들어감 
+	                   var aform = document.querySelector("#aform")
+	                   aform.address.value = document.getElementById("centerAddr3").innerText;
+	              /*      var address =$("#centerAddr3").val()
+	                   $("input[name=addressval]").val()=address; */
+	                   //aform.addressval2.value = document.getElementById("centerAddr3").innerText;
+	                   
+	               }   
+	           });
+	       });
+	});  
+</script>
 </html>
