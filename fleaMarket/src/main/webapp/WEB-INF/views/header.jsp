@@ -45,6 +45,9 @@
 #HeaderBackground{
 	  background-color: #5e72e4;
 }
+li{
+    list-style:none;
+ } 
 </style>
 <body class="">
   <div class="min-height-300 position-absolute w-100" id="HeaderBackground"></div>

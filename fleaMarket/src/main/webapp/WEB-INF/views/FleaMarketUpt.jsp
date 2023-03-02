@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" sizes="76x76"
 	href="${path}/assets/img/apple-icon.png">
 <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
-<title>플리마켓 등록</title>
+<title>플리마켓 수정하기</title>
 <!--     Fonts and icons     -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
@@ -86,7 +86,7 @@ $('#editor .ql-editor').keyup(function(){
 					<form  method="post"  action="fleaMarketins.do" id="aform"
 						name="aform" enctype="multipart/form-data">
 						<div class="card card-body mt-4">
-							<h6 class="mb-0 fleamarket">플리마켓 등록</h6>
+							<h6 class="mb-0 fleamarket">플리마켓 수정하기</h6>
 							<hr class="horizontal dark my-3">
 							<input type="hidden" name="email" value="ehddms2909@naver.com">
 							<input type="hidden" name="bisenessNumber" value="예시~">
@@ -189,7 +189,7 @@ $('#editor .ql-editor').keyup(function(){
 
 					<div class="d-flex justify-content-end mt-4">
 						<button type="submit" id="insBtn"
-							class="btn bg-gradient-primary m-0 ms-2">등록하기</button>
+							class="btn bg-gradient-primary m-0 ms-2">수정하기</button>
 					</div>
 				</div>
 			</div>

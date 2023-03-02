@@ -2,36 +2,43 @@
 <!DOCTYPE mapper
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-   
-    <mapper namespace="fleaMarket.a03_dao.Req3000_Dao">
 
-        
-        
-<!--  
+<mapper namespace="fleaMarket.a03_dao.Req3000_Dao">
 
-	private String title;
-	private String content;
-	private String bisenessNumber;
-	private String email;
-	private String approvalMaxCnt;
-	private String recruitmentStartDate;
-	private String recruitmentEndDate;
-	private String openDate;
-	private String closeDate;
-	private String checkForm; 
-	private String address;
+
+
+	<!-- private String title; private String content; private String bisenessNumber; 
+		private String email; private String approvalMaxCnt; private String recruitmentStartDate; 
+		private String recruitmentEndDate; private String openDate; private String 
+		closeDate; private String checkForm; private String address; -->
+	<insert id="insertFleaMarket" parameterType="fleamarket">
+		insert into FleaMarket
+		values(fleaMarket_seq.nextval,#{title}, sysdate,
+		#{content},#{bisenessNumber},#{email},#{approvalMaxCnt},
+		#{recruitmentStartDate},#{recruitmentEndDate},#{openDate},
+		#{closeDate},#{checkForm},#{viewCnt},#{address})
+	</insert>
+
+	<!--플리마켓 홍보글 등록시 -->
+	<insert id="insprofile" parameterType="ffile">
+		INSERT INTO FFile VALUES(#{filename},#{filePath},fleaMarket_seq.currval)
+	</insert>
 	
--->        
-       <insert id="insertFleaMarket" parameterType="fleamarket">
-    insert into FleaMarket
-       values(fleaMarket_seq.nextval,#{title}, sysdate,
-         #{content},#{bisenessNumber},#{email},#{approvalMaxCnt},
-         #{recruitmentStartDate},#{recruitmentEndDate},#{openDate},#{closeDate},
-         #{checkForm},#{viewCnt},#{address})
-      </insert> 
-      
-  
-  
-    </mapper>
+    <!-- 수정하기 -->
+	<update id="UptFleaMarket" parameterType="fleamarket">
+		update FleaMarket
+		set title=#{title},
+		content=#{content},
+		approvalMaxCnt=#{approvalMaxCnt},
+		recruitmentStartDate=#{recruitmentStartDate},
+		recruitmentEndDate=#{recruitmentEndDate},
+		openDate=#{openDate},
+		closeDate=#{closeDate},
+		checkForm=#{checkForm},
+		address=#{address},
+		where postingNumber = #{postingNumber}
+	</update>
+
+</mapper>
     
     

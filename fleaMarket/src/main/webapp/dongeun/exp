@@ -51,3 +51,37 @@ public void insertFleaMarket(FleaMarket ins){
     	dao.insertFleaMarket(ins);
     }
 
+
+//수정하기 
+
+
+
+dao
+public void UptFleaMarket(FleaMarket upt);
+
+//mapper.xml
+
+	<update id="UptFleaMarket"  parameterType="fleamarket">
+		update FleaMarket
+			set title=#{title},
+				content=#{content},
+				approvalMaxCnt=#{approvalMaxCnt},
+				recruitmentStartDate=#{recruitmentStartDate},
+				recruitmentEndDate=#{recruitmentEndDate},
+				openDate=#{openDate},
+				closeDate=#{closeDate},
+				checkForm=#{checkForm},
+				address=#{address},
+			where postingNumber = #{postingNumber}
+	</update>	
+
+service
+public void UptFleaMarket(FleaMarket upt);
+public void UptFleaMarket(FleaMarket ins){
+
+}
+
+public void insertFleaMarket(FleaMarket ins){
+    	dao.insertFleaMarket(ins);
+    }
+
