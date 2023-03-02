@@ -71,19 +71,36 @@
 	width: 300px;
 	height: 200px;
 }
+.others{
+  font-color:white;
+}
 </style>
 </head>
-<body class="g-sidenav-show   bg-gray-100">
+
+<%@ include file="header.jsp" %>
+<div>
+<body class="g-sidenav-show bg-gray-100">
 	<div class="container-fluid py-4">
 		<div class="row">
 			<div class="col-12">
-				<div class="card">
+				<div class="card" style = "margin-top: 150px;">
 					<!-- Card header -->
 					<div class="card-header pb-0">
 						<div class="d-lg-flex">
 							<div>
-								<h5 class="mb-0">사는 이야기</h5>
-								<p class="text-sm mb-0">나의 이야기를 써주세요</p>
+								<h5 class="mb-0">${pageMaker.cri.category}</h5>
+								<c:if test = "${pageMaker.cri.category eq '사는이야기'}">
+								<p class="text-sm mb-0">사는 이야기를 써주세요</p>
+								</c:if>
+								<c:if test = "${pageMaker.cri.category eq '카테고리'}">
+								<p class="text-sm mb-0">카테고리 공유 ! ! !</p>
+								</c:if>
+								<c:if test = "${pageMaker.cri.category eq '사업아이디어'}">
+								<p class="text-sm mb-0">사업 아이디어 공유 ! ! !</p>
+								</c:if>
+								<c:if test = "${pageMaker.cri.category eq '꿀팁'}">
+								<p class="text-sm mb-0">꿀팁 공유 ! ! !</p>
+								</c:if>
 							</div>
 							<div class="ms-auto my-auto mt-lg-0 mt-4">
 								<div class="ms-auto my-auto disflex">
@@ -126,14 +143,21 @@
 								class="btn bg-gradient-primary btn-sm mb-0 insertStyle">+
 								게시물 등록하기</button>
 
-							<button class="btn bg-gradient-primary dropdown-toggle"
-								type="button" id="dropdownMenuButton" data-bs-toggle="dropdown"
-								aria-expanded="false">카테고리별 검색</button>
-							<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-								<li><a class="dropdown-item" href="#">인기순</a></li>
-								<li><a class="dropdown-item" href="#">최근 등록순</a></li>
-								<li><a class="dropdown-item" href="#">조회수 순</a></li>
-							</ul>
+							
+							<select class="bg-gradient-primary form-control" id="Sort"
+							style = "width: 150px;height:44px;color: aliceblue;">
+							   
+											<option value="1"
+												<c:out value="${pageMaker.cri.shift eq '1'?'selected':'' }"/>>최근등록순</option>
+											<option value="2"
+												<c:out value="${pageMaker.cri.shift eq '2'?'selected':'' }"/>>조회수순</option>
+											<option value="3"
+												<c:out value="${pageMaker.cri.shift eq '3'?'selected':'' }"/>>좋아요</option>
+							</select>
+							<!-- 카테고리 조회 -->
+							<form id = "dropForm" method = "get">
+							<input type="hidden" name="shift" value="${pageMaker.cri.shift}">
+							</form>
 
 						</div>
 					</div>
@@ -168,7 +192,7 @@
 										</td>
 										<td class="text-sm">${lists.nickname }</td>
 										<td class="text-sm">${lists.viewCnt }</td>
-										<td class="text-sm">${lists.nickname }</td>
+										<td class="text-sm">${lists.viewCnt }</td>
 										<td class="text-sm">${lists.registDate }</td>
 										<td style="text-align: center; padding-top: 12px;"><span
 											class="badge badge-secondary badge-sm">room 가기</span></td>
@@ -220,6 +244,8 @@
 								name="amount" value="${pageMaker.cri.amount}"> <input
 								type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
 							<input type="hidden" name="type" value="${pageMaker.cri.type}">
+							<input type="hidden" name ="shift" value ="${pageMaker.cri.shift }">
+							<input type="hidden" name = "category" value = "${pageMaker.cri.category }">
 						</form>
 						<!-- 페이지 네이션 -->
 
@@ -261,18 +287,24 @@
 			</div>
 		</div>
 	</footer>
-	</div>
-	</main>
-
+</div>
 	<!--   Core JS Files   -->
-	<script src="${path}/assets/js/core/popper.min.js"></script>
-	<script src="${path}/assets/js/core/bootstrap.min.js"></script>
-	<script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
-	<script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
+	
 	<script src="${path}/assets/js/plugins/datatables.js"></script>
 	<script>
-  
+    
   var moveForm = $("#moveForm");
+  var dropForm = $("#dropForm");
+  
+  $("#Sort").on("change",function(e){
+	  
+	  let shift = $("#Sort option:selected").val();
+	  
+	  moveForm.find("input[name='shift']").val(shift);
+	  moveForm.find("input[name='pageNum']").val(1);
+	  moveForm.submit();
+	  
+  })
   
   $(".page-item a").on("click", function(e) {
       
@@ -281,15 +313,21 @@
       moveForm.find("input[name='pageNum']").val($(this).attr("href"));
       moveForm.submit();              
       });
+  
   $(".disflex button").on("click", function(e){
       e.preventDefault();
       
       let type = $(".disflex select").val();
       let keyword = $(".disflex input[name='keyword']").val();
-       
+      let shift = $("#Sort option:selected").val();
+      
+      //카테고리별 정렬하기 위해서 설정해줌
+     
       moveForm.find("input[name='type']").val(type);
+      moveForm.find("input[name='shift']").val(shift);
       moveForm.find("input[name='keyword']").val(keyword);
       moveForm.find("input[name='pageNum']").val(1);
+      moveForm.find("input[name='category']").val();
       moveForm.submit();
   });
   </script>

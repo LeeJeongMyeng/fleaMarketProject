@@ -5,9 +5,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 public class Criteria {
 	private int pageNum;
 	private int amount;
-	
 	private String type;	//검색
 	private String keyword;
+	private String shift; //정렬 
+	
+	private String category;
 	public Criteria(){
 		this(1,10);
 	}
@@ -48,6 +50,24 @@ public class Criteria {
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+
+	public String getShift() {
+		return shift;
+	}
+
+	public void setShift(String shift) {
+		this.shift = shift;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
+	
 	
 }
     

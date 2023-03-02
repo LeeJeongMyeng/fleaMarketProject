@@ -10,6 +10,7 @@ public class Capplication {
 	private String registDate;	// 등록날짜
 	private String updateDate;	// 수정날짜
 	private String category;	// 카테고리
+	private String categoryDetail;
 	private String email;	//이메일
 	private String hashtag;	//해시태그
 	private String viewCnt;	//조회수
@@ -81,4 +82,11 @@ public class Capplication {
 	public void setReport(MultipartFile report) {
 		this.report = report;
 	}
+	public String getCategoryDetail() {
+		return categoryDetail;
+	}
+	public void setCategoryDetail(String categoryDetail) {
+		this.categoryDetail = categoryDetail;
+	}
+	
 }
