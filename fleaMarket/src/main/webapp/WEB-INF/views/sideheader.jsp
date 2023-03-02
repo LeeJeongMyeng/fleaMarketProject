@@ -41,6 +41,9 @@ $(document).ready(function(){
 main{
   padding-left: 275px;
 }
+li{
+    list-style:none;
+ } 
 </style>
 <body>
 	
