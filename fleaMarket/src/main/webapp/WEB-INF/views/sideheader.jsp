@@ -181,10 +181,12 @@ main{
 							
 						</ul>
 					</div>
-					<div class="col text-center">
-						<button class="btn btn-outline-primary btn-default" type="button" style="margin-top:145%;" >로그아웃</button>
-					</div>
-			</li><%--nav-item --%>
+						<a class="btn btn-primary w-100" style="margin-top:145%;" href="Logout.do">로그아웃</a>
+				</li>			
+						
+			</ul>
+			
+			<%--nav-item --%>
 				
 				</div>
 			</li>
