@@ -3,8 +3,9 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
     <mapper namespace="fleaMarket.a03_dao.Req1001_Dao">
+    	<!-- 회원조회 -->
     	<select id="MemberList" resultType="Member"
-		parameterType="Member">
+		parameterType="String">
 		select *
 		from FLEAMARKETMEMBER
 		where name like '%'||#{name}||'%'	
@@ -47,6 +48,13 @@
     		DELETE FLEAMARKETMEMBER
     		WHERE EMAIL=#{email}
     	</delete>
+    	<!-- 내가 쓴 플리마켓글 -->
+    	<select id="FleaMarketList" resultType="FleaMarket"
+		parameterType="String">
+		SELECT * 
+		FROM FleaMarket 
+		WHERE email =#{email}
+		</select>
     </mapper>
     
     

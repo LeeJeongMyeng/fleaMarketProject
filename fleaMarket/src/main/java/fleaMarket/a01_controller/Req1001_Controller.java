@@ -14,18 +14,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import fleaMarket.a02_service.Req1001_Service;
 import fleaMarket.util.FileService;
+import vo.FleaMarket;
 import vo.Member;
 import vo.ProfileImg;
 
 
 @Controller("Req1001")
 public class Req1001_Controller {
-	//http://localhost:7080/fleaMarket/callmain.do 회사소개
-	@RequestMapping("callmain.do")
-	public String callmain() {
-		return "main";
-	}
-
+	
 	@Autowired
 	private Req1001_Service service;
 	
@@ -35,7 +31,11 @@ public class Req1001_Controller {
 	@Value("${profile.upload}")
 	private String profilepath;
 	
-	
+	//http://localhost:7080/fleaMarket/callmain.do 메인
+		@RequestMapping("callmain.do")
+		public String callmain() {
+			return "main";
+		}
 	//http://localhost:7080/fleaMarket/AdminIntro.do 회사소개
 	@RequestMapping("AdminIntro.do")
 	public String AdminIntro() {
@@ -52,7 +52,6 @@ public class Req1001_Controller {
 	public String AdminInquire() {
 		return "AdminInquire";
 	}
-	
 	//http://localhost:7080/fleaMarket/AdminPost.do 관리자 공지사항 작성조회
 	@RequestMapping("AdminPost.do")
 	public String AdminPost() {
@@ -68,7 +67,7 @@ public class Req1001_Controller {
 	public String MemberInquire() {
 		return "MemberInquire";
 	}
-	
+	//회원정보수정 
 	@RequestMapping("UpdateMemberInfo.do")
 	public String UpdateMemberInfo(Member upt,@RequestParam("profileimg") MultipartFile profile,
 			Model d,HttpSession session) {
@@ -98,7 +97,7 @@ public class Req1001_Controller {
 		 d.addAttribute("uptmsg","회원 수정이 완료되었습니다.");
 		return "MemberInfo";
 	}
-	
+	//비밀번호 변경
 	@RequestMapping("UpdatePassword.do")
 	public String UpdatePassword(Member upt,HttpSession session,Model d) {
 		//변경될거니까 세션 지우기
@@ -113,7 +112,7 @@ public class Req1001_Controller {
 		 d.addAttribute("uptmsg","비밀번호 변경이 완료되었습니다.");
 		return "MemberInfo";
 	}
-	
+	// 탈퇴
 	@PostMapping("LeaveMember.do")
 	public String LeaveMember(Member del,Model d,HttpSession session){
 		
@@ -128,7 +127,15 @@ public class Req1001_Controller {
 		}
 		//세션삭제 처리.. ㅂㅂ
 		session.removeAttribute("Login");
-		
 		return "main";
 	}
+	//http://localhost:7080/fleaMarket/MemberFmReg.do 
+	// 회원 내가 쓴 플리마켓 모집글
+	@RequestMapping("MemberFmReg.do")
+	public String MemberFmReg(@RequestParam("email")String email, Model d, HttpSession session) {
+		d.addAttribute("FleaMarketList",service.FleaMarketList(email));
+			return "MemberFmReg";
+	}
+	
+	
 }

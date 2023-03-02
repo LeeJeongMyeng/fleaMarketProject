@@ -2,6 +2,7 @@ package fleaMarket.a03_dao;
 
 import java.util.List;
 
+import vo.FleaMarket;
 import vo.Member;
 import vo.ProfileImg;
 
@@ -14,6 +15,6 @@ public interface Req1001_Dao {
 	public Member Login(String email);
 	public void DelelteProfile(String email);
 	public void DelelteMember(String email);
-	
+	public List<FleaMarket> FleaMarketList(String email);
 	
 }

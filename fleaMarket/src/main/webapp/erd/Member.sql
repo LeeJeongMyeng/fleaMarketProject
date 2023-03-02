@@ -77,6 +77,10 @@ NULL,
 '관리자'
 );
 UPDATE FLEAMARKETMEMBER 
+SET AUTHORITY  = '사업자' 
+WHERE EMAIL ='222@naver.com';
+
+UPDATE FLEAMARKETMEMBER 
 SET ADDRESS  = '07932&서울 양천구 목동중앙남로16나길 38-10& (목동, 월드메르디앙)&201호' 
 WHERE EMAIL ='28888wjdaud@naver.com'
 AND NAME  = ''

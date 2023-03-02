@@ -125,7 +125,7 @@ main{
 								<!-- 사업자일때 -->
 						<c:if test="${Login.authority=='사업자'}">
 							<li class="nav-item ">
-								<a class="nav-link " href="#"> 
+								<a class="nav-link " href="MemberFmReg.do?email=${Login.email}"> 
 									<span class="sidenav-normal">내가 쓴 모집글</span>
 								</a>
 							</li>
@@ -178,7 +178,7 @@ main{
 									<span class="sidenav-normal">메뉴2</span>
 								</a>
 							</li>
-							
+							s
 						</ul>
 					</div>
 						<a class="btn btn-primary w-100" style="margin-top:145%;" href="Logout.do">로그아웃</a>
