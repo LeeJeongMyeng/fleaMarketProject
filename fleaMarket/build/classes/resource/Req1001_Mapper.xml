@@ -7,7 +7,7 @@
 		parameterType="Member">
 		select *
 		from FLEAMARKETMEMBER
-		where nickname like '%'||#{nickname}||'%'	
+		where name like '%'||#{name}||'%'	
 		</select>
 		<!-- 회원정보 수정! -->
 		<update id="UpdateMemberInfo" parameterType="member">

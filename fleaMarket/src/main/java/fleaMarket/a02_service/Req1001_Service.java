@@ -23,6 +23,7 @@ public class Req1001_Service {
 	
 	public List<Member> MemberList(Member sch){
 		if(sch.getEmail()==null) sch.setEmail("");
+		if(sch.getName()==null) sch.setName("");
 		if(sch.getNickname()==null) sch.setNickname("");
 		if(sch.getAuthority()==null) sch.setAuthority("");
 		if(sch.getAddress()==null) sch.setAddress("");

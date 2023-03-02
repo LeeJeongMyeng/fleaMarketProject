@@ -93,7 +93,7 @@
 							<div class="row">
 								<div class="col-10 input-group mb-3 w-25">
 								  <button class="btn btn-outline-primary bg-primary mb-0 ms-3" type="submit" style="color:white;" id="button-addon1">　검색　</button>
-								  <input type="text" class="form-control form-control-outline-primary" style="border: 1px solid #5e72e4;"  name="nickname" value="${sch.nickname}" placeholder="　회원명을 입력하세요">
+								  <input type="text" class="form-control form-control-outline-primary" style="border: 1px solid #5e72e4;"  name="name" value="${sch.name}" placeholder="　회원명을 입력하세요">
 								</div>
 								<div class="col-2 ms-auto my-auto">
 									<button type="button" class="btn btn-outline-danger btn-md mb-0 me-2 " data-bs-toggle="modal" data-bs-target="#import">회원탈퇴</button>
@@ -112,8 +112,9 @@
 													</div>
 												</div>
 											</th>
-											<th width="25%">이메일</th>
-											<th width="20%">회원명</th>
+											<th width="20%">이메일</th>
+											<th width="10%">회원명</th>
+											<th width="10%">닉네임</th>
 											<th width="10%">권한</th>
 											<th width="40%">주소</th>
 										</tr>
@@ -130,6 +131,7 @@
 												</div>
 							    		</td>
 							    		<td>${Member.email}</td>
+							    		<td>${Member.name}</td>
 							    		<td>${Member.nickname}</td>
 							    		<td>${Member.authority}</td>
 							    		<td>${Member.address}</td>

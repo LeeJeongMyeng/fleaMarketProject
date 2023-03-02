@@ -51,7 +51,7 @@ main{
 			<i
 				class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none"
 				aria-hidden="true" id="iconSidenav"></i> <a class="navbar-brand m-0"
-				href=" https://demos.creative-tim.com/argon-dashboard-pro/pages/dashboards/default.html "
+				href="callmain.do"
 				target="_blank"> <img src="${path}/assets/img/logo2.png"
 				class="navbar-brand-img h-100" alt="main_logo"> <span
 				class="ms-1 font-weight-bold">CONTIGO 당신과 함께</span>
@@ -61,41 +61,15 @@ main{
 		<div class="collapse navbar-collapse  w-auto h-auto"
 			id="sidenav-collapse-main">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a data-bs-toggle="collapse"
+				<li class="nav-item"><a 
 					href="#dashboardsExamples" class="nav-link "
 					aria-controls="dashboardsExamples" role="button"
 					aria-expanded="false">
 						<div
 							class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
 							<i class="ni ni-shop text-primary text-sm opacity-10"></i>
-						</div> <span class="nav-link-text ms-1">마이페이지</span>
+						</div> <span class="nav-link-text ms-1">${Login.name}님 </span>
 				</a>
-					<div class="collapse " id="dashboardsExamples">
-						<ul class="nav ms-4">
-							<li class="nav-item "><a class="nav-link "
-								href="${path}/pages/dashboards/landing.html"> <span
-									class="sidenav-mini-icon"> L </span> <span
-									class="sidenav-normal"> Landing </span>
-							</a></li>
-							<li class="nav-item "><a class="nav-link "
-								href="${path}/pages/dashboards/default.html"> <span
-									class="sidenav-mini-icon"> D </span> <span
-									class="sidenav-normal"> Default </span>
-							</a></li>
-							<li class="nav-item "><a class="nav-link "
-								href="${path}/pages/dashboards/automotive.html"> <span
-									class="sidenav-mini-icon"> A </span> <span
-									class="sidenav-normal"> Automotive </span>
-							</a></li>
-
-
-							<li class="nav-item "><a class="nav-link "
-								href="${path}/pages/dashboards/crm.html"> <span
-									class="sidenav-mini-icon"> C </span> <span
-									class="sidenav-normal"> CRM </span>
-							</a></li>
-						</ul>
-					</div></li>
 				<li class="nav-item mt-3">
 					<h6 class="ps-4  ms-2 text-uppercase text-xs font-weight-bolder opacity-6">PAGES</h6>
 				</li>
@@ -147,6 +121,8 @@ main{
 				</a>
 					<div class="collapse " id="applicationsExamples">
 						<ul class="nav ms-4">
+								<!--관리자 일 때 추가하기-->
+								<!-- 사업자일때 -->
 						<c:if test="${Login.authority=='사업자'}">
 							<li class="nav-item ">
 								<a class="nav-link " href="#"> 
@@ -169,7 +145,6 @@ main{
 									<span class="sidenav-normal">커뮤니티</span>
 								</a>
 							</li>
-							
 						</ul>
 					</div>
 			</li><%--nav-item --%>
@@ -205,6 +180,9 @@ main{
 							</li>
 							
 						</ul>
+					</div>
+					<div class="col text-center">
+						<button class="btn btn-outline-primary btn-default" type="button" style="margin-top:145%;" >로그아웃</button>
 					</div>
 			</li><%--nav-item --%>
 				
