@@ -8,6 +8,7 @@
 <html lang="en">
 
 <head>
+<%@include file="sideheader.jsp" %>	
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -41,7 +42,7 @@
 
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
-	<%@include file="sideheader.jsp" %>	
+	
 	<main class="main-content position-relative border-radius-lg ">
 		<!-- Navbar -->
 		<!-- 상단 -->
