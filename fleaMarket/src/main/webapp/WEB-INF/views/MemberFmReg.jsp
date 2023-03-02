@@ -49,7 +49,7 @@
 							<div class="d-lg-flex">
 								<div>
 									<h5 class="mb-0"  style="margin-top:15%;">내가 쓴 플리마켓 모집글</h5>
-								<p class="text-sm mb-0">사업자님께서 작성하신 플리마켓 모집글 입니다.</p>
+								<p class="text-sm mb-0">회원님께서 작성하신 플리마켓 모집글 입니다.</p>
 								</div>
 								<div class="ms-auto my-auto mt-lg-0 mt-4">
 									<div class="ms-auto my-auto">
