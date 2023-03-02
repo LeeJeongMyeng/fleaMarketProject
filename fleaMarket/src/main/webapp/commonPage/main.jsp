@@ -18,7 +18,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <title>
-    메인
+    CONTIGO
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -42,21 +42,56 @@
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
-    <!-- 헤더 
-   	<jsp:include page="header.jsp"></jsp:include>
-   	-->
+
+   <%@ include file="/WEB-INF/views/header.jsp" %>
+
    	<!-- 배너  -->
-	<div class="mask bg-gradient-primary" style="background:white; width:100%; height:500px; margin-top:8%; border-top:0.5px solid grey; border-bottom:0.5px solid grey;"></div>
-      <!--배너 안에 사진 밑 글  -->
-      <div class="row" style="height:400px; margin-top:10%; margin-left:10%;">
+	<div class="mask bg-gradient-primary" style="background:white; width:100%; height:300px; margin-top:8%; border-top:0.5px solid grey; border-bottom:0.5px solid grey;"></div>
+       <!-- 메인 이미지 변경할 것 z-index참고 -->
+        <div id="carouselExampleIndicators" class="carousel slide slidew" data-bs-ride="carousel"  style="margin-top:10%;">
+      <ol class="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img class="d-block h-80 w-100" src="${path}/assets/img/intro.jpg" alt="First slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block h-80 w-100" src="${path}/assets/img/intro.jpg" alt="Second slide">
+        </div>
+        <div class="carousel-item">
+          <img class="d-block h-80 w-100" src="${path}/assets/img/intro.jpg" alt="Third slide">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
+      <!- 사이트 소개글 -->
+      <h5 style="text-align:center;">
+		</h5>
+	
+
+      <!--달력넣기  -->
+      <div class="row" style="height:400px;">
         <div class="col-lg-6 mb-4 mb-lg-0">
           <div class="card z-index-2 h-100">
-          	<h2 style="text-align:center; margin-top:20%;">플리마켓+커뮤니티</h2>
-          	<p>설명 샬라샬라</p>
+          	<h4 style="text-align:center; margin-top:20%; width:50%;">
+          	사이트소개글
+	콘티고는 플리마켓 플랫폼을 제공 어쩌고 하면서
+	지역사회와 함께 성장하는 올바른 가치를 추구합니다.
+          	</4>
           </div>
         </div>
-        <div class="col-lg-5">
-          <div class="card card-carousel overflow-hidden h-100 p-0 w-250" >
+        <div class="col-lg-5"  style="width:50%;">
+          <div class="card card-carousel overflow-hidden h-100 p-0" >
             <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
               <div class="carousel-inner border-radius-lg h-100">
                 <div class="carousel-item h-100 active" style="background-image: url('${path}/assets/img/img-2.jpg');
@@ -102,13 +137,46 @@
           </div>
         </div>
       </div>
+      
+      
+        <!-- 날씨 -->
+
+      <div class="row">
+        <div class="col-xl-4 h-500" style="width:20%; ">
+          <div class="row">
+            <div class="col-12">
+              <div class="card" >
+                <div class="card-body p-3">
+                  <div class="row">
+                    <div class="col-8 my-auto">
+                      <div class="numbers">
+                        <p class="text-sm mb-0 text-capitalize font-weight-bold opacity-7">Wheather today</p>
+                        <h5 class="font-weight-bolder mb-0">
+                         날씨 위치 고민 <br>San Francisco - 29°C
+                        </h5>
+                      </div>
+                    </div>
+                    <div class="col-4 text-end">
+                      <img class="w-50" src="${path}/assets/img/small-logos/icon-sun-cloud.png" alt="image sun">
+                      <h5 class="mb-0 text-end me-1">Cloudy</h5>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+         </div>
+            <div class="row"> 
+              	<h4 style="text-align:center;">지도<br> 플리마켓 열리는 장소 좌표 찍을거임<br>근데 가능할까?</h4>
+             </div> 
+      
   <!-- 커뮤니티/플리마켓 미리보기 -->
-  <div class="row" style="margin-top:5%; margin-left:13%;">
-        <div class="col-xl-11">
-          <div class="card">
-            <div class="card-header d-flex pb-0 p-3">
-              <h6 class="my-auto">게시글 정보</h6>
-              <div class="nav-wrapper position-relative ms-auto w-50">
+  <div class="row" style="margin-top:5%;">
+        <div class="col-xl-11"  style="width:100%;">
+          <div class="card" >
+            <div class="card-header d-flex pb-0 p-3" >
+              <h6 class="my-auto" >게시글 정보는</h6>
+              <div class="nav-wrapper position-relative ms-auto">
                 <ul class="nav nav-pills nav-fill p-1" role="tablist">
                   <li class="nav-item">
                     <a class="nav-link mb-0 px-0 py-1 active" data-bs-toggle="tab" href="#cam1" role="tab" aria-controls="cam1" aria-selected="true">
@@ -164,195 +232,42 @@
           </div>
         </div>
        </div>
-  <!-- 날씨/지도 -->
-  <div class="container-fluid py-4" style="margin-top:1%; margin-left:11.5%;">
-      <div class="row">
-        <div class="col-xl-4 h-500">
-          <div class="row">
-            <div class="col-12">
-              <div class="card" >
-                <div class="card-body p-3">
-                  <div class="row">
-                    <div class="col-8 my-auto">
-                      <div class="numbers">
-                        <p class="text-sm mb-0 text-capitalize font-weight-bold opacity-7">Wheather today</p>
-                        <h5 class="font-weight-bolder mb-0">
-                          San Francisco - 29°C
-                        </h5>
-                      </div>
-                    </div>
-                    <div class="col-4 text-end">
-                      <img class="w-50" src="${path}/assets/img/small-logos/icon-sun-cloud.png" alt="image sun">
-                      <h5 class="mb-0 text-end me-1">Cloudy</h5>
-                    </div>
-                  </div>
-                </div>
-              </div>
+      </div>
+       
+	<footer class="footer pt-3  ">
+				<div class="container-fluid">
+					<div class="row align-items-center justify-content-lg-between">
+						<div class="col-lg-6 mb-lg-0 mb-4">
+							<div
+								class="copyright text-center text-sm text-muted text-lg-start">
+								©
+								<script>
+                  document.write(new Date().getFullYear())
+                </script>
+								, made by <a
+									href="https://www.creative-tim.com" class="font-weight-bold"
+									target="_blank">CONTIGO</a> for a better FleaMarket.
+							</div>
+						</div>
+            <div class="col-lg-6">
+              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                </li>
+                <li class="nav-item">
+                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                </li>
+              </ul>
             </div>
           </div>
-         </div>
-         <div class="col-xl-6">
-          <div class="card">
-            <div class="card-header d-flex pb-0 p-3">
-              <!-- <div class="row"> -->
-              	<h4 style="text-align:center;">지도</h4>
-              <!-- </div> -->
-              <div class="row" style="width:100%;">
-	            <div class="card-header bg-transparent">
-		            <div class="row">
-		                  <div class="input-group input-group-lg">
-		                    <span class="input-group-text text-body bg-transparent border-0">
-		                      <i class="ni ni-zoom-split-in text-lg" aria-hidden="true"></i>
-		                    </span>
-		                    <input type="text" class="form-control bg-transparent border-0" placeholder="Search anything..." onfocus="focused(this)" onfocusout="defocused(this)">
-		                  </div>
-		            </div>
-		            <hr class="horizontal light">
-		            <div class="card-body px-0 py-0" >
-		              <div id="mapid" class="leaflet"></div>
-		            </div>
-	         	</div>
-          	  </div>
-          	</div>
-       	   </div>
-     	  </div>
-     </div>
-   </div>
-  <!--   Core JS Files   -->
-  <script src="${path}/assets/js/core/popper.min.js"></script>
-  <script src="${path}/assets/js/core/bootstrap.min.js"></script>
-  <script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <!-- Kanban scripts -->
-  <script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
-  <script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>
-  <script src="${path}/assets/js/plugins/leaflet.js"></script>
-  <script src="${path}/assets/js/plugins/nouislider.min.js"></script>
-  <script>
-    var ctx1 = document.getElementById("chart-line").getContext("2d");
-
-    var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
-
-    gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
-    new Chart(ctx1, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-        datasets: [{
-          label: "Mobile apps",
-          tension: 0.4,
-          borderWidth: 0,
-          pointRadius: 0,
-          borderColor: "#5e72e4",
-          backgroundColor: gradientStroke1,
-          borderWidth: 3,
-          fill: true,
-          data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-          maxBarThickness: 6
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#fbfbfb',
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#ccc',
-              padding: 20,
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-  </script>
-  <script>
-    // Initialize the map and assign it to a variable for later use
-    // there's a few ways to declare a VARIABLE in javascript.
-    // you might also see people declaring variables using `const` and `let`
-    var map = L.map('mapid', {
-      // Set latitude and longitude of the map center (required)
-      center: [38.89, -77.03],
-      // Set the initial zoom level, values 0-18, where 0 is most zoomed-out (required)
-      zoom: 11
-    });
-
-
-    // Create a Tile Layer and add it to the map
-    var tiles = new L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/light_all/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-      subdomains: 'abcd',
-      maxZoom: '19'
-    }).addTo(map);
-
-
-    // Init slider
-    var slider = document.getElementById("sliderRegular");
-    noUiSlider.create(slider, {
-      start: 40,
-      connect: [true, false],
-      range: {
-        min: 0,
-        max: 100
-      }
-    });
-  </script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
-  <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
-  <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
+        </div>
+      </footer>
+     
 </body>
 </html>
