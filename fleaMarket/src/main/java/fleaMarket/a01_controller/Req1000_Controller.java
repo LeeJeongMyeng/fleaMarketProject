@@ -98,4 +98,10 @@ public class Req1000_Controller {
 		return "SignIn";
 	}
 	 
+	
+	//문의글 동록
+	@RequestMapping("MemberQnAregForm.do")
+	public String MemberQnAreg() {
+		return "MemberQnAreg";
+	}
 }

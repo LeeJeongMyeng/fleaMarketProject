@@ -46,7 +46,7 @@ AND PERSONALNUMBER = '950828-1111111';
 --비번찾기
 --비번 초기화 후에,알려주기
 
-DELETE FLEAMARKETMEMBER WHERE email ='288888wjdaud@gmail.com';
+DELETE FLEAMARKETMEMBER WHERE email ='28888wjdaud@naver.com';
 INSERT INTO FLEAMARKETMEMBER values(
 '123@nate.com',
 '!dnfwlq12',
@@ -82,7 +82,7 @@ WHERE EMAIL ='222@naver.com';
 
 UPDATE FLEAMARKETMEMBER 
 SET AUTHORITY  = '관리자' 
-WHERE EMAIL ='admin@contigo.com'
+WHERE EMAIL ='admin@contigo.com';
 
 
 ALTER TABLE FLEAMARKETMEMBER MODIFY password varchar2(300);

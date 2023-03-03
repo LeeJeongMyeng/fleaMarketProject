@@ -136,7 +136,6 @@ public class Req1001_Controller {
 	//관리자 = 회원삭제처리 여러개 ㅇㅇ
 	@PostMapping("DeleteMembers.do")
     public String DeleteMembers(@RequestParam("email") List<String> email){
-		System.out.println(email.get(2));
 		
         for (String c : email) {  		
         	DeleteMemberModule(c);	
