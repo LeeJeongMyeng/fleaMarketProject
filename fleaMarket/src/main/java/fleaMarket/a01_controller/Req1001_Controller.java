@@ -45,7 +45,9 @@ public class Req1001_Controller {
 	}
 	//http://localhost:7080/fleaMarket/AdminSearch.do 관리자 회원조회
 	@RequestMapping("AdminSearch.do")
-	public String AdminSearch(@ModelAttribute("sch")Member sch, Model d) {
+	public String AdminSearch(@ModelAttribute("sch")Member sch,Model d) {
+		System.out.println(sch.getAuthority());
+		
 		d.addAttribute("MemberList",service.MemberList(sch));
 			return "AdminSearch";
 	}

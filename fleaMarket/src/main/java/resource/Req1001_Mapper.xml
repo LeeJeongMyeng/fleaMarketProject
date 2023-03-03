@@ -8,8 +8,15 @@
 		parameterType="String">
 		select *
 		from FLEAMARKETMEMBER
-		where name like '%'||#{name}||'%'	
-		and authority !='관리자'
+		where (name || email || nickname) like '%'||#{name}||'%'
+		<choose>
+			<when test="authority=='전체'">
+				and authority !='관리자'
+			</when>
+			<otherwise>
+				and authority = #{authority}
+			</otherwise>
+		</choose>
 		</select>
 		<!-- 회원정보 수정! -->
 		<update id="UpdateMemberInfo" parameterType="member">

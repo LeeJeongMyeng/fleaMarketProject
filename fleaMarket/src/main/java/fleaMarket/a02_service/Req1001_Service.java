@@ -19,6 +19,7 @@ public class Req1001_Service {
 	
 	public List<Member> MemberList(Member sch){
 		if(sch.getName()==null) sch.setName("");
+		if(sch.getAuthority()==null) sch.setAuthority("전체");
 		return dao.MemberList(sch);
 }
 	public Member getMember(String nickname) {

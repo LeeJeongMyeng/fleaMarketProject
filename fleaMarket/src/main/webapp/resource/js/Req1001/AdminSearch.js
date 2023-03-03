@@ -1,4 +1,35 @@
 callPageSelector()
+
+
+
+//클릭시 검색창과 버튼 값 서브밋 ㅋㅋ!!
+$('.authorityradio').click(function(){
+	$('#AdminSearchForm').submit();
+})
+//검색창에서 엔터 쳤을떄, 검색기능
+$('#AdminSearchForm input[name=name]').keyup(function(e){
+	if(e.keyCode==13){
+		ResetAuthRadioSubmit();
+	}
+})
+
+//검색창의 검색 버튼눌렀을 때, checked를 전체로 바꿔주기
+function ResetAuthRadioSubmit(){
+	//$(":radio[name='authority'][value='전체']").attr('checked', true);
+	//위에 구문 동작 제대로 안해서 이렇게 바꿈 혹시 나 천재..?
+	$(":radio[name='authority'][value='전체']").click();
+
+}
+//검색되고나서 해당 값에 checked해주기 ㅋㅋ!!
+$(":radio[name='authority']").each(function() {
+	//SchAuthorityRadioVal 이 친구는 해당 jsp파일에서 ${sch.authority}로 선언해놨음
+	// 이 파일에서는 ${}못 쓴다!!
+	if( $(this).val() == SchAuthorityRadioVal)
+	$(this).attr('checked', true);
+});
+
+
+
 //전체 체크 처리
 $("#cbx_chkAll").click(function() {
 			//전체 체크박스가 클릭이면 전체다 클릭해라
@@ -25,7 +56,7 @@ $("#cbx_chkAll").click(function() {
 			});
 
 
-//페이지네이
+
 function callPageSelector(){
 	const rowsPerPage =15; // 10개 씩 끊겟다.
 	const rows = document.querySelectorAll('#MembersListTable tbody tr');// 게시글 row를 전체 선택
@@ -54,7 +85,7 @@ function callPageSelector(){
 		nb.style.display='none';
 	}
 	
-	/* numberBtn.forEach(function(item,idx){}) */
+	//numberBtn.forEach(function(item,idx){}) 
 	numberBtn.forEach((item,idx)=>{ //item(numbersBtn의 각각), idx(인덱스번호)
 		item.addEventListener('click',(e)=>{ //해당 번호버튼을 클릭하면
 			e.preventDefault();

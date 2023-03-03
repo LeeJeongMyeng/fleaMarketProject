@@ -131,16 +131,28 @@
 						</div>
 							<div class="card-body px-0 pb-0">
 							</div>
+							<form id="AdminSearchForm" action="AdminSearch.do" method="post">
 							<div class="row">
-								<div class="col-10 input-group mb-3 w-25">
-								  <button class="btn btn-outline-primary bg-primary mb-0 ms-3" type="submit" style="color:white;" id="button-addon1">　검색　</button>
+								<div class="col-4 input-group mb-3 w-25">
+								  <button class="btn btn-outline-primary bg-primary mb-0 ms-3" type="button" style="color:white;" id="button-addon1" onclick="ResetAuthRadioSubmit()">　검색　</button>
 								  <input type="text" class="form-control form-control-outline-primary" style="border: 1px solid #5e72e4;"  name="name" value="${sch.name}" placeholder="　회원명을 입력하세요">
+								</div>
+								<div class="btn-group col-3" role="group" aria-label="Basic radio toggle button group">
+								  <input type="radio" class="btn-check authorityradio" value="전체" name="authority" id="btnradio1" autocomplete="off" checked>
+								  <label class="btn btn-outline-primary" for="btnradio1">전체</label>
+								
+								  <input type="radio" class="btn-check authorityradio" value="일반셀러" name="authority" id="btnradio2" autocomplete="off">
+								  <label class="btn btn-outline-primary" for="btnradio2">일반셀러</label>
+								
+								  <input type="radio" class="btn-check authorityradio" value="사업자" name="authority" id="btnradio3" autocomplete="off">
+								  <label class="btn btn-outline-primary" for="btnradio3">사업자</label>
 								</div>
 								<div class="col-2 ms-auto my-auto">
 									<button type="button" class="btn btn-outline-danger btn-md mb-0 me-2 " data-bs-toggle="modal" data-bs-target="#import">회원탈퇴</button>
 									<button class="btn btn-outline-primary btn-md export mb-0 ms-3" data-type="csv" type="button" name="button">Export</button>
 								</div>
 							</div>
+							</form>
 							<div class="table-responsive mt-3">
 								<form id="DeleteMembersForm" action="DeleteMembers.do" class="form"  method="post">
 								<table class="table table-flush" id="MembersListTable">
@@ -233,6 +245,13 @@
 				</div>
 			</footer>
 	</main>
+<script>
+//검색 후 해당 선택값(전체/일반셀러/사업자) 체크되도록하기 위한 변수
+var SchAuthorityRadioVal = '${sch.authority}'
+console.log(SchAuthorityRadioVal)
+
+
+</script>
 <script src="${path}/resource/js/Req1001/AdminSearch.js"></script>
 </body>
 </html>
