@@ -770,7 +770,7 @@ li{
 				     <c:when test="${empty Login }">
 				     <div class="row" style="width:240px; font-size:14px; font-weight:bold;">
 				     	<div class="col-6" ><a href="SignIn.do">로그인</a></div>
-				     	<div class="col-6"><a href="#" id="HeaderSignUp">회원가입</a></div>
+				     	<div class="col-6"><a href="SignUp.do" id="HeaderSignUp">회원가입</a></div>
 				     </div>
 				     </c:when>
 				     </c:choose>
