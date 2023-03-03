@@ -136,11 +136,9 @@ public class Req1001_Controller {
 	//관리자 = 회원삭제처리 여러개 ㅇㅇ
 	@PostMapping("DeleteMembers.do")
     public String DeleteMembers(@RequestParam("email") List<String> email){
-		
         for (String c : email) {  		
         	DeleteMemberModule(c);	
         }
-        
         return "redirect:AdminSearch.do";
     }
 	
