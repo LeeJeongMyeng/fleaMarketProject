@@ -367,7 +367,7 @@
 			  <label for="check_2" style="font-size: 15px;">서비스 이용약관 동의(필수)</label>
 			  <input class="form-check-input" name="Sucb" type="checkbox" id="Trem_2" class="Trem text-dark font-weight-bolder"/>
 			  <br>
-			  <label for="check_3" style="font-size: 15px;">마케팅 수신 동의</label>
+			  <label for="check_3" style="font-size: 15px;">마케팅 수신 동의(선택)</label>
 			  <input class="form-check-input" name="Sucb" type="checkbox" id="Trem_3" class="Trem text-dark font-weight-bolder"/>
 		  
 		  
