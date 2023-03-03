@@ -2,6 +2,11 @@ callPageSelector()
 
 
 
+//----------검색파트-----------검색파트-----------검색파트----------------
+
+
+
+
 //클릭시 검색창과 버튼 값 서브밋 ㅋㅋ!!
 $('.authorityradio').click(function(){
 	$('#AdminSearchForm').submit();
@@ -12,11 +17,10 @@ $('#AdminSearchForm input[name=name]').keyup(function(e){
 		ResetAuthRadioSubmit();
 	}
 })
-
 //검색창의 검색 버튼눌렀을 때, checked를 전체로 바꿔주기
 function ResetAuthRadioSubmit(){
 	//$(":radio[name='authority'][value='전체']").attr('checked', true);
-	//위에 구문 동작 제대로 안해서 이렇게 바꿈 혹시 나 천재..?
+	//위에 구문 동작 제대로 안해서 이렇게 바꿈
 	$(":radio[name='authority'][value='전체']").click();
 
 }
@@ -27,6 +31,13 @@ $(":radio[name='authority']").each(function() {
 	if( $(this).val() == SchAuthorityRadioVal)
 	$(this).attr('checked', true);
 });
+
+
+
+
+
+
+//---------회원 탈퇴/체크박스---------회원 탈퇴/체크박스---------회원 탈퇴/체크박스--------------------------------
 
 
 
@@ -54,6 +65,12 @@ $("#cbx_chkAll").click(function() {
 			// 아니면 끄셈
 				else $("#cbx_chkAll").prop("checked", true); 
 			});
+
+
+//------------------페이징처리------------------페이징처리------------------페이징처리------------------페이징처리
+
+
+
 
 
 
@@ -167,3 +184,4 @@ function callPageSelector(){
 	});
 
 }
+

@@ -18,7 +18,7 @@
 	 
 	//이메일 양식확인
 $('#CheckEmailBtn').click(function(){
-	var RegEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	var RegEmail = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i;
 	var EmailVal = $('[name=email]').val()
 	var Emaildoc = $('[name=email]')
 	if(!RegEmail.test(EmailVal) || EmailVal==''){
@@ -374,15 +374,54 @@ var data = {"b_no":[buisnum.val()]};
 	});
 } 
 	   
+
+
+// 동의약관 전체 체크 처리
+$("#cbx_chkAll").click(function() {
+			//전체 체크박스가 클릭이면 전체다 클릭해라
+				if($("#cbx_chkAll").is(":checked")){
+				 $("input[name=Sucb]").prop("checked", true);
+				 }
+			// 전체 쳌박이 헤제면 전체다 해제
+				else{
+					 $("input[name=Sucb]").prop("checked", false);
+				}
+			});
+			
+			//개별 쳌박 클릭시
+			$("input[name=Sucb]").click(function() {
+				var total = $("input[name=Sucb]").length;
+				var checked = $("input[name=Sucb]:checked").length;
+				
+				console.log(total+":"+checked)
+				
+			// 전체 쳌박 갯수랑 일치하면 전체 쳌박도 체크
+				if(total != checked) $("#cbx_chkAll").prop("checked", false);
+			// 아니면 끄셈
+				else $("#cbx_chkAll").prop("checked", true); 
+			});
+
+//위 동의약관 필수항목 두개 체크 시, 바깥 이용약관 동의
+$('#Trem_2,#Trem_1,#cbx_chkAll').change(function(){
+	if($('#Trem_2').is(':checked') && $('#Trem_1').is(':checked')){
+		$('#TotTermCheck').prop("checked",true)
+	}else{
+		$('#TotTermCheck').prop("checked",false)
+	}
+})
+	
+
+	   
+	   
 	//스탭넘기기전 유효성검사
 	function CheckStepHandler(number){
 		if(number==1){
-			if(!OkEamil){alert("이메일 인증을 완료해주세요."); return false;}
-			if(!OkPass2){alert("비밀번호를 알맞게 입력해주세요."); return false;}
-			if(!OkCheckName){alert("기존 회원 여부 체크를 진행해주세요"); return false;}
+			//if(!OkEamil){alert("이메일 인증을 완료해주세요."); return false;}
+			//if(!OkPass2){alert("비밀번호를 알맞게 입력해주세요."); return false;}
+			//if(!OkCheckName){alert("기존 회원 여부 체크를 진행해주세요"); return false;}
 		}else if(number==2){
-			if(!OkPhonenum){alert("핸드폰번호를 정확하게 입력부탁드립니다."); return false;}
-			if(!OkAddress){alert("우편번호 찾기를 통해서 주소기재 부탁드립니다."); return false;}
+			//if(!OkPhonenum){alert("핸드폰번호를 정확하게 입력부탁드립니다."); return false;}
+			//if(!OkAddress){alert("우편번호 찾기를 통해서 주소기재 부탁드립니다."); return false;}
 			console.log($('[name=profileimg]').val())
 			if($('[name=nickname').val().length<2){
 				$('[name=nickname]').val($('[name=email]').val().split('@')[0])
@@ -441,5 +480,6 @@ var data = {"b_no":[buisnum.val()]};
     function SignUp_Ok(){	
     	if(!OkAuth){alert("가입 유형을 선택해주세요."); return false;}
     	if($('[name=category]').val()=='카테고리 선택'){alert('카테고리를 선택해주세요.'); return false;}
+    	if($('#TotTermCheck').is(':checked')==false){alert('이용약관 동의 이후 가입 완료 부탁드립니다.'); return false;}
     	$('#SignUpForm').submit()
     }

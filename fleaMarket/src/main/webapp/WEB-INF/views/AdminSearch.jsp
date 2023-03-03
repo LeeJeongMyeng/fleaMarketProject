@@ -135,7 +135,7 @@
 							<div class="row">
 								<div class="col-4 input-group mb-3 w-25">
 								  <button class="btn btn-outline-primary bg-primary mb-0 ms-3" type="button" style="color:white;" id="button-addon1" onclick="ResetAuthRadioSubmit()">　검색　</button>
-								  <input type="text" class="form-control form-control-outline-primary" style="border: 1px solid #5e72e4;"  name="name" value="${sch.name}" placeholder="　회원명을 입력하세요">
+								  <input type="text" class="form-control form-control-outline-primary ps-2" style="border: 1px solid #5e72e4;"  name="name" value="${sch.name}" placeholder="　회원명을 입력하세요">
 								</div>
 								<div class="btn-group col-3" role="group" aria-label="Basic radio toggle button group">
 								  <input type="radio" class="btn-check authorityradio" value="전체" name="authority" id="btnradio1" autocomplete="off" checked>
