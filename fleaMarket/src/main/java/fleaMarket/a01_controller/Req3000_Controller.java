@@ -87,7 +87,14 @@ public class Req3000_Controller {
 		return "redirect:fRegistration.do";
 	}	
 	
-	
+//전체 조회 
+//	http://localhost:7030/fleaMarket/totalSearch.do
+	@RequestMapping("totalSearch.do")
+	public String totalSearch(FleaMarket sch, Model d) {
+	d.addAttribute("flist",service.getFleaMarketList(sch));
+		return "FleaMarketOverallCheck";
+	}
+		
 	
 	
 }

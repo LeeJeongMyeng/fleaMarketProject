@@ -44,6 +44,12 @@
 		where postingNumber = #{postingNumber}
 	</delete>
 	
+    <select id="getFleaMarketList" parameterType="fleamarket"
+		 resultType="fleamarket">
+		select * from FleaMarket
+		where title like '%'||#{title}||'%'
+		and address like '%'||#{address}||'%'
+	</select>	
 </mapper>
     
     

@@ -221,6 +221,7 @@
               <div class="row" style="justify-content: center;">
               
               <!-- 1개의 박스 -->
+              <c:forEach var="flea" items="${flist}">
                 <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                   <div class="card card-blog card-plain">
                     <div class="position-relative">
@@ -232,11 +233,11 @@
                     
                    <!-- 제목 -->
                         <h5>
-                          Bubbles
+                          ${flea.title}
                         </h5>
                    <!-- 간단한 설명 -->
                       <p class="mb-4 text-sm">
-                        As Bubble works through a huge amount of internal management turmoil.
+                        ${flea.content}
                       </p>
                       <div class="d-flex align-items-center justify-content-between">
                         <button type="button" class="btn btn-outline-primary btn-sm mb-0">View Project</button>
@@ -245,6 +246,7 @@
                     </div>
                   </div>
                 </div>
+                </c:forEach>
               </div>
             </div>
           

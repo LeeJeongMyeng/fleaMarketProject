@@ -111,5 +111,66 @@ public void delFleaMarket(FleaMarket postingNumber){
 	</delete>
 
 
+//전체 조회 
+
+dao 
+	public List<FleaMarket> getFleaMarketList(FleaMarket sch);	
+
+vo
+
+service
+public List<FleaMarket> getFleaMarketList(FleaMarket sch);	
+
+	public List<FleaMarket> getFleaMarketList(FleaMarket sch){
+		if(sch.getId()==null) sch.setId("");
+		if(sch.getName()==null) sch.setName("");
+		if(sch.getGrade()==null) sch.setGrade("");
+		return dao.getMemberList(sch);
+	}	
+
+컨트롤러
+		@RequestMapping("totalSearch.do")
+		public String totalSearch(@ModelAttribute("sch") FleaMarket sch, Model d) {
+		d.addAttribute("flist",service.);
+			return "FleaMarketOverallCheck";
+		}
+		
+	@RequestMapping("totalSearch.do")
+	public String totalSearch(FleaMarket sch, Model d) {
+	d.addAttribute("flist",service.getFleaMarketList(sch));
+		return "FleaMarketOverallCheck";
+	}
+	
+mapper
+	<select id="getFleaMarketList" parameterType="fleamarket"
+		 resultType="fleamarket">
+		select * from FleaMarket
+		where title like '%'||#{title}||'%'
+		and address like '%'||#{address}||'%'
+	</select>				
+	
+
+
+//전체 조회에서 상세조회 가는거
+<script>
+function goDetailPage(postingNumber) {
+		location.href="${path}/fleaMarketDetail.do?postingNumber"="+postingNumber;
+	}
+</script>
+
+
+<a onclick="goDetailPage('${flea.postingNumber}')">
+
+
+//컨트롤
+	@GetMapping("/fleaMarketDetail.do")
+	public String prodDetail(@RequestParam String postingNumber, 
+							Model d) {
+		d.addAttribute("flea", service.productDetail(postingNumber));
+		
+		
+		return "상세페이지";
+	}
+
 
 
