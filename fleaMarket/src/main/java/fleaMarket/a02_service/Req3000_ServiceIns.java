@@ -2,7 +2,6 @@ package fleaMarket.a02_service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import fleaMarket.a03_dao.Req3000_Dao;
 import vo.FFile;
 import vo.FleaMarket;
@@ -28,6 +27,10 @@ public class Req3000_ServiceIns implements Req3000_Service{
 	//수정하기
 	public void UptFleaMarket(FleaMarket upt) {
 		dao.UptFleaMarket(upt);
-	}
+	} 
 
+	//삭제하기
+	public void delFleaMarket(String postingNumber){
+	    dao.delFleaMarket(postingNumber);
+	}
 }

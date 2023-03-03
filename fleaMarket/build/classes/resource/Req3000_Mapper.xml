@@ -28,17 +28,22 @@
 	<update id="UptFleaMarket" parameterType="fleamarket">
 		update FleaMarket
 		set title=#{title},
-		content=#{content},
-		approvalMaxCnt=#{approvalMaxCnt},
-		recruitmentStartDate=#{recruitmentStartDate},
-		recruitmentEndDate=#{recruitmentEndDate},
-		openDate=#{openDate},
-		closeDate=#{closeDate},
-		checkForm=#{checkForm},
-		address=#{address},
+			content=#{content},
+			approvalMaxCnt=#{approvalMaxCnt},
+			recruitmentStartDate=#{recruitmentStartDate},
+			recruitmentEndDate=#{recruitmentEndDate},
+			openDate=#{openDate},
+			closeDate=#{closeDate},
+			checkForm=#{checkForm},
+			address=#{address}
 		where postingNumber = #{postingNumber}
 	</update>
 
+    <delete id="delFleaMarket" parameterType="string">
+		delete fleamarket 
+		where postingNumber = #{postingNumber}
+	</delete>
+	
 </mapper>
     
     

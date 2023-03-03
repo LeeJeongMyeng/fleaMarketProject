@@ -13,7 +13,7 @@
 <link rel="apple-touch-icon" sizes="76x76"
 	href="${path}/assets/img/apple-icon.png">
 <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
-<title>플리마켓 수정하기</title>
+<title>플리마켓 수정</title>
 <!--     Fonts and icons     -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
@@ -83,11 +83,12 @@ $('#editor .ql-editor').keyup(function(){
 		<div class="container-fluid py-4">
 			<div class="row">
 				<div class="col-lg-9 col-12 mx-auto">
-					<form  method="post"  action="fleaMarketins.do" id="aform"
+					<form  method="post"  action="FleaMarketUpt.do" id="aform" onsubmit="return checkForm1()"
 						name="aform" enctype="multipart/form-data">
 						<div class="card card-body mt-4">
 							<h6 class="mb-0 fleamarket">플리마켓 수정하기</h6>
 							<hr class="horizontal dark my-3">
+							<input type="hidden" name="postingNumber" value="1">
 							<input type="hidden" name="email" value="ehddms2909@naver.com">
 							<input type="hidden" name="bisenessNumber" value="예시~">
 							<label for="title" class="form-label labelFont">제목</label> 
@@ -176,7 +177,7 @@ $('#editor .ql-editor').keyup(function(){
 										</select>
 									</div>
 								</div>
-
+                          
 								<label class="mt-4 form-label labelFont">첨부파일</label>
 								<div class="form-control dropzone" id="dropzone">
 									<div class="fallback">
@@ -184,9 +185,8 @@ $('#editor .ql-editor').keyup(function(){
 									
 									</div>
 								</div>
-								</div>
+								
 					</form>
-
 					<div class="d-flex justify-content-end mt-4">
 						<button type="submit" id="insBtn"
 							class="btn bg-gradient-primary m-0 ms-2">수정하기</button>
@@ -417,9 +417,7 @@ geocoder.addressSearch('판교', function(result, status) {
                    // 지도 선택한 부분 input 들어감 
                    var aform = document.querySelector("#aform")
                    aform.address.value = document.getElementById("centerAddr3").innerText;
-              /*      var address =$("#centerAddr3").val()
-                   $("input[name=addressval]").val()=address; */
-                   //aform.addressval2.value = document.getElementById("centerAddr3").innerText;
+           
                    
                }   
            });
@@ -427,7 +425,7 @@ geocoder.addressSearch('판교', function(result, status) {
 
 });    
 //파일 업로드 
-var sel_files = [];
+  var sel_files = [];
 $(document).ready(function() {
     $("#Prodimg").on("change", handleImgsFilesSelect); //input file의상태가 변하면 함수실행
 }); 
@@ -464,13 +462,50 @@ function handleImgsFilesSelect(e) {
     
     
     $("input[name=filePath]").val(filesnameval)
-    //console.log(sel_files.length)
-    //console.log(sel_files[0])
-    //console.log(sel_files[1])
+
 }
+ 
 
-
-
+//필수항목 조건식 
+ function checkForm1(){	
+if(!document.aform.title.value){
+        alert("글제목을 입력하세요");
+        return false;
+ }
+	    
+ if(!document.aform.openDate.value){
+     alert("플리마켓 시작일을 입력하세요");
+     return false;
+ }
+ 
+ if(!document.aform.closeDate.value){
+     alert("플리마켓 종료일을 입력하세요");
+     return false;
+ }
+ 
+ if(!document.aform.approvalMaxCnt.value){
+     alert("모집인원을 입력해주세요");
+     return false;
+ }
+ if(!document.aform.recruitmentStartDate.value){
+     alert("모집시작일을 입력해주세요");
+     return false;
+ }
+ if(!document.aform.recruitmentEndDate.value){
+     alert("모집종료일을 입력해주세요");
+     return false;
+ }
+ if(!document.aform.address.value){
+     alert("장소를 선택해주세요");
+     return false;
+ }
+ if(!document.aform.content.value){
+     alert("내용 적어주세요");
+     return false;
+ }
+ 
+  return true;
+}
 
   
 </script>

@@ -85,3 +85,31 @@ public void insertFleaMarket(FleaMarket ins){
     	dao.insertFleaMarket(ins);
     }
 
+
+//삭제하기 
+컨트롤러
+	@RequestMapping("FleaMarketDel.do")
+	public String FleaMarketDel(@RequestParam("postingNumber") String postingNumber) {
+		service.delFleaMarket(postingNumber);
+		return "WEB-INF\\views\\a05_mvc\\a03_memberList.jsp";
+	}	
+
+dao
+public void delFleaMarket(String postingNumber);
+
+service
+public void delFleaMarket(FleaMarket postingNumber);
+public void delFleaMarket(FleaMarket postingNumber){
+    dao.
+}
+
+//mapper.xml
+
+	<delete id="delFleaMarket" parameterType="string">
+		delete fleamarket 
+		where postingNumber = #{postingNumber}
+	</delete>
+
+
+
+

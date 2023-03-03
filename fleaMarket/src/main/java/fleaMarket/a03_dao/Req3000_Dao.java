@@ -9,4 +9,6 @@ public interface Req3000_Dao {
 	public void insprofile(FFile fins);
 	//수정
 	public void UptFleaMarket(FleaMarket upt);
+	//삭제
+	public void delFleaMarket(String postingNumber);
 }

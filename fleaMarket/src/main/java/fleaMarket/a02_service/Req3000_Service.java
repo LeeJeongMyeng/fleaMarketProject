@@ -10,4 +10,5 @@ public interface Req3000_Service {
 	public void insertFleaMarket(FleaMarket ins);
 	public void insprofile(FFile fins);
 	public void UptFleaMarket(FleaMarket upt);
+	public void delFleaMarket(String postingNumber);
 }
