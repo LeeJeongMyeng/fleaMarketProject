@@ -103,14 +103,26 @@ public class Req1000_Controller {
 		return "MemberQnAList";
 	}
 	
-	//문의글 동록
-	@RequestMapping("MemberQnAreg.do")
-	public String MemberQnAregForm() {
-		return "exp";
+
+	//문의글등록
+	@PostMapping("QNAInsert.do")
+	public String QNAInsert() {
+		
+		return "";
 	}
-	@RequestMapping("MemberQnAreg2.do")
-	public String MemberQnAregForm2() {
-		return "MemberQnAreg2";
+	
+	@RequestMapping("GetQNA.do")
+	public String GetQNA(@RequestParam("qnaNo") String qnano,Model d) {
+		
+		//d.addAttribute("getqna",);
+		return "exp2";
 	}
+	
+	@PostMapping("QNAUpdate.do")
+	public String QNAUpdate() {
+		
+		return "MemberQnAListForm";
+	}
+	
 	
 }
