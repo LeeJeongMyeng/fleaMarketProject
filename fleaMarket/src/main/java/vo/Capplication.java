@@ -13,7 +13,8 @@ public class Capplication {
 	private String categoryDetail;
 	private String email;	//이메일
 	private String hashtag;	//해시태그
-	private String viewCnt;	//조회수
+	private int viewCnt;	//조회수
+	private int likeCnt;
 	private String imgname;	//파일명
 	private MultipartFile report;	// 
 	public String getCommunitynumber() {
@@ -64,11 +65,17 @@ public class Capplication {
 	public void setHashtag(String hashtag) {
 		this.hashtag = hashtag;
 	}
-	public String getViewCnt() {
+	public int getViewCnt() {
 		return viewCnt;
 	}
-	public void setViewCnt(String viewCnt) {
+	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
+	}
+	public int getLikeCnt() {
+		return likeCnt;
+	}
+	public void setLikeCnt(int likeCnt) {
+		this.likeCnt = likeCnt;
 	}
 	public String getImgname() {
 		return imgname;

@@ -8,7 +8,7 @@
     
     	<insert id="communityInsert" parameterType="capplication">
     		INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval,
-    		 #{title},#{content},sysdate,NULL,#{category},#{email},#{hashtag},0)
+    		 #{title},#{content},sysdate,NULL,#{category},#{email},#{hashtag},0,0)
     	</insert>
     	
     	<insert id="communityFileInsert" parameterType="boardimg">
@@ -35,6 +35,7 @@
 			AND (m.email LIKE '%'||#{keyword}||'%'
 			OR m.nickname LIKE '%'||#{keyword}||'%')
 		</select>
+		
 		<delete id="followmemberdelete" parameterType="followmemberinfo">
 			DELETE FROM friend
 			WHERE myemail=#{myemail}

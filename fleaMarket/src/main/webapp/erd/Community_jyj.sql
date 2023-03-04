@@ -11,6 +11,7 @@ CREATE TABLE capplicaion
 	-- 구분자 #
 	hashtag varchar2(100), -- 해시태그
 	viewCnt number, -- 조회수
+	likeCnt NUMBER, -- 좋아요수
 	PRIMARY KEY (communityNumber)
 );
 CREATE SEQUENCE communityNumber_seq
@@ -35,7 +36,7 @@ WHERE communityNumber='comBoard23';
 SELECT * FROM capplicaion
 WHERE communityNumber='comBoard23';
 
-INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','dbwls8382@gmail.com','#태그1 #태그2',0);
+INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','dbwls8382@gmail.com','#태그1 #태그2',0,0);
 -- 커뮤니티 게시글 이미지
 CREATE TABLE BoardImg
 (
@@ -176,5 +177,5 @@ FROM capplicaion c, BoardImg bi, fleamarketmember m, profile p
 WHERE c.email=m.email -- 회원/게시글
 AND m.email=p.email -- 회원/프로필
 AND c.communitynumber=bi.communitynumber -- 게시글커뮤니티번호/게시글사진카뮤니티번호
-;
+and m.email='yujin@gmail.com';
 
