@@ -37,7 +37,7 @@
 		</select>
 		<delete id="followmemberdelete" parameterType="followmemberinfo">
 			DELETE FROM friend
-			WHERE myemail=${myemail}
-			AND FOLLOWING=${following}
+			WHERE myemail=#{myemail}
+			AND FOLLOWING=#{following}
 		</delete>
     </mapper>

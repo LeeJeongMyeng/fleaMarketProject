@@ -35,7 +35,7 @@ WHERE communityNumber='comBoard23';
 SELECT * FROM capplicaion
 WHERE communityNumber='comBoard23';
 
-INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','dbwls8392@gmail.com','#태그1 #태그2',0);
+INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','dbwls8382@gmail.com','#태그1 #태그2',0);
 -- 커뮤니티 게시글 이미지
 CREATE TABLE BoardImg
 (
@@ -50,7 +50,9 @@ INSERT INTO BoardImg values('파일명','파일경로','comBoard0');
 SELECT * FROM BoardImg;
 
 SELECT * FROM BoardImg i,capplicaion c
-WHERE i.communityNumber=c.communityNumber;
+WHERE i.communityNumber=c.communityNumber
+ORDER BY registdate;
+
 -- 채팅
 CREATE TABLE chat
 (
@@ -122,11 +124,16 @@ CREATE TABLE friend
 );
 DROP TABLE friend CASCADE CONSTRAINTS;
 
-INSERT INTO friend VALUES('dbwls8382@naver.com','222@naver.com');
+INSERT INTO friend VALUES('yujin@gmail.com','ehddms2909@naver.com');
+INSERT INTO friend VALUES('yujin@gmail.com','janexagnes@gmail.com');
+INSERT INTO friend VALUES('yujin@gmail.com','28888wjdaud@naver.com');
+INSERT INTO friend VALUES('yujin@gmail.com','pucoca@naver.com');
+INSERT INTO friend VALUES('yujin@gmail.com','aoddl56@nate.com');
 
 SELECT * FROM friend;
 select * FROM FLEAMARKETMEMBER;
 SELECT * FROM profile;
+
 
 select *
 FROM FLEAMARKETMEMBER m,friend f,profile pro
@@ -142,6 +149,32 @@ AND myemail='dbwls8382@naver.com'
 AND (m.email LIKE '%'||''||'%'
 OR m.nickname LIKE '%'||''||'%');
 
+select pro.profileimg,m.nickname,m.email
+FROM FLEAMARKETMEMBER m,friend f,profile pro
+WHERE f.following=m.email
+AND f.following=pro.email
+AND myemail='dbwls8382@naver.com'
+AND (m.email LIKE '%'||''||'%'
+OR m.nickname LIKE '%'||''||'%');
+
 DELETE FROM friend
 WHERE myemail='dbwls8382@naver.com'
 AND FOLLOWING='222@naver.com';
+
+select*
+FROM FLEAMARKETMEMBER m,profile pro
+WHERE f.myemail= m.email
+AND m.email='dbwls8382@naver.com';
+
+SELECT * FROM capplicaion;
+SELECT * FROM BoardImg;
+SELECT * FROM profile;
+SELECT * FROM FLEAMARKETMEMBER m;
+
+SELECT * 
+FROM capplicaion c, BoardImg bi, fleamarketmember m, profile p
+WHERE c.email=m.email -- 회원/게시글
+AND m.email=p.email -- 회원/프로필
+AND c.communitynumber=bi.communitynumber -- 게시글커뮤니티번호/게시글사진카뮤니티번호
+;
+

@@ -28,28 +28,33 @@
 	  <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
 	  <!-- CSS Files -->
 	  <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
-	  
+	  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 	<script type="text/javascript">
+	
 		$(document).ready(function(){
 			if($("#index").keycode==13){
 				$("#indextform").submit()
 			}
-			$("#roomGo").click(function(){
-				location.href="communityMemberRoom.do?myemail="+$("#email").text()
-			})
-			$("#chatGo").click(function(){
-				location.href="chatting.do?myemail="+$("#email").text()
-			})
-			$("#unfollowGo").click(function(){
-				location.href="communityFollowDelete.do?myemail="+${Login.email}+"&following="+$("#email").text()
-			})
+			
+			var login = "${Login.email}"
+			if(login==""){
+				alert("[안내메시지]로그인을 하셔야 이용이 가능합니다.")
+				location.href="${path}/SignIn.do"
+			}
+			
+			var msg = "${msg}"
+			if(msg=="언팔로우"){
+				location.href="${path}/communityFollowMember.do?myemail="+login
+			}
 		});
+		
 	</script>
+
 </head>
 
 <body class="g-sidenav-show  bg-gray-100">
   <jsp:include page="header.jsp"></jsp:include>
-  <main class="main-content position-relative border-radius-lg" style="margin-top:18%;">
+  <main class="main-content position-relative border-radius-lg" style="margin-top:10%;">
     <!-- End Navbar -->
           <div class="card" style="width:95%; margin-left:2.5%; margin-top:10%;">
           <div class="card-header p-3">
@@ -68,16 +73,17 @@
                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">이메일</th>
                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">room이동</th>
                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">채팅하기</th>
-                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">팔로잉</th>
+                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">언팔로우</th>
                   </tr>
                 </thead>
                 <tbody>
                 <c:forEach var="followers" items="${follower}">
-                  <tr>
+                  <tr><!-- onclick="goEmail('${followers.email}')" -->
                     <td>
                       <div class="d-flex px-2 py-1">
                         <div>
-                          <img src="${path}/resource/img/Member/profileimg/${followers.profileimg}" class="avatar avatar-sm me-3" alt="avatar image">
+                          <img src="${path}/resource/img/Member/profileimg/${followers.profileimg}" 
+                          	class="avatar avatar-sm me-3" alt="avatar image">
                         </div>
                         <div class="d-flex flex-column justify-content-center">
                           <h6 class="mb-0 text-sm">${followers.nickname}</h6>
@@ -88,19 +94,25 @@
                       <p class="text-sm text-secondary mb-0">${followers.authority}</p>
                     </td>
                     <td class="align-middle text-center text-sm">
-                      <p id="email" class="text-secondary mb-0 text-sm">${followers.email}</p>
-                     <%--  <input type="hidden" id="emailinput" name="email" value="${followers.email}"/> --%>
+                      <p class="text-secondary mb-0 text-sm">${followers.email}</p>
                     </td>
                     <td class="align-middle text-center">
-                      <button type="button" id="roomGo" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-shop"></i></button>
+                    	<a href="communityMemberRoom.do?email=${followers.email}" ><i class="ni ni-shop"></i></a>
+                      <!-- <button type="button" id="roomGo" class="text-secondary text-sm roomGo" style="border:none; background:none;"><i class="ni ni-shop"></i></button> -->
                     </td>
                     <td class="align-middle text-center">
-                      <button type="button" id="chatGo" class="text-secondary text-sm" 
+                     <%--  <a href="chatting.do?myemail=${followers.email}" ><i class="ni ni-chat-round"></i></a> --%>
+                      <button type="button" id="chatGo" class="text-secondary text-sm chatGo" 
                       	style="border:none; background:none;"
-                      	data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="ni ni-chat-round"></i></button>
+                      	data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="ni ni-chat-round"></i>
+                      </button>
                     </td>
                     <td class="align-middle text-center">
-                      <button type="button" id="unfollowGo" class="text-secondary text-sm" style="border:none; background:none;"><i class="ni ni-scissors"></i></button>
+                      <a href="communityFollowDelete.do?myemail=${Login.email}&following=${followers.email}" >
+                      		<i class="ni ni-scissors"></i></a>
+                      <!-- <button type="button" id="unfollowGo" class="text-secondary text-sm unfollowGo" style="border:none; background:none;">
+                      		<i class="ni ni-scissors"></i>
+                      </button> -->
                     </td>
                   </tr>
            		 </c:forEach>
