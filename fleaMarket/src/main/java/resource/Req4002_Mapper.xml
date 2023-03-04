@@ -41,4 +41,6 @@
 			WHERE myemail=#{myemail}
 			AND FOLLOWING=#{following}
 		</delete>
+		
+		
     </mapper>
