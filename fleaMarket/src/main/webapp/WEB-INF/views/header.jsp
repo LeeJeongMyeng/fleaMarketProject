@@ -57,7 +57,7 @@ li{
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-absolute mt-4 py-2 start-0 end-0 mx-4">
           <div class="container-fluid ps-2 pe-0">
-            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="${path}/pages/dashboards/default.html">
+            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="callmain.do">
               <img src="${path}/resource/img/fleamarketLOGO3.png" alt="..." class="avatar" style="height:60px; width:250px;">
             </a>
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,216 +67,11 @@ li{
                 <span class="navbar-toggler-bar bar3"></span>
               </span>
             </button>
-            <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
-              <ul class="navbar-nav navbar-nav-hover mx-auto">
+
+
                 <li class="nav-item dropdown dropdown-hover mx-2">
-                  <a role="button" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center " id="dropdownMenuPages" data-bs-toggle="dropdown" aria-expanded="false">
-                    전체
-                    <img src=" ${path}/assets/img/down-arrow-dark.svg  " alt="down-arrow" class="arrow ms-1 d-lg-block d-none">
-                    <img src="${path}/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1 d-lg-none d-block">
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-animation dropdown-xl p-3 border-radius-xl mt-0 mt-lg-3 shadow-none" aria-labelledby="dropdownMenuPages">
-                    <div class="row d-none d-lg-block">
-                      <div class="col-12 px-4 py-2">
-                        <div class="row">
-                          <div class="col-4 position-relative">
-                            <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0">
-                              <i class="ni ni-spaceship me-3 text-primary"></i>
-                              회사소개
-                            </div>
-                            <a href="${path}/pages/dashboards/landing.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">Landing</span>
-                            </a>
-                            <a href="${path}/pages/dashboards/default.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">Default</span>
-                            </a>
-                            <a href="${path}/pages/dashboards/automotive.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">Automotive</span>
-                            </a>
-                            <a href="${path}/pages/dashboards/smart-home.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">Smart Home</span>
-                            </a>
-                            <a href="${path}/pages/dashboards/virtual-reality.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">Virtual Reality</span>
-                            </a>
-                            <a href="${path}/pages/dashboards/crm.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">CRM</span>
-                            </a>
-                          </div>
-                          <div class="col-4 position-relative">
-                            <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0">
-                              <i class="ni ni-badge me-3 text-primary"></i>
-                              플리마켓
-                            </div>
-                            <a href="${path}/pages/pages/profile/overview.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">전체조회(전체조회)</span>
-                            </a>
-                            <a href="${path}/pages/pages/profile/teams.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">플리마켓 등록(상세조회)</span>
-                            </a>
-                            <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center mt-3 px-0">
-                              <i class="ni ni-app me-3 text-primary"></i>
-                              커뮤니티
-                            </div>
-                            <a href="${path}/pages/pages/projects/general.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">홍보글</span>
-                            </a>
-                            <a href="${path}/pages/pages/projects/timeline.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">사업아이디어</span>
-                            </a>
-                            <a href="${path}/pages/pages/projects/new-project.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">사는이야기</span>
-                            </a>
-                            <a href="${path}/pages/pages/projects/new-project.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">꿀팁</span>
-                            </a>
-                            <a href="${path}/chatting.do" class="dropdown-item border-radius-md">
-                              <span class="ps-3">채팅목록</span>
-                            </a>
-                            <a href="${path}/communityMemberRoom.do" class="dropdown-item border-radius-md">
-                              <span class="ps-3">MyRoom</span>
-                            </a>
-                            <a href="${path}/communityFollowMember.do?myemail=${Login.email}" class="dropdown-item border-radius-md">
-                              <span class="ps-3">나의 팔로워 조회</span>
-                            </a>
-                          </div>
-                          <div class="col-4">
-                            <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0">
-                              <i class="ni ni-single-02 me-3 text-primary"></i>
-                              회원정보
-                            </div>
-                            <a href="${path}/pages/pages/account/settings.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">회원조회</span>
-                            </a>
-                            <a href="${path}/pages/pages/account/billing.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">회원수정</span>
-                            </a>
-                            <a href="${path}/pages/pages/account/invoice.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">회원탈퇴</span>
-                            </a>
-                            <a href="${path}/pages/pages/account/security.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">내가 쓴 홍보글</span>
-                            </a>
-                            <a href="${path}/pages/pages/account/security.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">내가 쓴 신청글</span>
-                            </a>
-                            <a href="${path}/pages/pages/account/security.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">My Room</span>
-                            </a>
-                            <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0 mt-3">
-                              <i class="ni ni-folder-17 me-3 text-primary"></i>
-                              공지사항
-                            </div>
-                            <a href="${path}/pages/pages/pricing-page.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">공지사항 보기</span>
-                            </a>
-                            <a href="${path}/pages/pages/rtl-page.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">공지사항 등록</span>
-                            </a>
-                            <a href="${path}/pages/pages/widgets.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">공지사항 메뉴1</span>
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <!-- responsive -->
-                    <div class="d-lg-none">
-                      <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0">
-                        <i class="ni ni-spaceship me-3 text-primary"></i>
-                        Dashboards
-                      </div>
-                      <a href="${path}/pages/dashboards/landing.html" class="dropdown-item border-radius-md ms-3">
-                        Landing
-                      </a>
-                      <a href="${path}/pages/dashboards/default.html" class="dropdown-item border-radius-md ms-3">
-                        Default
-                      </a>
-                      <a href="${path}/pages/dashboards/automotive.html" class="dropdown-item border-radius-md ms-3">
-                        Automotive
-                      </a>
-                      <a href="${path}/pages/dashboards/smart-home.html" class="dropdown-item border-radius-md ms-3">
-                        Smart Home
-                      </a>
-                      <a href="${path}/pages/dashboards/virtual-reality.html" class="dropdown-item border-radius-md ms-3">
-                        Virtual Reality
-                      </a>
-                      <a href="${path}/pages/dashboards/crm.html" class="dropdown-item border-radius-md ms-3">
-                        CRM
-                      </a>
-                      <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0 mt-3">
-                        <i class="ni ni-circle-08 me-3 text-primary"></i>
-                        Users
-                      </div>
-                      <a href="${path}/pages/pages/users/reports.html" class="dropdown-item border-radius-md ms-3">
-                        Reports
-                      </a>
-                      <a href="${path}/pages/pages/users/new-user.html" class="dropdown-item border-radius-md ms-3">
-                        New user
-                      </a>
-                      <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0 mt-3">
-                        <i class="ni ni-badge me-3 text-primary"></i>
-                        Profile
-                      </div>
-                      <a href="${path}/pages/pages/profile/overview.html" class="dropdown-item border-radius-md ms-3">
-                        Overview
-                      </a>
-                      <a href="${path}/pages/pages/profile/teams.html" class="dropdown-item border-radius-md ms-3">
-                        Teams
-                      </a>
-                      <a href="${path}/pages/pages/profile/projects.html" class="dropdown-item border-radius-md ms-3">
-                        Projects
-                      </a>
-                      <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center mt-3 px-0">
-                        <i class="ni ni-app me-3 text-primary"></i>
-                        Projects
-                      </div>
-                      <a href="${path}/pages/pages/projects/general.html" class="dropdown-item border-radius-md ms-3">
-                        General
-                      </a>
-                      <a href="${path}/pages/pages/projects/timeline.html" class="dropdown-item border-radius-md ms-3">
-                        Timeline
-                      </a>
-                      <a href="${path}/pages/pages/projects/new-project.html" class="dropdown-item border-radius-md ms-3">
-                        New Project
-                      </a>
-                      <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center mt-3 px-0">
-                        <i class="ni ni-single-02 me-3 text-primary"></i>
-                        Account
-                      </div>
-                      <a href="${path}/pages/pages/account/settings.html" class="dropdown-item border-radius-md ms-3">
-                        Settings
-                      </a>
-                      <a href="${path}/pages/pages/account/billing.html" class="dropdown-item border-radius-md ms-3">
-                        Billing
-                      </a>
-                      <a href="${path}/pages/pages/account/invoice.html" class="dropdown-item border-radius-md ms-3">
-                        Invoice
-                      </a>
-                      <a href="${path}/pages/pages/account/security.html" class="dropdown-item border-radius-md ms-3">
-                        Security
-                      </a>
-                      <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center mt-3 px-0">
-                        <i class="ni ni-folder-17 me-3 text-primary"></i>
-                        Extra
-                      </div>
-                      <a href="${path}/pages/pages/pricing-page.html" class="dropdown-item border-radius-md ms-3">
-                        Pricing Page
-                      </a>
-                      <a href="${path}/pages/pages/rtl-page.html" class="dropdown-item border-radius-md ms-3">
-                        RTL Page
-                      </a>
-                      <a href="${path}/pages/pages/widgets.html" class="dropdown-item border-radius-md ms-3">
-                        Widgets
-                      </a>
-                    </div>
-                  </div>
-                </li>
-                <li class="nav-item dropdown dropdown-hover mx-2">
-                  <a role="button" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center " id="dropdownMenuBlocks" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a href="AdminIntro.do" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center ">
                     회사소개
-                    <img src=" ${path}/assets/img/down-arrow-dark.svg " alt="down-arrow" class="arrow ms-1 d-lg-block d-none">
-                    <img src="${path}/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1 d-lg-none d-block">
                   </a>
                   <div class="dropdown-menu dropdown-menu-animation dropdown-md dropdown-md-responsive p-3 border-radius-lg mt-0 mt-lg-3 shadow-none" aria-labelledby="dropdownMenuBlocks">
                     <div class="d-none d-lg-block">
@@ -574,69 +369,13 @@ li{
                   </div>
                 </li>
                 <li class="nav-item dropdown dropdown-hover mx-2">
-                  <a role="button" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center " id="dropdownMenuBlocks" data-bs-toggle="dropdown" aria-expanded="false">
-                    공지사항
-                    <img src=" ${path}/assets/img/down-arrow-dark.svg " alt="down-arrow" class="arrow ms-1 d-lg-block d-none">
-                    <img src="${path}/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1 d-lg-none d-block">
+                  <a role="button" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center ">
+                    고객센터
                   </a>
                   <div class="dropdown-menu dropdown-menu-animation dropdown-md dropdown-md-responsive p-3 border-radius-lg mt-0 mt-lg-3 shadow-none" aria-labelledby="dropdownMenuBlocks">
                     <div class="d-none d-lg-block">
                       <ul class="list-group">
-                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/kanban.html">
-                            <div class="d-flex">
-                              <div class="icon h-10 me-3 d-flex mt-1">
-                                <i class="ni ni-single-copy-04 text-primary"></i>
-                              </div>
-                              <div class="w-100 d-flex align-items-center justify-content-between">
-                                <div>
-                                  <p class="dropdown-header text-dark p-0">공지사항 조회</p>
-                                </div>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/wizard.html">
-                            <div class="d-flex">
-                             <div class="icon h-10 me-3 d-flex mt-1">
-                               <i class="ni ni-laptop text-primary"></i>
-                             </div>
-                             <div class="w-100 d-flex align-items-center justify-content-between">
-                                <div>
-                                  <p class="dropdown-header text-dark p-0">공지사항 등록</p>
-                                </div>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/datatables.html">
-                            <div class="d-flex">
-                              <div class="icon h-10 me-3 d-flex mt-1">
-                                <i class="ni ni-badge text-primary"></i>
-                              </div>
-                              <div class="w-100 d-flex align-items-center justify-content-between">
-                                <div>
-                                  <p class="dropdown-header text-dark p-0">공지사항 추가메뉴1</p>
-                                </div>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/calendar.html">
-                            <div class="d-flex">
-                              <div class="icon h-10 me-3 d-flex mt-1">
-                                <i class="ni ni-notification-70 text-primary"></i>
-                              </div>
-                              <div class="w-100 d-flex align-items-center justify-content-between">
-                                <div>
-                                  <p class="dropdown-header text-dark p-0">공지사항 추가메뉴2</p>
-                                </div>
-                              </div>
-                            </div>
-                          </a>
+                        <li class="nav-item dropdown dropdown-hover  list-group-item border-0 p-0">
                         </li>
                       </ul>
                     </div>
