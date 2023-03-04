@@ -17,6 +17,7 @@ import fleaMarket.a02_service.Req1000_Service;
 import fleaMarket.util.FileService;
 import vo.Member;
 import vo.ProfileImg;
+import vo.QNA;
 
 @Controller("Req1000")
 public class Req1000_Controller {
@@ -97,25 +98,43 @@ public class Req1000_Controller {
 		session.removeAttribute("Login");
 		return "SignIn";
 	}
+	
+	
+	
+	
 	//문의글 조회
 	@RequestMapping("MemberQnAListForm.do")
 	public String QnAListForm() {
-		return "MemberQnAList";
+		return "MemberQnAListForm";
 	}
 	
-
+	
+	//문의글작성페이지
+	@RequestMapping("MemberQnAreg.do")
+	public String MemberQnAreg() {
+		return "exp";
+	}
+	
+	
+	
 	//문의글등록
 	@PostMapping("QNAInsert.do")
-	public String QNAInsert() {
-		
-		return "";
+	public String QNAInsert(QNA ins) {
+		System.out.println("###############");
+		System.out.println(ins.getCategory());
+		System.out.println(ins.getContent());
+		System.out.println(ins.getEmail());
+		System.out.println(ins.getMethod());
+		System.out.println(ins.getTitle());
+		System.out.println("###############");
+		service.QNAInsert(ins);
+		return "redirect:MemberQnAListForm.do";
 	}
-	
 
 	@PostMapping("QNAUpdate.do")
 	public String QNAUpdate() {
 		
-		return "MemberQnAListForm";
+		return "redirect:MemberQnAListForm.do";
 	}
 	
 	

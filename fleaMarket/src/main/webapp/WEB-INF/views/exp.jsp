@@ -90,13 +90,16 @@ $(document).ready(function(){
 							</div>
 								<input type="hidden" id="contentInput" name="content" />
 							<div style="width: 50%; margin-left: 23px;">
-								<label class="mt-4 form-label labelFont">첨부파일</label>
+								<!-- <label class="mt-4 form-label labelFont">첨부파일</label>
 								<div class="form-control dropzone mb-3" id="dropzone">
 									<div class="fallback">
 										<input name="qnafiles" type="file" id="Prodimg" multiple />
 									</div>
-								</div>
+								</div> -->
 							</div>
+							
+							<button type="button" style="float: right;" class="btn btn-secondary btn-md mb-0">취소</button>	
+							<button type="submit" style="float: right;" class="btn btn-primary btn-md mb-0 me-2">등록</button>
 						</form>
 						</div>
 					</div>

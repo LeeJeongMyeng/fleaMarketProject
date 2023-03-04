@@ -65,16 +65,17 @@
 			WHERE f.EMAIL(+) = p.EMAIL
 			AND f.NAVEREMAIL = #{naveremail}
     	</select>
-    	
+    	<!-- 카카오연동시 계정 존재 야부 -->
     	<select id="CheckPeristalsisSNS_K" parameterType="string" resultType="member">
     		SELECT * FROM FLEAMARKETMEMBER 		
     			WHERE EMAIL = #{snsemail}
     	</select>
+    	<!-- 네이버 연동시 계정잇는지 여부 -->
     	<select id="CheckPeristalsisSNS_N" parameterType="string" resultType="member">
     		SELECT * FROM FLEAMARKETMEMBER 		
     			WHERE NAME = #{name}
     	</select>
-    	
+    	<!-- sns연동 업데이트 -->
     	<update id="SnsEmailPlus" parameterType="member">
     		UPDATE FLEAMARKETMEMBER 
     		<choose>
@@ -88,7 +89,7 @@
     			</otherwise>
     		</choose>
     	</update>
-    	
+    	<!-- 비번찾기 -->
     	<update id="MemberFindPassword" parameterType="hashmap">
     		UPDATE FLEAMARKETMEMBER 
 				SET password = '1111' 
@@ -96,6 +97,17 @@
 				AND PERSONALNUMBER  = #{personalnumber}
 				AND EMAIL  =#{email}
     	</update>
+    	
+    	<!-- 문의하기 등록 -->
+    	<insert id="QNAInsert" parameterType="qna">
+    		INSERT INTO FLEAMARKETQNA values(
+			FLEAMARKETQNA_seq.nextval,
+			#{title},#{content},
+			to_CHAR(sysdate,'YYYY-MM-DD'),
+			to_CHAR(sysdate,'YYYY-MM-DD'),
+			#{email},#{method},
+			#{category})
+    	</insert>
     </mapper>
     
     

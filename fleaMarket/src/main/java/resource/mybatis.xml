@@ -17,6 +17,9 @@
 		<typeAlias alias="capplicationList" type = "vo.CapplicationList"/>
 		<typeAlias alias="ffile" type = "vo.FFile"/>
 		<typeAlias alias="roommemberinfo" type = "vo.RoomMemberInfo"/>
+		<typeAlias alias="qna" type = "vo.QNA"/>
+		<typeAlias alias="qnafile" type = "vo.QNAFile"/>
+		
 	</typeAliases>
 
 	<!-- 2. 사용 XXXMapper.xml을 추가 -->
