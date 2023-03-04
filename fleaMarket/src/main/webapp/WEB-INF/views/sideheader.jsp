@@ -13,8 +13,6 @@
  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
 <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
-<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
-<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 <title>내 정보 조회 및 수정</title>
 <!--     Fonts and icons     -->
 <link
@@ -28,8 +26,7 @@
 	crossorigin="anonymous"></script>
 <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
 <!-- CSS Files -->
-<%-- <link id="pagestyle"
-	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" /> --%>
+ <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" /> 
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -39,11 +36,11 @@ $(document).ready(function(){
 	}
 	
 	//input들 주제에 내 엔터기능을 방해함 ;; 그래서 막음
-	document.addEventListener('keydown', function(event) {
+	/* document.addEventListener('keydown', function(event) {
 		  if (event.keyCode === 13) {
 		    event.preventDefault();
 		  };
-		}, true);
+		}, true); */
 })
 </script>
 <style>
@@ -319,6 +316,10 @@ li{
 	<script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
 	<script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
 	<script src="${path}/assets/js/plugins/datatables.js"></script>
+	<script src="${path}/assets/js/plugins/quill.min.js"></script>
+	<script src="${path}/assets/js/plugins/choices.min.js"></script>
+	<script src="${path}/assets/js/plugins/dropzone.min.js"></script>
+		<script src="${path}/assets/js/plugins/flatpickr.min.js"></script>
 	<script>
     if (document.getElementById('products-list')) {
       const dataTableSearch = new simpleDatatables.DataTable("#products-list", {
@@ -345,8 +346,6 @@ li{
       });
     };
   </script>
-  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
-  <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
 	<!-- Kanban scripts -->
 	<script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
 	<script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>
@@ -358,9 +357,6 @@ li{
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-    
-    
-    //console.log('ㅎㅇㅎㅇ   ${Login.businessnumber}')
     
   </script>
 	<!-- Github buttons -->
