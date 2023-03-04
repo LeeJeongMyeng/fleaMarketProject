@@ -144,20 +144,14 @@
 	</main>
 <script>
 // 등록 버튼 클릭 시,
-$("#insert").click(function(){
-   //내용 입력에 따른 content Input에 데이터 넣기(내용입력란이 input태그가 아니라서))
-   var expeditor=$('#edit-deschiption .ql-editor').html()
-   $('input[name=content]').val(expeditor);
-   $("form").submit()
-})
+
 
 $(".ql-link").hide()
 
-if (document.getElementById('editor')) {
-      var quill = new Quill('#editor', {
-        theme: 'snow' // Specify theme in configuration
-      });
-    }
+var quill = new Quill('#editor', {
+  modules: { toolbar: true },
+  theme: 'snow'
+});
 
 Dropzone.autoDiscover = false;
 var drop = document.getElementById('dropzone')

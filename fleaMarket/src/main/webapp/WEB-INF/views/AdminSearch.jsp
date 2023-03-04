@@ -132,7 +132,7 @@
 						</div>
 							<div class="card-body px-0 pb-0">
 							</div>
-							<form id="AdminSearchForm" action="AdminSearch.do" method="post">
+							<form id="AdminSearchForm" action="AdminSearch.do" method="post" onsubmit="return false;">
 							<div class="row">
 								<div class="col-4 input-group mb-3 w-25">
 								  <button class="btn btn-outline-primary bg-primary mb-0 ms-3" type="button" style="color:white;" id="button-addon1" onclick="ResetAuthRadioSubmit()">　검색　</button>
