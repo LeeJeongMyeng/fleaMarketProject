@@ -29,6 +29,63 @@
   <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+  
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+   integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+   crossorigin="anonymous"></script>
+  <script type="text/javascript">
+	var msg = "${msg}"
+	if(msg=="수정완료"){
+		if(confirm(msg+" 전체조회화면 이동하시겠습니까?")){
+			location.href = "${path}/list.do";
+		}
+	}
+
+	$(document).ready(function(){
+		$("#appBtn").click(function(){
+		// 유효성 check
+		$.ajax({	
+			url:"${path}/updateAppRe.do",
+			type:"get",
+			data:$("#app").serialize()
+			dataType:"json",
+			success:function(data){
+				var appReceived = data.appReceived
+				if(appReceived!=null){
+					alert("수정 완료");
+				}
+				// 리스트 데이터 update
+				var list = data.list
+			}
+		})
+	})
+	});
+	function goModal(applicationNo){
+		$.ajax({	
+			url:"${path}/appReceivedView.do",
+			type:"get",
+			data:"applicationNo="+applicationNo,
+			dataType:"json",
+			success:function(data){
+				// d.addAttribute("dept", s
+				// data.모델명
+				// {dept:{deptno:10,...}}
+				
+				//첨부파일 불러오기 
+				//var dept = data.dept
+				$("#modalNoFile").click() // 모달 로딩
+				/*
+				$("#frm02 [name=deptno]").val(dept.deptno)
+				$("#frm02 [name=dname]").val(dept.dname)
+				$("#frm02 [name=loc]").val(dept.loc)
+				*/
+			},
+			error:function(err){
+				console.log(err)
+			}
+		})
+	}
+</script>
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -204,133 +261,49 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr data-bs-toggle="modal" data-bs-target="#jkanban-info-modal">
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <p class="text-xs font-weight-bold ms-2 mb-0">1</p>
-                      </div>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">소상공인 행복마켓</span>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">2023.01.01</span>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-check" aria-hidden="true"></i></button>
-                        <span>승인</span>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <img src="${path}/assets/img/team-2.jpg" class="avatar avatar-xs me-2" alt="user image">
-                        <span>김철수</span>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <i class="bi bi-paperclip"></i>
-                      <span class="my-2 text-xs">신청양식.pdf</span>
-                    </td>
-                  </tr>
-                  <tr data-bs-toggle="modal" data-bs-target="#jkanban-info-modal">
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <p class="text-xs font-weight-bold ms-2 mb-0">2</p>
-                      </div>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">소상공인 행복마켓</span>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">2023.01.01</span>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <span>-</span>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <div class="avatar avatar-xs me-2 bg-gradient-dark">
-                          <span>M</span>
-                        </div>
-                        <span>마영희</span>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <i class="bi bi-paperclip"></i>
-                      <span class="my-2 text-xs">
-                        신청양식.pdf
-                      </span>
-                    </td>
-                  </tr>
-                  <tr data-bs-toggle="modal" data-bs-target="#jkanban-info-modal">
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <p class="text-xs font-weight-bold ms-2 mb-0">3</p>
-                      </div>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">소상공인 행복마켓</span>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">2023.01.01</span>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-check" aria-hidden="true"></i></button>
-                        <span>승인</span>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <div class="d-flex align-items-center">
-                          <img src="${path}/assets/img/team-3.jpg" class="avatar avatar-xs me-2" alt="user image">
-                          <span>박선희</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <i class="bi bi-paperclip"></i>
-                      <span class="my-2 text-xs">
-                        신청양식.pdf
-                      </span>
-                    </td>
-                  </tr>
-                  <tr data-bs-toggle="modal" data-bs-target="#jkanban-info-modal">
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <p class="text-xs font-weight-bold ms-2 mb-0">4</p>
-                      </div>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">소상공인 행복마켓</span>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">2023.01.01</span>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-times" aria-hidden="true"></i></button>
-                        <span>거부</span>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <div class="d-flex align-items-center">
-                          <img src="${path}/assets/img/team-4.jpg" class="avatar avatar-xs me-2" alt="user image">
-                          <span>이영수</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <i class="bi bi-paperclip"></i>
-                      <span class="my-2 text-xs">
-                        신청양식.pdf
-                      </span>
-                    </td>
-                  </tr>
+                  <c:forEach varStatus="status" var="fapplication" items="${list}">
+	                  <tr onclick='goModal(${fapplication.applicationNo})'>
+	                    <td>
+	                      <div class="d-flex align-items-center">
+	                        <p class="text-xs font-weight-bold ms-2 mb-0">${status.count}</p>
+	                      </div>
+	                    </td>
+	                    <td class="font-weight-bold">
+	                      <span class="my-2 text-xs">${fapplication.title}</span>
+	                    </td>
+	                    <td class="font-weight-bold">
+	                      <span class="my-2 text-xs"><fmt:formatDate pattern='yyyy.MM.dd' value="${fapplication.applicationDate}"/></span>
+	                    </td>
+	                    <td class="text-xs font-weight-bold">
+	                      <div class="d-flex align-items-center">
+	                        <c:choose>
+			                   <c:when test="${fapplication.approvalWhether == 'a'}">
+			                      <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-check" aria-hidden="true"></i></button>
+                        		  <span>승인</span>
+			                   </c:when>
+			                   <c:when test="${fapplication.approvalWhether == 'r'}">
+			                      <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-times" aria-hidden="true"></i></button>
+                       			  <span>거부</span>
+			                   </c:when>
+			                   <c:otherwise>
+			                      <button class="btn btn-icon-only btn-rounded btn-outline-dark mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="ni ni-fat-delete" aria-hidden="true"></i></button>		                   
+			                   	  <span>대기</span>
+			                   </c:otherwise>
+			                </c:choose>      
+	                      </div>
+	                    </td>
+	                    <td class="text-xs font-weight-bold">
+	                      <div class="d-flex align-items-center">
+	                        <img src="${path}/assets/img/team-2.jpg" class="avatar avatar-xs me-2" alt="user image">
+	                        <span>${fapplication.nickname}</span>
+	                      </div>
+	                    </td>
+	                    <td class="text-xs font-weight-bold">
+	                      <i class="bi bi-paperclip"></i>
+	                      <span class="my-2 text-xs">신청양식.pdf</span>
+	                    </td>
+	                  </tr>
+                  </c:forEach>
                 </tbody>
               </table>
             </div>
@@ -502,6 +475,7 @@
   </div>
   
   <!-- 신청 조회 모달창 (양식 X) -->
+  <p id="modalNoFile"  data-bs-toggle="modal" data-bs-target="#jkanban-info-modal-nofile"></p>
   <div class="modal fade" id="jkanban-info-modal-nofile" style="display: none" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -513,11 +487,12 @@
         </div>
         <div class="pt-4 modal-body">
           <div class="form-group text-center">신청 승인하시겠습니까?</div>
+          <input type="hidden" id="app" value="a"/>
           <div class="text-end">
-            <button class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
+            <button id="appBtn" class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
               승인
             </button>
-            <button class="m-1 btn btn-danger" data-toggle="modal" data-target="#jkanban-info-modal">
+            <button id="rejBtn" class="m-1 btn btn-danger" data-toggle="modal" data-target="#jkanban-info-modal">
               거부
             </button>
           </div>

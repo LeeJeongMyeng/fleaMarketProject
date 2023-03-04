@@ -124,11 +124,11 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                 <div class="col-lg-5 mx-auto">
                   <h3 class="mt-lg-0 mt-4">${fleamarket.title}</h3>
                   <div class="rating">
-                    <i class="fas" aria-hidden="true"><fmt:formatDate pattern='yyyy.MM.dd' value="${fleamarket.openDate}"/> - <fmt:formatDate pattern='yyyy.MM.dd' value="${fleamarket.closeDate}"/></i>
+                    <i class="fas" aria-hidden="true">${fleamarket.openDate} - ${fleamarket.closeDate}</i>
                   </div>
                   <br>
                   <h6 class="mb-0 mt-3">모집기간</h6>
-                  <h5><fmt:formatDate pattern='yyyy.MM.dd' value="${fleamarket.recruitmentStartDate}"/> - <fmt:formatDate pattern='yyyy.MM.dd' value="${fleamarket.recruitmentEndDate}"/></h5>
+                  <h5>${fleamarket.recruitmentStartDate} - ${fleamarket.recruitmentEndDate}</h5>
                   <span class="badge badge-success">모집중</span>
                   <p  style="margin-top:15px;">
                   ${fleamarket.content}

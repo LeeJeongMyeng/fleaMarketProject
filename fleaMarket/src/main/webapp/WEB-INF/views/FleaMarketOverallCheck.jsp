@@ -28,6 +28,11 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 
+  <script type="text/javascript">
+	function goDetail(postingNumber){
+		location.href="${path}/fmView.do?postingNumber="+postingNumber
+	}	
+  </script>
 </head>
 <%@include file="header.jsp"%>
 <body class="g-sidenav-show bg-gray-100">
@@ -240,7 +245,7 @@
                         ${flea.content}
                       </p>
                       <div class="d-flex align-items-center justify-content-between">
-                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">View Project</button>
+                        <button onclick="goDetail(${flea.postingNumber})" type="button" class="btn btn-outline-primary btn-sm mb-0">구경하기</button>
                         
                       </div>
                     </div>

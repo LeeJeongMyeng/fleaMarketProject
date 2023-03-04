@@ -1,31 +1,22 @@
 package vo;
 
-import java.util.Date;
-
 public class FleaMarket {
 	
-	private int cnt;
 	private String postingNumber;
 	private String title;
-	private Date registDate;
+	private String registDate;
 	private String content;
 	private String bisenessNumber;
 	private String email;
 	private String approvalMaxCnt;
-	private Date recruitmentStartDate;
-	private Date recruitmentEndDate;
-	private Date openDate;
-	private Date closeDate;
+	private String recruitmentStartDate;
+	private String recruitmentEndDate;
+	private String openDate;
+	private String closeDate;
 	private String checkForm; 
 	private int viewCnt;
 	private String address;
 	
-	public int getCnt() {
-		return cnt;
-	}
-	public void setCnt(int cnt) {
-		this.cnt = cnt;
-	}
 	public String getPostingNumber() {
 		return postingNumber;
 	}
@@ -35,7 +26,7 @@ public class FleaMarket {
 	public String getTitle() {
 		return title;
 	}
-	public Date getRegistDate() {
+	public String getRegistDate() {
 		return registDate;
 	}
 	public String getContent() {
@@ -50,16 +41,16 @@ public class FleaMarket {
 	public String getApprovalMaxCnt() {
 		return approvalMaxCnt;
 	}
-	public Date getRecruitmentStartDate() {
+	public String getRecruitmentStartDate() {
 		return recruitmentStartDate;
 	}
-	public Date getRecruitmentEndDate() {
+	public String getRecruitmentEndDate() {
 		return recruitmentEndDate;
 	}
-	public Date getOpenDate() {
+	public String getOpenDate() {
 		return openDate;
 	}
-	public Date getCloseDate() {
+	public String getCloseDate() {
 		return closeDate;
 	}
 	public String getCheckForm() {
@@ -74,7 +65,7 @@ public class FleaMarket {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public void setRegistDate(Date registDate) {
+	public void setRegistDate(String registDate) {
 		this.registDate = registDate;
 	}
 	public void setContent(String content) {
@@ -89,16 +80,16 @@ public class FleaMarket {
 	public void setApprovalMaxCnt(String approvalMaxCnt) {
 		this.approvalMaxCnt = approvalMaxCnt;
 	}
-	public void setRecruitmentStartDate(Date recruitmentStartDate) {
+	public void setRecruitmentStartDate(String recruitmentStartDate) {
 		this.recruitmentStartDate = recruitmentStartDate;
 	}
-	public void setRecruitmentEndDate(Date recruitmentEndDate) {
+	public void setRecruitmentEndDate(String recruitmentEndDate) {
 		this.recruitmentEndDate = recruitmentEndDate;
 	}
-	public void setOpenDate(Date openDate) {
+	public void setOpenDate(String openDate) {
 		this.openDate = openDate;
 	}
-	public void setCloseDate(Date closeDate) {
+	public void setCloseDate(String closeDate) {
 		this.closeDate = closeDate;
 	}
 	public void setCheckForm(String checkForm) {
