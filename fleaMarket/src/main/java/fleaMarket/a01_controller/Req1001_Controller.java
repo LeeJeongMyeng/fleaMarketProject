@@ -71,6 +71,7 @@ public class Req1001_Controller {
 	public String MemberInquire() {
 		return "MemberInquire";
 	}
+	
 	//회원정보수정 
 	@RequestMapping("UpdateMemberInfo.do")
 	public String UpdateMemberInfo(Member upt,@RequestParam("profileimg") MultipartFile profile,
@@ -145,9 +146,12 @@ public class Req1001_Controller {
     }
 	
 	
-	
-	
-	
+	@RequestMapping("GetQNA.do")
+	public String GetQNA(@RequestParam("qnaNo") String qnano,Model d) {
+		
+		//d.addAttribute("getqna",);
+		return "exp2";
+	}
 	
 	
 	

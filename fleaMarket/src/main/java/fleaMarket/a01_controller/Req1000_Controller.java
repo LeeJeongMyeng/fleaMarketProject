@@ -111,13 +111,7 @@ public class Req1000_Controller {
 		return "";
 	}
 	
-	@RequestMapping("GetQNA.do")
-	public String GetQNA(@RequestParam("qnaNo") String qnano,Model d) {
-		
-		//d.addAttribute("getqna",);
-		return "exp2";
-	}
-	
+
 	@PostMapping("QNAUpdate.do")
 	public String QNAUpdate() {
 		
