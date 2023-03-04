@@ -106,7 +106,7 @@ public class Req1000_Controller {
 	//문의글 동록
 	@RequestMapping("MemberQnAreg.do")
 	public String MemberQnAregForm() {
-		return "MemberQnAreg";
+		return "exp";
 	}
 	@RequestMapping("MemberQnAreg2.do")
 	public String MemberQnAregForm2() {
