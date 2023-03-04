@@ -69,8 +69,9 @@
 }
 #numbers li a.active{
 	opacity:1;
-	background:#333;
 	color:#fff;
+	border-radius: 50%;
+    background: #e45e72;
 }
 
 .pagination i{
@@ -198,11 +199,12 @@
 							
 							<div class="pagination_wrap">
 								<div class="pagination">
-									<i class="fa-solid fa-arrow-left"></i>
+									<i class="fa-solid" id="PageNationPrevBtn">이전</i>
 									<ol id="numbers">
 									<!-- 페이지네이션 번호들이 오는곳 -->
 									</ol>
-									<i class="fa-solid fa-arrow-right"></i>
+									
+									<i class="fa-solid" id="PageNationNextBtn">다음</i>
 								</div>			
 							</div> 
 							

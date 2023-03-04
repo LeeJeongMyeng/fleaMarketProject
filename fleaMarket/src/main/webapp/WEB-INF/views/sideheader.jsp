@@ -191,7 +191,7 @@ li{
 							s
 						</ul>
 					</div>
-						<a class="btn btn-primary w-100" style="margin-top:145%;" href="Logout.do">로그아웃</a>
+						
 				</li>			
 						
 			</ul>
@@ -205,6 +205,9 @@ li{
 	</li>
 			</ul>
 		</div>
+	<div>
+	<a class="btn w-100" style="position: absolute;bottom:-11px;background:#e45e72;color:white;" href="Logout.do">로그아웃</a>
+	</div>
 	</aside> 
 	<div class="fixed-plugin">
 		<a class="fixed-plugin-button text-dark position-fixed px-3 py-2">

@@ -75,22 +75,24 @@ $("#cbx_chkAll").click(function() {
 
 
 function callPageSelector(){
-	const rowsPerPage =15; // 10개 씩 끊겟다.
+	const rowsPerPage =1; // 10개 씩 끊겟다.
 	const rows = document.querySelectorAll('#MembersListTable tbody tr');// 게시글 row를 전체 선택
-	const rowsCount = rows.length //게시글 전체의 갯수
-	console.log("gd"+rowsCount);
+	var rowsCount = rows.length //게시글 전체의 갯수
+	if(rowsCount==0){rowsCount=1}
+	console.log("gd"+rowsCount);	
 	const PageCount = Math.ceil(rowsCount/rowsPerPage); // 전체글개수/한페이지에 보여질 갯수를 올림처리 = 페이지 갯수
 	//console.log(PageCount)
 	const numbers = document.querySelector('#numbers'); //클릭할 페이지 버튼번호가 생성될 ol
 	//변수 추가 이전다음버튼
-	const prevPageBtn= document.querySelector(".pagination .fa-arrow-left");
-	const nextPageBtn= document.querySelector(".pagination .fa-arrow-right");
+	const prevPageBtn= document.querySelector(".pagination #PageNationPrevBtn");
+	const nextPageBtn= document.querySelector(".pagination #PageNationNextBtn");
 	let pageActiveIdx = 0;//현재 보고있는 페이지그룹 번호
-	let currentPageNum = 0; //현재 보고있는 페이지네이션 번호
+	let currentPageNum = 1; //현재 보고있는 페이지네이션 번호
 	let maxPageNum=5;//페이지그룹 최대 갯수
 	
 	//페이지네이션 생성
 	for(let i=1; i<=PageCount;i++){
+		
 		numbers.innerHTML +='<li><a href="">'+i+'</a></li>' //생성될 페이지 갯수만큼 버튼li 생성
 	}
 	const numberBtn = numbers.querySelectorAll('a'); //페이지버튼 a를 모두 선택
@@ -136,7 +138,7 @@ function callPageSelector(){
 		 
 	} //displayRow 
 	
-	displayRow(0); // 시작하자마자 해당 갯수만큼ㅁ만 페이지보이도록 실행함
+	
 	
 	//페이지네이션 버튼 그룹표시
 	function displayPage(num){
@@ -164,6 +166,7 @@ function callPageSelector(){
 			nextPageBtn.style.display='';
 		}
 	}
+	displayRow(0); // 시작하자마자 해당 갯수만큼ㅁ만 페이지보이도록 실행함
 	displayPage(0); //시작하자마자 보여줘야하니까 실행되도록 함
 	
 	// -> 버튼 

@@ -193,11 +193,18 @@
 	                    <div class="mb-2" >
 	                      <select name="category" class="form-select form-select-sm mb-3 ms-4" aria-label=".form-select-lg example">
 							  <option selected>카테고리 선택</option>
-							  <option title="">여성의류</option>
-							  <option title="">남성의류</option>
-							  <option title="">공통의류</option>
-							  <option>Two</option>
-							  <option>Three</option>
+							  <option>여성의류</option>
+							  <option>남성의류</option>
+							  <option>공통의류</option>
+							  <option>아동복</option>
+							  <option>잡화(지비츠,키링 등)</option>
+							  <option>쥬얼리</option>
+							  <option>수공예품(뜨개상품 등)</option>
+							  <option>수제식품</option>
+							  <option>캔들/디퓨저/향수</option>
+							  <option>리빙(컵,그릇)</option>
+							  <option>공방체험</option>			  
+							  <option>기타</option>
 							</select>
 	                    </div>
 	                    <div class="form-check form-check-info text-left">
