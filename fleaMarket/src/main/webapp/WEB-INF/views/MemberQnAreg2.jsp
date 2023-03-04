@@ -80,14 +80,14 @@ input::placeholder {
 						<label class="postInsertTitle" style="margin-left: -0.5%;">제목</label>
 						<input class="multisteps-form__input form-control" name="title" type="text" placeholder="제목을 작성해주세요." />
 					</div>
-					<div style="width: 99%; margin-left: 0.5%;">
+					<div style="width: 98%; margin-left: 23px;">
 						<label class="mt-4 postInsertTitle" style="margin-left: -0.5%;">게시글내용</label>
 						<div id="edit-deschiption" style="height: 400px;">
 							<p class="ql-editor"></p>
 						</div>
 						<input type="hidden" id="contentInput" name="content" />
 					</div>
-					<div style="width: 99%; margin-left: 0.5%;">
+					<div style="width: 50%; margin-left: 23px;">
 						<label class="mt-4 form-label labelFont">첨부파일</label>
 								<div class="form-control dropzone mb-3" id="dropzone">
 									<div class="fallback">
@@ -175,7 +175,6 @@ input::placeholder {
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
-  <script src="${path}/resource/js/Req4002/InsertContent.js"></script>
 </body>
 <script type="text/javascript">
    $(document).ready(function(){

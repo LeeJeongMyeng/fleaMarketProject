@@ -28,8 +28,7 @@
 	crossorigin="anonymous"></script>
 <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
 <!-- CSS Files -->
-<link id="pagestyle"
-	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+<link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 </head>
 <script type="text/javascript">
 	
@@ -86,8 +85,23 @@
 									<label class="postInsertTitle" style="margin-left: -0.5%;">제목</label>
 									<input class="multisteps-form__input form-control w-50" name="title" type="text" placeholder="제목을 작성해주세요." />
 							</div>
-							
-							
+							<div style="width: 98%; margin-left: 23px;">
+								<label class="mt-4 postInsertTitle" style="margin-left: -0.5%;">게시글내용</label>
+								<div id="editor">
+									<p id="contents">
+										<br>
+									</p>
+								</div>
+							</div>
+								<input type="hidden" id="contentInput" name="content" />
+							<div style="width: 50%; margin-left: 23px;">
+								<label class="mt-4 form-label labelFont">첨부파일</label>
+								<div class="form-control dropzone mb-3" id="dropzone">
+									<div class="fallback">
+										<input name="filePath" type="file" id="Prodimg" multiple />
+									</div>
+								</div>
+							</div>
 							
 						</div>
 					</div>
@@ -129,12 +143,30 @@
 			</footer>
 	</main>
 <script>
-//검색 후 해당 선택값(전체/일반셀러/사업자) 체크되도록하기 위한 변수
-var SchAuthorityRadioVal = '${sch.authority}'
-console.log(SchAuthorityRadioVal)
+// 등록 버튼 클릭 시,
+$("#insert").click(function(){
+   //내용 입력에 따른 content Input에 데이터 넣기(내용입력란이 input태그가 아니라서))
+   var expeditor=$('#edit-deschiption .ql-editor').html()
+   $('input[name=content]').val(expeditor);
+   $("form").submit()
+})
 
+$(".ql-link").hide()
 
+if (document.getElementById('editor')) {
+      var quill = new Quill('#editor', {
+        theme: 'snow' // Specify theme in configuration
+      });
+    }
+
+Dropzone.autoDiscover = false;
+var drop = document.getElementById('dropzone')
+var myDropzone = new Dropzone(drop, {
+  url: "/file/post",
+  addRemoveLinks: true
+
+});
 </script>
-<script src="${path}/resource/js/Req1001/AdminSearch.js"></script>
+<%-- <script src="${path}/resource/js/Req1001/AdminSearch.js"></script> --%>
 </body>
 </html>

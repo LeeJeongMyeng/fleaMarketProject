@@ -13,6 +13,8 @@
  <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
 <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
 <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
+<link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+<script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
 <title>내 정보 조회 및 수정</title>
 <!--     Fonts and icons     -->
 <link
@@ -343,6 +345,8 @@ li{
       });
     };
   </script>
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
 	<!-- Kanban scripts -->
 	<script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
 	<script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>
