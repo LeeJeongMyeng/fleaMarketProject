@@ -94,26 +94,7 @@ public class Req3000_Controller {
 	d.addAttribute("flist",service.getFleaMarketList(sch));
 		return "FleaMarketOverallCheck";
 	}
-		
-//문의글등록
-	@PostMapping("QNAInsert.do")
-	public String QNAInsert() {
-		
-		return "";
-	}
-	
-	@RequestMapping("GetQNA.do")
-	public String GetQNA(@RequestParam("qnaNo") String qnano,Model d) {
-		
-		//d.addAttribute("getqna",);
-		return "exp2";
-	}
-	
-	@PostMapping("QNAUpdate.do")
-	public String QNAUpdate() {
-		
-		return "MemberQnAListForm";
-	}
+
 	
 	
 }
