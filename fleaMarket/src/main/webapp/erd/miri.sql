@@ -3,8 +3,6 @@ SELECT * FROM fleamarketmember;
 
 -- 플리마켓
 SELECT * FROM fleamarket;
-SELECT fm.*, TO_CHAR(registDate, 'YYYY.MM.DD') registDate
-FROM fleamarket fm;
 
 CREATE TABLE FleaMarket
 (
@@ -44,6 +42,39 @@ FROM FApplication fa, fleaMarket fm, fleamarketmember m
 WHERE fa.postingNumber = fm.postingNumber
 AND fa.email = m.email
 ORDER BY fa.applicationDate DESC;
+-- 총 페이지 수
+SELECT count(*)
+FROM (
+	SELECT rownum cnt, fa.applicationno applicationno, fa.applicationdate applicationdate, fa.approvalwhether approvalwhether, fm.title title, fm.email email, m.nickname nickname
+	FROM FApplication fa, fleaMarket fm, fleamarketmember m
+	WHERE fa.postingNumber = fm.postingNumber(+)
+	AND fa.email = m.email
+	ORDER BY fa.applicationDate DESC
+	);
+
+SELECT count(*)
+FROM FApplication fa, fleaMarket fm
+WHERE fa.postingNumber = fm.postingNumber(+);
+and subject like '%'||#{subject}||'%'
+and writer like '%'||#{writer}||'%'
+-- 페이징 + 검색 연습
+select *
+from (
+	select rownum cnt, fa.*
+	from FApplication fa
+	)	
+where cnt between 1 and 5;
+-- 페이징 + 검색
+SELECT rownum cnt, applicationno, applicationdate, approvalwhether, title, email, nickname
+FROM (
+	SELECT rownum cnt, fa.applicationno applicationno, fa.applicationdate applicationdate, fa.approvalwhether approvalwhether, fm.title title, fm.email email, m.nickname nickname
+	FROM FApplication fa, fleaMarket fm, fleamarketmember m
+	WHERE fa.postingNumber = fm.postingNumber(+)
+	AND fa.email = m.email(+)
+	AND fm.title like '%'||#{title}||'%'
+	ORDER BY fa.applicationDate DESC
+	)	
+WHERE cnt BETWEEN 1 AND 5;
 
 CREATE TABLE FApplication
 (

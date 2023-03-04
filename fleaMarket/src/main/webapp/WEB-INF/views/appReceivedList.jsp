@@ -249,63 +249,70 @@
         <div class="col-12">
           <div class="card">
             <div class="table-responsive">
-              <table class="table table-flush" id="datatable-search">
-                <thead class="thead-light">
-                  <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>등록일</th>
-                    <th>상태</th>
-                    <th>작성자</th>
-                    <th>첨부파일</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <c:forEach varStatus="status" var="fapplication" items="${list}">
-	                  <tr onclick='goModal(${fapplication.applicationNo})'>
-	                    <td>
-	                      <div class="d-flex align-items-center">
-	                        <p class="text-xs font-weight-bold ms-2 mb-0">${status.count}</p>
-	                      </div>
-	                    </td>
-	                    <td class="font-weight-bold">
-	                      <span class="my-2 text-xs">${fapplication.title}</span>
-	                    </td>
-	                    <td class="font-weight-bold">
-	                      <span class="my-2 text-xs"><fmt:formatDate pattern='yyyy.MM.dd' value="${fapplication.applicationDate}"/></span>
-	                    </td>
-	                    <td class="text-xs font-weight-bold">
-	                      <div class="d-flex align-items-center">
-	                        <c:choose>
-			                   <c:when test="${fapplication.approvalWhether == 'a'}">
-			                      <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-check" aria-hidden="true"></i></button>
-                        		  <span>승인</span>
-			                   </c:when>
-			                   <c:when test="${fapplication.approvalWhether == 'r'}">
-			                      <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-times" aria-hidden="true"></i></button>
-                       			  <span>거부</span>
-			                   </c:when>
-			                   <c:otherwise>
-			                      <button class="btn btn-icon-only btn-rounded btn-outline-dark mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="ni ni-fat-delete" aria-hidden="true"></i></button>		                   
-			                   	  <span>대기</span>
-			                   </c:otherwise>
-			                </c:choose>      
-	                      </div>
-	                    </td>
-	                    <td class="text-xs font-weight-bold">
-	                      <div class="d-flex align-items-center">
-	                        <img src="${path}/assets/img/team-2.jpg" class="avatar avatar-xs me-2" alt="user image">
-	                        <span>${fapplication.nickname}</span>
-	                      </div>
-	                    </td>
-	                    <td class="text-xs font-weight-bold">
-	                      <i class="bi bi-paperclip"></i>
-	                      <span class="my-2 text-xs">신청양식.pdf</span>
-	                    </td>
+              <div class="dataTable-top">
+              	<div class="dataTable-search">
+              		<input class="form-control" placeholder="Search..." type="text">
+              	</div>
+              </div>
+              <div class="dataTable-container">
+	              <table class="table table-flush dataTable-table" id="datatable-search">
+	                <thead class="thead-light">
+	                  <tr>
+	                    <th>번호</th>
+	                    <th>제목</th>
+	                    <th>등록일</th>
+	                    <th>상태</th>
+	                    <th>작성자</th>
+	                    <th>첨부파일</th>
 	                  </tr>
-                  </c:forEach>
-                </tbody>
-              </table>
+	                </thead>
+	                <tbody>
+	                  <c:forEach varStatus="status" var="fapplication" items="${list}">
+		                  <tr onclick='goModal(${fapplication.applicationNo})'>
+		                    <td>
+		                      <div class="d-flex align-items-center">
+		                        <p class="text-xs font-weight-bold ms-2 mb-0">${status.count}</p>
+		                      </div>
+		                    </td>
+		                    <td class="font-weight-bold">
+		                      <span class="my-2 text-xs">${fapplication.title}</span>
+		                    </td>
+		                    <td class="font-weight-bold">
+		                      <span class="my-2 text-xs"><fmt:formatDate pattern='yyyy.MM.dd' value="${fapplication.applicationDate}"/></span>
+		                    </td>
+		                    <td class="text-xs font-weight-bold">
+		                      <div class="d-flex align-items-center">
+		                        <c:choose>
+				                   <c:when test="${fapplication.approvalWhether == 'a'}">
+				                      <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-check" aria-hidden="true"></i></button>
+	                        		  <span>승인</span>
+				                   </c:when>
+				                   <c:when test="${fapplication.approvalWhether == 'r'}">
+				                      <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-times" aria-hidden="true"></i></button>
+	                       			  <span>거부</span>
+				                   </c:when>
+				                   <c:otherwise>
+				                      <button class="btn btn-icon-only btn-rounded btn-outline-dark mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="ni ni-fat-delete" aria-hidden="true"></i></button>		                   
+				                   	  <span>대기</span>
+				                   </c:otherwise>
+				                </c:choose>      
+		                      </div>
+		                    </td>
+		                    <td class="text-xs font-weight-bold">
+		                      <div class="d-flex align-items-center">
+		                        <img src="${path}/assets/img/team-2.jpg" class="avatar avatar-xs me-2" alt="user image">
+		                        <span>${fapplication.nickname}</span>
+		                      </div>
+		                    </td>
+		                    <td class="text-xs font-weight-bold">
+		                      <i class="bi bi-paperclip"></i>
+		                      <span class="my-2 text-xs">신청양식.pdf</span>
+		                    </td>
+		                  </tr>
+	                  </c:forEach>
+	                </tbody>
+	              </table>
+	           </div>
             </div>
             <!-- 페이지네이션 -->
             <nav aria-label="Page navigation example">
