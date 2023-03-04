@@ -183,7 +183,7 @@ CREATE TABLE Profile
 );
 
 
-CREATE TABLE QNA
+CREATE TABLE FLEAMARKETQNA
 (
 	qnaNo varchar2(100) NOT NULL,
 	title varchar2(100),
@@ -191,13 +191,13 @@ CREATE TABLE QNA
 	regDate  date,
 	uptDate date,
 	email varchar2(50) NOT NULL,
-	-- 문의글이면 q , 공지사항 n 
-	-- 
-	-- 
 	method char,
-	answer varchar2(2000),
+	category varchar2(100),
 	PRIMARY KEY (qnaNo)
 );
+INSERT INTO 
+
+
 --공지
 SELECT * FROM QNA WHERE email='admin@contogo.com' AND METHOD='N'; 
 --문의

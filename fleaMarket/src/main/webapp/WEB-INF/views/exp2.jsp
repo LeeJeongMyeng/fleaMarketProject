@@ -54,14 +54,14 @@ $(document).ready(function(){
 						<div class="card-header pb-0 mb-4">
 							<div class="d-lg-flex">
 								<div>
-									<h5 class="mb-0">문의글등록</h5>
+									<h5 class="mb-0">문의글상세</h5>
 									<p class="text-sm mb-0">소중한 문의의견에 감사드립니다.</p>
 								</div>
 							</div>
 						</div>
-						<form action="QNAInsert.do" method="post" enctype="multipart/form-data">
+						<form action="QNAUpdate.do" method="post" enctype="multipart/form-data">
 							<div class="row ms-2 mb-3">
-							 	<input name="method" type="hidden" value="${Login.authority=='관리자'?'n':'q'}" readonly />
+							 	<input name="method" type="hidden" value="${getqna.method}" readonly />
 							<c:if test="${Login.authority!='관리자'}">	
 								<div class="col-2">
 									<label class="postInsertTitle" style="margin-left: -0.5%;">문의종류</label>
@@ -77,12 +77,20 @@ $(document).ready(function(){
 							<div class="row ms-3 mb-4">
 								<div class="col-2 ms-n2 me-2">
 									<label class="postInsertTitle">작성자</label>
-							 		<input class="multisteps-form__input form-control" name="email" type="text" value="${Login.email}" readonly />
+							 		<input class="multisteps-form__input form-control" name="email" type="text" value="${getqna.email}" readonly />
+								</div>
+								<div class="col-2 me-2">
+									<label class="postInsertTitle" style="margin-left: -0.5%;">등록일</label>
+									<input class="multisteps-form__input form-control" type="text" value="${getqna.regdate}" readonly/>
+								</div>
+								<div class="col-2">
+									<label class="postInsertTitle" style="margin-left: -0.5%;">수정일</label>
+									<input class="multisteps-form__input form-control" type="text" ${getqna.uptdate} readonly/>
 								</div>
 							</div>
 							<div class="mb-3" style="margin-left: 26px;">
 									<label class="postInsertTitle" style="margin-left: -0.5%;">제목</label>
-									<input class="multisteps-form__input form-control w-50" name="title" type="text" placeholder="제목을 작성해주세요." />
+									<input class="multisteps-form__input form-control w-50" name="title" type="text" value="${getqna.title }" />
 							</div>
 							<div class="mb-7" style="width: 98%; margin-left: 23px; height: 300px;">
 								<label class="mt-4 postInsertTitle" style="margin-left: -0.5%;">게시글내용</label>
