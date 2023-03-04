@@ -275,7 +275,7 @@ li{
                           </a>
                         </li>
                         <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="MemberQnAregForm.do">
+                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="MemberQnAreg.do">
                             <div class="d-flex">
                              <div class="icon h-10 me-3 d-flex mt-1">
                                <i class="ni ni-laptop text-primary"></i>

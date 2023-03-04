@@ -45,40 +45,36 @@ input::placeholder {
    <jsp:include page="header.jsp"></jsp:include>
     <div class="container-fluid py-4" style="margin-top:8%;">
             <!--form panels-->
-            <div class="row">
-              <div class="col-12 col-lg-8 m-auto">
-							<form class="multisteps-form__form mb-8" method="post"
+            <form class="multisteps-form__form mb-8" method="post"
 								enctype="multipart/form-data"
 								action="${path}/QNAInsert.do">
+            <div class="row">
+              <div class="col-12 col-lg-8 m-auto">
+							
 								<!--single form panel-->
 									<h5 class="font-weight-bolder mt-8"
 										style="text-align: center; font-size: 20pt;">고객센터 게시글 등록</h5>
 										<div class="row" style="padding: 5px; margin-top:2%;">
-											<div class="col-12 col-sm-6">
+											<div class="col-6 col-sm-6">
 											<label class="postInsertTitle">게시글 분류</label>
-								<c:choose>
-									<c:when test="${Login.authority=='관리자'}">
-									<div class="col-12 col-sm-11 mt-3 mt-sm-0">
-											<input
-													class="multisteps-form__input form-control"
-													type="text" placeholder="공지사항"  name="" readonly />
+											<c:choose>
+												<c:when test="${Login.authority=='관리자'}">
+														<input class="multisteps-form__input form-control" type="text" placeholder="공지사항"  name="" readonly />
+												
+												</c:when>
+												<c:when test="${Login.authority!='관리자'}">
+														<input class="multisteps-form__input form-control" type="text" placeholder="문의사항"  name="" readonly />	
+												</c:when>
+											</c:choose>
 											</div>
-									</c:when>
-									<c:when test="${Login.authority!='관리자'}">
-									<div class="col-12 col-sm-11 mt-3 mt-sm-0">
-											<input
-													class="multisteps-form__input form-control"
-													type="text" placeholder="문의사항"  name="" readonly />
-											</div>
-						</c:when>
-								</c:choose>
-											</div>
-											<div class="col-12 col-sm-6 mt-3 mt-sm-0">
+											<div class="col-6 col-sm-6 mt-3 mt-sm-0">
 												<label class="postInsertTitle">작성자</label> <input
 													class="multisteps-form__input form-control" name="email"
 													type="text" value="${Login.email}" readonly />
 											</div>
 										</div>
+											
+			</div>
 										<div class="row mt-3" style="width: 99%; margin-left: 0.5%;">
 											<label class="postInsertTitle" style="margin-left: -0.5%;">제목</label>
 											<input class="multisteps-form__input form-control"
@@ -102,11 +98,12 @@ input::placeholder {
 												</div>
 											</div>
 										</div>
-									</form>
+									
 							<button type="submit" style="float:right;" class="btn btn-secondary btn-md mb-0">취소</button>
 							<button type="submit" style="float:right;" class="btn btn-primary btn-md mb-0 me-2">등록</button>
 
 						</div>
+						</form>
 					</div>
 
                  
