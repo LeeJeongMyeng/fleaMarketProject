@@ -32,7 +32,6 @@
 <!-- CSS Files -->
 <link id="pagestyle"
 	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
-	<script src="https://kit.fontawesome.com/3aab1ef667.js" crossorigin="anonymous"></script>
 <style>
 .disflex {
 	display: flex;
@@ -74,6 +73,9 @@
 }
 .others{
   font-color:white;
+}
+.best:active{
+ 
 }
 </style>
 </head>
@@ -138,10 +140,12 @@
 
 							</div>
 						<div class="btnStyle">
-						    <div class = "buttonSelect">
-							<button type="button" id= "btbutn" class="btn btn-outline-dark" name = "showBtn" value="all">전체글</button>
-							<button type="button" id= "btbutn" class="btn btn-outline-dark" name = "showBtn" value="best">인기글</button>
-							</div>
+						    <div>
+							<button type="button" class="btn btn-outline-dark" name = "showBtn" value="all">전체</button>
+							<button type="button" class="btn btn-outline-dark best" name = "showBtn" value = "best"
+							<c:out value="${showTemplete eq 'best'?'active':'' }"/>
+							>인기글</button>
+							</div>c
 							<button type="button"
 								class="btn bg-gradient-primary btn-sm mb-0 insertStyle">+
 								게시물 등록하기</button>
@@ -158,7 +162,7 @@
 							</select>
 							<!-- 카테고리 조회 -->
 							<form id = "showForm" method = "get">
-							<input type="hidden" name="showTemplete" value="${showTemplete}">
+							<input type="hidden" name="showTemplete" value="${showbtn}">
 							</form>
 
 						</div>
@@ -187,14 +191,8 @@
 								<c:forEach var="lists" items="${list}">
 									<tr>
 										<td>
-											<div class="d-flex">   
-											
-												<div class="form-check my-auto">
-												<c:if test = "${lists.bestType eq 'T'}">
-												<i class="fa-solid fa-medal"></i>
-												</c:if>
-												</div>
-												
+											<div class="d-flex">
+												<div class="form-check my-auto"></div>
 												<img class="w-10 ms-3"
 													src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/ecommerce/adidas-hoodie.jpg"
 													alt="hoodie">
@@ -256,7 +254,6 @@
 							<input type="hidden" name="type" value="${pageMaker.cri.type}">
 							<input type="hidden" name ="shift" value ="${pageMaker.cri.shift }">
 							<input type="hidden" name = "category" value = "${pageMaker.cri.category }">
-							<input type="hidden" name ="showTemplete" value = "${bestValue}">
 						</form>
 						<!-- 페이지 네이션 -->
 					</div>
@@ -308,48 +305,45 @@
     
   var moveForm = $("#moveForm");
   //인기글 목록
-  var showpower = "${bestValue}";
+  var showForm = $("#showForm");
+  $("#Sort").val
   
-  // 페이지/ 정렬 / 인기글 처리 
   $("#Sort").on("change",function(e){
+	  
 	  let shift = $("#Sort option:selected").val();
-	  moveForm.find("input[name='showTemplete']").val(showpower);
+	  
 	  moveForm.find("input[name='shift']").val(shift);
 	  moveForm.find("input[name='pageNum']").val(1);
 	  moveForm.submit();
 	  
   })
-        //인기글 / 전체글 클릭처리 
-		$('button[name=showBtn]').on("click", function(e) {
-			let show = $(this).attr('value');
+  //인기글 서비스 처리 
+  
+		$('#showBtn').on("click", function(e) {
+			let show = $('#showBtn').val();
 			
 				e.preventDefault();
-				//인기글, 전체 버튼클릭시 초기화 
-				moveForm.find("input[name='pageNum']").val(1);
-				moveForm.find("input[name='keyword']").val("");
-				moveForm.find("input[name='type']").val("");
 				
-				//데이터 넘겨줌 
-				moveForm.find("input[name='category']").val();
-				moveForm.find("input[name='showTemplete']").val(show);
-				moveForm.submit();
+				showForm.find("[input[name='showTemplete']").val(show);
+				showForm.submit();
 			
 		})
-        //페이징 처리 
+
 		$(".page-item a").on("click", function(e) {
 
 			e.preventDefault(); //기본 동작 제한    
-			
+
 			moveForm.find("input[name='pageNum']").val($(this).attr("href"));
 			moveForm.submit();
 		});
-        //검색, 페이징 처리
+
 		$(".disflex button").on("click", function(e) {
 			e.preventDefault();
+
 			let type = $(".disflex select").val();
 			let keyword = $(".disflex input[name='keyword']").val();
 			let shift = $("#Sort option:selected").val();
-			
+			let show = $('#showBtn').val();
 			//카테고리별 정렬하기 위해서 설정해줌
 
 			moveForm.find("input[name='type']").val(type);
@@ -357,7 +351,6 @@
 			moveForm.find("input[name='keyword']").val(keyword);
 			moveForm.find("input[name='pageNum']").val(1);
 			moveForm.find("input[name='category']").val();
-			moveForm.find("input[name='showTemplete']").val(showpower);
 			
 			moveForm.submit();
 		});

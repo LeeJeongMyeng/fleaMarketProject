@@ -35,7 +35,7 @@ public class CommunitySelectController {
 	
 	//기본 조회(get)
 	@GetMapping("CommunityList.do")
-	public String communityList(Model model,Criteria cri) throws Exception{
+	public String communityList(@RequestParam(value = "showTemplete",required = false , defaultValue="all") String showTemplete,Model model,Criteria cri) throws Exception{
 		// 변수도 넣을수 있고, 객체도 넣어서 확인가능 
 		// info는 debug 보다 더 작은 Level 만 확인가능 
 		// sysout == info로 쓰셈
@@ -44,16 +44,26 @@ public class CommunitySelectController {
 		String email = m.getEmail();
 		*/
 		logger.info("log"+cri);
-		
+		List<CapplicationList> clist = null;
+		if(showTemplete.equals("all") || showTemplete == "") {
+			clist = service.getCommunityList(cri);
+			model.addAttribute("bestValue",showTemplete);
+			model.addAttribute("list",clist);
+			model.addAttribute("pageMaker",new PageDTO(cri,service.getCommunitySelectNum(cri)));
+		}
+		if(showTemplete.equals("best")) {
+			//인기글 처리
+			clist = service.getCommunityBestList(cri);
+			model.addAttribute("bestValue",showTemplete);
+			model.addAttribute("list",clist);
+			model.addAttribute("pageMaker",new PageDTO(cri,service.getCommunityBestCount(cri)));
+		}
 		//페이지 적용 리스트 
-		List<CapplicationList> clist = service.getCommunityList(cri);
-		model.addAttribute("list",clist);
-		model.addAttribute("pageMaker",new PageDTO(cri,service.getCommunitySelectNum(cri)));
+		
 		/* 총 게시물 처리*/
 	
 		return "communitySelect";
 	}
-	
 	
 	//상세 조회(get)
 	@GetMapping("CommunityDetail.do")

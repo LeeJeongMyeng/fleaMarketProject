@@ -7,8 +7,12 @@ import vo.Criteria;
 public interface CommunitySelectDao {
 	//커뮤니티 전체 조회 count / 검색 
 	public int getCommunitySelectNum(Criteria cri);
-	
+	//인기글 개수 
+	public int getBestCommunityListNum(Criteria cri);
 	//커뮤니티 목록/검색 페이징 적용 
 	public List<CapplicationList> getCommunityList(Criteria cri);
+	
+	//인기글 처리 
+	public List<CapplicationList> getBestCommunityList(Criteria cri);
 	
 }

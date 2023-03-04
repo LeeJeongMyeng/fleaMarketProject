@@ -41,13 +41,29 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 		}
 		if(cri.getShift().equals("3")) {
 			cri.setShift("like");
-		}
-		
-		
-		
+		}		
 		//게시판 카테고리 비즈니스 로직 설정
-	
 		return mapper.getCommunityList(cri);
+	}
+	@Override
+	public int getCommunityBestCount(Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.getBestCommunityListNum(cri);
+	}
+	@Override
+	public List<CapplicationList> getCommunityBestList(Criteria cri) {
+		// TODO Auto-generated method stub
+		if(cri.getShift()==null || cri.getShift().equals("1")) {
+			cri.setShift("registDate");
+		}
+		if(cri.getShift().equals("2")) {
+			cri.setShift("viewCnt");
+		}
+		if(cri.getShift().equals("3")) {
+			cri.setShift("like");
+		}		
+		
+		return mapper.getBestCommunityList(cri);
 	}
 	
 		

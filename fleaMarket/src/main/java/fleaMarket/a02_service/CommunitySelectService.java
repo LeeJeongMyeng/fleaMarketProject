@@ -15,4 +15,10 @@ public interface CommunitySelectService {
 	 
 	 public List<CapplicationList> getCommunityList(Criteria cri);
 	 
+	 //best 게시물 개수 
+	 public int getCommunityBestCount(Criteria cri);
+	 
+	 public List<CapplicationList> getCommunityBestList(Criteria cri);
+	 
+	 
 }

@@ -4,50 +4,130 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
-    <mapper namespace="fleaMarket.a03_dao.CommunitySelectDao">
-    <sql id="criteria">
-	<trim prefix="(" suffix=") AND " prefixOverrides="OR">
-        <choose>
-            <when test="type == 'T'.toString()">
-            	title like '%'||#{keyword}||'%'
-            </when>
-            <when test="type == 'C'.toString()">
-            	content like '%'||#{keyword}||'%'
-            </when>
-            <when test="type == 'W'.toString()">
-            	nickname like '%'||#{keyword}||'%'
-            </when>
-        </choose>
-	</trim>
-</sql>
-   
-    <!-- 검색 포함  -->
-    <select id = "getCommunityList" resultType = "capplicationList">
+<mapper namespace="fleaMarket.a03_dao.CommunitySelectDao">
+	<sql id="criteria">
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<choose>
+				<when test="type == 'T'.toString()">
+					title like '%'||#{keyword}||'%'
+				</when>
+				<when test="type == 'C'.toString()">
+					content like '%'||#{keyword}||'%'
+				</when>
+				<when test="type == 'W'.toString()">
+					nickname like '%'||#{keyword}||'%'
+				</when>
+			</choose>
+		</trim>
+	</sql>
+
+
+	<!--전체글목록 검색+페이징+카테고리정렬 포함 -->
+	<select id="getCommunityList" resultType="capplicationList">
     <![CDATA[
-      SELECT communitynumber,imgName,title,content,registDate,viewCnt,nickname FROM(
-   
-      SELECT ROWNUM AS rn,c.COMMUNITYNUMBER ,b.IMGNAME,c.TITLE ,c.CONTENT,c.REGISTDATE,c.VIEWCNT,m.NICKNAME
-      FROM fleamarketmember m, CAPPLICAION c,BOARDIMG b
-      
-      WHERE m.EMAIL = c.EMAIL AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER AND c.category = #{category}
-      
-      AND
+    SELECT  LAST.*
+FROM    (SELECT ROWNUM RNUM,
+                TEMP.*   
+        FROM    (
+        SELECT imgName,title,content,registDate,updateDate,viewCnt,nickname,CASE WHEN viewCnt >= 30 AND registDate >= SYSDATE  -1
+THEN 'T' ELSE 'F'
+END AS bestType
+FROM fleamarketmember m, CAPPLICAION c,BOARDIMG b WHERE m.EMAIL = c.EMAIL AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER
+AND 
       ]]>
-      <include refid="criteria"></include>
+		<include refid="criteria"></include>
 		<![CDATA[
-      ROWNUM <= #{pageNum} * #{amount}) 
-      
-      WHERE rn > (#{pageNum}-1)* ${amount} ORDER BY #{shift} desc,ROWNUM desc
-    ]]>
-    </select>
-    <!-- 검색 포함 전체 조회  -->
-    <select id = "getCommunitySelectNum" resultType = "int">
-            select 
-               count(*)
-            from fleamarketmember m, CAPPLICAION c,BOARDIMG b
-            where m.EMAIL = c.EMAIL AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER AND c.category = #{category}
-            AND
-            <include refid="criteria"></include>
-            1=1
-    </select>
-    </mapper>
+		c.CATEGORY = #{category}
+		]]>
+		<if test="shift != null and shift !=''">
+			ORDER BY
+
+			<choose>
+
+				<when test="shift eq 'registDate'">RegistDate</when>
+
+				<when test="shift eq 'viewCnt'"> viewCnt </when>
+
+				<otherwise>like</otherwise>
+
+			</choose>
+
+		</if> 
+		
+		<![CDATA[
+	  DESC	) TEMP 
+) LAST 
+        WHERE RNUM BETWEEN (#{pageNum}-1)* ${amount} AND #{pageNum} * #{amount}
+     ]]>
+
+	</select>
+	<!--전체글목록 검색+페이징+카테고리정렬 포함 -->
+	<select id="getBestCommunityList" resultType="capplicationList">
+    <![CDATA[
+    SELECT  LAST.*
+FROM    (SELECT ROWNUM RNUM,
+                TEMP.*   
+        FROM    (
+        SELECT imgName,title,content,registDate,updateDate,viewCnt,nickname,CASE WHEN viewCnt >= 30 AND registDate >= SYSDATE  -1
+THEN 'T' ELSE 'F'
+END AS bestType
+FROM fleamarketmember m, CAPPLICAION c,BOARDIMG b 
+WHERE m.EMAIL = c.EMAIL 
+AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER
+AND viewCnt >= 30 
+AND registDate >= SYSDATE -1
+AND 
+      ]]>
+		<include refid="criteria"></include>
+		<![CDATA[
+		c.CATEGORY = #{category}
+		]]>
+		<if test="shift != null and shift !=''">
+			ORDER BY
+
+			<choose>
+
+				<when test="shift eq 'registDate'">RegistDate</when>
+
+				<when test="shift eq 'viewCnt'"> viewCnt </when>
+
+				<otherwise>like</otherwise>
+
+			</choose>
+
+		</if> 
+		
+		<![CDATA[
+	  DESC	) TEMP 
+)LAST 
+        WHERE RNUM BETWEEN (#{pageNum}-1)* ${amount} AND #{pageNum} * #{amount}
+     ]]>
+
+	</select>
+
+	<!-- 페이징+검색+ 포함 전체 count -->
+	<select id="getCommunitySelectNum" resultType="int">
+		select
+		count(*)
+		from fleamarketmember m, CAPPLICAION c,BOARDIMG b
+		where m.EMAIL = c.EMAIL AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER AND
+		c.category = #{category}
+		AND
+		<include refid="criteria"></include>
+		1=1
+	</select>
+	<!-- 인기 페이징+검색+ 포함 전체 count -->
+	<select id="getBestCommunityListNum" resultType="int">
+		select
+		count(*)
+		from fleamarketmember m, CAPPLICAION c,BOARDIMG b
+		where m.EMAIL = c.EMAIL AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER AND
+		c.category = #{category}
+		AND
+		<include refid="criteria"></include>
+		viewCnt >= 30
+		AND registDate >= SYSDATE -1
+	</select>
+
+
+</mapper>
