@@ -200,7 +200,7 @@ li{
                             <a href="${path}/chatting.do" class="dropdown-item border-radius-md">
                               <span class="ps-3">채팅목록</span>
                             </a>
-                            <a href="${path}/communityMemberRoom.do" class="dropdown-item border-radius-md">
+                            <a href="${path}/communityMemberRoom.do?email=${Login.email}" class="dropdown-item border-radius-md">
                               <span class="ps-3">My Room</span>
                             </a>
                             <a href="${path}/communityFollowMember.do?myemail=${Login.email}" class="dropdown-item border-radius-md">
