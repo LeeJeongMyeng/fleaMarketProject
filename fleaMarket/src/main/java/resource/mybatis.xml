@@ -16,6 +16,7 @@
 		<typeAlias alias="followmemberinfo" type="vo.FollowMemberInfo"/>
 		<typeAlias alias="capplicationList" type = "vo.CapplicationList"/>
 		<typeAlias alias="ffile" type = "vo.FFile"/>
+		<typeAlias alias="roommemberinfo" type = "vo.RoomMemberInfo"/>
 	</typeAliases>
 
 	<!-- 2. 사용 XXXMapper.xml을 추가 -->
