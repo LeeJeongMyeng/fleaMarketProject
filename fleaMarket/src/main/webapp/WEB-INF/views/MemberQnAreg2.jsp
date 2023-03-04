@@ -103,8 +103,8 @@ input::placeholder {
 											</div>
 										</div>
 									</form>
-							<button type="submit" style="float:right;" class="btn btn-primary btn-md mb-0">등록</button>
 							<button type="submit" style="float:right;" class="btn btn-secondary btn-md mb-0">취소</button>
+							<button type="submit" style="float:right;" class="btn btn-primary btn-md mb-0 me-2">등록</button>
 
 						</div>
 					</div>
