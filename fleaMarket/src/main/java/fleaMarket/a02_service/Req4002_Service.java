@@ -12,6 +12,7 @@ import fleaMarket.a03_dao.Req4002_Dao;
 import vo.BoardImg;
 import vo.Capplication;
 import vo.FollowMemberInfo;
+import vo.RoomMemberInfo;
 
 @Service
 public class Req4002_Service {
@@ -57,5 +58,9 @@ public class Req4002_Service {
 	
 	public void followmemberdelete(FollowMemberInfo del) {
 		dao.followmemberdelete(del);
+	}
+	
+	public RoomMemberInfo roomMemberInfo(String email){
+		return dao.roomMemberInfo(email);
 	}
 }

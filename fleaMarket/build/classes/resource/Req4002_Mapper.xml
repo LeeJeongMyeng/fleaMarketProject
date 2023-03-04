@@ -41,6 +41,10 @@
 			WHERE myemail=#{myemail}
 			AND FOLLOWING=#{following}
 		</delete>
-		
-		
+		<select id="roomMemberInfo" parameterType="String" resultType="roommemberinfo">
+			SELECT * 
+			FROM fleamarketmember m, profile p
+			WHERE m.email=p.email
+			and m.email=#{email}
+		</select>
     </mapper>

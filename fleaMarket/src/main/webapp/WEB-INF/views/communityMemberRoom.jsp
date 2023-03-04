@@ -28,12 +28,40 @@
   <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 </head>
 <script type="text/javascript">
 	$(document).ready(function(){
-		<%-- 
+		// 정보 노출/미노출
+		$("#flexSwitchCheckDefault00").on("click",function(){
+			if($(this).is(":checked")){
+				$("#roomemail").show()
+				$("#roomphonenumber").show()
+				$("#roombusinessnumber").show()
+				$("#bulbicon").attr("src","${path}/resource/community/light-bulb.png")
+				$("#bulbicon").css({"width":"auto","height":"70px"})
+			}else{
+				$("#roomemail").hide()
+				$("#roomphonenumber").hide()
+				$("#roombusinessnumber").hide()
+				$("#bulbicon").attr("src","${path}/assets/img/small-logos/icon-bulb.svg")
+			}
+		})
+		// 팔로우수 넣기
+		var followMembers="${follower}"
+		var arrayFollow=followMembers.split(",")
+		//console.log(followMembers.length)
+		//console.log(followMembers)
+		//console.log(arrayFollow.length)
+		//console.log(arrayFollow)
 		
-		--%>	
+		if(followMembers=="[]"){
+			$("#folloewccnt span").text(0)
+		}else{
+			$("#folloewccnt span").text(arrayFollow.length)
+		}
+		
+		
 	});
 </script>
 </head>
@@ -47,13 +75,13 @@
         <div class="row gx-4">
           <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-              <img src="${path}/assets/img/team-1.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
+              <img src="${path}/resource/img/Member/profileimg/${roommember.profileimg}" alt="profile_image" class="border-radius-lg shadow-sm" style="width:auto; height:90px;">
             </div>
           </div>
           <div class="col-auto my-auto">
             <div class="h-100">
               <h5 class="mb-1">
-               	들어올 값
+               	${roommember.nickname}
               </h5>
               <p class="mb-0 font-weight-bold text-sm">
                 님의 Room  <i class="ni ni-shop"></i>
@@ -63,19 +91,21 @@
           <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
             <div class="nav-wrapper position-relative end-0">
               <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                <li class="nav-item">
+                 <li class="nav-item">
                   <a class="nav-link mb-0 px-0 py-1 active d-flex align-items-center justify-content-center " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
                     <i class="ni ni-fat-add"></i>
                     <!--<i class="ni ni-fat-delete"></i>  -->
                     <span class="ms-2">팔로우</span>
                   </a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
                   <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center  active " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
                     <i class="ni ni-chat-round"></i>
                     <span class="ms-2">채팅하기</span>
                   </a>
                 </li>
+<div class="moving-tab position-absolute nav-link" style="padding: 0px; transition: all 0.5s ease 0s; transform: translate3d(0px, 0px, 0px); width: 50%;">
+<a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center active" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">-</a></div>
               </ul>
             </div>
           </div>
@@ -94,10 +124,12 @@
 		              <input class="form-check-input ms-0" type="checkbox" checked id="flexSwitchCheckDefault00">
 		            </div>
 		          </div>
-		          <img class="img-fluid pt-3 pb-2" src="${path}/assets/img/small-logos/icon-bulb.svg" alt="bulb_icon">
-		          <p class="mb-0">e-mail:</p>
-		          <p class="mb-0">phone-number:</p>
-		          <p class="mb-0">사업자정보:</p>
+		          <img id="bulbicon" class="img-fluid pt-3 pb-2" src="${path}/resource/community/light-bulb.png" alt="bulb_icon" style="width:auto; height:70px;">
+		          <p class="mb-0">e-mail  :  <span id="roomemail"> ${roommember.email}</span></p>
+		          <p class="mb-0">휴대폰번호  :  <span id="roomphonenumber"> ${roommember.phonenumber}</span></p>
+		          <p class="mb-0">사업자정보  :  <span id="roombusinessnumber"> ${roommember.businessnumber}
+		          												<c:if test="${empty roommember.businessnumber}"> 등록된 사업자번호가 없습니다.
+		          														</c:if></span></p>
 		        </div>
 		      </div>
 		  </div>
@@ -116,10 +148,10 @@
           	<div class="card" style="width:300px;">
 	            <div class="card-body">
 	              <div class="icon icon-shape bg-gradient-primary shadow text-center">
-	                <i class="ni ni-favourite-28" aria-hidden="true"></i>
+	                <i class="ni ni-active-40" aria-hidden="true"></i>
 	              </div>
 	              <h5 class="mt-3 mb-0">754 <span class="text-secondary text-sm">개</span></h5>
-	              <p class="mb-0">댓글 좋아요 갯수(뭐넣을지 생각)</p>
+	              <p class="mb-0">게시글 조회수</p>
 	            </div>
 	          </div>
 	        </div>
@@ -127,33 +159,26 @@
 	        <div class="card" style="width:300px;">
 	           <div class="card-body">
 	             <p>팔로워 수</p>
-	             <h3>18명</h3>
-	             <span class="badge badge-success">+1(하루에 팔로우한 회원)</span>
+	             <h3 id="folloewccnt"><span></span>명</h3>
+	             <span class="badge badge-success">팔로우수 : 팔로잉수: (메퍼에서 조건처리)</span>
 	           </div>
 	        </div>
         </div>
         <div class="ms-auto d-flex">
           <div class="pe-4 mt-1 position-relative" >
+         
             <p class="text-black text-s font-weight-bold mb-2">팔로우한 회원들:</p>
+             
             <div class="d-flex align-items-center justify-content-center">
               <div class="avatar-group">
-                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Jessica Rowland">
-                  <img alt="Image placeholder" src="${path}/assets/img/team-1.jpg">
-                </a>
-                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Audrey Love">
-                  <img alt="Image placeholder" src="${path}/assets/img/team-2.jpg" class="rounded-circle">
-                </a>
-                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Michael Lewis">
-                  <img alt="Image placeholder" src="${path}/assets/img/team-3.jpg" class="rounded-circle">
-                </a>
-                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Lucia Linda">
-                  <img alt="Image placeholder" src="${path}/assets/img/team-4.jpg" class="rounded-circle">
-                </a>
-                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="Ronald Miller">
-                  <img alt="Image placeholder" src="${path}/assets/img/team-5.jpg" class="rounded-circle">
-                </a>
+              	<c:forEach var="followers" items="${follower}">
+	                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="${folloewers.nickname}">
+	                  <img alt="Image placeholder" src="${path}/resource/img/Member/profileimg/${followers.profileimg}" style="width:55px;height:45px;">
+	                </a>
+                </c:forEach>
               </div>
             </div>
+            
             <hr class="vertical light mt-0">
           </div>
           <div class="ps-4">
@@ -306,6 +331,218 @@
       <div class="hidden opacity-50 fixed inset-0 z-40 bg-black" id="jkanban-info-modal-backdrop"></div>
     </div>
   </main>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content"  style="width:900px;">
+	      <div class="modal-header">
+              <div class="row">
+                 <div class="d-flex align-items-center">
+                   <img alt="Image" src="${path}/assets/img/team-2.jpg" class="avatar">
+                   <div class="ms-3">
+                     <h6 class="mb-0 d-block">Charlie Watson</h6>
+                     <span class="text-sm text-dark opacity-8">last seen today at 1:53am</span>
+                   </div>
+                    <button class="btn btn-icon-only shadow-none text-dark mb-0 me-3 me-sm-0" type="button" data-bs-toggle="tooltip" data-bs-placement="top" title="" data-bs-original-title="Video call">
+                   <i class="ni ni-camera-compact"></i>
+                 </button>
+	               <div class="col-lg-1 col-2 my-auto ps-0">
+	                 <div class="dropdown">
+	                   <button class="btn btn-icon-only shadow-none text-dark mb-0" type="button" data-bs-toggle="dropdown">
+	                     <i class="ni ni-settings"></i>
+	                   </button>
+	                   <ul class="dropdown-menu dropdown-menu-end me-sm-n2 p-2" aria-labelledby="chatmsg">
+	                     <li>
+	                       <a class="dropdown-item border-radius-md" href="javascript:;">
+	                         Profile
+	                       </a>
+	                     </li>
+	                     <li>
+	                       <a class="dropdown-item border-radius-md" href="javascript:;">
+	                         Mute conversation
+	                       </a>
+	                     </li>
+	                     <li>
+	                       <a class="dropdown-item border-radius-md" href="javascript:;">
+	                         Block
+	                       </a>
+	                     </li>
+	                     <li>
+	                       <a class="dropdown-item border-radius-md" href="javascript:;">
+	                         Clear chat
+	                       </a>
+	                     </li>
+	                     <li>
+	                       <a class="dropdown-item border-radius-md text-danger" href="javascript:;">
+	                         Delete chat
+	                       </a>
+	                     </li>
+	                   </ul>
+	                 </div>
+	               </div>
+                 </div>
+             </div>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="color:black; font-size:20pt; font-weigth:bold;">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+          <div class="card blur shadow-blur max-height-vh-70">
+            <div class="card-body overflow-auto overflow-x-hidden">
+              <div class="row justify-content-start mb-4">
+                <div class="col-auto">
+                  <div class="card ">
+                    <div class="card-body py-2 px-3">
+                      <p class="mb-1">
+                        It contains a lot of good lessons about effective practices
+                      </p>
+                      <div class="d-flex align-items-center text-sm opacity-6">
+                        <i class="ni ni-check-bold text-sm me-1"></i>
+                        <small>3:14am</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-end text-right mb-4">
+                <div class="col-auto">
+                  <div class="card bg-gray-200">
+                    <div class="card-body py-2 px-3">
+                      <p class="mb-1">
+                        Can it generate daily design links that include essays and data visualizations ?<br>
+                      </p>
+                      <div class="d-flex align-items-center justify-content-end text-sm opacity-6">
+                        <i class="ni ni-check-bold text-sm me-1"></i>
+                        <small>4:42pm</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <div class="col-md-12 text-center">
+                  <span class="badge text-dark">Wed, 3:27pm</span>
+                </div>
+              </div>
+              <div class="row justify-content-start mb-4">
+                <div class="col-auto">
+                  <div class="card ">
+                    <div class="card-body py-2 px-3">
+                      <p class="mb-1">
+                        Yeah! Responsive Design is geared towards those trying to build web apps
+                      </p>
+                      <div class="d-flex align-items-center text-sm opacity-6">
+                        <i class="ni ni-check-bold text-sm me-1"></i>
+                        <small>4:31pm</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-end text-right mb-4">
+                <div class="col-auto">
+                  <div class="card bg-gray-200">
+                    <div class="card-body py-2 px-3">
+                      <p class="mb-1">
+                        Excellent, I want it now !
+                      </p>
+                      <div class="d-flex align-items-center justify-content-end text-sm opacity-6">
+                        <i class="ni ni-check-bold text-sm me-1"></i>
+                        <small>4:42pm</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-start mb-4">
+                <div class="col-auto">
+                  <div class="card ">
+                    <div class="card-body py-2 px-3">
+                      <p class="mb-1">
+                        You can easily get it; The content here is all free
+                      </p>
+                      <div class="d-flex align-items-center text-sm opacity-6">
+                        <i class="ni ni-check-bold text-sm me-1"></i>
+                        <small>4:42pm</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-end text-right mb-4">
+                <div class="col-auto">
+                  <div class="card bg-gray-200">
+                    <div class="card-body py-2 px-3">
+                      <p class="mb-1">
+                        Awesome, blog is important source material for anyone who creates apps? <br>
+                        Beacuse these blogs offer a lot of information about website development.
+                      </p>
+                      <div class="d-flex align-items-center justify-content-end text-sm opacity-6">
+                        <i class="ni ni-check-bold text-sm me-1"></i>
+                        <small>4:42pm</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-start mb-4">
+                <div class="col-5">
+                  <div class="card ">
+                    <div class="card-body p-2">
+                      <div class="col-12 p-0">
+                        <img src="https://images.unsplash.com/photo-1602142946018-34606aa83259?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1762&q=80" alt="Rounded image" class="img-fluid mb-2 border-radius-lg">
+                      </div>
+                      <div class="d-flex align-items-center text-sm opacity-6">
+                        <i class="ni ni-check-bold text-sm me-1"></i>
+                        <small>4:47pm</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-end text-right mb-4">
+                <div class="col-auto">
+                  <div class="card bg-gray-200">
+                    <div class="card-body py-2 px-3">
+                      <p class="mb-0">
+                        At the end of the day … the native dev apps is where users are
+                      </p>
+                      <div class="d-flex align-items-center justify-content-end text-sm opacity-6">
+                        <i class="ni ni-check-bold text-sm me-1"></i>
+                        <small>4:42pm</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row justify-content-start">
+                <div class="col-auto">
+                  <div class="card ">
+                    <div class="card-body py-2 px-3">
+                      <p class="mb-0">
+                        Charlie is Typing...
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer d-block">
+              <form class="align-items-center">
+                <div class="d-flex">
+                  <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Type here" aria-label="Message example input">
+                  </div>
+                  <button class="btn bg-gradient-primary mb-0 ms-2">
+                    <i class="ni ni-send"></i>
+                  </button>
+                </div>
+              </form>
+            </div>
+        </div>
+	      </div>
+	    </div>
+	  </div>
+	</div>
   <!--   Core JS Files   -->
   <%-- <script src="${path}/assets/js/core/popper.min.js"></script>
   <script src="${path}/assets/js/core/bootstrap.min.js"></script>

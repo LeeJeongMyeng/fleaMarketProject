@@ -5,6 +5,7 @@ import java.util.List;
 import vo.BoardImg;
 import vo.Capplication;
 import vo.FollowMemberInfo;
+import vo.RoomMemberInfo;
 
 //fleaMarket.a03_dao.CommunityDao_jyj
 public interface Req4002_Dao {
@@ -18,5 +19,6 @@ public interface Req4002_Dao {
 	public List<FollowMemberInfo> followerSelect(FollowMemberInfo index);
 	// 팔로우 취소
 	public void followmemberdelete(FollowMemberInfo del);
-
+	// 룸회원 정보 조회
+	public RoomMemberInfo roomMemberInfo(String email);
 }

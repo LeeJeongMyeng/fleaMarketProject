@@ -78,45 +78,68 @@ DROP TABLE chattingFile CASCADE CONSTRAINTS;
 -- 댓글
 CREATE TABLE reply
 (
-	repContent varchar2(10000),
-	repNo number NOT NULL,
-	repDate date,
-	communityNumber varchar2(100) NOT NULL,
-	email varchar2(50) NOT NULL,
-	rereplyNo number NOT NULL,
-	reReport number,
+	repContent varchar2(2000), -- 댓글내용
+	repNo number NOT NULL,	-- 댓글번호
+	repDate date, --등록날짜
+	communityNumber varchar2(100) NOT NULL, --커뮤니티번호
+	email varchar2(50) NOT NULL, --이메일
+	rereplyNo number NOT NULL, -- 대댓글번호
+	reReport number, -- 댓글신고수
 	PRIMARY KEY (repNo)
 );
 DROP TABLE reply CASCADE CONSTRAINTS;
 
+CREATE SEQUENCE reply_seq
+		increment by 1
+		start with 0
+		MINVALUE 0
+		MAXVALUE 100000;
+DROP SEQUENCE reply_seq;
+
+SELECT reply_seq.nextval FROM dual;
+SELECT reply_seq.currval FROM dual;
+
+SELECT * FROM reply;
+SELECT * FROM capplicaion;
+INSERT INTO reply values('멍청해요', reply_seq.nextval, sysdate,'comBoard1','yujin@email.com','0',0);
+
 -- 대댓글
 CREATE TABLE rereply
 (
-	rereplyNo number NOT NULL,
-	rereplyContent varchar2(1000),
-	rereplyDate date,
-	email varchar2(50) NOT NULL,
-	rereReportcnt number,
+	rereplyNo number NOT NULL, -- 대댓글 번호
+	rereplyContent varchar2(1000),	-- 대댓글 내용
+	rereplyDate date,	-- 대댓글 등록날짜
+	email varchar2(50) NOT NULL,	-- 이메일
+	rereReportcnt number,	-- 대댓글 신고수
 	PRIMARY KEY (rereplyNo)
 );
 DROP TABLE rereply CASCADE CONSTRAINTS;
 
+SELECT * FROM rereply;
+SELECT * FROM capplicaion;
+
+INSERT INTO reply values();
 --  댓글 좋아요
 CREATE TABLE reLike
 (
-	repNo number NOT NULL,
-	email varchar2(50) NOT NULL
+	repNo number NOT NULL,	-- 댓글번호
+	email varchar2(50) NOT NULL	--이메일
 );
 DROP TABLE reLike CASCADE CONSTRAINTS;
+
+SELECT * FROM reLike;
+INSERT INTO reply values();
 
 -- 대댓글 좋아요
 CREATE TABLE rereLike
 (
-	rereplyNo number NOT NULL,
-	email varchar2(50) NOT NULL
+	rereplyNo number NOT NULL,	-- 대댓글번호
+	email varchar2(50) NOT NULL	-- 이메일
 );
 DROP TABLE rereLike CASCADE CONSTRAINTS;
 
+SELECT * FROM rereLike;
+INSERT INTO reply values();
 --팔로우/팔로잉
 CREATE TABLE friend
 (
@@ -130,6 +153,7 @@ INSERT INTO friend VALUES('yujin@gmail.com','janexagnes@gmail.com');
 INSERT INTO friend VALUES('yujin@gmail.com','28888wjdaud@naver.com');
 INSERT INTO friend VALUES('yujin@gmail.com','pucoca@naver.com');
 INSERT INTO friend VALUES('yujin@gmail.com','aoddl56@nate.com');
+INSERT INTO friend VALUES('pucoca@naver.com','yujin@gmail.com');
 
 SELECT * FROM friend;
 select * FROM FLEAMARKETMEMBER;
@@ -140,13 +164,13 @@ select *
 FROM FLEAMARKETMEMBER m,friend f,profile pro
 WHERE f.following=m.email
 AND f.following=pro.email
-AND myemail='dbwls8382@naver.com';
+AND myemail='yujin@gmail.com';
 
 select *
 FROM FLEAMARKETMEMBER m,friend f,profile pro
 WHERE f.following=m.email
 AND f.following=pro.email
-AND myemail='dbwls8382@naver.com'
+AND myemail='yujin@gmail.com'
 AND (m.email LIKE '%'||''||'%'
 OR m.nickname LIKE '%'||''||'%');
 
@@ -154,7 +178,7 @@ select pro.profileimg,m.nickname,m.email
 FROM FLEAMARKETMEMBER m,friend f,profile pro
 WHERE f.following=m.email
 AND f.following=pro.email
-AND myemail='dbwls8382@naver.com'
+AND myemail='yujin@gmail.com'
 AND (m.email LIKE '%'||''||'%'
 OR m.nickname LIKE '%'||''||'%');
 
@@ -178,4 +202,14 @@ WHERE c.email=m.email -- 회원/게시글
 AND m.email=p.email -- 회원/프로필
 AND c.communitynumber=bi.communitynumber -- 게시글커뮤니티번호/게시글사진카뮤니티번호
 and m.email='yujin@gmail.com';
+
+SELECT * 
+FROM fleamarketmember m, profile p
+WHERE m.email=p.email -- 회원/프로필
+and m.email='yujin@gmail.com';
+
+UPDATE fleamarketmember SET businessnumber='1234567891'
+WHERE email='janexagnes@gmail.com';
+
+
 

@@ -18,7 +18,7 @@ public class RoomMemberInfo {
 	private String phonenumber;
 	private String address;
 	private String authority;
-	private String busnessnumber;
+	private String businessnumber;
 	private String kakaoemail;
 	private String naveremail;
 	private String name;
@@ -125,11 +125,11 @@ public class RoomMemberInfo {
 	public void setAuthority(String authority) {
 		this.authority = authority;
 	}
-	public String getBusnessnumber() {
-		return busnessnumber;
+	public String getBusinessnumber() {
+		return businessnumber;
 	}
-	public void setBusnessnumber(String busnessnumber) {
-		this.busnessnumber = busnessnumber;
+	public void setBusinessnumber(String businessnumber) {
+		this.businessnumber = businessnumber;
 	}
 	public String getKakaoemail() {
 		return kakaoemail;

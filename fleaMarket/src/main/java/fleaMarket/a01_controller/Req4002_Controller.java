@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import fleaMarket.a02_service.Req4002_Service;
 import vo.Capplication;
@@ -60,8 +61,10 @@ public class Req4002_Controller {
 	}
 	
 	@RequestMapping("communityMemberRoom.do")
-	public String communityMemberRoom(FollowMemberInfo sel, Model d) {
-		d.addAttribute("room", service.followerSelect(sel));
+	public String communityMemberRoom(@RequestParam("email") String email,FollowMemberInfo sel, Model d) {
+		sel.setMyemail(email);
+		d.addAttribute("follower", service.followerSelect(sel));
+		d.addAttribute("roommember", service.roomMemberInfo(email));
 		return "communityMemberRoom";
 	}
 }
