@@ -261,7 +261,7 @@ li{
                     <div class="d-none d-lg-block">
                       <ul class="list-group">
                         <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="MemberQnAListForm.do">
+                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="QNAList.do">
                             <div class="d-flex">
                               <div class="icon h-10 me-3 d-flex mt-1">
                                 <i class="ni ni-single-copy-04 text-primary"></i>
