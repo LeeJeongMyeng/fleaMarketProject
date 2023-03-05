@@ -5,6 +5,7 @@ import java.util.HashMap;
 import vo.Member;
 import vo.ProfileImg;
 import vo.QNA;
+import vo.QNAFile;
 
 public interface Req1000_Dao {
 	public Member DuplicateEmail(String email);
@@ -19,4 +20,5 @@ public interface Req1000_Dao {
 	public void SnsEmailPlus(Member upt);
 	public void MemberFindPassword(HashMap<String,String> map);
 	public void QNAInsert(QNA ins);
+	public void QNAFileInsert(QNAFile ins);
 }

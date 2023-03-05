@@ -75,7 +75,7 @@ $("#cbx_chkAll").click(function() {
 
 
 function callPageSelector(){
-	const rowsPerPage =1; // 10개 씩 끊겟다.
+	const rowsPerPage =5; // 10개 씩 끊겟다.
 	const rows = document.querySelectorAll('#MembersListTable tbody tr');// 게시글 row를 전체 선택
 	var rowsCount = rows.length //게시글 전체의 갯수
 	if(rowsCount==0){rowsCount=1}

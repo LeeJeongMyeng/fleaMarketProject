@@ -108,6 +108,10 @@
 			#{email},#{method},
 			#{category})
     	</insert>
+    	<!-- 문의하기 파일등록 -->
+    	<insert id="QNAFileInsert" parameterType="qnafile">
+    		INSERT INTO qnafile values(#{filename},#{filepath},FLEAMARKETQNA_seq.currval)
+    	</insert>
     </mapper>
     
     

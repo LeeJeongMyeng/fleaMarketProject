@@ -15,6 +15,7 @@ import fleaMarket.util.FileService;
 import vo.Member;
 import vo.ProfileImg;
 import vo.QNA;
+import vo.QNAFile;
 
 @Service
 public class Req1000_ServiceImp implements Req1000_Service {
@@ -106,7 +107,9 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	public void QNAInsert(QNA ins) {
 		dao.QNAInsert(ins);
 	}
-	
+	public void QNAFileInsert(QNAFile ins) {
+		dao.QNAFileInsert(ins);
+	}
 
 }
 
