@@ -113,7 +113,7 @@ function goDetail(qnano){
 																	<td>${QNA.qnano}</td>
 																	<td>${QNA.title}</td>
 																	<td>${QNA.regdate}</td>
-																	<td>${Login.name}</td>
+																	<td>${QNA.email}</td>
 																	<c:if test="${QNA.method=='q'}">
 																		<td>문의사항</td>
 																	</c:if>
