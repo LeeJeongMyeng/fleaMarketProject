@@ -53,8 +53,8 @@ function goDetail(qnano){
 						<div class="card-header pb-0">
 							<div class="d-lg-flex">
 								<div>
-									<h5 class="mb-0"  style="margin-top:15%;">내가 쓴 플리마켓 모집글</h5>
-								<p class="text-sm mb-0">회원님께서 작성하신 플리마켓 모집글 입니다.</p>
+									<h5 class="mb-0" style="margin-top: 15%;">내가 쓴 플리마켓 모집글</h5>
+									<p class="text-sm mb-0">회원님께서 작성하신 플리마켓 모집글 입니다.</p>
 								</div>
 								<div class="ms-auto my-auto mt-lg-0 mt-4">
 									<div class="ms-auto my-auto">
@@ -65,49 +65,50 @@ function goDetail(qnano){
 													<div class="modal-header">
 														<i class="fas fa-upload ms-3"></i>
 													</div>
-												
-												
+
+
 												</div>
 											</div>
 										</div>
-										
+
 									</div>
 								</div>
 							</div>
 						</div>
-							<div class="card-body px-0 pb-0">
-							</div>
-							<form id="frm01" class="form"  method="post"> 
-							
-						<div class="row">
-								<div class="col-10 input-group mb-3 w-25">
+						<div class="card-body px-0 pb-0"></div>
+						<form id="frm01" class="form" method="post">
+							<div class="row">
+								<div class="table-responsive mt-3">
+									<table class="table table-flush" id="QnAListTable">
+										<col width="20%">
+										<col width="40%">
+										<col width="30%">
+										<col width="20%">
+										<thead class="thead-light">
+											<tr style="background-color: #ebebeb;">
+												<th>글 번호</th>
+												<th>제목</th>
+												<th>등록일</th>
+												<th>분류</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<c:forEach var="QNA" items="${MemberQNAList}">
+												<tr ondblclick="goDetail(${QNA.qnano})">
+													<td>${QNA.qnano}</td>
+													<td>${QNA.title}</td>
+													<td>${QNA.regdate}</td>
+													<td>${QNA.method}</td>
+												</tr>
+											</c:forEach>
+										</tbody>
+									</table>
 								</div>
-							<div class="table-responsive mt-3">
-							<table class="table table-flush" id="QnAListTable">
-											   	<col width="20%">
-											   	<col width="40%">
-											   	<col width="30%">
-											   	<col width="20%">
-												<thead class="thead-light">
-													<tr style="background-color: #ebebeb;">
-														<th >글 번호</th>
-														<th >제목</th>
-														<th >등록일</th>
-														<th>분류</th>
-													</tr>
-												</thead>
-													 
-									<tbody>
-										<c:forEach var="QNA" items="${MemberQNAList}">
-    													<tr ondblclick="goDetail(${QNA.qnano})">
-														<td>${QNA.qnano}</td>
-														<td>${QNA.title}</td>
-														<td>${QNA.regdate}</td>
-														<td>${QNA.method}</td>
-													</tr>
-														</c:forEach>
-										
-										</tbody></table></div></div></div></div></div>
+							</div>
+					</div>
+				</div>
+			</div>
 			<footer class="footer pt-3  ">
 				<div class="container-fluid">
 					<div class="row align-items-center justify-content-lg-between">

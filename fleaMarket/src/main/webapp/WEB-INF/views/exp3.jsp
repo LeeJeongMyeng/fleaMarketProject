@@ -108,16 +108,22 @@ function goDetail(qnano){
 													</tr>
 												</thead>
 												<tbody>
-												    	<c:forEach var="QNA" items="${QNAList}">
-    													<tr ondblclick="goDetail(${QNA.qnano})">
-														<td>${QNA.qnano}</td>
-														<td>${QNA.title}</td>
-														<td>${QNA.regdate}</td>
-														<td>${QNA.email}</td>
-														<td>${QNA.method}</td>
-													</tr>
-														</c:forEach>
-												</tbody>
+															<c:forEach var="QNA" items="${QNAList}">
+																<tr ondblclick="goDetail(${QNA.qnano})">
+																	<td>${QNA.qnano}</td>
+																	<td>${QNA.title}</td>
+																	<td>${QNA.regdate}</td>
+																	<td>${Login.name}</td>
+																	<c:if test="${QNA.method=='q'}">
+																		<td>문의사항</td>
+																	</c:if>
+																	<c:if test="${QNA.method!='q'}">
+																		<td>공지사항</td>
+																	</c:if>
+															</c:forEach>
+															</tr>
+
+														</tbody>
 											</table>
 										</div>
 									</div>
