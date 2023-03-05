@@ -27,15 +27,22 @@ SELECT communityNumber_seq.currval FROM dual;
 DROP TABLE capplicaion CASCADE CONSTRAINTS;
 SELECT * FROM capplicaion;
 
+
+UPDATE capplicaion 
+SET likecnt='5'
+WHERE communityNumber='comBoard20';
+
 UPDATE capplicaion 
 SET title='',
 	content='',
 	hashtag='#태그할수 있을까?',
 	updatedate=sysdate
 WHERE communityNumber='comBoard23';
-SELECT * FROM capplicaion
+
+SELECT * FROM capplicaion;
 WHERE communityNumber='comBoard23';
 
+INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','dbwls8382@gmail.com','#태그1 #태그2',0,0);
 INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','dbwls8382@gmail.com','#태그1 #태그2',0,0);
 -- 커뮤니티 게시글 이미지
 CREATE TABLE BoardImg
@@ -50,9 +57,15 @@ INSERT INTO BoardImg values('파일명','파일경로','comBoard0');
 
 SELECT * FROM BoardImg;
 
-SELECT * FROM BoardImg i,capplicaion c
+SELECT DISTINCT *
+FROM BoardImg i,capplicaion c
 WHERE i.communityNumber=c.communityNumber
-ORDER BY registdate;
+AND c.email='yujin@gmail.com';
+
+SELECT DISTINCT c.communitynumber, imgpath, title, content, registdate, updatedate, category, email, hashtag, viewcnt, likecnt
+FROM BoardImg i,capplicaion c
+WHERE i.communityNumber=c.communityNumber
+AND c.email='yujin@gmail.com';
 
 -- 채팅
 CREATE TABLE chat
@@ -78,12 +91,11 @@ DROP TABLE chattingFile CASCADE CONSTRAINTS;
 -- 댓글
 CREATE TABLE reply
 (
-	repContent varchar2(2000), -- 댓글내용
 	repNo number NOT NULL,	-- 댓글번호
+	repContent varchar2(2000), -- 댓글내용
 	repDate date, --등록날짜
 	communityNumber varchar2(100) NOT NULL, --커뮤니티번호
 	email varchar2(50) NOT NULL, --이메일
-	rereplyNo number NOT NULL, -- 대댓글번호
 	reReport number, -- 댓글신고수
 	PRIMARY KEY (repNo)
 );
@@ -99,26 +111,53 @@ DROP SEQUENCE reply_seq;
 SELECT reply_seq.nextval FROM dual;
 SELECT reply_seq.currval FROM dual;
 
-SELECT * FROM reply;
+SELECT * FROM reply ;
+WHERE email='yujin@gmail.com';
 SELECT * FROM capplicaion;
-INSERT INTO reply values('멍청해요', reply_seq.nextval, sysdate,'comBoard1','yujin@email.com','0',0);
 
+SELECT * 
+FROM capplicaion c, reply r
+WHERE c.COMMUNITYNUMBER = r.COMMUNITYNUMBER
+AND c.email='yujin@gmail.com';
+--AND r.email='yujin@gmail.com';
+
+SELECT * FROM capplicaion c
+WHERE email='yujin@gmail.com'
+AND category='사는이야기';
+
+
+INSERT INTO reply values(reply_seq.nextval,'멍청해요', sysdate,'comBoard1','yujin@gmail.com',0);
+INSERT INTO reply values(reply_seq.nextval,'ㅇㅇ너도', sysdate,'comBoard1','ehddms2909@naver.com',0);
+select * FROM FLEAMARKETMEMBER;
 -- 대댓글
 CREATE TABLE rereply
 (
 	rereplyNo number NOT NULL, -- 대댓글 번호
-	rereplyContent varchar2(1000),	-- 대댓글 내용
+	rereplyContent varchar2(2000),	-- 대댓글 내용
 	rereplyDate date,	-- 대댓글 등록날짜
 	email varchar2(50) NOT NULL,	-- 이메일
 	rereReportcnt number,	-- 대댓글 신고수
+	repNo number NOT NULL,
 	PRIMARY KEY (rereplyNo)
 );
 DROP TABLE rereply CASCADE CONSTRAINTS;
 
+CREATE SEQUENCE rereply_seq
+		increment by 1
+		start with 0
+		MINVALUE 0
+		MAXVALUE 100000;
+DROP SEQUENCE rereply_seq;
+
+SELECT rereply_seq.nextval FROM dual;
+SELECT rereply_seq.currval FROM dual;
+
 SELECT * FROM rereply;
 SELECT * FROM capplicaion;
 
-INSERT INTO reply values();
+INSERT INTO rereply values(rereply_seq.nextval, '멍청이의 멍청이', sysdate, 'yujin@gmail.com','0', 0);
+
+
 --  댓글 좋아요
 CREATE TABLE reLike
 (
@@ -127,8 +166,10 @@ CREATE TABLE reLike
 );
 DROP TABLE reLike CASCADE CONSTRAINTS;
 
+SELECT * FROM reply;
 SELECT * FROM reLike;
-INSERT INTO reply values();
+select * FROM FLEAMARKETMEMBER;
+INSERT INTO reLike values('0','pucoca@naver.com');
 
 -- 대댓글 좋아요
 CREATE TABLE rereLike
@@ -138,8 +179,10 @@ CREATE TABLE rereLike
 );
 DROP TABLE rereLike CASCADE CONSTRAINTS;
 
+SELECT * FROM rereply;
 SELECT * FROM rereLike;
-INSERT INTO reply values();
+select * FROM FLEAMARKETMEMBER;
+INSERT INTO rereLike values('0','28888wjdaud@naver.com');
 --팔로우/팔로잉
 CREATE TABLE friend
 (
@@ -154,6 +197,7 @@ INSERT INTO friend VALUES('yujin@gmail.com','28888wjdaud@naver.com');
 INSERT INTO friend VALUES('yujin@gmail.com','pucoca@naver.com');
 INSERT INTO friend VALUES('yujin@gmail.com','aoddl56@nate.com');
 INSERT INTO friend VALUES('pucoca@naver.com','yujin@gmail.com');
+INSERT INTO friend VALUES('two__yoon@naver.com','yujin@gmail.com');
 
 SELECT * FROM friend;
 select * FROM FLEAMARKETMEMBER;
@@ -166,13 +210,17 @@ WHERE f.following=m.email
 AND f.following=pro.email
 AND myemail='yujin@gmail.com';
 
+SELECT * FROM friend;
+
 select *
 FROM FLEAMARKETMEMBER m,friend f,profile pro
 WHERE f.following=m.email
 AND f.following=pro.email
-AND myemail='yujin@gmail.com'
+AND 1=1
 AND (m.email LIKE '%'||''||'%'
-OR m.nickname LIKE '%'||''||'%');
+OR m.nickname LIKE '%'||''||'%')
+--AND myemail='yujin@gmail.com'
+AND following='yujin@gmail.com';
 
 select pro.profileimg,m.nickname,m.email
 FROM FLEAMARKETMEMBER m,friend f,profile pro

@@ -56,12 +56,41 @@
 		//console.log(arrayFollow)
 		
 		if(followMembers=="[]"){
-			$("#folloewccnt span").text(0)
+			$("#folloewcnt").text(0)
 		}else{
-			$("#folloewccnt span").text(arrayFollow.length)
+			$("#folloewcnt").text(arrayFollow.length)
 		}
-		
-		
+		// 팔로잉수 넣기
+		var followingMembers="${following}"
+			var arrayFollowing=followingMembers.split(",")
+			
+			if(followingMembers=="[]"){
+				$("#following span").text(0)
+			}else{
+				$("#following span").text(arrayFollowing.length)
+			}
+		// 팔로우 회원 클릭 시, 해당 회원 룸으로 이동
+		function memberRoom(email){
+			location.href="communityMemberRoom.do?email"+this
+		}
+		// 내게시글 정보
+		var boardrepInfos = "${boardreplyInfo}"
+		console.log("내게시글정보",boardrepInfos);
+		var arrayboardrepInfo=boardrepInfos.split(",")
+		if(boardrepInfos=="[]"){
+			$("#meBoardRepCnt").text(0)
+		}else{
+			$("#meBoardRepCnt").text(arrayboardrepInfo.length)
+		}
+		// 내가쓴 댓글 정보
+		var replyInfos = "${replyInfo}"
+		console.log("내 댓글 정보",replyInfos)
+		var arrayreplyInfo=replyInfos.split(",")
+		if(replyInfos=="[]"){
+			$("#meRepCnt").text(0)
+		}else{
+			$("#meRepCnt").text(arrayreplyInfo.length)
+		}
 	});
 </script>
 </head>
@@ -75,7 +104,7 @@
         <div class="row gx-4">
           <div class="col-auto">
             <div class="avatar avatar-xl position-relative">
-              <img src="${path}/resource/img/Member/profileimg/${roommember.profileimg}" alt="profile_image" class="border-radius-lg shadow-sm" style="width:auto; height:90px;">
+              <img src="${path}/resource/img/Member/profileimg/${roommember.profileimg}" alt="profile_image" class="border-radius-lg shadow-sm" style="width:90px; height:90px;">
             </div>
           </div>
           <div class="col-auto my-auto">
@@ -139,8 +168,10 @@
 	              <div class="icon icon-shape bg-gradient-primary shadow text-center">
 	                <i class="ni ni-favourite-28" aria-hidden="true"></i>
 	              </div>
-	              <h5 class="mt-3 mb-0">754 <span class="text-secondary text-sm">개</span></h5>
+	              <h5 class="mt-3 mb-0">${likeCnt}<span class="text-secondary text-sm">개</span></h5>
 	              <p class="mb-0">게시글 좋아요 갯수</p>
+	              <h5 class="mt-3 mb-0"><span id="meBoardRepCnt"></span><span class="text-secondary text-sm">개</span></h5>
+	              <p class="mb-0">게시글 댓글 갯수</p>
 	            </div>
 	          </div>
 	        </div>
@@ -150,17 +181,18 @@
 	              <div class="icon icon-shape bg-gradient-primary shadow text-center">
 	                <i class="ni ni-active-40" aria-hidden="true"></i>
 	              </div>
-	              <h5 class="mt-3 mb-0">754 <span class="text-secondary text-sm">개</span></h5>
-	              <p class="mb-0">게시글 조회수</p>
+	              <h5 class="mt-3 mb-0"><span id="meRepCnt"></span><span class="text-secondary text-sm">개</span></h5>
+	              <p class="mb-0">${roommember.nickname}님이 쓰신 댓글 갯수</p>
+	              <button type="button" class="btn btn-outline-primary">댓글보러가기</button>
 	            </div>
 	          </div>
 	        </div>
 	  	<div class="col-lg-2">
 	        <div class="card" style="width:300px;">
 	           <div class="card-body">
-	             <p>팔로워 수</p>
-	             <h3 id="folloewccnt"><span></span>명</h3>
-	             <span class="badge badge-success">팔로우수 : 팔로잉수: (메퍼에서 조건처리)</span>
+	             <p>팔로잉 수</p>
+	             <h3 id="following"><span></span>명</h3>
+	             <span class="badge badge-success">팔로우수 : <span id="folloewcnt" style="color:green"></span>명</span>
 	           </div>
 	        </div>
         </div>
@@ -172,8 +204,8 @@
             <div class="d-flex align-items-center justify-content-center">
               <div class="avatar-group">
               	<c:forEach var="followers" items="${follower}">
-	                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="${folloewers.nickname}">
-	                  <img alt="Image placeholder" src="${path}/resource/img/Member/profileimg/${followers.profileimg}" style="width:55px;height:45px;">
+	                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="${folloewers.nickname}" >
+	                  <img alt="Image placeholder" src="${path}/resource/img/Member/profileimg/${followers.profileimg}" style="width:55px;height:45px;" onclick="memberRoom(${folloewers.email})">
 	                </a>
                 </c:forEach>
               </div>
@@ -634,7 +666,15 @@
       },
     });
 
-
+	var adv="${adv}"
+	console.log("홍보글",adv)
+	var idea="${idea}"
+	console.log("사업아이디어",idea)
+	var life="${life}"
+	console.log("사는이야기",life)
+	var tip="${tip}"
+	console.log("꿀팁",tip)
+	
     // Pie chart
     new Chart(ctx2, {
       type: "pie",

@@ -31,9 +31,18 @@
 			FROM FLEAMARKETMEMBER m,friend f,profile pro
 			WHERE f.following=m.email
 			AND f.following=pro.email
-			AND myemail=#{myemail}
+			and 1=1
 			AND (m.email LIKE '%'||#{keyword}||'%'
 			OR m.nickname LIKE '%'||#{keyword}||'%')
+			<choose>
+				<when test="div==null">
+					AND myemail=#{myemail}
+				</when>
+				<when test="div!=null">
+					AND following=#{myemail}
+				</when>
+			</choose>
+			
 		</select>
 		
 		<delete id="followmemberdelete" parameterType="followmemberinfo">
@@ -41,10 +50,35 @@
 			WHERE myemail=#{myemail}
 			AND FOLLOWING=#{following}
 		</delete>
+		
+		<!-- room 회원정보(게시글이 없을 때를 대비해서 join할수 없음) -->
 		<select id="roomMemberInfo" parameterType="String" resultType="roommemberinfo">
 			SELECT * 
 			FROM fleamarketmember m, profile p
 			WHERE m.email=p.email
 			and m.email=#{email}
 		</select>
+		
+		<!-- 좋아요 갯수(누적합계) -->
+		<select id="boardSelect" parameterType="HashMap" resultType="roommemberinfo">
+			SELECT * FROM capplicaion
+			WHERE email=#{email}
+			<if test='category!=null'>
+				AND category=#{category}
+			</if>
+		</select>
+		
+		<!-- 게시글댓글 조회 / 내가쓴 댓글 조회 (구분자를 주기위해 파라미터값 vo로 넣기)-->
+		<select id="boardReplySelect" parameterType="HashMap" resultType="roommemberinfo">
+			SELECT * 
+			FROM capplicaion c, reply r
+			WHERE c.COMMUNITYNUMBER = r.COMMUNITYNUMBER
+			<if test="div=='meboard'.toString()">
+				AND c.email=#{email}
+			</if>
+			<if test="div=='mereply'.toString()">
+				AND r.email=#{email}
+			</if>
+		</select>
+		
     </mapper>

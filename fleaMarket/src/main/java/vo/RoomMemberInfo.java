@@ -1,6 +1,7 @@
 package vo;
 // vo.RoomMemberInfo
 public class RoomMemberInfo {
+	// 커뮤니티 테이블
 	private String communitynumber;
 	private String title;
 	private String content;
@@ -11,7 +12,12 @@ public class RoomMemberInfo {
 	private String hashtag;
 	private int viewcnt;
 	private int likecnt;
+	
+	//커뮤니티 게시글 이미지
+	private String imgname;
 	private String imgpath;
+	
+	//커뮤니티 회원정보
 	private String password;
 	private String nickname;
 	private String personalnumber;
@@ -23,6 +29,15 @@ public class RoomMemberInfo {
 	private String naveremail;
 	private String name;
 	private String profileimg;
+	
+	// 커뮤니티 댓글
+	private int repno; // 댓글번호
+	private String repcontent;	// 댓글 내용
+	private String repdate;	// 댓글등록날짜
+	private String reemail;	// 댓글쓴 이메일
+	private int report;	// 신고수
+	private String div; // 내가쓴 댓글,게시글 댓글 구분자
+	
 	public String getCommunitynumber() {
 		return communitynumber;
 	}
@@ -154,5 +169,47 @@ public class RoomMemberInfo {
 	}
 	public void setProfileimg(String profileimg) {
 		this.profileimg = profileimg;
+	}
+	public String getImgname() {
+		return imgname;
+	}
+	public void setImgname(String imgname) {
+		this.imgname = imgname;
+	}
+	public int getRepno() {
+		return repno;
+	}
+	public void setRepno(int repno) {
+		this.repno = repno;
+	}
+	public String getRepcontent() {
+		return repcontent;
+	}
+	public void setRepcontent(String repcontent) {
+		this.repcontent = repcontent;
+	}
+	public String getRepdate() {
+		return repdate;
+	}
+	public void setRepdate(String repdate) {
+		this.repdate = repdate;
+	}
+	public String getReemail() {
+		return reemail;
+	}
+	public void setReemail(String reemail) {
+		this.reemail = reemail;
+	}
+	public int getReport() {
+		return report;
+	}
+	public void setReport(int report) {
+		this.report = report;
+	}
+	public String getDiv() {
+		return div;
+	}
+	public void setDiv(String div) {
+		this.div = div;
 	}
 }

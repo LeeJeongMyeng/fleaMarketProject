@@ -17,6 +17,7 @@ public class FollowMemberInfo {
 	private String following;	// 팔로잉(
 	private String profileimg;	// 프로필이미지
 	private String keyword; // 검색기능
+	private String div; // 팔로우/팔로잉 구분
 	public String getEmail() {
 		return email;
 	}
@@ -112,5 +113,11 @@ public class FollowMemberInfo {
 	}
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+	public String getDiv() {
+		return div;
+	}
+	public void setDiv(String div) {
+		this.div = div;
 	}
 }

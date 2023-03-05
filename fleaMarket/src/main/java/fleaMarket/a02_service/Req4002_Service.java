@@ -2,6 +2,7 @@ package fleaMarket.a02_service;
 
 import java.io.File;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -62,5 +63,13 @@ public class Req4002_Service {
 	
 	public RoomMemberInfo roomMemberInfo(String email){
 		return dao.roomMemberInfo(email);
+	}
+	
+	public List<RoomMemberInfo> boardReplySelect(Map<String, String> map) {
+		return dao.boardReplySelect(map);
+	}
+	
+	public List<RoomMemberInfo> boardSelect(Map<String, String> map){
+		return dao.boardSelect(map);
 	}
 }
