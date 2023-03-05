@@ -76,10 +76,6 @@
 							<form id="frm01" class="form"  method="post"> 
 							
 						<div class="row">
-								<div class="col-10 input-group mb-3 w-25">
-								  <button class="btn btn-outline-primary bg-primary mb-0 ms-3" type="submit" style="color:white;" id="button-addon1">　검색　</button>
-								  <input type="text" class="form-control form-control-outline-primary" style="border: 1px solid #5e72e4;"  name="name" value="${sch.title}" placeholder="　회원명을 입력하세요">
-								</div>
 							<div class="table-responsive mt-3">
 								<table class="table table-flush" id="products-list">
 									<thead class="thead-light">
@@ -96,7 +92,7 @@
 									<tbody>
 										<c:forEach var="FleaMarket" items="${FleaMarketList}">
 							    		<tr>
-							    		  <input type="hidden" td:value="${Login.email}" />
+							    		  <input type="hidden" value="${Login.email}" />
 							    		
 							    		<td>${FleaMarket.title}</td>
 							    		<td>${FleaMarket.recruitmentStartDate}</td>

@@ -145,7 +145,7 @@ li{
 								</a>
 							</li>
 							<li class="nav-item ">
-								<a class="nav-link " href="#"> 
+								<a class="nav-link " href="MemberInquire.do?email=${Login.email}"> 
 									<span class="sidenav-normal">나의 문의글</span>
 								</a>
 							</li>

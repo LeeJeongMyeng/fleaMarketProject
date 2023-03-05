@@ -52,6 +52,9 @@ public class Req1001_Service {
 	public List<FleaMarket> FleaMarketList(String email){
 		return dao.FleaMarketList(email);
 	}
+	public List<QNA> MemberQNAList(String email){
+		return dao.MemberQNAList(email);
+	}
 	public ProfileImg getMemberProfile(String email) {
 		return dao.getMemberProfile(email);
 	}

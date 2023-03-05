@@ -84,11 +84,6 @@ public class Req1001_Controller {
 	public String MemberInfo() {
 		return "MemberInfo";
 	}
-	//http://localhost:7080/fleaMarket/MemberInquire.do 마이페이지 문의사항 조회
-	@RequestMapping("MemberInquire.do")
-	public String MemberInquire() {
-		return "MemberInquire";
-	}
 	
 	//회원정보수정 
 	@RequestMapping("UpdateMemberInfo.do")
@@ -142,6 +137,12 @@ public class Req1001_Controller {
 	public String MemberFmReg(@RequestParam("email")String email, Model d, HttpSession session) {
 		d.addAttribute("FleaMarketList",service.FleaMarketList(email));
 			return "MemberFmReg";
+	}
+	// 회원 내가 쓴 문의글
+	@RequestMapping("MemberInquire.do")
+	public String MemberInquire(@RequestParam("email")String email, Model d, HttpSession session) {
+		d.addAttribute("MemberQNAList",service.MemberQNAList(email));
+			return "MemberInquire";
 	}
 	
 	// 자진탈퇴

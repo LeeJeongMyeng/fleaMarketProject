@@ -65,11 +65,29 @@ $(document).ready(function(){
 							 
 								<div class="col-2">
 								
-									<label class="postInsertTitle" style="margin-left: -0.5%;">문의종류</label>
-										<input name="method" type="text" value="${qna.method}" readonly />
+									<label class="postInsertTitle" style="margin-left: -0.5%;">분류</label>
+										<c:if test="${qna.method=='q'}">
+										<input class="multisteps-form__input form-control" name="method" type="text" value="문의사항" readonly />
+										</c:if>
+										<c:if test="${qna.method!='q'}">
+										<input class="multisteps-form__input form-control" name="method" type="text" value="공지사항" readonly />
+										</c:if>
 								</div>
+								<!-- 관리자만 게시글 최종 수정일 확인 가능 -->
+								<c:if test="${Login.authority=='관리자'}">
+								<div class="col-2">
+									<label class="postInsertTitle" style="margin-left: -0.5%;">최종 수정일</label>
+									<input class="multisteps-form__input form-control" name="uptdate" type="text" value="${qna.uptdate}" readonly/>
+								</div>
+								</c:if>
 							</div>
+							
+							
 							<div class="row ms-3 mb-4">
+								<div class="col-2 ms-n2 me-2">
+									<label class="postInsertTitle" style="margin-left: -0.5%;">게시글번호</label>
+									<input class="multisteps-form__input form-control" name="qnano" type="text" value="${qna.qnano}" readonly/>
+								</div>
 								<div class="col-2 ms-n2 me-2">
 									<label class="postInsertTitle">작성자</label>
 							 		<input class="multisteps-form__input form-control" name="email" type="text" value="${qna.email}" readonly />
@@ -78,25 +96,18 @@ $(document).ready(function(){
 									<label class="postInsertTitle" style="margin-left: -0.5%;">등록일</label>
 									<input class="multisteps-form__input form-control" name="regdate" type="text" value="${qna.regdate}" readonly/>
 								</div>
-								<div class="col-2">
-									<label class="postInsertTitle" style="margin-left: -0.5%;">수정일</label>
-									<input class="multisteps-form__input form-control" name="uptdate" type="text" value="${qna.uptdate}" readonly/>
-								</div>
-								<div class="col-2">
-									<label class="postInsertTitle" style="margin-left: -0.5%;">게시글번호</label>
-									<input class="multisteps-form__input form-control" name="qnano" type="text" value="${qna.qnano}" readonly/>
-								</div>
 							</div>
 							<div class="mb-3" style="margin-left: 26px;">
 									<label class="postInsertTitle" style="margin-left: -0.5%;">제목</label>
-									<input class="multisteps-form__input form-control w-50" name="title" type="text" value="${qna.title}" />
+									<input class="multisteps-form__input form-control w-50" name="title" type="text" value="${qna.title}" readonly/>
 							</div>
 							<div class="mb-7" style="width: 98%; margin-left: 23px; height: 300px;">
-								<label class="mt-4 postInsertTitle" style="margin-left: -0.5%;" value="${qna.content}">게시글내용</label>
-								<div id="editor"></div>
+								<label class="mt-4 postInsertTitle" style="margin-left: -0.5%;" >게시글내용</label>
+								<div style="width: 65%; height:70%; border:0.5px solid gray;">
+								${qna.content}
 							</div>
-								<input type="hidden" id="contentInput" name="content" />
-							<div style="width: 50%; margin-left: 23px;">
+								
+							<div style="width: 50%;">
 								<label class="mt-4 form-label labelFont">첨부파일</label>
 									<div class="fallback">
 										<input name="qnafiles" type="file" id="Prodimg" multiple />

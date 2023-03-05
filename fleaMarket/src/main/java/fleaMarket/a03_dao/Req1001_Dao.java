@@ -17,6 +17,7 @@ public interface Req1001_Dao {
 	public void DeleteProfile(String email);
 	public void DeleteMember(String email);
 	public List<FleaMarket> FleaMarketList(String email);
+	public List<QNA> MemberQNAList(String email);
 	public ProfileImg getMemberProfile(String email);
 	public List<QNA> QNAList(QNA sch);
 	public QNA getQNA(String qnano);	
