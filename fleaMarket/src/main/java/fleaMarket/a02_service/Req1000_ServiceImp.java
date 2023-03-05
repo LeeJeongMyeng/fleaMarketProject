@@ -105,6 +105,7 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	}
 	
 	public void QNAInsert(QNA ins) {
+		if(ins.getCategory()==null) {ins.setCategory("공지사항");}
 		dao.QNAInsert(ins);
 	}
 	public void QNAFileInsert(QNAFile ins) {
