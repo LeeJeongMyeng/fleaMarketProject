@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 import vo.Member;
 import vo.ProfileImg;
 import vo.QNA;
+import vo.QNAFile;
 
 @Service
 public interface Req1000_Service  {
@@ -20,4 +21,5 @@ public interface Req1000_Service  {
 	public void MemberFindPassword(String name,String personalnumber,String email);
 	public Member ReLogin(String email);
 	public void QNAInsert(QNA ins);
+	public void QNAFileInsert(QNAFile ins);
 }

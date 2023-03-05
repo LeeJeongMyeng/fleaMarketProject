@@ -1,5 +1,8 @@
 package fleaMarket.a01_controller;
 
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fleaMarket.a02_service.Req1000_Service;
@@ -18,6 +22,7 @@ import fleaMarket.util.FileService;
 import vo.Member;
 import vo.ProfileImg;
 import vo.QNA;
+import vo.QNAFile;
 
 @Controller("Req1000")
 public class Req1000_Controller {
@@ -32,6 +37,9 @@ public class Req1000_Controller {
 	
 	@Value("${profile.upload}")
 	private String profilepath;
+	
+	@Value("${qna.upfile}")
+	private String qnafilepath;
 	
 //=================================================================================
 	
@@ -119,15 +127,39 @@ public class Req1000_Controller {
 	
 	//문의글등록
 	@PostMapping("QNAInsert.do")
-	public String QNAInsert(QNA ins) {
-		System.out.println("###############");
-		System.out.println(ins.getCategory());
-		System.out.println(ins.getContent());
-		System.out.println(ins.getEmail());
-		System.out.println(ins.getMethod());
-		System.out.println(ins.getTitle());
-		System.out.println("###############");
-		service.QNAInsert(ins);
+	public String QNAInsert(QNA ins,MultipartHttpServletRequest qnafiles) {
+		
+		//여러개 들어온 파일들을 리스트로 받음
+		 List<MultipartFile> fileList = qnafiles.getFiles("qnafiles");
+		 
+		//들어온 글정보부터 입력(중요. 시퀸스넘버때매 무조건 앞에서 해야함)
+		 service.QNAInsert(ins);
+		 
+		//문의글 등록파일 VO객체 생성 
+		 QNAFile qf = new QNAFile(); 
+		 
+		// 리스트로 받은 파일객체들을 심어줌
+		 if(fileList!=null) {
+		 for (MultipartFile mf : fileList) {
+			 //HashMap으로 파일이름과 경로를 반환함
+			// 이미지 확장자냐에 따른 경로 심기.
+				String imgArray[] = {"gif","jpg","jpeg","png","bmp","ico","apng","jfif"};			
+				String subpath ="file/qna/";
+				
+				 for(String ia:imgArray) {
+					 if(ia.equals(mf.getOriginalFilename().split("\\.")[1])) {
+						 subpath = "img/qna/";
+					 }
+				 }
+			
+			 //등록파일 vo객체에 set값 할당(for문 돌면서 계속 할당)
+			 qf.setFilename(fileservice.insprofileimg2(qnafilepath+subpath,mf));
+			 qf.setFilepath(subpath);
+			 
+			 //테이블에 심어주기
+			 service.QNAFileInsert(qf); 
+		 	}
+		 }
 		return "redirect:MemberQnAListForm.do";
 	}
 

@@ -89,15 +89,13 @@ $(document).ready(function(){
 								<div id="editor"></div>
 							</div>
 								<input type="hidden" id="contentInput" name="content" />
-							<div style="width: 50%; margin-left: 23px;">
-								<!-- <label class="mt-4 form-label labelFont">첨부파일</label>
-								<div class="form-control dropzone mb-3" id="dropzone">
-									<div class="fallback">
-										<input name="qnafiles" type="file" id="Prodimg" multiple />
-									</div>
-								</div> -->
+							<div class="mb-3" style="margin-left: 26px;">
+								 <input name="qnafiles" type="file" id="qnafiles"  multiple />
+								 <input name="qnafiles" type="file" id="expfile"  multiple />
 							</div>
-							
+							<label class="postInsertTitle">이미지 미리보기 <span style="color:red;">(이미지를 '더블클릭'시 해당파일이 제외됩니다.)</span></label>
+							 <div id="imgs_wrap" style="display:flex;">
+   							 </div>
 							<button type="button" style="float: right;" class="btn btn-secondary btn-md mb-0">취소</button>	
 							<button type="submit" style="float: right;" class="btn btn-primary btn-md mb-0 me-2">등록</button>
 						</form>
@@ -141,23 +139,20 @@ $(document).ready(function(){
 			</footer>
 	</main>
 <script>
-// 등록 버튼 클릭 시,
-
-
+//---------세션처리된 변수 할당 전용 구역----------
+var SesAuthority = '${Login.authority}' //권한
+//---------------------------------------
 
 var quill = new Quill('#editor', {
   modules: { toolbar: true },
   theme: 'snow'
 });
 
-Dropzone.autoDiscover = false;
-var drop = document.getElementById('dropzone')
-var myDropzone = new Dropzone(drop, {
-  url: "/file/post",
-  addRemoveLinks: true
 
-});
+
+
+
 </script>
-<%-- <script src="${path}/resource/js/Req1001/AdminSearch.js"></script> --%>
+<script src="${path}/resource/js/Req1000/fileupload.js"></script>
 </body>
 </html>

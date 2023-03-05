@@ -29,7 +29,7 @@ to_CHAR(sysdate,'YYYY-MM-DD'),
 #{category});
 
 INSERT INTO FLEAMARKETQNA values(
-FLEAMARKETQNA_seq.nextval,
+FLEAMARKETQNA_seq.currval,
 '제목','내용',
 to_CHAR(sysdate,'YYYY-MM-DD'),
 to_CHAR(sysdate,'YYYY-MM-DD'),
@@ -47,3 +47,6 @@ CREATE TABLE QNAFile
 	filePath varchar2(200),
 	qnaNo varchar2(100) NOT NULL
 );
+SELECT * FROM qnafile;
+INSERT INTO qnafile values(FLEAMARKETQNA_seq.currval,'file/qna/','20');
+DELETE qnafile WHERE qnano = '20';
