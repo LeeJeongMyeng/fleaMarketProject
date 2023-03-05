@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,9 +17,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import fleaMarket.a02_service.Req1001_Service;
 import fleaMarket.util.FileService;
-import vo.FleaMarket;
 import vo.Member;
 import vo.ProfileImg;
+import vo.QNA;
 
 
 @Controller("Req1001")
@@ -51,6 +52,23 @@ public class Req1001_Controller {
 		d.addAttribute("MemberList",service.MemberList(sch));
 			return "AdminSearch";
 	}
+	
+	//http://localhost:7080/fleaMarket/QNAList.do 문의사항 전체조회
+	@RequestMapping("QNAList.do")
+	public String QNAList(@ModelAttribute("sch") QNA sch,Model d) {
+		d.addAttribute("QNAList", service.QNAList(sch));
+		return "exp3";
+	}
+	
+	//http://localhost:7080/fleaMarket/GetQNA.do?qnano=1 문의사항 상세 조회
+	//http://localhost:7080/fleaMarket/GetQNA.do 문의사항 상세 조회
+	@GetMapping("GetQNA.do")
+	public String getQnA(@RequestParam("qnano") String qnano, Model d){
+		d.addAttribute("qna",service.getQNA(qnano));
+		return "exp2";
+	}	
+	
+	
 	//http://localhost:7080/fleaMarket/AdminInquire.do 관리자 문의사항 답변 조회
 	@RequestMapping("AdminInquire.do")
 	public String AdminInquire() {
@@ -145,20 +163,7 @@ public class Req1001_Controller {
         return "redirect:AdminSearch.do";
     }
 	
-	
-	@RequestMapping("GetQNA.do")
-	public String GetQNA(@RequestParam("qnaNo") String qnano,Model d) {
-		
-		//d.addAttribute("getqna",);
-		return "exp2";
-	}
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

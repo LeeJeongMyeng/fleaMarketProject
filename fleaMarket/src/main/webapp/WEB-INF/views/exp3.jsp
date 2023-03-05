@@ -35,16 +35,16 @@
 	
 	
 <script type="text/javascript">
-function goDetail(qnaNo){
-	location.href="${path}/**.do?qnaNo="+qnaNo
+function goDetail(qnano){
+	location.href="${path}/GetQNA.do?qnano="+qnano
 }
 </script>
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-
-	<%@ include file="/WEB-INF/views/header.jsp"%>
-
+	<!--
+	<jsp:include page="header.jsp"></jsp:include>
+	-->
 
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
 	<div class="position-absolute w-100 min-height-300 top-0"
@@ -108,21 +108,17 @@ function goDetail(qnaNo){
 													</tr>
 												</thead>
 												<tbody>
-												    	<!--
-												    	<c:forEach var="board" items="${list}">
-    													-->
-    													<tr ondblclick="goDetail(${QNA.qnaNo})">
-														<td>${QNA.qnaNo}</td>
+												    	<c:forEach var="QNA" items="${QNAList}">
+    													<tr ondblclick="goDetail(${QNA.qnano})">
+														<td>${QNA.qnano}</td>
 														<td>${QNA.title}</td>
-														<td><fmt:formatDate value="${QNA.regDate}"/></td>
-														<td>{QNA.email}</td>
-														<td>{QNA.method}</td>
+														<td>${QNA.regdate}</td>
+														<td>${QNA.email}</td>
+														<td>${QNA.method}</td>
 													</tr>
-													<!-- 
 														</c:forEach>
-													 -->
+												</tbody>
 											</table>
-
 										</div>
 									</div>
 								</div>
@@ -134,7 +130,6 @@ function goDetail(qnaNo){
 
 			</div>
 
-			</footer>
 		</div>
 	</div>
 
@@ -305,22 +300,6 @@ function goDetail(qnaNo){
       });
     };
   </script>
-	<!-- Kanban scripts -->
-	<script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
-	<script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>
-	<script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
-	<!-- Github buttons -->
-	<script async defer src="https://buttons.github.io/buttons.js"></script>
-	<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-	<script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
 </body>
 
 </html>

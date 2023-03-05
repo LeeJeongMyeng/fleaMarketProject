@@ -61,11 +61,19 @@
 		SELECT * FROM FleaMarket 
 		WHERE email =#{email}
 		</select>
-		
 		<!-- 관리자 회원탈퇴용 이메일/프로필이미지 가져오기 -->
 		<select id="getMemberProfile" parameterType="string" resultType="profileimg">
 			SELECT * FROM PROFILE
 			WHERE EMAIL = #{email}
+		</select>
+		<!-- 고객센터 전체조회 큰틀 검색제외 -->
+		<select id="QNAList" resultType="QNA" parameterType="String">
+			select * from FLEAMARKETQNA
+		</select>
+		<!-- 상세조회 -->
+		<select id="getQNA" resultType="QNA" parameterType="String">
+			SELECT * FROM FLEAMARKETQNA
+			WHERE qnano = #{qnano}
 		</select>
     </mapper>
     

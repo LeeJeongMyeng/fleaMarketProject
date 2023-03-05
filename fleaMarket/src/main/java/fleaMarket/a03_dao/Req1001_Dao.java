@@ -5,6 +5,7 @@ import java.util.List;
 import vo.FleaMarket;
 import vo.Member;
 import vo.ProfileImg;
+import vo.QNA;
 
 public interface Req1001_Dao {
 	public List<Member> MemberList(Member sch);
@@ -17,7 +18,7 @@ public interface Req1001_Dao {
 	public void DeleteMember(String email);
 	public List<FleaMarket> FleaMarketList(String email);
 	public ProfileImg getMemberProfile(String email);
-	
-	
+	public List<QNA> QNAList(QNA sch);
+	public QNA getQNA(String qnano);	
 	
 }

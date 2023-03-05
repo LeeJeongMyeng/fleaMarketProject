@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" sizes="76x76"
 	href="${path}/assets/img/apple-icon.png">
 <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
-<title>회원목록조회</title>
+<title>문의글 상세</title>
 <!--     Fonts and icons     -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
@@ -31,6 +31,7 @@
 <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 </head>
 <script type="text/javascript">
+
 $(document).ready(function(){
 	//글쓰기 부분ㅇㅇ
 	$('#editor .ql-editor').keyup(function(){
@@ -61,45 +62,42 @@ $(document).ready(function(){
 						</div>
 						<form action="QNAUpdate.do" method="post" enctype="multipart/form-data">
 							<div class="row ms-2 mb-3">
-							 	<input name="method" type="hidden" value="${getqna.method}" readonly />
-							<c:if test="${Login.authority!='관리자'}">	
+							 
 								<div class="col-2">
+								
 									<label class="postInsertTitle" style="margin-left: -0.5%;">문의종류</label>
-									<select class="form-select" aria-label="Default select example" name="category">
-									  <option value="none" selected>문의종류</option>
-									  <option>One</option>
-									  <option>Two</option>
-									  <option>Three</option>
-									</select>
+										<input name="method" type="text" value="${qna.method}" readonly />
 								</div>
-							</c:if>
 							</div>
 							<div class="row ms-3 mb-4">
 								<div class="col-2 ms-n2 me-2">
 									<label class="postInsertTitle">작성자</label>
-							 		<input class="multisteps-form__input form-control" name="email" type="text" value="${getqna.email}" readonly />
+							 		<input class="multisteps-form__input form-control" name="email" type="text" value="${qna.email}" readonly />
 								</div>
 								<div class="col-2 me-2">
 									<label class="postInsertTitle" style="margin-left: -0.5%;">등록일</label>
-									<input class="multisteps-form__input form-control" type="text" value="${getqna.regdate}" readonly/>
+									<input class="multisteps-form__input form-control" name="regdate" type="text" value="${qna.regdate}" readonly/>
 								</div>
 								<div class="col-2">
 									<label class="postInsertTitle" style="margin-left: -0.5%;">수정일</label>
-									<input class="multisteps-form__input form-control" type="text" ${getqna.uptdate} readonly/>
+									<input class="multisteps-form__input form-control" name="uptdate" type="text" value="${qna.uptdate}" readonly/>
+								</div>
+								<div class="col-2">
+									<label class="postInsertTitle" style="margin-left: -0.5%;">게시글번호</label>
+									<input class="multisteps-form__input form-control" name="qnano" type="text" value="${qna.qnano}" readonly/>
 								</div>
 							</div>
 							<div class="mb-3" style="margin-left: 26px;">
 									<label class="postInsertTitle" style="margin-left: -0.5%;">제목</label>
-									<input class="multisteps-form__input form-control w-50" name="title" type="text" value="${getqna.title }" />
+									<input class="multisteps-form__input form-control w-50" name="title" type="text" value="${qna.title}" />
 							</div>
 							<div class="mb-7" style="width: 98%; margin-left: 23px; height: 300px;">
-								<label class="mt-4 postInsertTitle" style="margin-left: -0.5%;">게시글내용</label>
+								<label class="mt-4 postInsertTitle" style="margin-left: -0.5%;" value="${qna.content}">게시글내용</label>
 								<div id="editor"></div>
 							</div>
 								<input type="hidden" id="contentInput" name="content" />
 							<div style="width: 50%; margin-left: 23px;">
 								<label class="mt-4 form-label labelFont">첨부파일</label>
-								<div class="form-control dropzone mb-3" id="dropzone">
 									<div class="fallback">
 										<input name="qnafiles" type="file" id="Prodimg" multiple />
 									</div>
