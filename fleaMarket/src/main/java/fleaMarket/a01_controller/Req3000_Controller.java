@@ -1,5 +1,7 @@
 package fleaMarket.a01_controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -39,16 +41,41 @@ public class Req3000_Controller {
 	}
 
 	@PostMapping("fleaMarketins.do")
-	public String fleaMarketins(FleaMarket ins, Model d, MultipartFile profile) {
+	public String fleaMarketins(FleaMarket ins, Model d, List<MultipartFile> pro) {
 	    //1. 플리마켓 홍보글 등록
-		service.insertFleaMarket(ins);	
+		 service.insertFleaMarket(ins);	
+		 
 		//2. 파일 경로 처리
+		 //FFile fins = new FFile(); 
+			/* fins.setFilePath(profilepath); */
+		if(pro.size()!=0) {
+			for(MultipartFile f : pro) {
+					String filename=fileservice.insprofileimg(profilepath,f);
+					FFile fins = new FFile(filename,profilepath); 
+					service.insprofile(fins);
+				 	//fins.setFilePath(fileservice.insprofileimg(profilepath,profile)); 
+			}
+		}
+		
+		
 		/*
-		 * FFile fins = new FFile(); fins.setFilePath(profilepath);
-		 * if(profile.getOriginalFilename()!="") {
-		 * fins.setFilePath(fileservice.insprofileimg(profilepath,profile)); } //파일 정보
-		 * DB넣기 service.insprofile(fins); d.addAttribute("msg", "등록 성공");
+		 
 		 */
+		 
+		 //파일 정보 DB넣기
+			/* String filename=fins.getFilename(); */
+		 
+		 // String[] fileArr=file.split(",");
+		 
+		 /*
+		 for(int i=0;i<fileArr.length;i++) {
+			 String filename= fileArr[i];
+			 service.insprofile(fileArr[i]); 
+		 }
+		 */
+	
+	
+		 
 		d.addAttribute("msg", "등록 성공");
 		return "redirect:fRegistration.do"; // 조회페이지로 이동
 	}
@@ -94,7 +121,7 @@ public class Req3000_Controller {
 	d.addAttribute("flist",service.getFleaMarketList(sch));
 		return "FleaMarketOverallCheck";
 	}
-
+		
 	
 	
 }

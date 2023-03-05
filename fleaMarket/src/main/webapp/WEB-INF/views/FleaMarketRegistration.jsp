@@ -42,25 +42,28 @@
 <script src="${path}/assets/js/plugins/fullcalendar.min.js"></script>
 <%--모달창 --%>
 <script>
+var msg = "${msg}"
+	if (msg != "") {
+		alert(msg)
+		if (msg + "\n 조회화면으로 이동하시겠습니까?") {
+			location.href = "${path}/totalSearch.do"
+		}
+	}
+
 $(document).ready(function(){
 
-$('#editor .ql-editor').keyup(function(){
-
- 	var expeditor=$(this).html() 
-	console.log("dd",expeditor);
-	$('input[name=content]').val(expeditor); 
-})
+	
+	$('#editor .ql-editor').keyup(function(){
+	
+	 	var expeditor=$(this).html() 
+		console.log("dd",expeditor);
+		$('input[name=content]').val(expeditor); 
+	})
+	$("#insBtn").click(function(){
+		$("#aform").submit()
+	})
 //
-	var msg = "${msg}"
-		if (msg != "") {
-			alert(msg)
-			if (msg + "\n 조회화면으로 이동하시겠습니까?") {
-				location.href = "${path}/totalSearch.do"
-			}
-		}
-
-
-
+	
 });
 
 </script>
@@ -178,16 +181,25 @@ $('#editor .ql-editor').keyup(function(){
 								</div>
                           
 								<label class="mt-4 form-label labelFont">첨부파일</label>
+								<div class="row mt-3">
+		                        <div class="col-2" style="height:120px;">
+		                          <input type="file" name="pro" class="form-control" style="width:230px"
+		                          		id="productImg" multiple>
+		                           <div id="image_container"></div>
+		                        </div>
+		                      </div>
+		                      <%-- 
 								<div class="form-control dropzone" id="dropzone">
 									<div class="fallback">
-										<input name="filePath" type="file" id="Prodimg" multiple />
-									
+										<input name="pro" type="file" id="Prodimg" multiple />
+										<input type="hidden" name="filesname" value=""/>
 									</div>
 								</div>
+								--%>
 								
 					</form>
 					<div class="d-flex justify-content-end mt-4">
-						<button type="submit" id="insBtn"
+						<button type="button" id="insBtn"
 							class="btn bg-gradient-primary m-0 ms-2">등록하기</button>
 					</div>
 				</div>
@@ -423,49 +435,9 @@ geocoder.addressSearch('판교', function(result, status) {
        });
 
 });    
-//파일 업로드 
-  var sel_files = [];
-$(document).ready(function() {
-    $("#Prodimg").on("change", handleImgsFilesSelect); //input file의상태가 변하면 함수실행
-}); 
-function handleImgsFilesSelect(e) {
-	var filesnameval="";
-	$(".imgs_wrap").empty()
-	sel_files=[];
-    var files = e.target.files; // 해당 파일들을 선택
-    var filesArr = Array.prototype.slice.call(files); //파일명을 배열화
-
-    filesArr.forEach(function(f) {
-        if(!f.type.match("image.*")) {
-            alert("확장자는 이미지 확장자만 가능합니다.");
-            return;
-        }
-        sel_files.push(f.name); // 이미지만 걸러서 다시 배열화
-
-     /*    var reader = new FileReader();
-        reader.onload = function(e) {
-            var img_html = "<img src=\"" + e.target.result + "\" />";
-            $(".imgs_wrap").append(img_html);
-        }
-        reader.readAsDataURL(f); */
-    });
-    
-    
-    for(var i=0; i<sel_files.length; i++){
-    	if(i==sel_files.length-1){
-    	filesnameval+=sel_files[i]
-    	}else{
-    	filesnameval+=sel_files[i]+","
-    	}
-    }
-    
-    
-    $("input[name=filePath]").val(filesnameval)
-
-}
- 
 
 //필수항목 조건식 
+
  function checkForm1(){	
 if(!document.aform.title.value){
         alert("글제목을 입력하세요");
@@ -502,9 +474,14 @@ if(!document.aform.title.value){
      alert("내용 적어주세요");
      return false;
  }
+ if(!document.aform.pro.value){
+     alert("파일 첨부를 해주세요");
+     return false;
+ }
  
   return true;
 }
+ 
 
   
 </script>
