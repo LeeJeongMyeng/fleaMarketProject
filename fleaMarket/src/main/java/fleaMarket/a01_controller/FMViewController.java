@@ -46,6 +46,7 @@ public class FMViewController {
                 //fins.setFilePath(fileservice.insprofileimg(profilepath,profile)); 
             
          //}
+		
 			return "redirect:fmView.do";
       }
 	
