@@ -147,7 +147,6 @@ public class Req1000_Controller {
 			// 이미지 확장자냐에 따른 경로 심기.
 				String imgArray[] = {"gif","jpg","jpeg","png","bmp","ico","apng","jfif"};			
 				String subpath ="file/qna/";
-				
 				 for(String ia:imgArray) {
 					 if(ia.equals(mf.getOriginalFilename().split("\\.")[1])) {
 						 subpath = "img/qna/";

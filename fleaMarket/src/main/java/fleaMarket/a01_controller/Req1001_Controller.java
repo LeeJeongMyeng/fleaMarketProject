@@ -57,7 +57,7 @@ public class Req1001_Controller {
 	@RequestMapping("QNAList.do")
 	public String QNAList(@ModelAttribute("sch") QNA sch,Model d) {
 		d.addAttribute("QNAList", service.QNAList(sch));
-		return "exp3";
+		return "QNAList";
 	}
 	
 	//http://localhost:7080/fleaMarket/GetQNA.do?qnano=1 문의사항 상세 조회
@@ -65,7 +65,7 @@ public class Req1001_Controller {
 	@GetMapping("GetQNA.do")
 	public String getQnA(@RequestParam("qnano") String qnano, Model d){
 		d.addAttribute("qna",service.getQNA(qnano));
-		return "exp2";
+		return "GetQNA";
 	}	
 	
 	
