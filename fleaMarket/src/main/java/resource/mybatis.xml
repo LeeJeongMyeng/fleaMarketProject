@@ -9,10 +9,11 @@
 		<typeAlias alias="capplication" type="vo.Capplication"/>
 		<typeAlias alias="boardimg" type="vo.BoardImg"/>
 		<typeAlias alias="fleamarket" type="vo.FleaMarket"/>
-		<typeAlias alias="fapplication" type="vo.FApplication"/>
-		<typeAlias alias="fapplicationsch" type="vo.FApplicationSch"/>
 		<typeAlias alias="ffile" type="vo.FFile"/>
 		<typeAlias alias="totfleamarket" type="vo.TotFleaMarket"/>
+		<typeAlias alias="fapplication" type="vo.FApplication"/>
+		<typeAlias alias="fapplicationsch" type="vo.FApplicationSch"/>
+		<typeAlias alias="applicationfile" type="vo.ApplicationFile"/>
 		<typeAlias alias="followmemberinfo" type="vo.FollowMemberInfo"/>
 		<typeAlias alias="capplicationList" type = "vo.CapplicationList"/>
 		<typeAlias alias="ffile" type = "vo.FFile"/>
