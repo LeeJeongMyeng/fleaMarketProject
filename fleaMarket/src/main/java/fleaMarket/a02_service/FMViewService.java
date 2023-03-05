@@ -1,9 +1,12 @@
 package fleaMarket.a02_service;
 
+import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import fleaMarket.a03_dao.FMViewDao;
 import vo.ApplicationFile;
@@ -21,6 +24,34 @@ public class FMViewService {
 		FleaMarket fm = dao.fmView(postingNumber);
 		return fm;
 	}	
+	/*	
+	// 신청글 파일 업로드
+	@Value("${user.upload}")
+	private String upload;
+
+	private void uploadFile(MultipartFile f){
+		String fname = f.getOriginalFilename();
+		File fObj = new File(upload+fname);
+		try{
+			System.out.println("## 파일 업로드 처리:"+upload+fname);
+			f.transferTo(fObj);
+		}catch(Exception e){
+				System.out.println("업로드예외:"+e.getMessage());
+		}			
+	}
+
+	public void insertBoard(Board ins) {
+		dao.insertBoard(ins);
+		String fname = ins.getReport().getOriginalFilename();
+		//if( !fname.equals("") ){
+			uploadFile(ins.getReport());
+			BoardFile f = new BoardFile();
+			f.setFname(fname);
+			f.setEtc(ins.getSubject());
+			dao.insertUploadFile(f);
+		//}
+		
+	}		
 	
 	// 받은 신청 전체 조회(최신순)
 	public List<FApplication> appReceivedList(FApplicationSch sch){		
@@ -80,4 +111,5 @@ public class FMViewService {
 	public void updateAppRe(FApplication upt) {
 		dao.updateAppRe(upt);
 	}
+	*/
 }

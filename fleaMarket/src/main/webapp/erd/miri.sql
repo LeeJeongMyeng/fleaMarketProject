@@ -99,6 +99,7 @@ INSERT INTO FApplication VALUES (1,'aoddl56@nate.com',FApplication_seq.nextval,s
 INSERT INTO FApplication VALUES (2,'aoddl56@nate.com',FApplication_seq.nextval,sysdate,null);
 INSERT INTO FApplication VALUES (11,'ehddms2909@naver.com',FApplication_seq.nextval,sysdate,null);
 INSERT INTO FApplication VALUES (11,'pucoca@naver.com',FApplication_seq.nextval,sysdate,'a');
+INSERT INTO FApplication VALUES (#{postingNumber},#{email},FApplication_seq.nextval,sysdate,null);
 
 UPDATE FApplication
 SET approvalWhether = 'r'
@@ -121,6 +122,7 @@ CREATE TABLE ApplicationFile
 );
 
 INSERT INTO ApplicationFile VALUES ('','',3);
+INSERT INTO ApplicationFile VALUES (#{filename},#{filePath},FApplication_seq.currval);
 
 UPDATE ApplicationFile
 SET applicationDate = '230302'

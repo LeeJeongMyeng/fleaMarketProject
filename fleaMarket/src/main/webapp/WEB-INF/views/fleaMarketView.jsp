@@ -232,11 +232,24 @@ It's a separate element, as animating opacity is faster than rgba(). -->
         <div class="pt-4 modal-body">
           <div class="form-group">
           	<label>파일 첨부</label> <!-- 첨부파일 -->
-            <div action="/file-upload" class="form-control dropzone" id="productImg"></div>
+          	<form  method="post"  action="insApp.do" enctype="multipart/form-data">  
+          		<div class="row mt-3">
+	              <div class="col-2" style="height:120px;">
+	                <input type="file" name="pro" class="form-control" style="width:230px"
+	                      id="productImg" multiple>
+	                 <div id="image_container"></div>
+	              </div>
+	            </div>  
+          	<!--  		
+            	<div action="/file-upload" class="form-control dropzone" id="productImg">
+            		<input type="file" name="pro" multiple>
+            	</div>
+             -->  
+            </form>
           </div>
           <div class="alert alert-success d-none">Changes saved!</div>
           <div class="text-end">
-            <button class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
+            <button type="submit" class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
               확인
             </button>
             <button class="m-1 btn btn-secondary" data-target="#jkanban-info-modal" data-bs-dismiss="modal">
