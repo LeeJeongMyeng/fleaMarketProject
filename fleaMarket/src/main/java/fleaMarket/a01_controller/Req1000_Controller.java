@@ -120,7 +120,7 @@ public class Req1000_Controller {
 	//문의글작성페이지
 	@RequestMapping("MemberQnAreg.do")
 	public String MemberQnAreg() {
-		return "exp";
+		return "QNAInsert";
 	}
 	
 	
@@ -128,6 +128,8 @@ public class Req1000_Controller {
 	//문의글등록
 	@PostMapping("QNAInsert.do")
 	public String QNAInsert(QNA ins,MultipartHttpServletRequest qnafiles) {
+		
+		
 		
 		//여러개 들어온 파일들을 리스트로 받음
 		 List<MultipartFile> fileList = qnafiles.getFiles("qnafiles");
@@ -145,7 +147,6 @@ public class Req1000_Controller {
 			// 이미지 확장자냐에 따른 경로 심기.
 				String imgArray[] = {"gif","jpg","jpeg","png","bmp","ico","apng","jfif"};			
 				String subpath ="file/qna/";
-				
 				 for(String ia:imgArray) {
 					 if(ia.equals(mf.getOriginalFilename().split("\\.")[1])) {
 						 subpath = "img/qna/";
