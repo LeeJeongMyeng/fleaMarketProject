@@ -45,7 +45,7 @@
    <%@ include file="/WEB-INF/views/header.jsp" %>
 
    	<!-- 배너  -->
-	<div class="mask bg-gradient-primary" style="background:white; width:100%; height:300px; margin-top:8%; border-top:0.5px solid grey; border-bottom:0.5px solid grey;"></div>
+	<div class="mask bg-gradient-primary" style="background:white; width:100%; height:1px; margin-top:8%; border-top:0.5px solid grey; border-bottom:0.5px solid grey;"></div>
        <!-- 메인 이미지 변경할 것 z-index참고 -->
         <div id="carouselExampleIndicators" class="carousel slide slidew" data-bs-ride="carousel"  style="margin-top:10%;">
       <ol class="carousel-indicators">
@@ -55,13 +55,13 @@
       </ol>
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img class="d-block h-80 w-100" src="${path}/assets/img/intro.jpg" alt="First slide">
+          <img class="d-block h-10 w-100" src="${path}/assets/img/1.jpg" alt="First slide">
         </div>
         <div class="carousel-item">
-          <img class="d-block h-80 w-100" src="${path}/assets/img/intro.jpg" alt="Second slide">
+          <img class="d-block h-10 w-100" src="${path}/assets/img/intro.jpg" alt="Second slide">
         </div>
         <div class="carousel-item">
-          <img class="d-block h-80 w-100" src="${path}/assets/img/intro.jpg" alt="Third slide">
+          <img class="d-block h-10 w-100" src="${path}/assets/img/intro.jpg" alt="Third slide">
         </div>
       </div>
       <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">

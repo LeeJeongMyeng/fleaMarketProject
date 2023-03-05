@@ -19,7 +19,7 @@ function goDetail(qnano){
 <link rel="apple-touch-icon" sizes="76x76"
 	href="${path}/assets/img/apple-icon.png">
 <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
-<title>내가 쓴 플리마켓 모집글</title>
+<title>내가 쓴 문의글</title>
 <!--     Fonts and icons     -->
 <link
 	href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700"
@@ -53,8 +53,8 @@ function goDetail(qnano){
 						<div class="card-header pb-0">
 							<div class="d-lg-flex">
 								<div>
-									<h5 class="mb-0" style="margin-top: 15%;">내가 쓴 플리마켓 모집글</h5>
-									<p class="text-sm mb-0">회원님께서 작성하신 플리마켓 모집글 입니다.</p>
+									<h5 class="mb-0" style="margin-top: 15%;">내가 쓴 문의글</h5>
+									<p class="text-sm mb-0">회원님께서 작성하신 고객센터 문의글 목록입니다.</p>
 								</div>
 								<div class="ms-auto my-auto mt-lg-0 mt-4">
 									<div class="ms-auto my-auto">
@@ -82,13 +82,15 @@ function goDetail(qnano){
 									<table class="table table-flush" id="QnAListTable">
 										<col width="20%">
 										<col width="40%">
-										<col width="30%">
-										<col width="20%">
+										<col width="15%">
+										<col width="15%">
+										<col width="10%">
 										<thead class="thead-light">
 											<tr style="background-color: #ebebeb;">
 												<th>글 번호</th>
 												<th>제목</th>
 												<th>등록일</th>
+												<th>수정일</th>
 												<th>분류</th>
 											</tr>
 										</thead>
@@ -99,7 +101,13 @@ function goDetail(qnano){
 													<td>${QNA.qnano}</td>
 													<td>${QNA.title}</td>
 													<td>${QNA.regdate}</td>
-													<td>${QNA.method}</td>
+													<td>${QNA.uptdate}</td>
+													<c:if test="${QNA.method=='q'}">
+													<td>문의사항</td>
+													</c:if>
+													<c:if test="${QNA.method!='q'}">
+													<td>공지사항</td>
+													</c:if>
 												</tr>
 											</c:forEach>
 										</tbody>

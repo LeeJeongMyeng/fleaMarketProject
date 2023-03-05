@@ -33,11 +33,12 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	//글쓰기 부분ㅇㅇ
-	$('#editor .ql-editor').keyup(function(){
-	 	var expeditor=$(this).html() 
-		$('input[name=content]').val(expeditor); 
-	})
+	$("#downFile").click(function(){
+  		if(confirm($(this).val()+"을 다운로드하시겠습니까?")){
+  			location.href="${path}/download.do?qnano="+$(this).val()
+  		}
+  		
+  	})		
 })
 </script>
 <body class="g-sidenav-show   bg-gray-100">
@@ -110,9 +111,10 @@ $(document).ready(function(){
 							<div style="width: 50%;">
 								<label class="mt-4 form-label labelFont">첨부파일</label>
 									<div class="fallback">
-										<input name="qnafiles" type="file" id="Prodimg" multiple />
+									 <input id="downFile"  value="${qna.qnano}" type="text" class="form-control" placeholder="첨부 입력" required>
 									</div>
 								</div>
+									<button type="submit" style="float: right;" class="btn btn-primary btn-md mb-0 me-2">첨부파일다운로드</button>
 							</div>
 						</form>
 						</div>
