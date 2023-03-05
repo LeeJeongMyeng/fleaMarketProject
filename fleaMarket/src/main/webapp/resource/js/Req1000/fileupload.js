@@ -90,10 +90,8 @@ function handleImgsFilesSelect2(e) {
 	const dataTransfer = new DataTransfer();// dataTransfer (Array -> FileList) 배열을 다시 파일화 시키는 친구!
 	$("#imgs_wrap").empty()
 	sel_files=[];
-	var filetag = $(this)
-	var filetagid = "#"+$(this).attr('id')
-    //var files = e.target.files; //이벤트로 넘어온 file친구들을 담아줌
-    console.log($(this).attr('id'))
+	var filetag = $(this) //해당 태그 안의파일들 사용해야하니까 변수로 사용하게끔 처리
+	var filetagid = "#"+$(this).attr('id') //이거는.. 밑에서 삭제처리 가능하도록, 생성되는 img파일에다가 해당 id변수명 넣어줌
     var fileArr = Array.from(e.target.files);// 이벤트로 넘어온 파일들을 배열형식으로 담음(FileList -> Array)
     console.log(fileArr.length)
     for(var i=fileArr.length-1; i>0; i--){
