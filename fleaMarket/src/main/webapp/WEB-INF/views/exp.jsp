@@ -67,9 +67,12 @@ $(document).ready(function(){
 									<label class="postInsertTitle" style="margin-left: -0.5%;">문의종류</label>
 									<select class="form-select" aria-label="Default select example" name="category">
 									  <option value="none" selected>문의종류</option>
-									  <option>One</option>
-									  <option>Two</option>
-									  <option>Three</option>
+									  <option>등업문의</option>
+									  <option>판매문의</option>
+									  <option>커뮤니티문의</option>
+									  <option>유저신고</option>
+									  <option>플리마켓게시글신고</option>
+									  <option>커뮤니티게시글신고</option>
 									</select>
 								</div>
 							</c:if>
@@ -77,7 +80,7 @@ $(document).ready(function(){
 							<div class="row ms-3 mb-4">
 								<div class="col-2 ms-n2 me-2">
 									<label class="postInsertTitle">작성자</label>
-							 		<input class="multisteps-form__input form-control" name="email" type="text" value="${Login.email}" readonly />
+							 		<input class="multisteps-form__input form-control" name="email" type="text" value="${Login.authority=='관리자'?'관리자':Login.email}" readonly />
 								</div>
 							</div>
 							<div class="mb-3" style="margin-left: 26px;">
@@ -90,8 +93,7 @@ $(document).ready(function(){
 							</div>
 								<input type="hidden" id="contentInput" name="content" />
 							<div class="mb-3" style="margin-left: 26px;">
-								 <input name="qnafiles" type="file" id="qnafiles"  multiple />
-								 <input name="qnafiles" type="file" id="expfile"  multiple />
+								 <input name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}"  multiple/>
 							</div>
 							<label class="postInsertTitle">이미지 미리보기 <span style="color:red;">(이미지를 '더블클릭'시 해당파일이 제외됩니다.)</span></label>
 							 <div id="imgs_wrap" style="display:flex;">
