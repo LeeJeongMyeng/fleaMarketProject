@@ -2,6 +2,7 @@ package fleaMarket.a03_dao;
 
 import java.util.List;
 
+import vo.FApplicationSch;
 import vo.FleaMarket;
 import vo.Member;
 import vo.ProfileImg;
@@ -20,7 +21,9 @@ public interface Req1001_Dao {
 	public List<FleaMarket> FleaMarketList(String email);
 	public List<QNA> MemberQNAList(String email);
 	public ProfileImg getMemberProfile(String email);
-	public List<QNA> QNAList(QNA sch);
+	public List<QNA> QNAListNotics(); //공지사항 전체 조회
+	public int totCnt(FApplicationSch sch);
+	public List<QNA> QNAList(FApplicationSch sch);//검색한 문의글 조회
 	public QNA getQNA(String qnano);	
 	public List<QNAFile> getQNAFile(String qnano);
 	//public List<QNAFile> getQNAFileList(String filename);

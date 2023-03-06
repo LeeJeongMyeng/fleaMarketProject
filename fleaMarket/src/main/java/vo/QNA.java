@@ -9,6 +9,7 @@ public class QNA {
 	private String email;
 	private String method;
 	private String category;
+	private String cnt;
 	public String getQnano() {
 		return qnano;
 	}
@@ -57,5 +58,12 @@ public class QNA {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+	public String getCnt() {
+		return cnt;
+	}
+	public void setCnt(String cnt) {
+		this.cnt = cnt;
+	}
+	
 	
 }

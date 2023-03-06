@@ -67,10 +67,21 @@
 			WHERE EMAIL = #{email}
 		</select>
 		<!-- 고객센터 전체조회 큰틀 검색제외 -->
-		<select id="QNAList" resultType="qna" parameterType="string">
-			SELECT *
-			FROM fleamarketqna
-			ORDER BY method ASC, CAST(qnano AS NUMBER) ASC
+		<select id="QNAListNotics" resultType="qna">
+			SELECT * FROM FLEAMARKETQNA
+			WHERE METHOD = 'n'
+		</select>
+		<select id="totCnt" resultType="int">
+			SELECT count(*) FROM FLEAMARKETQNA
+			WHERE METHOD != 'n'
+			AND (title || EMAIL) LIKE '%'||#{title}||'%'
+		</select>
+		<select id="QNAList" resultType="qna" parameterType="fapplicationsch">
+			SELECT qna.* FROM
+			(SELECT rownum cnt,f.* FROM fleamarketqna f
+			WHERE f.METHOD != 'n'
+			and (title || email) LIKE '%'||#{title}||'%'
+			ORDER BY cnt ASC) qna WHERE cnt BETWEEN #{start} AND #{end}
 		</select>
 		<!-- 내가 쓴 문의글 조회 -->
 		<select id="MemberQNAList" resultType="qna" parameterType="string">

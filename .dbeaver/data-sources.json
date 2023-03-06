@@ -21,16 +21,16 @@
 				"auth-model": "oracle_native"
 			}
 		},
-		"oracle_thin-186827e1754-4f2e59e1ecf7229b": {
+		"oracle_thin-186b56c50cc-1ba2225155d816d5": {
 			"provider": "oracle",
 			"driver": "oracle_thin",
-			"name": "223.26.182.204",
+			"name": "233.26.182.204",
 			"save-password": true,
 			"configuration": {
-				"host": "223.26.182.204",
+				"host": "233.26.182.204",
 				"port": "1521",
 				"database": "XE",
-				"url": "jdbc:oracle:thin:@//223.26.182.204:1521/XE",
+				"url": "jdbc:oracle:thin:@//233.26.182.204:1521/XE",
 				"configurationType": "MANUAL",
 				"home": "C:\\oraclexe\\app\\oracle\\product\\11.2.0\\server",
 				"type": "dev",

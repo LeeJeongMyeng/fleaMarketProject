@@ -22,4 +22,5 @@ public interface Req1000_Service  {
 	public Member ReLogin(String email);
 	public void QNAInsert(QNA ins);
 	public void QNAFileInsert(QNAFile ins);
+	
 }

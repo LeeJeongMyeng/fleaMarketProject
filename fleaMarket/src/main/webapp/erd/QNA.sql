@@ -50,3 +50,22 @@ CREATE TABLE QNAFile
 SELECT * FROM qnafile;
 INSERT INTO qnafile values(FLEAMARKETQNA_seq.currval,'file/qna/','20');
 DELETE qnafile WHERE qnano = '20';
+
+SELECT rownum cnt,qna.* from(
+SELECT f.*
+FROM fleamarketqna f
+ORDER BY method ASC, CAST(qnano AS NUMBER) ASC) qna;
+
+SELECT qna.* FROM
+(SELECT rownum cnt,f.* FROM fleamarketqna f
+WHERE f.METHOD != 'n'
+and (title || email) LIKE '%'||''||'%'
+ORDER BY cnt ASC) qna WHERE cnt BETWEEN 2 AND 4;
+
+--공지사항
+SELECT * FROM FLEAMARKETQNA
+WHERE METHOD = 'n';
+-- 전체글 갯수
+SELECT count(*) FROM FLEAMARKETQNA
+WHERE METHOD != 'n'
+AND (title || EMAIL) LIKE '%'||''||'%';

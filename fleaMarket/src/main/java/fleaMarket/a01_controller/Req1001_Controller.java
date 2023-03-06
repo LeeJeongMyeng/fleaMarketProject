@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import fleaMarket.a02_service.Req1001_Service;
 import fleaMarket.util.FileService;
+import vo.FApplicationSch;
 import vo.Member;
 import vo.ProfileImg;
 import vo.QNA;
@@ -50,7 +51,8 @@ public class Req1001_Controller {
 	
 		//http://localhost:7080/fleaMarket/QNAList.do 문의사항 전체조회
 		@RequestMapping("QNAList.do")
-		public String QNAList(@ModelAttribute("sch") QNA sch,Model d) {
+		public String QNAList(@ModelAttribute("sch") FApplicationSch sch,Model d){
+			d.addAttribute("QNAListNotics",service.QNAListNotics());
 			d.addAttribute("QNAList", service.QNAList(sch));
 			return "QNAList";
 		}

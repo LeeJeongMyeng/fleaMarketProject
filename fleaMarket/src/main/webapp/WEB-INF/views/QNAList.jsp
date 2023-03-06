@@ -9,6 +9,7 @@
 <html lang="ko">
 <!-- exp3전체조회페이지 exp2상세조회페이지 -->
 <head>
+<%@include file="header.jsp" %>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -42,13 +43,15 @@ function goDetail(qnano){
 function QnASeach(seachval){
 	location.href=""
 }
+function goPage(cnt){
+	$("[name=curPage]").val(cnt);
+	$("#SeachQNAForm").submit()
+}
 </script>
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
-	<!--
-	<jsp:include page="header.jsp"></jsp:include>
-	-->
+	
 
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
 	<div class="position-absolute w-100 min-height-300 top-0"
@@ -81,11 +84,12 @@ function QnASeach(seachval){
 										</div>
 										
 										<div class="ms-auto my-auto mt-lg-0 mt-4">
-										<form action="" method="">
+										<form id="SeachQNAForm" action="QNAList.do" method="post">
 											<div class="input-group mb-3">
 												<input type="text" name="title" class="form-control" placeholder="　제목/작성자 입력하세요" >
+												<input type="hidden" name="curPage" value="${sch.curPage}"/>
 												<button class="btn btn-outline-primary mb-0" type="submit">검색</button>
-												<div class="ms-auto my-auto"></div>
+											<div class="ms-auto my-auto"></div>
 											</div>
 										</form>
 										</div>
@@ -100,8 +104,9 @@ function QnASeach(seachval){
 											   	<col width="20%">
 												<table class="table table-flush" id="QnAListTable">
 												<thead class="thead-light">
-													<tr style="background-color: #ebebeb;">
-														<th >글 번호</th>
+													<tr style="background-color: #ebebeb;">\
+														<th >No</th>
+														<th >문의 번호</th>
 														<th >제목</th>
 														<th >등록일</th>
 														<th>작성자</th>
@@ -109,8 +114,23 @@ function QnASeach(seachval){
 													</tr>
 												</thead>
 												<tbody>
-															<c:forEach var="QNA" items="${QNAList}">
+															<c:forEach var="QNAListNotics" items="${QNAListNotics}">
+																<tr ondblclick="goDetail(${QNAListNotics.qnano})" style="font-weight:bold;">
+																	<td style="color:red;">0</td>
+																	<td style="color:red;">0</td>
+																	<td><span style="color:red;">&#60;공지&#62;</span>${QNAListNotics.title}</td>
+																	<td>${QNAListNotics.regdate}</td>
+																	<td>${QNAListNotics.email}</td>
+																	<c:if test="${QNA.method=='q'}">
+																		<td>문의사항</td>
+																	</c:if>
+																	<c:if test="${QNA.method!='q'}">
+																		<td>공지사항</td>
+																	</c:if>
+																</tr>
+															</c:forEach><c:forEach var="QNA" items="${QNAList}">
 																<tr ondblclick="goDetail(${QNA.qnano})">
+																	<td>${QNA.cnt}</td>
 																	<td>${QNA.qnano}</td>
 																	<td>${QNA.title}</td>
 																	<td>${QNA.regdate}</td>
@@ -121,11 +141,31 @@ function QnASeach(seachval){
 																	<c:if test="${QNA.method!='q'}">
 																		<td>공지사항</td>
 																	</c:if>
+																</tr>
 															</c:forEach>
-															</tr>
-
 														</tbody>
 											</table>
+											<nav aria-label="Page navigation example">
+											  <ul class="pagination justify-content-center">
+											    <li class="page-item">
+											      <a class="page-link" href="javascript:goPage(${sch.startBlock-1});">
+											        <i class="fa fa-angle-left"></i>
+											        <span class="sr-only">Previous</span>
+											      </a>
+											    </li>
+											    <c:forEach var="cnt" begin="${sch.startBlock}" end="${sch.endBlock}">
+											    	<li class="page-item ${sch.curPage==cnt?'active':''}">
+											    		<a class="page-link" href="javascript:goPage(${cnt});">${cnt}</a>
+											    	</li>
+											    </c:forEach>
+											    <li class="page-item">
+											      <a class="page-link" href="javascript:goPage(${sch.endBlock+1});">
+											        <i class="fa fa-angle-right"></i>
+											        <span class="sr-only">Next</span>
+											      </a>
+											    </li>
+											  </ul>
+											</nav>
 										</div>
 									</div>
 								</div>

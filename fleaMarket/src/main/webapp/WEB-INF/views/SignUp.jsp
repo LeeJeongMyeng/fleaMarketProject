@@ -10,7 +10,7 @@
 <html lang="en">
 
 <head>
-
+<%@include file="header.jsp" %>
   <meta charset="utf-8" />
  
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -36,7 +36,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 
-<%@include file="header.jsp" %>
+
 </head>
 <link href="${path}/resource/css/Req1000/SignUp.css" rel="stylesheet" />
 <body class="">
