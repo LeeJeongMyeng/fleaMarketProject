@@ -67,21 +67,28 @@
 			WHERE EMAIL = #{email}
 		</select>
 		<!-- 고객센터 전체조회 큰틀 검색제외 -->
-		<select id="QNAList" resultType="QNA" parameterType="String">
+		<select id="QNAList" resultType="qna" parameterType="string">
 			SELECT *
 			FROM fleamarketqna
 			ORDER BY method ASC, CAST(qnano AS NUMBER) ASC
 		</select>
 		<!-- 내가 쓴 문의글 조회 -->
-		<select id="MemberQNAList" resultType="QNA" parameterType="String">
+		<select id="MemberQNAList" resultType="qna" parameterType="string">
 			select * from FLEAMARKETQNA
 			WHERE email = #{email}
 		</select>
 		<!-- 상세조회 -->
-		<select id="getQNA" resultType="QNA" parameterType="String">
+		<select id="getQNA" resultType="qna" parameterType="string">
 			SELECT * FROM FLEAMARKETQNA
 			WHERE qnano = #{qnano}
 		</select>
+		<!-- 파일명가져오기 -->
+		<select id="getQNAFile" resultType="qnafile" parameterType="string">
+			SELECT *
+			FROM QNAFile
+			WHERE qnano = #{qnano}
+		</select>
+		
     </mapper>
     
     
