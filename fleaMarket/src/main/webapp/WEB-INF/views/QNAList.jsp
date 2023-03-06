@@ -36,17 +36,27 @@
 	
 	
 <script type="text/javascript">
-function goDetail(qnano){
+var SessionAuth = '${Login.authority}' //권한
+var SessionEmail = '${Login.email}'
+
+function goDetail(qnano,email){
+	if(SessionAuth!='관리자'){
+		if(SessionEmail!= email){
+			return false;
+		}
+	}
+location.href="${path}/GetQNA.do?qnano="+qnano
+}
+
+function goNotics(qnano){
 	location.href="${path}/GetQNA.do?qnano="+qnano
 }
 
-function QnASeach(seachval){
-	location.href=""
-}
 function goPage(cnt){
 	$("[name=curPage]").val(cnt);
 	$("#SeachQNAForm").submit()
 }
+
 </script>
 </head>
 
@@ -115,32 +125,23 @@ function goPage(cnt){
 												</thead>
 												<tbody>
 															<c:forEach var="QNAListNotics" items="${QNAListNotics}">
-																<tr ondblclick="goDetail(${QNAListNotics.qnano})" style="font-weight:bold;">
+																<tr ondblclick="goNotics(${QNAListNotics.qnano})" style="font-weight:bold;">
 																	<td style="color:red;">0</td>
 																	<td style="color:red;">0</td>
 																	<td><span style="color:red;">&#60;공지&#62;</span>${QNAListNotics.title}</td>
 																	<td>${QNAListNotics.regdate}</td>
 																	<td>${QNAListNotics.email}</td>
-																	<c:if test="${QNA.method=='q'}">
-																		<td>문의사항</td>
-																	</c:if>
-																	<c:if test="${QNA.method!='q'}">
-																		<td>공지사항</td>
-																	</c:if>
+																	<td>공지사항</td>
 																</tr>
-															</c:forEach><c:forEach var="QNA" items="${QNAList}">
-																<tr ondblclick="goDetail(${QNA.qnano})">
+															</c:forEach>
+															<c:forEach var="QNA" items="${QNAList}">
+																<tr ondblclick="goDetail(${QNA.qnano},'${QNA.email}')">
 																	<td>${QNA.cnt}</td>
 																	<td>${QNA.qnano}</td>
 																	<td>${QNA.title}</td>
 																	<td>${QNA.regdate}</td>
 																	<td>${QNA.email}</td>
-																	<c:if test="${QNA.method=='q'}">
-																		<td>문의사항</td>
-																	</c:if>
-																	<c:if test="${QNA.method!='q'}">
-																		<td>공지사항</td>
-																	</c:if>
+																	<td>문의사항</td>
 																</tr>
 															</c:forEach>
 														</tbody>
