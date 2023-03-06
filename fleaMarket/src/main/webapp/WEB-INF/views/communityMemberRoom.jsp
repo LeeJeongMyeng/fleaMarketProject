@@ -32,7 +32,7 @@
 </head>
 <script type="text/javascript">
 	$(document).ready(function(){
-		// 정보 노출/미노출
+		// 정보 노출/미노출 -- 유지하는 기능넣기(Myroom일경우만 노출)
 		$("#flexSwitchCheckDefault00").on("click",function(){
 			if($(this).is(":checked")){
 				$("#roomemail").show()
@@ -47,50 +47,29 @@
 				$("#bulbicon").attr("src","${path}/assets/img/small-logos/icon-bulb.svg")
 			}
 		})
+		// 아래 차트 js에 갯수 계산 기능 있음 arrFun(obj)
+		
 		// 팔로우수 넣기
 		var followMembers="${follower}"
-		var arrayFollow=followMembers.split(",")
-		//console.log(followMembers.length)
-		//console.log(followMembers)
-		//console.log(arrayFollow.length)
-		//console.log(arrayFollow)
+		$("#folloewcnt").text(arrFun(followMembers))
 		
-		if(followMembers=="[]"){
-			$("#folloewcnt").text(0)
-		}else{
-			$("#folloewcnt").text(arrayFollow.length)
-		}
 		// 팔로잉수 넣기
 		var followingMembers="${following}"
-			var arrayFollowing=followingMembers.split(",")
-			
-			if(followingMembers=="[]"){
-				$("#following span").text(0)
-			}else{
-				$("#following span").text(arrayFollowing.length)
-			}
-		// 팔로우 회원 클릭 시, 해당 회원 룸으로 이동
+		$("#following span").text(arrFun(followingMembers))
+		
+		// 팔로우 회원 클릭 시, 해당 회원 룸으로 이동 -- 안됨
 		function memberRoom(email){
 			location.href="communityMemberRoom.do?email"+this
 		}
+			
 		// 내게시글 정보
 		var boardrepInfos = "${boardreplyInfo}"
-		console.log("내게시글정보",boardrepInfos);
-		var arrayboardrepInfo=boardrepInfos.split(",")
-		if(boardrepInfos=="[]"){
-			$("#meBoardRepCnt").text(0)
-		}else{
-			$("#meBoardRepCnt").text(arrayboardrepInfo.length)
-		}
+		$("#meBoardRepCnt").text(arrFun(boardrepInfos))
+		
 		// 내가쓴 댓글 정보
 		var replyInfos = "${replyInfo}"
+		$("#meRepCnt").text(arrFun(replyInfos))
 		console.log("내 댓글 정보",replyInfos)
-		var arrayreplyInfo=replyInfos.split(",")
-		if(replyInfos=="[]"){
-			$("#meRepCnt").text(0)
-		}else{
-			$("#meRepCnt").text(arrayreplyInfo.length)
-		}
 	});
 </script>
 </head>
@@ -134,7 +113,8 @@
                   </a>
                 </li>
 <div class="moving-tab position-absolute nav-link" style="padding: 0px; transition: all 0.5s ease 0s; transform: translate3d(0px, 0px, 0px); width: 50%;">
-<a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center active" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">-</a></div>
+<a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center active" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">-</a>
+</div>
               </ul>
             </div>
           </div>
@@ -183,7 +163,7 @@
 	              </div>
 	              <h5 class="mt-3 mb-0"><span id="meRepCnt"></span><span class="text-secondary text-sm">개</span></h5>
 	              <p class="mb-0">${roommember.nickname}님이 쓰신 댓글 갯수</p>
-	              <button type="button" class="btn btn-outline-primary">댓글보러가기</button>
+	              <button type="button" class="btn btn-outline-primary mt-2">댓글보러가기</button>
 	            </div>
 	          </div>
 	        </div>
@@ -198,9 +178,7 @@
         </div>
         <div class="ms-auto d-flex">
           <div class="pe-4 mt-1 position-relative" >
-         
-            <p class="text-black text-s font-weight-bold mb-2">팔로우한 회원들:</p>
-             
+            <p class="text-black text-s font-weight-bold mb-2">팔로우한 회원들:</p> <!-- 시간남으면 팔로잉한 회원들 추가하기 -->
             <div class="d-flex align-items-center justify-content-center">
               <div class="avatar-group">
               	<c:forEach var="followers" items="${follower}">
@@ -226,7 +204,7 @@
           <div class="card h-100">
             <div class="card-header pb-0 p-3">
               <div class="d-flex justify-content-between">
-                <h6 class="mb-0">커뮤니티 카테고리별 게시물 갯수</h6>
+                <h6 class="mb-0">커뮤니티 카테고리별 ${roommember.nickname}님의 게시물 갯수</h6>
                 <button type="button" class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="See traffic channels">
                   <i class="fas fa-info" aria-hidden="true"></i>
                 </button>
@@ -273,7 +251,7 @@
               <div class="d-flex align-items-center">
                 <span class="badge badge-md badge-dot me-4">
                   <i class="bg-dark"></i>
-                  <span class="text-dark text-xs">팔로우한회원닉네임님이 게시한 게시글 </span>
+                  <span class="text-dark text-xs">${roommember.nickname}님이 게시한 게시글 </span>
                 </span>
               </div>
             </div>
@@ -605,7 +583,7 @@
     new Chart(ctx1, {
       type: "line",
       data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: ["Jan","Feb","Mar","Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
         datasets: [{
             label: "커뮤니티 게시글 갯수",
             tension: 0.4,
@@ -616,7 +594,7 @@
             borderWidth: 3,
             backgroundColor: gradientStroke2,
             fill: true,
-            data: [0, 10, 20, 30, 40, 50, 60, 70, 80],
+            data: [0, 0, 0, 0, 10, 20, 30, 40, 50, 60, 70, 80],
             maxBarThickness: 6
           }
         ],
@@ -668,13 +646,25 @@
 
 	var adv="${adv}"
 	console.log("홍보글",adv)
+	
 	var idea="${idea}"
 	console.log("사업아이디어",idea)
+	
 	var life="${life}"
 	console.log("사는이야기",life)
+	
 	var tip="${tip}"
 	console.log("꿀팁",tip)
 	
+	// 갯수 계산 기능
+	function arrFun(obj){
+		var arr=obj.split(",")
+		if(obj=="[]"){
+			arr.length=0
+		}else{
+			return arr.length
+		}
+	}
     // Pie chart
     new Chart(ctx2, {
       type: "pie",
@@ -688,7 +678,7 @@
           pointRadius: 2,
           borderWidth: 2,
           backgroundColor: ['#17c1e8', '#5e72e4', '#3A416F', '#a8b8d8'],
-          data: [15, 20, 12, 60],
+          data: [arrFun(adv), arrFun(life), arrFun(life), arrFun(tip)],
           fill: false
         }],
       },
