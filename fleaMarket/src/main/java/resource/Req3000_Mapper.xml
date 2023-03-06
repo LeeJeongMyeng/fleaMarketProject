@@ -5,12 +5,12 @@
 
 <mapper namespace="fleaMarket.a03_dao.Req3000_Dao">
 
-
-
-	<!-- private String title; private String content; private String bisenessNumber; 
-		private String email; private String approvalMaxCnt; private String recruitmentStartDate; 
-		private String recruitmentEndDate; private String openDate; private String 
-		closeDate; private String checkForm; private String address; -->
+    <select id="calList" parameterType="fleamarket" resultType="fleamarket">
+		SELECT openDate, closeDate, title
+		FROM FLEAMARKET 
+		WHERE address like '%'||#{address}||'%';
+	</select>	
+    
 	<insert id="insertFleaMarket" parameterType="fleamarket">
 		insert into FleaMarket
 		values(fleaMarket_seq.nextval,#{title}, sysdate,
@@ -48,7 +48,17 @@
 		 resultType="fleamarket">
 		select * from FleaMarket
 		where title like '%'||#{title}||'%'
-		and address like '%'||#{address}||'%'
+	</select>	
+	
+	<select id="FileNum" parameterType="fleamarket" resultType="ffile">
+	<![CDATA[
+		SELECT FILENAME FROM(
+SELECT ROWNUM rn,f.FILENAME 
+FROM ffile f
+WHERE ROWNUM <2 AND 
+POSTINGNUMBER = #{postingNumber}
+)    
+	    ]]>
 	</select>	
 </mapper>
     

@@ -33,14 +33,15 @@
 	integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
 	crossorigin="anonymous"></script>
 
-
 <%-- gps --%>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=491d6062da8be4de279d8ef2a5a72e75&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=491d6062da8be4de279d8ef2a5a72e75"></script>
 <script src="${path}/assets/js/plugins/fullcalendar.min.js"></script>
-<%--모달창 --%>
+<%--주소 설정해주기 --%>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+
 <script>
 var msg = "${msg}"
 	if (msg != "") {
@@ -50,19 +51,24 @@ var msg = "${msg}"
 		}
 	}
 
+
+
 $(document).ready(function(){
 
 	
+	//내용
 	$('#editor .ql-editor').keyup(function(){
 	
 	 	var expeditor=$(this).html() 
 		console.log("dd",expeditor);
 		$('input[name=content]').val(expeditor); 
 	})
+
+	//등록하기 버튼
 	$("#insBtn").click(function(){
 		$("#aform").submit()
 	})
-//
+
 	
 });
 
@@ -83,7 +89,7 @@ $(document).ready(function(){
 	<main class="main-content position-relative border-radius-lg ">
 
 		<!-- End Navbar -->
-		<div class="container-fluid py-4">
+		<div class="container-fluid py-4"  style="margin-top:100px;">
 			<div class="row">
 				<div class="col-lg-9 col-12 mx-auto">
 					<form  method="post"  action="fleaMarketins.do" id="aform" onsubmit="return checkForm1()"
@@ -96,15 +102,26 @@ $(document).ready(function(){
 							<label for="title" class="form-label labelFont">제목</label> 
 							<input type="text" class="form-control" id="projectName" name="title">
 
-
+			                <br>
+                            <!-- 주소지정해주기 -->
 							<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">플리마켓 시작일</label> <input
-										class="form-control datetimepicker" type="text"
+									<label class="form-label labelFont">주소 설정</label> 
+									<div class = "s_form">
+									   <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
+									   <input name = "addrs1" type="text" id="sample6_address" class="form-control soooo2" placeholder="주소"><br>						
+                                    </div>
+							     </div>
+							</div>
+							
+							<div class="row">
+								<div class="col-6">
+									<label class="form-label labelFont">플리마켓 시작일</label> 
+									<input class="form-control datetimepicker" type="text"
 										placeholder="시작일을 선택해주세요" name="openDate" data-input>
 								</div>
 								<div class="col-6">
-									<label class="form-label labelFont">플리마켓 종료일</label> <input
+									<label class="form-label labelFont">플리마켓 종료일</label><input
 										class="form-control datetimepicker" type="text"
 										placeholder="종료일을 선택해주세요" name="closeDate" data-input>
 								</div>
@@ -161,7 +178,7 @@ $(document).ready(function(){
 
 								<label class="mt-4 labelFont">내용</label>
 
-								<div id="editor">
+								<div id="editor" style="height:294px;">
 
 									<p id="contents">
 										<br>
@@ -184,19 +201,11 @@ $(document).ready(function(){
 								<div class="row mt-3">
 		                        <div class="col-2" style="height:120px;">
 		                          <input type="file" name="pro" class="form-control" style="width:230px"
-		                          		id="productImg" multiple>
+		                          		id="isFile" multiple  accept="">
 		                           <div id="image_container"></div>
 		                        </div>
 		                      </div>
-		                      <%-- 
-								<div class="form-control dropzone" id="dropzone">
-									<div class="fallback">
-										<input name="pro" type="file" id="Prodimg" multiple />
-										<input type="hidden" name="filesname" value=""/>
-									</div>
-								</div>
-								--%>
-								
+		             							
 					</form>
 					<div class="d-flex justify-content-end mt-4">
 						<button type="button" id="insBtn"
@@ -281,210 +290,17 @@ $(document).ready(function(){
 	<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
 </body>
-<script>
-var toDay = new Date().toISOString().split("T")[0];
-var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
-    initialView: "dayGridMonth",
-    headerToolbar: {
-      start: 'title', // will normally be on the left. if RTL, will be on the right
-      center: '',
-      end: 'today prev,next' // will normally be on the right. if RTL, will be on the left
-    },
-    selectable: true,
-    editable: true,
-    initialDate: toDay,
-    //캘린더 정보 불러오기 
-    events:function(info, successCallback, failureCallback){
-		$.ajax({
-			type:"post",
-			url:"/springweb/calendarAjax.do",
-			dataType:"json",
-			success:function(data){
-				console.log(data.callist)
-				successCallback(data.callist)
-			},
-			error:function(err){
-				console.log(err)
-			}
-		})
-	}
 
-  });
-
-  calendar.render();
+<!-- <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
+<script src="${path}/resource/js/Req3000/address.js"></script>
+<%--캘린더 js --%>
+<script src="${path}/resource/js/Req3000/calendar.js"></script>
+<%--gps --%>
+<script src="${path}/resource/js/Req3000/gps.js"></script>
 
 
-  //gps 
-var container = document.getElementById('map');// 지도를 표시할 div 
-var options = {
-   center: new kakao.maps.LatLng(33.450701, 126.570667),// 지도의 중심좌표
-   level: 3 // 지도의 확대 레벨
-};
-
-//지도를 생성합니다    
-var map = new kakao.maps.Map(container, options);
-
-// 주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
-
-var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커
-    infowindow = new kakao.maps.InfoWindow({zindex:1}); 
-
-// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시
-searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-
-// 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
-// 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'idle', function() {
-    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-});
-function searchAddrFromCoords(coords, callback) {// 좌표로 주소 정보를 요청합니다
-   geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
-}
-
-function searchDetailAddrFromCoords(coords, callback) {// 좌표로 상세 주소 정보를 요청합니다
-   geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-   
-}
 
 
-//지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
-function displayCenterInfo(result, status) {
-   if (status === kakao.maps.services.Status.OK) {
-     var infoDiv = document.getElementById('centerAddr');
-
-       for(var i = 0; i < result.length; i++) {
-           // 행정동의 region_type 값은 'H' 이므로
-           if (result[i].region_type === 'H') {
-               infoDiv.innerHTML = result[i].address_name;
-               break;
-           }
-       }
-   }    
-} 
-
-/* function serar */
-//동에 대한 default 
-geocoder.addressSearch('판교', function(result, status) {
-   var infoDiv2 = document.getElementById('centerAddr2'); 
-   var infoDiv3 = document.getElementById('centerAddr3'); 
-
-    // 정상적으로 검색이 완료됐으면 
-     if (status === kakao.maps.services.Status.OK) {
-
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
-
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-           content: '<div style="width:150px;text-align:center;padding:6px 0;">요기!</div>'
-        });
-        infowindow.open(map, marker);
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-        
-        var infoDiv = document.getElementById('centerAddr'); 
- 
-        for(var i = 0; i < result.length; i++) {
-            // 행정동의 region_type 값은 'H' 이므로
-            if (result[i].region_type === 'H') {         
-                infoDiv.innerHTML = result[i].address_name;       
-                break;
-            }
-        }
-    }
-     kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-           searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
-               if (status === kakao.maps.services.Status.OK) {
-                   var detailAddr2 = !!result[0].road_address ? result[0].road_address.address_name : '';
-                   detailAddr3 = result[0].address.address_name;
-                        
-                         
-                      /* console.log("도로명주소:"+result[0].road_address.address_name)
-                      console.log("지번주소:"+result[0].address.address_name) */
-                   
-                   var content = '<div class="bAddr">' +
-                                   '<span class="title">주소정보</span>' + 
-                                   detailAddr2 + 
-                               '</div>';
-
-                   // 마커를 클릭한 위치에 표시합니다 
-                   marker.setPosition(mouseEvent.latLng);
-                   marker.setMap(map);
-
-                   // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-                   infowindow.setContent(content);
-                   infowindow.open(map, marker);
-                   infoDiv=detailAddr2;
-                   infoDiv2.innerHTML=detailAddr2;
-                   infoDiv3.innerHTML=detailAddr3;
-                   
-                   // 지도 선택한 부분 input 들어감 
-                   var aform = document.querySelector("#aform")
-                   aform.address.value = document.getElementById("centerAddr3").innerText;
-           
-                   
-               }   
-           });
-       });
-
-});    
-
-//필수항목 조건식 
-
- function checkForm1(){	
-if(!document.aform.title.value){
-        alert("글제목을 입력하세요");
-        return false;
- }
-	    
- if(!document.aform.openDate.value){
-     alert("플리마켓 시작일을 입력하세요");
-     return false;
- }
- 
- if(!document.aform.closeDate.value){
-     alert("플리마켓 종료일을 입력하세요");
-     return false;
- }
- 
- if(!document.aform.approvalMaxCnt.value){
-     alert("모집인원을 입력해주세요");
-     return false;
- }
- if(!document.aform.recruitmentStartDate.value){
-     alert("모집시작일을 입력해주세요");
-     return false;
- }
- if(!document.aform.recruitmentEndDate.value){
-     alert("모집종료일을 입력해주세요");
-     return false;
- }
- if(!document.aform.address.value){
-     alert("장소를 선택해주세요");
-     return false;
- }
- if(!document.aform.content.value){
-     alert("내용 적어주세요");
-     return false;
- }
- if(!document.aform.pro.value){
-     alert("파일 첨부를 해주세요");
-     return false;
- }
- 
-  return true;
-}
- 
-
-  
-</script>
 
 
 </html>

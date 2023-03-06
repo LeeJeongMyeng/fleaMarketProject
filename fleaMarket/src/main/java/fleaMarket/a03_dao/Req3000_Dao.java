@@ -10,6 +10,9 @@ public interface Req3000_Dao {
 	public void insertFleaMarket(FleaMarket ins);
 	public void insprofile(FFile fins);
 	
+	//캘린더
+	public List<FleaMarket> calList(); 
+	
 	//수정
 	public void UptFleaMarket(FleaMarket upt);
 	
@@ -18,4 +21,7 @@ public interface Req3000_Dao {
 	
 	//전체조회
 	public List<FleaMarket> getFleaMarketList(FleaMarket sch);	
+	
+	//전체조회(img파일) 
+	public List<FFile> FileNum(FleaMarket sch);
 }

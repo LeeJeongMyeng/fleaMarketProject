@@ -80,7 +80,7 @@ $('#editor .ql-editor').keyup(function(){
 	<main class="main-content position-relative border-radius-lg ">
 
 		<!-- End Navbar -->
-		<div class="container-fluid py-4">
+		<div class="container-fluid py-4" style="margin-top:100px;">
 			<div class="row">
 				<div class="col-lg-9 col-12 mx-auto">
 					<form  method="post"  action="FleaMarketUpt.do" id="aform" onsubmit="return checkForm1()"

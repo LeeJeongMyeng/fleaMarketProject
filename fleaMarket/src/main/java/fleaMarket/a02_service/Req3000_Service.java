@@ -14,4 +14,6 @@ public interface Req3000_Service {
 	public void UptFleaMarket(FleaMarket upt);
 	public void delFleaMarket(String postingNumber);
 	public List<FleaMarket> getFleaMarketList(FleaMarket sch);	
+	public List<FFile> FileNum(FleaMarket sch);
+	public List<FleaMarket> calList(); 
 }

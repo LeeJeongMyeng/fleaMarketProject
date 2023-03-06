@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fleaMarket.a02_service.Req3000_Service;
 import fleaMarket.util.FileService;
@@ -25,7 +27,14 @@ public class Req3000_Controller {
 	public Req3000_Controller(Req3000_Service service) {
 		this.service = service;
 	}
-
+	
+	//캘린더 
+	@RequestMapping("/calendarAjax.do")
+	public String calendarAjax(Model d) {
+		d.addAttribute("callist", service.calList());
+		return "pageJsonReport";
+	}
+	
 	//파일 업로드 
 	  @Autowired 
 	  private FileService fileservice;
@@ -41,42 +50,22 @@ public class Req3000_Controller {
 	}
 
 	@PostMapping("fleaMarketins.do")
-	public String fleaMarketins(FleaMarket ins, Model d, List<MultipartFile> pro) {
+	public String fleaMarketins(FleaMarket ins, RedirectAttributes rttr, List<MultipartFile> pro) {
 	    //1. 플리마켓 홍보글 등록
 		 service.insertFleaMarket(ins);	
 		 
 		//2. 파일 경로 처리
-		 //FFile fins = new FFile(); 
-			/* fins.setFilePath(profilepath); */
 		if(pro.size()!=0) {
 			for(MultipartFile f : pro) {
 					String filename=fileservice.insprofileimg(profilepath,f);
+					
 					FFile fins = new FFile(filename,profilepath); 
+					//첨부파일 DB에 넣기                                   
 					service.insprofile(fins);
-				 	//fins.setFilePath(fileservice.insprofileimg(profilepath,profile)); 
 			}
 		}
-		
-		
-		/*
-		 
-		 */
-		 
-		 //파일 정보 DB넣기
-			/* String filename=fins.getFilename(); */
-		 
-		 // String[] fileArr=file.split(",");
-		 
-		 /*
-		 for(int i=0;i<fileArr.length;i++) {
-			 String filename= fileArr[i];
-			 service.insprofile(fileArr[i]); 
-		 }
-		 */
-	
-	
-		 
-		d.addAttribute("msg", "등록 성공");
+		 // redirect로는 model를 받아 줄 수 없음 RedirectAttributes 사용을 해야함
+		 rttr.addFlashAttribute("msg","등록 성공");
 		return "redirect:fRegistration.do"; // 조회페이지로 이동
 	}
 	
@@ -117,11 +106,14 @@ public class Req3000_Controller {
 //전체 조회 
 //	http://localhost:7030/fleaMarket/totalSearch.do
 	@RequestMapping("totalSearch.do")
-	public String totalSearch(FleaMarket sch, Model d) {
+	public String totalSearch(@ModelAttribute("sch") FleaMarket sch, Model d) {
 	d.addAttribute("flist",service.getFleaMarketList(sch));
+	d.addAttribute("fnolist",service.FileNum(sch));
 		return "FleaMarketOverallCheck";
 	}
-		
+	
+
+	
 	
 	
 }

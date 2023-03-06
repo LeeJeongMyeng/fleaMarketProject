@@ -16,6 +16,10 @@ public class Req3000_ServiceIns implements Req3000_Service{
 	public Req3000_ServiceIns(Req3000_Dao dao) {
 		this.dao = dao;
 	}
+	//캘린더 
+	public List<FleaMarket> calList(){
+	      return dao.calList();
+	   }
 	
 	//홍보글 등록
 	public void insertFleaMarket(FleaMarket ins){
@@ -56,4 +60,10 @@ public class Req3000_ServiceIns implements Req3000_Service{
 
 		return dao.getFleaMarketList(sch);
 	}	
+	//전체조회(img 파일)
+	public List<FFile> FileNum(FleaMarket sch){
+		return dao.FileNum(sch);
+	}
+	
+	
 }
