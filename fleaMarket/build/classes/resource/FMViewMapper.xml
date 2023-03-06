@@ -19,13 +19,22 @@
 		INSERT INTO ApplicationFile VALUES (#{filename},#{filePath},FApplication_seq.currval)
 	</insert>
 	
-	<!-- 받은 신청 전체 조회(최신순) -->
+	<!-- 받은 신청 전체 조회(최신순) + 페이징 + 제목 검색 -->
+	<!-- 전체 데이터 -->
+	<select id="totCnt"  resultType="int" parameterType="fapplicationsch">
+		SELECT count(*)
+		FROM FApplication fa, fleaMarket fm
+		WHERE 1=1
+		AND fa.postingNumber = fm.postingNumber(+)
+		AND fm.title like '%'||#{title}||'%'
+	</select>
 	<select id="appReceivedList" resultType="fapplication" parameterType="fapplicationsch">
 		SELECT rownum cnt, applicationno, applicationdate, approvalwhether, title, email, nickname
 		FROM (
 			SELECT rownum cnt, fa.applicationno applicationno, fa.applicationdate applicationdate, fa.approvalwhether approvalwhether, fm.title title, fm.email email, m.nickname nickname
 			FROM FApplication fa, fleaMarket fm, fleamarketmember m
-			WHERE fa.postingNumber = fm.postingNumber(+)
+			WHERE 1=1
+			AND fa.postingNumber = fm.postingNumber(+)
 			AND fa.email = m.email(+)
 			AND fm.title like '%'||#{title}||'%'
 			ORDER BY fa.applicationDate DESC

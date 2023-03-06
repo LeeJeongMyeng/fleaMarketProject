@@ -8,11 +8,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import fleaMarket.a02_service.FMViewService;
 import vo.FApplication;
-import vo.FleaMarket;
+import vo.FApplicationSch;
 
 @Controller
 public class FMViewController {
@@ -27,6 +26,20 @@ public class FMViewController {
 	}
 	
 	// 신청글 등록
+	/*
+	@RequestMapping("/insAppFrm.do")
+	public String insAppFrm(){
+		return "appInsert";
+	}
+	*/
+	@PostMapping("/insApp.do")
+	public String insApp(FApplication ins, Model d){
+		service.insApp(ins);
+		d.addAttribute("msg","등록성공");
+		return "fleaMarketView";
+	}	
+	/*
+	신청글 + 파일첨부 등록
 	@PostMapping("insApp.do")
    public String insApp(FApplication ins, Model d, MultipartFile profile) {
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+profile.getOriginalFilename());
@@ -35,29 +48,28 @@ public class FMViewController {
        //service.insertFleaMarket(ins);   
       //2. 파일 경로 처리
        //FFile fins = new FFile(); 
-         /* fins.setFilePath(profilepath); */
-       /*
-      if(pro.size()!=0) {
-         for(MultipartFile f : pro) {
-               String filename=fileservice.insprofileimg(profilepath,f);
-               FFile fins = new FFile(filename,profilepath); 
-               service.insprofile(fins);
-               */
+         //fins.setFilePath(profilepath);
+       
+//      if(pro.size()!=0) {
+//         for(MultipartFile f : pro) {
+//               String filename=fileservice.insprofileimg(profilepath,f);
+//               FFile fins = new FFile(filename,profilepath); 
+//               service.insprofile(fins);
+               
                 //fins.setFilePath(fileservice.insprofileimg(profilepath,profile)); 
             
          //}
 		
-			return "redirect:fmView.do";
-      }
-	
+			//return "redirect:fmView.do";
+      //}
+	*/
 	// 받은 신청 전체 조회(최신순)
-	/*
 	@RequestMapping("appReceivedList.do")
-	public String appReceivedList(@ModelAttribute("sch") FApplication sch,Model d) {
+	public String appReceivedList(@ModelAttribute("sch") FApplicationSch sch,Model d) {
 		d.addAttribute("list", service.appReceivedList(sch));
 		return "appReceivedList";
 	}
-	*/
+	
 	// 받은 신청 상세 조회
 	/*
 	@GetMapping("appReceivedView.do")

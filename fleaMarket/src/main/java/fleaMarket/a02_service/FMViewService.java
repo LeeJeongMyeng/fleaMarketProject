@@ -1,15 +1,11 @@
 package fleaMarket.a02_service;
 
-import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import fleaMarket.a03_dao.FMViewDao;
-import vo.ApplicationFile;
 import vo.FApplication;
 import vo.FApplicationSch;
 import vo.FleaMarket;
@@ -39,25 +35,24 @@ public class FMViewService {
 				System.out.println("업로드예외:"+e.getMessage());
 		}			
 	}
-
-	public void insertBoard(Board ins) {
-		dao.insertBoard(ins);
+	*/
+	public void insApp(FApplication ins) {
+		dao.insApp(ins);
+		/*
 		String fname = ins.getReport().getOriginalFilename();
-		//if( !fname.equals("") ){
-			uploadFile(ins.getReport());
-			BoardFile f = new BoardFile();
-			f.setFname(fname);
-			f.setEtc(ins.getSubject());
-			dao.insertUploadFile(f);
-		//}
-		
+		uploadFile(ins.getReport());
+		BoardFile f = new BoardFile();
+		f.setFname(fname);
+		f.setEtc(ins.getSubject());
+		dao.insertUploadFile(f);
+		*/
 	}		
-	
+
 	// 받은 신청 전체 조회(최신순)
 	public List<FApplication> appReceivedList(FApplicationSch sch){		
 		if(sch.getTitle()==null) sch.setTitle("");
 		// 1. 총페이지 수
-		//sch.setCount(dao.totCnt(sch));
+		sch.setCount(dao.totCnt(sch));
 		// 2. 현재페이지 번호(클릭한)
 		if(sch.getCurPage()==0) {
 			sch.setCurPage(1);
@@ -65,7 +60,7 @@ public class FMViewService {
 		// 3. 한페이지에 보일 데이터 갯수
 		//   - 초기화면 현재 페이지 번호 0 ==> default설정
 		if(sch.getPageSize()==0) {
-			sch.setPageSize(5);
+			sch.setPageSize(10);
 		}
 		// 4. 총페이지 수.(전체데이터/한페이지에 보일 데이터 건수)
 		//    한번에 보일 데이터 건수 5건일 때, 총건수11 ==> 3페이지
@@ -85,7 +80,7 @@ public class FMViewService {
 		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
 		// 6. 블럭처리
 		//    1) 블럭 크기 지정
-		sch.setBlockSize(5);
+		sch.setBlockSize(3);
 		
 		//	  2) 블럭 번호 지정 : 현재페이지번호/블럭의 크기 올림 처리
 		int blocknum = (int)Math.ceil(sch.getCurPage()/
@@ -102,6 +97,7 @@ public class FMViewService {
 		
 		return dao.appReceivedList(sch);
 	}
+	/*
 	// 받은 신청 상세 조회
 	public ApplicationFile appReceivedView(int applicationNo) {
 		ApplicationFile af = dao.appReceivedView(applicationNo);

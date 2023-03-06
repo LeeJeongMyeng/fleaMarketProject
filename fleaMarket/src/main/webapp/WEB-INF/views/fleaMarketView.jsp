@@ -32,6 +32,22 @@
 	   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=91e22fb67ec6ac7eabb75fa26b7d3d4d&libraries=services,clusterer,drawing"></script>
 	<script type="text/javascript"
 	   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=91e22fb67ec6ac7eabb75fa26b7d3d4d"></script>
+  <script type="text/javascript">
+   $(document).ready(function(){
+	   var msg = "${msg}"
+		$("[name=regBtn]").click(function(){
+			$("#frmNofile").submit()
+		})
+	});
+	/*
+   function goDetail(postingNumber){
+	   $("#frmNofile").submit(postingNumber)
+	}
+  	$("#regBtn").click(function(){
+		$("#frmNofile").submit()
+	})
+	*/
+  </script>
 </head>
 <%@include file="header.jsp" %>
 <body class="g-sidenav-show   bg-gray-100">
@@ -153,7 +169,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                     </div>
                     <div class="row mt-4">
 	                    <div class="col-lg-5 ms-auto">
-	                      <button class="btn btn-primary mb-0 mt-lg-auto w-100" type="button" name="button" data-bs-toggle="modal" data-bs-target="#jkanban-info-modal">신청하기</button>
+	                      <button class="btn btn-primary mb-0 mt-lg-auto w-100" type="button" name="button" data-bs-toggle="modal" data-bs-target="#jkanban-info-modal-nofile">신청하기</button>
 	                    </div>
                     </div>
                   </div>
@@ -249,7 +265,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
           </div>
           <div class="alert alert-success d-none">Changes saved!</div>
           <div class="text-end">
-            <button type="submit" class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
+            <button type="button" class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
               확인
             </button>
             <button class="m-1 btn btn-secondary" data-target="#jkanban-info-modal" data-bs-dismiss="modal">
@@ -275,12 +291,15 @@ It's a separate element, as animating opacity is faster than rgba(). -->
         <div class="pt-4 modal-body">
           <div class="form-group text-center">신청하시겠습니까?</div>
           <div class="text-end">
-            <button class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
-              확인
-            </button>
-            <button class="m-1 btn btn-secondary" data-target="#jkanban-info-modal" data-bs-dismiss="modal">
-              취소
-            </button>
+            <form id="frmNofile" method="post" action="${path}/insApp.do">
+            	<input type="hidden" name="postingNumber" value="${fleamarket.postingNumber}"/>
+	            <button name="regBtn" class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
+	              확인
+	            </button>
+	            <button class="m-1 btn btn-secondary" data-target="#jkanban-info-modal" data-bs-dismiss="modal">
+	              취소
+	            </button>
+            </form>
           </div>
         </div>
       </div>

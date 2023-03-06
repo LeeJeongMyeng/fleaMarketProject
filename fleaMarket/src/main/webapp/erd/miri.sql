@@ -54,9 +54,8 @@ FROM (
 
 SELECT count(*)
 FROM FApplication fa, fleaMarket fm
-WHERE fa.postingNumber = fm.postingNumber(+);
-and subject like '%'||#{subject}||'%'
-and writer like '%'||#{writer}||'%'
+WHERE fa.postingNumber = fm.postingNumber(+)
+AND fm.title like '%'||#{title}||'%';
 -- 페이징 + 검색 연습
 select *
 from (
@@ -74,7 +73,9 @@ FROM (
 	AND fm.title like '%'||#{title}||'%'
 	ORDER BY fa.applicationDate DESC
 	)	
-WHERE cnt BETWEEN 1 AND 5;
+WHERE cnt BETWEEN 1 AND 10;
+
+-- AND fm.title like '%'||#{title}||'%'
 
 CREATE TABLE FApplication
 (

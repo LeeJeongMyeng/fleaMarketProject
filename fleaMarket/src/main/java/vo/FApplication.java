@@ -3,6 +3,7 @@ package vo;
 import java.util.Date;
 
 public class FApplication {
+	private int cnt;
 	private String postingNumber;
 	private String email;
 	private int applicationNo;
@@ -12,6 +13,12 @@ public class FApplication {
 	private String title;
 	private String nickname;
 	
+	public int getCnt() {
+		return cnt;
+	}
+	public void setCnt(int cnt) {
+		this.cnt = cnt;
+	}
 	public String getPostingNumber() {
 		return postingNumber;
 	}

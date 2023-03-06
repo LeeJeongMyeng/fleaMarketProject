@@ -1,7 +1,7 @@
 package vo;
 
 public class FleaMarket {
-	
+
 	private String postingNumber;
 	private String title;
 	private String registDate;
@@ -16,7 +16,7 @@ public class FleaMarket {
 	private String checkForm; 
 	private int viewCnt;
 	private String address;
-	
+
 	public String getPostingNumber() {
 		return postingNumber;
 	}

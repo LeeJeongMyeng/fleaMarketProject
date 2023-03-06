@@ -34,6 +34,7 @@
    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
    crossorigin="anonymous"></script>
   <script type="text/javascript">
+  /*
 	var msg = "${msg}"
 	if(msg=="수정완료"){
 		if(confirm(msg+" 전체조회화면 이동하시겠습니까?")){
@@ -43,23 +44,30 @@
 
 	$(document).ready(function(){
 		$("#appBtn").click(function(){
-		// 유효성 check
-		$.ajax({	
-			url:"${path}/updateAppRe.do",
-			type:"get",
-			data:$("#app").serialize()
-			dataType:"json",
-			success:function(data){
-				var appReceived = data.appReceived
-				if(appReceived!=null){
-					alert("수정 완료");
+			// 유효성 check
+			$.ajax({	
+				url:"${path}/updateAppRe.do",
+				type:"get",
+				data:$("#app").serialize()
+				dataType:"json",
+				success:function(data){
+					var appReceived = data.appReceived
+					if(appReceived!=null){
+						alert("수정 완료");
+					}
+					// 리스트 데이터 update
+					var list = data.list
 				}
-				// 리스트 데이터 update
-				var list = data.list
-			}
+			})
 		})
-	})
 	});
+	*/
+	// 페이징
+	function goPage(cnt){
+		$("[name=curPage]").val(cnt);
+		$("#frmSch").submit()
+	}
+	
 	function goModal(applicationNo){
 		$.ajax({	
 			url:"${path}/appReceivedView.do",
@@ -251,7 +259,11 @@
             <div class="table-responsive">
               <div class="dataTable-top">
               	<div class="dataTable-search">
-              		<input class="form-control" placeholder="Search..." type="text">
+              		<form id="frmSch" class="d-flex"  method="post"> 
+	              		<input name="title" value="${sch.title}" class="form-control" placeholder="제목을 입력하세요" type="text">
+	              		<!-- <button class="btn btn-primary" type="submit">검색</button> -->
+	              		<input type="hidden" name="curPage" value="${sch.curPage}"/>
+	              	</form>
               	</div>
               </div>
               <div class="dataTable-container">
@@ -267,11 +279,16 @@
 	                  </tr>
 	                </thead>
 	                <tbody>
-	                  <c:forEach varStatus="status" var="fapplication" items="${list}">
+	                  <c:forEach var="fapplication" items="${list}">
 		                  <tr onclick='goModal(${fapplication.applicationNo})'>
 		                    <td>
 		                      <div class="d-flex align-items-center">
-		                        <p class="text-xs font-weight-bold ms-2 mb-0">${status.count}</p>
+		                      	<p class="text-xs font-weight-bold ms-2 mb-0">${fapplication.cnt}</p>
+		                      	<!-- 
+		                      <c:forEach varStatus="status" var="cnt" begin="${sch.startBlock}" end="${sch.endBlock}">
+		                        <p class="text-xs font-weight-bold ms-2 mb-0">${sch.count} - ( ((${sch.start} - 1) * ${sch.pageSize}) + ${status.count})</p>
+		                      </c:forEach>
+		                       -->
 		                      </div>
 		                    </td>
 		                    <td class="font-weight-bold">
@@ -314,20 +331,23 @@
 	              </table>
 	           </div>
             </div>
+            
             <!-- 페이지네이션 -->
             <nav aria-label="Page navigation example">
 			  <ul class="pagination justify-content-center">
-			    <li class="page-item disabled">
-			      <a class="page-link" href="javascript:;" tabindex="-1">
+			    <li class="page-item">
+			      <a class="page-link" href="javascript:goPage(${sch.startBlock-1});">
 			        <i class="fa fa-angle-left"></i>
 			        <span class="sr-only">Previous</span>
 			      </a>
 			    </li>
-			    <li class="page-item active"><a class="page-link" href="javascript:;">1</a></li>
-			    <li class="page-item"><a class="page-link" href="javascript:;">2</a></li>
-			    <li class="page-item"><a class="page-link" href="javascript:;">3</a></li>
+			    <c:forEach var="cnt" begin="${sch.startBlock}" end="${sch.endBlock}">
+			    	<li class="page-item ${sch.curPage==cnt?'active':''}">
+			    		<a class="page-link" href="javascript:goPage(${cnt});">${cnt}</a>
+			    	</li>
+			    </c:forEach>
 			    <li class="page-item">
-			      <a class="page-link" href="javascript:;">
+			      <a class="page-link" href="javascript:goPage(${sch.endBlock+1});">
 			        <i class="fa fa-angle-right"></i>
 			        <span class="sr-only">Next</span>
 			      </a>
