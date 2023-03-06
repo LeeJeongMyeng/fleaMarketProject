@@ -157,13 +157,13 @@ public class Req1000_Controller {
 			 service.QNAFileInsert(qf); 
 		 	}
 		 }
-		return "redirect:MemberQnAListForm.do";
+		return "redirect:QNAList.do";
 	}
 
 	@PostMapping("QNAUpdate.do")
 	public String QNAUpdate() {
 		
-		return "redirect:MemberQnAListForm.do";
+		return "redirect:QNAList.do";
 	}
 	
 	
