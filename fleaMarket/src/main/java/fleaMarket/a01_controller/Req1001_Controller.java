@@ -24,7 +24,7 @@ import vo.QNA;
 
 @Controller("Req1001")
 public class Req1001_Controller {
-	
+		
 	@Autowired
 	private Req1001_Service service;
 	
@@ -33,6 +33,8 @@ public class Req1001_Controller {
 	
 	@Value("${profile.upload}")
 	private String profilepath;
+	
+	//홈페이지 
 	
 	//http://localhost:7080/fleaMarket/callmain.do 메인
 		@RequestMapping("callmain.do")
@@ -44,7 +46,23 @@ public class Req1001_Controller {
 	public String AdminIntro() {
 		return "AdminIntro";
 	}
-	//http://localhost:7080/fleaMarket/AdminSearch.do 관리자 회원조회
+	
+	//http://localhost:7080/fleaMarket/QNAList.do 문의사항 전체조회
+		@RequestMapping("QNAList.do")
+		public String QNAList(@ModelAttribute("sch") QNA sch,Model d) {
+			d.addAttribute("QNAList", service.QNAList(sch));
+			return "QNAList";
+		}
+		
+	//http://localhost:7080/fleaMarket/GetQNA.do 문의사항 상세 조회
+		@GetMapping("GetQNA.do")
+		public String getQnA(@RequestParam("qnano") String qnano, Model d){
+			d.addAttribute("qna",service.getQNA(qnano));
+			return "GetQNA";
+		}	
+			
+	// 마이페이지 
+	//http://localhost:7080/fleaMarket/AdminSearch.do 관리자페이지 - 회원조회
 	@RequestMapping("AdminSearch.do")
 	public String AdminSearch(@ModelAttribute("sch")Member sch,Model d) {
 		System.out.println(sch.getAuthority());
@@ -52,40 +70,12 @@ public class Req1001_Controller {
 		d.addAttribute("MemberList",service.MemberList(sch));
 			return "AdminSearch";
 	}
-	
-	//http://localhost:7080/fleaMarket/QNAList.do 문의사항 전체조회
-	@RequestMapping("QNAList.do")
-	public String QNAList(@ModelAttribute("sch") QNA sch,Model d) {
-		d.addAttribute("QNAList", service.QNAList(sch));
-		return "QNAList";
-	}
-	
-	//http://localhost:7080/fleaMarket/GetQNA.do?qnano=1 문의사항 상세 조회
-	//http://localhost:7080/fleaMarket/GetQNA.do 문의사항 상세 조회
-	@GetMapping("GetQNA.do")
-	public String getQnA(@RequestParam("qnano") String qnano, Model d){
-		d.addAttribute("qna",service.getQNA(qnano));
-		return "GetQNA";
-	}	
-	
-	
-	//http://localhost:7080/fleaMarket/AdminInquire.do 관리자 문의사항 답변 조회
-	@RequestMapping("AdminInquire.do")
-	public String AdminInquire() {
-		return "AdminInquire";
-	}
-	//http://localhost:7080/fleaMarket/AdminPost.do 관리자 공지사항 작성조회
-	@RequestMapping("AdminPost.do")
-	public String AdminPost() {
-		return "AdminPost";
-	}
-	//http://localhost:7080/fleaMarket/MemberInfo.do 마이페이지 내 정보
+	//http://localhost:7080/fleaMarket/MemberInfo.do 마이페이지 내 정보 확인 
 	@RequestMapping("MemberInfo.do")
 	public String MemberInfo() {
 		return "MemberInfo";
 	}
-	
-	//회원정보수정 
+	// 마이페이지 내 정보 수정 
 	@RequestMapping("UpdateMemberInfo.do")
 	public String UpdateMemberInfo(Member upt,@RequestParam("profileimg") MultipartFile profile,
 			Model d,HttpSession session) {
@@ -116,7 +106,7 @@ public class Req1001_Controller {
 		return "MemberInfo";
 	}
 	
-	//비밀번호 변경
+	//마이페이지 비밀번호 변경
 	@RequestMapping("UpdatePassword.do")
 	public String UpdatePassword(Member upt,HttpSession session,Model d) {
 		//변경될거니까 세션 지우기
@@ -131,21 +121,20 @@ public class Req1001_Controller {
 		 d.addAttribute("uptmsg","비밀번호 변경이 완료되었습니다.");
 		return "MemberInfo";
 	}
-	
-	// 회원 내가 쓴 플리마켓 모집글
+	// 마이페이지 - 내가 쓴 플리마켓 모집글
 	@RequestMapping("MemberFmReg.do")
 	public String MemberFmReg(@RequestParam("email")String email, Model d, HttpSession session) {
 		d.addAttribute("FleaMarketList",service.FleaMarketList(email));
 			return "MemberFmReg";
 	}
-	// 회원 내가 쓴 문의글
+	// 마이페이지 - 회원 내가 쓴 문의글
 	@RequestMapping("MemberInquire.do")
 	public String MemberInquire(@RequestParam("email")String email, Model d, HttpSession session) {
 		d.addAttribute("MemberQNAList",service.MemberQNAList(email));
 			return "MemberInquire";
 	}
 	
-	// 자진탈퇴
+	// 마이페이지 - 사이트 탈퇴
 	@PostMapping("LeaveMember.do")
 	public String LeaveMember(Member del,Model d,HttpSession session){
 		//밑에 모듈처리함
@@ -155,7 +144,7 @@ public class Req1001_Controller {
 		return "main";
 	}
 	
-	//관리자 = 회원삭제처리 여러개 ㅇㅇ
+	//관리자 페이지 - 회원탈퇴처리 여러개 ㅇㅇ
 	@PostMapping("DeleteMembers.do")
     public String DeleteMembers(@RequestParam("email") List<String> email){
         for (String c : email) {  		
