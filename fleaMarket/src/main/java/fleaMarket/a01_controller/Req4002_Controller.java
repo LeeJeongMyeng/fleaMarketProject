@@ -1,18 +1,24 @@
 package fleaMarket.a01_controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import fleaMarket.a02_service.Req4002_Service;
+import fleaMarket.util.FileService;
+import vo.BoardImg;
 import vo.Capplication;
 import vo.FollowMemberInfo;
 import vo.RoomMemberInfo;
@@ -22,13 +28,35 @@ public class Req4002_Controller {
 	@Autowired(required=false)
 	Req4002_Service service;
 	
+	@Autowired
+	private FileService fileservice;
+	
 	@RequestMapping("communityInsertPage.do")
 	public String communityInsertPage() {
 		return "communityInsert";
 	}
+	
+	@Value("${board.upload2}")
+	private String upload;
+	
 	@PostMapping("communityInsert.do")
-	public String communityInsert(Capplication ins, Model d) {
+	public String communityInsert(Capplication ins,MultipartHttpServletRequest files, Model d) {
 		service.communityInsert(ins);
+		List<MultipartFile> fileList = files.getFiles("report");
+		
+		if( fileList!=null ){
+			BoardImg f = new BoardImg();
+			String imgname =""; 
+			for (MultipartFile mf : fileList) {
+				System.out.println(mf);
+				imgname+=fileservice.insprofileimg(upload, mf);
+				imgname+="&SEP&";
+			}
+				f.setImgname(imgname);
+				f.setImgpath(upload);
+				service.communityFileInsert(f);
+		}
+		
 		d.addAttribute("msg", "등록 성공");
 		return "communityInsert"; // 전체조회페이지로 이동
 	}
@@ -75,28 +103,12 @@ public class Req4002_Controller {
 		sel.setMyemail(email);
 		d.addAttribute("follower", service.followerSelect(sel));
 		// 팔로잉 정보
+		// https://mititch.tistory.com/77
+		// 정보은닉이 안되어(캡슐화X), 좋지않은코드.. 객체에 직접 데이터 넣기.. Map<String, String> 파라미터명이나, 매퍼 나누기
 		FollowMemberInfo following = new FollowMemberInfo();
 		following.setMyemail(email);
 		following.setDiv("팔로잉");
 		d.addAttribute("following", service.followerSelect(following));
-		
-		// https://mititch.tistory.com/77
-		// 정보은닉이 안되어(캡슐화X), 좋지않은코드.. 객체에 직접 데이터 넣기.. Map<String, String> 파라미터명이나, 매퍼 나누기
-		// 나의 게시판 정보
-//		RoomMemberInfo meboard = new RoomMemberInfo();
-//		meboard.setDiv("meboard");
-//		meboard.setEmail(email);
-//		d.addAttribute("boardreplyInfo", service.boardReplySelect(meboard));
-//		
-//		// 나의 댓글 정보
-//		RoomMemberInfo mereply = new RoomMemberInfo();
-//		mereply.setDiv("mereply");
-//		mereply.setEmail(email);
-//		d.addAttribute("replyInfo", service.boardReplySelect(mereply));
-//
-//		System.out.println("####나의게시판정보");
-//		System.out.println("나의 게시판 정보"+meboard.getDiv());
-//		System.out.println("내가쓴 댓글정보"+mereply.getDiv());
 		
 		Map<String, String> repMap = new HashMap<String, String>();
 		repMap.put("email", email);
@@ -109,7 +121,7 @@ public class Req4002_Controller {
 		repMap.put("div", "mereply");
 		d.addAttribute("replyInfo", service.boardReplySelect(repMap));
 		
-		// 카테고리별 게시판 조회 // 답없다..전체랑 카테고리별 나눠서 진행해라~~~시댕
+		// 카테고리별 게시판 조회
 		 Map<String, String> boardMap = new HashMap<String, String>();
 		 boardMap.put("email", email);
 		 boardMap.put("category", null);

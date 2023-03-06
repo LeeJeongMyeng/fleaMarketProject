@@ -60,7 +60,8 @@ SELECT * FROM BoardImg;
 SELECT DISTINCT *
 FROM BoardImg i,capplicaion c
 WHERE i.communityNumber=c.communityNumber
-AND c.email='yujin@gmail.com';
+AND c.email='yujin@gmail.com'
+ORDER BY registdate;
 
 SELECT DISTINCT c.communitynumber, imgpath, title, content, registdate, updatedate, category, email, hashtag, viewcnt, likecnt
 FROM BoardImg i,capplicaion c

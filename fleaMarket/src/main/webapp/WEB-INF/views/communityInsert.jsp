@@ -59,7 +59,7 @@
             <!--form panels-->
             <div class="row">
               <div class="col-12 col-lg-8 m-auto">
-                <form class="multisteps-form__form mb-8" method="post" enctype="multipart/form-data" action="${path}/communityInsert.do">
+                <form class="multisteps-form__form mb-8" method="get" enctype="multipart/form-data"><!-- action="${path}/communityInsert.do"  -->
                   <!--single form panel-->
                   <div class="card multisteps-form__panel r-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
                     <h5 class="font-weight-bolder mt-4" style="text-align:center; font-size:20pt;">커뮤니티 게시글 등록</h5>
@@ -111,7 +111,7 @@
                         <div class="col-2" style="height:120px;">
                           <label class="postInsertTitle">게시글 이미지</label>
                           <input type="file" name="report" class="form-control" style="width:230px"
-                          		id="productImg" accept="image/*" onchange="setThumbnail(event);" >
+                          		id="productImg" accept="image/*" onchange="setThumbnail(event);" multiple>
                            <div id="image_container"></div>
                         </div>
                       </div>

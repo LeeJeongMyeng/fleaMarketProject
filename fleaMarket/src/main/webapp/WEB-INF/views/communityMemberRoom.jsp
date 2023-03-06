@@ -213,7 +213,7 @@
             <div class="card-body pb-0 p-3 mt-4">
               <div class="row">
                 <div class="col-7 text-start">
-                  <div class="chart">
+                  <div class="chart" id="chartposition">
                     <canvas id="chart-pie" class="chart-canvas" height="200"></canvas>
                   </div>
                 </div>
@@ -660,10 +660,13 @@
 	function arrFun(obj){
 		var arr=obj.split(",")
 		if(obj=="[]"){
-			arr.length=0
+			return 0
 		}else{
 			return arr.length
 		}
+	}
+	if(arrFun(adv)==0 && arrFun(idea)==0 && arrFun(life)==0 && arrFun(tip)==0){
+		$("#chartposition").text("등록된 게시물이 없습니다.")
 	}
     // Pie chart
     new Chart(ctx2, {
@@ -678,7 +681,7 @@
           pointRadius: 2,
           borderWidth: 2,
           backgroundColor: ['#17c1e8', '#5e72e4', '#3A416F', '#a8b8d8'],
-          data: [arrFun(adv), arrFun(life), arrFun(life), arrFun(tip)],
+          data: [arrFun(adv), arrFun(idea), arrFun(life), arrFun(tip)],
           fill: false
         }],
       },
