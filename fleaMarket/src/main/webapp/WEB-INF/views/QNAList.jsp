@@ -122,7 +122,7 @@ function goPage(cnt){
 											   	<col width="20%">
 												<table class="table table-flush" id="QnAListTable">
 												<thead class="thead-light">
-													<tr style="background-color: #ebebeb;">\
+													<tr style="background-color: #ebebeb;">
 														<th >No</th>
 														<th >문의 번호</th>
 														<th >제목</th>
