@@ -1,6 +1,7 @@
 package fleaMarket.a03_dao;
 
 import java.util.HashMap;
+import java.util.List;
 
 import vo.Member;
 import vo.ProfileImg;
@@ -21,4 +22,8 @@ public interface Req1000_Dao {
 	public void MemberFindPassword(HashMap<String,String> map);
 	public void QNAInsert(QNA ins);
 	public void QNAFileInsert(QNAFile ins);
+	public void QNAUpdate(QNA upt);
+	public List<QNAFile> GetFileNames(String qnano);
+	public void QNAFileDelete(String qnano);
+	
 }

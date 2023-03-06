@@ -39,6 +39,9 @@ to_CHAR(sysdate,'YYYY-MM-DD'),
 
 
 SELECT * FROM FLEAMARKETQNA;
+SELECT * FROM FLEAMARKETMEMBER;
+SELECT * FROM PROFILE p ;
+SELECT * FROM FLEAMARKETQNA WHERE QNANO = FLEAMARKETQNA_seq.currval;
 
 ------------------------------------------------------------------
 CREATE TABLE QNAFile
@@ -50,6 +53,8 @@ CREATE TABLE QNAFile
 SELECT * FROM qnafile;
 INSERT INTO qnafile values(FLEAMARKETQNA_seq.currval,'file/qna/','20');
 DELETE qnafile WHERE qnano = '20';
+
+ALTER TABLE qnafile ADD filename2 varchar2(100);
 
 SELECT rownum cnt,qna.* from(
 SELECT f.*
@@ -69,3 +74,5 @@ WHERE METHOD = 'n';
 SELECT count(*) FROM FLEAMARKETQNA
 WHERE METHOD != 'n'
 AND (title || EMAIL) LIKE '%'||''||'%';
+--삭제
+DELETE qnafile;

@@ -110,8 +110,31 @@
     	</insert>
     	<!-- 문의하기 파일등록 -->
     	<insert id="QNAFileInsert" parameterType="qnafile">
-    		INSERT INTO qnafile values(#{filename},#{filepath},FLEAMARKETQNA_seq.currval)
+    		INSERT INTO qnafile values(#{filename},#{filepath},
+    		<if test="qnano==null">
+    		 FLEAMARKETQNA_seq.currval,
+    		</if>
+    		<if test="qnano!=null">
+    		 #{qnano},
+    		</if>
+    		#{filename2})
     	</insert>
+    	<!-- 문의/공지글 업데이트 -->
+    	<update id="QNAUpdate" parameterType="qna">
+    		update FLEAMARKETQNA
+    		set title=#{title}, content=#{content}
+    		where qnano=#{qnano}
+    	</update>
+    	<!-- 문의게시글 파일 수정 전 파일담기 -->
+    	<select id="GetFileNames" parameterType="string" resultType="qnafile">
+    		select * from qnafile
+    		where qnano = #{qnano}
+    	</select>
+    	
+    	<!-- 문의/게시글파일데이터 삭제 -->
+    	<delete id="QNAFileDelete" parameterType="string">
+    		delete qnafile where qnano=#{qnano}
+    	</delete>
     </mapper>
     
     

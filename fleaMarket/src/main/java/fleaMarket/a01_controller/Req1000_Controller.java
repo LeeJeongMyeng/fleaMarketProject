@@ -34,8 +34,9 @@ public class Req1000_Controller {
       this.service = service;
    }
 
-   @Autowired
-   private FileService fileservice;
+	/*
+	 * @Autowired private FileService fileservice;
+	 */
    
    @Value("${profile.upload}")
    private String profilepath;
@@ -60,16 +61,11 @@ public class Req1000_Controller {
          //1. 기본 회원가입 양식
             service.SignUp(ins);
          //2. 파일처리
-            ProfileImg fins = new ProfileImg();
-            fins.setEmail(ins.getEmail());
-            fins.setProfileimg("defaultprofile.png");
-            if(profile.getOriginalFilename()!="") {
-              fins.setProfileimg(fileservice.insprofileimg(profilepath,profile));
-            }
-            service.insprofile(fins);         
+            service.insprofile(ins.getEmail(),profile);         
          
       return "SignIn";
    }
+   
    
    @RequestMapping("Login.do") //로그인
    public String Loign(Member log,Model d,HttpSession session) {
@@ -126,48 +122,40 @@ public class Req1000_Controller {
    @PostMapping("QNAInsert.do")
    public String QNAInsert(QNA ins,MultipartHttpServletRequest qnafiles) {
       
-      
-      
-      //여러개 들어온 파일들을 리스트로 받음
-       List<MultipartFile> fileList = qnafiles.getFiles("qnafiles");
-       
       //들어온 글정보부터 입력(중요. 시퀸스넘버때매 무조건 앞에서 해야함)
        service.QNAInsert(ins);
        
-      //문의글 등록파일 VO객체 생성 
-       QNAFile qf = new QNAFile(); 
        
-      // 리스트로 받은 파일객체들을 심어줌
-       if(fileList!=null) {
-       for (MultipartFile mf : fileList) {
-          //HashMap으로 파일이름과 경로를 반환함
-         // 이미지 확장자냐에 따른 경로 심기.
-            String imgArray[] = {"gif","jpg","jpeg","png","bmp","ico","apng","jfif"};         
-            String subpath ="file/qna/";
-             for(String ia:imgArray) {
-                if(ia.equals(mf.getOriginalFilename().split("\\.")[1])) {
-                   subpath = "img/qna/";
-                }
-             }
-         
-          //등록파일 vo객체에 set값 할당(for문 돌면서 계속 할당)
-            
-          qf.setFilename(fileservice.insprofileimg2(qnafilepath+subpath,mf));
-          qf.setFilepath(subpath);
-          
-          //테이블에 심어주기
-          service.QNAFileInsert(qf); 
-          }
-       }
+       
+      // 리스트로 받은 파일업로드+데이터베이스 삽입
+       List<MultipartFile> fileList = qnafiles.getFiles("qnafiles");
+		if(fileList.size() > 0 && !fileList.get(0).getOriginalFilename().equals("")) {
+			  service.QNAFileInsert(null,fileList);
+		}
+       
       return "redirect:QNAList.do";
    }
-
+//------------------------------------------------------------------
+   //문의글 업데이또
    @PostMapping("QNAUpdate.do")
-   public String QNAUpdate() {
+   public String QNAUpdate(QNA upt,MultipartHttpServletRequest qnafiles) {
+	   List<MultipartFile> fileList = qnafiles.getFiles("qnafiles");
+	   
+        //1. 내용 업데이또
+	   	service.QNAUpdate(upt);
+	  
+	   	
+	   	
+	    //2. 업데이트시 업데이트할 파일이 존재하면
+	   	if(fileList.size() > 0 && !fileList.get(0).getOriginalFilename().equals("")) {	
+	   		//기존꺼 다지움
+		   service.QNAFileDelete(upt.getQnano());
+		    //새거 다넣음
+		   service.QNAFileInsert(upt.getQnano(),fileList);
+		   		
       
-      return "redirect:QNAList.do";
    }
-   
-   
-   
+	   	return "redirect:QNAList.do";
+  } 
 }
+  

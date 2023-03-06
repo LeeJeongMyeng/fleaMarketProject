@@ -31,11 +31,7 @@
 <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 </head>
 <script type="text/javascript">
-$(document).ready(function(){
-	$("#goQnaList").click(function(){
-		location.href="QNAList.do"	
-		})
-	});
+
 </script>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
@@ -101,30 +97,24 @@ $(document).ready(function(){
 							<div class="mb-7" style="width: 98%; margin-left: 23px; height: 300px;">
 								<label class="mt-4 postInsertTitle" style="margin-left: -0.5%;" >게시글내용</label>
 								<div id="editor">${qna.content}</div>
-								<!-- 
-									<button type="submit" style="float: right;" class="btn btn-primary btn-md mb-0 me-2">첨부파일다운로드</button>
-							 -->
+								<input type="hidden" id="contentInput" name="content" />
 							</div>
 							<div class="mb-3" style="margin-left: 26px;">
 								 <input name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}" multiple/>
+								 <div id="imgs_wrap" style="display:flex;">
 							</div>	
    						
 							<div class="" style="margin-left:85%;">
-							<c:if test="${Login.authority!='관리자'}">
-							<button type="submit" class="btn btn-outline-primary btn-md mb-0 me-1">수정</button>
+							<c:if test="${Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email }">
+								<button type="submit" class="btn btn-outline-primary btn-md mb-0 me-1">수정</button>
+								<button type="button"  data-bs-toggle="modal" data-bs-target="#DeleteQnaModal" id="DeleteQnaModalbtn"  class="btn btn-outline-danger btn-md mb-0 me-1">삭제</button>  <!-- 모달창추가 -->
 							</c:if>
 							<button type="button" id="goQnaList" class="btn btn-outline-secondary btn-md mb-0 me-1">취소</button>	
 							
 							</form>
-							<button type="button"  data-bs-toggle="modal" data-bs-target="#DeleteQnaModal" id="DeleteQnaModalbtn"  class="btn btn-outline-danger btn-md mb-0 me-1">삭제</button>  <!-- 모달창추가 -->
 							</div>	
 							
-							
-							
-							
-							
-							
-						
+
 						<c:forEach var="QNAFile" items="${qna2}">
 						<form action="downloadqna.do" method="get">
 						<div style="width:50%;">
@@ -133,19 +123,13 @@ $(document).ready(function(){
 									 <div class="download_Wrap">
 										<input type="hidden" name="filepath" value="${QNAFile.filepath}">
 									 	<input type="hidden" name="filename" value="${QNAFile.filename}">
-										<input value="${QNAFile.filename}" type="submit" class="form-control">
+										<input value="${QNAFile.filename2}" type="submit" class="form-control">
 									</div>
 									</div>
 								</div>
 						</form>
 							</c:forEach>
-							
-							
 								 </div>
-							
-							
-							
-						
 						</div>
 					</div>
 				</div>
@@ -203,6 +187,7 @@ var myDropzone = new Dropzone(drop, {
 
 });
 </script>
-
+<script src="${path}/resource/js/Req1000/fileupload.js"></script>
+<script src="${path}/resource/js/Req1001/GetQNA.js"></script>
 </body>
 </html>

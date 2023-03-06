@@ -4,6 +4,7 @@ public class QNAFile {
 	private String qnano;
 	private String filepath;
 	private String filename;
+	private String filename2;
 	public String getQnano() {
 		return qnano;
 	}
@@ -22,4 +23,11 @@ public class QNAFile {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
+	public String getFilename2() {
+		return filename2;
+	}
+	public void setFilename2(String filename2) {
+		this.filename2 = filename2;
+	}
+	
 }

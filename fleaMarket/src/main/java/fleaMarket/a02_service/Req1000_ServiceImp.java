@@ -3,12 +3,14 @@ package fleaMarket.a02_service;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import fleaMarket.a03_dao.Req1000_Dao;
 import fleaMarket.util.FileService;
@@ -22,11 +24,20 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	
 	
 	private Req1000_Dao dao;
+	
 	@Autowired
 	public Req1000_ServiceImp(Req1000_Dao dao) {
 		this.dao = dao;
 	}
-
+	
+	@Autowired
+	private FileService fileservice;
+	@Value("${profile.upload}")
+	   private String profilepath;
+	   
+	@Value("${qna.upfile}")
+	   private String qnafilepath;
+	
 	HashMap<String,String> map;
 	
 	
@@ -48,16 +59,19 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	public void SignUp(Member ins) {		
 		ins.setPassword(BCrypt.hashpw(ins.getPassword(), BCrypt.gensalt()));
 		dao.SignUp(ins);
+		
+		
 	}
 	
-	//회원가입 처리 후,이미지 업로드 처리
-	/*
-	public String insprofileimg(MultipartFile report) { 
-		return fileservice.insprofileimg(profilepath, report); //db업로드 해야하니까 네임 리턴
-	}*/
 	
 	// 테이블에 프로필사진 삽입
-	public void insprofile(ProfileImg fins) {
+	public void insprofile(String email,MultipartFile profile) {
+		ProfileImg fins = new ProfileImg();
+        fins.setEmail(email);
+        fins.setProfileimg("defaultprofile.png");
+        if(profile.getOriginalFilename()!="") {
+          fins.setProfileimg(fileservice.insprofileimg(profilepath,profile));
+        }
 		dao.insprofile(fins);
 	}
 	
@@ -107,10 +121,62 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		if(ins.getCategory()==null) {ins.setCategory("공지사항");}
 		dao.QNAInsert(ins);
 	}
-	public void QNAFileInsert(QNAFile ins) {
-		dao.QNAFileInsert(ins);
+	
+	public void QNAFileInsert(String qnano,List<MultipartFile> fileList) {
+			for(MultipartFile mf:fileList){
+			dao.QNAFileInsert(insertFileModule(qnano,mf));
+			}
+		
 	}
-
+	public void QNAUpdate(QNA upt) {
+		dao.QNAUpdate(upt);
+	}
+	
+	public List<QNAFile> GetFileNames(String qnano){
+		return dao.GetFileNames(qnano);
+	}
+	
+	public void QNAFileDelete(String qnano) {
+		
+		//파일리스트를 다뽑아옴
+		 List<QNAFile> qfs=GetFileNames(qnano);
+		//리스트가있다면
+		 if(qfs.size()>0 && !qfs.get(0).getFilename().equals("")) {
+			//DB다지움
+			 dao.QNAFileDelete(qnano);
+			//업로드 된거 다 지움
+			 for(QNAFile qf:qfs) {
+				fileservice.DeleteFile(qnafilepath+qf.getFilepath(), qf.getFilename());
+			 }
+		  }
+		 
+		 
+		 
+		
+	}
+	
+	
+	//--------------------------------------------
+	// 파일 업로드 처리하고 문의글파일 db에 데이터 삽입
+	public QNAFile insertFileModule(String qnano,MultipartFile file) {
+		   QNAFile qf = new QNAFile();
+		   
+		          //HashMap으로 파일이름과 경로를 반환함
+		         // 이미지 확장자냐에 따른 경로 심기.
+		            String imgArray[] = {"gif","jpg","jpeg","png","bmp","ico","apng","jfif"};         
+		            String subpath ="file/qna/";
+		             for(String ia:imgArray) {
+		                if(ia.equals(file.getOriginalFilename().split("\\.")[1])) {
+		                   subpath = "img/qna/";
+		                }
+		             }
+		          //등록파일 vo객체에 set값 할당(for문 돌면서 계속 할당)
+		          qf.setQnano(qnano);
+		          qf.setFilename(fileservice.insprofileimg2(qnafilepath+subpath,file));
+		          qf.setFilepath(subpath);
+		          qf.setFilename2(file.getOriginalFilename());
+		      return qf;
+	   }
 }
 
 
