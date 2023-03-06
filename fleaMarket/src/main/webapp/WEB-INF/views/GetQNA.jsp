@@ -31,19 +31,18 @@
 <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 </head>
 <script type="text/javascript">
-
-var sessId = "${Login.email}"
-	if(sessId!="${qna.email}"){
-		alert("해당 페이지에 접근 권한이 없습니다. \n이전페이지로 돌아갑니다.");
-		location.href="QNAList.do"
-	}
+$(document).ready(function(){
+	$("#goQnaList").click(function(){
+		location.href="QNAList.do"	
+		})
+	});
 </script>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
 
 	<main class="main-content position-relative border-radius-lg ">
 		<!-- Navbar -->
-		<!-- 상단 -->
+		<!-- 상단 -->                                                                                                                                                                                                                                 
 		
 		<div class="container-fluid py-4">
 			<div class="row">
@@ -114,7 +113,7 @@ var sessId = "${Login.email}"
 							<c:if test="${Login.authority!='관리자'}">
 							<button type="submit" class="btn btn-outline-primary btn-md mb-0 me-1">수정</button>
 							</c:if>
-							<button type="button" id="goQNAList" class="btn btn-outline-secondary btn-md mb-0 me-1">취소</button>	
+							<button type="button" id="goQnaList" class="btn btn-outline-secondary btn-md mb-0 me-1">취소</button>	
 							
 							</form>
 							<button type="button"  data-bs-toggle="modal" data-bs-target="#DeleteQnaModal" id="DeleteQnaModalbtn"  class="btn btn-outline-danger btn-md mb-0 me-1">삭제</button>  <!-- 모달창추가 -->

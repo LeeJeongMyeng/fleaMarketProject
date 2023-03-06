@@ -36,12 +36,20 @@
 	
 	
 <script type="text/javascript">
+$(document).ready(function(){
+$("#regBtn").click(function(){
+	location.href="MemberQnAreg.do"	
+	})
+});
+
+
 var SessionAuth = '${Login.authority}' //권한
 var SessionEmail = '${Login.email}'
 
 function goDetail(qnano,email){
 	if(SessionAuth!='관리자'){
 		if(SessionEmail!= email){
+			alert("접근 권한이 없습니다.")
 			return false;
 		}
 	}
@@ -172,8 +180,9 @@ function goPage(cnt){
 								</div>
 							</div>
 						</div>
-					</div><br>
-					<button type="button" class="btn btn-outline-primary btn-sm mb-0" style="float:right;">등록</button>
+					</div>
+				<br>
+					<button type="button" id="regBtn" class="btn btn-outline-primary btn-sm mb-0" style="float:right;">등록</button>
 				</div>
 
 			</div>
