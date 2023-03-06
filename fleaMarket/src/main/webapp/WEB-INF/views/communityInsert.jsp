@@ -36,6 +36,16 @@
 			  $("form").submit()
 		  })
 		  console.log($('#productImg').val())
+		  
+		  $("input[type=file]").change(function () {
+	            var fileInput = document.getElementById("contract_file");
+	            var files = fileInput.files;
+	            var file;
+	            for (var i = 0; i < files.length; i++) {
+	                file = files[i];
+	                alert(file.name);
+	            }
+	        });
 	  });
   </script>
 </head>
@@ -110,9 +120,9 @@
                       <div class="row mt-3">
                         <div class="col-2" style="height:120px;">
                           <label class="postInsertTitle">게시글 이미지</label>
-                          <input type="file" name="report" class="form-control" style="width:230px"
-                          		id="productImg" accept="image/*" onchange="setThumbnail(event);" multiple>
-                           <div id="image_container"></div>
+                          <input type="file" name="report" id="report" multiple>
+                          <!-- <input type="file" name="report" class="form-control" style="width:230px"
+                          		id="productImg" accept="image/*" onchange="setThumbnail(event);" multiple> -->
                         </div>
                       </div>
                       <script>
