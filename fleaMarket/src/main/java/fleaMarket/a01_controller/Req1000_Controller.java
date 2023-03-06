@@ -110,8 +110,6 @@ public class Req1000_Controller {
 	
 	
 	
-	
-	
 	//문의글작성페이지
 	@RequestMapping("MemberQnAreg.do")
 	public String MemberQnAreg() {
@@ -150,7 +148,7 @@ public class Req1000_Controller {
 			
 			 //등록파일 vo객체에 set값 할당(for문 돌면서 계속 할당)
 				
-			 qf.setFilename(fileservice.insprofileimg2(qnafilepath+subpath,mf));
+			 qf.setFilename(fileservice.insprofileimg(qnafilepath+subpath,mf));
 			 qf.setFilepath(subpath);
 			 
 			 //테이블에 심어주기
@@ -162,9 +160,9 @@ public class Req1000_Controller {
 
 	@PostMapping("QNAUpdate.do")
 	public String QNAUpdate() {
-		
 		return "redirect:MemberQnAListForm.do";
 	}
+	
 	
 	
 }

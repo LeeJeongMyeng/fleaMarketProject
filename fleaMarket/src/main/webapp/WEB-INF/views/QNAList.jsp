@@ -38,6 +38,10 @@
 function goDetail(qnano){
 	location.href="${path}/GetQNA.do?qnano="+qnano
 }
+
+function QnASeach(seachval){
+	location.href=""
+}
 </script>
 </head>
 
@@ -75,18 +79,15 @@ function goDetail(qnano){
 											<h5 class="mb-0">고객센터</h5>
 											<p class="text-sm mb-0">검색할 내용 검색창에 제목을 입력해주세요</p>
 										</div>
-
+										
 										<div class="ms-auto my-auto mt-lg-0 mt-4">
-
+										<form action="" method="">
 											<div class="input-group mb-3">
-												<input type="text" class="form-control"
-													placeholder="　제목(내용)을 입력하세요">
-												<button class="btn btn-outline-primary mb-0" type="button"
-													id="button-addon2">검색</button>
+												<input type="text" name="title" class="form-control" placeholder="　제목/작성자 입력하세요" >
+												<button class="btn btn-outline-primary mb-0" type="submit">검색</button>
 												<div class="ms-auto my-auto"></div>
-
-
 											</div>
+										</form>
 										</div>
 									</div>
 									<div class="card-body px-0 pb-0">
