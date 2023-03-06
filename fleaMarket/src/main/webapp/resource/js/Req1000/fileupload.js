@@ -23,7 +23,7 @@ function Checkfiles2(fileName) {
     return checkfile(extension2,fileName);
 }
 //체크해주는 친구!
-function checkfile(extension,fileName){
+function checkfile(extension,fileName){ 
 	 var result = false;
 	 var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
 	    if(!ext){ return result; }
@@ -47,10 +47,10 @@ function handleImgsFilesSelect(e) {
     var fileArr = Array.from(e.target.files);// 이벤트로 넘어온 파일들을 배열형식으로 담음(FileList -> Array)
     for(var i=fileArr.length-1; i>0; i--){
     	if(!Checkfiles1(fileArr[i].name)){fileArr.splice(i, 1);}
-    }
-     fileArr.forEach(function(f,index) { //배열형식의 파일들의 확장자 검사 돌림
+    } 
+     /*fileArr.forEach(function(f,index) { //배열형식의 파일들의 확장자 검사 돌림
     	if(!Checkfiles1(f.name)){fileArr.splice(index, 1);}
-    }) 
+    }) */
     //위에서 걸러준 후 배열파일친구들을 다시 찐 파일로변환시킴
     fileArr.forEach(file => { dataTransfer.items.add(file); });
     //그리고 input file태그에 담음

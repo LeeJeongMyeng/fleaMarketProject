@@ -15,21 +15,19 @@ import org.springframework.web.servlet.view.AbstractView;
 
 public class DownloadView extends AbstractView {
 	
-	// 다운로드할 특정한 폴드공통위치
-	/* @Value("${file.upload}") */
-	private String upload;
 	
 	@Override
-	protected void renderMergedOutputModel(Map<String, Object> model, 
+	protected void renderMergedOutputModel(Map<String, Object> model,
 			HttpServletRequest requst, HttpServletResponse response)
 			throws Exception {
 		// 1. 파일 객체 생성
 		// 		파일다운로드 컨트롤러에서 모델명으로 온 파일명 정보를 가져온다.
 		//      model.addAttribute("downloadFile", 파일명)
 		//	1) 파일명 선언
-		String fname = (String)model.get("downloadFile");
+		String fpath = (String)model.get("downloadPath");
+		String fname = (String)model.get("downloadName");
 		//	2) 경로명과 함께 파일 객체 생성
-		File file = new File(upload+fname);
+		File file = new File(fpath+fname);
 		
 		// 2. 파일 객체를 client에 전달하기 위한 response 객체 속성 선언
 		//	1) 파일을 클라이언트 전달하기 위해 contentType 설정

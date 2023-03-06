@@ -44,7 +44,6 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		if(email!=null) {map.put("email",email);}
 		return dao.DuplicateMem(map);
 	}
-	
 	//회원가입
 	public void SignUp(Member ins) {		
 		ins.setPassword(BCrypt.hashpw(ins.getPassword(), BCrypt.gensalt()));

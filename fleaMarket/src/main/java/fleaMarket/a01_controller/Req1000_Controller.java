@@ -110,11 +110,6 @@ public class Req1000_Controller {
 	
 	
 	
-	//문의글 조회
-	@RequestMapping("MemberQnAListForm.do")
-	public String QnAListForm() {
-		return "MemberQnAListForm";
-	}
 	
 	
 	//문의글작성페이지
@@ -154,6 +149,7 @@ public class Req1000_Controller {
 				 }
 			
 			 //등록파일 vo객체에 set값 할당(for문 돌면서 계속 할당)
+				
 			 qf.setFilename(fileservice.insprofileimg2(qnafilepath+subpath,mf));
 			 qf.setFilepath(subpath);
 			 
