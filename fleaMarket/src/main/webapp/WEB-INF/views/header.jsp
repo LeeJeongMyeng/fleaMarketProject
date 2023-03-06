@@ -253,7 +253,7 @@ li{
                 </li>
                 <li class="nav-item dropdown dropdown-hover">
                   <a role="button" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center " id="dropdownMenuBlocks" data-bs-toggle="dropdown" aria-expanded="false">
-                    공지사항
+                    고객센터
                     <img src=" ${path}/assets/img/down-arrow-dark.svg " alt="down-arrow" class="arrow ms-1 d-lg-block d-none">
                     <img src="${path}/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1 d-lg-none d-block">
                   </a>
@@ -268,7 +268,7 @@ li{
                               </div>
                               <div class="w-100 d-flex align-items-center justify-content-between">
                                 <div>
-                                  <p class="dropdown-header text-dark p-0">공지사항 조회</p>
+                                  <p class="dropdown-header text-dark p-0">고객센터 조회</p>
                                 </div>
                               </div>
                             </div>
@@ -281,36 +281,13 @@ li{
                                <i class="ni ni-laptop text-primary"></i>
                              </div>
                              <div class="w-100 d-flex align-items-center justify-content-between">
-                                <div>
+                                <div>		
+                                <c:if test="${Login.authority=='관리자'}">
                                   <p class="dropdown-header text-dark p-0">공지사항 등록</p>
-                                </div>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/datatables.html">
-                            <div class="d-flex">
-                              <div class="icon h-10 me-3 d-flex mt-1">
-                                <i class="ni ni-badge text-primary"></i>
-                              </div>
-                              <div class="w-100 d-flex align-items-center justify-content-between">
-                                <div>
-                                  <p class="dropdown-header text-dark p-0">공지사항 추가메뉴1</p>
-                                </div>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/calendar.html">
-                            <div class="d-flex">
-                              <div class="icon h-10 me-3 d-flex mt-1">
-                                <i class="ni ni-notification-70 text-primary"></i>
-                              </div>
-                              <div class="w-100 d-flex align-items-center justify-content-between">
-                                <div>
-                                  <p class="dropdown-header text-dark p-0">공지사항 추가메뉴2</p>
+                                </c:if>
+                                <c:if test="${Login.authority!='관리자'}">
+                                  <p class="dropdown-header text-dark p-0">문의사항 등록</p>
+                                </c:if>
                                 </div>
                               </div>
                             </div>
