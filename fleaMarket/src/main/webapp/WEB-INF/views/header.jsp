@@ -90,7 +90,9 @@ li{
                               </div>
                               <div class="w-100 d-flex align-items-center justify-content-between">
                                 <div>
+                                  <a href="${path}/totalSearch.do" class="dropdown-item border-radius-md">
                                   <p class="dropdown-header text-dark p-0">전체조회</p>
+                                  </a>
                                 </div>
                               </div>
                             </div>
@@ -104,7 +106,9 @@ li{
                               </div>
                               <div class="w-100 d-flex align-items-center justify-content-between">
                                 <div>
+                                 <a href="${path}/fRegistration.do" class="dropdown-item border-radius-md">
                                   <p class="dropdown-header text-dark p-0">플리마켓 등록</p>
+                                  </a>
                                 </div>
                               </div>
                             </div>
