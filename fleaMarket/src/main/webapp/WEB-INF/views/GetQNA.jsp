@@ -32,9 +32,11 @@
 </head>
 <script type="text/javascript">
 
-$(document).ready(function(){
-
-})
+var sessId = "${Login.email}"
+	if(sessId!="${qna.email}"){
+		alert("해당 페이지에 접근 권한이 없습니다. \n이전페이지로 돌아갑니다.");
+		location.href="QNAList.do"
+	}
 </script>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
@@ -95,18 +97,35 @@ $(document).ready(function(){
 							</div>
 							<div class="mb-3" style="margin-left: 26px;">
 									<label class="postInsertTitle" style="margin-left: -0.5%;">제목</label>
-									<input class="multisteps-form__input form-control w-50" name="title" type="text" value="${qna.title}" readonly/>
+									<input class="multisteps-form__input form-control w-50" name="title" type="text" value="${qna.title}"/>
 							</div>
 							<div class="mb-7" style="width: 98%; margin-left: 23px; height: 300px;">
 								<label class="mt-4 postInsertTitle" style="margin-left: -0.5%;" >게시글내용</label>
-								<div style="width: 65%; height:70%; border:0.5px solid gray;">
-								${qna.content}
-							</div>
+								<div id="editor">${qna.content}</div>
 								<!-- 
 									<button type="submit" style="float: right;" class="btn btn-primary btn-md mb-0 me-2">첨부파일다운로드</button>
 							 -->
 							</div>
-						</form>
+							<div class="mb-3" style="margin-left: 26px;">
+								 <input name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}" multiple/>
+							</div>	
+   						
+							<div class="" style="margin-left:85%;">
+							<c:if test="${Login.authority!='관리자'}">
+							<button type="submit" class="btn btn-outline-primary btn-md mb-0 me-1">수정</button>
+							</c:if>
+							<button type="button" id="goQNAList" class="btn btn-outline-secondary btn-md mb-0 me-1">취소</button>	
+							
+							</form>
+							<button type="button"  data-bs-toggle="modal" data-bs-target="#DeleteQnaModal" id="DeleteQnaModalbtn"  class="btn btn-outline-danger btn-md mb-0 me-1">삭제</button>  <!-- 모달창추가 -->
+							</div>	
+							
+							
+							
+							
+							
+							
+						
 						<c:forEach var="QNAFile" items="${qna2}">
 						<form action="downloadqna.do" method="get">
 						<div style="width:50%;">
@@ -121,6 +140,13 @@ $(document).ready(function(){
 								</div>
 						</form>
 							</c:forEach>
+							
+							
+								 </div>
+							
+							
+							
+						
 						</div>
 					</div>
 				</div>
@@ -178,6 +204,6 @@ var myDropzone = new Dropzone(drop, {
 
 });
 </script>
-<%-- <script src="${path}/resource/js/Req1001/AdminSearch.js"></script> --%>
+
 </body>
 </html>
