@@ -33,7 +33,8 @@ public class Req1001_Controller {
 	
 	@Value("${profile.upload}")
 	private String profilepath;
-	
+	@Value("${qna.upfile}")
+	private String qnafilepath;
 	//홈페이지 
 	
 		//http://localhost:7080/fleaMarket/callmain.do 메인
@@ -54,14 +55,14 @@ public class Req1001_Controller {
 			return "QNAList";
 		}
 		// 문의사항 첨부 파일 다운로드
-		@Value("${qna.upfile}")
-		private String qnafilepath;
 		
-		@GetMapping("/downloaqna.do")
+		
+		@GetMapping("downloadqna.do")
 		public String download(@RequestParam("filepath") String filepath, 
 							@RequestParam("filename") String filename,Model d) {
-			d.addAttribute("downloadFile",filename);
-			return "QNAList";
+			d.addAttribute("downloadPath",qnafilepath+filepath);
+			d.addAttribute("downloadName",filename);
+			return "downloadView";
 		}
 		
 		// http://localhost:7080/fleaMarket/GetQNA.do 
