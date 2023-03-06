@@ -33,12 +33,14 @@
 <script type="text/javascript">
 
 $(document).ready(function(){
-	$("#downFile").click(function(){
+$("#downFile").click(function(){
   		if(confirm($(this).val()+"을 다운로드하시겠습니까?")){
-  			location.href="${path}/download.do?qnano="+$(this).val()
+  			var filepath= $($(this) 'input[name=filepath]').val()
+  			var filename= $($(this) 'input[name=filename]').val()
+  			location.href="${path}/downloadqna.do?filepath="+filepath+"&filename="+filename
   		}
   		
-  	})		
+  	})
 })
 </script>
 <body class="g-sidenav-show   bg-gray-100">
@@ -111,10 +113,18 @@ $(document).ready(function(){
 							<div style="width: 50%;">
 								<label class="mt-4 form-label labelFont">첨부파일</label>
 									<div class="fallback">
-									 <input id="downFile"  value="${qna.qnano}" type="text" class="form-control" placeholder="첨부 입력" required>
+									<c:forEach var="QNAFile" items="${qna2}">
+									 <div class="download_Wrap">
+										 <input type="hidden" name="filepath" value="${QNAFile.filepath}">
+									 	<!--  <input type="hidden" name="filename" value="${QNAFile.filename}"> -->
+										<input id="downFile" value="${QNAFile.filename}" type="submit" class="form-control">
+									</div>
+									</c:forEach>
 									</div>
 								</div>
+								<!-- 
 									<button type="submit" style="float: right;" class="btn btn-primary btn-md mb-0 me-2">첨부파일다운로드</button>
+							 -->
 							</div>
 						</form>
 						</div>

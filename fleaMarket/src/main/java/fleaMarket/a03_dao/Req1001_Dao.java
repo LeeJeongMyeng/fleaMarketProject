@@ -6,6 +6,7 @@ import vo.FleaMarket;
 import vo.Member;
 import vo.ProfileImg;
 import vo.QNA;
+import vo.QNAFile;
 
 public interface Req1001_Dao {
 	public List<Member> MemberList(Member sch);
@@ -21,5 +22,7 @@ public interface Req1001_Dao {
 	public ProfileImg getMemberProfile(String email);
 	public List<QNA> QNAList(QNA sch);
 	public QNA getQNA(String qnano);	
+	public List<QNAFile> getQNAFile(String qnano);
+	//public List<QNAFile> getQNAFileList(String filename);
 	
 }

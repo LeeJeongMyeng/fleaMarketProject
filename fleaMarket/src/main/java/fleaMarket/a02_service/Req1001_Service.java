@@ -12,6 +12,7 @@ import vo.FleaMarket;
 import vo.Member;
 import vo.ProfileImg;
 import vo.QNA;
+import vo.QNAFile;
 @Service 
 public class Req1001_Service {
 	
@@ -77,6 +78,12 @@ public class Req1001_Service {
 		return dao.getQNA(qnano);
 		
 	}	
-	
+	public List<QNAFile> getQNAFile(String qnano) {
+		return dao.getQNAFile(qnano);
+	}
+	/*
+	 * public List<QNAFile> getQNAFileList(String filename) { return
+	 * dao.getQNAFileList(filename); }
+	 */
 	
 }
