@@ -56,7 +56,7 @@ li{
         <!-- Navbar -->
         <nav class="navbar navbar-expand-lg blur border-radius-lg top-0 z-index-3 shadow position-absolute mt-4 py-2 start-0 end-0 mx-4">
           <div class="container-fluid ps-2 pe-0">
-            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="${path}/pages/dashboards/default.html">
+            <a class="navbar-brand font-weight-bolder ms-lg-0 ms-3 " href="callmain.do">
               <img src="${path}/resource/img/fleamarketLOGO3.png" alt="..." class="avatar" style="height:60px; width:250px;">
             </a>
             <button class="navbar-toggler shadow-none ms-2" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
@@ -79,36 +79,32 @@ li{
                     <img src=" ${path}/assets/img/down-arrow-dark.svg " alt="down-arrow" class="arrow ms-1 d-lg-block d-none">
                     <img src="${path}/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1 d-lg-none d-block">
                   </a>
-                  <div class="dropdown-menu dropdown-menu-animation dropdown-md dropdown-md-responsive p-3 border-radius-lg mt-0 mt-lg-3 shadow-none" aria-labelledby="dropdownMenuBlocks">
+                       <div class="dropdown-menu dropdown-menu-animation dropdown-md dropdown-md-responsive p-3 border-radius-lg mt-0 mt-lg-3 shadow-none" aria-labelledby="dropdownMenuBlocks">
                     <div class="d-none d-lg-block">
                       <ul class="list-group">
                         <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/kanban.html">
+                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="totalSearch.do">
                             <div class="d-flex">
                               <div class="icon h-10 me-3 d-flex mt-1">
                                 <i class="ni ni-single-copy-04 text-primary"></i>
                               </div>
                               <div class="w-100 d-flex align-items-center justify-content-between">
                                 <div>
-                                  <a href="${path}/totalSearch.do" class="dropdown-item border-radius-md">
-                                  <p class="dropdown-header text-dark p-0">전체조회</p>
-                                  </a>
+                                  <p class="dropdown-header text-dark p-0">플리마켓 조회</p>
                                 </div>
                               </div>
                             </div>
                           </a>
                         </li>
                         <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/wizard.html">
+                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="fRegistration.do">
                             <div class="d-flex">
-                              <div class="icon h-10 me-3 d-flex mt-1">
-                                <i class="ni ni-laptop text-primary"></i>
-                              </div>
-                              <div class="w-100 d-flex align-items-center justify-content-between">
-                                <div>
-                                 <a href="${path}/fRegistration.do" class="dropdown-item border-radius-md">
+                             <div class="icon h-10 me-3 d-flex mt-1">
+                               <i class="ni ni-laptop text-primary"></i>
+                             </div>
+                             <div class="w-100 d-flex align-items-center justify-content-between">
+                                <div>		
                                   <p class="dropdown-header text-dark p-0">플리마켓 등록</p>
-                                  </a>
                                 </div>
                               </div>
                             </div>
@@ -116,6 +112,14 @@ li{
                         </li>
                       </ul>
                     </div>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                 
                     <!-- responsive -->
                     <div class="row d-lg-none">
                       <div class="col-md-12">
