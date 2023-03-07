@@ -1,6 +1,11 @@
 package fleaMarket.a01_controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,6 +22,7 @@ import fleaMarket.a02_service.Req3000_Service;
 import fleaMarket.util.FileService;
 import vo.FFile;
 import vo.FleaMarket;
+import vo.Member;
 
 @Controller("fleamarket")
 public class Req3000_Controller {
@@ -44,13 +50,13 @@ public class Req3000_Controller {
 	  
 //http://localhost:7030/fleaMarket/fRegistration.do	
 	@RequestMapping("fRegistration.do")
-	public String fRegistration() {
-
+	public String fRegistration(Model d) {
+	
 		return "FleaMarketRegistration";
 	}
 
 	@PostMapping("fleaMarketins.do")
-	public String fleaMarketins(FleaMarket ins, RedirectAttributes rttr, List<MultipartFile> pro) {
+	public String fleaMarketins(FleaMarket ins,RedirectAttributes rttr, List<MultipartFile> pro) {
 	    //1. 플리마켓 홍보글 등록
 		 service.insertFleaMarket(ins);	
 		 
@@ -107,8 +113,43 @@ public class Req3000_Controller {
 //	http://localhost:7030/fleaMarket/totalSearch.do
 	@RequestMapping("totalSearch.do")
 	public String totalSearch(@ModelAttribute("sch") FleaMarket sch, Model d) {
-	d.addAttribute("flist",service.getFleaMarketList(sch));
-	d.addAttribute("fnolist",service.FileNum(sch));
+		/*
+		 * service.getFleaMarketList(sch).get(0);
+		 * 
+		 * service.FileNum(sch);
+		 */
+		//플리마켓 글 목록을 불러옴.
+		List<FleaMarket> flist = service.getFleaMarketList(sch);
+		/*
+		for(int i=0; i<flist.size(); i++){ 
+			System.out.println(flist.get(i).getPostingNumber());
+			String a =service.FileNum(flist.get(i).getPostingNumber());
+			if(a==null ||a.equals(null)){
+				System.out.println("널이에오 ㅋㅋ!!");
+			}else {
+				System.out.println(a);
+			}
+			
+		} */
+		
+		  List<Map<String,Object>> listmap = new ArrayList<Map<String, Object>>();
+		  //플리마켓의 글갯수만큼 for문
+		  for(int i=0; i<flist.size(); i++){ 
+		  HashMap<String,Object> map= new HashMap<String,Object>();
+		  //플리마켓글 하나하나하나를 맵에 할당.
+		  map.put("fno",flist.get(i));
+		  //플리마켓 글과 일치하는 filename을 불러와서 담아줌.
+		  String filename =service.FileNum(flist.get(i).getPostingNumber());
+		  if(filename==null ||filename.equals(null)){
+			  filename="아에없음";
+			}
+		  map.put("fnolist",filename);
+		  listmap .add(map); 
+		  }
+		  
+	
+	d.addAttribute("fmap",listmap);
+	
 		return "FleaMarketOverallCheck";
 	}
 	

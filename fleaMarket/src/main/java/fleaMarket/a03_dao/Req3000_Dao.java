@@ -23,5 +23,5 @@ public interface Req3000_Dao {
 	public List<FleaMarket> getFleaMarketList(FleaMarket sch);	
 	
 	//전체조회(img파일) 
-	public List<FFile> FileNum(FleaMarket sch);
+	public String FileNum(String postingNumber);
 }

@@ -282,27 +282,27 @@
               <div class="row" style="justify-content: center;">
               
               <!-- 1개의 박스 -->
-              <c:forEach var="flea" items="${flist}" varStatus="statusNm">
+              <c:forEach var="fm" items="${fmap}">
                 <div class="col-xl-3 col-md-6 mb-xl-0 mb-4 TotList">
-                  <div class="card card-blog card-plain">
-                     <c:forEach var="imgf" items = "${fnolist }">
+                  <div class="card card-blog card-plain">                 
                     <div class="position-relative">
-                      <a class="d-block shadow-xl border-radius-xl">
-                       <%--  <img src="${path}/assets/img/home-decor-1.jpg" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl"> --%>
-                       <img src="${path}/resource/img/fleaMarket/${imgf.filename}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
-                      </a>
+                      <a class="d-block shadow-xl border-radius-xl">                    
+                       <img src="${path }/resource/img/fleaMarket/${fm.fnolist }" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+                    </a>
                     </div>
-         </c:forEach>
+       
+                     
+                    
                      
                   <div class="card-body px-1 pb-0">
                     
                    <!-- 제목 -->
                         <h5>
-                          ${flea.title}
+                       	${fm.fno.title }
                         </h5>
                    <!-- 간단한 설명 -->
                       <p class="mb-4 text-sm">
-                        ${flea.address}
+                         ${fm.fno.address}
                       </p>
                       <div class="d-flex align-items-center justify-content-between">
                         <button onclick="goDetail(${flea.postingNumber})" type="button" class="btn btn-outline-primary btn-sm mb-0">구경하기</button>

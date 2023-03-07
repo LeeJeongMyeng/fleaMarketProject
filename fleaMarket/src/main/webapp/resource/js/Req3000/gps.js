@@ -48,9 +48,10 @@ function displayCenterInfo(result, status) {
 } 
 
 /* function serar */
-//동에 대한 default 
+//동에 대한 default  
 
-geocoder.addressSearch('부산', function(result, status) {
+/*	var adrs = f.value()*/
+	geocoder.addressSearch('판교', function(result, status) {
    var infoDiv2 = document.getElementById('centerAddr2'); 
    var infoDiv3 = document.getElementById('centerAddr3'); 
 
@@ -121,10 +122,19 @@ geocoder.addressSearch('부산', function(result, status) {
 
 });
 
-var infodo = $("input[name=addrs1]").val;
-console.log(t);
+
+
+
 //필수항목 조건식 
  function checkForm1(){	
+if(!document.aform.email.value){
+	    var loginState="로그인을 하셔야합니다."
+	    alert(loginState)
+	    if(loginState+"\n 로그인 화면으로 이동하시겠습니까?"){
+			location.href="SignIn.do"
+		}        
+        return false;
+ }
 if(!document.aform.title.value){
         alert("글제목을 입력하세요");
         return false;

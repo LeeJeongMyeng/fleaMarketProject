@@ -50,14 +50,14 @@
 		where title like '%'||#{title}||'%'
 	</select>	
 	
-	<select id="FileNum" parameterType="fleamarket" resultType="ffile">
+	<select id="FileNum" parameterType="string" resultType="string">
 	<![CDATA[
-		SELECT FILENAME FROM(
-SELECT ROWNUM rn,f.FILENAME 
-FROM ffile f
-WHERE ROWNUM <2 AND 
-POSTINGNUMBER = #{postingNumber}
-)    
+		SELECT nvl(FILENAME,'없음') FROM(
+		SELECT ROWNUM rn,f.FILENAME 
+		FROM ffile f
+		WHERE ROWNUM <2 AND 
+		POSTINGNUMBER = #{postingNumber}
+		)    
 	    ]]>
 	</select>	
 </mapper>

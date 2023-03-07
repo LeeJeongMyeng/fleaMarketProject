@@ -73,6 +73,7 @@ $(document).ready(function(){
 });
 
 </script>
+
 </head>
 <link href="${path}/resource/css/FleaMarketRe/FleaMarketRe.css"
 	rel="stylesheet" />
@@ -97,8 +98,8 @@ $(document).ready(function(){
 						<div class="card card-body mt-4">
 							<h6 class="mb-0 fleamarket">플리마켓 등록</h6>
 							<hr class="horizontal dark my-3">
-							<input type="hidden" name="email" value="ehddms2909@naver.com">
-							<input type="hidden" name="bisenessNumber" value="예시~">
+							<input type="hidden" name="email" value="${Login.email}">
+							<input type="hidden" name="bisenessNumber" value="${Login.businessnumber}">
 							<label for="title" class="form-label labelFont">제목</label> 
 							<input type="text" class="form-control" id="projectName" name="title">
 
@@ -109,7 +110,7 @@ $(document).ready(function(){
 									<label class="form-label labelFont">주소 설정</label> 
 									<div class = "s_form">
 									   <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-									   <input name = "addrs1" type="text" id="sample6_address" class="form-control soooo2" placeholder="주소"><br>						
+									   <input name = "addrs1" type="text" onchange="asd(this)" id="sample6_address" class="form-control soooo2" placeholder="주소"><br>						
                                     </div>
 							     </div>
 							</div>
