@@ -6,7 +6,6 @@
 <fmt:requestEncoding value="utf-8" />
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <%@include file="sideheader.jsp"%>
 <meta charset="utf-8" />
@@ -32,55 +31,14 @@
 	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 </head>
 <style>
-/*페이지네이션*/
-.pagination_wrap {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	height: 50px;
-}
-
-.pagination {
-	background: #fff;
-	padding-top: 9px;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	height: 37px;
-	width: 400px;
-}
-
-#numbers {
-	padding: 0;
-	margin: 0 2rem;
-	list-style-type: none;
-	display: flex;
-}
-
-#numbers li a {
-	color: #333;
-	padding: .5rem 1rem;
-	text-decoration: none;
-	opacity: 0.7;
-}
-
-#numbers li a:hover {
-	opacity: 1;
-}
-
-#numbers li a.active {
-	opacity: 1;
-	color: #fff;
-	border-radius: 50%;
-	background: #e45e72;
-}
-
-.pagination i {
-	color: #333;
-	font-size: 1.2em;
-}
+table, td {
+   text-align:center;
+   }
 </style>
 <script type="text/javascript">
+function goDetail(postingNumber){
+	location.href="${path}/fmView.do?postingNumber="+postingNumber
+}
 function goPage(cnt){
 	$("[name=curPage]").val(cnt);
 	$("#frm01").submit()
@@ -88,11 +46,11 @@ function goPage(cnt){
 </script>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
-
+		
 	<main class="main-content position-relative border-radius-lg ">
 		<!-- Navbar -->
 		<!-- 상단 -->
-
+		
 		<div class="container-fluid py-4">
 			<div class="row">
 				<div class="col-12">
@@ -102,7 +60,7 @@ function goPage(cnt){
 							<div class="d-lg-flex">
 								<div>
 									<h5 class="mb-0" style="margin-top: 15%;">내가 쓴 플리마켓 모집글</h5>
-									<p class="text-sm mb-0">회원님께서 작성하신 플리마켓 모집글 입니다.</p>
+									<p class="text-sm mb-0">회원님께서 작성하신 플리마켓 모집글 목록입니다.</p>
 								</div>
 								<div class="ms-auto my-auto mt-lg-0 mt-4">
 									<div class="ms-auto my-auto">
@@ -113,36 +71,40 @@ function goPage(cnt){
 													<div class="modal-header">
 														<i class="fas fa-upload ms-3"></i>
 													</div>
-
-
 												</div>
 											</div>
 										</div>
-
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="card-body px-0 pb-0"></div>
 						<form id="frm01" class="form" method="post">
-							<input type="hidden" name="curPage" />
+						<input type="hidden" name="curPage" />
 							<div class="row">
 								<div class="table-responsive mt-3">
-									<table class="table table-flush" id="products-list">
+									<table class="table table-flush" id="FleamarketListTable">
+										<col width="5%">
+										<col width="30%">
+										<col width="10%">
+										<col width="10%">
+										<col width="10%">
+										<col width="10%">
+										<col width="10%">
 										<thead class="thead-light">
 											<tr style="background-color: #ebebeb;">
-												<th width="15%">글 번호</th>
-												<th width="15%">제목</th>
-												<th width="15%">모집공고 시작일</th>
-												<th width="15%">모집공고 마감일</th>
-												<th width="15%">플리마켓 개최일</th>
-												<th width="15%">플리마켓 장소</th>
-												<th width="15%">조회수</th>
+												<th>글 번호</th>
+												<th>제목</th>
+												<th>모집공고 시작일</th>
+												<th>모집공고 마감일</th>
+												<th>플리마켓 개최일</th>
+												<th>플리마켓 장소</th>
+												<th>조회수</th>
 											</tr>
 										</thead>
 										<tbody>
 											<c:forEach var="FleaMarket" items="${FleaMarketList}">
-												<tr>
+												<tr ondblclick="goDetail(${FleaMarket.postingNumber})">
 													<td>${FleaMarket.postingNumber}</td>
 													<td>${FleaMarket.title}</td>
 													<td>${FleaMarket.recruitmentStartDate}</td>
@@ -158,7 +120,8 @@ function goPage(cnt){
 							</div>
 						</form>
 
-						<nav aria-label="Page navigation example" style="margin-left:38%"><!-- 태그수정 -->
+						<nav aria-label="Page navigation example">
+							<!-- 태그수정 -->
 							<ul class="pagination justify-content-center">
 								<li class="page-item"><a class="page-link"
 									href="javascript:goPage(${sch.startBlock-1});"> <i
@@ -192,24 +155,8 @@ function goPage(cnt){
                 </script>
 							, made by <a href="https://www.creative-tim.com"
 								class="font-weight-bold" target="_blank">CONTIGO</a> for a
-							better FleaMarket.
+							better Community.
 						</div>
-					</div>
-					<div class="col-lg-6">
-						<ul
-							class="nav nav-footer justify-content-center justify-content-lg-end">
-							<li class="nav-item"><a href="https://www.creative-tim.com"
-								class="nav-link text-muted" target="_blank">Creative Tim</a></li>
-							<li class="nav-item"><a
-								href="https://www.creative-tim.com/presentation"
-								class="nav-link text-muted" target="_blank">About Us</a></li>
-							<li class="nav-item"><a
-								href="https://www.creative-tim.com/blog"
-								class="nav-link text-muted" target="_blank">Blog</a></li>
-							<li class="nav-item"><a
-								href="https://www.creative-tim.com/license"
-								class="nav-link pe-0 text-muted" target="_blank">License</a></li>
-						</ul>
 					</div>
 				</div>
 			</div>

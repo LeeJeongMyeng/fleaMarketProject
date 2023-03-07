@@ -6,11 +6,6 @@
 <fmt:requestEncoding value="utf-8" />
 <!DOCTYPE html>
 <html lang="en">
-<script type="text/javascript">
-function goDetail(qnano){
-	location.href="${path}/GetQNA.do?qnano="+qnano
-}
-</script>
 <head>
 <%@include file="sideheader.jsp" %>
 <meta charset="utf-8" />
@@ -35,7 +30,15 @@ function goDetail(qnano){
 <link id="pagestyle"
 	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 </head>
+<style>
+table, td {
+   text-align:center;
+   }
+</style>
 <script type="text/javascript">
+function goDetail(qnano){
+	location.href="${path}/GetQNA.do?qnano="+qnano
+}
 function goPage(cnt){
 	$("[name=curPage]").val(cnt);
 	$("#frm01").submit()
@@ -68,12 +71,9 @@ function goPage(cnt){
 													<div class="modal-header">
 														<i class="fas fa-upload ms-3"></i>
 													</div>
-
-
 												</div>
 											</div>
 										</div>
-
 									</div>
 								</div>
 							</div>
@@ -154,24 +154,8 @@ function goPage(cnt){
                 </script>
 								, made by <a
 									href="https://www.creative-tim.com" class="font-weight-bold"
-									target="_blank">CONTIGO</a> for a better FleaMarket.
+									target="_blank">CONTIGO</a> for a better Community.
 							</div>
-						</div>
-						<div class="col-lg-6">
-							<ul
-								class="nav nav-footer justify-content-center justify-content-lg-end">
-								<li class="nav-item"><a href="https://www.creative-tim.com"
-									class="nav-link text-muted" target="_blank">Creative Tim</a></li>
-								<li class="nav-item"><a
-									href="https://www.creative-tim.com/presentation"
-									class="nav-link text-muted" target="_blank">About Us</a></li>
-								<li class="nav-item"><a
-									href="https://www.creative-tim.com/blog"
-									class="nav-link text-muted" target="_blank">Blog</a></li>
-								<li class="nav-item"><a
-									href="https://www.creative-tim.com/license"
-									class="nav-link pe-0 text-muted" target="_blank">License</a></li>
-							</ul>
 						</div>
 					</div>
 				</div>

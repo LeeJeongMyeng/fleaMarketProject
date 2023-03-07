@@ -37,40 +37,36 @@
   <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
     <span class="mask bg-primary opacity-6"></span>
   </div>
-  <div class="main-content position-relative max-height-vh-100 h-100">
-    <!-- End Navbar -->
-    <div class="card shadow-lg mx-4 card-profile-bottom">
-      <div class="card-body p-3">
-        <div class="row gx-4">
-          <div class="col-auto">
-           
-          </div>
-          <div class="col-auto my-auto">
-            <div class="h-100">
-            
-              <p class="mb-0 font-weight-bold text-sm">
-              
-              </p>
-            </div>
-          </div>
-       
-      <div class="row mt-4">
-        <div class="col-12">
-          <div class="card mb-4">
-            <div class="card-header pb-0 p-3">
-         <!--   <img src="${path}/assets/img/@@@.jpg" > -->
-             <br>
-              <h6>CONTIGO는 스페인어로 당신과 함께라는 뜻으로</h6>
-              <h6>지역사회와 함께 성장하는 올바른 가치를 추구합니다.</h6>
-            </div>
-          
-               
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      	<footer class="footer pt-3  ">
+	<div class="main-content position-relative max-height-vh-100 h-100">
+		<!-- End Navbar -->
+		<div class="card shadow-lg mx-4 card-profile-bottom">
+			<div class="card-body p-3">
+				<div class="row gx-4">
+					<div class="col-auto"></div>
+					<div class="col-auto my-auto">
+						<div class="h-100">
+
+							<p class="mb-0 font-weight-bold text-sm"></p>
+						</div>
+					</div>
+
+					<div class="row mt-4">
+						<div class="col-12">
+							<div class="card mb-4">
+								<div class="card-header pb-0 p-3">
+									<!--   <img src="${path}/assets/img/@@@.jpg" > -->
+									<br>
+									<h6>CONTIGO는 스페인어로 당신과 함께라는 뜻으로</h6>
+									<h6>지역사회와 함께 성장하는 올바른 가치를 추구합니다.</h6>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<footer class="footer pt-3  ">
 				<div class="container-fluid">
 					<div class="row align-items-center justify-content-lg-between">
 						<div class="col-lg-6 mb-lg-0 mb-4">
@@ -78,48 +74,33 @@
 								class="copyright text-center text-sm text-muted text-lg-start">
 								©
 								<script>
-                  document.write(new Date().getFullYear())
-                </script>
-								, made by <a
-									href="https://www.creative-tim.com" class="font-weight-bold"
-									target="_blank">CONTIGO</a> for a better FleaMarket.
+									document.write(new Date().getFullYear())
+								</script>
+								, made by <a href="https://www.creative-tim.com"
+									class="font-weight-bold" target="_blank">CONTIGO</a> for a
+								better Community.
 							</div>
 						</div>
-            <div class="col-lg-6">
-              <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
-  </div>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
 
-  <!--   Core JS Files   -->
+	<!--   Core JS Files   -->
   <!-- Kanban scripts -->
   <script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
   <script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>
   <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
+			var win = navigator.platform.indexOf('Win') > -1;
+			if (win && document.querySelector('#sidenav-scrollbar')) {
+				var options = {
+					damping : '0.5'
+				}
+				Scrollbar.init(document.querySelector('#sidenav-scrollbar'),
+						options);
+			}
+		</script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->

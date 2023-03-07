@@ -63,7 +63,7 @@
 		<select id="FleaMarketList" resultType="fleamarket" parameterType="fapplicationsch">
 			SELECT a.* from
 			(SELECT rownum cnt,f.* FROM FLEAMARKET f WHERE email = #{title}) a
-			WHERE cnt BETWEEN #{start} AND #{end}
+			WHERE cnt BETWEEN #{start} AND #{end} ORDER BY postingnumber desc
 		</select>
 		<!-- 관리자 회원탈퇴용 이메일/프로필이미지 가져오기 -->
 		<select id="getMemberProfile" parameterType="string" resultType="profileimg">
@@ -98,7 +98,7 @@
 		<select id="MemberQNAList" resultType="qna" parameterType="fapplicationsch">
 			SELECT a.* from
 			(SELECT rownum cnt,f.* FROM FLEAMARKETQNA f WHERE email = #{title}) a
-			WHERE cnt BETWEEN #{start} AND #{end}
+			WHERE cnt BETWEEN #{start} AND #{end} ORDER BY qnano desc
 		</select>
 		<!-- 상세조회 -->
 		<select id="getQNA" resultType="qna" parameterType="string">
