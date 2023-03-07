@@ -8,8 +8,7 @@
 <fmt:requestEncoding value="utf-8"/>     
 <!DOCTYPE html>
 <%--
-
-
+동은아 뜨니 ???
  --%>
 <html>
 <head>
@@ -67,159 +66,44 @@ li{
                 <span class="navbar-toggler-bar bar3"></span>
               </span>
             </button>
-
-
-                <li class="nav-item dropdown dropdown-hover mx-2">
-                  <a href="AdminIntro.do" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center ">
+            <div class="collapse navbar-collapse w-100 pt-3 pb-2 py-lg-0" id="navigation">
+              <ul class="navbar-nav navbar-nav-hover mx-auto">
+                <li class="nav-item dropdown dropdown-hover ms-n5 me-6">
+                  <a class="nav-link ps-2 cursor-pointer" href="AdminIntro.do">
                     회사소개
                   </a>
-                  <div class="dropdown-menu dropdown-menu-animation dropdown-md dropdown-md-responsive p-3 border-radius-lg mt-0 mt-lg-3 shadow-none" aria-labelledby="dropdownMenuBlocks">
-                    <div class="d-none d-lg-block">
-                      <ul class="list-group">
-                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/kanban.html">
-                            <div class="d-flex">
-                              <div class="icon h-10 me-3 d-flex mt-1">
-                                <i class="ni ni-single-copy-04 text-primary"></i>
-                              </div>
-                              <div class="w-100 d-flex align-items-center justify-content-between">
-                                <div>
-                                  <p class="dropdown-header text-dark p-0">Kanban</p>
-                                </div>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/wizard.html">
-                            <div class="d-flex">
-                              <div class="icon h-10 me-3 d-flex mt-1">
-                                <i class="ni ni-laptop text-primary"></i>
-                              </div>
-                              <div class="w-100 d-flex align-items-center justify-content-between">
-                                <div>
-                                  <p class="dropdown-header text-dark p-0">Wizard</p>
-                                </div>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/datatables.html">
-                            <div class="d-flex">
-                              <div class="icon h-10 me-3 d-flex mt-1">
-                                <i class="ni ni-badge text-primary"></i>
-                              </div>
-                              <div class="w-100 d-flex align-items-center justify-content-between">
-                                <div>
-                                  <p class="dropdown-header text-dark p-0">DataTables</p>
-                                </div>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/calendar.html">
-                            <div class="d-flex">
-                              <div class="icon h-10 me-3 d-flex mt-1">
-                                <i class="ni ni-notification-70 text-primary"></i>
-                              </div>
-                              <div class="w-100 d-flex align-items-center justify-content-between">
-                                <div>
-                                  <p class="dropdown-header text-dark p-0">Calendar</p>
-                                </div>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
-                      </ul>
-                    </div>
-                    <!-- responsive -->
-                    <div class="row d-lg-none">
-                      <div class="col-md-12">
-                        <a class="py-2 ps-3 border-radius-md" href="${path}/pages/applications/kanban.html">
-                          <div class="d-flex">
-                            <div class="icon h-10 me-3 d-flex mt-1">
-                              <i class="ni ni-single-copy-04 text-primary"></i>
-                            </div>
-                            <div class="w-100 d-flex align-items-center justify-content-between">
-                              <div>
-                                <p class="dropdown-header text-dark p-0">Kanban</p>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                        <a class="py-2 ps-3 border-radius-md" href="${path}/pages/applications/wizard.html">
-                          <div class="d-flex">
-                            <div class="icon h-10 me-3 d-flex mt-1">
-                              <i class="ni ni-laptop text-primary"></i>
-                            </div>
-                            <div class="w-100 d-flex align-items-center justify-content-between">
-                              <div>
-                                <p class="dropdown-header text-dark p-0">Wizard</p>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                        <a class="py-2 ps-3 border-radius-md" href="${path}/pages/applications/datatables.html">
-                          <div class="d-flex">
-                            <div class="icon h-10 me-3 d-flex mt-1">
-                              <i class="ni ni-badge text-primary"></i>
-                            </div>
-                            <div class="w-100 d-flex align-items-center justify-content-between">
-                              <div>
-                                <p class="dropdown-header text-dark p-0">DataTables</p>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                        <a class="py-2 ps-3 border-radius-md" href="${path}/pages/applications/calendar.html">
-                          <div class="d-flex">
-                            <div class="icon h-10 me-3 d-flex mt-1">
-                              <i class="ni ni-notification-70 text-primary"></i>
-                            </div>
-                            <div class="w-100 d-flex align-items-center justify-content-between">
-                              <div>
-                                <p class="dropdown-header text-dark p-0">Calendar</p>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
                 </li>
-                <li class="nav-item dropdown dropdown-hover mx-2">
+                <li class="nav-item dropdown dropdown-hover me-6">
                   <a role="button" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center " id="dropdownMenuBlocks" data-bs-toggle="dropdown" aria-expanded="false">
                     플리마켓
                     <img src=" ${path}/assets/img/down-arrow-dark.svg " alt="down-arrow" class="arrow ms-1 d-lg-block d-none">
                     <img src="${path}/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1 d-lg-none d-block">
                   </a>
-                  <div class="dropdown-menu dropdown-menu-animation dropdown-md dropdown-md-responsive p-3 border-radius-lg mt-0 mt-lg-3 shadow-none" aria-labelledby="dropdownMenuBlocks">
+                       <div class="dropdown-menu dropdown-menu-animation dropdown-md dropdown-md-responsive p-3 border-radius-lg mt-0 mt-lg-3 shadow-none" aria-labelledby="dropdownMenuBlocks">
                     <div class="d-none d-lg-block">
                       <ul class="list-group">
                         <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/kanban.html">
+                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="totalSearch.do">
                             <div class="d-flex">
                               <div class="icon h-10 me-3 d-flex mt-1">
                                 <i class="ni ni-single-copy-04 text-primary"></i>
                               </div>
                               <div class="w-100 d-flex align-items-center justify-content-between">
                                 <div>
-                                  <p class="dropdown-header text-dark p-0">전체조회</p>
+                                  <p class="dropdown-header text-dark p-0">플리마켓 조회</p>
                                 </div>
                               </div>
                             </div>
                           </a>
                         </li>
                         <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="${path}/pages/applications/wizard.html">
+                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="fRegistration.do">
                             <div class="d-flex">
-                              <div class="icon h-10 me-3 d-flex mt-1">
-                                <i class="ni ni-laptop text-primary"></i>
-                              </div>
-                              <div class="w-100 d-flex align-items-center justify-content-between">
-                                <div>
+                             <div class="icon h-10 me-3 d-flex mt-1">
+                               <i class="ni ni-laptop text-primary"></i>
+                             </div>
+                             <div class="w-100 d-flex align-items-center justify-content-between">
+                                <div>		
                                   <p class="dropdown-header text-dark p-0">플리마켓 등록</p>
                                 </div>
                               </div>
@@ -228,6 +112,14 @@ li{
                         </li>
                       </ul>
                     </div>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                 
                     <!-- responsive -->
                     <div class="row d-lg-none">
                       <div class="col-md-12">
@@ -283,7 +175,7 @@ li{
                     </div>
                   </div>
                 </li>
-                <li class="nav-item dropdown dropdown-hover mx-2">
+                <li class="nav-item dropdown dropdown-hover me-6">
                   <a role="button" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center " id="dropdownMenuEcommerce" data-bs-toggle="dropdown" aria-expanded="false">
                     커뮤니티
                     <img src=" ${path}/assets/img/down-arrow-dark.svg  " alt="down-arrow" class="arrow ms-1 d-lg-block d-none">
@@ -317,7 +209,7 @@ li{
                             <a href="${path}/chatting.do" class="dropdown-item border-radius-md">
                               <span class="ps-3">채팅목록</span>
                             </a>
-                            <a href="${path}/communityMemberRoom.do" class="dropdown-item border-radius-md">
+                            <a href="${path}/communityMemberRoom.do?email=${Login.email}" class="dropdown-item border-radius-md">
                               <span class="ps-3">My Room</span>
                             </a>
                             <a href="${path}/communityFollowMember.do?myemail=${Login.email}" class="dropdown-item border-radius-md">
@@ -368,14 +260,47 @@ li{
                     </div>
                   </div>
                 </li>
-                <li class="nav-item dropdown dropdown-hover mx-2">
-                  <a role="button" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center ">
+                <li class="nav-item dropdown dropdown-hover">
+                  <a role="button" class="nav-link ps-2 d-flex justify-content-between cursor-pointer align-items-center " id="dropdownMenuBlocks" data-bs-toggle="dropdown" aria-expanded="false">
                     고객센터
+                    <img src=" ${path}/assets/img/down-arrow-dark.svg " alt="down-arrow" class="arrow ms-1 d-lg-block d-none">
+                    <img src="${path}/assets/img/down-arrow-dark.svg" alt="down-arrow" class="arrow ms-1 d-lg-none d-block">
                   </a>
                   <div class="dropdown-menu dropdown-menu-animation dropdown-md dropdown-md-responsive p-3 border-radius-lg mt-0 mt-lg-3 shadow-none" aria-labelledby="dropdownMenuBlocks">
                     <div class="d-none d-lg-block">
                       <ul class="list-group">
-                        <li class="nav-item dropdown dropdown-hover  list-group-item border-0 p-0">
+                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
+                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="QNAList.do">
+                            <div class="d-flex">
+                              <div class="icon h-10 me-3 d-flex mt-1">
+                                <i class="ni ni-single-copy-04 text-primary"></i>
+                              </div>
+                              <div class="w-100 d-flex align-items-center justify-content-between">
+                                <div>
+                                  <p class="dropdown-header text-dark p-0">고객센터 조회</p>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </li>
+                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
+                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="MemberQnAreg.do">
+                            <div class="d-flex">
+                             <div class="icon h-10 me-3 d-flex mt-1">
+                               <i class="ni ni-laptop text-primary"></i>
+                             </div>
+                             <div class="w-100 d-flex align-items-center justify-content-between">
+                                <div>		
+                                <c:if test="${Login.authority=='관리자'}">
+                                  <p class="dropdown-header text-dark p-0">공지사항 등록</p>
+                                </c:if>
+                                <c:if test="${Login.authority!='관리자'}">
+                                  <p class="dropdown-header text-dark p-0">문의사항 등록</p>
+                                </c:if>
+                                </div>
+                              </div>
+                            </div>
+                          </a>
                         </li>
                       </ul>
                     </div>

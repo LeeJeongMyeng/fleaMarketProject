@@ -151,7 +151,7 @@ var SessPassword = '${Login.password}'
 			              <input type="text" class="form-control form-control-sm" id="sample6_postcode" value="" readonly>
 			              </div>
 			              <div class="col-8">
-			              <input type="button" class="btn btn-primary w-50" style="font-size: x-small;background: #8451ce;"  onclick="AddressApi()" value="주소 수정"><br>
+			              <input type="button" class="btn btn-primary w-40" style="font-size: x-small;background: #5e72e4;"  onclick="AddressApi()" value="주소 변경"><br>
 			              </div>
 			              </div>
 						  <input type="text" class="form-control form-control-sm mt-n1" id="sample6_address" placeholder="주소" readonly><br>
@@ -171,7 +171,7 @@ var SessPassword = '${Login.password}'
                   </div>
                   <div class="" style="display:flex;">
 
-	                <button type="submit" style="margin-left:auto;" class="btn btn-primary btn-md mb-0">회원정보수정</button>
+	                <button type="submit" style="margin-left:auto;" class="btn btn-primary btn-md mb-0">정보수정</button>
 
                   	<button type="button" style="margin:0 13px;" data-bs-toggle="modal" data-bs-target="#LeaveMemberModal" id="LeaveMemberModalbtn" class="btn btn-outline-danger btn-md mb-0">회원탈퇴</button>                  
                   </div>
@@ -191,7 +191,7 @@ var SessPassword = '${Login.password}'
                 <input class="form-control w-50" id="CurrentPassword" type="password" placeholder="Current password">
                 <div class="invalid-feedback">기존 비밀번호와 일치하지 않습니다.</div>	
               </div>
-              <label class="form-label">새로운 비밀번호(8~16자 영/숫/특수 중 2가지이상)</label>	
+              <label class="form-label">새로운 비밀번호(8~16자 영문/숫자/특수문자 중 2가지이상)</label>	
               <div class="form-group">
                 <input class="form-control w-50" name="password" type="password" placeholder="New password">
                 <div class="invalid-feedback">형식이 올바르지 않습니다.</div>	
@@ -201,7 +201,9 @@ var SessPassword = '${Login.password}'
                 <input class="form-control w-50" id="password2" type="password" placeholder="Confirm password">
                 <div class="invalid-feedback">비밀번호와 일치하지않습니다.</div>	
               </div>
-              <button class="btn btn-primary mt-3 mb-0">비밀번호변경</button>
+              <div class="" style="display:flex;">
+              <button style="margin:0 13px; margin-left:auto;" class="btn btn-primary mt-3 mb-0">비밀번호 변경</button>
+            </div>
             </div>
             </form>
           </div>
