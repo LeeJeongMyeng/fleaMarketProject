@@ -106,7 +106,8 @@
 			to_CHAR(sysdate,'YYYY-MM-DD'),
 			to_CHAR(sysdate,'YYYY-MM-DD'),
 			#{email},#{method},
-			#{category})
+			#{category},'미답변',#{refno}
+			)
     	</insert>
     	<!-- 문의하기 파일등록 -->
     	<insert id="QNAFileInsert" parameterType="qnafile">

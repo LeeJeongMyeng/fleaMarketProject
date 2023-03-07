@@ -38,6 +38,7 @@ to_CHAR(sysdate,'YYYY-MM-DD'),
 
 
 
+
 SELECT * FROM FLEAMARKETQNA;
 SELECT * FROM FLEAMARKETMEMBER;
 SELECT * FROM PROFILE p ;
@@ -111,3 +112,16 @@ START with refno=0
  CONNECT BY PRIOR NO=refno
 ORDER siblings BY NO desc)
 where cnt between #{start} and #{end}
+
+DELETE FLEAMARKETQNA WHERE qnano='41';
+
+
+SELECT qna.* FROM
+			(SELECT rownum cnt,level,f.* FROM fleamarketqna f
+			WHERE 1=1
+			AND f.METHOD != 'n'
+			and (title || email) LIKE '%'||''||'%'
+			START with refno=0
+			CONNECT BY PRIOR qnano=refno
+			ORDER siblings BY qnano DESC) qna
+			WHERE cnt BETWEEN 1 AND 10

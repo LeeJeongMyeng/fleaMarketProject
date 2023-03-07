@@ -9,7 +9,8 @@ public class QNA {
 	private String email;
 	private String method;
 	private String category;
-	private String cnt;
+	private String refno;
+	private String cnt;//페이징
 	public String getQnano() {
 		return qnano;
 	}
@@ -63,6 +64,12 @@ public class QNA {
 	}
 	public void setCnt(String cnt) {
 		this.cnt = cnt;
+	}
+	public String getRefno() {
+		return refno;
+	}
+	public void setRefno(String refno) {
+		this.refno = refno;
 	}
 	
 	

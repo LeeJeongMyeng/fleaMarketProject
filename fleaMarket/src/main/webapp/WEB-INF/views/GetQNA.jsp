@@ -105,6 +105,9 @@
 							</div>	
    						
 							<div class="" style="margin-left:85%;">
+							<c:if test="${Login.authority=='관리자' && qna.method=='q'}">
+								<button type="button"  class="btn btn-outline-success btn-md mb-0 me-1" id="QNAAnswerBtn">답변작성</button>  
+							</c:if>
 							<c:if test="${Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email }">
 								<button type="submit" class="btn btn-outline-primary btn-md mb-0 me-1">수정</button>
 								<button type="button"  data-bs-toggle="modal" data-bs-target="#QNADeleteModal" id="DeleteQnaModalbtn"  class="btn btn-outline-danger btn-md mb-0 me-1">삭제</button>  <!-- 모달창추가 -->

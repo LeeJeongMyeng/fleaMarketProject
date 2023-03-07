@@ -1,7 +1,9 @@
 package fleaMarket.a01_controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -109,7 +111,8 @@ public class Req1000_Controller {
    
    //문의글작성페이지
    @RequestMapping("MemberQnAreg.do")
-   public String MemberQnAreg() {
+   public String MemberQnAreg(@ModelAttribute("qna") QNA qna,Model d) {
+	   
       return "QNAInsert";
    }
    
@@ -157,6 +160,12 @@ public class Req1000_Controller {
 	   //2. 테이블 데이터 삭제
 	   service.QNADelete(qnano);
 	   return "redirect:QNAList.do";
+   }
+   
+   @PostMapping("QNAAnswer.do")
+   public String QNAAnswer() {
+	   
+	   return "";
    }
    
    

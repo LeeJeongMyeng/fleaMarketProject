@@ -144,12 +144,17 @@ function goPage(cnt){
 															</c:forEach>
 															<c:forEach var="QNA" items="${QNAList}">
 																<tr ondblclick="goDetail(${QNA.qnano},'${QNA.email}')">
-																	<td>${QNA.cnt}</td>
+																	<td>
+																	${QNA.cnt}
+																	</td>
 																	<td>${QNA.qnano}</td>
-																	<td>${QNA.title}</td>
+																	<td>
+																	<c:if test="${QNA.method=='a'}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↪</c:if>																	
+																	 ${QNA.title}
+																	 </td>
 																	<td>${QNA.regdate}</td>
 																	<td>${QNA.email}</td>
-																	<td>문의사항</td>
+																	<td>${QNA.category}</td>
 																</tr>
 															</c:forEach>
 														</tbody>

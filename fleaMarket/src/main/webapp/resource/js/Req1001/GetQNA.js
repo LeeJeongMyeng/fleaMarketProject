@@ -19,3 +19,12 @@ function okmsg(){
 			alert('수정이 완료되었습니다. 감사합니다.'); return true;
 	
 }
+
+$('#QNAAnswerBtn').click(function(){
+
+var anstitle = $('input[name=title]').val()
+var ansqnano = $('input[name=qnano]').val()
+
+
+location.href="MemberQnAreg.do?method=a&title="+anstitle+"&refno="+ansqnano
+})

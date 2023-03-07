@@ -142,7 +142,9 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	
 	//문의글 등록
 	public void QNAInsert(QNA ins) {
-		if(ins.getCategory()==null) {ins.setCategory("공지사항");}
+		if(ins.getMethod().equals("a")) {ins.setCategory("답변");}
+		if(ins.getMethod().equals("n")) {ins.setCategory("공지사항");}
+		
 		dao.QNAInsert(ins);
 	}
 	//문의글파일 DB+파일업로드

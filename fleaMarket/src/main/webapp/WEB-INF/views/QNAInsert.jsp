@@ -60,8 +60,16 @@ $(document).ready(function(){
 							</div>
 						</div>
 						<form action="QNAInsert.do" method="post" enctype="multipart/form-data">
+							<input type="hidden" name="refno" value="${empty qna.refno?0:qna.refno}"/>							
 							<div class="row ms-2 mb-3">
-							 	<input name="method" type="hidden" value="${Login.authority=='관리자'?'n':'q'}" readonly />
+							<c:choose>
+								<c:when test="${empty method}">
+									<input name="method" type="hidden" value="${qna.method}"/>
+								</c:when>
+								<c:otherwise>
+									<input name="method" type="hidden" value="${Login.authority=='관리자'?'n':'q'}"/>
+								</c:otherwise>
+							</c:choose>
 							<c:if test="${Login.authority!='관리자'}">	
 								<div class="col-2">
 									<label class="postInsertTitle" style="margin-left: -0.5%;">문의종류</label>
@@ -85,7 +93,14 @@ $(document).ready(function(){
 							</div>
 							<div class="mb-3" style="margin-left: 26px;">
 									<label class="postInsertTitle" style="margin-left: -0.5%;">제목</label>
-									<input class="multisteps-form__input form-control w-50" name="title" type="text" placeholder="제목을 작성해주세요." />
+								<c:choose>	
+									<c:when test="${empty title}">
+										<input class="multisteps-form__input form-control w-50" name="title" type="text" value="re:${qna.title}"/>
+									</c:when>
+									<c:otherwise>
+										<input class="multisteps-form__input form-control w-50" name="title" type="text" placeholder="제목을 작성해주세요." />
+									</c:otherwise>
+								</c:choose>
 							</div>
 							<div class="mb-7" style="width: 98%; margin-left: 23px; height: 300px;">
 								<label class="mt-4 postInsertTitle" style="margin-left: -0.5%;">게시글내용</label>
