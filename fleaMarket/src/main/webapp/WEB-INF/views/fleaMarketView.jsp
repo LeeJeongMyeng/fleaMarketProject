@@ -45,19 +45,6 @@
 		if(msg!=""){
 			alert(msg+"\n 조회 화면으로 이동합니다")
 		}
-	   	checkId()
-	   	function checkId(){
-			if(sessEmail!=writerEmail){ // 로그인 email != 작성자 email
-				$("[name=uptBtn]").css('display', 'none'); // 수정 버튼 X
-				$("[name=delBtn]").css('display', 'none'); // 삭제 버튼 X
-				$("[name=appBtn]").css('display', 'block'); // 신청하기 버튼 O
-			}else{ // 로그인 email == 작성자 email
-				$("[name=uptBtn]").css('display', 'block'); // 수정 버튼 O
-				$("[name=delBtn]").css('display', 'block'); // 삭제 버튼 O
-				$("[name=appBtn]").css('display', 'none'); // 신청하기 버튼 X
-			}
-	  	}
-	   
 		$("[name=regBtn]").click(function(){
 			console.log(sessEmail)
 			/*
@@ -202,32 +189,39 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                       <c:forEach var="fmfile" items="${noimgfiles}">
 						<form action="downloadqna.do" method="get">
 						<div style="width:50%;">
-								<label class="mt-4 form-label labelFont">첨부파일</label>
-									<div class="fallback">
-									 <div class="download_Wrap">
-									 	<input type="hidden" name="filename"  value="${fmfile.filename}">
-										<input value="${fmfile.filename}" type="submit" class="form-control">
-									</div>
-									</div>
+							<label class="mt-4 form-label labelFont">첨부파일</label>
+								<div class="fallback">
+								 <div class="download_Wrap">
+								 	<input type="hidden" name="filename"  value="${fmfile.filename}">
+									<input value="${fmfile.filename}" type="submit" class="form-control">
 								</div>
+								</div>
+							</div>
 						</form>
 					</c:forEach>
                     </div>
-                    <div class="row mt-4">
-	                    <div class="col-lg-5 ms-auto">
-	                      
-	                      <button class="btn btn-primary mb-0 mt-lg-auto w-100" type="button" name="appBtn" data-bs-toggle="modal" data-bs-target="#jkanban-info-modal-nofile">신청하기</button>
-	                    </div>
-	                    <div class="row ms-auto text-end">
-		                    <div class="col-6"></div>
-	                    	<div class="col-3">  
-	                    	  <a name="uptBtn" class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>수정</a>
-							</div>
-							<div class="col-3">
-		                      <a name="delBtn" class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>삭제</a>
-	                    	</div>
-						</div>	                    
-                    </div>
+                    <c:choose>
+	                    <c:when test="${Login.email != fleamarket.email}">	
+							<div class="row mt-4">
+			                    <div class="col-lg-5 ms-auto">
+			                      <button class="btn btn-primary mb-0 mt-lg-auto w-100" type="button" name="appBtn" data-bs-toggle="modal" data-bs-target="#jkanban-info-modal-nofile">신청하기</button>
+			                    </div>
+			                </div>
+			            </c:when>
+		            	<c:otherwise>
+			            	<div class="row mt-4">
+			                    <div class="row ms-auto text-end">
+				                    <div class="col-6"></div>
+			                    	<div class="col-3">  
+			                    	  <a name="uptBtn" class="btn btn-link text-dark px-3 mb-0" href=".do"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>수정</a>
+									</div>
+									<div class="col-3">
+				                      <a name="delBtn" class="btn btn-link text-danger text-gradient px-3 mb-0" href=".do"><i class="far fa-trash-alt me-2"></i>삭제</a>
+			                    	</div>
+								</div>	                    
+		                    </div>
+						</c:otherwise>
+					</c:choose>
                   </div>
                 </div>
               </div>
