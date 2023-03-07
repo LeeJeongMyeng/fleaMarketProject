@@ -135,7 +135,7 @@ li{
 								<!-- 사업자일때 -->
 						<c:if test="${Login.authority=='사업자'}">
 							<li class="nav-item ">
-								<a class="nav-link " href="MemberFmReg.do?email=${Login.email}"> 
+								<a class="nav-link " href="MemberFmReg.do?title=${Login.email}"> 
 									<span class="sidenav-normal">내가 쓴 모집글</span>
 								</a>
 							</li>
@@ -146,7 +146,7 @@ li{
 								</a>
 							</li>
 							<li class="nav-item ">
-								<a class="nav-link " href="MemberInquire.do?email=${Login.email}"> 
+								<a class="nav-link " href="MemberInquire.do?title=${Login.email}"> 
 									<span class="sidenav-normal">나의 문의글</span>
 								</a>
 							</li>

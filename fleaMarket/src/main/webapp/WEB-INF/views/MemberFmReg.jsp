@@ -8,7 +8,7 @@
 <html lang="en">
 
 <head>
-<%@include file="sideheader.jsp" %>
+<%@include file="sideheader.jsp"%>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -33,50 +33,59 @@
 </head>
 <style>
 /*페이지네이션*/
-.pagination_wrap{
+.pagination_wrap {
 	display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
+	justify-content: center;
+	align-items: center;
+	height: 50px;
 }
 
-.pagination{
+.pagination {
 	background: #fff;
-    padding-top: 9px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    height: 37px;
-    width: 400px;
+	padding-top: 9px;
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	height: 37px;
+	width: 400px;
 }
-#numbers{
-	padding:0;
+
+#numbers {
+	padding: 0;
 	margin: 0 2rem;
-	list-style-type:none;
-	display:flex; 
+	list-style-type: none;
+	display: flex;
 }
-#numbers li a{
-	color:#333;
+
+#numbers li a {
+	color: #333;
 	padding: .5rem 1rem;
-	text-decoration:none;
-	opacity:0.7;
+	text-decoration: none;
+	opacity: 0.7;
 }
-#numbers li a:hover{
-	opacity:1;
+
+#numbers li a:hover {
+	opacity: 1;
 }
-#numbers li a.active{
-	opacity:1;
-	color:#fff;
+
+#numbers li a.active {
+	opacity: 1;
+	color: #fff;
 	border-radius: 50%;
-    background: #e45e72;
+	background: #e45e72;
 }
 
-.pagination i{
-	color:#333;
-	font-size:1.2em;
+.pagination i {
+	color: #333;
+	font-size: 1.2em;
 }
-
 </style>
+<script type="text/javascript">
+function goPage(cnt){
+	$("[name=curPage]").val(cnt);
+	$("#frm01").submit()
+}
+</script>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
 
@@ -116,17 +125,17 @@
 						</div>
 						<div class="card-body px-0 pb-0"></div>
 						<form id="frm01" class="form" method="post">
-
+							<input type="hidden" name="curPage" />
 							<div class="row">
 								<div class="table-responsive mt-3">
 									<table class="table table-flush" id="products-list">
 										<thead class="thead-light">
 											<tr style="background-color: #ebebeb;">
+												<th width="15%">글 번호</th>
 												<th width="15%">제목</th>
 												<th width="15%">모집공고 시작일</th>
 												<th width="15%">모집공고 마감일</th>
 												<th width="15%">플리마켓 개최일</th>
-												<th width="15%">플리마켓 종료일</th>
 												<th width="15%">플리마켓 장소</th>
 												<th width="15%">조회수</th>
 											</tr>
@@ -134,11 +143,11 @@
 										<tbody>
 											<c:forEach var="FleaMarket" items="${FleaMarketList}">
 												<tr>
+													<td>${FleaMarket.postingNumber}</td>
 													<td>${FleaMarket.title}</td>
 													<td>${FleaMarket.recruitmentStartDate}</td>
 													<td>${FleaMarket.recruitmentEndDate}</td>
 													<td>${FleaMarket.openDate}</td>
-													<td>${FleaMarket.closeDate}</td>
 													<td>${FleaMarket.address}</td>
 													<td>${FleaMarket.viewCnt}</td>
 												</tr>
@@ -149,12 +158,28 @@
 							</div>
 						</form>
 
-
-
-
-</div></div></div>
-
-
+						<nav aria-label="Page navigation example" style="margin-left:38%"><!-- 태그수정 -->
+							<ul class="pagination justify-content-center">
+								<li class="page-item"><a class="page-link"
+									href="javascript:goPage(${sch.startBlock-1});"> <i
+										class="fa fa-angle-left"></i> <span class="sr-only">Previous</span>
+								</a></li>
+								<c:forEach var="cnt" begin="${sch.startBlock}"
+									end="${sch.endBlock}">
+									<li class="page-item ${sch.curPage==cnt?'active':''}"><a
+										class="page-link" href="javascript:goPage(${cnt});">${cnt}</a>
+									</li>
+								</c:forEach>
+								<li class="page-item"><a class="page-link"
+									href="javascript:goPage(${sch.endBlock+1});"> <i
+										class="fa fa-angle-right"></i> <span class="sr-only">Next</span>
+								</a></li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+			</div>
+		</div>
 		<footer class="footer pt-3  ">
 			<div class="container-fluid">
 				<div class="row align-items-center justify-content-lg-between">

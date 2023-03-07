@@ -138,14 +138,17 @@ public class Req1001_Controller {
 		}
 		// 마이페이지 - 내가 쓴 플리마켓 모집글
 		@RequestMapping("MemberFmReg.do")
-		public String MemberFmReg(@RequestParam("email")String email, Model d, HttpSession session) {
-			d.addAttribute("FleaMarketList",service.FleaMarketList(email));
+		public String MemberFmReg(@ModelAttribute("sch") FApplicationSch sch, 
+						 Model d, HttpSession session) {
+			d.addAttribute("FleaMarketList",service.FleaMarketList(sch));
 				return "MemberFmReg";
 		}
+		
 		// 마이페이지 - 회원 내가 쓴 문의글
 		@RequestMapping("MemberInquire.do")
-		public String MemberInquire(@RequestParam("email")String email, Model d, HttpSession session) {
-			d.addAttribute("MemberQNAList",service.MemberQNAList(email));
+		public String MemberInquire(@ModelAttribute("sch") FApplicationSch sch, 
+						Model d, HttpSession session) {
+			d.addAttribute("MemberQNAList",service.MemberQNAList(sch));
 				return "MemberInquire";
 		}
 		

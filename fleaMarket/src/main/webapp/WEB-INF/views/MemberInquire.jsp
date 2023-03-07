@@ -36,7 +36,10 @@ function goDetail(qnano){
 	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 </head>
 <script type="text/javascript">
-	
+function goPage(cnt){
+	$("[name=curPage]").val(cnt);
+	$("#frm01").submit()
+}	
 </script>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
@@ -77,6 +80,7 @@ function goDetail(qnano){
 						</div>
 						<div class="card-body px-0 pb-0"></div>
 						<form id="frm01" class="form" method="post">
+						<input type="hidden" name="curPage" />
 							<div class="row">
 								<div class="table-responsive mt-3">
 									<table class="table table-flush" id="QnAListTable">
@@ -114,6 +118,27 @@ function goDetail(qnano){
 									</table>
 								</div>
 							</div>
+						</form>
+							<nav aria-label="Page navigation example">
+							<ul class="pagination justify-content-center">
+								<li class="page-item"><a class="page-link"
+									href="javascript:goPage(${sch.startBlock-1});"> <i
+										class="fa fa-angle-left"></i> <span class="sr-only">Previous</span>
+								</a></li>
+								<c:forEach var="cnt" begin="${sch.startBlock}"
+									end="${sch.endBlock}">
+									<li class="page-item ${sch.curPage==cnt?'active':''}"><a
+										class="page-link" href="javascript:goPage(${cnt});">${cnt}</a>
+									</li>
+								</c:forEach>
+								<li class="page-item"><a class="page-link"
+									href="javascript:goPage(${sch.endBlock+1});"> <i
+										class="fa fa-angle-right"></i> <span class="sr-only">Next</span>
+								</a></li>
+							</ul>
+						</nav>
+					</div>
+					
 					</div>
 				</div>
 			</div>

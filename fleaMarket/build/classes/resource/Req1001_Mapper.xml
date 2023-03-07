@@ -57,9 +57,13 @@
     		WHERE EMAIL=#{email}
     	</delete>
     	<!-- 내가 쓴 플리마켓글 -->
-    	<select id="FleaMarketList" resultType="FleaMarket" parameterType="String">
-		SELECT * FROM FleaMarket 
-		WHERE email =#{email}
+    	<select id="totCnt2" resultType="int">
+			SELECT count(*) FROM FLEAMARKET f WHERE email = #{title}
+		</select>
+		<select id="FleaMarketList" resultType="fleamarket" parameterType="fapplicationsch">
+			SELECT a.* from
+			(SELECT rownum cnt,f.* FROM FLEAMARKET f WHERE email = #{title}) a
+			WHERE cnt BETWEEN #{start} AND #{end}
 		</select>
 		<!-- 관리자 회원탈퇴용 이메일/프로필이미지 가져오기 -->
 		<select id="getMemberProfile" parameterType="string" resultType="profileimg">
@@ -88,9 +92,13 @@
 			WHERE cnt BETWEEN #{start} AND #{end}
 		</select>
 		<!-- 내가 쓴 문의글 조회 -->
-		<select id="MemberQNAList" resultType="qna" parameterType="string">
-			select * from FLEAMARKETQNA
-			WHERE email = #{email}
+		<select id="totCnt3" resultType="int">
+			SELECT count(*) FROM FLEAMARKETQNA WHERE email = #{title}
+		</select>
+		<select id="MemberQNAList" resultType="qna" parameterType="fapplicationsch">
+			SELECT a.* from
+			(SELECT rownum cnt,f.* FROM FLEAMARKETQNA f WHERE email = #{title}) a
+			WHERE cnt BETWEEN #{start} AND #{end}
 		</select>
 		<!-- 상세조회 -->
 		<select id="getQNA" resultType="qna" parameterType="string">
