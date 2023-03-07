@@ -305,7 +305,7 @@
                          ${fm.fno.address}
                       </p>
                       <div class="d-flex align-items-center justify-content-between">
-                        <button onclick="goDetail(${flea.postingNumber})" type="button" class="btn btn-outline-primary btn-sm mb-0">구경하기</button>
+                        <button onclick="goDetail(${fm.fno.postingNumber})" type="button" class="btn btn-outline-primary btn-sm mb-0">구경하기</button>
                         
                       </div>
                     </div>
