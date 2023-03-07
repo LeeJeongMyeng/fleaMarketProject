@@ -27,7 +27,7 @@
   <link href="${path}/resource/css/Community/CommunityBoard.css" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
   <script type="text/javascript">
-	  $(document).ready(function(){
+	  $(document).ready(function(e){
 			// 등록 버튼 클릭 시,
 		  $("#insert").click(function(){
 			  //내용 입력에 따른 content Input에 데이터 넣기(내용입력란이 input태그가 아니라서))
@@ -36,17 +36,117 @@
 			  $("form").submit()
 		  })
 		  console.log($('#productImg').val())
+		$('#uploadFile2').hide()
+	  	$('#uploadFile3').hide()
+	  	$('#uploadFile4').hide()
+	  	$('#uploadFile5').hide()
+	  	$('#uploadFile6').hide()
+	  	$('#uploadFile7').hide()
 		  
-		  $("input[type=file]").change(function () {
-	            var fileInput = document.getElementById("contract_file");
-	            var files = fileInput.files;
-	            var file;
-	            for (var i = 0; i < files.length; i++) {
-	                file = files[i];
-	                alert(file.name);
-	            }
-	        });
-	  });
+	    $("input[type='file']").change(function(e){
+		      //div 내용 비워주기
+		      //$('#preview').empty();
+		      
+			if($('#uploadFile1').val()!=""){
+				  $('#uploadFile1').hide()
+				  $('#uploadFile2').show()
+			 }
+			 if($('#uploadFile2').val()!=""){
+				  $('#uploadFile2').hide()
+				  $('#uploadFile3').show()
+			 }
+			 if($('#uploadFile3').val()!=""){
+				  $('#uploadFile3').hide()
+				  $('#uploadFile4').show()
+			 }
+			 if($('#uploadFile4').val()!=""){
+				  $('#uploadFile4').hide()
+				  $('#uploadFile5').show()
+			 }
+			  
+			 if($('#uploadFile5').val()!=""){
+				  $('#uploadFile5').hide()
+				  $('#uploadFile6').show()
+			 }
+			 
+			 if($('#uploadFile6').val()!=""){
+				 $('#uploadFile6').hide()
+				 $('#uploadFile7').show()
+				 
+				 $('#uploadFile7').click(function(){
+					 alert("[안내메시지]사진은 6장이상 등록이 불가합니다.")
+					 $('#uploadFile7').attr("readonly",true)
+				 
+			 	})
+			 }
+			 
+			 
+			 
+			  
+		      var files = e.target.files;
+		      var arr =Array.prototype.slice.call(files);
+		      
+		      //업로드 가능 파일인지 체크
+		      for(var i=0;i<files.length;i++){
+		        if(!checkExtension(files[i].name,files[i].size)){
+		          return false;
+		        }
+		      }
+		      preview(arr);
+		    });//file change
+		  
+		  // 사진 용량에 따른 유효성체크
+		  function checkExtension(fileName,fileSize){
+
+		      var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+		      var maxSize = 20971520;  //20MB
+		      
+		      if(fileSize >= maxSize){
+		        alert('파일 사이즈 초과');
+		        $("input[type='file']").val("");  //파일 초기화
+		        return false;
+		      }
+		      
+		      if(regex.test(fileName)){
+		        alert('[안내메시지]업로드 불가능한 파일이 있습니다.');
+		        $("input[type='file']").val("");  //파일 초기화
+		        return false;
+		      }
+		      return true;
+		    }
+		  //이미지 넣기
+		  function preview(arr){
+		      arr.forEach(function(f){
+		        
+		        //파일명이 길면 파일명...으로 처리
+		        var fileName = f.name;
+		        if(fileName.length > 10){
+		          fileName = fileName.substring(0,7)+"...";
+		        }
+		        
+		        //div에 이미지 추가
+		        var str = '<div style="display: inline-flex; padding: 10px;"><li>';
+		        str += '<span>'+fileName+'</span><br>';
+		        
+		        //이미지 파일 미리보기
+		        if(f.type.match('image.*')){
+		          var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+		          reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+		            //str += '<button type="button" class="delBtn" value="'+f.name+'" style="background: red">x</button><br>';
+		            str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
+		            str += '</li></div>';
+		            $(str).appendTo('#preview');
+		          } 
+		          reader.readAsDataURL(f);
+		        }else{
+		          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
+		          $(str).appendTo('#preview');
+		        }
+		      });//arr.forEach
+		    }
+		    
+	  })
+		  
   </script>
 </head>
 
@@ -69,7 +169,7 @@
             <!--form panels-->
             <div class="row">
               <div class="col-12 col-lg-8 m-auto">
-                <form class="multisteps-form__form mb-8" method="get" enctype="multipart/form-data"><!-- action="${path}/communityInsert.do"  -->
+                <form class="multisteps-form__form mb-8" method="post" enctype="multipart/form-data" action="${path}/communityInsert.do"><!-- action="${path}/communityInsert.do"  -->
                   <!--single form panel-->
                   <div class="card multisteps-form__panel r-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
                     <h5 class="font-weight-bolder mt-4" style="text-align:center; font-size:20pt;">커뮤니티 게시글 등록</h5>
@@ -86,7 +186,7 @@
                         </div>
                         <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                           <label class="postInsertTitle">작성자</label>
-                          <input class="multisteps-form__input form-control" name="email" type="text" value="${Login.email}" readonly/>
+                          <input class="multisteps-form__input form-control" name="email" type="text" value="yujin@gmail.com" readonly/><!--${Login.email}  -->
                         </div>
                       </div>
                       <div class="row mt-3" style="width:99%; margin-left:0.5%;">
@@ -120,26 +220,24 @@
                       <div class="row mt-3">
                         <div class="col-2" style="height:120px;">
                           <label class="postInsertTitle">게시글 이미지</label>
-                          <input type="file" name="report" id="report" multiple>
+                          <table>
+						    <tr >
+						      <td align="center">
+						        <input type="file" name="mediaFile" id="uploadFile1" class="form-control" multiple="multiple" style="width:1100px;">
+						        <input type="file" name="mediaFile" id="uploadFile2" class="form-control" multiple style="width:1100px;">
+						        <input type="file" name="mediaFile" id="uploadFile3" class="form-control" multiple style="width:1100px;">
+						        <input type="file" name="mediaFile" id="uploadFile4" class="form-control" multiple style="width:1100px;">
+						        <input type="file" name="mediaFile" id="uploadFile5" class="form-control" multiple style="width:1100px;">
+						        <input type="file" name="mediaFile" id="uploadFile6" class="form-control" multiple style="width:1100px;">
+						        <input type="file" id="uploadFile7" class="form-control" multiple style="width:1100px;">
+						        <div id="preview"></div>
+						      </td>
+						    </tr>
+						  </table>
                           <!-- <input type="file" name="report" class="form-control" style="width:230px"
                           		id="productImg" accept="image/*" onchange="setThumbnail(event);" multiple> -->
                         </div>
                       </div>
-                      <script>
-                     
-                      function setThumbnail(event) {
-                          var reader = new FileReader();
-                          reader.onload = function(event) {
-                            var img = document.createElement("img");
-                            img.setAttribute("src", event.target.result);
-                            document.querySelector("#image_container").appendChild(img);
-                            //document.querySelector("#image_container").innerHTML = img;
-                            img.width=230
-                            img.height=180
-                          };
-                          reader.readAsDataURL(event.target.files[0]);
-                        }
-                      </script>
                       <div class="button-row d-flex mt-4">
                         <button class="btn bg-gradient-secondary mb-0 js-btn-prev mt-8"  type="button" title="Prev">이전</button>
                         <button class="btn bg-gradient-dark ms-auto mb-0 mt-8" type="button" title="Send" id="insert">등록</button>

@@ -1,7 +1,7 @@
 package fleaMarket.a01_controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import fleaMarket.a02_service.Req4002_Service;
 import fleaMarket.util.FileService;
@@ -40,23 +39,37 @@ public class Req4002_Controller {
 	private String upload;
 	
 	@PostMapping("communityInsert.do")
-	public String communityInsert(Capplication ins,MultipartHttpServletRequest files, Model d) {
+	public String communityInsert(@RequestParam("mediaFile") MultipartFile[] mfiles,Capplication ins, Model d) {
 		service.communityInsert(ins);
-		List<MultipartFile> fileList = files.getFiles("report");
-		
-		if( fileList!=null ){
-			BoardImg f = new BoardImg();
-			String imgname =""; 
-			for (MultipartFile mf : fileList) {
-				System.out.println(mf);
-				imgname+=fileservice.insprofileimg(upload, mf);
-				imgname+="&SEP&";
+		BoardImg f = new BoardImg();
+		String imgname =""; 
+		System.out.println("파일 길이:"+mfiles.length);
+		if( mfiles!=null ){
+			ArrayList<String> imgNames = new ArrayList<String>();
+			for (MultipartFile mf : mfiles) {
+				System.out.println(mf.toString());
+				imgNames.add(fileservice.insprofileimg(upload, mf));
 			}
-				f.setImgname(imgname);
-				f.setImgpath(upload);
-				service.communityFileInsert(f);
+			imgNames.add(""); // 배열 고정값 7
+			
+			int inCnt = imgNames.indexOf(""); // 들어오는 이미지 갯수
+			System.out.println(imgNames);
+			System.out.println("사이즈"+imgNames.size());
+			System.out.println("인덱스"+inCnt); // 넣은 숫자값+1
+			
+			String imgnameVal="";
+			
+			for(int i=0;i<(inCnt+1);i++) {
+				imgnameVal += imgNames.get(i);
+				if(inCnt>1 && i<inCnt) { // 1개이상, 이미지 들어온값까지만 구분자 추가
+					imgnameVal += "&SEP&";
+				}
+			}
+			//System.out.println(imgnameVal.substring(0,imgnameVal.length()-5));
+			f.setImgname(imgnameVal.substring(0,imgnameVal.length()-5));
+			f.setImgpath(upload);
+			service.communityFileInsert(f);
 		}
-		
 		d.addAttribute("msg", "등록 성공");
 		return "communityInsert"; // 전체조회페이지로 이동
 	}

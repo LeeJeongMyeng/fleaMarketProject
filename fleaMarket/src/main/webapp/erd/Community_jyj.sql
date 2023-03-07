@@ -1,7 +1,7 @@
 -- 커뮤니티 게시글
 CREATE TABLE capplicaion
 (
-	communityNumber varchar2(100) NOT NULL, -- 커뮤니티번호
+	communityNumber number NOT NULL, -- 커뮤니티번호
 	title varchar2(100), -- 제목
 	content varchar2(2000), -- 커뮤니티 내용
 	registDate date, -- 등록날짜
@@ -11,7 +11,6 @@ CREATE TABLE capplicaion
 	-- 구분자 #
 	hashtag varchar2(100), -- 해시태그
 	viewCnt number, -- 조회수
-	likeCnt NUMBER, -- 좋아요수
 	PRIMARY KEY (communityNumber)
 );
 CREATE SEQUENCE communityNumber_seq
@@ -42,31 +41,43 @@ WHERE communityNumber='comBoard23';
 SELECT * FROM capplicaion;
 WHERE communityNumber='comBoard23';
 
-INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','dbwls8382@gmail.com','#태그1 #태그2',0,0);
-INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','dbwls8382@gmail.com','#태그1 #태그2',0,0);
+INSERT INTO capplicaion values(communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','yujin@gmail.com','#태그1 #태그2',0);
+INSERT INTO capplicaion values(communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','dbwls8382@gmail.com','#태그1 #태그2',0);
 -- 커뮤니티 게시글 이미지
 CREATE TABLE BoardImg
 (
-	imgName varchar2(100), -- 파일명
-	imgPath varchar2(500), -- 파일경로
-	communityNumber varchar2(100) NOT NULL -- 커뮤니티 번호(FK)
+	imgName varchar2(1000), -- 파일명
+	imgPath varchar2(1000), -- 파일경로
+	communityNumber number NOT NULL -- 커뮤니티 번호(FK)
 );
 DROP TABLE BoardImg CASCADE CONSTRAINTS;
 
-INSERT INTO BoardImg values('파일명','파일경로','comBoard0');
+INSERT INTO BoardImg values('파일명','파일경로',communityNumber_seq.currval);
 
 SELECT * FROM BoardImg;
 
 SELECT DISTINCT *
 FROM BoardImg i,capplicaion c
-WHERE i.communityNumber=c.communityNumber
+WHERE i.communitynumber=c.communitynumber
 AND c.email='yujin@gmail.com'
 ORDER BY registdate;
 
-SELECT DISTINCT c.communitynumber, imgpath, title, content, registdate, updatedate, category, email, hashtag, viewcnt, likecnt
+
+
+SELECT DISTINCT c.communitynumber, imgpath, title, content, registdate, updatedate, category, email, hashtag, viewcnt
 FROM BoardImg i,capplicaion c
 WHERE i.communityNumber=c.communityNumber
 AND c.email='yujin@gmail.com';
+
+-- 커뮤니티 게시글 좋아요
+CREATE TABLE communityHeart(
+   communityNumber varchar2(100) CONSTRAINT Heart_cnum_fk REFERENCES capplication(communitynumber) ON DELETE CASCADE,
+   email varchar2(50) CONSTRAINT Heart_email_fk REFERENCES fleamarketmember(email) ON DELETE CASCADE
+);
+
+DROP TABLE communityHeart;
+
+SELECT* FROM communityHeart;
 
 -- 채팅
 CREATE TABLE chat

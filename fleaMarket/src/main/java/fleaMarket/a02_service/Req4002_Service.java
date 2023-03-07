@@ -1,13 +1,10 @@
 package fleaMarket.a02_service;
 
-import java.io.File;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import fleaMarket.a03_dao.Req4002_Dao;
 import vo.BoardImg;

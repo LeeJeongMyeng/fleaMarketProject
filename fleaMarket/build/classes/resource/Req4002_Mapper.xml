@@ -7,12 +7,12 @@
     <mapper namespace="fleaMarket.a03_dao.Req4002_Dao">
     
     	<insert id="communityInsert" parameterType="capplication">
-    		INSERT INTO capplicaion values('comBoard'||communityNumber_seq.nextval,
-    		 #{title},#{content},sysdate,NULL,#{category},#{email},#{hashtag},0,0)
+    		INSERT INTO capplicaion values(communityNumber_seq.nextval,
+    		 #{title},#{content},sysdate,NULL,#{category},#{email},#{hashtag},0)
     	</insert>
     	
     	<insert id="communityFileInsert" parameterType="boardimg">
-			INSERT INTO BoardImg values(#{imgname},#{imgpath},'comBoard'||communityNumber_seq.currval)
+			INSERT INTO BoardImg values(#{imgname},#{imgpath},communityNumber_seq.currval)
 		</insert>
 		
     	<update id="communityUpdate" parameterType="capplication">

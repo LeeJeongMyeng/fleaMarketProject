@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 //vo.Capplication
 // vo.Capplication
 public class Capplication {
-	private String communitynumber; //커뮤니티번호
+	private int communitynumber; //커뮤니티번호
 	private String title;	// 제목
 	private String content;	// 커뮤니티내용
 	private String registDate;	// 등록날짜
@@ -14,13 +14,12 @@ public class Capplication {
 	private String email;	//이메일
 	private String hashtag;	//해시태그
 	private int viewCnt;	//조회수
-	private int likeCnt;
 	private String imgname;	//파일명
 	private MultipartFile report;	// 
-	public String getCommunitynumber() {
+	public int getCommunitynumber() {
 		return communitynumber;
 	}
-	public void setCommunitynumber(String communitynumber) {
+	public void setCommunitynumber(int communitynumber) {
 		this.communitynumber = communitynumber;
 	}
 	public String getTitle() {
@@ -70,12 +69,6 @@ public class Capplication {
 	}
 	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
-	}
-	public int getLikeCnt() {
-		return likeCnt;
-	}
-	public void setLikeCnt(int likeCnt) {
-		this.likeCnt = likeCnt;
 	}
 	public String getImgname() {
 		return imgname;
