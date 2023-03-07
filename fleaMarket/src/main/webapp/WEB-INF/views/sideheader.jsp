@@ -70,12 +70,10 @@ li{
 		<div class="collapse navbar-collapse  w-auto h-auto"
 			id="sidenav-collapse-main">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a 
-					href="#dashboardsExamples" class="nav-link "
+				<li class="nav-item"><a href="MemberInfo.do" class="nav-link "
 					aria-controls="dashboardsExamples" role="button"
 					aria-expanded="false">
-						<div
-							class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
+						<div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
 							<i class="ni ni-shop text-primary text-sm opacity-10"></i>
 						</div> <span class="nav-link-text ms-1">${Login.name}님 </span>
 				</a>
@@ -96,7 +94,6 @@ li{
 						<ul class="nav ms-4">
 							<li class="nav-item active">
 								<a class="nav-link" href="MemberInfo.do">
-								 <span class="sidenav-mini-icon">P</span>
 								  <span class="sidenav-normal">내 정보 조회<b class="caret"></b></span>
 								</a>
 							</li>	
@@ -109,7 +106,6 @@ li{
 						<ul class="nav ms-4">
 							<li class="nav-item active">
 								<a class="nav-link" href="AdminSearch.do">
-								 <span class="sidenav-mini-icon">P</span>
 								  <span class="sidenav-normal">가입회원 목록조회<b class="caret"></b></span>
 								</a>
 							</li>	
@@ -136,23 +132,20 @@ li{
 						<c:if test="${Login.authority=='사업자'}">
 							<li class="nav-item ">
 								<a class="nav-link " href="MemberFmReg.do?title=${Login.email}"> 
-									<span class="sidenav-normal">내가 쓴 모집글</span>
+									<span class="sidenav-normal">플리마켓 모집</span>
 								</a>
 							</li>
 					</c:if>
+							<!-- 어떻게 할지? 
 							<li class="nav-item ">
 								<a class="nav-link " href="#"> 
 									<span class="sidenav-normal">내 참가신청 글목록</span>
 								</a>
 							</li>
+							 -->
 							<li class="nav-item ">
 								<a class="nav-link " href="MemberInquire.do?title=${Login.email}"> 
-									<span class="sidenav-normal">나의 문의글</span>
-								</a>
-							</li>
-							<li class="nav-item ">
-								<a class="nav-link " href="${path}/pages/pages/pricing-page.html"> 
-									<span class="sidenav-normal">커뮤니티</span>
+									<span class="sidenav-normal">문의하기</span>
 								</a>
 							</li>
 						</ul>
@@ -165,12 +158,12 @@ li{
 				<a data-bs-toggle="collapse" href="#PageMove" class="nav-link" aria-controls="applicationsExamples" role="button" aria-expanded="false">
 						<div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
  							<i class="ni ni-single-copy-04 text-danger text-sm opacity-10"></i>						</div> 
-						<span class="nav-link-text ms-1">이동하기</span>
+						<span class="nav-link-text ms-1">사이트</span>
 				</a>
 					<div class="collapse " id="PageMove">
 						<ul class="nav ms-4">
 							<li class="nav-item ">
-								<a class="nav-link " href="#"> 
+								<a class="nav-link " href="totalSearch.do"> 
 									<span class="sidenav-normal">플리마켓</span>
 								</a>
 							</li>
@@ -181,13 +174,13 @@ li{
 								</a>
 							</li>
 							<li class="nav-item ">
-								<a class="nav-link " href="#"> 
-									<span class="sidenav-normal">메뉴1</span>
+								<a class="nav-link" href="${path}/communityMemberRoom.do?email=${Login.email}"> 
+									<span class="sidenav-normal">마이룸</span>
 								</a>
 							</li>
 							<li class="nav-item ">
-								<a class="nav-link " href="#"> 
-									<span class="sidenav-normal">메뉴2</span>
+								<a class="nav-link" href="${path}/communityFollowMember.do?myemail=${Login.email}"> 
+									<span class="sidenav-normal">나의 팔로워</span>
 								</a>
 							</li>
 						</ul>
@@ -312,7 +305,8 @@ li{
 				</div>
 			</div>
 		</div>
-	</div><!--   Core JS Files   -->
+	</div>
+	<!--   Core JS Files   -->
 	<script src="${path}/assets/js/core/popper.min.js"></script>
 	<script src="${path}/assets/js/core/bootstrap.min.js"></script>
 	<script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
