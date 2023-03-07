@@ -32,9 +32,29 @@
 	   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=91e22fb67ec6ac7eabb75fa26b7d3d4d&libraries=services,clusterer,drawing"></script>
 	<script type="text/javascript"
 	   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=91e22fb67ec6ac7eabb75fa26b7d3d4d"></script>
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+   integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+   crossorigin="anonymous"></script>
   <script type="text/javascript">
+   var sessEmail = "${Login.email}"
+   var writerEmail = "${fleamarket.email}"
+   
    $(document).ready(function(){
 	   var msg = "${msg}"
+	   
+		checkId()
+	   function checkId(){
+			if(sessEmail!=writerEmail){ // 로그인 email != 작성자 email
+				$("[name=uptBtn]").css('display', 'none'); // 수정 버튼 X
+				$("[name=delBtn]").css('display', 'none'); // 삭제 버튼 X
+				$("[name=appBtn]").css('display', 'block'); // 신청하기 버튼 O
+			}else{ // 로그인 email == 작성자 email
+				$("[name=uptBtn]").css('display', 'block'); // 수정 버튼 O
+				$("[name=delBtn]").css('display', 'block'); // 삭제 버튼 O
+				$("[name=appBtn]").css('display', 'none'); // 신청하기 버튼 X
+			}
+	   }
+	   
 		$("[name=regBtn]").click(function(){
 			$("#frmNofile").submit()
 		})
@@ -138,6 +158,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                   </div>
                 </div>
                 <div class="col-lg-5 mx-auto">
+                  <input type="hidden" name="writer" value="${fleamarket.email}">
                   <h3 class="mt-lg-0 mt-4">${fleamarket.title}</h3>
                   <div class="rating">
                     <i class="fas" aria-hidden="true">${fleamarket.openDate} - ${fleamarket.closeDate}</i>
@@ -169,8 +190,18 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                     </div>
                     <div class="row mt-4">
 	                    <div class="col-lg-5 ms-auto">
-	                      <button class="btn btn-primary mb-0 mt-lg-auto w-100" type="button" name="button" data-bs-toggle="modal" data-bs-target="#jkanban-info-modal-nofile">신청하기</button>
+	                      
+	                      <button class="btn btn-primary mb-0 mt-lg-auto w-100" type="button" name="appBtn" data-bs-toggle="modal" data-bs-target="#jkanban-info-modal-nofile">신청하기</button>
 	                    </div>
+	                    <div class="row ms-auto text-end">
+		                    <div class="col-6"></div>
+	                    	<div class="col-3">  
+	                    	  <a name="uptBtn" class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>수정</a>
+							</div>
+							<div class="col-3">
+		                      <a name="delBtn" class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>삭제</a>
+	                    	</div>
+						</div>	                    
                     </div>
                   </div>
                 </div>
@@ -235,7 +266,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
     </div>
   </div>
   
-  <!-- 신청하기 모달창 (양식 O) -->
+  <!-- 신청하기 모달창 (양식 O) 
   <div class="modal fade" id="jkanban-info-modal" style="display: none" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -246,39 +277,35 @@ It's a separate element, as animating opacity is faster than rgba(). -->
           </button>
         </div>
         <div class="pt-4 modal-body">
+          
           <div class="form-group">
-          	<label>파일 첨부</label> <!-- 첨부파일 -->
-          	<form  method="post"  action="insApp.do" enctype="multipart/form-data">  
+          	<label>파일 첨부</label> 
+          	<form id="frmNofile" method="post" action="${path}/insApp.do" enctype="multipart/form-data">  
           		<div class="row mt-3">
 	              <div class="col-2" style="height:120px;">
-	                <input type="file" name="pro" class="form-control" style="width:230px"
-	                      id="productImg" multiple>
+	                <input type="file" name="appFile" class="form-control" style="width:230px"
+	                      id="appFile" multiple>
 	                 <div id="image_container"></div>
 	              </div>
-	            </div>  
-          	<!--  		
-            	<div action="/file-upload" class="form-control dropzone" id="productImg">
-            		<input type="file" name="pro" multiple>
-            	</div>
-             -->  
-            </form>
-          </div>
-          <div class="alert alert-success d-none">Changes saved!</div>
-          <div class="text-end">
-            <button type="button" class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
-              확인
-            </button>
-            <button class="m-1 btn btn-secondary" data-target="#jkanban-info-modal" data-bs-dismiss="modal">
-              취소
-            </button>
-          </div>
+	            </div>
+          	<div class="text-end">
+	           	<input type="hidden" name="postingNumber" value="${fleamarket.postingNumber}"/>
+	           	<input type="hidden" name="email" value="${Login.email}"/>
+	            <button name="regBtn" class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
+	              확인
+	            </button>
+	            <button class="m-1 btn btn-secondary" data-target="#jkanban-info-modal" data-bs-dismiss="modal">
+	              취소
+	            </button>
+	          </form>
+	          </div>
+		   </div>
         </div>
       </div>
     </div>
-  </div>
-  
-  
-  <!-- 신청하기 모달창 (양식 X) -->
+   </div>
+  -->
+  <!-- 신청하기 모달창 (양식 X) -->  
   <div class="modal fade" id="jkanban-info-modal-nofile" style="display: none" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -290,22 +317,31 @@ It's a separate element, as animating opacity is faster than rgba(). -->
         </div>
         <div class="pt-4 modal-body">
           <div class="form-group text-center">신청하시겠습니까?</div>
-          <div class="text-end">
-            <form id="frmNofile" method="post" action="${path}/insApp.do">
-            	<input type="hidden" name="postingNumber" value="${fleamarket.postingNumber}"/>
+          <form id="frmNofile" method="post" action="${path}/insApp.do" enctype="multipart/form-data">
+          	<label>파일 첨부</label>
+         	<div class="row mt-3">
+              <div class="col-2" style="height:120px;">
+                <input type="file" name="appFile" class="form-control" style="width:230px"
+                      id="appFile" multiple>
+                 <div id="image_container"></div>
+              </div>
+            </div>
+            <input type="hidden" name="postingNumber" value="${fleamarket.postingNumber}"/>
+	        <input type="hidden" name="email" value="${Login.email}"/>
+          	<div class="text-end">
 	            <button name="regBtn" class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
 	              확인
 	            </button>
 	            <button class="m-1 btn btn-secondary" data-target="#jkanban-info-modal" data-bs-dismiss="modal">
 	              취소
 	            </button>
-            </form>
-          </div>
-        </div>
+		   	 </div>
+		   </form>
+         </div>
       </div>
     </div>
   </div>
-  
+
   
   <!-- 신청 완료 알림 모달창 (양식 X) -->
   <div class="modal fade" id="jkanban-info-modal-done" style="display: none" tabindex="-1" role="dialog">

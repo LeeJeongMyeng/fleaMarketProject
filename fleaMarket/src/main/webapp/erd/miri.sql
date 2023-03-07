@@ -32,7 +32,7 @@ CREATE SEQUENCE fleaMarket_seq
      
 DROP SEQUENCE fleaMarket_seq;
 
-INSERT INTO fleaMarket VALUES (fleaMarket_seq.nextval,'소상공인 행복마켓',sysdate,'주최 : 중소벤처기업부, 소상공인연합회<br>지역별 우수 소상공인 상품의 전시와 판매를 중심으로 플리마켓, 푸드트럭, 체험존 운영 예정<br>소상공인 업체의 지역 제품 판매','3762801384','28888wjdaud@naver.com',30,'20230101','20230131','20230301','20230307','P',NULL,NULL);
+INSERT INTO fleaMarket VALUES (fleaMarket_seq.nextval,'댕댕이마켓',sysdate,'이 세상 모든 댕댕이들을 위한 플리마켓에 참여해주세요!<br>강아지용품이라면 어떤 분이든 환영합니다 ^-^','3762801384','miri7575@naver.com',30,'20230301','20230331','20230701','20230707','P',0,'서울 강남구 삼성동 135-4');
 
 -- 신청
 SELECT * FROM FApplication;
@@ -70,7 +70,15 @@ FROM (
 	FROM FApplication fa, fleaMarket fm, fleamarketmember m
 	WHERE fa.postingNumber = fm.postingNumber(+)
 	AND fa.email = m.email(+)
-	AND fm.title like '%'||#{title}||'%'
+	AND fm.title like '%'||''||'%'
+	ORDER BY fa.applicationDate DESC
+	)	
+WHERE cnt BETWEEN 1 AND 10;
+-- 수정
+SELECT *
+FROM (
+	SELECT rownum cnt, fa.*
+	FROM FApplication fa
 	ORDER BY fa.applicationDate DESC
 	)	
 WHERE cnt BETWEEN 1 AND 10;
@@ -118,12 +126,11 @@ WHERE applicationNo = 3;
 CREATE TABLE ApplicationFile
 (
 	filename varchar2(100),
-	filePath varchar2(100),
 	applicationNo number NOT NULL
 );
 
-INSERT INTO ApplicationFile VALUES ('','',3);
-INSERT INTO ApplicationFile VALUES (#{filename},#{filePath},FApplication_seq.currval);
+INSERT INTO ApplicationFile VALUES ('',3);
+INSERT INTO ApplicationFile VALUES (#{filename},FApplication_seq.currval);
 
 UPDATE ApplicationFile
 SET applicationDate = '230302'

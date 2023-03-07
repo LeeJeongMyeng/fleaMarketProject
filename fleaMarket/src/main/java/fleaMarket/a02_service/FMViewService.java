@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fleaMarket.a03_dao.FMViewDao;
+import vo.ApplicationFile;
 import vo.FApplication;
 import vo.FApplicationSch;
 import vo.FleaMarket;
@@ -47,6 +48,9 @@ public class FMViewService {
 		dao.insertUploadFile(f);
 		*/
 	}		
+	public void insUploadFile(ApplicationFile f) {
+		dao.insUploadFile(f);
+	}
 
 	// 받은 신청 전체 조회(최신순)
 	public List<FApplication> appReceivedList(FApplicationSch sch){		
@@ -94,6 +98,10 @@ public class FMViewService {
 		sch.setEndBlock(endBlock);
 		//	  4) 시작 블럭
 		sch.setStartBlock((blocknum-1)*sch.getBlockSize()+1);
+		// 검색된 내용 없을 때 처리
+		if(((blocknum-1)*sch.getBlockSize()+1)<0) {
+			sch.setStartBlock(0);
+		}
 		
 		return dao.appReceivedList(sch);
 	}

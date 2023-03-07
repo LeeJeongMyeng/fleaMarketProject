@@ -42,7 +42,6 @@ CREATE TABLE alert
 CREATE TABLE ApplicationFile
 (
 	filename varchar2(100),
-	filePath varchar2(100),
 	applicationNo number NOT NULL
 );
 
