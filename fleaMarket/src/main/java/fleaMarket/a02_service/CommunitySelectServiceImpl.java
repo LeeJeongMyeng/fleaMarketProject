@@ -59,7 +59,6 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 			if(st.hasMoreTokens()) {
 				clist.get(i).setImgName(st.nextToken());
 			}
-			
 		}
 		return clist;
 	}
