@@ -43,6 +43,8 @@ SELECT * FROM FLEAMARKETMEMBER;
 SELECT * FROM PROFILE p ;
 SELECT * FROM FLEAMARKETQNA WHERE QNANO = FLEAMARKETQNA_seq.currval;
 
+UPDATE FLEAMARKETQNA SET status='미답변', refno =0;
+
 ------------------------------------------------------------------
 CREATE TABLE QNAFile
 (
@@ -54,12 +56,9 @@ SELECT * FROM qnafile;
 INSERT INTO qnafile values(FLEAMARKETQNA_seq.currval,'file/qna/','20');
 DELETE qnafile WHERE qnano = '20';
 
-ALTER TABLE qnafile ADD filename2 varchar2(100);
+ALTER TABLE FLEAMARKETQNA ADD refno varchar2(100);
 
-SELECT rownum cnt,qna.* from(
-SELECT f.*
-FROM fleamarketqna f
-ORDER BY method ASC, CAST(qnano AS NUMBER) ASC) qna;
+
 
 SELECT qna.* FROM
 (SELECT rownum cnt,f.* FROM fleamarketqna f
@@ -76,3 +75,39 @@ WHERE METHOD != 'n'
 AND (title || EMAIL) LIKE '%'||''||'%';
 --삭제
 DELETE qnafile;
+
+
+
+
+SELECT qna.* FROM
+(SELECT rownum cnt,level,f.* FROM fleamarketqna f
+WHERE 1=1
+AND f.METHOD != 'n'
+and (title || email) LIKE '%'||''||'%'
+START with refno=0
+CONNECT BY PRIOR qnano=refno
+ORDER siblings BY cnt ASC) qna
+WHERE cnt BETWEEN 1 AND 5;
+
+INSERT INTO FLEAMARKETQNA VALUES(FLEAMARKETQNA_seq.nextval,'RE:실험테스트','답변드립니다. 꺼지세요','2023-03-07','2023-03-07','관리자','a','유저신고','-','31');
+
+SELECT rownum cnt,level,f.* FROM fleamarketqna f
+WHERE 1=1
+AND f.METHOD != 'n'
+and (title || email) LIKE '%'||''||'%'
+START with refno=0
+CONNECT BY PRIOR qnano=refno
+ORDER siblings BY cnt ASC
+
+
+select *
+from(
+select rownum cnt, level, b.*
+from board b
+where 1=1
+and subject like '%'||#{subject}||'%'
+ and writer like '%'||#{writer}||'%'   
+START with refno=0
+ CONNECT BY PRIOR NO=refno
+ORDER siblings BY NO desc)
+where cnt between #{start} and #{end}
