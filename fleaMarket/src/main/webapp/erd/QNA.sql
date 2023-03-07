@@ -86,8 +86,8 @@ AND f.METHOD != 'n'
 and (title || email) LIKE '%'||''||'%'
 START with refno=0
 CONNECT BY PRIOR qnano=refno
-ORDER siblings BY cnt ASC) qna
-WHERE cnt BETWEEN 1 AND 5;
+ORDER siblings BY qnano DESC) qna
+WHERE cnt BETWEEN 1 AND 3;
 
 INSERT INTO FLEAMARKETQNA VALUES(FLEAMARKETQNA_seq.nextval,'RE:실험테스트','답변드립니다. 꺼지세요','2023-03-07','2023-03-07','관리자','a','유저신고','-','31');
 
