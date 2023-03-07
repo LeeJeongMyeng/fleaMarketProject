@@ -1,6 +1,8 @@
 package fleaMarket.a01_controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,6 +42,29 @@ public class FMViewController {
 		d.addAttribute("fleamarket",service.fmView(postingNumber));
 		return "fleaMarketView";
 	}
+	/*
+	@GetMapping("fmView.do")
+	public String fmView(@RequestParam("postingNumber") String postingNumber, Model d) {
+		//d.addAttribute("fleamarket",service.fmView(postingNumber));
+		Map<String, Object> map = new HashMap<String,Object>();
+		 map = service.exp02(postingNumber); //map 1.imgfiles 2.noimgfiles
+		d.addAttribute("imgfiles",map.get("imgfiles"));
+		d.addAttribute("noimgfiles",map.get("noimgfiles"));
+		//d.addAttribute(글정보를담으면 되게쬬?);
+		return "fleaMarketView";
+	}
+	*/
+	
+	@GetMapping("downloadFM.do")
+	public String download(	@RequestParam("filename") String filename,Model d) {
+		d.addAttribute("downloadPath",appPath);
+		d.addAttribute("downloadName",filename);
+		return "downloadView";
+	}
+	
+	
+	
+	
 
 	// 신청글 + 파일첨부 등록
 	@PostMapping("/insApp.do")
@@ -50,10 +75,10 @@ public class FMViewController {
 		List<MultipartFile> fileList = appFile.getFiles("appFile");
 		 
 		// 들어온 파일이 있다면 실행
-		if(fileList !=null) {
+		if(fileList!=null) {
 			String filenames = "";
 			int indexnum =0;
-			 for (MultipartFile mf : fileList) {
+			for (MultipartFile mf : fileList) {
 				 if(indexnum==fileList.size()-1) {
 					 filenames += fileservice.insprofileimg(appPath, mf);
 				 }else {
@@ -69,31 +94,6 @@ public class FMViewController {
 		rttr.addFlashAttribute("msg","등록 성공");
 		return "redirect:appReceivedList.do";
 	}	
-	/*
-	신청글 + 파일첨부 등록
-	@PostMapping("insApp.do")
-   public String insApp(FApplication ins, Model d, MultipartFile profile) {
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"+profile.getOriginalFilename());
-       //1. 플리마켓 홍보글 등록
-		
-       //service.insertFleaMarket(ins);   
-      //2. 파일 경로 처리
-       //FFile fins = new FFile(); 
-         //fins.setFilePath(profilepath);
-       
-//      if(pro.size()!=0) {
-//         for(MultipartFile f : pro) {
-//               String filename=fileservice.insprofileimg(profilepath,f);
-//               FFile fins = new FFile(filename,profilepath); 
-//               service.insprofile(fins);
-               
-                //fins.setFilePath(fileservice.insprofileimg(profilepath,profile)); 
-            
-         //}
-		
-			//return "redirect:fmView.do";
-      //}
-	*/
 	// 받은 신청 전체 조회(최신순)
 	@RequestMapping("appReceivedList.do")
 	public String appReceivedList(@ModelAttribute("sch") FApplicationSch sch,Model d) {

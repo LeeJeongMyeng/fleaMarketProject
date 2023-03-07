@@ -1,6 +1,9 @@
 package fleaMarket.a02_service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -94,4 +97,38 @@ public class FMViewService {
 		dao.updateAppRe(upt);
 	}
 	*/
+	
+	public Map<String,Object> exp02(String postingNumber){
+		HashMap<String,Object> map = new HashMap<String,Object>();
+		//db에서 뽑아온 파일
+		//dao.파일불러오는거
+		//받아올때, vo객체에 담지말고 List<String>에다가 담아오세요.
+		String dbfiles[] = {"a.jpg","b.bmp","c.png","d.ico","e.apng","f.jfif","g.txt","aa.pdf","bb.ppt","cc.doc","gg.hwp"};
+		//검사할 확장자
+		String imgArray[] = {"gif","jpg","jpeg","png","bmp","ico","apng","jfif"};
+		
+		//이미지리스트
+		List<String> imgfiles = new ArrayList<>();
+		//no이미지리스트
+		List<String> noimgfiles = new ArrayList<>();
+		
+		for(String f:dbfiles) {
+			//1. 들어온 파일이름을 split("\\.")으로자르고 [1] 값을 가져온다.
+		String splita = f.split("\\.")[1]; //확장자
+		System.out.println(splita);
+		 boolean check = false;
+		 
+			for(String a:imgArray) {if(splita.equals(a)) {check=true;}}
+			//만약 이미지 확장자검사와 일치하는게 있다면,
+			System.out.println(check);
+			if(check) {imgfiles.add(f);}else {noimgfiles.add(f);}
+		}
+		map.put("imgfiles", imgfiles);
+		map.put("noimgfiles", noimgfiles);  //여기까지에서 map에는 imgfiles의 이름으로 이미지파일리스트, noimgfiles의 이름으로 아닌파일리스트
+		
+		return map;
+		
+	}
+	
+	
 }

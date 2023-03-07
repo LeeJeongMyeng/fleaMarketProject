@@ -96,6 +96,9 @@
                 <div class="col-xl-5 col-lg-6 text-center">
                   <img class="w-100 border-radius-lg shadow-lg mx-auto" src="${path}/resource/img/fleaMarket/market.jpg" alt="market">
                   <div class="my-gallery d-flex mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery">
+
+                  	
+                  	
                     <figure class="ms-2 me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
                       <a href="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-1.jpg" itemprop="contentUrl" data-size="500x600">
                         <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-1.jpg" alt="Image description" />
@@ -196,7 +199,19 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                   </div>
                     <div class="col-12"> <!-- 첨부파일 -->
                       <label>파일 다운로드</label>
-                      <div action="/file-upload" class="form-control dropzone" id="productImg"></div>
+                      <c:forEach var="fmfile" items="${noimgfiles}">
+						<form action="downloadqna.do" method="get">
+						<div style="width:50%;">
+								<label class="mt-4 form-label labelFont">첨부파일</label>
+									<div class="fallback">
+									 <div class="download_Wrap">
+									 	<input type="hidden" name="filename"  value="${fmfile.filename}">
+										<input value="${fmfile.filename}" type="submit" class="form-control">
+									</div>
+									</div>
+								</div>
+						</form>
+					</c:forEach>
                     </div>
                     <div class="row mt-4">
 	                    <div class="col-lg-5 ms-auto">
@@ -331,8 +346,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
           	<label>파일 첨부</label>
          	<div class="row mt-3">
               <div class="col-2" style="height:120px;">
-                <input type="file" name="appFile" class="form-control" style="width:230px"
-                      id="appFile" multiple>
+                <input type="file" name="appFile" class="form-control" style="width:230px" id="appFile" multiple>
                  <div id="image_container"></div>
               </div>
             </div>
