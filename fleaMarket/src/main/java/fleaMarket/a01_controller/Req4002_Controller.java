@@ -61,7 +61,7 @@ public class Req4002_Controller {
 			
 			for(int i=0;i<(inCnt+1);i++) {
 				imgnameVal += imgNames.get(i);
-				if(inCnt>1 && i<inCnt) { // 1개이상, 이미지 들어온값까지만 구분자 추가
+				if(i<inCnt) { // 1개이상, 이미지 들어온값까지만 구분자 추가
 					imgnameVal += "&SEP&";
 				}
 			}
