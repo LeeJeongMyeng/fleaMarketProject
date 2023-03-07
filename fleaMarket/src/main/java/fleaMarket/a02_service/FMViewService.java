@@ -21,32 +21,10 @@ public class FMViewService {
 		FleaMarket fm = dao.fmView(postingNumber);
 		return fm;
 	}	
-	/*	
-	// 신청글 파일 업로드
-	@Value("${user.upload}")
-	private String upload;
-
-	private void uploadFile(MultipartFile f){
-		String fname = f.getOriginalFilename();
-		File fObj = new File(upload+fname);
-		try{
-			System.out.println("## 파일 업로드 처리:"+upload+fname);
-			f.transferTo(fObj);
-		}catch(Exception e){
-				System.out.println("업로드예외:"+e.getMessage());
-		}			
-	}
-	*/
+	
+	// 신청글 + 파일첨부 등록
 	public void insApp(FApplication ins) {
 		dao.insApp(ins);
-		/*
-		String fname = ins.getReport().getOriginalFilename();
-		uploadFile(ins.getReport());
-		BoardFile f = new BoardFile();
-		f.setFname(fname);
-		f.setEtc(ins.getSubject());
-		dao.insertUploadFile(f);
-		*/
 	}		
 	public void insUploadFile(ApplicationFile f) {
 		dao.insUploadFile(f);

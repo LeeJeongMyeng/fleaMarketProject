@@ -39,11 +39,14 @@
    var sessEmail = "${Login.email}"
    var writerEmail = "${fleamarket.email}"
    
-   $(document).ready(function(){
-	   var msg = "${msg}"
-	   
-		checkId()
-	   function checkId(){
+   $(document).ready(function(){   
+	   	var msg = "${msg}"
+	   	// msg 확인 필요
+		if(msg!=""){
+			alert(msg+"\n 조회 화면으로 이동합니다")
+		}
+	   	checkId()
+	   	function checkId(){
 			if(sessEmail!=writerEmail){ // 로그인 email != 작성자 email
 				$("[name=uptBtn]").css('display', 'none'); // 수정 버튼 X
 				$("[name=delBtn]").css('display', 'none'); // 삭제 버튼 X
@@ -53,9 +56,16 @@
 				$("[name=delBtn]").css('display', 'block'); // 삭제 버튼 O
 				$("[name=appBtn]").css('display', 'none'); // 신청하기 버튼 X
 			}
-	   }
+	  	}
 	   
 		$("[name=regBtn]").click(function(){
+			console.log(sessEmail)
+			/*
+			if(sessEmail==""){
+				alert("로그인을 하여야 합니다\n로그인 화면이동");
+				location.href="${path}/SignIn.do"
+			}
+			*/
 			$("#frmNofile").submit()
 		})
 	});
@@ -332,7 +342,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 	            <button name="regBtn" class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
 	              확인
 	            </button>
-	            <button class="m-1 btn btn-secondary" data-target="#jkanban-info-modal" data-bs-dismiss="modal">
+	            <button type="button" class="m-1 btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">
 	              취소
 	            </button>
 		   	 </div>
