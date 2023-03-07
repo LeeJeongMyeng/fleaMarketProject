@@ -13,3 +13,9 @@ $("#goQnaList").click(function(){
 location.href="QNAList.do"	
 })
 	
+
+//오케이 문구
+function okmsg(){ 
+			alert('수정이 완료되었습니다. 감사합니다.'); return true;
+	
+}

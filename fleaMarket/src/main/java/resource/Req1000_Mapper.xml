@@ -135,6 +135,10 @@
     	<delete id="QNAFileDelete" parameterType="string">
     		delete qnafile where qnano=#{qnano}
     	</delete>
+    	<!-- 문의/게시글데이터 삭제 -->
+    	<delete id="QNADelete" parameterType="string">
+    		delete FLEAMARKETQNA where qnano=#{qnano}
+    	</delete>
     </mapper>
     
     

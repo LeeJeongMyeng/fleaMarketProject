@@ -46,6 +46,9 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		System.out.println("dd:"+email);
 		return dao.DuplicateEmail(email);
 	} 
+	
+	
+	
 	// 이름,주민 중복검사
 	public Member DuplicateMem(String name,String personalnumber,String email) {
 		map = new HashMap<String,String>();
@@ -55,13 +58,15 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		if(email!=null) {map.put("email",email);}
 		return dao.DuplicateMem(map);
 	}
+	
+	
+	
 	//회원가입
 	public void SignUp(Member ins) {		
 		ins.setPassword(BCrypt.hashpw(ins.getPassword(), BCrypt.gensalt()));
 		dao.SignUp(ins);
-		
-		
 	}
+	
 	
 	
 	// 테이블에 프로필사진 삽입
@@ -74,6 +79,8 @@ public class Req1000_ServiceImp implements Req1000_Service {
         }
 		dao.insprofile(fins);
 	}
+	
+	
 	
 	//로그인 처리
 	public Member Login(Member log) {
@@ -93,18 +100,30 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		return mem;
 	}
 	
+	
+	
+	
 	//카카오연동 여부확인
 	public Member CheckPeristalsisSNS_K(String snsemail) {
 		return dao.CheckPeristalsisSNS_K(snsemail);
 	}
+	
+	
+	
 	//네이버 연동
 	public Member CheckPeristalsisSNS_N(String name) {
 		return dao.CheckPeristalsisSNS_N(name);
 	}
 	
+	
+	
+	//계정에 SNS이메일 업뎃
 	public void SnsEmailPlus(Member upt) {
 		dao.SnsEmailPlus(upt);
 	}
+	
+	
+	//비번발급
 	public void MemberFindPassword(String name,String personalnumber,String email) {
 		map = new HashMap<String,String>();
 		map.put("name", name);
@@ -113,29 +132,40 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		dao.MemberFindPassword(map);
 	}
 	
+	
+	
+	//다시로긴
 	public Member ReLogin(String email){
 		return dao.Login(email);
 	}
 	
+	
+	//문의글 등록
 	public void QNAInsert(QNA ins) {
 		if(ins.getCategory()==null) {ins.setCategory("공지사항");}
 		dao.QNAInsert(ins);
 	}
-	
+	//문의글파일 DB+파일업로드
 	public void QNAFileInsert(String qnano,List<MultipartFile> fileList) {
+			String filename = "파일1,파일2,파일3,....";
+			int idxnum = 0;
 			for(MultipartFile mf:fileList){
 			dao.QNAFileInsert(insertFileModule(qnano,mf));
+			filename+=mf.getOriginalFilename()+",";
 			}
-		
 	}
+	
+	//문의글 업뎃
 	public void QNAUpdate(QNA upt) {
 		dao.QNAUpdate(upt);
 	}
 	
+	//문의글 삭제/업뎃 시 삭제할 파일db정보조회
 	public List<QNAFile> GetFileNames(String qnano){
 		return dao.GetFileNames(qnano);
 	}
 	
+	//문의글파일 DB+업로드파일삭제
 	public void QNAFileDelete(String qnano) {
 		
 		//파일리스트를 다뽑아옴
@@ -149,12 +179,10 @@ public class Req1000_ServiceImp implements Req1000_Service {
 				fileservice.DeleteFile(qnafilepath+qf.getFilepath(), qf.getFilename());
 			 }
 		  }
-		 
-		 
-		 
-		
 	}
-	
+	public void QNADelete(String qnano) {
+		dao.QNADelete(qnano);
+	}
 	
 	//--------------------------------------------
 	// 파일 업로드 처리하고 문의글파일 db에 데이터 삽입

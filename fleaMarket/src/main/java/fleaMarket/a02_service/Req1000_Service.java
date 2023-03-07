@@ -29,7 +29,10 @@ public interface Req1000_Service  {
 	public void QNAFileInsert(String qnano,List<MultipartFile> fileList);
 	//문의글내용 DB업뎃
 	public void QNAUpdate(QNA upt);
-	//문의글 내용 삭제 및 파일삭제
+	//문의파일 DB삭제 삭제 및 파일삭제
 	public void QNAFileDelete(String qnano);
+	//문의파일 삭제용 데이터불러오기 ㅋㅋ!!
 	public List<QNAFile> GetFileNames(String qnano);
+	// 문의글 DB 삭제
+	public void QNADelete(String qnano);
 }

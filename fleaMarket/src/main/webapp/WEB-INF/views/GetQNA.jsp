@@ -53,7 +53,7 @@
 								</div>
 							</div>
 						</div>
-						<form action="QNAUpdate.do" method="post" enctype="multipart/form-data">
+						<form action="QNAUpdate.do" method="post" enctype="multipart/form-data" onsubmit="okmsg('update')">
 							<div class="row ms-2 mb-3">
 							 
 								<div class="col-2">
@@ -97,7 +97,7 @@
 							<div class="mb-7" style="width: 98%; margin-left: 23px; height: 300px;">
 								<label class="mt-4 postInsertTitle" style="margin-left: -0.5%;" >게시글내용</label>
 								<div id="editor">${qna.content}</div>
-								<input type="hidden" id="contentInput" name="content" />
+								<input type="hidden" id="contentInput" name="content" value="${qna.content }" />
 							</div>
 							<div class="mb-3" style="margin-left: 26px;">
 								 <input name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}" multiple/>
@@ -107,7 +107,7 @@
 							<div class="" style="margin-left:85%;">
 							<c:if test="${Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email }">
 								<button type="submit" class="btn btn-outline-primary btn-md mb-0 me-1">수정</button>
-								<button type="button"  data-bs-toggle="modal" data-bs-target="#DeleteQnaModal" id="DeleteQnaModalbtn"  class="btn btn-outline-danger btn-md mb-0 me-1">삭제</button>  <!-- 모달창추가 -->
+								<button type="button"  data-bs-toggle="modal" data-bs-target="#QNADeleteModal" id="DeleteQnaModalbtn"  class="btn btn-outline-danger btn-md mb-0 me-1">삭제</button>  <!-- 모달창추가 -->
 							</c:if>
 							<button type="button" id="goQnaList" class="btn btn-outline-secondary btn-md mb-0 me-1">취소</button>	
 							
@@ -169,6 +169,43 @@
 				</div>
 			</footer>
 	</main>
+	<!-- 아이디 비밀번호 찾기 모달창 -->
+ <!--  <div data-bs-toggle="modal" data-bs-target="#QNADeleteModal" id="#QNADeleteModal"></div> -->
+	<div class="modal fade" id="QNADeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content" style="top:119px;">
+	      <div class="modal-header" style="background-color: #e74f58;">
+	        <h3 class="modal-title fs-6 text-center" id="MemberFindTitle" style="color: white;">게시글 삭제</h3>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      	</div>
+	     
+	      <div class="modal-body">
+			<div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
+                    <div class="multisteps-form__content">
+                    <div class="mb-4" style="font-weight:bold;">해당 글을 정말 삭제하시겠습니까??</div>
+                    <form action="QNADelete.do" method="post">
+                      <div class="row">
+                        <input type="hidden" name="qnano" value="${qna.qnano}">
+                        <div class=col-6>
+                       	 	<button class="btn w-100" type="submit" style="background-color:#e74f58; color:white;">삭제</button>
+                        </div>
+                        <div class=col-6>
+                         	<button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">닫기</button>
+                        </div>
+                      </div>
+                     </form>
+                    </div>
+                  </div>
+                  <!--single form panel-->
+	      </div>
+	      
+	      <div class="modal-footer">
+	        회사소개 | 이용약관 | <strong>개인정보처리방침</strong>
+	      </div>
+	     
+	    </div>
+	  </div>
+	</div> <!-- sns확인모달 모달끝 -->
 <script>
 // 등록 버튼 클릭 시,
 

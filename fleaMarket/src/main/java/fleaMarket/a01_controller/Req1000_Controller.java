@@ -45,17 +45,16 @@ public class Req1000_Controller {
    private String qnafilepath;
    
 //=================================================================================
-   
    @RequestMapping("SignIn.do")
    public String login() {
       return "SignIn";
    }
-   
+ //------------------------------------------------------------------  
    @RequestMapping("SignUp.do")
    public String SignUp() {
       return "SignUp";
    }
-   
+ //------------------------------------------------------------------  
    @RequestMapping("insSignUp.do")
    public String SignUp(Member ins,@RequestParam("profileimg") MultipartFile profile){
          //1. 기본 회원가입 양식
@@ -66,7 +65,7 @@ public class Req1000_Controller {
       return "SignIn";
    }
    
-   
+ //------------------------------------------------------------------  
    @RequestMapping("Login.do") //로그인
    public String Loign(Member log,Model d,HttpSession session) {
       Member mem;      
@@ -88,7 +87,7 @@ public class Req1000_Controller {
       return path;
    }
    
-   
+ //------------------------------------------------------------------ 
    
    //Sns연동처리
    @RequestMapping("SnsEmailPlus.do")//기존계정에 연동계정 업데이트
@@ -98,7 +97,7 @@ public class Req1000_Controller {
       redirectAttributes.addFlashAttribute("SnsEmailPlus",upt);
       return "redirect:Login.do";
    }
-   
+ //------------------------------------------------------------------  
    @RequestMapping("Logout.do")
    public String Logout(HttpSession session) {
       session.removeAttribute("Login");
@@ -106,9 +105,7 @@ public class Req1000_Controller {
    }
    
    
-   
-   
-   
+ //------------------------------------------------------------------ 
    
    //문의글작성페이지
    @RequestMapping("MemberQnAreg.do")
@@ -116,7 +113,7 @@ public class Req1000_Controller {
       return "QNAInsert";
    }
    
-   
+ //------------------------------------------------------------------
    
    //문의글등록
    @PostMapping("QNAInsert.do")
@@ -125,14 +122,11 @@ public class Req1000_Controller {
       //들어온 글정보부터 입력(중요. 시퀸스넘버때매 무조건 앞에서 해야함)
        service.QNAInsert(ins);
        
-       
-       
       // 리스트로 받은 파일업로드+데이터베이스 삽입
        List<MultipartFile> fileList = qnafiles.getFiles("qnafiles");
 		if(fileList.size() > 0 && !fileList.get(0).getOriginalFilename().equals("")) {
 			  service.QNAFileInsert(null,fileList);
 		}
-       
       return "redirect:QNAList.do";
    }
 //------------------------------------------------------------------
@@ -144,18 +138,27 @@ public class Req1000_Controller {
         //1. 내용 업데이또
 	   	service.QNAUpdate(upt);
 	  
-	   	
-	   	
 	    //2. 업데이트시 업데이트할 파일이 존재하면
 	   	if(fileList.size() > 0 && !fileList.get(0).getOriginalFilename().equals("")) {	
 	   		//기존꺼 다지움
 		   service.QNAFileDelete(upt.getQnano());
 		    //새거 다넣음
 		   service.QNAFileInsert(upt.getQnano(),fileList);
-		   		
-      
    }
 	   	return "redirect:QNAList.do";
   } 
+
+ //------------------------------------------------------------------
+   @PostMapping("QNADelete.do")
+   public String QNADelete(@RequestParam("qnano") String qnano) {
+	   
+	   //1. 파일부터 다삭제
+	   service.QNAFileDelete(qnano);
+	   //2. 테이블 데이터 삭제
+	   service.QNADelete(qnano);
+	   return "redirect:QNAList.do";
+   }
+   
+   
 }
   
