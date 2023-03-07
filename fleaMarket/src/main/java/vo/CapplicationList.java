@@ -11,10 +11,15 @@ public class CapplicationList {
 	private String email;
 	private String hashtag;
 	private String viewCnt;
+	//받는 이미지 
 	private String imgName;
+	
 	private String nickname;
-	private int score;
 	private String bestType;
+	private String profileimg;
+	//구분자 이미지 
+	private String img;
+	
 	
 	public String getCommunitynumber() {
 		return communitynumber;
@@ -82,17 +87,23 @@ public class CapplicationList {
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
 	}
-	public int getScore() {
-		return score;
-	}
-	public void setScore(int score) {
-		this.score = score;
-	}
 	public String getBestType() {
 		return bestType;
 	}
 	public void setBestType(String bestType) {
 		this.bestType = bestType;
+	}
+	public String getProfileimg() {
+		return profileimg;
+	}
+	public void setProfileimg(String profileimg) {
+		this.profileimg = profileimg;
+	}
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
 	}
 	
 	

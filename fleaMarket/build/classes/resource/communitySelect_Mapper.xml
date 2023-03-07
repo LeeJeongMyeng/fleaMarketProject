@@ -128,6 +128,43 @@ AND
 		viewCnt >= 30
 		AND registDate >= SYSDATE -1
 	</select>
-
-
+	
+	<!-- 커뮤니티 상세 조회  -->
+	<select id="getCommunityDetailList"
+	resultType="capplicationList">
+	SELECT
+	c.COMMUNITYNUMBER,c.TITLE,c.CONTENT,c.REGISTDATE,c.UPDATEDATE,f.nickname,p.PROFILEIMG,c.EMAIL
+	FROM CAPPLICAION c ,FLEAMARKETMEMBER f,BOARDIMG b
+	,PROFILE p
+	WHERE f.EMAIL = c.EMAIL AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER AND
+	f.EMAIL = p.EMAIL
+	AND c.COMMUNITYNUMBER = #{communityNumber}
+</select> 
+   <select id = "getCommunityImgList" resultType = "boardimg">
+   SELECT b.IMGNAME FROM CAPPLICAION c,BOARDIMG b 
+WHERE c.COMMUNITYNUMBER = b.COMMUNITYNUMBER 
+AND c.COMMUNITYNUMBER = #{communityNumber}
+   </select>
+   <!-- 팔로잉 된 목록 조회 -->
+   <select id = "getFollowYesOrNot" parameterType ="java.util.HashMap" resultType = "int">
+   SELECT count(*) FROM FRIEND f, CAPPLICAION c
+WHERE f.FOLLOWING  = c.EMAIL 
+AND c.COMMUNITYNUMBER = #{communityNumber}
+AND f.MYEMAIL = #{email}  
+   </select>
+   <!-- 좋아요 눌렀는지 여부 확인 -->
+   <select id = "getLikeYesOrNot" parameterType = "java.util.HashMap">
+   SELECT count(*) FROM communityHeart
+WHERE communityNumber = #{communityNumber}
+AND email = #{email}
+</select>
+   <!-- insert keyproperty 값 반환 -->
+   <insert id="getInsertFriend" parameterType = "java.util.HashMap">
+   INSERT INTO FRIEND VALUES(#{myEmail},#{following})
+   </insert>
+   <!--  -->
+   <delete id="getDeleteFriend" parameterType ="java.util.HashMap">
+   DELETE FROM FRIEND WHERE MYEMAIL = #{myEmail}  AND FOLLOWING =#{following} 
+   </delete>
 </mapper>
+

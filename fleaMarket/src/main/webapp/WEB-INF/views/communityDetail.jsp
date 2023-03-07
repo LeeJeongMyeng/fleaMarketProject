@@ -37,10 +37,11 @@
   <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
-  
+  <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
   <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+  <script src="https://kit.fontawesome.com/3aab1ef667.js" crossorigin="anonymous"></script>
   <style>
   .dropdown{
   display: flex;
@@ -63,9 +64,9 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              
+              <c:forEach var = "detail" items = "${dlist }">
               <div class="dropdown">
-              <h5 class="mb-4">~ 님의 게시물</h5>
+              <h5 class="mb-4">${detail.nickname }님의 게시물</h5>
   <a href="#" class="btn bg-gradient-white dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
        <i class="ni ni-settings"></i>
   </a>
@@ -86,36 +87,19 @@
           </a>
       </li>
   </ul>
-</div>
+</div> 
+
               <div class="row">
                 <div class="col-xl-5 col-lg-6 text-center">
-                  <img class="w-100 border-radius-lg shadow-lg mx-auto" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb.jpg" alt="chair">
+                  <img class="w-100 border-radius-lg shadow-lg mx-auto" src="${path }/resource/community/${imgList[0]}" alt="chair">
                   <div class="my-gallery d-flex mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery">
+                  <c:forEach var = "img" items = "${imgList}" begin = "1" end = "4">
                     <figure class="ms-2 me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
                       <a href="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-1.jpg" itemprop="contentUrl" data-size="500x600">
-                        <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-1.jpg" alt="Image description" />
+                        <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="${path }/resource/community/${img}" alt="Image description" />
                       </a>
                     </figure>
-                    <figure class="me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                      <a href="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-2.jpg" itemprop="contentUrl" data-size="500x600">
-                        <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-2.jpg" itemprop="thumbnail" alt="Image description" />
-                      </a>
-                    </figure>
-                    <figure class="me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                      <a href="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-3.jpg" itemprop="contentUrl" data-size="500x600">
-                        <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-3.jpg" itemprop="thumbnail" alt="Image description" />
-                      </a>
-                    </figure>
-                    <figure class="me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                      <a href="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-4.jpg" itemprop="contentUrl" data-size="500x600">
-                        <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-4.jpg" itemprop="thumbnail" alt="Image description" />
-                      </a>
-                    </figure>
-                    <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                      <a href="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-5.jpg" itemprop="contentUrl" data-size="500x600">
-                        <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-5.jpg" itemprop="thumbnail" alt="Image description" />
-                      </a>
-                    </figure>
+                    </c:forEach>
                   </div>
                   <!-- Root element of PhotoSwipe. Must have class pswp. -->
                   <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
@@ -162,41 +146,43 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                     </div>
                   </div>
                 </div>
+                
                 <div class="col-lg-5 mx-auto">
                 <!-- 제목 -->
-                  <h3 class="mt-lg-0 mt-4">타이틀ㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋㅋ</h3>
+                  <h3 class="mt-lg-0 mt-4">${detail.title }</h3>
                   <!-- 작성날짜 -->
-                  <small class="d-block text-muted">3 days ago</small>
+                  <small class="d-block text-muted">${detail.registDate }</small>
                   <div class="d-flex mt-3">
                   <div class="flex-shrink-0">
-                    <img alt="Image placeholder" class="avatar rounded-circle" src="${path}/assets/img/team-5.jpg">
+                    <img alt="Image placeholder" class="avatar rounded-circle" src="${path}/resource/img/Member/profileimg/${detail.profileimg}">
                   </div>
-                  <div class="flex-grow-1 ms-3"">
-                    <h6 class="h5 mt-0" style = "line-height:2.5">Jessica Stones</h6>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="h5 mt-0" style = "line-height:2.5">${detail.nickname }</h6>
                     </div>
+                     
                     <div class="text-end ms-auto">
-                <button type="button" class="btn btn-xs btn-primary mb-0">
-                  <i class="fas fa-plus pe-2"></i> Follow
-                </button>
+                    <c:set var = "followChecking" value = "${followCheck }"/>
+                    <c:if test = "${followChecking eq '0'}">  
+                <button id = "followButton" type="button" class="btn btn-xs bg-gradient-secondary mb-0">
+                  + Follow</button>
+                </c:if>
+                <c:if test = "${followChecking eq '1'}">  
+                <button id = "followButton" type="button" class="btn btn-xs bg-gradient-primary mb-0">
+                  - Following</button>
+                </c:if>
+                   
+               
               </div>
                     </div>
                     <div>
                     <p class="mb-4">
-                    Personal profiles are the perfect way for you to grab their attention and persuade recruiters to continue reading your CV because you’re telling them from the off exactly why they should hire you.
-                    z
-                    zz
-                    z
-                    z
-                    z
-                    z
-                    z
-                    z
-                    
+                    ${detail.content }
                    </p>
-                   </div>
-       
+                   </div>      
                 </div>
               </div>
+              
+              </c:forEach>
               <div class = "dstep">
               <button type="button" class="btn btn-primary"><i class="ni ni-bold-left"></i></button>
               <button type="button" class="btn btn-primary">목록</button>
@@ -205,10 +191,19 @@ It's a separate element, as animating opacity is faster than rgba(). -->
               <div class="row align-items-center px-2 mt-4 mb-2">
                 <div class="col-sm-6">
                   <div class="d-flex">
-                    <div class="d-flex align-items-center">
-                      <i class="ni ni-like-2 me-1 cursor-pointer opacity-6"></i>
+                  
+                  <!--  좋아요/댓글개수 부분 -->
+                  <div class="d-flex align-items-center" style = "width:70px">
+                  <c:set var = "likeChecking" value = "${likeCheck}"/>
+                    <c:if test = "${likeChecking eq '0'}">  
+                      <i class="fa-light fa-heart cursor-pointer" style ="font-size:25px;"></i>
+                      </c:if>
+                      <c:if test = "${likeChecking eq '1'}">  
+                      <i class="fa-solid fa-heart-circle-minus cursor-pointer"style ="font-size:25px;"></i>
+                      </c:if>
                       <span class="text-sm me-3 ">150</span>
                     </div>
+               
                     <div class="d-flex align-items-center">
                       <i class="ni ni-chat-round me-1 cursor-pointer opacity-6"></i>
                       <span class="text-sm me-3">36</span>
@@ -336,12 +331,102 @@ It's a separate element, as animating opacity is faster than rgba(). -->
   <!--   Core JS Files   -->
   <script src="${path}/assets/js/core/popper.min.js"></script>
   <script src="${path}/assets/js/core/bootstrap.min.js"></script>
-  <script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
   <script src="${path}/assets/js/plugins/choices.min.js"></script>
   <script src="${path}/assets/js/plugins/photoswipe.min.js"></script>
   <script src="${path}/assets/js/plugins/photoswipe-ui-default.min.js"></script>
   <script>
+  
+    var myEmail = '${session}';
+    var communityNumber = '${dlist[0].communitynumber}';
+    var following = '${dlist[0].email}';
+    
+    //팔로우, 팔로잉 처리    
+    $("#followButton").on("click", function(e) {
+    	if(myEmail!=null && myEmail!=""){
+    	fetch("${path}/selectFriend.do?communityNumber=${dlist[0].communitynumber}&myEmail=${session}")
+    	.then(res => res.json())
+    	.then(data => {
+    		console.log(data.followCheck);
+    		var followCheck = data.followCheck;
+    		console.log(followCheck);
+    		if(followCheck==1){
+    			fetch("${path}/deleteFriend.do",{
+    	   			method : "POST",
+    	   			header:{
+    	   				"Content-Type": "application/json",
+    	   			},
+    	   			body:JSON.stringify({
+    	   			myEmail:'${session}',
+    	   			following:'${dlist[0].email}'
+    	   		}),
+    	   	})
+    	   	    .then(res => res.json())  //응답 결과를 json으로 파싱
+    	   	    .then(data => {
+    	   	    		//***여기서 응답 결과로 실행할 동작을 정의하면 됨***
+    	   	            // [ data.키값 ] 이런 형태로 value 추출 가능 
+    	   	            console.log(data.string); //응답 결과를 console 창에 출력	 
+    		            	$('#followButton').html('+ Follow');	            	
+    		            	$('#followButton').attr('class','btn btn-xs bg-gradient-secondary mb-0')
+    		               
+    		            	
+    	   	    })
+    	   	    .catch(err => { // 오류 발생시 오류를 담아서 보여줌
+    	   	        console.log('Fetch Error',err);
+    	   	    });
+    		}		
+    		if(followCheck==0){
+    			
+    	    		fetch("${path}/insertFriend.do",{
+    	    			method : "POST",
+    	    			header:{
+    	    				"Content-Type": "application/json",
+    	    			},
+    	    			body:JSON.stringify({
+    	    			myEmail:'${session}',
+    	    			following:'${dlist[0].email}'
+    	    		}),
+    	    	})
+    	    	    .then(res => res.json())  //응답 결과를 json으로 파싱
+    	    	    .then(data => {
+    	    	    		//***여기서 응답 결과로 실행할 동작을 정의하면 됨***
+    	    	            // [ data.키값 ] 이런 형태로 value 추출 가능 
+    	    	            console.log(data.string); //응답 결과를 console 창에 출력
+    	    	            	$('#followButton').html('- Following');
+    	    	            	$('#followButton').attr('class','btn btn-xs bg-gradient-primary mb-0')
+    	    	                
+    	    	            	
+    	    	    })
+    	    	    .catch(err => { // 오류 발생시 오류를 담아서 보여줌
+    	    	        console.log('Fetch Error',err);
+    	    	    });
+    		
+    	
+    	
+    
+    		}
+    	})
+    }else{
+    	   var delConfirm = confirm('로그인 후 이용이 가능합니다.');
+    	   if (delConfirm) {
+    	      alert('로그인창으로 이동합니다');
+    	      location.href = "#";
+    	   }
+    }
+ 
+ });
+
+//좋아요 수/ 댓글 수 표시하기 
+var likeVal = ${likeCheck};
+
+if(likeVal>0){
+	console.log("허허 좋아요 눌렀어용!");
+}
+    
+  
+    
+    	
+    
+  
     if (document.getElementById('choices-quantity')) {
       var element = document.getElementById('choices-quantity');
       const example = new Choices(element, {

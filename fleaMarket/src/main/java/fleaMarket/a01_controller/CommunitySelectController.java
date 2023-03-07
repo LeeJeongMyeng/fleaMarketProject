@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fleaMarket.a02_service.CommunitySelectService;
+import vo.BoardImg;
 import vo.CapplicationList;
 import vo.Criteria;
 import vo.PageDTO;
@@ -44,9 +45,11 @@ public class CommunitySelectController {
 		String email = m.getEmail();
 		*/
 		logger.info("log"+cri);
+		
 		List<CapplicationList> clist = null;
 		if(showTemplete.equals("all") || showTemplete == "") {
 			clist = service.getCommunityList(cri);
+			logger.info("clist:"+clist.get(1));
 			model.addAttribute("bestValue",showTemplete);
 			model.addAttribute("list",clist);
 			model.addAttribute("pageMaker",new PageDTO(cri,service.getCommunitySelectNum(cri)));
@@ -67,7 +70,28 @@ public class CommunitySelectController {
 	
 	//상세 조회(get)
 	@GetMapping("CommunityDetail.do")
-	public String communityDetailList() {
+	public String communityDetailList(@RequestParam("communityNumber") String communityNumber,Model model) throws Exception {
+		//세션처리 
+		String sessions = "pucoca@naver.com";
+		//상세조회 정보 
+		List<CapplicationList> clist = service.getCommunityDetailList(communityNumber);
+		//이미지 다중불러오기.
+		List<String> imgList = service.getCommunityImg(communityNumber);
+		//int followCheck 처리 
+		int followCheck = service.getFollowYesOrNot(communityNumber, sessions);
+		//int 좋아요 처리 
+		int likeCheck = service.getLikeYesOrNot(communityNumber, sessions);
+		
+		model.addAttribute("dlist",clist);
+		
+		model.addAttribute("imgList",imgList);
+		
+		model.addAttribute("followCheck",followCheck);
+		
+		model.addAttribute("session",sessions);
+		
+		model.addAttribute("likeCheck",likeCheck);
+		
 		return "communityDetail";
 	}
 	

@@ -1,6 +1,8 @@
 package fleaMarket.a03_dao;
 import java.util.List;
+import java.util.Map;
 
+import vo.BoardImg;
 import vo.CapplicationList;
 import vo.Criteria;
 
@@ -15,4 +17,15 @@ public interface CommunitySelectDao {
 	//인기글 처리 
 	public List<CapplicationList> getBestCommunityList(Criteria cri);
 	
+	public List<CapplicationList> getCommunityDetailList(String communityNumber);
+	
+	public List<BoardImg> getCommunityImgList(String communityNumber);
+	// json 
+	public int getFollowYesOrNot(Map<String, String> map);
+	
+	public int getInsertFriend(Map<String, String> map);
+	
+	public int getDeleteFriend(Map<String, String> map);
+	//좋아요 // yes or not
+	public int getLikeYesOrNot(Map<String,String> map);
 }

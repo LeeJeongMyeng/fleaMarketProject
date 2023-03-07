@@ -196,8 +196,7 @@
 												</div>
 												
 												<img class="w-10 ms-3"
-													src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/soft-ui-design-system/assets/img/ecommerce/adidas-hoodie.jpg"
-													alt="hoodie">
+													src="${path }/resource/community/${lists.imgName}">
 												<h6 class="ms-3 my-auto">${lists.title }</h6>
 										</td>
 										<td class="text-sm">${lists.nickname }</td>
