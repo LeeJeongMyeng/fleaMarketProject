@@ -42,6 +42,12 @@ SELECT * FROM capplicaion;
 WHERE communityNumber='comBoard23';
 INSERT INTO capplicaion values(communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','yujin@gmail.com','#태그1 #태그2',0);
 INSERT INTO capplicaion values(communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','dbwls8382@gmail.com','#태그1 #태그2',0);
+-- 커뮤니티 게시글 해시태그
+CREATE TABLE HashTag
+(
+	hashtag varchar2(1000)
+);
+
 -- 커뮤니티 게시글 이미지
 CREATE TABLE BoardImg
 (

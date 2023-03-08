@@ -20,16 +20,34 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-		
-		$(".ql-editor").append("${boardInfo.content}") // 내용값 넣기(value)
+
+		 // 내용값 넣기(value)
+		$(".ql-editor").append("${boardInfo.content}")
 		console.log($('#edit-deschiption-edit .ql-editor').text())
-		
+		// 글자수 갯수
+		$("#edit-deschiption-edit").keyup(function(){
+			$("#textCnt").text(expeditor.text().length)
+		})
+		var expeditor=$('#edit-deschiption-edit .ql-editor')
 		$("#update").click(function(){
-		  //내용 입력에 따른 content Input에 데이터 넣기(내용입력란이 input태그가 아니라서))
-		  var expeditor=$('#edit-deschiption-edit .ql-editor').html()
-		  console.log(expeditor)
-		  $('input[name=content]').val(expeditor);
-		 $("form").submit()
+			// 유효성체크
+			  if($("input[name='title']").val()==""){
+				  alert("[안내메시지] 제목을 입력하여야 게시글 등록이 가능합니다.")
+				 contentfocus("title")
+			  }else if($("input[name='title']").val().length>150){
+				  alert("[안내메시지] 제목은 150자 이하로 입력하셔야 게시글 등록이 가능합니다.")
+				  contentfocus("title")
+			  }else if(expeditor.text().length<10){
+				 alert("[안내메시지] 내용을 10자 이상 작성해주셔야 게시글 등록이 가능합니다.")
+				 contentfocus("content")
+			  }else if(expeditor.text().length>600){
+				 alert("[안내메시지] 내용을 600자 이하로 작성해주셔야 게시글 등록이 가능합니다.")
+				 contentfocus("content")
+			  }else{
+				  //내용 입력에 따른 content Input에 데이터 넣기(내용입력란이 input태그가 아니라서))
+				  $('input[name=content]').val(expeditor.html());
+				  $("form").submit()
+			  }
   		})
   		
   		var imgCnt = "${boardImgArr}"
@@ -68,6 +86,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
   <link href="${path}/resource/css/Community/CommunityBoard.css" rel="stylesheet" />
+  <script src="${path}/resource/js/Req4002/commonfunction.js"></script>
 </head>
 
 <body class="g-sidenav-show bg-gray-100">
@@ -125,7 +144,8 @@
                 <input name="title" class="form-control" type="text" value="${boardInfo.title}"/>
               </div>
               <div class="row" style="--bs-gutter-x:0;">
-                <label class="mt-4 postUpdateTitle">내용</label>
+                <label class="mt-4 postUpdateTitle">내용
+                	<span style="font-color:grey; font-weight:normal; font-size:12pt;">(<span id="textCnt" style="color:red"></span> / 600자)</span></label>
                 <div id="edit-deschiption-edit" style="height:500px;">
                 	<div class=".ql-editor"></div>
                 </div>

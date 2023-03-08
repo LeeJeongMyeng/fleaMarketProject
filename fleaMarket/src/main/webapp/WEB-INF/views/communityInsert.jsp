@@ -26,15 +26,40 @@
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
   <link href="${path}/resource/css/Community/CommunityBoard.css" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="${path}/resource/js/Req4002/commonfunction.js"></script>
   <script type="text/javascript">
 	  $(document).ready(function(e){
-			// 등록 버튼 클릭 시,
-		  $("#insert").click(function(){
-			  //내용 입력에 따른 content Input에 데이터 넣기(내용입력란이 input태그가 아니라서))
-			  var expeditor=$('#edit-deschiption .ql-editor').html()
-			  $('input[name=content]').val(expeditor);
-			  $("form").submit()
+		  // 로그인 체크
+		  var login = "${Login.email}"
+		  loginCk(login)
+		   var expeditor=$('#edit-deschiption .ql-editor')
+		  // 글자수 갯수
+		  $("#edit-deschiption").keyup(function(){
+			 $("#textCnt").text(expeditor.text().length)
 		  })
+		  
+		  // 등록 버튼 클릭 시,
+		  $("#insert").click(function(){
+			  // 유효성체크
+			  if($("input[name='title']").val()==""){
+				  alert("[안내메시지] 제목을 입력하여야 게시글 등록이 가능합니다.")
+				 contentfocus("title")
+			  }else if($("input[name='title']").val().length>150){
+				  alert("[안내메시지] 제목은 150자 이하로 입력하셔야 게시글 등록이 가능합니다.")
+				  contentfocus("title")
+			  }else if(expeditor.text().length<10){
+				 alert("[안내메시지] 내용을 10자 이상 작성해주셔야 게시글 등록이 가능합니다.")
+				 contentfocus("content")
+			  }else if(expeditor.text().length>600){
+				 alert("[안내메시지] 내용을 600자 이하로 작성해주셔야 게시글 등록이 가능합니다.")
+				 contentfocus("content")
+			  }else{
+				  //내용 입력에 따른 content Input에 데이터 넣기(내용입력란이 input태그가 아니라서))
+				  $('input[name=content]').val(expeditor.html());
+				  $("form").submit()
+			  }
+		  })
+		  
 		  console.log($('#productImg').val())
 		$('#uploadFile2').hide()
 	  	$('#uploadFile3').hide()
@@ -157,7 +182,7 @@
               <div class="col-12 col-lg-8 mx-auto mt-4 mb-sm-5 mb-3">
                 <div class="multisteps-form__progress">
                   <button class="multisteps-form__progress-btn js-active" type="button" title="Product Info">
-                    <span style="">1. 게시글 등록</span>
+                    <span>1. 게시글 등록</span>
                   </button>
                   <button class="multisteps-form__progress-btn" type="button" title="Media">2. 이미지 등록</button>
                 </div>
@@ -183,7 +208,7 @@
                         </div>
                         <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                           <label class="postInsertTitle">작성자</label>
-                          <input class="multisteps-form__input form-control" name="email" type="text" value="yujin@gmail.com" readonly/><!--${Login.email}  -->
+                          <input class="multisteps-form__input form-control" name="email" type="text" value="${Login.email}" readonly/><!--  -->
                         </div>
                       </div>
                       <div class="row mt-3" style="width:99%; margin-left:0.5%;">
@@ -191,7 +216,8 @@
                           <input class="multisteps-form__input form-control" name="title" type="text" placeholder="제목을 작성해주세요." />
                        </div>
                       <div class="row" style="width:99%; margin-left:0.5%;">
-                         <label class="mt-4 postInsertTitle" style="margin-left:-0.5%;">게시글 내용</label>
+                         <label class="mt-4 postInsertTitle" style="margin-left:-0.5%;">게시글 내용 
+                         				<span style="font-color:grey; font-weight:normal; font-size:12pt;">(<span id="textCnt" style="color:red"></span> / 600자)</span></label>
                          <div id="edit-deschiption" style="height:400px;">
                          <!-- 	<p class="ql-editor"></p> -->
                          </div>

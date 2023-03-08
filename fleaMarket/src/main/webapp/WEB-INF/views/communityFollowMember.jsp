@@ -29,18 +29,16 @@
 	  <!-- CSS Files -->
 	  <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 	  <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+	  <script src="${path}/resource/js/Req4002/commonfunction.js"></script>
+	  
 	<script type="text/javascript">
-	
 		$(document).ready(function(){
 			if($("#index").keycode==13){
 				$("#indextform").submit()
 			}
 			
 			var login = "${Login.email}"
-			if(login==""){
-				alert("[안내메시지]로그인을 하셔야 이용이 가능합니다.")
-				location.href="${path}/SignIn.do"
-			}
+			loginCk(login)
 			
 			var msg = "${msg}"
 			if(msg=="언팔로우"){
