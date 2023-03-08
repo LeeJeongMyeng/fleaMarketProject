@@ -31,33 +31,36 @@ public class FMViewController {
 	@Autowired
 	private FileService fileservice;
 
+	@Value("${fleamarket.upload3}")
+	private String fmPath;
+	
 	@Value("${app.upload}")
 	private String appPath;
 	 
 	 
 	 
 	// 홍보글 상세 조회
+	/*
 	@GetMapping("fmView.do")
 	public String fmView(@RequestParam("postingNumber") String postingNumber, Model d) {
 		d.addAttribute("fleamarket",service.fmView(postingNumber));
 		return "fleaMarketView";
 	}
-	/*
+	*/
 	@GetMapping("fmView.do")
 	public String fmView(@RequestParam("postingNumber") String postingNumber, Model d) {
-		//d.addAttribute("fleamarket",service.fmView(postingNumber));
 		Map<String, Object> map = new HashMap<String,Object>();
-		 map = service.exp02(postingNumber); //map 1.imgfiles 2.noimgfiles
+		 map = service.devideFmFile(postingNumber); //map 1.imgfiles 2.noimgfiles
 		d.addAttribute("imgfiles",map.get("imgfiles"));
 		d.addAttribute("noimgfiles",map.get("noimgfiles"));
-		//d.addAttribute(글정보를담으면 되게쬬?);
+		d.addAttribute("fleamarket",service.fmView(postingNumber));
 		return "fleaMarketView";
 	}
-	*/
 	
-	@GetMapping("downloadFM.do")
+	// 홍보글 파일 다운로드
+	@GetMapping("downloadFFile.do")
 	public String download(	@RequestParam("filename") String filename,Model d) {
-		d.addAttribute("downloadPath",appPath);
+		d.addAttribute("downloadPath",fmPath);
 		d.addAttribute("downloadName",filename);
 		return "downloadView";
 	}

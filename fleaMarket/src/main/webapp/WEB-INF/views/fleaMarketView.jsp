@@ -87,41 +87,27 @@
               <h5 class="mb-4">플리마켓</h5>
               <div class="row">
                 <div class="col-xl-5 col-lg-6 text-center">
-                  <img class="w-100 border-radius-lg shadow-lg mx-auto" src="${path}/resource/img/fleaMarket/market.jpg" alt="market">
-                  <div class="my-gallery d-flex mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery">
-
-                  	
-                  	
-                    <figure class="ms-2 me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                      <a href="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-1.jpg" itemprop="contentUrl" data-size="500x600">
-                        <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-1.jpg" alt="Image description" />
-                      </a>
-                    </figure>
-                    <figure class="me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                      <a href="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-2.jpg" itemprop="contentUrl" data-size="500x600">
-                        <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-2.jpg" itemprop="thumbnail" alt="Image description" />
-                      </a>
-                    </figure>
-                    <figure class="me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                      <a href="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-3.jpg" itemprop="contentUrl" data-size="500x600">
-                        <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-3.jpg" itemprop="thumbnail" alt="Image description" />
-                      </a>
-                    </figure>
-                    <figure class="me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                      <a href="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-4.jpg" itemprop="contentUrl" data-size="500x600">
-                        <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-4.jpg" itemprop="thumbnail" alt="Image description" />
-                      </a>
-                    </figure>
-                    <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                      <a href="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-5.jpg" itemprop="contentUrl" data-size="500x600">
-                        <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-5.jpg" itemprop="thumbnail" alt="Image description" />
-                      </a>
-                    </figure>
+                <!-- 첫번째 이미지 -->
+                  <c:forEach var="img" items="${imgfiles}" varStatus="status">
+                    <c:choose>
+	                  	<c:when test="${status.first == true}">
+			                  <img class="w-100 border-radius-lg shadow-lg mx-auto" src="${path}/resource/img/fleaMarket/${img}" alt="market">
+			                  <div class="my-gallery d-flex justify-content-center mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery">
+						</c:when>
+	                    <c:otherwise>
+		                    <figure class="me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+		                      <a href="${path}/resource/img/fleaMarket/${img}" itemprop="contentUrl" data-size="500x600">
+		                        <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="${path}/resource/img/fleaMarket/${img}" itemprop="thumbnail" alt="Image description" />
+		                      </a>
+		                    </figure>
+	                   </c:otherwise>
+                    </c:choose>
+                  </c:forEach>
                   </div>
                   <!-- Root element of PhotoSwipe. Must have class pswp. -->
                   <div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
                     <!-- Background of PhotoSwipe.
-It's a separate element, as animating opacity is faster than rgba(). -->
+						It's a separate element, as animating opacity is faster than rgba(). -->
                     <div class="pswp__bg"></div>
                     <!-- Slides wrapper with overflow:hidden. -->
                     <div class="pswp__scroll-wrap">
@@ -192,19 +178,28 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                   </div>
                     <div class="col-12"> <!-- 첨부파일 -->
                       <label>파일 다운로드</label>
-                      <c:forEach var="fmfile" items="${noimgfiles}">
-						<form action="downloadqna.do" method="get">
-						<div style="width:50%;">
-							<label class="mt-4 form-label labelFont">첨부파일</label>
+                      <c:forEach var="noimg" items="${noimgfiles}">
+                      
+						<form action="downloadFFile.do" method="get">
+						<%-- 
+							<div class="row mt-3">
+				              <div class="col-2" style="height:120px;">
+				                <input type="file" name="fmFile" value="${noimg.filename}" class="form-control" style="width:230px" id="appFile" multiple>
+				                 <div id="image_container"></div>
+				              </div>
+				            </div>
+						 --%>
+						
+							<div style="width:50%;">
 								<div class="fallback">
-								 <div class="download_Wrap">
-								 	<input type="hidden" name="filename"  value="${fmfile.filename}">
-									<input value="${fmfile.filename}" type="submit" class="form-control">
-								</div>
+									 <div class="download_Wrap">
+									 	<input type="hidden" name="filename"  value="${noimg}">
+										<input value="${noimg}" type="submit" class="form-control">
+									 </div>
 								</div>
 							</div>
 						</form>
-					</c:forEach>
+					  </c:forEach>
                     </div>
                     <c:choose>
 	                    <c:when test="${Login.email != fleamarket.email}">	

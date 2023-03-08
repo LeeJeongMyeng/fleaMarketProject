@@ -9,6 +9,7 @@ import vo.FleaMarket;
 
 public interface FMViewDao {
 	public FleaMarket fmView(String postingNumber);
+	public List<String> fmFileView(String postingNumber);
 	public void insApp(FApplication ins);
 	public void insUploadFile(ApplicationFile f);
 	public int totCnt(FApplicationSch sch);

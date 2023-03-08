@@ -9,6 +9,11 @@
 		FROM fleamarket
 		WHERE postingNumber = #{postingNumber}			
 	</select>	
+	<select id="fmFileView" resultType="string" parameterType="string">
+		SELECT filename
+		FROM ffile
+		WHERE postingNumber = #{postingNumber}
+	</select>
 	
 	<!-- 신청글 등록 -->
 	<insert id="insApp" parameterType="fapplication">
