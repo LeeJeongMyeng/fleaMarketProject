@@ -133,10 +133,10 @@ text-align:center;
 												 <colgroup> 
 											   	<col width="5%">
 											   	<col width="5%">
-											   	<col width="35%">
+											   	<col width="30%">
 											   	<col width="15%">
 											   	<col width="20%">
-											   	<col width="10%">
+											   	<col width="15%">
 											   	<col width="10%">
 											   	</colgroup>
 												<thead class="thead-light">
@@ -156,7 +156,7 @@ text-align:center;
 																<tr ondblclick="goDetail(${QNAListNotics.qnano})" style="font-weight:bold;">
 																	<td>-</td>
 																	<td>-</td>
-																	<td><span style="color:red;">&#60;공지&#62;</span>${QNAListNotics.title}</td>
+																	<td style="text-align:left; padding-left:20px;"><span style="color:red;">&#60;공지&#62;</span>${QNAListNotics.title}</td>
 																	<td>${QNAListNotics.regdate}</td>
 																	<td>${QNAListNotics.email}</td>
 																	<td>공지사항</td>
@@ -170,7 +170,7 @@ text-align:center;
 																		${QNA.cnt}
 																	</td>
 																	<td>${QNA.qnano}</td>
-																	<td>
+																	<td style="text-align:left;  padding-left:20px;"">
 																		<c:if test="${QNA.method=='a'}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↪</c:if>
 																		<c:if test="${QNA.secretwhether=='y'}">  
 																		<img src="${path}/resource/img/lock.png" style="width:18px; height:18px;"></c:if>
