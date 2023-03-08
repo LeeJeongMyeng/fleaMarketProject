@@ -64,6 +64,12 @@
 		$("#frmNofile").submit()
 	})
 	*/
+	function uptBtn(postingNumber){
+		location.href="${path}/FleaMarketUptPage.do?postingNumber="+postingNumber
+	}	
+	function delBtn(postingNumber){
+		location.href="${path}/fmView.do?postingNumber="+postingNumber
+	}	
   </script>
 </head>
 <%@include file="header.jsp" %>
@@ -213,10 +219,12 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 			                    <div class="row ms-auto text-end">
 				                    <div class="col-6"></div>
 			                    	<div class="col-3">  
-			                    	  <a name="uptBtn" class="btn btn-link text-dark px-3 mb-0" href=".do"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>수정</a>
+			                    	  <button onclick="uptBtn(${fleamarket.postingNumber})" class="btn btn-link text-dark px-3 mb-0">
+			                    	  <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>수정</button>
 									</div>
 									<div class="col-3">
-				                      <a name="delBtn" class="btn btn-link text-danger text-gradient px-3 mb-0" href=".do"><i class="far fa-trash-alt me-2"></i>삭제</a>
+				                      <button onclick="delBtn(${fleamarket.postingNumber})" class="btn btn-link text-danger text-gradient px-3 mb-0">
+				                      <i class="far fa-trash-alt me-2"></i>삭제</button>
 			                    	</div>
 								</div>	                    
 		                    </div>
