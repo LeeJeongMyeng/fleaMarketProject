@@ -276,6 +276,11 @@ ALTER TABLE FFile
 	REFERENCES FleaMarket (postingNumber)
 ;
 
+ALTER TABLE FFile
+ADD FOREIGN KEY (postingNumber)
+REFERENCES FleaMarket (postingNumber)
+ON DELETE CASCADE;
+
 
 ALTER TABLE alert
 	ADD FOREIGN KEY (email)

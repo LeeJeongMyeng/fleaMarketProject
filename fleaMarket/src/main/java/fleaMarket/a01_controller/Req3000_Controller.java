@@ -5,12 +5,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +20,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import fleaMarket.a02_service.Req3000_Service;
 import fleaMarket.util.FileService;
 import vo.FFile;
+import vo.Faddresss;
 import vo.FleaMarket;
-import vo.Member;
 
 @Controller("fleamarket")
 public class Req3000_Controller {
@@ -50,8 +49,8 @@ public class Req3000_Controller {
 	  
 //http://localhost:7030/fleaMarket/fRegistration.do	
 	@RequestMapping("fRegistration.do")
-	public String fRegistration(Model d) {
-	
+	public String fRegistration(Model d,Faddresss ins) {
+		d.addAttribute("add", ins.getAddrs0());
 		return "FleaMarketRegistration";
 	}
 
@@ -78,59 +77,48 @@ public class Req3000_Controller {
 	
 //수정하기	
 //http://localhost:7030/fleaMarket/FleaMarketUptPage.do	
-	@RequestMapping("FleaMarketUptPage.do")
-	public String FleaMarketUptPage(Model d) {
 	
+	@GetMapping("FleaMarketUptPage.do")
+	public String FleaMarketUptPage(@RequestParam String postingNumber, Model d) {
+		d.addAttribute("fleamarket", service.fleaDetail(postingNumber));
+		
 		return "FleaMarketUpt";
-	}
+	} 
 	
-	//홍보글 수정하기 
+	
+//홍보글 수정하기 
 	@RequestMapping("FleaMarketUpt.do")
-	public String FleaMarketUpt(FleaMarket upt, Model d,MultipartFile profile) {
+	public String FleaMarketUpt(FleaMarket upt, RedirectAttributes redirect,MultipartFile profile) {
 		service.UptFleaMarket(upt);
-		d.addAttribute("msg", "수정완료");
-		return "redirect:FleaMarketUptPage.do";
+		redirect.addFlashAttribute("msg", "수정완료");
+		return "redirect:totalSearch.do";
 	} 
 	
 //삭제하기	
-	//http://localhost:7030/fleaMarket/FleaMarketDelPage.do		
-	@RequestMapping("FleaMarketDelPage.do")
-	public String FleaMarketDelPage() {
-	
-		return "FleaMarketDel";
-	}
-	
-	
+
 //삭제버튼 클릭시	
 	@RequestMapping("FleaMarketDel.do")
 	public String FleaMarketDel(@RequestParam("postingNumber") String postingNumber) {
-		service.delFleaMarket(postingNumber);
-		//삭제 버튼 페이지(임의로 설정)
-		return "redirect:fRegistration.do";
+		//파일 삭제 
+	    List<FFile> filelist= service.DelFail(postingNumber);
+	 
+	    for(int i=0; i<filelist.size(); i++) {
+	    	String sd=filelist.get(i).getFilename();
+			fileservice.DeleteFile(profilepath,sd);
+	    }
+		//플리마켓 테이블 삭제
+		service.delFleaMarket(postingNumber); 
+		
+		return "redirect:totalSearch.do";
 	}	
 	
 //전체 조회 
 //	http://localhost:7030/fleaMarket/totalSearch.do
 	@RequestMapping("totalSearch.do")
 	public String totalSearch(@ModelAttribute("sch") FleaMarket sch, Model d) {
-		/*
-		 * service.getFleaMarketList(sch).get(0);
-		 * 
-		 * service.FileNum(sch);
-		 */
+
 		//플리마켓 글 목록을 불러옴.
 		List<FleaMarket> flist = service.getFleaMarketList(sch);
-		/*
-		for(int i=0; i<flist.size(); i++){ 
-			System.out.println(flist.get(i).getPostingNumber());
-			String a =service.FileNum(flist.get(i).getPostingNumber());
-			if(a==null ||a.equals(null)){
-				System.out.println("널이에오 ㅋㅋ!!");
-			}else {
-				System.out.println(a);
-			}
-			
-		} */
 		
 		  List<Map<String,Object>> listmap = new ArrayList<Map<String, Object>>();
 		  //플리마켓의 글갯수만큼 for문

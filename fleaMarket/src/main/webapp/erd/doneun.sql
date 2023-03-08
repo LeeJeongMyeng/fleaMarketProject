@@ -22,8 +22,6 @@ CREATE TABLE FleaMarket
 	address varchar2(200),
 	PRIMARY KEY (postingNumber)
 );
-
-
 SELECT * FROM FleaMarket;
 
 DROP SEQUENCE fleaMarket_seq;
@@ -77,3 +75,17 @@ SELECT * FROM FLEAMARKETMEMBER;
 
 SELECT businessnumber 
 FROM fleamarketmember
+
+
+
+
+--수정하기 데이터 불러오기 
+		SELECT *
+		FROM FleaMarket
+		WHERE postingNumber = 1;
+		
+	
+-- 외래키
+alter table [추가할테이블명] add constraint [제약조건명] foreign key(컬럼명)
+references [부모테이블명] (PK컬럼명) [ON DELETE CASCADE / ON UPDATE CASECADE];
+	

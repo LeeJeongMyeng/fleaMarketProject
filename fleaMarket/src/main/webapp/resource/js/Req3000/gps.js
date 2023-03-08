@@ -51,7 +51,7 @@ function displayCenterInfo(result, status) {
 //동에 대한 default  
 
 /*	var adrs = f.value()*/
-	geocoder.addressSearch('판교', function(result, status) {
+	geocoder.addressSearch('${add}', function(result, status) {
    var infoDiv2 = document.getElementById('centerAddr2'); 
    var infoDiv3 = document.getElementById('centerAddr3'); 
 

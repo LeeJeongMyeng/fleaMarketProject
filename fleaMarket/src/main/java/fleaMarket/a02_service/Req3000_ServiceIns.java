@@ -30,6 +30,11 @@ public class Req3000_ServiceIns implements Req3000_Service{
 	public void insprofile(FFile fins) {
 		dao.insprofile(fins);
 	}
+	//수정페이지 상세 정보 불러오기 
+	public FleaMarket fleaDetail(String postingNumber) {
+		
+		return dao.fleaDetail(postingNumber);
+	}    
 	
 	//수정하기
 	public void UptFleaMarket(FleaMarket upt) {
@@ -50,6 +55,13 @@ public class Req3000_ServiceIns implements Req3000_Service{
 	public String FileNum(String postingNumber){
 		return dao.FileNum(postingNumber);
 	}
+	
+	//파일 정보파일 불러오기(삭제하기)
+	public List<FFile> DelFail(String postingNumber){
+
+	    return  dao.DelFail(postingNumber);
+	}
+
 	
 	
 }

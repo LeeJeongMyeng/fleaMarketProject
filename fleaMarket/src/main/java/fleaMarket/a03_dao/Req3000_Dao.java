@@ -13,6 +13,8 @@ public interface Req3000_Dao {
 	//캘린더
 	public List<FleaMarket> calList(); 
 	
+	//수정페이지 정보 불러오기
+	public FleaMarket fleaDetail(String postingNumber);	  
 	//수정
 	public void UptFleaMarket(FleaMarket upt);
 	
@@ -24,4 +26,7 @@ public interface Req3000_Dao {
 	
 	//전체조회(img파일) 
 	public String FileNum(String postingNumber);
+	
+	//파일 정보 불러오기(삭제) 
+	public List<FFile> DelFail(String postingNumber);
 }

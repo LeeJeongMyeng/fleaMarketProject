@@ -42,6 +42,17 @@
 <script src="${path}/assets/js/plugins/fullcalendar.min.js"></script>
 <%--모달창 --%>
 <script>
+var msg = "${msg}"
+	console.log(msg)
+		if (msg != "") {
+			alert(msg)
+			if (msg + "\n 조회화면으로 이동하시겠습니까?") {
+				location.href = "${path}/totalSearch.do"
+			}
+		}
+</script>
+
+<script>
 $(document).ready(function(){
 
 $('#editor .ql-editor').keyup(function(){
@@ -51,14 +62,6 @@ $('#editor .ql-editor').keyup(function(){
 	$('input[name=content]').val(expeditor); 
 })
 //
-	var msg = "${msg}"
-		if (msg != "") {
-			alert(msg)
-			if (msg + "\n 조회화면으로 이동하시겠습니까?") {
-				location.href = "${path}/totalSearch.do"
-			}
-		}
-
 
 
 });
@@ -88,23 +91,25 @@ $('#editor .ql-editor').keyup(function(){
 						<div class="card card-body mt-4">
 							<h6 class="mb-0 fleamarket">플리마켓 수정하기</h6>
 							<hr class="horizontal dark my-3">
-							<input type="hidden" name="postingNumber" value="1">
-							<input type="hidden" name="email" value="ehddms2909@naver.com">
-							<input type="hidden" name="bisenessNumber" value="예시~">
+							<input type="hidden" name="postingNumber" value="${fleamarket.postingNumber}">
+							<input type="hidden" name="email" value="${Login.email}">
+							<input type="hidden" name="bisenessNumber" value="${Login.businessnumber}">
 							<label for="title" class="form-label labelFont">제목</label> 
-							<input type="text" class="form-control" id="projectName" name="title">
+							<input type="text" class="form-control" id="projectName" name="title" value="${fleamarket.title}">
 
 
 							<div class="row">
 								<div class="col-6">
 									<label class="form-label labelFont">플리마켓 시작일</label> <input
 										class="form-control datetimepicker" type="text"
-										placeholder="시작일을 선택해주세요" name="openDate" data-input>
+										placeholder="시작일을 선택해주세요" name="openDate" data-input 
+										value="${fleamarket.openDate}">
 								</div>
 								<div class="col-6">
 									<label class="form-label labelFont">플리마켓 종료일</label> <input
 										class="form-control datetimepicker" type="text"
-										placeholder="종료일을 선택해주세요" name="closeDate" data-input>
+										placeholder="종료일을 선택해주세요" name="closeDate" data-input
+										value="${fleamarket.closeDate}">
 								</div>
 							</div>
 
@@ -118,7 +123,8 @@ $('#editor .ql-editor').keyup(function(){
 							<div class="row">
 								<div class="col-6">
 									<label class="form-label labelFont">모집 인원</label> <input
-										class="form-control" type="text" name="approvalMaxCnt">
+										class="form-control" type="text" name="approvalMaxCnt"
+										value="${fleamarket.approvalMaxCnt}">
 								</div>
 							</div>
 
@@ -128,12 +134,13 @@ $('#editor .ql-editor').keyup(function(){
 									<label class="form-label labelFont">모집 시작일</label> <input
 										class="form-control datetimepicker" type="text"
 										placeholder="시작일을 선택해주세요" name="recruitmentStartDate"
-										data-input>
+										data-input value="${fleamarket.recruitmentStartDate}">
 								</div>
 								<div class="col-6">
 									<label class="form-label labelFont">모집 종료일</label> <input
 										class="form-control datetimepicker" type="text"
-										placeholder="종료일을 선택해주세요" name="recruitmentEndDate" data-input>
+										placeholder="종료일을 선택해주세요" name="recruitmentEndDate" data-input
+										value="${fleamarket.recruitmentEndDate}">
 								</div>
 							</div>
 
@@ -152,7 +159,7 @@ $('#editor .ql-editor').keyup(function(){
 										<span id="centerAddr2"> </span> <span id="centerAddr3">
 										</span>
 									</div>
-									<input Type="text" name="address" value="">
+									<input Type="text" name="address" value="${fleamarket.address}">
 									
 								</div>
 								</div>
@@ -162,15 +169,15 @@ $('#editor .ql-editor').keyup(function(){
 								<div id="editor">
 
 									<p id="contents">
-										<br>
+										${fleamarket.content}<br>
 									</p>
 								</div>
-								<input type="hidden" name="content" id="content" value="">
+								<input type="hidden" name="content" id="content" value="${fleamarket.content}">
 
 								<div class="row">
 									<div class="col-sm-4 col-6">
 										<label class="form-label mt-4">첨부파일 유무</label> 
-										<select	class="form-control" name="checkForm" id="choices-gender">
+										<select	class="form-control" name="checkForm" id="choices-gender" value="${fleamarket.checkForm}">
 											<option value="N">필요없음</option>
 											<option value="P">개인양식</option>
 											<option value="C">공통파일</option>
@@ -188,7 +195,7 @@ $('#editor .ql-editor').keyup(function(){
 								
 					</form>
 					<div class="d-flex justify-content-end mt-4">
-						<button type="submit" id="insBtn"
+						<button type="submit" 
 							class="btn bg-gradient-primary m-0 ms-2">수정하기</button>
 					</div>
 				</div>
@@ -354,7 +361,7 @@ function displayCenterInfo(result, status) {
 
 /* function serar */
 //동에 대한 default 
-geocoder.addressSearch('판교', function(result, status) {
+geocoder.addressSearch('${fleamarket.address}', function(result, status) {
    var infoDiv2 = document.getElementById('centerAddr2'); 
    var infoDiv3 = document.getElementById('centerAddr3'); 
 

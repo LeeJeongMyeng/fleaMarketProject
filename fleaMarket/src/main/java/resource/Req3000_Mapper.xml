@@ -10,19 +10,26 @@
 		FROM FLEAMARKET 
 		WHERE address like '%'||#{address}||'%';
 	</select>	
-    
-	<insert id="insertFleaMarket" parameterType="fleamarket">
+   	
+  	<insert id="insertFleaMarket" parameterType="fleamarket">
 		insert into FleaMarket
-		values(fleaMarket_seq.nextval,#{title}, sysdate,
+		values(fleaMarket_seq.nextval,#{title}, to_CHAR(sysdate,'YYYY-MM-DD'),
 		#{content},#{bisenessNumber},#{email},#{approvalMaxCnt},
 		#{recruitmentStartDate},#{recruitmentEndDate},#{openDate},
 		#{closeDate},#{checkForm},#{viewCnt},#{address})
-	</insert>
+	</insert>  
 
 	<!--플리마켓 홍보글 등록시 -->
 	<insert id="insprofile" parameterType="ffile">
 		INSERT INTO FFile VALUES(#{filename},#{filePath},fleaMarket_seq.currval)
 	</insert>
+	
+	<!-- 수정 상세정보 -->
+	<select id="fleaDetail" resultType="fleamarket" parameterType="string">
+		SELECT *
+		FROM FleaMarket
+		WHERE postingNumber = #{postingNumber}
+    </select>	
 	
     <!-- 수정하기 -->
 	<update id="UptFleaMarket" parameterType="fleamarket">
@@ -43,6 +50,12 @@
 		delete fleamarket 
 		where postingNumber = #{postingNumber}
 	</delete>
+	
+	<select id="DelFail" resultType="ffile" parameterType="string">
+		    SELECT *  
+			FROM ffile 
+			where postingNumber=#{postingNumber}
+    </select>
 	
     <select id="getFleaMarketList" parameterType="fleamarket"
 		 resultType="fleamarket">
