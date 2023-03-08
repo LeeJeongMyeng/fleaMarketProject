@@ -136,13 +136,16 @@ li{
 								</a>
 							</li>
 					</c:if>
-							<!-- 어떻게 할지? 
 							<li class="nav-item ">
-								<a class="nav-link " href="#"> 
-									<span class="sidenav-normal">내 참가신청 글목록</span>
+								<a class="nav-link " href="appMyList.do"> 
+									<span class="sidenav-normal">내 신청 조회</span>
 								</a>
 							</li>
-							 -->
+							<li class="nav-item ">
+								<a class="nav-link " href="appReceivedList.do"> 
+									<span class="sidenav-normal">받은 신청 조회</span>
+								</a>
+							</li>
 							<li class="nav-item ">
 								<a class="nav-link " href="MemberInquire.do?title=${Login.email}"> 
 									<span class="sidenav-normal">문의하기</span>
