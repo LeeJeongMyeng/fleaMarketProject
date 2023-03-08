@@ -2,7 +2,7 @@ package vo;
 
 
 public class CapplicationList {
-	private String communitynumber;
+	private int communitynumber;
 	private String title;
 	private String content;
 	private String registDate;
@@ -10,7 +10,9 @@ public class CapplicationList {
 	private String category;
 	private String email;
 	private String hashtag;
-	private String viewCnt;
+	private int viewCnt;
+	private int likeCnt;
+	
 	//받는 이미지 
 	private String imgName;
 	
@@ -21,11 +23,11 @@ public class CapplicationList {
 	private String img;
 	
 	
-	public String getCommunitynumber() {
+	public int getCommunitynumber() {
 		return communitynumber;
 	}
-	public void setCommunitynumber(String communitynumber) {
-		this.communitynumber = communitynumber;
+	public void setCommunitynumber(int communitynumber) {
+		this.communitynumber=communitynumber;
 	}
 	public String getTitle() {
 		return title;
@@ -69,10 +71,10 @@ public class CapplicationList {
 	public void setHashtag(String hashtag) {
 		this.hashtag = hashtag;
 	}
-	public String getViewCnt() {
+	public int getViewCnt() {
 		return viewCnt;
 	}
-	public void setViewCnt(String viewCnt) {
+	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
 	}
 	public String getImgName() {
@@ -104,6 +106,12 @@ public class CapplicationList {
 	}
 	public void setImg(String img) {
 		this.img = img;
+	}
+	public int getLikeCnt() {
+		return likeCnt;
+	}
+	public void setLikeCnt(int likeCnt) {
+		this.likeCnt = likeCnt;
 	}
 	
 	

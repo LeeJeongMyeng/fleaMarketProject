@@ -17,15 +17,22 @@ public interface CommunitySelectDao {
 	//인기글 처리 
 	public List<CapplicationList> getBestCommunityList(Criteria cri);
 	
-	public List<CapplicationList> getCommunityDetailList(String communityNumber);
+	public List<CapplicationList> getCommunityDetailList(int communityNumber);
 	
-	public List<BoardImg> getCommunityImgList(String communityNumber);
+	public List<BoardImg> getCommunityImgList(int communityNumber);
 	// json 
-	public int getFollowYesOrNot(Map<String, String> map);
+	public int getFollowYesOrNot(Map<String,Object> map);
 	
-	public int getInsertFriend(Map<String, String> map);
+	public int getInsertFriend(Map<String,String> map);
 	
-	public int getDeleteFriend(Map<String, String> map);
+	public int getDeleteFriend(Map<String,String> map);
 	//좋아요 // yes or not
-	public int getLikeYesOrNot(Map<String,String> map);
+	public int getLikeYesOrNot(Map<String,Object> map);
+	
+	public int getLikeCnt(int communityNumber);
+	
+	public int getLikeInsert(Map<String,Object> map);
+	
+	public int getLikeDelete(Map<String,Object> map);
+	
 }

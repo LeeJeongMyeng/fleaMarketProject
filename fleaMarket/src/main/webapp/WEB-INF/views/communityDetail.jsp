@@ -196,10 +196,10 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                   <div class="d-flex align-items-center" style = "width:70px">
                   <c:set var = "likeChecking" value = "${likeCheck}"/>
                     <c:if test = "${likeChecking eq '0'}">  
-                      <i class="fa-light fa-heart cursor-pointer" style ="font-size:25px;"></i>
+                      <i id = "Heart" class="fa-regular fa-heart cursor-pointer Heart" style ="font-size:25px;"></i>
                       </c:if>
                       <c:if test = "${likeChecking eq '1'}">  
-                      <i class="fa-solid fa-heart-circle-minus cursor-pointer"style ="font-size:25px;"></i>
+                      <i id = "Heart" class="fa-solid fa-heart-circle-minus cursor-pointer Heart" style ="font-size:25px;"></i>
                       </c:if>
                       <span class="text-sm me-3 ">150</span>
                     </div>
@@ -233,14 +233,15 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                 <hr class="horizontal dark my-3">
               </div>
               <!-- Comments -->
+              <c:forEach var = "rep" items = "${replyList}">
               <div class="mb-1">
                 <div class="d-flex">
                   <div class="flex-shrink-0">
-                    <img alt="Image placeholder" class="avatar rounded-circle" src="${path}/assets/img/bruce-mars.jpg">
+                    <img alt="Image placeholder" class="avatar rounded-circle" src="${path}/resource/img/Member/profileimg/${rep.profileimg}">
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h6 class="h5 mt-0">Michael Lewis</h6>
-                    <p class="text-sm">I always felt like I could do anything. That’s the main thing people are controlled by! Thoughts- their perception of themselves!</p>
+                    <h6 class="h5 mt-0">${rep.nickname }</h6>
+                    <p class="text-sm">${rep.repcontent }</p>
                     <div class="d-flex">
                       <div>
                         <i class="ni ni-like-2 me-1 cursor-pointer opacity-6"></i>
@@ -253,40 +254,24 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                     </div>
                   </div>
                 </div>
-                <div class="d-flex mt-3">
-                  <div class="flex-shrink-0">
-                    <img alt="Image placeholder" class="avatar rounded-circle" src="${path}/assets/img/team-5.jpg">
-                  </div>
-                  <div class="flex-grow-1 ms-3">
-                    <h6 class="h5 mt-0">Jessica Stones</h6>
-                    <p class="text-sm">Society has put up so many boundaries, so many limitations on what’s right and wrong that it’s almost impossible to get a pure thought out. It’s like a little kid, a little boy.</p>
-                    <div class="d-flex">
-                      <div>
-                        <i class="ni ni-like-2 me-1 cursor-pointer opacity-6"></i>
-                      </div>
-                      <span class="text-sm me-2">10 likes</span>
-                      <div>
-                        <i class="ni ni-curved-next me-1 cursor-pointer opacity-6"></i>
-                      </div>
-                      <span class="text-sm me-2">1 share</span>
-                    </div>
-                  </div>
-                </div>
+                </c:forEach>
                 <div class="d-flex mt-4">
                   <div class="flex-shrink-0">
+                    <!-- 세션 프로필 아이디. -->
                     <img alt="Image placeholder" class="avatar rounded-circle me-3" src="${path}/assets/img/team-4.jpg">
                   </div>
                   <div class="flex-grow-1 my-auto">
-                      <form class="align-items-center">
+                      <form method = "post" action = "${path}/writeReply.do" class="align-items-center">
+                      <input type = "number" name = "communitynumber" value = "${dlist[0].communitynumber}">
                 <div class="d-flex">
-                   <textarea class="form-control" placeholder="Write your comment" rows="1"></textarea>
-                  <button class="btn bg-gradient-primary mb-0 ms-2" style = "height: 38px;width: 70px;">
+                   <textarea name = "content" class="form-control" placeholder="Write your comment" rows="1"></textarea>
+                  <button  class="btn bg-gradient-primary mb-0 ms-2" style = "height: 38px;width: 70px;">
                     등록
                   </button>
                 </div>
               </form>
 
-  <form>
+ 
                   </div>
                 </div>
               </div>
@@ -417,15 +402,83 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 
 //좋아요 수/ 댓글 수 표시하기 
 var likeVal = ${likeCheck};
-
-if(likeVal>0){
+$("#Heart").on("click", function(e) {
+	if(likeVal>0){
+		console.log("허허 좋아요 눌렀어용!");	
+		fetch("${path}/deleteLike.do",{
+   			method : "POST",
+   			header:{
+   				"Content-Type": "application/json",
+   			},
+   			body:JSON.stringify({
+   			email:'${session}',
+   			communityNumber:'${dlist[0].communitynumber}'
+   		}),
+   	})
+   	    .then(res => res.json())  //응답 결과를 json으로 파싱
+   	    .then(data => {
+   	    		//***여기서 응답 결과로 실행할 동작을 정의하면 됨***
+   	            // [ data.키값 ] 이런 형태로 value 추출 가능 
+   	            likeVal--;
+   	            console.log(data.msg)
+   	    		console.log(likeVal);
+	            $('#Heart').attr('class','fa-regular fa-heart cursor-pointer')
+	              	            	
+   	    })
+   	    .catch(err => { // 오류 발생시 오류를 담아서 보여줌
+   	        console.log('Fetch Error',err);
+   	    });
+	}else{
 	console.log("허허 좋아요 눌렀어용!");
-}
+		fetch("${path}/insertLike.do",{
+   			method : "POST",
+   			header:{
+   				"Content-Type": "application/json",
+   			},
+   			body:JSON.stringify({
+   			email:'${session}',
+   			communityNumber:'${dlist[0].communitynumber}'
+   		}),
+   	})
+   	    .then(res => res.json())  //응답 결과를 json으로 파싱
+   	    .then(data => {
+   	    		//***여기서 응답 결과로 실행할 동작을 정의하면 됨***
+   	            // [ data.키값 ] 이런 형태로 value 추출 가능
+   	            console.log(data.msg);
+   	    		console.log(likeVal);
+   	    		likeVal++;
+	            $('#Heart').attr('class','fa-solid fa-heart-circle-minus cursor-pointer')               
+	            	
+   	    })
+   	    .catch(err => { // 오류 발생시 오류를 담아서 보여줌
+   	        console.log('Fetch Error',err);
+   	    });
+}})
+
+
+
+
+// 좋아요 수 가져오는 함수 
+var likeCntFunc = function(){
+	fetch("${path}/likeCnt.do",{
+			method : "POST",
+			header:{
+				"Content-Type": "application/json",
+			},
+			body:JSON.stringify({
+			communitynumber:${dlist[0].communitynumber}
+		}),
+	})
+	    .then(res => res.json())  //응답 결과를 json으로 파싱
+	    .then(data => {
+	    		console.log(data.likeCnt);
+	    })
+	    .catch(err => { // 오류 발생시 오류를 담아서 보여줌
+	        console.log('Fetch Error',err);
+	    });
+};
     
-  
-    
-    	
-    
+
   
     if (document.getElementById('choices-quantity')) {
       var element = document.getElementById('choices-quantity');

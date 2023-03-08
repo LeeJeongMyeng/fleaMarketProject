@@ -8,19 +8,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import fleaMarket.a02_service.CommunityReplyService;
 import fleaMarket.a02_service.CommunitySelectService;
-import vo.BoardImg;
 import vo.CapplicationList;
 import vo.Criteria;
 import vo.PageDTO;
+import vo.ReplyVo;
 
 @Controller
 public class CommunitySelectController {
 	
 	private CommunitySelectService service;
-	//생성자 주입하기 
+	//생성자 주입하기
+	private CommunityReplyService repservice;
 	
 	// 커뮤니티 조회 컨트롤러 
 	private final Logger logger = LoggerFactory.getLogger(CommunitySelectController.class);
@@ -28,12 +31,24 @@ public class CommunitySelectController {
     /**
 	 * @param service
 	 */
+	
+	
+	
+	
+	/**
+	 * @param service
+	 * @param repservice
+	 */
 	@Autowired
-	public CommunitySelectController(CommunitySelectService service) {
+	public CommunitySelectController(CommunitySelectService service, CommunityReplyService repservice) {
+		
 		this.service = service;
+		this.repservice = repservice;
 	}
-	
-	
+
+
+
+
 	//기본 조회(get)
 	@GetMapping("CommunityList.do")
 	public String communityList(@RequestParam(value = "showTemplete",required = false , defaultValue="all") String showTemplete,Model model,Criteria cri) throws Exception{
@@ -46,10 +61,9 @@ public class CommunitySelectController {
 		*/
 		logger.info("log"+cri);
 		
-		List<CapplicationList> clist = null;
+		List<CapplicationList> clist;
 		if(showTemplete.equals("all") || showTemplete == "") {
 			clist = service.getCommunityList(cri);
-			logger.info("clist:"+clist.get(1));
 			model.addAttribute("bestValue",showTemplete);
 			model.addAttribute("list",clist);
 			model.addAttribute("pageMaker",new PageDTO(cri,service.getCommunitySelectNum(cri)));
@@ -70,7 +84,7 @@ public class CommunitySelectController {
 	
 	//상세 조회(get)
 	@GetMapping("CommunityDetail.do")
-	public String communityDetailList(@RequestParam("communityNumber") String communityNumber,Model model) throws Exception {
+	public String communityDetailList(@RequestParam("communityNumber") int communityNumber,Model model) throws Exception {
 		//세션처리 
 		String sessions = "pucoca@naver.com";
 		//상세조회 정보 
@@ -82,6 +96,9 @@ public class CommunitySelectController {
 		//int 좋아요 처리 
 		int likeCheck = service.getLikeYesOrNot(communityNumber, sessions);
 		
+		List<ReplyVo> replyList = repservice.replyList(communityNumber);
+				
+		
 		model.addAttribute("dlist",clist);
 		
 		model.addAttribute("imgList",imgList);
@@ -91,6 +108,21 @@ public class CommunitySelectController {
 		model.addAttribute("session",sessions);
 		
 		model.addAttribute("likeCheck",likeCheck);
+		
+		model.addAttribute("replyList",replyList);
+		
+		return "communityDetail";
+	}
+	
+	@PostMapping("writeReply.do")
+	public String writeReply(@RequestParam int communitynumber,@RequestParam String content,String email) {
+		email = "pucoca@naver.com";
+		ReplyVo vo = new ReplyVo();
+		vo.setCommunityNumber(communitynumber);
+		vo.setRepcontent(content);
+		vo.setEmail(email);
+		//나중에 등록, 리스트 구현 후 개수 받아올 예정 
+		int result = repservice.insertReply(vo);
 		
 		return "communityDetail";
 	}

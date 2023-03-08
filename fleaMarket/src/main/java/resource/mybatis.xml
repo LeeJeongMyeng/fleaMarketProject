@@ -20,7 +20,7 @@
 		<typeAlias alias="roommemberinfo" type = "vo.RoomMemberInfo"/>
 		<typeAlias alias="qna" type = "vo.QNA"/>
 		<typeAlias alias="qnafile" type = "vo.QNAFile"/>
-		
+		<typeAlias alias="reply" type ="vo.ReplyVo"/>
 	</typeAliases>
 
 	<!-- 2. 사용 XXXMapper.xml을 추가 -->
@@ -31,5 +31,6 @@
 		<mapper resource="resource/Req3000_Mapper.xml"/>
 		<mapper resource="resource/FMViewMapper.xml"/>
 		<mapper resource="resource/communitySelect_Mapper.xml"/>
+		<mapper resource="resource/ReplyMapper.xml"/>
 	</mappers>
 </configuration>

@@ -150,14 +150,27 @@ AND c.COMMUNITYNUMBER = #{communityNumber}
    SELECT count(*) FROM FRIEND f, CAPPLICAION c
 WHERE f.FOLLOWING  = c.EMAIL 
 AND c.COMMUNITYNUMBER = #{communityNumber}
-AND f.MYEMAIL = #{email}  
+AND f.MYEMAIL = #{session}  
    </select>
    <!-- 좋아요 눌렀는지 여부 확인 -->
-   <select id = "getLikeYesOrNot" parameterType = "java.util.HashMap">
+   <select id = "getLikeYesOrNot" parameterType = "java.util.HashMap" resultType = "int">
    SELECT count(*) FROM communityHeart
-WHERE communityNumber = #{communityNumber}
-AND email = #{email}
+   WHERE communityNumber = #{communityNumber}
+   AND email = #{session}
 </select>
+   <!-- 좋아요 cnt 확인 -->
+    <select id = "getLikeCnt" resultType = "int">
+    SELECT count(*) FROM communityHeart
+    WHERE communityNumber = #{communityNumber}
+    </select>
+    <!-- 좋아요 Insert -->
+    <insert id="getLikeInsert" parameterType = "java.util.HashMap">
+   INSERT INTO communityHeart VALUES(#{communityNumber},#{email})
+   </insert>
+   <!-- 좋아요 delete  -->
+   <delete id="getLikeDelete" parameterType = "java.util.HashMap">
+   DELETE FROM communityHeart WHERE communityNumber = #{communityNumber}  AND email = #{email} 
+   </delete>
    <!-- insert keyproperty 값 반환 -->
    <insert id="getInsertFriend" parameterType = "java.util.HashMap">
    INSERT INTO FRIEND VALUES(#{myEmail},#{following})
