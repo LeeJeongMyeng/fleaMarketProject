@@ -105,7 +105,7 @@ public class Req1000_RestController {
 		String writer = qna.getEmail();
 		
 		// 1. 만약 해당 글이 공지글이 아니거나, 비밀글이라면
-		if(!qna.getMethod().equals("n") && qna.getSecretwhther().equals("y") && !sesAuth.equals("관리자")) {
+		if(!qna.getMethod().equals("n") && qna.getSecretwhether().equals("y") && !sesAuth.equals("관리자")) {
 		// 2. 해당글이 답변글이면 
 			if(qna.getMethod().equals("a")){
 				//기존 문의글작성자를 불러옴

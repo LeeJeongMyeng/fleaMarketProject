@@ -38,13 +38,17 @@ $(document).ready(function(){
 		$('input[name=content]').val(expeditor); 
 	})
 	
-	function CheckQNAInsert(){
-		if($(' input[name=category]').val()=='none'){alert('문의유형을 선택바랍니다.'); return false;}
-		if($(' input[name=title]').val()==''){alert('문의제목을 입력바랍니다.');return false;}
-		if($(' input[name=content]').val()=='none'){alert('문의내용을 입력부탁드립니다.');return false;}
+	
+})
+
+function CheckQNAInsert(){
+	var sesAuthority='${Login.authority}'
+	
+		if(sesAuthority!='관리자' && $('select[name=category]').val()=='none'){alert('문의유형을 선택바랍니다.'); return false;}
+		if($('input[name=title]').val()==''){alert('문의제목을 입력바랍니다.');return false;}
+		if($('input[name=content]').val()==''){alert('문의내용을 입력부탁드립니다.');return false;}
 		return true;
 	}
-})
 </script>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
@@ -71,10 +75,10 @@ $(document).ready(function(){
 							<div class="row ms-2 mb-3">
 							<c:choose>
 								<c:when test="${empty qna.method}">
-									<input name="method" type="text" value="${Login.authority=='관리자'?'n':'q'}"/>
+									<input name="method" type="hidden" value="${Login.authority=='관리자'?'n':'q'}"/>
 								</c:when>
 								<c:otherwise>
-									<input name="method" type="text" value="${qna.method}"/>
+									<input name="method" type="hidden" value="${qna.method}"/>
 								</c:otherwise>
 							</c:choose>
 							<c:if test="${Login.authority!='관리자'}">	
@@ -97,14 +101,15 @@ $(document).ready(function(){
 									</div>
 								</div>
 							</c:if>
-							<c:choose>
-										<c:when test="${empty qna.secretwhther}">
-											<input type="hidden" name="secretwhther" value="n"/>
+							<input type="hidden" name="secretwhether" value="${empty qna.secretwhether?'n':qna.secretwhether}"/>
+							
+							<%-- <c:choose>
+										<c:when test="${empty qna.secretwhether}">
 										</c:when>
 										<c:otherwise>
-											<input type="hidden" name="secretwhther" value="${qna.secretwhther}"/>
+											<input type="hidden" name="secretwhether" value="${qna.secretwhether}"/>
 										</c:otherwise>
-									</c:choose>
+									</c:choose> --%>
 							</div>
 							<div class="row ms-3 mb-4">
 								<div class="col-2 ms-n2 me-2">
@@ -189,8 +194,8 @@ var quill = new Quill('#editor', {
 
 $('#secretBtn').click(function(){
 	
-	if($(this).is(':checked')){$('input[name=secretwhther]').val('y')}
-	else{$('input[name=secretwhther]').val('n')}
+	if($(this).is(':checked')){$('input[name=secretwhether]').val('y')}
+	else{$('input[name=secretwhether]').val('n')}
 })
 
 

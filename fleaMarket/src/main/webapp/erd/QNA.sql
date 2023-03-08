@@ -55,9 +55,9 @@ CREATE TABLE QNAFile
 );
 SELECT * FROM qnafile;
 INSERT INTO qnafile values(FLEAMARKETQNA_seq.currval,'file/qna/','20');
-DELETE qnafile;
+DELETE FLEAMARKETQNA WHERE qnano=54;
 
-ALTER TABLE FLEAMARKETQNA ADD refno varchar2(100);
+ALTER TABLE FLEAMARKETQNA RENAME COLUMN secretwhther TO secretwhether;
 
 
 
@@ -75,7 +75,7 @@ SELECT count(*) FROM FLEAMARKETQNA
 WHERE METHOD != 'n'
 AND (title || EMAIL) LIKE '%'||''||'%';
 --삭제
-DELETE qnafile;
+DELETE ;
 
 
 

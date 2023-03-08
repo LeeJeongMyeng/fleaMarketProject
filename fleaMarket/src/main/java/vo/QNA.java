@@ -10,7 +10,7 @@ public class QNA {
 	private String method;
 	private String category;
 	private String refno;
-	private String secretwhther;
+	private String secretwhether;
 	private String status;
 	private String cnt;//페이징
 	public String getQnano() {
@@ -73,17 +73,18 @@ public class QNA {
 	public void setRefno(String refno) {
 		this.refno = refno;
 	}
-	public String getSecretwhther() {
-		return secretwhther;
-	}
-	public void setSecretwhther(String secretwhther) {
-		this.secretwhther = secretwhther;
-	}
+	
 	public String getStatus() {
 		return status;
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public String getSecretwhether() {
+		return secretwhether;
+	}
+	public void setSecretwhether(String secretwhether) {
+		this.secretwhether = secretwhether;
 	}
 	
 	

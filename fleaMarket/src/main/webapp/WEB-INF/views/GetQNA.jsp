@@ -90,7 +90,7 @@
 									<input class="multisteps-form__input form-control" name="regdate" type="text" value="${qna.regdate}" readonly/>
 								</div>
 							</div>
-							<input type="hidden" name="secretwhther" value="${qna.secretwhther }"> 
+							<input type="hidden" name="secretwhether" value="${qna.secretwhether }"> 
 							<div class="mb-3" style="margin-left: 26px;">
 									<label class="postInsertTitle" style="margin-left: -0.5%;">제목</label>
 									<input class="multisteps-form__input form-control w-50" name="title" type="text" value="${qna.title}"/>

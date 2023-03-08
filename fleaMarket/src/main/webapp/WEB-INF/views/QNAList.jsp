@@ -76,7 +76,11 @@ function goPage(cnt){
 
 </script>
 </head>
-
+<style>
+tbody td,th{
+text-align:center;
+}
+</style>
 <body class="g-sidenav-show bg-gray-100">
 	
 
@@ -124,14 +128,17 @@ function goPage(cnt){
 									<div class="card-body px-0 pb-0">
 
 										<div class="table-responsive">
-												<table>
-											   	<col width="5%">
-											   	<col width="5%">
-											   	<col width="50%">
-											   	<col width="15%">
-											   	<col width="15%">
-											   	<col width="5%">
+												
 												<table class="table table-flush" id="QnAListTable">
+												 <colgroup> 
+											   	<col width="5%">
+											   	<col width="5%">
+											   	<col width="35%">
+											   	<col width="15%">
+											   	<col width="20%">
+											   	<col width="10%">
+											   	<col width="10%">
+											   	</colgroup>
 												<thead class="thead-light">
 													<tr style="background-color: #ebebeb;">
 														<th>No</th>
@@ -147,8 +154,8 @@ function goPage(cnt){
 															<c:forEach var="QNAListNotics" items="${QNAListNotics}">
 															
 																<tr ondblclick="goDetail(${QNAListNotics.qnano})" style="font-weight:bold;">
-																	<td style="color:red;">0</td>
-																	<td style="color:red;">0</td>
+																	<td>-</td>
+																	<td>-</td>
 																	<td><span style="color:red;">&#60;공지&#62;</span>${QNAListNotics.title}</td>
 																	<td>${QNAListNotics.regdate}</td>
 																	<td>${QNAListNotics.email}</td>
@@ -165,7 +172,7 @@ function goPage(cnt){
 																	<td>${QNA.qnano}</td>
 																	<td>
 																		<c:if test="${QNA.method=='a'}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↪</c:if>
-																		<c:if test="${QNA.secretwhther=='y'}">  
+																		<c:if test="${QNA.secretwhether=='y'}">  
 																		<img src="${path}/resource/img/lock.png" style="width:18px; height:18px;"></c:if>
 																		 ${QNA.title}
 																	 </td>
