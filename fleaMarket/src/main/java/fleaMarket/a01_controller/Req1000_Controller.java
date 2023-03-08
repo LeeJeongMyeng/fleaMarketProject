@@ -133,6 +133,7 @@ public class Req1000_Controller {
       //들어온 글정보부터 입력(중요. 시퀸스넘버때매 무조건 앞에서 해야함)
        
 	   service.QNAInsert(ins);
+	   
 	   if(ins.getMethod().equals("a")) {
 		   //답변글일경우 해당 문의글 상태 답변완료로 업데이트
 		   service.QNAAnswerUpdate(ins.getRefno());

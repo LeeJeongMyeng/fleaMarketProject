@@ -70,11 +70,11 @@ $(document).ready(function(){
 							<input type="hidden" name="refno" value="${empty qna.refno?0:qna.refno}"/>							
 							<div class="row ms-2 mb-3">
 							<c:choose>
-								<c:when test="${empty method}">
-									<input name="method" type="hidden" value="${qna.method}"/>
+								<c:when test="${empty qna.method}">
+									<input name="method" type="text" value="${Login.authority=='관리자'?'n':'q'}"/>
 								</c:when>
 								<c:otherwise>
-									<input name="method" type="hidden" value="${Login.authority=='관리자'?'n':'q'}"/>
+									<input name="method" type="text" value="${qna.method}"/>
 								</c:otherwise>
 							</c:choose>
 							<c:if test="${Login.authority!='관리자'}">	
