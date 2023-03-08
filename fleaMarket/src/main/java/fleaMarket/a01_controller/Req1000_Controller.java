@@ -121,9 +121,17 @@ public class Req1000_Controller {
    //문의글등록
    @PostMapping("QNAInsert.do")
    public String QNAInsert(QNA ins,MultipartHttpServletRequest qnafiles) {
-      
+      System.out.println("카테:"+ins.getCategory());
+      System.out.println("내용:"+ins.getContent());
+      System.out.println("이멜:"+ins.getEmail());
+      System.out.println("메소드:"+ins.getMethod());
+      System.out.println("참고번호:"+ins.getRefno());
+      System.out.println("비밀글:"+ins.getSecretwhther());
+      System.out.println("제목:"+ins.getTitle());
+    
       //들어온 글정보부터 입력(중요. 시퀸스넘버때매 무조건 앞에서 해야함)
-       service.QNAInsert(ins);
+       
+	   service.QNAInsert(ins);
        
       // 리스트로 받은 파일업로드+데이터베이스 삽입
        List<MultipartFile> fileList = qnafiles.getFiles("qnafiles");

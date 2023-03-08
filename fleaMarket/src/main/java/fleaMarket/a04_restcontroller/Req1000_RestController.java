@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import fleaMarket.a02_service.Req1000_Service;
+import fleaMarket.a02_service.Req1001_Service;
 import vo.Member;
+import vo.QNA;
 
 
 
@@ -22,6 +24,8 @@ public class Req1000_RestController {
 	public Req1000_RestController(Req1000_Service service) {
 		this.service = service;
 	}
+	@Autowired
+	private Req1001_Service service2;
 	
 	 //이메일 중복검사
 	@PostMapping("DuplicateEmail.do")
@@ -86,10 +90,33 @@ public class Req1000_RestController {
 		}else {
 			MatchPassword = BCrypt.checkpw(password,sespassword)?"true":"false";
 		}
-		
-		
-
 		d.addAttribute("MatchPassword",MatchPassword);
+		return "pageJsonReport";
+	}
+	
+	@PostMapping("CheckGetQNA.do")
+	public String CheckGetQNA(@RequestParam("qnano") String qnano,Model d,HttpSession session) {
+		
+		Member mem = (Member)session.getAttribute("Login");
+		String sesAuth = mem.getAuthority();
+		String sesemail = mem.getEmail();
+		
+		QNA qna = service2.getQNA(qnano);
+		String writer = qna.getEmail();
+		
+		// 1. 만약 해당 글이 공지글이 아니거나, 비밀글이라면
+		if(!qna.getMethod().equals("n") && qna.getSecretwhther().equals("y") && !sesAuth.equals("관리자")) {
+		// 2. 해당글이 답변글이면 
+			if(qna.getMethod().equals("a")){
+				//기존 문의글작성자를 불러옴
+				writer = service2.getQNA(qna.getRefno()).getEmail();
+			}
+			//로그인된 유저와 일치여부
+		qnano = sesemail.equals(writer)?qnano:"false";
+		}
+		
+		
+		d.addAttribute("CheckGetQNA",qnano);
 		return "pageJsonReport";
 	}
 }

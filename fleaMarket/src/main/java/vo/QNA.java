@@ -10,6 +10,7 @@ public class QNA {
 	private String method;
 	private String category;
 	private String refno;
+	private String secretwhther;
 	private String cnt;//페이징
 	public String getQnano() {
 		return qnano;
@@ -70,6 +71,12 @@ public class QNA {
 	}
 	public void setRefno(String refno) {
 		this.refno = refno;
+	}
+	public String getSecretwhther() {
+		return secretwhther;
+	}
+	public void setSecretwhther(String secretwhther) {
+		this.secretwhther = secretwhther;
 	}
 	
 	

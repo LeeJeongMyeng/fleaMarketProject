@@ -37,6 +37,13 @@ $(document).ready(function(){
 	 	var expeditor=$(this).html() 
 		$('input[name=content]').val(expeditor); 
 	})
+	
+	function CheckQNAInsert(){
+		if($(' input[name=category]').val()=='none'){alert('문의유형을 선택바랍니다.'); return false;}
+		if($(' input[name=title]').val()==''){alert('문의제목을 입력바랍니다.');return false;}
+		if($(' input[name=content]').val()=='none'){alert('문의내용을 입력부탁드립니다.');return false;}
+		return true;
+	}
 })
 </script>
 <body class="g-sidenav-show   bg-gray-100">
@@ -59,15 +66,15 @@ $(document).ready(function(){
 								</div>
 							</div>
 						</div>
-						<form action="QNAInsert.do" method="post" enctype="multipart/form-data">
+						<form action="QNAInsert.do" method="post" enctype="multipart/form-data" onsubmit="return CheckQNAInsert()">
 							<input type="hidden" name="refno" value="${empty qna.refno?0:qna.refno}"/>							
 							<div class="row ms-2 mb-3">
 							<c:choose>
 								<c:when test="${empty method}">
-									<input name="method" type="hidden" value="${qna.method}"/>
+									<input name="method" type="hidden" value="${Login.authority=='관리자'?'n':'q'}"/>
 								</c:when>
 								<c:otherwise>
-									<input name="method" type="hidden" value="${Login.authority=='관리자'?'n':'q'}"/>
+									<input name="method" type="hidden" value="${qna.method}"/>
 								</c:otherwise>
 							</c:choose>
 							<c:if test="${Login.authority!='관리자'}">	
@@ -83,7 +90,21 @@ $(document).ready(function(){
 									  <option>커뮤니티게시글신고</option>
 									</select>
 								</div>
+								<div class="col-2">
+									 <div class="checkbox_group form-check form-check-info Trems_Wrap ms-3">
+										  <label class="postInsertTitle" style="margin-left: -0.5%;">비밀글</label>
+										  <input class="form-check-input" type="checkbox" id="secretBtn" class="Trem text-dark font-weight-bolder"/>
+									</div>
+								</div>
 							</c:if>
+							<c:choose>
+										<c:when test="${empty qna.secretwhther}">
+											<input type="hidden" name="secretwhther" value="n"/>
+										</c:when>
+										<c:otherwise>
+											<input type="hidden" name="secretwhther" value="${qna.secretwhther}"/>
+										</c:otherwise>
+									</c:choose>
 							</div>
 							<div class="row ms-3 mb-4">
 								<div class="col-2 ms-n2 me-2">
@@ -94,11 +115,11 @@ $(document).ready(function(){
 							<div class="mb-3" style="margin-left: 26px;">
 									<label class="postInsertTitle" style="margin-left: -0.5%;">제목</label>
 								<c:choose>	
-									<c:when test="${empty title}">
-										<input class="multisteps-form__input form-control w-50" name="title" type="text" value="re:${qna.title}"/>
+									<c:when test="${empty qna.title}">
+										<input class="multisteps-form__input form-control w-50" name="title" type="text" placeholder="제목을 작성해주세요." />
 									</c:when>
 									<c:otherwise>
-										<input class="multisteps-form__input form-control w-50" name="title" type="text" placeholder="제목을 작성해주세요." />
+										<input class="multisteps-form__input form-control w-50" name="title" type="text" value="re:${qna.title}"/>
 									</c:otherwise>
 								</c:choose>
 							</div>
@@ -166,7 +187,11 @@ var quill = new Quill('#editor', {
 });
 
 
-
+$('#secretBtn').click(function(){
+	
+	if($(this).is(':checked')){$('input[name=secretwhther]').val('y')}
+	else{$('input[name=secretwhther]').val('n')}
+})
 
 
 </script>

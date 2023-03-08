@@ -70,7 +70,8 @@ public class Req1001_Controller {
 		// http://localhost:7080/fleaMarket/GetQNA.do 
 		//문의사항 상세 조회 + 첨부파일명 가져오기
 		@GetMapping("GetQNA.do")
-		public String getQnA(@RequestParam("qnano") String qnano, Model d){
+		public String getQnA(@RequestParam("qnano") String qnano,Model d){
+			
 			d.addAttribute("qna",service.getQNA(qnano));
 			d.addAttribute("qna2",service.getQNAFile(qnano));
 			return "GetQNA";

@@ -44,8 +44,8 @@ SELECT * FROM FLEAMARKETMEMBER;
 SELECT * FROM PROFILE p ;
 SELECT * FROM FLEAMARKETQNA WHERE QNANO = FLEAMARKETQNA_seq.currval;
 
-UPDATE FLEAMARKETQNA SET status='미답변', refno =0;
-
+UPDATE FLEAMARKETQNA SET secretwhther='y';
+ALTER TABLE FLEAMARKETQNA ADD Secretwhther char;
 ------------------------------------------------------------------
 CREATE TABLE QNAFile
 (

@@ -101,6 +101,7 @@
 			WHERE cnt BETWEEN #{start} AND #{end} ORDER BY qnano desc
 		</select>
 		<!-- 상세조회 -->
+		<!-- 상세조회 확인용 -->
 		<select id="getQNA" resultType="qna" parameterType="string">
 			SELECT * FROM FLEAMARKETQNA
 			WHERE qnano = #{qnano}

@@ -46,19 +46,28 @@ $("#regBtn").click(function(){
 var SessionAuth = '${Login.authority}' //권한
 var SessionEmail = '${Login.email}'
 
-function goDetail(qnano,email){
-	if(SessionAuth!='관리자'){
-		if(SessionEmail!= email){
-			alert("접근 권한이 없습니다.")
-			return false;
-		}
-	}
-location.href="${path}/GetQNA.do?qnano="+qnano
+function goDetail(qnano){
+	$.ajax({
+		url:"CheckGetQNA.do",
+		type:"post",
+		data:"qnano="+qnano,
+		dataType:"json",
+		success:function(data){
+			console.log(data)
+			if(data.CheckGetQNA=='false'){alert('작성자만 들어갈 수 있습니다.')}
+			else{
+				location.href="GetQNA.do?qnano="+qnano
+			}
+		},
+		error:function(xhr,status,error){
+              console.log(xhr)
+              console.log(status)
+              console.log(error)
+        }
+	})
 }
 
-function goNotics(qnano){
-	location.href="${path}/GetQNA.do?qnano="+qnano
-}
+
 
 function goPage(cnt){
 	$("[name=curPage]").val(cnt);
@@ -133,7 +142,8 @@ function goPage(cnt){
 												</thead>
 												<tbody>
 															<c:forEach var="QNAListNotics" items="${QNAListNotics}">
-																<tr ondblclick="goNotics(${QNAListNotics.qnano})" style="font-weight:bold;">
+															
+																<tr ondblclick="goDetail(${QNAListNotics.qnano})" style="font-weight:bold;">
 																	<td style="color:red;">0</td>
 																	<td style="color:red;">0</td>
 																	<td><span style="color:red;">&#60;공지&#62;</span>${QNAListNotics.title}</td>
@@ -141,15 +151,17 @@ function goPage(cnt){
 																	<td>${QNAListNotics.email}</td>
 																	<td>공지사항</td>
 																</tr>
+															</form>
 															</c:forEach>
 															<c:forEach var="QNA" items="${QNAList}">
-																<tr ondblclick="goDetail(${QNA.qnano},'${QNA.email}')">
+																<tr ondblclick="goDetail(${QNA.qnano})">
 																	<td>
 																	${QNA.cnt}
 																	</td>
 																	<td>${QNA.qnano}</td>
 																	<td>
-																	<c:if test="${QNA.method=='a'}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↪</c:if>																	
+																	<c:if test="${QNA.method=='a'}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↪</c:if>
+																	<c:if test="${QNA.secretwhether=='y'}">비밀글입니다.</c:if>
 																	 ${QNA.title}
 																	 </td>
 																	<td>${QNA.regdate}</td>

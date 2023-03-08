@@ -24,7 +24,8 @@ $('#QNAAnswerBtn').click(function(){
 
 var anstitle = $('input[name=title]').val()
 var ansqnano = $('input[name=qnano]').val()
+var anssecretwhther = $('input[name=secretwhther]').val()
 
 
-location.href="MemberQnAreg.do?method=a&title="+anstitle+"&refno="+ansqnano
+location.href="MemberQnAreg.do?method=a&title="+anstitle+"&refno="+ansqnano+"&secretwhther"+anssecretwhther
 })

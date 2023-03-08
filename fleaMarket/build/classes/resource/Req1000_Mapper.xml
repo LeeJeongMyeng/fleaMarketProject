@@ -106,7 +106,7 @@
 			to_CHAR(sysdate,'YYYY-MM-DD'),
 			to_CHAR(sysdate,'YYYY-MM-DD'),
 			#{email},#{method},
-			#{category},'미답변',#{refno}
+			#{category},'미답변',#{refno},#{secretwhther}
 			)
     	</insert>
     	<!-- 문의하기 파일등록 -->

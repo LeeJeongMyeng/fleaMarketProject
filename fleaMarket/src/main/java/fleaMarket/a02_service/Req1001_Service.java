@@ -205,10 +205,6 @@ public class Req1001_Service {
 		return dao.QNAList(sch);
 	}
 	public QNA getQNA(String qnano) {
-		//QNA q = dao.getQNA(qnano);
-		// 해당 번호에 파일 정보를 가져오는 처리..
-		//b.setFname(dao.getBoardFile(no));
-		//q.setQnano(dao.getQNA(qnano));
 		return dao.getQNA(qnano);
 		
 	}	
