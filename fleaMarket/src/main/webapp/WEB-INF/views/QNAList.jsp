@@ -161,7 +161,8 @@ function goPage(cnt){
 																	<td>${QNA.qnano}</td>
 																	<td>
 																	<c:if test="${QNA.method=='a'}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↪</c:if>
-																	<c:if test="${QNA.secretwhether=='y'}">비밀글입니다.</c:if>
+																	<c:if test="${QNA.secretwhther=='y'}">  
+																	<img src="${path}/resource/img/lock.png" style="width:25px; height:25px;"></c:if>
 																	 ${QNA.title}
 																	 </td>
 																	<td>${QNA.regdate}</td>
