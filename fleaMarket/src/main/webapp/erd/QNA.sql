@@ -77,7 +77,9 @@ AND (title || EMAIL) LIKE '%'||''||'%';
 --삭제
 DELETE ;
 
-
+SELECT * FROM FLEAMARKETQNA
+WHERE METHOD = 'n'
+ORDER BY qnano DESC;
 
 
 SELECT qna.* FROM

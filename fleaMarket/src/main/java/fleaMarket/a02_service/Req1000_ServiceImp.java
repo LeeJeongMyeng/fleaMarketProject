@@ -90,12 +90,22 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		}else if(log.getNaveremail()!=null) { //네이버 이메일로그인시
 			mem = dao.naverLogin(log.getNaveremail());
 		}else { //일반로그인
+			
+			//이메일가지고 로그인정보를 받아옴
 			mem = dao.Login(log.getEmail());
-			if(mem.getPassword().equals("1111") || mem.getPassword().equals("admin")) {
-				mem = log.getPassword().equals(mem.getPassword())?mem:null;
-			}else {
-				mem = BCrypt.checkpw(log.getPassword(),dao.Login(log.getEmail()).getPassword())?mem:null;
+			// null이 아닐경우
+			if(mem.getPassword().equals(null)) {
+				//비밀번호가 1111/아니면 admin일경우
+				if(mem.getPassword().equals("1111") || mem.getPassword().equals("admin")) {
+					mem = log.getPassword().equals(mem.getPassword())?mem:null;
+				//다른비번일경우 암호화비교
+				}else {
+					mem = BCrypt.checkpw(log.getPassword(),mem.getPassword())?mem:null;
+				}
 			}
+			
+			
+			
 		}
 		return mem;
 	}

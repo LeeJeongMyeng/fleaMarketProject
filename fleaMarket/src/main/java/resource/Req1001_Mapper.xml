@@ -74,6 +74,7 @@
 		<select id="QNAListNotics" resultType="qna">
 			SELECT * FROM FLEAMARKETQNA
 			WHERE METHOD = 'n'
+			ORDER BY qnano DESC
 		</select>
 		<select id="totCnt" resultType="int">
 			SELECT count(*) FROM FLEAMARKETQNA
