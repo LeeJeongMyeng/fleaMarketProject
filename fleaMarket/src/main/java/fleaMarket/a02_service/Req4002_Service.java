@@ -21,13 +21,24 @@ public class Req4002_Service {
 		if(ins.getHashtag()==null) ins.setHashtag("");
 		dao.communityInsert(ins);
 	}
+	
 	public void communityFileInsert(BoardImg fIns) {
 		dao.communityFileInsert(fIns);
+	}
+	
+	public Capplication boardDetailSelect(int sel) {
+		if(dao.boardDetailSelect(sel).getImgname()==null) dao.boardDetailSelect(sel).setImgname("");
+		return dao.boardDetailSelect(sel);
 	}
 	
 	public void communityUpdate(Capplication upt) {
 		if(upt.getHashtag()==null) upt.setHashtag("");
 		dao.communityUpdate(upt);
+	}
+	
+	public void communityFileUpdate(BoardImg fupt) {
+		if(fupt.getImgname()==null) fupt.setImgname("");
+		dao.communityFileUpdate(fupt);
 	}
 	
 	public List<FollowMemberInfo> followerSelect(FollowMemberInfo index) {

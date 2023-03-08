@@ -3,7 +3,7 @@ package vo;
 public class BoardImg {
 	private String imgname;
 	private String imgpath;
-	private String communitynumber; // 외래키(커뮤니티 번호)
+	private int communitynumber; // 외래키(커뮤니티 번호)
 	public String getImgname() {
 		return imgname;
 	}
@@ -16,10 +16,10 @@ public class BoardImg {
 	public void setImgpath(String imgpath) {
 		this.imgpath = imgpath;
 	}
-	public String getCommunitynumber() {
+	public int getCommunitynumber() {
 		return communitynumber;
 	}
-	public void setCommunitynumber(String communitynumber) {
+	public void setCommunitynumber(int communitynumber) {
 		this.communitynumber = communitynumber;
 	}
 }

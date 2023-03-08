@@ -40,7 +40,6 @@ WHERE communityNumber='comBoard23';
 
 SELECT * FROM capplicaion;
 WHERE communityNumber='comBoard23';
-
 INSERT INTO capplicaion values(communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','yujin@gmail.com','#태그1 #태그2',0);
 INSERT INTO capplicaion values(communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','dbwls8382@gmail.com','#태그1 #태그2',0);
 -- 커뮤니티 게시글 이미지
@@ -56,9 +55,21 @@ INSERT INTO BoardImg values('파일명','파일경로',communityNumber_seq.currv
 
 SELECT * FROM BoardImg;
 
+UPDATE BoardImg
+SET imgname=''
+WHERE communitynumber ='69';
+
 SELECT DISTINCT *
 FROM BoardImg i,capplicaion c
 WHERE i.communitynumber=c.communitynumber
+AND c.email='yujin@gmail.com'
+ORDER BY registdate;
+
+SELECT *
+FROM BoardImg i,capplicaion c
+WHERE i.communitynumber=c.communitynumber
+AND c.communitynumber ='68';
+
 AND c.email='yujin@gmail.com'
 ORDER BY registdate;
 

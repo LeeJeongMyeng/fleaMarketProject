@@ -15,6 +15,15 @@
 			INSERT INTO BoardImg values(#{imgname},#{imgpath},communityNumber_seq.currval)
 		</insert>
 		
+		<!-- 수정할 게시글 정보 불러오기 -->
+		<select id="boardDetailSelect" parameterType="int" resultType="capplication">
+			SELECT *
+			FROM BoardImg i,capplicaion c
+			WHERE i.communitynumber=c.communitynumber
+			AND c.communitynumber =#{communitynumber}
+		</select>
+		
+		<!-- 커뮤니티게시글 수정하기  -->
     	<update id="communityUpdate" parameterType="capplication">
     		UPDATE capplicaion 
 			SET title=#{title},
@@ -23,9 +32,15 @@
 				updatedate=sysdate
 			WHERE communityNumber=#{communitynumber}
 		</update>
-    	<!-- <update id="communityFileUpdate" parameterType="boardimg">
-    		
-		</update> -->
+		
+		<!-- 커뮤니티 파일 수정하기  -->
+    	<update id="communityFileUpdate" parameterType="boardimg">
+    		UPDATE BoardImg
+			SET imgname=#{imgname}
+			WHERE communitynumber =#{communitynumber}
+		</update>
+		
+		<!-- 팔로우 회원 조회(검색) -->
 		<select id="followerSelect" parameterType="followmemberinfo" resultType="followmemberinfo">
 			select *
 			FROM FLEAMARKETMEMBER m,friend f,profile pro

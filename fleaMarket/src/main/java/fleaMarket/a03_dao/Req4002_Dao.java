@@ -14,8 +14,12 @@ public interface Req4002_Dao {
 	public void communityInsert(Capplication ins);
 	// 커뮤니티 파일 등록
 	public void communityFileInsert(BoardImg fIns);
+	// 커뮤니티 글 수정시 불러올 게시글 정보
+	public Capplication boardDetailSelect(int sel);
 	// 커뮤니티 글 수정
-	public void communityUpdate(Capplication ins);
+	public void communityUpdate(Capplication upt);
+	// 커뮤니티 파일 수정
+	public void communityFileUpdate(BoardImg fupt);
 	// 팔로우 조회
 	public List<FollowMemberInfo> followerSelect(FollowMemberInfo index);
 	// 팔로우 취소

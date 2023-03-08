@@ -79,9 +79,6 @@
 				 
 			 	})
 			 }
-			 
-			 
-			 
 			  
 		      var files = e.target.files;
 		      var arr =Array.prototype.slice.call(files);

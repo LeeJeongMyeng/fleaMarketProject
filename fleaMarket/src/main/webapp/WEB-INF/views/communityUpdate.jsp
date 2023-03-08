@@ -16,15 +16,13 @@
 <meta charset="UTF-8">
 <title>커뮤니티 게시글 수정</title>
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+<script src="${path}/resource/js/Req4002/room.js"></script>
 
 <script type="text/javascript">
 	$(document).ready(function(){
 		
-		$(".ql-editor").append("<h2>될까?</h2><p>되야지그러ㅗㅁ</p>") // 내용값 넣기(value)
+		$(".ql-editor").append("${boardInfo.content}") // 내용값 넣기(value)
 		console.log($('#edit-deschiption-edit .ql-editor').text())
-		/* $('#edit-deschiption-edit').keyup(function(){
-			console.log($($('#edit-deschiption-edit .ql-editor')).html())
-		}) */
 		
 		$("#update").click(function(){
 		  //내용 입력에 따른 content Input에 데이터 넣기(내용입력란이 input태그가 아니라서))
@@ -33,8 +31,18 @@
 		  $('input[name=content]').val(expeditor);
 		 $("form").submit()
   		})
+  		
+  		var imgCnt = "${boardImgArr}"
+  		//alert(arrFun(imgCnt))
+  		
+  		
+  		/* $("input[type='file']").click(function(){
+  			
+  			
+  		}) */
+  		
+  		
 	});
-	
 	function updateImpossible(what){
 		if(what==="작성자"){
 			alert("[안내메시지]작성자는 변경이 불가합니다.")
@@ -42,6 +50,11 @@
 			alert("[안내메시지]카테고리는 변경이 불가합니다.")
 		}
 	}
+	
+	function clickImgHidden(){
+		$(this).hide()
+	}
+	
 </script>
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <!--     Fonts and icons     -->
@@ -59,8 +72,8 @@
 
 <body class="g-sidenav-show bg-gray-100">
 	<jsp:include page="header.jsp"></jsp:include>
-	<form method="post" enctype="multipart/form-data" action="${path}/communityUpdate.do"><!--  -->
-	  <input type="hidden" name="communitynumber" value="comBoard23">
+	<form method="get" enctype="multipart/form-data" ><!-- action="${path}/communityUpdate.do" -->
+	  <input type="hidden" name="communitynumber" value="${boardInfo.communitynumber}">
       <div class="row mt-4" >
          <div class="card h-100" style="margin-top:8%;">
            <div class="card-body">
@@ -68,62 +81,31 @@
              <div class="row">
                <div class="col-12">
                  <div class="card-body">
-              <div class="row">
-	              	<label for="fileClick1" style="margin-left:32%;">
-	                  <img class="border-radius-lg shadow-lg" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb.jpg" alt="chair" style="width:600px; height:400px;">
-	                </label>
-                 	<input type="file" id="fileClick1" accept="image/*" onchange="setThumbnail(event);" hidden>
-                  <div class="my-gallery d-flex mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery" style="margin:24px 32% 0px;">
-                    <figure class="ms-2 me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                       	<label for="fileClick2">
-                        	<img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-1.jpg" alt="Image description"/>
-                   			<!-- <div class="w-100 min-height-100 max-height-100 border-radius-lg shadow" id="image_container"></div> -->
-							<!-- 이미지 클릭 시, img 히든처리, 사진 변경 기능넣기 -->
-                   		</label>
-                   		<input type="file" id="fileClick2" accept="image/*" onchange="setThumbnail(event);" hidden>
-                    </figure>
-                    <figure class="me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                        <label for="fileClick3">
-                       	 <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-2.jpg" itemprop="thumbnail" alt="Image description" />
-                    	</label>
-                    	<input type="file" id="fileClick3" accept="image/*" onchange="setThumbnail(event);" hidden>
-                    </figure>
-                    <figure class="me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                        <label for="fileClick4">
-                        	<img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-3.jpg" itemprop="thumbnail" alt="Image description" />
-                    	</label>
-                    	<input type="file" id="fileClick4" accept="image/*" onchange="setThumbnail(event);" hidden>
-                    </figure>
-                    <figure class="me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                        <label for="fileClick5">
-                        	<img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-4.jpg" itemprop="thumbnail" alt="Image description" />
-                    	</label>
-                    	<input type="file" id="fileClick5" accept="image/*" onchange="setThumbnail(event);" hidden>
-                    </figure>
-                    <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                        <label for="fileClick6">
-                        	<img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-5.jpg" itemprop="thumbnail" alt="Image description" />
-                    	</label>
-                    	<input type="file" id="fileClick6" accept="image/*" onchange="setThumbnail(event);" hidden>
-                    </figure>
-                  </div>
-             </div>
-           </div>
-        </div>
-        <script>
-	        function setThumbnail(event) {
-	            var reader = new FileReader();
-	            reader.onload = function(event) {
-	              var img = document.createElement("img");
-	              img.setAttribute("src", event.target.result);
-	              document.querySelector("#image_container").appendChild(img);
-	              img.width=230
-	              img.height=180
-	            };
-	            reader.readAsDataURL(event.target.files[0]);
-	          }
-	        
-        </script>
+		             <div class="row" style="margin-left:30%;">
+			              	<label for="fileClick1" style="border:1px solid black" >
+			                  <img id="bigphoto" class="border-radius-lg shadow-lg ms-5" src="${path}/resource/community/${boardImg1}" 
+			                  			onclick="clickImgHidden(this)" alt="이미지없음." style="width:auto; height:400px;">
+			                </label>
+		                 	<input type="file" name="updateFile" id="fileClick1" value="${boardImg1}" hidden multiple>
+		                  
+		                  <div class="my-gallery d-flex mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery">
+		                    
+			                    <figure class="ms-2 me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+			                        <c:forEach var="boardImgs" items="${boardImgArr}">
+				                       	<label for="fileClick2" style="border:1px solid black" >
+				                        	<img id="smallphoto" class="w-100 min-height-100 max-height-100 border-radius-lg shadow ms-2" 
+				                        		 src="${path}/resource/community/${boardImgs}" onclick="clickImgHidden()" alt="이미지 없음"/>
+											<!-- 이미지 클릭 시, img 히든처리, 사진 변경 기능넣기 -->
+											<input type="file" name="updateFile" value="${boardImgs}" hidden multiple>
+				                   		</label>
+				                   		
+			                   		</c:forEach>
+			                    </figure>
+		                    
+		                  </div>
+		             </div>
+           		</div>
+        	</div>
         <div class="row mt-4">
           <div class="card">
             <div class="card-body">
@@ -131,16 +113,16 @@
               <div class="row" style="--bs-gutter-x:0;">
                 <div class="col-12 col-sm-6">
                    <label class="postUpdateTitle" style="width:90%;">카테고리</label>
-	               <input class="form-control" onclick="updateImpossible('카테고리')" value="카테고리값" type="text" readonly style="width:90%;"/>
+	               <input class="form-control" onclick="updateImpossible('카테고리')" value="${boardInfo.category}" type="text" readonly style="width:90%;"/>
                 </div>
                 <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                   <label class="postUpdateTitle">작성자</label>
-                  <input class="form-control" onclick="updateImpossible('작성자')" value="${Login.email}" type="text" readonly style="width:90%;"/>
+                  <input class="form-control" onclick="updateImpossible('작성자')" value="yujin@gmail.com" type="text" readonly style="width:90%;"/><!-- ${Login.email} -->
                 </div>
               </div>
               <div class="row" style="--bs-gutter-x:0;">
                 <label class="mt-4 postUpdateTitle">제목</label>
-                <input name="title" class="form-control" type="text" value="등록된 내용 가져오기" />
+                <input name="title" class="form-control" type="text" value="${boardInfo.title}"/>
               </div>
               <div class="row" style="--bs-gutter-x:0;">
                 <label class="mt-4 postUpdateTitle">내용</label>
@@ -150,9 +132,9 @@
                 <input type="hidden" id="contentInput" name="content"/>
               </div>
             <div class="row" style="--bs-gutter-x:0;">
-               <label class="mt-4 postUpdateTitle">태그(#)</label>
+               <label class="mt-4 postUpdateTitle">태그(#)</label><!-- 선택된값을 select되어있게 설정해야함..  -->
                 <select class="form-control" name="hashtag" id="choices-tags-edit" multiple>
-                  <option selected>In Stock</option>
+                  <option selected>In Stock</option><!-- 태그 테이블에서 콤보박스 생성  -->
                 </select>
             </div>
           </div>

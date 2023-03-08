@@ -10,12 +10,13 @@ public class Capplication {
 	private String registDate;	// 등록날짜
 	private String updateDate;	// 수정날짜
 	private String category;	// 카테고리
-	private String categoryDetail;
+	//private String categoryDetail; //? 필요없는거같은디?
 	private String email;	//이메일
 	private String hashtag;	//해시태그
 	private int viewCnt;	//조회수
 	private String imgname;	//파일명
 	private MultipartFile report;	// 
+
 	public int getCommunitynumber() {
 		return communitynumber;
 	}
@@ -70,8 +71,13 @@ public class Capplication {
 	public void setViewCnt(int viewCnt) {
 		this.viewCnt = viewCnt;
 	}
+	// split으로 받아가는값이 null이오면 안되므로 "" 처리
 	public String getImgname() {
-		return imgname;
+		if(this.imgname==null) {
+			return "";
+		}else {
+			return imgname;
+		}
 	}
 	public void setImgname(String imgname) {
 		this.imgname = imgname;
@@ -82,11 +88,4 @@ public class Capplication {
 	public void setReport(MultipartFile report) {
 		this.report = report;
 	}
-	public String getCategoryDetail() {
-		return categoryDetail;
-	}
-	public void setCategoryDetail(String categoryDetail) {
-		this.categoryDetail = categoryDetail;
-	}
-	
 }

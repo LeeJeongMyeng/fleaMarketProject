@@ -29,6 +29,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
+  <script src="${path}/resource/js/Req4002/room.js"></script>
 </head>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -656,15 +657,6 @@
 	var tip="${tip}"
 	console.log("꿀팁",tip)
 	
-	// 갯수 계산 기능
-	function arrFun(obj){
-		var arr=obj.split(",")
-		if(obj=="[]"){
-			return 0
-		}else{
-			return arr.length
-		}
-	}
 	if(arrFun(adv)==0 && arrFun(idea)==0 && arrFun(life)==0 && arrFun(tip)==0){
 		$("#chartposition").text("등록된 게시물이 없습니다.")
 	}
