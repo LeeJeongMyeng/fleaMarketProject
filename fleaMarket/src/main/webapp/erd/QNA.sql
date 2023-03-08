@@ -44,7 +44,7 @@ SELECT * FROM FLEAMARKETMEMBER;
 SELECT * FROM PROFILE p ;
 SELECT * FROM FLEAMARKETQNA WHERE QNANO = FLEAMARKETQNA_seq.currval;
 
-UPDATE FLEAMARKETQNA SET secretwhther='y';
+UPDATE FLEAMARKETQNA SET STATUS ='-' WHERE METHOD='n' or METHOD='a';
 ALTER TABLE FLEAMARKETQNA ADD Secretwhther char;
 ------------------------------------------------------------------
 CREATE TABLE QNAFile
@@ -55,7 +55,7 @@ CREATE TABLE QNAFile
 );
 SELECT * FROM qnafile;
 INSERT INTO qnafile values(FLEAMARKETQNA_seq.currval,'file/qna/','20');
-DELETE qnafile WHERE qnano = '20';
+DELETE qnafile;
 
 ALTER TABLE FLEAMARKETQNA ADD refno varchar2(100);
 

@@ -142,8 +142,13 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	
 	//문의글 등록
 	public void QNAInsert(QNA ins) {
-		if(ins.getMethod().equals("a")) {ins.setCategory("답변");}
-		if(ins.getMethod().equals("n")) {ins.setCategory("공지사항");}
+		//답변글이면 카테고리=답변
+		if(ins.getMethod().equals("a")){ins.setCategory("답변");}
+		//공지사항이면 카테고리=공지사항
+		if(ins.getMethod().equals("n")){ins.setCategory("공지사항");}
+		//문의글 등록을 제외하곤 나머지(공지/답변글) 글 상태는 "-"
+		ins.setStatus(!ins.getMethod().equals("q")?"-":"미답변");
+		
 		
 		dao.QNAInsert(ins);
 	}
@@ -184,6 +189,9 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	}
 	public void QNADelete(String qnano) {
 		dao.QNADelete(qnano);
+	}
+	public void QNAAnswerUpdate(String qnano) {
+		dao.QNAAnswerUpdate(qnano);
 	}
 	
 	//--------------------------------------------

@@ -27,5 +27,5 @@ var ansqnano = $('input[name=qnano]').val()
 var anssecretwhther = $('input[name=secretwhther]').val()
 
 
-location.href="MemberQnAreg.do?method=a&title="+anstitle+"&refno="+ansqnano+"&secretwhther"+anssecretwhther
+location.href="MemberQnAreg.do?method=a&title="+anstitle+"&refno="+ansqnano+"&secretwether"+anssecretwhther
 })

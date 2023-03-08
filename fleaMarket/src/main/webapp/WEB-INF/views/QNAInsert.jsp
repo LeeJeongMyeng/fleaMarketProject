@@ -71,10 +71,10 @@ $(document).ready(function(){
 							<div class="row ms-2 mb-3">
 							<c:choose>
 								<c:when test="${empty method}">
-									<input name="method" type="hidden" value="${Login.authority=='관리자'?'n':'q'}"/>
+									<input name="method" type="hidden" value="${qna.method}"/>
 								</c:when>
 								<c:otherwise>
-									<input name="method" type="hidden" value="${qna.method}"/>
+									<input name="method" type="hidden" value="${Login.authority=='관리자'?'n':'q'}"/>
 								</c:otherwise>
 							</c:choose>
 							<c:if test="${Login.authority!='관리자'}">	
@@ -82,12 +82,12 @@ $(document).ready(function(){
 									<label class="postInsertTitle" style="margin-left: -0.5%;">문의종류</label>
 									<select class="form-select" aria-label="Default select example" name="category">
 									  <option value="none" selected>문의종류</option>
-									  <option>등업문의</option>
-									  <option>판매문의</option>
-									  <option>커뮤니티문의</option>
+									  <option>등업</option>
+									  <option>판매</option>
+									  <option>커뮤니티</option>
 									  <option>유저신고</option>
-									  <option>플리마켓게시글신고</option>
-									  <option>커뮤니티게시글신고</option>
+									  <option>플리마켓신고</option>
+									  <option>커뮤니티신고</option>
 									</select>
 								</div>
 								<div class="col-2">

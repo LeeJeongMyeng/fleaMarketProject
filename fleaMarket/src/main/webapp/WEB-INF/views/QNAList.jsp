@@ -125,19 +125,22 @@ function goPage(cnt){
 
 										<div class="table-responsive">
 												<table>
-											   	<col width="20%">
-											   	<col width="40%">
-											   	<col width="30%">
-											   	<col width="20%">
+											   	<col width="5%">
+											   	<col width="5%">
+											   	<col width="50%">
+											   	<col width="15%">
+											   	<col width="15%">
+											   	<col width="5%">
 												<table class="table table-flush" id="QnAListTable">
 												<thead class="thead-light">
 													<tr style="background-color: #ebebeb;">
-														<th >No</th>
-														<th >문의 번호</th>
-														<th >제목</th>
-														<th >등록일</th>
+														<th>No</th>
+														<th>문의 번호</th>
+														<th>제목</th>
+														<th>등록일</th>
 														<th>작성자</th>
 														<th>분류</th>
+														<th>답변상태</th>
 													</tr>
 												</thead>
 												<tbody>
@@ -150,24 +153,31 @@ function goPage(cnt){
 																	<td>${QNAListNotics.regdate}</td>
 																	<td>${QNAListNotics.email}</td>
 																	<td>공지사항</td>
+																	<td>${QNAListNotics.status }</td>
 																</tr>
 															</form>
 															</c:forEach>
 															<c:forEach var="QNA" items="${QNAList}">
 																<tr ondblclick="goDetail(${QNA.qnano})">
 																	<td>
-																	${QNA.cnt}
+																		${QNA.cnt}
 																	</td>
 																	<td>${QNA.qnano}</td>
 																	<td>
-																	<c:if test="${QNA.method=='a'}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↪</c:if>
-																	<c:if test="${QNA.secretwhther=='y'}">  
-																	<img src="${path}/resource/img/lock.png" style="width:25px; height:25px;"></c:if>
-																	 ${QNA.title}
+																		<c:if test="${QNA.method=='a'}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↪</c:if>
+																		<c:if test="${QNA.secretwhther=='y'}">  
+																		<img src="${path}/resource/img/lock.png" style="width:18px; height:18px;"></c:if>
+																		 ${QNA.title}
 																	 </td>
 																	<td>${QNA.regdate}</td>
 																	<td>${QNA.email}</td>
-																	<td>${QNA.category}</td>
+																	<td>
+																	<c:choose>
+																		<c:when test="${QNA.method=='q'}">문의(${QNA.category})</c:when>
+																		<c:otherwise>${QNA.category}</c:otherwise>
+																	</c:choose>
+																	</td>
+																	<td>${QNA.status }</td>
 																</tr>
 															</c:forEach>
 														</tbody>

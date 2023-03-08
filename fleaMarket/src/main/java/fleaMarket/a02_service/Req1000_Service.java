@@ -35,4 +35,7 @@ public interface Req1000_Service  {
 	public List<QNAFile> GetFileNames(String qnano);
 	// 문의글 DB 삭제
 	public void QNADelete(String qnano);
+	//답변글에 대한 문의글 상태 변경
+	public void QNAAnswerUpdate(String qnano);
+	
 }

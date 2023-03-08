@@ -26,5 +26,6 @@ public interface Req1000_Dao {
 	public List<QNAFile> GetFileNames(String qnano);
 	public void QNAFileDelete(String qnano);
 	public void QNADelete(String qnano);
+	public void QNAAnswerUpdate(String qnano);
 	
 }

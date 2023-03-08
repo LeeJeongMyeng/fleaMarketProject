@@ -21,6 +21,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fleaMarket.a02_service.Req1000_Service;
+import fleaMarket.a02_service.Req1001_Service;
 import fleaMarket.util.FileService;
 import vo.FApplicationSch;
 import vo.Member;
@@ -30,15 +31,15 @@ import vo.QNAFile;
 
 @Controller("Req1000")
 public class Req1000_Controller {
-   private final Req1000_Service service;
+   private Req1000_Service service;
    @Autowired
    public Req1000_Controller(Req1000_Service service) {
       this.service = service;
    }
-
-	/*
-	 * @Autowired private FileService fileservice;
-	 */
+   @Autowired
+   private Req1001_Service service2;
+	
+	 
    
    @Value("${profile.upload}")
    private String profilepath;
@@ -132,6 +133,10 @@ public class Req1000_Controller {
       //들어온 글정보부터 입력(중요. 시퀸스넘버때매 무조건 앞에서 해야함)
        
 	   service.QNAInsert(ins);
+	   if(ins.getMethod().equals("a")) {
+		   //답변글일경우 해당 문의글 상태 답변완료로 업데이트
+		   service.QNAAnswerUpdate(ins.getRefno());
+	   }
        
       // 리스트로 받은 파일업로드+데이터베이스 삽입
        List<MultipartFile> fileList = qnafiles.getFiles("qnafiles");

@@ -11,6 +11,7 @@ public class QNA {
 	private String category;
 	private String refno;
 	private String secretwhther;
+	private String status;
 	private String cnt;//페이징
 	public String getQnano() {
 		return qnano;
@@ -77,6 +78,12 @@ public class QNA {
 	}
 	public void setSecretwhther(String secretwhther) {
 		this.secretwhther = secretwhther;
+	}
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
 	}
 	
 	
