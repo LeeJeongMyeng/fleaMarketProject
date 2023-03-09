@@ -18,4 +18,5 @@ public interface Req3000_Service {
 	public String FileNum(String postingNumber);
 	public List<FleaMarket> calList(); 
 	public List<FFile> DelFail(String postingNumber);	
+	public void UptFFile(FFile fupt);
 }

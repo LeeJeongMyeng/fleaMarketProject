@@ -42,14 +42,14 @@
 <script src="${path}/assets/js/plugins/fullcalendar.min.js"></script>
 <%--모달창 --%>
 <script>
-var msg = "${msg}"
+/* var msg = "${msg}"
 	console.log(msg)
 		if (msg != "") {
 			alert(msg)
 			if (msg + "\n 조회화면으로 이동하시겠습니까?") {
 				location.href = "${path}/totalSearch.do"
 			}
-		}
+		} */
 </script>
 
 <script>
@@ -184,16 +184,17 @@ $('#editor .ql-editor').keyup(function(){
 										</select>
 									</div>
 								</div>
-                          
-								<label class="mt-4 form-label labelFont">첨부파일</label>
-								<div class="form-control dropzone" id="dropzone">
-									<div class="fallback">
-										<input name="filePath" type="file" id="Prodimg" multiple />
-									
-									</div>
+
+							<label class="mt-4 form-label labelFont">첨부파일</label>
+							<div class="row mt-3">
+								<div class="col-2" style="height: 120px;">
+									<input type="file" name="pro" class="form-control"
+										style="width: 230px" multiple>
+									<div id="image_container"></div>
 								</div>
-								
-					</form>
+							</div>
+							
+							</form>
 					<div class="d-flex justify-content-end mt-4">
 						<button type="submit" 
 							class="btn bg-gradient-primary m-0 ms-2">수정하기</button>

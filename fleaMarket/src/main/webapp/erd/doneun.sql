@@ -40,7 +40,11 @@ CREATE TABLE FFile
 	filePath varchar2(100),
 	postingNumber varchar2(100) NOT NULL
 );
-SELECT * FROM ffile;   
+SELECT * FROM ffile;  
+
+SELECT *  
+FROM ffile 
+where postingNumber=4;
 
 --주소에 따른 캘린더 일정 데이터 가져오기 
 SELECT openDate, closeDate, title

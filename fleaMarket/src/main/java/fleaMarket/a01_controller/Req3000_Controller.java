@@ -88,9 +88,40 @@ public class Req3000_Controller {
 	
 //홍보글 수정하기 
 	@RequestMapping("FleaMarketUpt.do")
-	public String FleaMarketUpt(FleaMarket upt, RedirectAttributes redirect,MultipartFile profile) {
+	public String FleaMarketUpt(@RequestParam("postingNumber") String postingNumber,
+			FleaMarket upt,RedirectAttributes redirect,List<MultipartFile> pro) {
+        //업로드 수정
+		//파일 삭제
+		if(pro.size()!=0) {
+			//해당 postingNumber의 여러행을 list처리 
+			 List<FFile> filelist= service.DelFail(postingNumber);
+			 for(int i=0; i<filelist.size(); i++) {
+			    	String sd=filelist.get(i).getFilename();
+					fileservice.DeleteFile(profilepath,sd);
+			    }
+			 //파일 업로드 후, db에 저장된 정보 
+				for(MultipartFile f : pro) {
+					String filename=fileservice.insprofileimg(profilepath,f);
+					
+					FFile fupt = new FFile(filename,profilepath,postingNumber); 
+					//수정하기                               
+					service.UptFFile(fupt);
+			}
+			
+		}
+		/*
+		 * if(pro.size()!=0) { List<FFile> filelist= service.DelFail(postingNumber);
+		 * for(int i=0; i<filelist.size(); i++) { String
+		 * sd=filelist.get(i).getFilename(); fileservice.DeleteFile(profilepath,sd); }
+		 * service.UptFFile(upt); }
+		 */		
+	    
+		//글목록 수정
 		service.UptFleaMarket(upt);
-		redirect.addFlashAttribute("msg", "수정완료");
+		
+		
+		
+		/* redirect.addFlashAttribute("msg", "수정완료"); */
 		return "redirect:totalSearch.do";
 	} 
 	
@@ -124,7 +155,7 @@ public class Req3000_Controller {
 		  //플리마켓의 글갯수만큼 for문
 		  for(int i=0; i<flist.size(); i++){ 
 		  HashMap<String,Object> map= new HashMap<String,Object>();
-		  //플리마켓글 하나하나하나를 맵에 할당.
+		  //플리마켓글 하나 하나를 맵에 할당.
 		  map.put("fno",flist.get(i));
 		  //플리마켓 글과 일치하는 filename을 불러와서 담아줌.
 		  String filename =service.FileNum(flist.get(i).getPostingNumber());

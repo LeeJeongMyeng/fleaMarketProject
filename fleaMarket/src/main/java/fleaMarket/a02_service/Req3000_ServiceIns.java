@@ -40,11 +40,10 @@ public class Req3000_ServiceIns implements Req3000_Service{
 	public void UptFleaMarket(FleaMarket upt) {
 		dao.UptFleaMarket(upt);
 	} 
-
-	//삭제하기
-	public void delFleaMarket(String postingNumber){
-	    dao.delFleaMarket(postingNumber);
-	}
+	//파일 수정 
+	public void UptFFile(FFile fupt) {
+		dao.UptFFile(fupt);
+	}  	
 	
 	//전체조회
 	public List<FleaMarket> getFleaMarketList(FleaMarket sch){
@@ -54,6 +53,11 @@ public class Req3000_ServiceIns implements Req3000_Service{
 	//전체조회(img 파일)
 	public String FileNum(String postingNumber){
 		return dao.FileNum(postingNumber);
+	}
+	
+	//삭제하기
+	public void delFleaMarket(String postingNumber){
+	    dao.delFleaMarket(postingNumber);
 	}
 	
 	//파일 정보파일 불러오기(삭제하기)

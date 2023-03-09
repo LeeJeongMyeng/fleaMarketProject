@@ -45,6 +45,13 @@
 			address=#{address}
 		where postingNumber = #{postingNumber}
 	</update>
+	<update id="UptFFile" parameterType="ffile">
+		update FFile
+		set filename=#{filename},
+		    filePath=#{filePath}
+		where postingNumber = #{postingNumber}
+    </update>	
+	
 
     <delete id="delFleaMarket" parameterType="string">
 		delete fleamarket 
