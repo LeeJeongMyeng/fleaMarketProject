@@ -84,8 +84,8 @@ public class Req4002_Controller {
 	}
 	
 	@RequestMapping("communityUpdatePage.do")
-	public String communityUpdatePage(Model d) {
-		Capplication boardInfoVo = service.boardDetailSelect(76);
+	public String communityUpdatePage(@RequestParam("communityNumber") int upt,Model d) {
+		Capplication boardInfoVo = service.boardDetailSelect(upt);
 		
 		ArrayList<String> boardArr = new ArrayList<String>(); // 동적 배열
 		//String[] dataArr = boardInfoVo.getImgname().split("&SEP&"); // 구분자로 나눠서 배열에 넣기
