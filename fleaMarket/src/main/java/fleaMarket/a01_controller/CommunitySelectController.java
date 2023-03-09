@@ -154,7 +154,7 @@ public class CommunitySelectController {
 		 */
 		return "communityDetail";
 	}
-	
+	//처리
     //댓글 등록 
 	@PostMapping("writeReply.do")
 	public String writeReply(@RequestParam int communitynumber,@RequestParam String content,HttpSession session,RedirectAttributes rttr) {
