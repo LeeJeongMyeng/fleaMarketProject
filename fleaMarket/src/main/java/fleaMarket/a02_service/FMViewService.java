@@ -28,33 +28,30 @@ public class FMViewService {
 	// 홍보글 상세 조회 이미지파일, 양식파일 분리
 	public Map<String,Object> devideFmFile(String postingNumber){
 		HashMap<String,Object> map = new HashMap<String,Object>();
-		//db에서 뽑아온 파일
-		//dao.파일불러오는거
-		
-		//받아올때, vo객체에 담지말고 List<String>에다가 담아오세요.
+		//db에서 가져온 파일
+		//dao.파일불러오기
+		//받아올때, List<String>에 담음
 		List<String> ffiles = dao.fmFileView(postingNumber);
 		//String dbfiles[] = {"a.jpg","b.bmp","c.png","d.ico","e.apng","f.jfif","g.txt","aa.pdf","bb.ppt","cc.doc","gg.hwp"};
 		//검사할 확장자
 		String imgArray[] = {"gif","jpg","jpeg","png","bmp","ico","apng","jfif"};
-		
 		//이미지리스트
 		List<String> imgfiles = new ArrayList<>();
 		//no이미지리스트
 		List<String> noimgfiles = new ArrayList<>();
-		
 		for(String f:ffiles) {
 			//1. 들어온 파일이름을 split("\\.")으로자르고 [1] 값을 가져온다.
 		String splita = f.split("\\.")[1]; //확장자
 		//System.out.println(splita);
 		 boolean check = false;
-		 
 			for(String a:imgArray) {if(splita.equals(a)) {check=true;}}
 			//만약 이미지 확장자검사와 일치하는게 있다면,
 			System.out.println(check);
 			if(check) {imgfiles.add(f);}else {noimgfiles.add(f);}
 		}
 		map.put("imgfiles", imgfiles);
-		map.put("noimgfiles", noimgfiles);  //여기까지에서 map에는 imgfiles의 이름으로 이미지파일리스트, noimgfiles의 이름으로 아닌파일리스트
+		map.put("noimgfiles", noimgfiles);
+		//여기까지에서 map에는 imgfiles의 이름으로 이미지파일리스트, noimgfiles의 이름으로 아닌파일리스트
 
 		return map;
 		
@@ -65,8 +62,8 @@ public class FMViewService {
 	public void insApp(FApplication ins) {
 		dao.insApp(ins);
 	}		
-	public void insUploadFile(ApplicationFile f) {
-		dao.insUploadFile(f);
+	public void insAppFile(ApplicationFile f) {
+		dao.insAppFile(f);
 	}
 
 	// 받은 신청 전체 조회(최신순)
@@ -122,12 +119,14 @@ public class FMViewService {
 		
 		return dao.appReceivedList(sch);
 	}
-	/*
+	
 	// 받은 신청 상세 조회
-	public ApplicationFile appReceivedView(int applicationNo) {
-		ApplicationFile af = dao.appReceivedView(applicationNo);
-		return af;
-	}	
+	public String appFileView(int applicationNo) {
+		//String flist[] = dao.appFileView(applicationNo).split(",");		
+		return dao.appFileView(applicationNo);
+	}
+	
+	/*
 	// 받은 신청 승인
 	public void updateAppRe(FApplication upt) {
 		dao.updateAppRe(upt);

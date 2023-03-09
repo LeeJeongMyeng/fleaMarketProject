@@ -40,13 +40,6 @@ public class FMViewController {
 	 
 	 
 	// 홍보글 상세 조회
-	/*
-	@GetMapping("fmView.do")
-	public String fmView(@RequestParam("postingNumber") String postingNumber, Model d) {
-		d.addAttribute("fleamarket",service.fmView(postingNumber));
-		return "fleaMarketView";
-	}
-	*/
 	@GetMapping("fmView.do")
 	public String fmView(@RequestParam("postingNumber") String postingNumber, Model d) {
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -59,16 +52,12 @@ public class FMViewController {
 	
 	// 홍보글 파일 다운로드
 	@GetMapping("downloadFFile.do")
-	public String download(	@RequestParam("filename") String filename,Model d) {
+	public String downloadFFile(@RequestParam("filename") String filename, Model d) {
 		d.addAttribute("downloadPath",fmPath);
 		d.addAttribute("downloadName",filename);
 		return "downloadView";
 	}
 	
-	
-	
-	
-
 	// 신청글 + 파일첨부 등록
 	@PostMapping("/insApp.do")
 	public String insApp(FApplication ins, RedirectAttributes rttr, MultipartHttpServletRequest appFile){
@@ -92,26 +81,42 @@ public class FMViewController {
 			 ApplicationFile af = new ApplicationFile();
 			 af.setFilename(filenames);
 			 af.setApplicationNo(ins.getApplicationNo());
-			 service.insUploadFile(af);
+			 service.insAppFile(af);
 		}
 		rttr.addFlashAttribute("msg","등록 성공");
 		return "redirect:appReceivedList.do";
 	}	
+	
 	// 받은 신청 전체 조회(최신순)
 	@RequestMapping("appReceivedList.do")
-	public String appReceivedList(@ModelAttribute("sch") FApplicationSch sch,Model d) {
-		d.addAttribute("list", service.appReceivedList(sch));
+	public String appReceivedList(@ModelAttribute("sch") FApplicationSch sch,Model d) {		 
+		d.addAttribute("list",service.appReceivedList(sch));
 		return "appReceivedList";
 	}
 	
 	// 받은 신청 상세 조회
 	/*
+	승인위해..
 	@GetMapping("appReceivedView.do")
 	public String appReceivedView(@RequestParam("applicationNo") int applicationNo, Model d) {
 		d.addAttribute("appReceived",service.appReceivedView(applicationNo));
-		return "pageJsonReport";
+		return "appReceivedList";
 	}
 	*/
+	@GetMapping("appFileView.do")
+	public String appFileView(@RequestParam("applicationNo") int applicationNo, Model d) {
+		d.addAttribute("appFile",service.appFileView(applicationNo));
+		return "pageJsonReport";
+	}
+	
+	// 신청글 파일 다운로드
+	@GetMapping("downloadAppFile.do")
+	public String downloadAppFile(@RequestParam("filename") String filename,Model d) {	
+		d.addAttribute("downloadPath",appPath);
+		d.addAttribute("downloadName",filename);
+		return "downloadView";
+	}
+	
 	// 받은 신청 승인
 	/*
 	@GetMapping("updateAppRe.do")
@@ -122,9 +127,12 @@ public class FMViewController {
 		return "pageJsonReport";
 	}
 	*/
+	
 	// 내 신청 목록
 	@RequestMapping("appMyList.do")
 	public String appMyList() {
 		return "appMyList";
 	}
+	
+
 }

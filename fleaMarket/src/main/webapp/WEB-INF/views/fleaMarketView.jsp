@@ -68,8 +68,8 @@
 		location.href="${path}/FleaMarketUptPage.do?postingNumber="+postingNumber
 	}	
 	function delBtn(postingNumber){
-		location.href="${path}/FleaMarketDel.do?postingNumber="+postingNumber
-	}
+		location.href="${path}/fmView.do?postingNumber="+postingNumber
+	}	
   </script>
 </head>
 <%@include file="header.jsp" %>
@@ -178,18 +178,16 @@
                   </div>
                     <div class="col-12"> <!-- 첨부파일 -->
                       <label>파일 다운로드</label>
+                      <%----------------------------- 전체다운로드
+                      <form>
                       <c:forEach var="noimg" items="${noimgfiles}">
-                      
+                      	<input type="hidden" name="filename" value="${noimg }"/>
+                      </c:forEach>
+                      <button type="submit">전체다운로드</button>
+                      </form>
+                       ----------------------------- --%>
+                      <c:forEach var="noimg" items="${noimgfiles}">
 						<form action="downloadFFile.do" method="get">
-						<%-- 
-							<div class="row mt-3">
-				              <div class="col-2" style="height:120px;">
-				                <input type="file" name="fmFile" value="${noimg.filename}" class="form-control" style="width:230px" id="appFile" multiple>
-				                 <div id="image_container"></div>
-				              </div>
-				            </div>
-						 --%>
-						
 							<div style="width:50%;">
 								<div class="fallback">
 									 <div class="download_Wrap">
@@ -214,7 +212,7 @@
 			                    <div class="row ms-auto text-end">
 				                    <div class="col-6"></div>
 			                    	<div class="col-3">  
-			                    	   <button onclick="uptBtn(${fleamarket.postingNumber})" class="btn btn-link text-dark px-3 mb-0">
+			                    	  <button onclick="uptBtn(${fleamarket.postingNumber})" class="btn btn-link text-dark px-3 mb-0">
 			                    	  <i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>수정</button>
 									</div>
 									<div class="col-3">
@@ -288,46 +286,11 @@
     </div>
   </div>
   
-  <!-- 신청하기 모달창 (양식 O) 
-  <div class="modal fade" id="jkanban-info-modal" style="display: none" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="h5 modal-title">신청하기</h5>
-          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="pt-4 modal-body">
-          
-          <div class="form-group">
-          	<label>파일 첨부</label> 
-          	<form id="frmNofile" method="post" action="${path}/insApp.do" enctype="multipart/form-data">  
-          		<div class="row mt-3">
-	              <div class="col-2" style="height:120px;">
-	                <input type="file" name="appFile" class="form-control" style="width:230px"
-	                      id="appFile" multiple>
-	                 <div id="image_container"></div>
-	              </div>
-	            </div>
-          	<div class="text-end">
-	           	<input type="hidden" name="postingNumber" value="${fleamarket.postingNumber}"/>
-	           	<input type="hidden" name="email" value="${Login.email}"/>
-	            <button name="regBtn" class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
-	              확인
-	            </button>
-	            <button class="m-1 btn btn-secondary" data-target="#jkanban-info-modal" data-bs-dismiss="modal">
-	              취소
-	            </button>
-	          </form>
-	          </div>
-		   </div>
-        </div>
-      </div>
-    </div>
-   </div>
-  -->
-  <!-- 신청하기 모달창 (양식 X) -->  
+  
+  
+  
+  
+  <!-- 신청하기 모달창 (양식 O) -->  
   <div class="modal fade" id="jkanban-info-modal-nofile" style="display: none" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -338,12 +301,13 @@
           </button>
         </div>
         <div class="pt-4 modal-body">
-          <div class="form-group text-center">신청하시겠습니까?</div>
+          <!-- <div class="form-group text-center">신청하시겠습니까?</div> -->
+          <div class="form-group text-center">신청 파일을 첨부해 주세요</div>
           <form id="frmNofile" method="post" action="${path}/insApp.do" enctype="multipart/form-data">
           	<label>파일 첨부</label>
          	<div class="row mt-3">
-              <div class="col-2" style="height:120px;">
-                <input type="file" name="appFile" class="form-control" style="width:230px" id="appFile" multiple>
+              <div class="col-md-12">
+                <input type="file" name="appFile" class="form-control col-md-12 mb-3" id="appFile" multiple>
                  <div id="image_container"></div>
               </div>
             </div>

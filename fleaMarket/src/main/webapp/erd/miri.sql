@@ -3,6 +3,13 @@ SELECT * FROM fleamarketmember;
 
 ------------------------------------------------------ 플리마켓
 SELECT * FROM fleamarket;
+SELECT * FROM ffile;
+INSERT INTO ffile VALUES ('플리마켓 신청 양식.docx','C:/Users/gram/git/fleaMarketProject/fleaMarket/src/main/webapp/resource/img/fleaMarket/',6);
+INSERT INTO ffile VALUES ('양식 작성 방법.txt','C:/Users/gram/git/fleaMarketProject/fleaMarket/src/main/webapp/resource/img/fleaMarket/',6);
+INSERT INTO ffile VALUES ('m02.jpg','C:/Users/gram/git/fleaMarketProject/fleaMarket/src/main/webapp/resource/img/fleaMarket/',6);
+INSERT INTO ffile VALUES ('market.jpg','C:/Users/gram/git/fleaMarketProject/fleaMarket/src/main/webapp/resource/img/fleaMarket/',6);
+INSERT INTO ffile VALUES ('fleaMarket.jpg','C:/Users/gram/git/fleaMarketProject/fleaMarket/src/main/webapp/resource/img/fleaMarket/',6);
+DELETE FROM ffile WHERE filename = '6 최종 프로젝트 공지.txt';
 
 CREATE TABLE FleaMarket
 (
@@ -36,6 +43,7 @@ INSERT INTO fleaMarket VALUES (fleaMarket_seq.nextval,'댕댕이마켓',to_CHAR(
 
 ------------------------------------------------------ 신청
 SELECT * FROM FApplication;
+SELECT * FROM fleamarket;
 
 SELECT fa.*, fm.title, fm.email, m.nickname
 FROM FApplication fa, fleaMarket fm, fleamarketmember m
@@ -107,7 +115,7 @@ DROP SEQUENCE FApplication_seq;
 INSERT INTO FApplication VALUES (1,'aoddl56@nate.com',FApplication_seq.nextval,sysdate,null);
 INSERT INTO FApplication VALUES (2,'aoddl56@nate.com',FApplication_seq.nextval,sysdate,null);
 INSERT INTO FApplication VALUES (11,'ehddms2909@naver.com',FApplication_seq.nextval,sysdate,null);
-INSERT INTO FApplication VALUES (11,'pucoca@naver.com',FApplication_seq.nextval,sysdate,'a');
+INSERT INTO FApplication VALUES (6,'pucoca@naver.com',FApplication_seq.nextval,sysdate,'a');
 INSERT INTO FApplication VALUES (#{postingNumber},#{email},FApplication_seq.nextval,sysdate,null);
 
 UPDATE FApplication
@@ -121,9 +129,9 @@ SELECT *
 FROM ApplicationFile
 ORDER BY applicationno;
 
-SELECT *
+SELECT filename
 FROM ApplicationFile
-WHERE applicationNo = 3;
+WHERE applicationNo = #{applicationNo}
 		
 CREATE TABLE ApplicationFile
 (
