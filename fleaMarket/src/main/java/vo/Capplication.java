@@ -1,8 +1,9 @@
 package vo;
 
+import java.util.ArrayList;
+
 import org.springframework.web.multipart.MultipartFile;
 //vo.Capplication
-// vo.Capplication
 public class Capplication {
 	private int communitynumber; //커뮤니티번호
 	private String title;	// 제목
@@ -15,8 +16,9 @@ public class Capplication {
 	private String hashtag;	//해시태그
 	private int viewCnt;	//조회수
 	private String imgname;	//파일명
-	private MultipartFile report;	// 
-
+	private String[] fileNameList;
+	private MultipartFile report;
+	
 	public int getCommunitynumber() {
 		return communitynumber;
 	}
@@ -78,6 +80,16 @@ public class Capplication {
 		}else {
 			return imgname;
 		}
+	}
+	
+	public String[] getFileNameList() {
+		if(this.imgname==null) {
+			this.imgname="";
+		}
+		return this.imgname.split("&SEP&");
+	}
+	public void setFileNameList(String[] fileNameList) {
+		this.fileNameList = fileNameList;
 	}
 	public void setImgname(String imgname) {
 		this.imgname = imgname;

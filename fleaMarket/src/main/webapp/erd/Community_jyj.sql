@@ -69,7 +69,7 @@ SELECT DISTINCT *
 FROM BoardImg i,capplicaion c
 WHERE i.communitynumber=c.communitynumber
 AND c.email='yujin@gmail.com'
-ORDER BY registdate;
+ORDER BY registdate desc;
 
 SELECT *
 FROM BoardImg i,capplicaion c

@@ -54,24 +54,23 @@
 				 alert("[안내메시지] 내용을 600자 이하로 작성해주셔야 게시글 등록이 가능합니다.")
 				 contentfocus("content")
 			  }else{
-				  //내용 입력에 따른 content Input에 데이터 넣기(내용입력란이 input태그가 아니라서))
+				  //내용 입력에 따른 content Input에 데이터 넣기(내용입력란이 input태그가 아니라서)
 				  $('input[name=content]').val(expeditor.html());
 				  $("form").submit()
 			  }
 		  })
 		  
-		  console.log($('#productImg').val())
+		console.log($('#productImg').val())
 		$('#uploadFile2').hide()
 	  	$('#uploadFile3').hide()
 	  	$('#uploadFile4').hide()
 	  	$('#uploadFile5').hide()
 	  	$('#uploadFile6').hide()
 	  	$('#uploadFile7').hide()
-		  
-	    $("input[type='file']").change(function(e){
-		      //div 내용 비워주기
+		  //div 내용 비워주기
 		      //$('#preview').empty();
 		      
+	    $("input[type='file']").change(function(e){
 			if($('#uploadFile1').val()!=""){
 				  $('#uploadFile1').hide()
 				  $('#uploadFile2').show()
@@ -101,8 +100,7 @@
 				 $('#uploadFile7').click(function(){
 					 alert("[안내메시지]사진은 6장이상 등록이 불가합니다.")
 					 $('#uploadFile7').attr("readonly",true)
-				 
-			 	})
+			 	 })
 			 }
 			  
 		      var files = e.target.files;
@@ -139,25 +137,21 @@
 		  //이미지 넣기
 		  function preview(arr){
 		      arr.forEach(function(f){
-		        
 		        //파일명이 길면 파일명...으로 처리
 		        var fileName = f.name;
 		        if(fileName.length > 10){
 		          fileName = fileName.substring(0,7)+"...";
 		        }
-		        
 		        //div에 이미지 추가
 		        var str = '<div style="display: inline-flex; padding: 10px;"><li>';
 		        str += '<span>'+fileName+'</span><br>';
-		        
 		        //이미지 파일 미리보기
 		        if(f.type.match('image.*')){
-		          var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
-		          reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-		            //str += '<button type="button" class="delBtn" value="'+f.name+'" style="background: red">x</button><br>';
-		            str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
-		            str += '</li></div>';
-		            $(str).appendTo('#preview');
+		          	var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+	            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
+	            	str += '</li></div>';
+	            $(str).appendTo('#preview');
 		          } 
 		          reader.readAsDataURL(f);
 		        }else{
@@ -168,7 +162,7 @@
 		    }
 		    
 	  })
-		  
+		   //str += '<button type="button" class="delBtn" value="'+f.name+'" style="background: red">x</button><br>';
   </script>
 </head>
 
@@ -227,7 +221,13 @@
                         <div class="col-12">
                           <label class="mt-4 form-label postInsertTitle">태그(#)</label><!--태그 기능 넣기 #클릭시 드롭다운하기/아니면 입력값넣기  -->
                           <select class="form-control" name="hashtag" id="choices-tags" multiple>
-                            <!-- <option selected>#구분자로 있는 태그들로 드롭다운시키기</option> -->
+                            <option selected>#홍보</option>
+                            <option selected>#맛집</option>
+                            <option selected>#3대학원</option>
+                            <option selected>#재테크</option>
+                            <option selected>#나를 이기자</option>
+                            <option selected>#장수</option>
+                            <option selected>#건강</option>
                           </select>
                         </div>
                       </div>

@@ -49,17 +49,14 @@ public class Req4002_Controller {
 			imgNames.add(fileservice.insprofileimg(upload, mf));
 		}
 		imgNames.add(""); // 배열 고정값 7 (6개의 파일이 for문을 돌지않아서)
-		
 		int inCnt = imgNames.indexOf(""); // 들어오는 이미지 갯수
-		System.out.println(imgNames);
-		System.out.println("사이즈"+imgNames.size());
-		System.out.println("인덱스"+inCnt); // 넣은 숫자값+1
+//		System.out.println(imgNames);
+//		System.out.println("사이즈"+imgNames.size());
+//		System.out.println("인덱스"+inCnt); // 넣은 숫자값+1
 		if(inCnt==0) {
 			inCnt = 1;
 		}
-		
 		String imgnameVal="";
-		
 		for(int i=0;i<(inCnt+1);i++) {
 			imgnameVal += imgNames.get(i);
 			if(i<inCnt) { //이미지 들어온값까지만 구분자 추가
@@ -68,13 +65,13 @@ public class Req4002_Controller {
 		}
 		return (imgnameVal.substring(0,imgnameVal.length()-5));
 	}
-	
+
 	@PostMapping("communityInsert.do")
 	public String communityInsert(@RequestParam("mediaFile") MultipartFile[] mfiles,Capplication ins, Model d) {
 		service.communityInsert(ins);
 		BoardImg f = new BoardImg();
-		System.out.println("파일 길이:"+mfiles.length);
 		if( mfiles!=null ){
+			//System.out.println("파일 길이:"+mfiles.length);
 			f.setImgname(multifileFun(mfiles)); //끝에 구분자제거해서 생성자에 추가
 			f.setImgpath(upload);
 			service.communityFileInsert(f);
@@ -88,18 +85,17 @@ public class Req4002_Controller {
 		Capplication boardInfoVo = service.boardDetailSelect(76);
 		
 		ArrayList<String> boardArr = new ArrayList<String>(); // 동적 배열
-		String[] dataArr = boardInfoVo.getImgname().split("&SEP&"); // 구분자로 나눠서 배열에 넣기
+		//String[] dataArr = boardInfoVo.getImgname().split("&SEP&"); // 구분자로 나눠서 배열에 넣기
 		
-		if(dataArr!=null) {
-			for (String imgname:dataArr) {
+		if(boardInfoVo.getFileNameList()!=null) {
+			for (String imgname:boardInfoVo.getFileNameList()) {
 				System.out.println("사진명:"+imgname);
 				boardArr.add(imgname);
 			}
-			d.addAttribute("boardImg1", boardArr.get(0));
-			boardArr.remove(0);
-			
 			d.addAttribute("boardImgArr", boardArr);
 		}
+		
+		boardArr.indexOf("");
 		d.addAttribute("boardInfo", boardInfoVo);
 		return "communityUpdate";
 	}
@@ -109,17 +105,54 @@ public class Req4002_Controller {
 	public String communityUpdate(@RequestParam("updateFile") MultipartFile[] mfiles,Capplication upt, Model d) {
 		service.communityUpdate(upt); // text형들 수정
 		
+		// 등록되어있는 사진명배열
+		Capplication imgname = service.boardDetailSelect(76);
+		ArrayList<String> regFileName = new ArrayList<String>();
+		
+		System.out.println("## 등록되어있는 사진 호출 ##");
+		for(String ri:imgname.getFileNameList()) {
+			regFileName.add(ri);
+			System.out.println(ri);
+		}
+		
+		// 수정한 파일명 배열
+		String[] inputfileArr = multifileFun(mfiles).split("&SEP&"); 
+		ArrayList<String> inputfileList = new ArrayList<String>(); // 수정파일명 리스트 
+		
+		System.out.println("## 수정으로 들어간 사진 호출 ##");
+		for(String ili:inputfileArr) {
+			inputfileList.add(ili);
+			System.out.println(ili);
+		}
+		
+		ArrayList<String> uptFileName = new ArrayList<String>(); // (같은파일체크)수정 파일
+		
+		String uptFname = "";
+		for(String ii:regFileName) {
+			if(regFileName.indexOf(ii)>=1) {
+				uptFileName.add(ii);
+			}else {
+				for(int i=0;i<inputfileList.size();i++) {
+					uptFileName.add(inputfileList.get(i));
+					
+					uptFname += uptFileName.get(i);
+					if(i<uptFileName.size()) { //이미지 들어온값까지만 구분자 추가
+						uptFname += "&SEP&";
+					}
+				}
+			}
+		}
+		System.out.println("## 최종수정본");
+		System.out.println(uptFname);
 		BoardImg f = new BoardImg();
-		// 멀티파일 등록 함수
 		if( mfiles!=null ){
-			f.setImgname(multifileFun(mfiles)); // 파일명 리턴해옴.
+			f.setImgname(uptFname.substring(0,uptFname.length()-5)); // 파일명 리턴해옴.
 			f.setCommunitynumber(76);
 			service.communityFileUpdate(f); //이미지
 		}
 		d.addAttribute("msg", "수정 성공");
 		return "communityUpdate"; // 상세조회페이지로 이동
 	}
-	
 	
 	@RequestMapping("chatting.do")
 	public String chatting() {

@@ -19,7 +19,7 @@
 <script src="${path}/resource/js/Req4002/room.js"></script>
 
 <script type="text/javascript">
-	$(document).ready(function(){
+	$(document).ready(function(e){
 
 		 // 내용값 넣기(value)
 		$(".ql-editor").append("${boardInfo.content}")
@@ -50,16 +50,180 @@
 			  }
   		})
   		
-  		var imgCnt = "${boardImgArr}"
-  		//alert(arrFun(imgCnt))
-  		
-  		
-  		/* $("input[type='file']").click(function(){
+  		// 큰사진 클릭 시, file값 클릭
+  		$("#imgTab td").eq(5).click(function(){
+  			$("#fileClick6").click()
   			
-  			
-  		}) */
-  		
-  		
+  		})
+  		// 작은사진
+  		$("#imgTab td").eq(0).click(function(){
+  			$("#fileClick1").click()
+  			imgView("img1")
+  			$("#fileClick1").change(function(){
+  				$(".regimg").eq(1).hide()
+  			})
+  		})
+  		$("#imgTab td").eq(1).click(function(){
+  			$("#fileClick2").click()
+  			imgView("img2")
+  			$("#fileClick2").change(function(){
+  				$(".regimg").eq(2).hide()
+  			})
+  		})
+  		$("#imgTab td").eq(2).click(function(){
+  			$("#fileClick3").click()
+  			imgView("img3")
+  			$("#fileClick3").change(function(){
+  				$(".regimg").eq(3).hide()
+  			})
+  		})
+  		$("#imgTab td").eq(3).click(function(){
+  			$("#fileClick4").click()
+  			imgView("img4")
+  			$("#fileClick4").change(function(){
+  				$(".regimg").eq(4).hide()
+  			})
+  		})
+  		$("#imgTab td").eq(4).click(function(){
+  			$("#fileClick5").click()
+  			imgView("img5")
+  			$("#fileClick5").change(function(){
+  				$(".regimg").eq(5).hide()
+  			})
+  		})
+  		// 이미지 미리보기 기능
+	  	function imgView(clickImg){
+			$("input[type='file']").change(function(e){
+			      var files = e.target.files;
+			      var arr =Array.prototype.slice.call(files);
+			      
+			      //업로드 가능 파일인지 체크
+			      for(var i=0;i<files.length;i++){
+			        if(!checkExtension(files[i].name,files[i].size)){
+			          return false;
+			        }
+			      }
+			      preview(arr,clickImg);
+			});//file change
+		}
+  	
+	  // 사진 용량에 따른 유효성체크
+	  function checkExtension(fileName,fileSize){
+
+	      var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	      var maxSize = 20971520;  //20MB
+	      
+	      if(fileSize >= maxSize){
+	        alert('파일 사이즈 초과');
+	        $("input[type='file']").val("");  //파일 초기화
+	        return false;
+	      }
+	      
+	      if(regex.test(fileName)){
+	        alert('[안내메시지]업로드 불가능한 파일이 있습니다.');
+	        $("input[type='file']").val("");  //파일 초기화
+	        return false;
+	      }
+	      return true;
+	    }
+	  	//이미지 넣기
+	  	function preview(arr, clickImg){
+	  		//function(f){
+	  		arr.forEach(function(f){
+	        //파일명이 길면 파일명...으로 처리
+	        var fileName = f.name;
+	        if(fileName.length > 10){
+	          fileName = fileName.substring(0,7)+"...";
+	        }
+	        //div에 이미지 추가
+	        var str = '<div style="display: inline-flex; padding: 10px;"><li>';
+	        str += '<span>'+fileName+'</span><br>';
+	        //이미지 파일 미리보기
+	        var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+			if(clickImg=="img1"){
+				if(f.type.match('image.*')){
+	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+			            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
+			            	str += '</li></div>';
+			            $(str).appendTo('#preview1');
+		          } 
+		          reader.readAsDataURL(f);
+		        }else{
+		          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
+		          $(str).appendTo('#preview1');
+		        }
+				
+	  		}else if(clickImg=="img2"){
+	  			if(f.type.match('image.*')){
+	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+	            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
+	            	str += '</li></div>';
+	            $(str).appendTo('#preview2');
+		          } 
+		          reader.readAsDataURL(f);
+		        }else{
+		          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
+		          $(str).appendTo('#preview2');
+		        }
+	  			
+	  		}else if(clickImg=="img3"){
+	  			if(f.type.match('image.*')){
+	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+	            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
+	            	str += '</li></div>';
+	            $(str).appendTo('#preview3');
+		          } 
+		          reader.readAsDataURL(f);
+		        }else{
+		          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
+		          $(str).appendTo('#preview3');
+		        }
+	  			
+	  		}else if(clickImg=="img4"){
+	  			if(f.type.match('image.*')){
+	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+	            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
+	            	str += '</li></div>';
+	            $(str).appendTo('#preview4');
+		          } 
+		          reader.readAsDataURL(f);
+		        }else{
+		          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
+		          $(str).appendTo('#preview4');
+		        }
+	  			
+	  		}else if(clickImg=="img5"){
+	  			if(f.type.match('image.*')){
+	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+	            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
+	            	str += '</li></div>';
+	            $(str).appendTo('#preview5');
+		          } 
+		          reader.readAsDataURL(f);
+		        }else{
+		          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
+		          $(str).appendTo('#preview5');
+		        }
+	  		}
+	  		// 큰사진
+	  		/* else if(clickImg=="img6"){
+	  			if(f.type.match('image.*')){
+		          	var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
+	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
+	            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
+	            	str += '</li></div>';
+	            $(str).appendTo('#preview');
+		          } 
+		          reader.readAsDataURL(f);
+		        }else{
+		          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
+		          $(str).appendTo('#preview');
+		        }
+	  		} */
+	        
+	      });//arr.forEach
+	    }
+	
 	});
 	function updateImpossible(what){
 		if(what==="작성자"){
@@ -68,10 +232,7 @@
 			alert("[안내메시지]카테고리는 변경이 불가합니다.")
 		}
 	}
-	
-	function clickImgHidden(){
-		$(this).hide()
-	}
+
 	
 </script>
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
@@ -91,7 +252,7 @@
 
 <body class="g-sidenav-show bg-gray-100">
 	<jsp:include page="header.jsp"></jsp:include>
-	<form method="get" enctype="multipart/form-data" ><!-- action="${path}/communityUpdate.do" -->
+	<form method="post" enctype="multipart/form-data" action="${path}/communityUpdate.do" ><!--  -->
 	  <input type="hidden" name="communitynumber" value="${boardInfo.communitynumber}">
       <div class="row mt-4" >
          <div class="card h-100" style="margin-top:8%;">
@@ -101,30 +262,100 @@
                <div class="col-12">
                  <div class="card-body">
 		             <div class="row" style="margin-left:30%;">
-			              	<label for="fileClick1" style="border:1px solid black" >
-			                  <img id="bigphoto" class="border-radius-lg shadow-lg ms-5" src="${path}/resource/community/${boardImg1}" 
-			                  			onclick="clickImgHidden(this)" alt="이미지없음." style="width:auto; height:400px;">
-			                </label>
-		                 	<input type="file" name="updateFile" id="fileClick1" value="${boardImg1}" hidden multiple>
+			              <!-- <label style="border:1px solid black" >  -->
+				               <img id="bigphoto" class="border-radius-lg shadow-lg ms-5 regimg" src="${path}/resource/community/${boardImgArr[0]}" 
+				                  			alt="이미지 없음" style="width:auto; height:400px;">
+				                <span id="noImg" class="ms-5" style="color:red;"></span>
+				                
+			              <!--  </label> -->
 		                  
-		                  <div class="my-gallery d-flex mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery">
-		                    
-			                    <figure class="ms-2 me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-			                        <c:forEach var="boardImgs" items="${boardImgArr}">
-				                       	<label for="fileClick2" style="border:1px solid black" >
-				                        	<img id="smallphoto" class="w-100 min-height-100 max-height-100 border-radius-lg shadow ms-2" 
-				                        		 src="${path}/resource/community/${boardImgs}" onclick="clickImgHidden()" alt="이미지 없음"/>
-											<!-- 이미지 클릭 시, img 히든처리, 사진 변경 기능넣기 -->
-											<input type="file" name="updateFile" value="${boardImgs}" hidden multiple>
-				                   		</label>
-				                   		
-			                   		</c:forEach>
-			                    </figure>
-		                    
+		                 <div class="my-gallery d-flex mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery">
+			                    <%-- <figure class="ms-2 me-2" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
+			                       <div class="row w-800">
+				                        <c:forEach var="boardImgs" items="${boardImgArr}">
+				                        	<div class="col-3" >
+						                       	<div class="laclass" for="fileClick2" >
+						                        	<img id="smallphoto" class="w-100 min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
+						                        		 src="${path}/resource/community/${boardImgs}" alt="이미지 없음"/>
+						                   		</div>
+					                   		</div>
+				                        	<div class="col-3" >
+						                       	<div class="laclass" for="fileClick2" >
+						                        	<img id="smallphoto" class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
+								                        		 src="${path}/resource/community/${boardImgArr[2]}" alt="이미지 없음" style="width:auto; height:150px;" />
+						                   		</div>
+					                   		</div>
+				                        	<div class="col-3" >
+						                       	<div class="laclass" for="fileClick2" >
+						                        	<img id="smallphoto" class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
+								                        		 src="${path}/resource/community/${boardImgArr[3]}" alt="이미지 없음" style="width:auto; height:150px;" />
+						                   		</div>
+					                   		</div>
+				                        	<div class="col-3" >
+						                       	<div class="laclass" for="fileClick2" >
+						                        	<img id="smallphoto" class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
+								                        		 src="${path}/resource/community/${boardImgArr[4]}" alt="이미지 없음" style="width:auto; height:150px;" />
+						                   		</div>
+					                   		</div>
+				                        	<div class="col-3" >
+						                       	<div class="laclass" for="fileClick2" >
+						                        	<img id="smallphoto" class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
+								                        		 src="${path}/resource/community/${boardImgArr[4]}" alt="이미지 없음" style="width:auto; height:150px;" />
+						                   		</div>
+					                   		</div>
+				                        	<div class="col-3" >
+						                       	<div class="laclass" for="fileClick2" >
+						                        	<img id="smallphoto" class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
+								                        		 src="${path}/resource/community/${boardImgArr[5]}" alt="이미지 없음" style="width:auto; height:150px;" />
+						                   		</div>
+					                   		</div>
+				                   		</c:forEach>
+			                   		</div>
+			                    </figure> --%>
+			                    <table class="ms-4" id="imgTab">
+			                    	<tbody>
+				                    	<tr>
+					                    	<td style="border:30px solid white;">
+					                    		<img class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
+								                        		 src="${path}/resource/community/${boardImgArr[1]}" alt="이미지 없음" style="width:auto; height:150px;" />
+								           		<div id="preview1"></div>
+								           	</td>
+					                    	<td style="border:30px solid white;">
+					                    		<img class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
+								                        		 src="${path}/resource/community/${boardImgArr[2]}" alt="이미지 없음" style="width:auto; height:150px;" />
+								           		<div id="preview2"></div>
+								           	</td>
+					                    	<td style="border:30px solid white;">
+					                    		<img class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
+								                        		 src="${path}/resource/community/${boardImgArr[3]}" alt="이미지 없음" style="width:auto; height:150px;" />
+								           		<div id="preview3"></div>
+								           	</td>
+					                    	<td style="border:30px solid white;">
+					                    		<img class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
+								                        		 src="${path}/resource/community/${boardImgArr[4]}" alt="이미지 없음" style="width:auto; height:150px;" />
+								           		<div id="preview4"></div>
+								           	</td>
+					                    	<td style="border:30px solid white;">
+					                    		<img class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
+								                        		 src="${path}/resource/community/${boardImgArr[5]}" alt="이미지 없음" style="width:auto; height:150px;" />
+								           		<div id="preview5"></div>
+								           	</td>
+					                    </tr>
+					                    <tr>
+					                    	<td colspan="5" style="color:red; text-align:center;">※ 사진을 클릭하시면 수정이 가능합니다.</td>
+					                    </tr>
+				                    </tbody>
+			                    </table>
 		                  </div>
 		             </div>
            		</div>
         	</div>
+        	  		<input type="file" name="updateFile" id="fileClick1" hidden multiple>
+                	<input type="file" name="updateFile" id="fileClick2" hidden multiple>
+                	<input type="file" name="updateFile" id="fileClick3" hidden multiple>
+                	<input type="file" name="updateFile" id="fileClick4" hidden multiple>
+                	<input type="file" name="updateFile" id="fileClick5" hidden multiple>
+                	<input type="file" name="updateFile" id="fileClick6" hidden multiple>
         <div class="row mt-4">
           <div class="card">
             <div class="card-body">
