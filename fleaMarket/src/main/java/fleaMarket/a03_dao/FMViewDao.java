@@ -1,6 +1,8 @@
 package fleaMarket.a03_dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import vo.ApplicationFile;
 import vo.FApplication;
@@ -16,5 +18,6 @@ public interface FMViewDao {
 	public List<FApplication> appReceivedList(FApplicationSch sch);
 	//public ApplicationFile appReceivedView(int applicationNo);
 	public String appFileView(int applicationNo);
-	public void updateAppRe(FApplication upt);
+	public void updateAppRe(Map<String,String> map);
+	
 }

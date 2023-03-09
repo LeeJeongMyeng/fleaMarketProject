@@ -120,15 +120,16 @@ public class FMViewController {
 	}
 	
 	// 받은 신청 승인
-	/*
-	@GetMapping("updateAppRe.do")
-	public String updateAppRe(FApplication upt,  Model d) {
-		service.updateAppRe(upt);
-		d.addAttribute("appReceived",service.appReceivedView(upt.getApplicationNo()));
-		d.addAttribute("list",service.appReceivedList(upt));
+	
+	@PostMapping("updateAppRe.do")
+	public String updateAppRe(@RequestParam("applicationNo") String applicationNo,
+								@RequestParam("approvalWhether") String approvalWhether,  Model d) {
+		
+		service.updateAppRe(applicationNo,approvalWhether);
+		 
 		return "pageJsonReport";
 	}
-	*/
+	
 	
 	// 내 신청 목록
 	@RequestMapping("appMyList.do")

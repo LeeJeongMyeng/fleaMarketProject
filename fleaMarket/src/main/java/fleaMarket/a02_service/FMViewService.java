@@ -126,11 +126,14 @@ public class FMViewService {
 		return dao.appFileView(applicationNo);
 	}
 	
-	/*
+	
 	// 받은 신청 승인
-	public void updateAppRe(FApplication upt) {
-		dao.updateAppRe(upt);
+	public void updateAppRe(String applicationNo,String approvalWhether) {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("applicationNo", applicationNo);
+		map.put("approvalWhether", approvalWhether);
+		dao.updateAppRe(map);
 	}
-	*/
+	
 	
 }

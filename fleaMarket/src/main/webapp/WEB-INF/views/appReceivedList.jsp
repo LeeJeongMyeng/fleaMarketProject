@@ -40,28 +40,36 @@
 		if(confirm(msg+" 전체조회화면 이동하시겠습니까?")){
 			location.href = "${path}/list.do";
 		}
-	}
+	}*/
 
 	$(document).ready(function(){
-		$("#appBtn").click(function(){
-			// 유효성 check
-			$.ajax({	
-				url:"${path}/updateAppRe.do",
-				type:"get",
-				data:$("#app").serialize()
-				dataType:"json",
-				success:function(data){
-					var appReceived = data.appReceived
-					if(appReceived!=null){
-						alert("수정 완료");
-					}
-					// 리스트 데이터 update
-					var list = data.list
-				}
-			})
-		})
+	
 	});
-	*/
+	
+	function updateAppRe(applicationNo,approvalwhether){
+		// 유효성 check
+		$.ajax({
+		url:"updateAppRe.do",
+		type:"post",
+		data:"applicationNo="+applicationNo+"&approvalWhether="+approvalwhether,
+		dataType:"json",
+		success:function(data){
+			console.log("zzzzzz")
+			 var msg="";
+			if(approvalwhether=='a'){msg="승인처리되었습니다."}
+			else{msg="거부처리 되었습니다."}
+			alert(msg)
+			location.reload(); 
+		},
+		error:function(xhr,status,err){
+              console.log(xhr)
+              console.log(status)
+              console.log(err)
+        }
+	})
+		
+	}
+	
 	// 페이징
 	function goPage(cnt){
 		$("[name=curPage]").val(cnt);
@@ -87,7 +95,12 @@
 				str += "<button class='m-1 btn btn-primary' type='button' onclick=\"alldown('downloadAppFileForm')\">전체다운로드</button>";
 				
 				$('#downloadAppFileForm').html(str)
-			$('#jkanban-info-modalbtn').click()
+				
+				$(".ApprovalBtnWrap button:nth-child(1)").attr("onclick","updateAppRe("+appno+",'a')")
+				$(".ApprovalBtnWrap button:nth-child(2)").attr("onclick","updateAppRe("+appno+",'r')")
+				
+				
+			$('#ApplicaionNoFilesModalBtn').click()
 			},
 			error:function(xhr,status,err){
 	              console.log(xhr)
@@ -369,8 +382,8 @@
   
   
   <!-- 신청 조회 모달창 (양식 O) -->
-  <div data-bs-toggle="modal" data-bs-target="#jkanban-info-modal" id="jkanban-info-modalbtn"></div>
-  <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="jkanban-info-modal" style="display: none" role="dialog">
+  <div data-bs-toggle="modal" data-bs-target="#ApplicaionNoFilesModal" id="ApplicaionNoFilesModalBtn"></div>
+  <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="ApplicaionNoFilesModal" style="display: none" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -385,11 +398,11 @@
 					<%--여기에 파일리스트삽입 --%>
 			</form>
           <div class="alert alert-success d-none">Changes saved!</div>
-          <div class="text-end">
-            <button class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
+          <div class="text-end ApprovalBtnWrap">
+            <button class="m-1 btn btn-primary" data-bs-dismiss="modal" onclick="updateAppRe('a')">
               승인
             </button>
-            <button class="m-1 btn btn-danger" data-toggle="modal" data-target="#jkanban-info-modal">
+            <button class="m-1 btn btn-danger"  data-bs-dismiss="modal" onclick="updateAppRe('r')">
               거부
             </button>
           </div>

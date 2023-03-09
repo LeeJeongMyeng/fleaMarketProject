@@ -69,7 +69,7 @@
 	</select>
 	
 	<!-- 받은 신청 승인 -->
-	<update id="updateAppRe" parameterType="fapplication">
+	<update id="updateAppRe" parameterType="hashmap">
 		UPDATE FApplication
 		SET approvalWhether = #{approvalWhether}
 		WHERE applicationNo = #{applicationNo}
