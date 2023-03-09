@@ -19,7 +19,7 @@
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
   <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
- <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+ <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>  
   <title>
     Header
   </title>
@@ -39,6 +39,22 @@
 		
 		--%>	
 	});
+	function kakaoLogOut(){
+	    if (Kakao.Auth.getAccessToken()) {
+	      Kakao.API.request({
+	        url: '/v1/user/unlink',
+	        success: function (response) {
+	           console.log(response)
+	           
+	        },
+	        fail: function (error) {
+	          console.log(error)
+	        },
+	      })
+	      Kakao.Auth.setAccessToken(undefined)
+	    }
+	    location.href="Logout.do"
+	  }  
 </script>
 </head>
 <style>
@@ -191,17 +207,17 @@ li{
                               <i class="ni ni-cart text-primary me-3"></i>
                               커뮤니티보기
                             </div>
-                            <a href="${path}/CommunityList.do?category=홍보글" class="dropdown-item border-radius-md">
-                              <span class="ps-3">홍보글</span>
+                            <a href="${path}/pages/ecommerce/orders/list.html" class="dropdown-item border-radius-md">
+                              <span class="ps-3">홍보</span>
                             </a>
-                            <a href="${path}/CommunityList.do?category=사업아이디어" class="dropdown-item border-radius-md">
-                              <span class="ps-3">사업 아이디어</span>
+                            <a href="${path}/pages/ecommerce/orders/details.html" class="dropdown-item border-radius-md">
+                              <span class="ps-3">사업아이디어</span>
                             </a>
-                            <a href="${path}/CommunityList.do?category=사는이야기" class="dropdown-item border-radius-md">
+                            <a href="${path}/pages/ecommerce/orders/details.html" class="dropdown-item border-radius-md">
                               <span class="ps-3">사는 이야기</span>
                             </a>
-                            <a href="${path}/CommunityList.do?category=꿀팁" class="dropdown-item border-radius-md">
-                              <span class="ps-3">꿀 팁</span>
+                            <a href="${path}/pages/ecommerce/orders/details.html" class="dropdown-item border-radius-md">
+                              <span class="ps-3">꿀팁팁</span>
                             </a>
                             <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0 mt-3">
                               <i class="ni ni-box-2 text-primary me-3"></i>
@@ -387,7 +403,7 @@ li{
 	                              </div>
 	                              <div class="w-100 d-flex align-items-center justify-content-between">
 	                                <div>
-	                                  <p class="dropdown-header text-dark p-0">로그아웃</p>
+	                                  <p class="dropdown-header text-dark p-0" onclick="kakaoLogOut()">로그아웃</p>
 	                                </div>
 	                              </div>
 	                            </div>

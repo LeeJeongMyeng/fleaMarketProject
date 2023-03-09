@@ -80,6 +80,10 @@ function goPage(cnt){
 tbody td,th{
 text-align:center;
 }
+table td:hover {
+  text-decoration: underline;
+  color: blue;
+}
 </style>
 <body class="g-sidenav-show bg-gray-100">
 	
@@ -111,7 +115,7 @@ text-align:center;
 									<div class="d-lg-flex">
 										<div>
 											<h5 class="mb-0">고객센터</h5>
-											<p class="text-sm mb-0">검색할 내용 검색창에 제목을 입력해주세요</p>
+											<p class="text-sm mb-0">검색창에 검색할 제목이나 작성자 이메일을 입력해주세요</p>
 										</div>
 										
 										<div class="ms-auto my-auto mt-lg-0 mt-4">
@@ -153,7 +157,7 @@ text-align:center;
 												<tbody>
 															<c:forEach var="QNAListNotics" items="${QNAListNotics}">
 															
-																<tr ondblclick="goDetail(${QNAListNotics.qnano})" style="font-weight:bold;">
+																<tr onclick="goDetail(${QNAListNotics.qnano})" style="font-weight:bold;">
 																	<td>-</td>
 																	<td>-</td>
 																	<td style="text-align:left; padding-left:20px;"><span style="color:red;">&#60;공지&#62;</span>${QNAListNotics.title}</td>
@@ -165,7 +169,7 @@ text-align:center;
 															</form>
 															</c:forEach>
 															<c:forEach var="QNA" items="${QNAList}">
-																<tr ondblclick="goDetail(${QNA.qnano})">
+																<tr onclick="goDetail(${QNA.qnano})">
 																	<td>
 																		${QNA.cnt}
 																	</td>

@@ -50,6 +50,15 @@ function CheckQNAInsert(){
 		return true;
 	}
 </script>
+<style>
+
+#imgs_wrap img {
+  width: 80px;
+  height: 120px;
+  margin-right:3px;
+}
+
+ </style>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
 
@@ -65,8 +74,16 @@ function CheckQNAInsert(){
 						<div class="card-header pb-0 mb-4">
 							<div class="d-lg-flex">
 								<div>
+								<c:if test="${Login.authority!='관리자'}">	
 									<h5 class="mb-0">문의글등록</h5>
 									<p class="text-sm mb-0">소중한 문의의견에 감사드립니다.</p>
+								</c:if>
+								<c:if test="${Login.authority == '관리자' && empty qna.title}">
+								    <h5 class="mb-0">공지사항등록</h5>
+								</c:if>
+								<c:if test="${!empty qna.title}">
+								    <h5 class="mb-0">문의답변등록</h5>
+								</c:if>
 								</div>
 							</div>
 						</div>
@@ -95,7 +112,7 @@ function CheckQNAInsert(){
 									</select>
 								</div>
 								<div class="col-2">
-									 <div class="checkbox_group form-check form-check-info Trems_Wrap ms-3">
+									 <div class="checkbox_group form-check form-check-info Trems_Wrap ms-3" style="margin-top:15%;">
 										  <label class="postInsertTitle" style="margin-left: -0.5%;">비밀글</label>
 										  <input class="form-check-input" type="checkbox" id="secretBtn" class="Trem text-dark font-weight-bolder"/>
 									</div>
@@ -132,13 +149,14 @@ function CheckQNAInsert(){
 								<label class="mt-4 postInsertTitle" style="margin-left: -0.5%;">게시글내용</label>
 								<div id="editor"></div>
 							</div>
-								<input type="hidden" id="contentInput" name="content" />
+								<input type="hidden" id="contentInput" name="content"/>
 							<div class="mb-3" style="margin-left: 26px;">
 								 <input name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}"  multiple/>
 							</div>
 							<label class="postInsertTitle">이미지 미리보기 <span style="color:red;">(이미지를 '더블클릭'시 해당파일이 제외됩니다.)</span></label>
 							 <div id="imgs_wrap" style="display:flex;">
    							 </div>
+   							
 							<button type="button" style="float: right;" class="btn btn-secondary btn-md mb-0">취소</button>	
 							<button type="submit" style="float: right;" class="btn btn-primary btn-md mb-0 me-2">등록</button>
 						</form>

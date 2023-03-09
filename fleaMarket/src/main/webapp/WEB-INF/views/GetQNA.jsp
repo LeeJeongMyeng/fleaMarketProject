@@ -48,8 +48,15 @@
 						<div class="card-header pb-0 mb-4">
 							<div class="d-lg-flex">
 								<div>
-									<h5 class="mb-0">문의글상세</h5>
-									<p class="text-sm mb-0">소중한 문의의견에 감사드립니다.</p>
+									<c:if test="${qna.method == 'a'}">
+									  <h5>문의답변 조회</h5>
+									</c:if>
+									<c:if test="${qna.method == 'q'}">
+									  <h5>문의글 조회</h5>
+									</c:if>
+									<c:if test="${qna.method == 'n'}">
+									  <h5>공지사항 조회</h5>
+									</c:if>
 								</div>
 							</div>
 						</div>
@@ -105,16 +112,16 @@
 								 <div id="imgs_wrap" style="display:flex;">
 							</div>	
    						
-							<div class="" style="margin-left:85%;">
-							<c:if test="${Login.authority=='관리자' && qna.method=='q'}">
-								<button type="button"  class="btn btn-outline-success btn-md mb-0 me-1" id="QNAAnswerBtn">답변작성</button>  
-							</c:if>
+							<div class="" style="margin-left:80%;">
+							
 							<c:if test="${Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email }">
 								<button type="submit" class="btn btn-outline-primary btn-md mb-0 me-1">수정</button>
 								<button type="button"  data-bs-toggle="modal" data-bs-target="#QNADeleteModal" id="DeleteQnaModalbtn"  class="btn btn-outline-danger btn-md mb-0 me-1">삭제</button>  <!-- 모달창추가 -->
 							</c:if>
 							<button type="button" id="goQnaList" class="btn btn-outline-secondary btn-md mb-0 me-1">취소</button>	
-							
+							<c:if test="${Login.authority=='관리자' && qna.method=='q'}">
+								<button type="button" class="btn btn-outline-success btn-md mb-0 me-1" id="QNAAnswerBtn">답변</button>  
+							</c:if>
 							</form>
 							</div>	
 							
