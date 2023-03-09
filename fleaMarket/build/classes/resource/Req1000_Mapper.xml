@@ -123,7 +123,7 @@
     	<!-- 문의/공지글 업데이트 -->
     	<update id="QNAUpdate" parameterType="qna">
     		update FLEAMARKETQNA
-    		set title=#{title}, content=#{content}
+    		set title=#{title}, content=#{content},uptdate=to_CHAR(sysdate,'YYYY-MM-DD')
     		where qnano=#{qnano}
     	</update>
     	<!-- 문의게시글 파일 수정 전 파일담기 -->
