@@ -142,7 +142,7 @@
 							<button type="button" id= "btbutn" class="btn btn-outline-dark" name = "showBtn" value="all">전체글</button>
 							<button type="button" id= "btbutn" class="btn btn-outline-dark" name = "showBtn" value="best">인기글</button>
 							</div>
-							<button type="button"
+							<button onclick="location.href='${path}/communityInsertPage.do'" type="button"
 								class="btn bg-gradient-primary btn-sm mb-0 insertStyle">+
 								게시물 등록하기</button>
 

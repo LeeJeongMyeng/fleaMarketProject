@@ -76,8 +76,11 @@ public class Req4002_Controller {
 			f.setImgpath(upload);
 			service.communityFileInsert(f);
 		}
-		d.addAttribute("msg", "등록 성공");
-		return "redirect/:CommunityList.do?category="+ins.getCategory(); // 전체조회페이지로 이동
+		String category = ins.getCategory();
+		System.out.println("category"+category);
+		//d.addAttribute("msg", "등록 성공");
+		d.addAttribute("category",ins.getCategory());
+		return "redirect:/CommunityList.do";// 전체조회페이지로 이동
 	}
 	
 	@RequestMapping("communityUpdatePage.do")
