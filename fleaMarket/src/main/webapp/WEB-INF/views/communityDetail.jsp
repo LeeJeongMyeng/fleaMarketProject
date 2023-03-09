@@ -77,7 +77,7 @@
           </a>
       </li>
       <li>
-          <a class="dropdown-item" href="#">
+          <a class="dropdown-item" href="${path }/communityUpdatePage.do?communityNumber=${detail.communitynumber }">
              <i class="ni ni-fat-add"></i> 수정하기
           </a>
       </li>
