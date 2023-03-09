@@ -30,17 +30,7 @@
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
-	var uptmsg = '${uptmsg}'
-	if(uptmsg!=''){
-		alert(uptmsg)
-	}
-	
-	//input들 주제에 내 엔터기능을 방해함 ;; 그래서 막음
-	/* document.addEventListener('keydown', function(event) {
-		  if (event.keyCode === 13) {
-		    event.preventDefault();
-		  };
-		}, true); */
+
 })
 </script>
 <style>

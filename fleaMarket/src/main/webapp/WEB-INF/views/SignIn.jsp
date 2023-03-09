@@ -32,19 +32,21 @@
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
   <link href="${path}/resource/css/Req1000/SignIn.css" rel="stylesheet" />
   <%@include file="header.jsp" %>
+
+</head>
 <script type="text/javascript">
 
 var Loginemail = '${mem.email}'
 
 $(document).ready(function(){
-	var msg = "${LoginMsg}"
-	console.log("dddd"+msg)
+	
+});
+var msg = "${LoginMsg}";
+console.log("dddd",msg)
 		if(msg!=""){
 			alert(msg)
 			}	
-});
 </script>
-</head>
 <body class="">
   <div class="container position-sticky z-index-sticky top-0">
     <div class="row">

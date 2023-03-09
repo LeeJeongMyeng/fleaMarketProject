@@ -187,9 +187,7 @@ $('#SNSLoginbnt').click(function(){
 	 
  }
  
- function MemberFindEmail(url,qstr){
-	
- }
+
  
 
  

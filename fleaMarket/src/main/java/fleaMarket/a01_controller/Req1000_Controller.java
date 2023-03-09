@@ -49,12 +49,15 @@ public class Req1000_Controller {
    
 //=================================================================================
    @RequestMapping("SignIn.do")
-   public String login() {
+   public String login(Model d) {
+	   d.addAttribute("LoginMsg", d.asMap().get("LoginMsg"));
+	   System.out.println(d.asMap().get("LoginMsg"));
       return "SignIn";
    }
  //------------------------------------------------------------------  
    @RequestMapping("SignUp.do")
    public String SignUp() {
+	  
       return "SignUp";
    }
  //------------------------------------------------------------------  
@@ -69,27 +72,27 @@ public class Req1000_Controller {
    }
    
  //------------------------------------------------------------------  
-	   @RequestMapping("Login.do") //로그인
-	   public String Loign(Member log, HttpSession session) {
+   @RequestMapping("Login.do") //로그인
+   public String Loign(Member log,Model d,HttpSession session,RedirectAttributes redirectAttributes) {
 	   Member mem; 
 	   String msg = "일치하는 회원이 없습니다. 다시 시도 부탁드립니다.";
 	   String path = "redirect:SignIn.do";
-	   // sns이메일값
-	   if(session.getAttribute("SnsEmailPlus") != null) {
-	   mem = service.Login((Member)session.getAttribute("SnsEmailPlus"));
-	   session.removeAttribute("SnsEmailPlus");
-	   // 기본이메일/패스워드
-	   } else {
+   // sns이메일값
+   if(d.asMap().get("SnsEmailPlus")!=null) {
+	   mem = service.Login((Member)d.asMap().get("SnsEmailPlus"));
+   // 기본이메일/패스워드
+   }else {
 	   mem = service.Login(log);
-	   }
-	   if(mem != null) {
+   }
+   if(mem!=null) {
 	   session.setAttribute("Login", mem);
-	   path = "main"; 
-	   } else {
-	   session.setAttribute("LoginMsg", msg);
-	   }
-	   return path;
-	   }
+	   path="main"; 
+   }else {
+	   
+   }
+   redirectAttributes.addFlashAttribute("LoginMsg",msg);
+   return path;
+   }
 
  //------------------------------------------------------------------ 
    

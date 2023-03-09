@@ -192,13 +192,7 @@ function MatchPassword(pass){
 			success:function(data){
 				console.log(data.MatchPassword)
 				MatchResult =data.MatchPassword;
-				/*if(data.MatchPassword=='false'){
-					console.log("펄스");
-					MatchResult= 'false';
-				}else if(data.MatchPassword=='true'){
-					console.log("트루");
-					MatchResult= 'true'
-				}*/
+				
 				
 			},
 			error:function(xhr,status,error){

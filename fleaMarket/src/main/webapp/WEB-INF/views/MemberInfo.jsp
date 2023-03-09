@@ -33,11 +33,12 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	var uptmsg = '${uptmsg}'
-	if(uptmsg!=''){
-		alert(uptmsg)
-	}
+		if(uptmsg!=''){
+			alert(uptmsg)
+		}
 	
 })
+	
 var SessAddress = '${Login.address}' //세션주소값
 var SessCategory = '${Login.category}'
 var SessPassword = '${Login.password}'
