@@ -68,32 +68,26 @@
 		$("#frmSch").submit()
 	}
 	
-	// 신청글 상세 조회 모달창
-	function goModal(appno){
+    function getFiles(appno){
+    	console.log(appno)
 		$.ajax({
 			url:"appFileView.do",
 			type:"post",
 			data:"applicationNo="+appno,
 			dataType:"json",
 			success:function(data){
-				var values = "<form>";
-				$(data.appFile).each(function(idx, data.appFile){
-					values+="<input type="text" value="data.appFile(1)">"
-					values+="</form>"
+				console.log(data.appFile)
+				var files = data.appFile;
+				var filelist = files.split(',');
+				
+				var str = "";
+				filelist.forEach(function(f){
+					str += "<input class='form-control w-50 mb-2' onclick=\"javascript:location.href='downloadAppFile.do?filename="+f+"'\" name='filename' type='text' value='"+f+"' readonly/>"
 				})
-				$('#here').html(values)	
-				$("#goModal").click()
-				/*
-				1. data.appFile for문돌리셈
-				2. 돌리는데 여기다가 직접 태그들을 만들줘야함
-	  			 var values = "<form>";
-	                                           for문{
-					values+=<input type="text" value="data.appFile(1)">
-					}
-				      values+=</form>
-	                                        $('#asdfasdf').html(values)
-				$(#goModal).click()
-				*/
+				str += "<button class='m-1 btn btn-primary' type='submit'>전체다운로드</button>";
+				
+				$('#downloadAppFileForm').html(str)
+			$('#jkanban-info-modalbtn').click()
 			},
 			error:function(xhr,status,err){
 	              console.log(xhr)
@@ -102,10 +96,20 @@
 	        }
 		})
 	}
+	
+	// 신청글 상세 조회 모달창
+	
 
 </script>
 </head>
+<style>
 
+  	#downloadAppFileForm input:hover{
+  		text-decoration:underline;
+  		cursor:pointer;
+  	}
+
+</style>
 <body class="g-sidenav-show   bg-gray-100">
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
   <main class="main-content position-relative border-radius-lg ">
@@ -162,7 +166,7 @@
 	                </thead>
 	                <tbody>
 	                  <c:forEach var="fapplication" items="${list}">
-		                  <tr onclick="goModal(${fapplication.applicationNo})">
+		                  <tr onclick="getFiles('${fapplication.applicationNo}')">
 		                    <td>
 		                      <div class="d-flex align-items-center">
 		                      	<p class="text-xs font-weight-bold ms-2 mb-0">${fapplication.cnt}</p>
@@ -353,7 +357,7 @@
   
   
   <!-- 신청 조회 모달창 (양식 O) -->
-  <p id="goModal" data-toggle="modal" data-target="#jkanban-info-modal"></p>
+  <div data-bs-toggle="modal" data-bs-target="#jkanban-info-modal" id="jkanban-info-modalbtn">
   <div class="modal fade" id="jkanban-info-modal" style="display: none" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -364,30 +368,10 @@
           </button>
         </div>
         <div class="pt-4 modal-body">
-          <div class="form-group">
-          	<label>첨부파일</label> <!-- 첨부파일 -->
-          	<div id="here"></div>
-            <c:forEach var="appFile" items="${appFile}">                     
-			<form action="downloadAppFile.do" method="get">
-			<%-- 
-				<div class="row mt-3">
-	              <div class="col-2" style="height:120px;">
-	                <input type="file" name="fmFile" value="${noimg.filename}" class="form-control" style="width:230px" id="appFile" multiple>
-	                 <div id="image_container"></div>
-	              </div>
-	            </div>
-			 --%>
-				<div style="width:50%;">
-					<div class="fallback">
-						 <div class="download_Wrap">
-						 	<input type="hidden" name="filename"  value="${appFile}">
-							<input value="${appFile}" type="submit" class="form-control">
-						 </div>
-					</div>
-				</div>
+          	<label>첨부파일(개별 다운로드)</label> <!-- 첨부파일 -->
+			<form id="downloadAppFileForm" action="downloadAppFile.do" method="get">
+					<%--여기에 파일리스트삽입 --%>
 			</form>
-		  </c:forEach>
-          </div>
           <div class="alert alert-success d-none">Changes saved!</div>
           <div class="text-end">
             <button class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
@@ -401,78 +385,7 @@
       </div>
     </div>
   </div>
-  <%--
-  <!-- 신청 조회 모달창 (양식 X) -->
-  <p id="modalNoFile"  data-bs-toggle="modal" data-bs-target="#jkanban-info-modal-nofile"></p>
-  <div class="modal fade" id="jkanban-info-modal-nofile" style="display: none" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="h5 modal-title">신청 조회</h5>
-          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="pt-4 modal-body">
-          <div class="form-group text-center">신청 승인하시겠습니까?</div>
-          <input type="hidden" id="app" value="a"/>
-          <div class="text-end">
-            <button id="appBtn" class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
-              승인
-            </button>
-            <button id="rejBtn" class="m-1 btn btn-danger" data-toggle="modal" data-target="#jkanban-info-modal">
-              거부
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- 승인 완료 알림 모달창 (양식 X) -->
-  <div class="modal fade" id="jkanban-info-modal-accept" style="display: none" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="h5 modal-title">신청 조회</h5>
-          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="pt-4 modal-body">
-          <div class="form-group text-center">승인되었습니다.</div>
-          <div class="text-end">
-            <button class="btn btn-primary btn-block" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
-              확인
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- 거부 완료 알림 모달창 (양식 X) -->
-  <div class="modal fade" id="jkanban-info-modal-reject" style="display: none" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="h5 modal-title">신청 조회</h5>
-          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="pt-4 modal-body">
-          <div class="form-group text-center">거부되었습니다.</div>
-          <div class="text-end">
-            <button class="btn btn-primary btn-block" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
-              확인
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-   --%>
+ 
   <!--   Core JS Files   -->
   <script src="${path}/assets/js/core/popper.min.js"></script>
   <script src="${path}/assets/js/core/bootstrap.min.js"></script>
@@ -491,6 +404,13 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
+    
+    
+   
+    
+
+    
+    
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

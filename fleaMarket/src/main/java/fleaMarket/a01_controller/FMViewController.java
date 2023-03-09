@@ -103,9 +103,26 @@ public class FMViewController {
 		return "appReceivedList";
 	}
 	*/
-	@GetMapping("appFileView.do")
+	@PostMapping("appFileView.do")
 	public String appFileView(@RequestParam("applicationNo") int applicationNo, Model d) {
-		d.addAttribute("appFile",service.appFileView(applicationNo));
+		String a= service.appFileView(applicationNo);
+		
+		d.addAttribute("appFile",a);
+		System.out.println(a);
+		System.out.println(a);
+		System.out.println(a);
+		System.out.println(a);
+		System.out.println(a);
+		System.out.println(a);
+		System.out.println(a);
+		System.out.println(a);
+		System.out.println(a);
+		System.out.println(a);
+		System.out.println(a);
+		System.out.println(a);
+		System.out.println(a);
+		System.out.println(a);
+		
 		return "pageJsonReport";
 	}
 	
