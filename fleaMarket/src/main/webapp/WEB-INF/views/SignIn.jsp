@@ -15,7 +15,6 @@
   <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
   <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
   <title>
     콘티고 로그인
