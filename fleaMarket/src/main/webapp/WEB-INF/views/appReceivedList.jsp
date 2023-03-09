@@ -77,7 +77,7 @@
 			dataType:"json",
 			success:function(data){
 				var values = "<form>";
-				$(data.appFile).each(function(idx, dept){
+				$(data.appFile).each(function(idx, data.appFile){
 					values+="<input type="text" value="data.appFile(1)">"
 					values+="</form>"
 				})
@@ -103,31 +103,6 @@
 		})
 	}
 
-	function goModal2(applicationNo){
-		$.ajax({	
-			url:"${path}/appReceivedView.do",
-			type:"get",
-			data:"applicationNo="+applicationNo,
-			dataType:"json",
-			success:function(data){
-				// d.addAttribute("dept", s
-				// data.모델명
-				// {dept:{deptno:10,...}}
-				
-				//첨부파일 불러오기 
-				//var dept = data.dept
-				$("#modalNoFile").click() // 모달 로딩
-				/*
-				$("#frm02 [name=deptno]").val(dept.deptno)
-				$("#frm02 [name=dname]").val(dept.dname)
-				$("#frm02 [name=loc]").val(dept.loc)
-				*/
-			},
-			error:function(err){
-				console.log(err)
-			}
-		})
-	}
 </script>
 </head>
 
@@ -426,7 +401,7 @@
       </div>
     </div>
   </div>
-  
+  <%--
   <!-- 신청 조회 모달창 (양식 X) -->
   <p id="modalNoFile"  data-bs-toggle="modal" data-bs-target="#jkanban-info-modal-nofile"></p>
   <div class="modal fade" id="jkanban-info-modal-nofile" style="display: none" tabindex="-1" role="dialog">
@@ -497,7 +472,7 @@
       </div>
     </div>
   </div>
-  
+   --%>
   <!--   Core JS Files   -->
   <script src="${path}/assets/js/core/popper.min.js"></script>
   <script src="${path}/assets/js/core/bootstrap.min.js"></script>
