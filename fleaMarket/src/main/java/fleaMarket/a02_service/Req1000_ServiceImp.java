@@ -188,13 +188,13 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		//파일리스트를 다뽑아옴
 		 List<QNAFile> qfs=GetFileNames(qnano);
 		//리스트가있다면
-		 if(qfs.size()>0 && !qfs.get(0).getFilename().equals("")) {
+		
 			//DB다지움
 			 dao.QNAFileDelete(qnano);
 			//업로드 된거 다 지움
 			 for(QNAFile qf:qfs) {
 				fileservice.DeleteFile(qnafilepath+qf.getFilepath(), qf.getFilename());
-			 }
+			 
 		  }
 	}
 	public void QNADelete(String qnano) {
