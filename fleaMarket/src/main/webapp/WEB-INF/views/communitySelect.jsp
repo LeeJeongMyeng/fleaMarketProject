@@ -197,11 +197,17 @@
 												
 												<img class="w-10 ms-3"
 													src="${path }/resource/community/${lists.imgName}">
-												<h6 class="ms-3 my-auto">${lists.title }</h6>
+												<h6 class="ms-3 my-auto"><a href ="${path}
+												/CommunityDetail.do?communityNumber=${lists.communitynumber}&pageNum=${pageMaker.cri.pageNum} 
+												&keyword=${pageMaker.cri.keyword}
+												&type=${pageMaker.cri.type}
+												&shift=${pageMaker.cri.shift}
+												&category=${pageMaker.cri.category}
+												&showTemplete=${bestValue}">${lists.title }</a></h6>
 										</td>
 										<td class="text-sm">${lists.nickname }</td>
 										<td class="text-sm">${lists.viewCnt }</td>
-										<td class="text-sm">${lists.viewCnt }</td>
+										<td class="text-sm">${lists.likeCnt }</td>
 										<td class="text-sm">${lists.registDate }</td>
 										<td style="text-align: center; padding-top: 12px;"><span
 											class="badge badge-secondary badge-sm">room 가기</span></td>
@@ -259,10 +265,16 @@
 						</form>
 						<!-- 페이지 네이션 -->
 					</div>
-				</div>
-				
+				</div>	
 				<!-- 전체글 목록 -->
-				
+				<form id="pageForm" method="get" action = "${path }/CommunityDetail.do">
+							<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}"> 
+							<input type="hidden" name="keyword" value="${pageMaker.cri.keyword}">
+							<input type="hidden" name="type" value="${pageMaker.cri.type}">
+							<input type="hidden" name ="shift" value ="${pageMaker.cri.shift }">
+							<input type="hidden" name = "category" value = "${pageMaker.cri.category }">
+							<input type="hidden" name ="showTemplete" value = "${bestValue}">
+						</form>
 			</div>
 		</div>
 	</div>
@@ -304,7 +316,9 @@
 	
 	<script src="${path}/assets/js/plugins/datatables.js"></script>
 	<script>
-    
+  $("#formDetail").on("click",function(e){
+	  pageForm.submit();
+  })
   var moveForm = $("#moveForm");
   //인기글 목록
   var showpower = "${bestValue}";

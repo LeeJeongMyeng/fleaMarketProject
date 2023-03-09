@@ -100,9 +100,9 @@ public class Community_RestController {
 		
 		int communityNumber = Integer.parseInt((String) jsonObj.get("communityNumber"));
 		String email = (String)jsonObj.get("email");
-		String msg =  service.getInsertLike(communityNumber,email);
-		model.addAttribute("msg",msg);
-		
+		String msg =  service.getInsertLike(communityNumber,email);		
+		int likeCnt = service.getLikeCnt(communityNumber);
+		model.addAttribute("likeCnt",likeCnt);
 		return "pageJsonReport";		
 	}
 	@PostMapping("deleteLike.do")
@@ -116,7 +116,9 @@ public class Community_RestController {
 		int communityNumber = Integer.parseInt((String) jsonObj.get("communityNumber"));
 		String email = (String)jsonObj.get("email");
 		String msg =  service.getDeleteLike(communityNumber,email);
-		model.addAttribute("msg",msg);
+		
+		int likeCnt = service.getLikeCnt(communityNumber);
+		model.addAttribute("likeCnt",likeCnt);
 		
 		return "pageJsonReport";		
 	}

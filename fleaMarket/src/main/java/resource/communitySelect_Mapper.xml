@@ -29,7 +29,7 @@
 FROM    (SELECT ROWNUM RNUM,
                 TEMP.*   
         FROM    (
-        SELECT imgName,title,content,registDate,updateDate,viewCnt,nickname,CASE WHEN viewCnt >= 30 AND registDate >= SYSDATE  -1
+        SELECT imgName,c.communityNumber,title,content,registDate,updateDate,viewCnt,nickname,CASE WHEN viewCnt >= 30 AND registDate >= SYSDATE  -1
 THEN 'T' ELSE 'F'
 END AS bestType
 FROM fleamarketmember m, CAPPLICAION c,BOARDIMG b WHERE m.EMAIL = c.EMAIL AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER
@@ -68,7 +68,7 @@ AND
 FROM    (SELECT ROWNUM RNUM,
                 TEMP.*   
         FROM    (
-        SELECT imgName,title,content,registDate,updateDate,viewCnt,nickname,CASE WHEN viewCnt >= 30 AND registDate >= SYSDATE  -1
+        SELECT imgName,c.communityNumber,title,content,registDate,updateDate,viewCnt,nickname,CASE WHEN viewCnt >= 30 AND registDate >= SYSDATE  -1
 THEN 'T' ELSE 'F'
 END AS bestType
 FROM fleamarketmember m, CAPPLICAION c,BOARDIMG b 
@@ -130,8 +130,7 @@ AND
 	</select>
 	
 	<!-- 커뮤니티 상세 조회  -->
-	<select id="getCommunityDetailList"
-	resultType="capplicationList">
+	<select id="getCommunityDetailList" parameterType = "java.util.HashMap" resultType="capplicationList">
 	SELECT
 	c.COMMUNITYNUMBER,c.TITLE,c.CONTENT,c.REGISTDATE,c.UPDATEDATE,f.nickname,p.PROFILEIMG,c.EMAIL
 	FROM CAPPLICAION c ,FLEAMARKETMEMBER f,BOARDIMG b
@@ -140,6 +139,11 @@ AND
 	f.EMAIL = p.EMAIL
 	AND c.COMMUNITYNUMBER = #{communityNumber}
 </select> 
+<!-- 조회수 mapper  -->
+<update id = "updateViewCnt">
+UPDATE CAPPLICAION SET VIEWCNT = VIEWCNT + 1 WHERE COMMUNITYNUMBER = #{communityNumber}
+
+</update>
    <select id = "getCommunityImgList" resultType = "boardimg">
    SELECT b.IMGNAME FROM CAPPLICAION c,BOARDIMG b 
 WHERE c.COMMUNITYNUMBER = b.COMMUNITYNUMBER 
@@ -179,5 +183,6 @@ AND f.MYEMAIL = #{session}
    <delete id="getDeleteFriend" parameterType ="java.util.HashMap">
    DELETE FROM FRIEND WHERE MYEMAIL = #{myEmail}  AND FOLLOWING =#{following} 
    </delete>
+   
 </mapper>
 

@@ -35,6 +35,7 @@ public class CommunityReplyServiceImpl implements CommunityReplyService {
 		int result = mapper.replyWrite(vo);
 		return result;
 	}
+	
 
 	@Override
 	public List<ReplyVo> replyList(int communityNumber) {
@@ -43,6 +44,23 @@ public class CommunityReplyServiceImpl implements CommunityReplyService {
 		clist = mapper.replyList(communityNumber);
 		return clist;
 	}
+
+	@Override
+	public int insertReReply(ReplyVo vo) {
+		// TODO Auto-generated method stub
+		// groupOrder + 1
+		int groupId = vo.getGroupId();
+		int groupOrder = mapper.getGroupOrder(groupId)+1;
+		vo.setGroupOrderid(groupOrder);
+		int result = mapper.rereplyWrite(vo);
+		return result;
+	}
+	@Override
+	public int getReplyCnt(int communityNumber) {
+		int replyCount = mapper.getReplyCnt(communityNumber);
+		return replyCount;
+	}
+	
 	
 
 }

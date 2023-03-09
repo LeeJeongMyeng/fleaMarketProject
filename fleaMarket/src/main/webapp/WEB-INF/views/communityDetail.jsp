@@ -93,7 +93,7 @@
                 <div class="col-xl-5 col-lg-6 text-center">
                   <img class="w-100 border-radius-lg shadow-lg mx-auto" src="${path }/resource/community/${imgList[0]}" alt="chair">
                   <div class="my-gallery d-flex mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery">
-                  <c:forEach var = "img" items = "${imgList}" begin = "1" end = "4">
+                  <c:forEach var = "img" items = "${imgList}" begin = "1" end = "5">
                     <figure class="ms-2 me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
                       <a href="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-1.jpg" itemprop="contentUrl" data-size="500x600">
                         <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="${path }/resource/community/${img}" alt="Image description" />
@@ -162,7 +162,9 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                      
                     <div class="text-end ms-auto">
                     <c:set var = "followChecking" value = "${followCheck }"/>
-                    <c:if test = "${followChecking eq '0'}">  
+                  
+                
+                    <c:if test = "${followChecking eq '0' or followChecking eq null}">  
                 <button id = "followButton" type="button" class="btn btn-xs bg-gradient-secondary mb-0">
                   + Follow</button>
                 </c:if>
@@ -193,24 +195,20 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                   <div class="d-flex">
                   
                   <!--  좋아요/댓글개수 부분 -->
-                  <div class="d-flex align-items-center" style = "width:70px">
+                  <div class="d-flex align-items-center" style = "width:50px">
                   <c:set var = "likeChecking" value = "${likeCheck}"/>
-                    <c:if test = "${likeChecking eq '0'}">  
-                      <i id = "Heart" class="fa-regular fa-heart cursor-pointer Heart" style ="font-size:25px;"></i>
+                    <c:if test = "${likeChecking eq '0' || likeChecking eq null}">  
+                      <i id = "Heart" class="fa-regular fa-heart cursor-pointer Heart" style ="font-size:20px;"></i>
                       </c:if>
                       <c:if test = "${likeChecking eq '1'}">  
-                      <i id = "Heart" class="fa-solid fa-heart-circle-minus cursor-pointer Heart" style ="font-size:25px;"></i>
+                      <i id = "Heart" class="fa-solid fa-heart-circle-minus cursor-pointer Heart" style ="font-size:20px;"></i>
                       </c:if>
-                      <span class="text-sm me-3 ">150</span>
+                      <span class="text-sm me-3 showId" style = "margin-left: 5px;">${likeCnt }</span>
                     </div>
                
                     <div class="d-flex align-items-center">
-                      <i class="ni ni-chat-round me-1 cursor-pointer opacity-6"></i>
-                      <span class="text-sm me-3">36</span>
-                    </div>
-                    <div class="d-flex align-items-center">
-                      <i class="ni ni-curved-next me-1 cursor-pointer opacity-6"></i>
-                      <span class="text-sm me-2">12</span>
+                      <i class="ni ni-chat-round me-1 cursor-pointer"></i>
+                      <span class="text-sm me-3">${replyCnt }</span>
                     </div>
                   </div>
                 </div>
@@ -233,9 +231,15 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                 <hr class="horizontal dark my-3">
               </div>
               <!-- Comments -->
-              <c:forEach var = "rep" items = "${replyList}">
-              <div class="mb-1">
-                <div class="d-flex">
+            
+              
+              <div class="mb-1" style = "gap: 15px">
+                <c:forEach var = "rep" items = "${replyList}">
+              <div>
+              <!-- 부모 글  -->
+             
+                <div class="d-flex" style = "height: auto";>
+                <c:if test = "${rep.repclass eq '0'}">
                   <div class="flex-shrink-0">
                     <img alt="Image placeholder" class="avatar rounded-circle" src="${path}/resource/img/Member/profileimg/${rep.profileimg}">
                   </div>
@@ -250,19 +254,67 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                       <div>
                         <i class="ni ni-curved-next me-1 cursor-pointer opacity-6"></i>
                       </div>
-                      <span class="text-sm me-2">2 shares</span>
+                      <span class="text-sm me-2 cursor-pointer" onclick="contItem(${rep.replyNo})">댓글 달기</span>
+                    </div>
+                  </div>
+                  </c:if>
+                  <c:if test = "${rep.repclass eq '1'}">
+                <div class="d-flex" style ="gap:5px;">
+                <i class="fa-solid fa-arrow-right" style = "margin-top: 15px;
+    font-size: 30px;"></i>
+                  <div class="flex-shrink-0">
+                    <img alt="Image placeholder" class="avatar rounded-circle" src="${path}/resource/img/Member/profileimg/${rep.profileimg}">
+                  </div>
+                  <div class="flex-grow-1 ms-3">
+                    <h6 class="h5 mt-0">${rep.nickname }</h6>
+                    <p class="text-sm">${rep.repcontent }</p>
+                    <div class="d-flex" style ="gap:5px;">
+                      <div>
+                        <i class="fa-solid fa-pen-to-square cursor-pointer"></i>
+                      </div>
+                      <span class="text-sm me-2 cursor-pointer">수정</span>
+                      <div>
+                        <i class="fa-solid fa-trash cursor-pointer"></i>
+                      </div>
+                      <span class="text-sm me-2 cursor-pointer">삭제</span>
                     </div>
                   </div>
                 </div>
-                </c:forEach>
+                </c:if>
+                </div>                                   
+                </div>
+                <div id = "showHide${rep.replyNo}" class="mt-4" style =
+                "
+                    margin-left: 60px;margin-right: 80px;margin-bottom:25px;display:none"
+                >
+                  <div class="flex-shrink-0">
+                    <!-- 세션 프로필 아이디. -->
+                    <img alt="Image placeholder" class="avatar rounded-circle me-3" src="${path}/resource/img/Member/profileimg/${profileImg}">
+                  </div>
+                  <div class="flex-grow-1 my-auto">
+                      <form method = "post" action = "${path}/writeReReply.do" class="align-items-center">
+                      <input type = "hidden" name = "communitynumber" value = "${dlist[0].communitynumber}">
+                      <input type = "hidden" name = "groupId" value = "${rep.groupId }"/>
+                <div class="d-flex">
+                   <textarea name = "content" class="form-control" placeholder="Write your comment" rows="1"></textarea>
+                  <button  class="btn bg-gradient-primary mb-0 ms-2" style = "height: 38px;width: 70px;">
+                    등록
+                  </button>
+                </div>
+              </form>
+                  </div>
+                </div>
+                 </c:forEach>
+                </div>          
+                <c:if test = "${not empty session}">
                 <div class="d-flex mt-4">
                   <div class="flex-shrink-0">
                     <!-- 세션 프로필 아이디. -->
-                    <img alt="Image placeholder" class="avatar rounded-circle me-3" src="${path}/assets/img/team-4.jpg">
+                    <img alt="Image placeholder" class="avatar rounded-circle me-3" src="${path}/resource/img/Member/profileimg/${profileImg}">
                   </div>
                   <div class="flex-grow-1 my-auto">
                       <form method = "post" action = "${path}/writeReply.do" class="align-items-center">
-                      <input type = "number" name = "communitynumber" value = "${dlist[0].communitynumber}">
+                      <input type = "hidden" name = "communitynumber" value = "${dlist[0].communitynumber}">
                 <div class="d-flex">
                    <textarea name = "content" class="form-control" placeholder="Write your comment" rows="1"></textarea>
                   <button  class="btn bg-gradient-primary mb-0 ms-2" style = "height: 38px;width: 70px;">
@@ -274,6 +326,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
  
                   </div>
                 </div>
+                </c:if>
               </div>
             </div>
           </div>
@@ -285,7 +338,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
               <div class="copyright text-center text-sm text-muted text-lg-start">
                 © <script>
                   document.write(new Date().getFullYear())
-                </script>,
+                </script>
                 made with <i class="fa fa-heart"></i> by
                 <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
                 for a better web.
@@ -320,11 +373,30 @@ It's a separate element, as animating opacity is faster than rgba(). -->
   <script src="${path}/assets/js/plugins/photoswipe.min.js"></script>
   <script src="${path}/assets/js/plugins/photoswipe-ui-default.min.js"></script>
   <script>
-  
+
+
+//function onclick 
+function contItem(idx){		   
+	      if(myEmail!=null && myEmail!=""){
+		  if($("#showHide"+idx).css("display") == "none"){
+		  $('#showHide'+idx).css({"display":"flex"});
+		  }else{
+	      $('#showHide'+idx).css({"display":"none"});
+		  }
+	      }else{
+	    	  var delConfirm = confirm('로그인 후 이용이 가능합니다.');
+	    	   if (delConfirm) {
+	    	      alert('로그인창으로 이동합니다');
+	    	      location.href = "#";
+	    	   }
+	      }
+	 
+}
+//  
     var myEmail = '${session}';
     var communityNumber = '${dlist[0].communitynumber}';
     var following = '${dlist[0].email}';
-    
+    console.log(myEmail);
     //팔로우, 팔로잉 처리    
     $("#followButton").on("click", function(e) {
     	if(myEmail!=null && myEmail!=""){
@@ -400,9 +472,13 @@ It's a separate element, as animating opacity is faster than rgba(). -->
  
  });
 
-//좋아요 수/ 댓글 수 표시하기 
-var likeVal = ${likeCheck};
+//좋아요 수/ 댓글 수 표시하기
+
+var likeVal = '${likeCheck}';
+
 $("#Heart").on("click", function(e) {
+	if(myEmail!=null && myEmail!=""){
+	var likeCnt =${likeCnt};
 	if(likeVal>0){
 		console.log("허허 좋아요 눌렀어용!");	
 		fetch("${path}/deleteLike.do",{
@@ -422,6 +498,7 @@ $("#Heart").on("click", function(e) {
    	            likeVal--;
    	            console.log(data.msg)
    	    		console.log(likeVal);
+   	            $('.showId').text(data.likeCnt);
 	            $('#Heart').attr('class','fa-regular fa-heart cursor-pointer')
 	              	            	
    	    })
@@ -447,37 +524,21 @@ $("#Heart").on("click", function(e) {
    	            console.log(data.msg);
    	    		console.log(likeVal);
    	    		likeVal++;
+   	    		$('.showId').text(data.likeCnt);
 	            $('#Heart').attr('class','fa-solid fa-heart-circle-minus cursor-pointer')               
 	            	
    	    })
    	    .catch(err => { // 오류 발생시 오류를 담아서 보여줌
    	        console.log('Fetch Error',err);
    	    });
+}}else{
+	var delConfirm = confirm('로그인 후 이용이 가능합니다.');
+	   if (delConfirm) {
+	      alert('로그인창으로 이동합니다');
+	      location.href = "#";
+	   }
 }})
 
-
-
-
-// 좋아요 수 가져오는 함수 
-var likeCntFunc = function(){
-	fetch("${path}/likeCnt.do",{
-			method : "POST",
-			header:{
-				"Content-Type": "application/json",
-			},
-			body:JSON.stringify({
-			communitynumber:${dlist[0].communitynumber}
-		}),
-	})
-	    .then(res => res.json())  //응답 결과를 json으로 파싱
-	    .then(data => {
-	    		console.log(data.likeCnt);
-	    })
-	    .catch(err => { // 오류 발생시 오류를 담아서 보여줌
-	        console.log('Fetch Error',err);
-	    });
-};
-    
 
   
     if (document.getElementById('choices-quantity')) {

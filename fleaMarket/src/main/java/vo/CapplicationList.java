@@ -12,6 +12,8 @@ public class CapplicationList {
 	private String hashtag;
 	private int viewCnt;
 	private int likeCnt;
+	private int prevNum;
+	private int nextNum;
 	
 	//받는 이미지 
 	private String imgName;
@@ -113,6 +115,20 @@ public class CapplicationList {
 	public void setLikeCnt(int likeCnt) {
 		this.likeCnt = likeCnt;
 	}
+	public int getPrevNum() {
+		return prevNum;
+	}
+	public int getNextNum() {
+		return nextNum;
+	}
+	public void setPrevNum(int prevNum) {
+		this.prevNum = prevNum;
+	}
+	public void setNextNum(int nextNum) {
+		this.nextNum = nextNum;
+	}
+	
+	
 	
 	
 }

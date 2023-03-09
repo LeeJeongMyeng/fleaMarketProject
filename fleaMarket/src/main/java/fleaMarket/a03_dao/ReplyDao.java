@@ -7,5 +7,8 @@ public interface ReplyDao {
 	public int replyWrite(ReplyVo vo);
 	public int replyMax();
 	public int replyCheck(ReplyVo vo);
+	public int rereplyWrite(ReplyVo vo);
 	public List<ReplyVo> replyList(int communityNumber);
+	public int getGroupOrder(int groupId);
+	public int getReplyCnt(int communityNumber);
 }

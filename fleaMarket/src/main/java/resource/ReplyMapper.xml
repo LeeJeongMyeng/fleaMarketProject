@@ -18,19 +18,26 @@
      <!-- 댓글 리스트 가져오기 -->
      <select id="replyList" resultType="reply">
 	SELECT
-	r.replyNo,r.COMMUNITYNUMBER,r.groupid,r.repclass,r.repcontent
+	r.replyNo,r.COMMUNITYNUMBER,r.groupid,r.repclass,r.repcontent,r.REPDATE 
 	,f.NICKNAME,p.PROFILEIMG FROM REPLY r,FLEAMARKETMEMBER f,CAPPLICAION
 	c,PROFILE p
-	WHERE f.EMAIL = c.EMAIL AND c.COMMUNITYNUMBER =
-	r.COMMUNITYNUMBER AND
-	f.EMAIL = p.EMAIL
-	and r.COMMUNITYNUMBER =
-	#{communityNumber}
-	ORDER BY groupid ASC,groupOrderid DESC
+	WHERE  c.COMMUNITYNUMBER = r.COMMUNITYNUMBER 
+	AND r.EMAIL = f.EMAIL 
+	AND f.EMAIL = p.EMAIL 
+	and r.COMMUNITYNUMBER = #{communityNumber}
+	ORDER BY groupid ASC,groupOrderid ASC
 </select>
 <!-- 답글 달기 -->
-      <insert id = "rereplyWrite">
-          INSERT INTO REPLY values(replys_seq.nextval,#{communityNumber},#{email},#{repcontent},1,0,#{groupId},sysdate) 
+      <insert id = "rereplyWrite" parameterType = "reply">
+          INSERT INTO REPLY values(replys_seq.nextval,#{communityNumber},#{email},#{repcontent},1,#{groupOrderid},#{groupId},sysdate) 
       </insert>
-
+      
+ <!-- Orderby 해주기위해 답글..  -->     
+ <select id="getGroupOrder" resultType = "int">
+    SELECT NVL(max(groupOrderid),0)  FROM REPLY WHERE groupid = #{groupId} AND repclass = 1
+ </select>
+ 
+ <select id = "getReplyCnt" resultType = "int">
+ SELECT count(*) FROM REPLY WHERE COMMUNITYNUMBER = #{communityNumber}
+ </select>
    </mapper>

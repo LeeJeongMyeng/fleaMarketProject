@@ -3,13 +3,14 @@ package vo;
 import org.springframework.web.util.UriComponentsBuilder;
 
 public class Criteria {
+	private int communityNumber;
 	private int pageNum;
 	private int amount;
 	private String type;	//검색
 	private String keyword;
 	private String shift; //정렬 
-	
 	private String category;
+
 	public Criteria(){
 		this(1,10);
 	}
@@ -66,8 +67,17 @@ public class Criteria {
 	public void setCategory(String category) {
 		this.category = category;
 	}
+
+	public int getCommunityNumber() {
+		return communityNumber;
+	}
+
+	public void setCommunityNumber(int communityNumber) {
+		this.communityNumber = communityNumber;
+	}
 	
+
 	
-	
+		
 }
     

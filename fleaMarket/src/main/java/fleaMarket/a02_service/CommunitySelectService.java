@@ -41,5 +41,6 @@ public interface CommunitySelectService {
 	 //좋아요 delete
 	 public String getDeleteLike(int communityNumber,String email);
 	
-	 
+	 //조회수 
+	 public void updateViewCnt(int communityNumber);
 }

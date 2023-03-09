@@ -18,7 +18,8 @@ public interface CommunitySelectDao {
 	public List<CapplicationList> getBestCommunityList(Criteria cri);
 	
 	public List<CapplicationList> getCommunityDetailList(int communityNumber);
-	
+	//조회수 업데이트 
+	public void updateViewCnt(int communityNumber);
 	public List<BoardImg> getCommunityImgList(int communityNumber);
 	// json 
 	public int getFollowYesOrNot(Map<String,Object> map);
@@ -34,5 +35,7 @@ public interface CommunitySelectDao {
 	public int getLikeInsert(Map<String,Object> map);
 	
 	public int getLikeDelete(Map<String,Object> map);
+	
+	
 	
 }
