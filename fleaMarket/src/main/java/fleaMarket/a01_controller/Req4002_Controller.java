@@ -32,10 +32,6 @@ public class Req4002_Controller {
 	@Autowired
 	private FileService fileservice;
 	
-	@RequestMapping("communityInsertPage.do")
-	public String communityInsertPage() {
-		return "communityInsert";
-	}
 	
 	// 파일경로
 	@Value("${board.upload2}")
@@ -65,7 +61,11 @@ public class Req4002_Controller {
 		}
 		return (imgnameVal.substring(0,imgnameVal.length()-5));
 	}
-
+	@RequestMapping("communityInsertPage.do")
+	public String communityInsertPage() {
+		return "communityInsert";
+	}
+	
 	@PostMapping("communityInsert.do")
 	public String communityInsert(@RequestParam("mediaFile") MultipartFile[] mfiles,Capplication ins, Model d) {
 		service.communityInsert(ins);
@@ -77,7 +77,7 @@ public class Req4002_Controller {
 			service.communityFileInsert(f);
 		}
 		d.addAttribute("msg", "등록 성공");
-		return "communityInsert"; // 전체조회페이지로 이동
+		return "redirect/:CommunityList.do?category="+ins.getCategory(); // 전체조회페이지로 이동
 	}
 	
 	@RequestMapping("communityUpdatePage.do")
