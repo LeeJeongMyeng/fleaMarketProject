@@ -5,22 +5,22 @@ DROP TABLE FleaMarket CASCADE CONSTRAINTS;
 --플리마켓 db
 CREATE TABLE FleaMarket
 (
-	postingNumber varchar2(100) NOT NULL,--게시글 번호: 시퀀스
-	title varchar2(100),
-	registDate date, 
-	content varchar2(500),
-	bisenessNumber varchar2(100),
-	email varchar2(50) NOT NULL, -- 회원 테이블
-	approvalMaxCnt number,
-	recruitmentStartDate date,
-	recruitmentEndDate date,
-	openDate date,
-	closeDate date,
-	-- N,P,C check 제약조건 넣기
-	checkForm varchar2(10),
-	viewCnt number,
-	address varchar2(200),
-	PRIMARY KEY (postingNumber)
+   postingNumber varchar2(100) NOT NULL,
+   title varchar2(100),
+   registDate varchar2(100), 
+   content varchar2(500),
+   bisenessNumber varchar2(100),
+   email varchar2(50) NOT NULL,
+   approvalMaxCnt number,
+   recruitmentStartDate varchar2(100),
+   recruitmentEndDate varchar2(100),
+   openDate varchar2(100),
+   closeDate varchar2(100),
+   -- N,P,C 
+   checkForm varchar2(10),
+   viewCnt number,
+   address varchar2(200),
+   PRIMARY KEY (postingNumber)
 );
 SELECT * FROM FleaMarket;
 

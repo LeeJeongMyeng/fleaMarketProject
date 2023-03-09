@@ -34,4 +34,22 @@ public FleaMarket fleaDetail(String postingNumber);
 		SELECT *
 		FROM FleaMarket
 		WHERE postingNumber = #{postingNumber}
-</select>	            	
+</select>	           
+
+ 	
+
+//FFile update 
+//dao
+public void UptFFile(FFile upt);
+
+//service
+public void UptFFile(FFile upt);
+public void UptFFile(FFile upt) {
+		dao.UptFFilet(upt);
+	}  	
+	
+<update id="UptFFilet" parameterType="ffile">
+		update FFile
+		set filename=#{filename}
+		where postingNumber = #{postingNumber}
+</update>	
