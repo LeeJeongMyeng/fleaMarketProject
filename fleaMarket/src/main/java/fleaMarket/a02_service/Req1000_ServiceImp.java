@@ -2,6 +2,7 @@ package fleaMarket.a02_service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -210,13 +211,11 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		   
 		          //HashMap으로 파일이름과 경로를 반환함
 		         // 이미지 확장자냐에 따른 경로 심기.
-		            String imgArray[] = {"gif","jpg","jpeg","png","bmp","ico","apng","jfif"};         
-		            String subpath ="file/qna/";
-		             for(String ia:imgArray) {
-		                if(ia.equals(file.getOriginalFilename().split("\\.")[1])) {
-		                   subpath = "img/qna/";
-		                }
-		             }
+		            String imgArra[] = {"gif","jpg","jpe","png","bmp","ico","apng","jfif"};    
+		          //
+		            String subpath = (Arrays.asList(imgArra).indexOf(
+		            		file.getOriginalFilename().split("\\.")[1])==1)?"file/qna/":"img/qna/";
+		            
 		          //등록파일 vo객체에 set값 할당(for문 돌면서 계속 할당)
 		          qf.setQnano(qnano);
 		          qf.setFilename(fileservice.insprofileimg2(qnafilepath+subpath,file));

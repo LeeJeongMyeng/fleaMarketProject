@@ -18,7 +18,8 @@ function Checkfiles1(fileName) {
 }
 //확장자검사2(이미지+파일)
 function Checkfiles2(fileName) {
-    var extension2 = ['gif', 'jpg', 'jpeg', 'png', 'bmp' ,'ico', 'apng','jfif','.doc','docx','ppt','pptx','xls','pdf','hwp','txt'];
+    var extension2 = ['gif', 'jpg', 'jpeg', 'png', 'bmp' ,'ico', 'apng','jfif','.doc',
+    'docx','ppt','pptx','xls','pdf','hwp','txt'];
    //들어온 파일이름의 끝자리(확장자부분)를 소문자로 변환
     return checkfile(extension2,fileName);
 }
