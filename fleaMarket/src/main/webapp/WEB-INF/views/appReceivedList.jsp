@@ -84,7 +84,7 @@
 				filelist.forEach(function(f){
 					str += "<input class='form-control w-50 mb-2' onclick=\"javascript:location.href='downloadAppFile.do?filename="+f+"'\" name='filename' type='text' value='"+f+"' readonly/>"
 				})
-				str += "<button class='m-1 btn btn-primary' type='submit'>전체다운로드</button>";
+				str += "<button class='m-1 btn btn-primary' type='button' onclick=\"alldown('downloadAppFileForm')\">전체다운로드</button>";
 				
 				$('#downloadAppFileForm').html(str)
 			$('#jkanban-info-modalbtn').click()
@@ -98,6 +98,18 @@
 	}
 	
 	// 신청글 상세 조회 모달창
+	function alldown(){
+		var len = $('#downloadAppFileForm').children('input[name=filename]').length
+		var start=1;
+		setInterval(function() {
+			$("#downloadAppFileForm input[name=filename]:nth-child("+start+")").click()
+			start++
+			if(start==len){clearInterval()}
+		},500)
+		console.log(nth)
+		
+		}
+		
 	
 
 </script>
@@ -357,8 +369,8 @@
   
   
   <!-- 신청 조회 모달창 (양식 O) -->
-  <div data-bs-toggle="modal" data-bs-target="#jkanban-info-modal" id="jkanban-info-modalbtn">
-  <div class="modal fade" id="jkanban-info-modal" style="display: none" tabindex="-1" role="dialog">
+  <div data-bs-toggle="modal" data-bs-target="#jkanban-info-modal" id="jkanban-info-modalbtn"></div>
+  <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="jkanban-info-modal" style="display: none" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">

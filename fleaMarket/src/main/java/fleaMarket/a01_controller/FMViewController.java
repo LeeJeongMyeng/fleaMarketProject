@@ -106,29 +106,14 @@ public class FMViewController {
 	@PostMapping("appFileView.do")
 	public String appFileView(@RequestParam("applicationNo") int applicationNo, Model d) {
 		String a= service.appFileView(applicationNo);
-		
 		d.addAttribute("appFile",a);
-		System.out.println(a);
-		System.out.println(a);
-		System.out.println(a);
-		System.out.println(a);
-		System.out.println(a);
-		System.out.println(a);
-		System.out.println(a);
-		System.out.println(a);
-		System.out.println(a);
-		System.out.println(a);
-		System.out.println(a);
-		System.out.println(a);
-		System.out.println(a);
-		System.out.println(a);
-		
 		return "pageJsonReport";
 	}
 	
 	// 신청글 파일 다운로드
 	@GetMapping("downloadAppFile.do")
 	public String downloadAppFile(@RequestParam("filename") String filename,Model d) {	
+		
 		d.addAttribute("downloadPath",appPath);
 		d.addAttribute("downloadName",filename);
 		return "downloadView";
