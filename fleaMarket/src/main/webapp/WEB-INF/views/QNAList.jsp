@@ -33,61 +33,13 @@
 <!-- CSS Files -->
 <link id="pagestyle"
 	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
-	
-	
+<link href="${path}/resource/css/Req1001/QNAList.css" rel="stylesheet" />
 <script type="text/javascript">
-$(document).ready(function(){
-$("#regBtn").click(function(){
-	location.href="MemberQnAreg.do"	
-	})
-});
-
-
 var SessionAuth = '${Login.authority}' //권한
 var SessionEmail = '${Login.email}'
-
-function goDetail(qnano){
-	$.ajax({
-		url:"CheckGetQNA.do",
-		type:"post",
-		data:"qnano="+qnano,
-		dataType:"json",
-		success:function(data){
-			console.log(data)
-			if(data.CheckGetQNA=='false'){alert('작성자만 들어갈 수 있습니다.')}
-			else{
-				location.href="GetQNA.do?qnano="+qnano
-			}
-		},
-		error:function(xhr,status,error){
-              console.log(xhr)
-              console.log(status)
-              console.log(error)
-        }
-	})
-}
-
-
-
-function goPage(cnt){
-	$("[name=curPage]").val(cnt);
-	$("#SeachQNAForm").submit()
-}
-
 </script>
 </head>
-<style>
-tbody td,th{
-text-align:center;
-}
-table td:hover {
-  text-decoration: underline;
-  color: blue;
-}
-</style>
 <body class="g-sidenav-show bg-gray-100">
-	
-
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
 	<div class="position-absolute w-100 min-height-300 top-0"
 		style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
@@ -369,33 +321,7 @@ table td:hover {
 		</div>
 	</div>
 	<!--   Core JS Files   -->
-
-	<script>
-    if (document.getElementById('products-list')) {
-      const dataTableSearch = new simpleDatatables.DataTable("#products-list", {
-        searchable: true,
-        fixedHeight: false,
-        perPage: 7
-      });
-
-      document.querySelectorAll(".export").forEach(function(el) {
-        el.addEventListener("click", function(e) {
-          var type = el.dataset.type;
-
-          var data = {
-            type: type,
-            filename: "soft-ui-" + type,
-          };
-
-          if (type === "csv") {
-            data.columnDelimiter = "|";
-          }
-
-          dataTableSearch.export(data);
-        });
-      });
-    };
-  </script>
+	<script src="${path}/resource/js/Req1001/QNAList.js"></script>
 </body>
 
 </html>

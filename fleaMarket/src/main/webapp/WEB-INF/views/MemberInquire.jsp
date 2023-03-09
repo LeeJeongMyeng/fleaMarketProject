@@ -29,20 +29,9 @@
 <!-- CSS Files -->
 <link id="pagestyle"
 	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+<link href="${path}/resource/css/Req1001/MemberFmReg.css" rel="stylesheet" />
 </head>
-<style>
-table, td {
-   text-align:center;
-   }
-</style>
 <script type="text/javascript">
-function goDetail(qnano){
-	location.href="${path}/GetQNA.do?qnano="+qnano
-}
-function goPage(cnt){
-	$("[name=curPage]").val(cnt);
-	$("#frm01").submit()
-}	
 </script>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
@@ -161,5 +150,6 @@ function goPage(cnt){
 				</div>
 			</footer>
 	</main>
+	<script src="${path}/resource/js/Req1001/MemberInquire.js"></script>
 </body>
 </html>

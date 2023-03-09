@@ -29,6 +29,7 @@
 <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
 <!-- CSS Files -->
 <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+<link href="${path}/resource/css/Req1001/QNAInsert.css" rel="stylesheet" />
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
@@ -40,25 +41,14 @@ $(document).ready(function(){
 	
 	
 })
-
 function CheckQNAInsert(){
 	var sesAuthority='${Login.authority}'
-	
 		if(sesAuthority!='관리자' && $('select[name=category]').val()=='none'){alert('문의유형을 선택바랍니다.'); return false;}
 		if($('input[name=title]').val()==''){alert('문의제목을 입력바랍니다.');return false;}
 		if($('input[name=content]').val()==''){alert('문의내용을 입력부탁드립니다.');return false;}
 		return true;
 	}
 </script>
-<style>
-
-#imgs_wrap img {
-  width: 80px;
-  height: 120px;
-  margin-right:3px;
-}
-
- </style>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
 

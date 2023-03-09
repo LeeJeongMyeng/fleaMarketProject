@@ -30,56 +30,8 @@
 <!-- CSS Files -->
 <link id="pagestyle"
 	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+<link href="${path}/resource/css/Req1001/AdminSearch.css" rel="stylesheet" />
 </head>
-<script type="text/javascript">
-	
-</script>
-<style>
-/*페이지네이션*/
-.pagination_wrap{
-	display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-}
-
-.pagination{
-	background: #fff;
-    padding-top: 9px;
-    text-align: center;
-    display: flex;
-    justify-content: center;
-    height: 37px;
-    width: 400px;
-}
-#numbers{
-	padding:0;
-	margin: 0 2rem;
-	list-style-type:none;
-	display:flex; 
-}
-#numbers li a{
-	color:#333;
-	padding: .5rem 1rem;
-	text-decoration:none;
-	opacity:0.7;
-}
-#numbers li a:hover{
-	opacity:1;
-}
-#numbers li a.active{
-	opacity:1;
-	color:#fff;
-	border-radius: 50%;
-    background: #e45e72;
-}
-
-.pagination i{
-	color:#333;
-	font-size:1.2em;
-}
-
-</style>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
 
