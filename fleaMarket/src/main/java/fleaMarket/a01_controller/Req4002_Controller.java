@@ -103,7 +103,7 @@ public class Req4002_Controller {
 		return "communityUpdate";
 	}
 	
-	
+	// 파일 업데이트 기능메서드 (아직 구성중)
 	@PostMapping("communityUpdate.do")
 	public String communityUpdate(@RequestParam("updateFile") MultipartFile[] mfiles,Capplication upt, Model d) {
 		service.communityUpdate(upt); // text형들 수정

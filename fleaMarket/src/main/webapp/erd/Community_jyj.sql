@@ -68,7 +68,7 @@ WHERE communitynumber ='69';
 SELECT DISTINCT *
 FROM BoardImg i,capplicaion c
 WHERE i.communitynumber=c.communitynumber
---AND c.email='yujin@gmail.com'
+AND c.email='yujin@gmail.com'
 ORDER BY registdate desc;
 
 SELECT *
