@@ -34,11 +34,11 @@ public class Req3000_Controller {
 	}
 	
 	//캘린더 
-	@RequestMapping("/calendarAjax.do")
-	public String calendarAjax(Model d) {
-		d.addAttribute("callist", service.calList());
-		return "pageJsonReport";
-	}
+	/*
+	 * @RequestMapping("/calendarAjax.do") public String calendarAjax(Model
+	 * d,Calendar sch) { d.addAttribute("callist", service.calList()); return
+	 * "pageJsonReport"; }
+	 */
 	
 	//파일 업로드 
 	  @Autowired 
@@ -47,7 +47,7 @@ public class Req3000_Controller {
 	  @Value("${fleamarket.upload3}") 
 	  private String profilepath;
 	  
-//http://localhost:7030/fleaMarket/fRegistration.do	
+//http://localhost:7080/fleaMarket/fRegistration.do	
 	@RequestMapping("fRegistration.do")
 	public String fRegistration(Model d,Faddresss ins) {
 		d.addAttribute("add", ins.getAddrs0());
@@ -99,11 +99,16 @@ public class Req3000_Controller {
 			    	String sd=filelist.get(i).getFilename();
 					fileservice.DeleteFile(profilepath,sd);
 			    }
+				
+			 
 			 //파일 업로드 후, db에 저장된 정보 
 				for(MultipartFile f : pro) {
 					String filename=fileservice.insprofileimg(profilepath,f);
 					
 					FFile fupt = new FFile(filename,profilepath,postingNumber); 
+					System.out.println(fupt.getFilename());
+					System.out.println(fupt.getFilePath());
+					System.out.println(fupt.getPostingNumber());
 					//수정하기                               
 					service.UptFFile(fupt);
 			}
@@ -120,8 +125,6 @@ public class Req3000_Controller {
 		service.UptFleaMarket(upt);
 		
 		
-		
-		/* redirect.addFlashAttribute("msg", "수정완료"); */
 		return "redirect:totalSearch.do";
 	} 
 	

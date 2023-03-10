@@ -33,11 +33,12 @@
 	integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
 	crossorigin="anonymous"></script>
 
-<%-- gps --%>
+<%-- gps --%> 
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=491d6062da8be4de279d8ef2a5a72e75&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=491d6062da8be4de279d8ef2a5a72e75"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=491d6062da8be4de279d8ef2a5a72e75"></script> 
+	
 <script src="${path}/assets/js/plugins/fullcalendar.min.js"></script>
 <%--주소 설정해주기 --%>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
@@ -55,13 +56,6 @@ var msg = "${msg}"
 
 $(document).ready(function(){
 
-
-	$("#addBtn").click(function(){
-		$("input[name=addrs0]").val($("input[name=addrs1]").val()) 		
-		$("#addform").submit()
-	})
-
-	
 	//내용
 	$('#editor .ql-editor').keyup(function(){
 	
@@ -99,10 +93,6 @@ $(document).ready(function(){
 		<div class="container-fluid py-4"  style="margin-top:100px;">
 			<div class="row">
 				<div class="col-lg-9 col-12 mx-auto">
-				<form id="addform" action="fRegistration.do">
-				 <input type="hidden" name="addrs0" value="">
-				</form>
-			   <button id="addBtn">주소 설정</button>	
 					<form  method="post"  action="fleaMarketins.do" id="aform" onsubmit="return checkForm1()"
 						name="aform" enctype="multipart/form-data">
 						<div class="card card-body mt-4">
@@ -120,10 +110,24 @@ $(document).ready(function(){
 									<label class="form-label labelFont">주소 설정</label> 
 									<div class = "s_form">
 									   <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-									   <input name = "addrs1" type="text" id="sample6_address" class="form-control soooo2" placeholder="주소">
+									   <input name = "addrs1" onkeyup="callAdd(this)" type="text" id="sample6_address" class="form-control soooo2" placeholder="주소">
+									<script>
+									function callAdd(ob){
+										//등록 버튼 추가해주기 
+										if(event.keyCode==13){
+											alert("등록:"+ob.value)
+											geocoder.addressSearch(ob.value, mafun );  
+											
+										}
+										//
+										
+										
+									}
 									
+									
+									</script>
 									   <br>	
-									   	
+									  
 									   				
                                     </div>
 							     </div>
@@ -148,6 +152,7 @@ $(document).ready(function(){
 									<div class="calendar" data-bs-toggle="calendar" id="calendar"></div>
 								</div>
 							</div>
+
 
 							<div class="row">
 								<div class="col-6">
@@ -364,8 +369,35 @@ function displayCenterInfo(result, status) {
 
 /* function serar */
 //동에 대한 default  
+    
+    function mafun(result, status) {
 
+        // 정상적으로 검색이 완료됐으면 
+         if (status === kakao.maps.services.Status.OK) {
+
+       var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+       // 결과값으로 받은 위치를 마커로 표시합니다
+       var marker = new kakao.maps.Marker({
+           map: map,
+           position: coords
+       });
+
+       // 인포윈도우로 장소에 대한 설명을 표시합니다
+       var infowindow = new kakao.maps.InfoWindow({
+           content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+       });
+       infowindow.open(map, marker);
+
+       // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+       map.setCenter(coords);
+        } 
+    }
+    
+    
+    
 /*	var adrs = f.value()${add}*/
+/*
 	geocoder.addressSearch('${add}', function(result, status) {
    var infoDiv2 = document.getElementById('centerAddr2'); 
    var infoDiv3 = document.getElementById('centerAddr3'); 
@@ -399,7 +431,9 @@ function displayCenterInfo(result, status) {
                 break;
             }
         }
-    }
+    } 
+
+    
      kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
            searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
                if (status === kakao.maps.services.Status.OK) {
@@ -409,7 +443,7 @@ function displayCenterInfo(result, status) {
                          
                       /* console.log("도로명주소:"+result[0].road_address.address_name)
                       console.log("지번주소:"+result[0].address.address_name) */
-                   
+                   /*
                    var content = '<div class="bAddr">' +
                                    '<span class="title">주소정보</span>' + 
                                    detailAddr2 + 
@@ -436,7 +470,7 @@ function displayCenterInfo(result, status) {
        });
 
 });
-
+*/
 	//필수항목 조건식 
 	 function checkForm1(){	
 	if(!document.aform.email.value){
@@ -447,6 +481,15 @@ function displayCenterInfo(result, status) {
 			}        
 	        return false;
 	 }
+
+/* 	if(!document.aform.bisenessNumber.value){
+		    var bcontent="사업자 번호 등록을 해주세요"
+	        alert(bcontent);
+	        if(bcontent){
+				location.href="AdminSearch.do"
+			} 
+	        return false;
+	 } */
 	if(!document.aform.title.value){
 	        alert("글제목을 입력하세요");
 	        return false;

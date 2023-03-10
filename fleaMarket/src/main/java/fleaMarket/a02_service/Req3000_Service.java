@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import vo.Calendar;
 import vo.FFile;
 import vo.FleaMarket;
 
@@ -16,7 +17,8 @@ public interface Req3000_Service {
 	public void delFleaMarket(String postingNumber);
 	public List<FleaMarket> getFleaMarketList(FleaMarket sch);	
 	public String FileNum(String postingNumber);
-	public List<FleaMarket> calList(); 
+
+	/* public List<FleaMarket> calList(Calendar sch); */
 	public List<FFile> DelFail(String postingNumber);	
 	public void UptFFile(FFile fupt);
 }

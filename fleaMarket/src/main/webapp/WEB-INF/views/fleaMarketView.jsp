@@ -305,7 +305,8 @@
         <div class="pt-4 modal-body">
           <!-- <div class="form-group text-center">신청하시겠습니까?</div> -->
           <div class="form-group text-center">신청 파일을 첨부해 주세요</div>
-          <form id="frmNofile" method="post" action="${path}/insApp.do" enctype="multipart/form-data">
+          <form id="frmNofile" method="post" action="${path}/insApp.do" 
+          enctype="multipart/form-data" onsubmit="return checkForm1()">
           	<label>파일 첨부</label>
          	<div class="row mt-3">
               <div class="col-md-12">
@@ -734,5 +735,32 @@
 	           });
 	       });
 	});  
+	
+	//유효성 체크
+	 function checkForm1(){	
+		//로그인 유효성 체크
+			if(!document.aform.email.value){
+			    var loginState="로그인을 하셔야합니다."
+			    alert(loginState)
+			    if(loginState+"\n 로그인 화면으로 이동하시겠습니까?"){
+					location.href="SignIn.do"
+				}        
+		        return false;
+		 }
+		
+		//첨부파일 유효성 체크 
+			var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf|ppt|docx|hwp)$/;
+			 if(!document.aform.appFile.value){
+			     alert("첨부파일은 필수");
+			     return false;
+			 }
+
+			 if(!fileForm.test(document.aform.appFile.value)){
+			     alert("첨부할 수 없는 파일입니다.");
+			     return false;
+			 }
+			 
+			  return true;
+			}
 </script>
 </html>
