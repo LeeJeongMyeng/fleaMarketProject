@@ -207,17 +207,17 @@ li{
                               <i class="ni ni-cart text-primary me-3"></i>
                               커뮤니티보기
                             </div>
-                            <a href="${path}/pages/ecommerce/orders/list.html" class="dropdown-item border-radius-md">
+                            <a href="${path}/CommunityList.do?category=홍보글" class="dropdown-item border-radius-md">
                               <span class="ps-3">홍보</span>
                             </a>
-                            <a href="${path}/pages/ecommerce/orders/details.html" class="dropdown-item border-radius-md">
+                            <a href="${path}/CommunityList.do?category=사업아이디어" class="dropdown-item border-radius-md">
                               <span class="ps-3">사업아이디어</span>
                             </a>
-                            <a href="${path}/pages/ecommerce/orders/details.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">사는 이야기</span>
+                            <a href="${path}/CommunityList.do?category=사는이야기" class="dropdown-item border-radius-md">
+                              <span class="ps-3">사는이야기</span>
                             </a>
-                            <a href="${path}/pages/ecommerce/orders/details.html" class="dropdown-item border-radius-md">
-                              <span class="ps-3">꿀팁팁</span>
+                            <a href="${path}/CommunityList.do?category=꿀팁" class="dropdown-item border-radius-md">
+                              <span class="ps-3">꿀팁</span>
                             </a>
                             <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0 mt-3">
                               <i class="ni ni-box-2 text-primary me-3"></i>
