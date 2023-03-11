@@ -24,8 +24,10 @@ public interface Req4002_Dao {
 	public List<FollowMemberInfo> followerSelect(FollowMemberInfo index);
 	// 팔로우 취소
 	public void followmemberdelete(FollowMemberInfo del);
+	// 룸회원 좋아요 갯수 조회
+	public int boardLikeCnt(String email);
 	// 룸회원 정보 조회
-	public RoomMemberInfo roomMemberInfo(String email);
+	public List<RoomMemberInfo> roomMemberInfo(Map<String, String> map);
 	// 룸회원 댓글 조회
 	public List<RoomMemberInfo> boardReplySelect(Map<String, String> map);
 	// 커뮤니티 조회(전체, 카테고리별)

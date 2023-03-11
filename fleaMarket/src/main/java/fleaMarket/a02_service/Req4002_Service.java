@@ -51,8 +51,12 @@ public class Req4002_Service {
 		dao.followmemberdelete(del);
 	}
 	
-	public RoomMemberInfo roomMemberInfo(String email){
-		return dao.roomMemberInfo(email);
+	public int boardLikeCnt(String email){
+		return dao.boardLikeCnt(email);
+	}
+	
+	public List<RoomMemberInfo> roomMemberInfo(Map<String, String> map){
+		return dao.roomMemberInfo(map);
 	}
 	
 	public List<RoomMemberInfo> boardReplySelect(Map<String, String> map) {
