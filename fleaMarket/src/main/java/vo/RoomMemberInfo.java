@@ -11,7 +11,6 @@ public class RoomMemberInfo {
 	private String email;
 	private String hashtag;
 	private int viewcnt;
-	private int likecnt;
 	
 	//커뮤니티 게시글 이미지
 	private String imgname;
@@ -31,12 +30,12 @@ public class RoomMemberInfo {
 	private String profileimg;
 	
 	// 커뮤니티 댓글
-	private int repno; // 댓글번호
+	private int replyno; // 댓글번호
 	private String repcontent;	// 댓글 내용
-	private String repdate;	// 댓글등록날짜
-	private String reemail;	// 댓글쓴 이메일
-	private int report;	// 신고수
-	private String div; // 내가쓴 댓글,게시글 댓글 구분자
+	private String repclass;	// 댓글 부모 0 자식 1 
+	private String grouporderid;	// groupOrderid NUMBER, -- 순서 NUMBER
+	private String groupid;	// 그룹 나누기.(모 댓글과 대댓글은 같은값)
+	private String repdate;	// 댓글 쓴 날짜
 	
 	public String getCommunitynumber() {
 		return communitynumber;
@@ -91,12 +90,6 @@ public class RoomMemberInfo {
 	}
 	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
-	}
-	public int getLikecnt() {
-		return likecnt;
-	}
-	public void setLikecnt(int likecnt) {
-		this.likecnt = likecnt;
 	}
 	public String getImgpath() {
 		return imgpath;
@@ -176,11 +169,11 @@ public class RoomMemberInfo {
 	public void setImgname(String imgname) {
 		this.imgname = imgname;
 	}
-	public int getRepno() {
-		return repno;
+	public int getReplyno() {
+		return replyno;
 	}
-	public void setRepno(int repno) {
-		this.repno = repno;
+	public void setReplyno(int replyno) {
+		this.replyno = replyno;
 	}
 	public String getRepcontent() {
 		return repcontent;
@@ -188,28 +181,28 @@ public class RoomMemberInfo {
 	public void setRepcontent(String repcontent) {
 		this.repcontent = repcontent;
 	}
+	public String getRepclass() {
+		return repclass;
+	}
+	public void setRepclass(String repclass) {
+		this.repclass = repclass;
+	}
+	public String getGrouporderid() {
+		return grouporderid;
+	}
+	public void setGrouporderid(String grouporderid) {
+		this.grouporderid = grouporderid;
+	}
+	public String getGroupid() {
+		return groupid;
+	}
+	public void setGroupid(String groupid) {
+		this.groupid = groupid;
+	}
 	public String getRepdate() {
 		return repdate;
 	}
 	public void setRepdate(String repdate) {
 		this.repdate = repdate;
-	}
-	public String getReemail() {
-		return reemail;
-	}
-	public void setReemail(String reemail) {
-		this.reemail = reemail;
-	}
-	public int getReport() {
-		return report;
-	}
-	public void setReport(int report) {
-		this.report = report;
-	}
-	public String getDiv() {
-		return div;
-	}
-	public void setDiv(String div) {
-		this.div = div;
 	}
 }

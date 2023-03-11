@@ -105,11 +105,11 @@ public class Req4002_Controller {
 	
 	// 파일 업데이트 기능메서드 (아직 구성중)
 	@PostMapping("communityUpdate.do")
-	public String communityUpdate(@RequestParam("updateFile") MultipartFile[] mfiles,Capplication upt, Model d) {
+	public String communityUpdate(@RequestParam("updateFile") MultipartFile[] mfiles,Capplication upt, Model d) { //@RequestParam("communityNumber") int no
 		service.communityUpdate(upt); // text형들 수정
 		
 		// 등록되어있는 사진명배열
-		Capplication imgname = service.boardDetailSelect(76);
+		Capplication imgname = service.boardDetailSelect(upt.getCommunitynumber());
 		ArrayList<String> regFileName = new ArrayList<String>();
 		
 		System.out.println("## 등록되어있는 사진 호출 ##");
@@ -131,9 +131,10 @@ public class Req4002_Controller {
 		ArrayList<String> uptFileName = new ArrayList<String>(); // (같은파일체크)수정 파일
 		
 		String uptFname = "";
-		for(String ii:regFileName) {
+		for(String ii:inputfileList) {
 			if(regFileName.indexOf(ii)>=1) {
 				uptFileName.add(ii);
+				inputfileList.remove(ii);
 			}else {
 				for(int i=0;i<inputfileList.size();i++) {
 					uptFileName.add(inputfileList.get(i));
@@ -150,10 +151,12 @@ public class Req4002_Controller {
 		BoardImg f = new BoardImg();
 		if( mfiles!=null ){
 			f.setImgname(uptFname.substring(0,uptFname.length()-5)); // 파일명 리턴해옴.
-			f.setCommunitynumber(76);
+			f.setCommunitynumber(upt.getCommunitynumber());
 			service.communityFileUpdate(f); //이미지
 		}
+		//d.addAttribute("communityNumber", no);
 		d.addAttribute("msg", "수정 성공");
+		
 		return "communityUpdate"; // 상세조회페이지로 이동
 	}
 	
@@ -173,6 +176,7 @@ public class Req4002_Controller {
 	@RequestMapping("communityFollowDelete.do")
 	public String communityFollowDelete(FollowMemberInfo del, Model d) {
 		service.followmemberdelete(del);
+		d.addAttribute("msg", "언팔로우");
 		return "communityFollowMember";
 	}
 	
@@ -180,9 +184,27 @@ public class Req4002_Controller {
 	public String communityMemberRoom(@RequestParam("email") String email,FollowMemberInfo sel,
 			RoomMemberInfo board,Model d) {
 		
-		// 이메일 정보
-		d.addAttribute("roommember", service.roomMemberInfo(email));
+		// 룸주인 회원정보 
+		Map<String, String> memInfoMap = new HashMap<String, String>();
 		
+		//if(service.roomMemberInfo(memInfoMap).toString().split(",").length==2) {
+			memInfoMap.put("email",email);
+			memInfoMap.put("div", null);
+			d.addAttribute("roommember", service.roomMemberInfo(memInfoMap).get(0));
+		//}else {
+			// 언팔중인 회원 정보
+			memInfoMap.put("div", "unfollowMem");
+			d.addAttribute("unfollowMember", service.roomMemberInfo(memInfoMap));
+		//}
+		
+		
+		//System.out.println("룸회원정보"+service.roomMemberInfo(memInfoMap).spliterator());
+		
+		
+		System.out.println("####팔로우하지않은 회원정보"+service.roomMemberInfo(memInfoMap).toString().split(","));
+		// 좋아요 갯수
+		d.addAttribute("likeCnt", service.boardLikeCnt(email));
+		System.out.println("좋아요갯수"+service.boardLikeCnt(email));
 		// 팔로우 정보
 		sel.setMyemail(email);
 		d.addAttribute("follower", service.followerSelect(sel));
@@ -210,15 +232,15 @@ public class Req4002_Controller {
 		 boardMap.put("email", email);
 		 boardMap.put("category", null);
 		
-		// 좋아요 누적처리 및 커뮤니티 정보
-		int totlike=0;
-		for(RoomMemberInfo e:service.boardSelect(boardMap)) {
-			totlike += e.getLikecnt();
-			System.out.println("좋아요수:"+e.getLikecnt());
-			System.out.println("전체좋아요수:"+totlike);
-		}
+		// 좋아요 누적처리 및 커뮤니티 정보 (전윤환이 좋아요 테이블따로만들어서 필요없게 됨..기가막히게짯는데 -ㅅ-)
+//		int totlike=0;
+//		for(RoomMemberInfo e:service.boardSelect(boardMap)) {
+//			totlike += e.getLikecnt();
+//			System.out.println("좋아요수:"+e.getLikecnt());
+//			System.out.println("전체좋아요수:"+totlike);
+//		}
 		d.addAttribute("boardInfo", service.boardSelect(boardMap));
-		d.addAttribute("likeCnt", totlike);
+//		d.addAttribute("likeCnt", totlike);
 		
 		boardMap.put("category", "홍보글");
 		d.addAttribute("adv", service.boardSelect(boardMap));

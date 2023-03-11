@@ -63,9 +63,16 @@
 			location.href="communityMemberRoom.do?email"+this
 		}
 			
-		// 내게시글 정보
+		// 내게시글 댓글 정보
 		var boardrepInfos = "${boardreplyInfo}"
 		$("#meBoardRepCnt").text(arrFun(boardrepInfos))
+		
+		// 게시글 갯수정보
+		$("#boardCntTab td").eq(0).text(arrFun("${adv}")) //
+		$("#boardCntTab td").eq(1).text(arrFun("${idea}"))
+		$("#boardCntTab td").eq(2).text(arrFun("${life}"))
+		$("#boardCntTab td").eq(3).text(arrFun("${tip}"))
+		
 		
 		// 내가쓴 댓글 정보
 		var replyInfos = "${replyInfo}"
@@ -107,7 +114,7 @@
                     <span class="ms-2">팔로우</span>
                   </a>
                 </li>
-                <li class="nav-item" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <li class="nav-item" data-bs-toggle="modal" data-bs-target="#chatModal">
                   <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center  active " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
                     <i class="ni ni-chat-round"></i>
                     <span class="ms-2">채팅하기</span>
@@ -150,9 +157,9 @@
 	                <i class="ni ni-favourite-28" aria-hidden="true"></i>
 	              </div>
 	              <h5 class="mt-3 mb-0">${likeCnt}<span class="text-secondary text-sm">개</span></h5>
-	              <p class="mb-0">게시글 좋아요 갯수</p>
+	              <p class="mb-0">${roommember.nickname}님 게시글의 좋아요 갯수</p>
 	              <h5 class="mt-3 mb-0"><span id="meBoardRepCnt"></span><span class="text-secondary text-sm">개</span></h5>
-	              <p class="mb-0">게시글 댓글 갯수</p>
+	              <p class="mb-0">${roommember.nickname}님 게시글의 댓글 갯수</p>
 	            </div>
 	          </div>
 	        </div>
@@ -164,7 +171,8 @@
 	              </div>
 	              <h5 class="mt-3 mb-0"><span id="meRepCnt"></span><span class="text-secondary text-sm">개</span></h5>
 	              <p class="mb-0">${roommember.nickname}님이 쓰신 댓글 갯수</p>
-	              <button type="button" class="btn btn-outline-primary mt-2">댓글보러가기</button>
+	              <button type="button" class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#repModal">
+	              		댓글보러가기</button>
 	            </div>
 	          </div>
 	        </div>
@@ -206,7 +214,8 @@
             <div class="card-header pb-0 p-3">
               <div class="d-flex justify-content-between">
                 <h6 class="mb-0">커뮤니티 카테고리별 ${roommember.nickname}님의 게시물 갯수</h6>
-                <button type="button" class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="See traffic channels">
+                <button type="button" class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" 
+                		data-bs-toggle="modal" data-bs-target="#boardCntModal">
                   <i class="fas fa-info" aria-hidden="true"></i>
                 </button>
               </div>
@@ -342,7 +351,58 @@
       <div class="hidden opacity-50 fixed inset-0 z-40 bg-black" id="jkanban-info-modal-backdrop"></div>
     </div>
   </main>
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- 게시글 갯수정보 모달창  -->
+	<div class="modal fade" id="boardCntModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+		  <div class="modal-content">
+		    <div class="modal-header">
+		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님이 쓴 게시글 수</h5>
+		      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+		        <span aria-hidden="true">&times;</span>
+		      </button>
+		    </div>
+		    <div class="modal-body">
+		      	<table id="boardCntTab" class="table align-items-center mb-0">
+		      		<tr><th>홍보글</th><td></td></tr>
+		      		<tr><th>사업아이디어</th><td></td></tr>
+		      		<tr><th>사는이야기</th><td></td></tr>
+		      		<tr><th>꿀팁</th><td></td></tr>
+		      	</table>
+		    </div>
+		    <div class="modal-footer">
+		      <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
+		    </div>
+		  </div>
+		</div>
+	</div>
+  <!-- 댓글보러가기 모달창 -->
+  <div class="modal fade" id="repModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+		  <div class="modal-content">
+		    <div class="modal-header">
+		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님이 쓴 댓글 정보<br>
+		      <span style="color:grey; font-size:11pt;">＊ 게시글 클릭 시, 게시글 상세조회 페이지로 이동</span></h5>
+		      
+		      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+		        <span aria-hidden="true">&times;</span>
+		      </button>
+		    </div>
+		    <div class="modal-body">
+		      	<table id="boardCntTab" class="table align-items-center mb-0">
+		      		<tr><th>게시글명</th><th>댓글내용</th></tr>
+		      		<c:forEach var="repInfo" items="${boardreplyInfo}">
+		      			<tr><td>${repInfo.title}</td><td>${repInfo.repcontent}</td></tr>
+		      		</c:forEach>
+		      	</table>
+		    </div>
+		    <div class="modal-footer">
+		      <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
+		    </div>
+		  </div>
+		</div>
+	</div>
+  <!--채팅 모달창  -->
+  <div class="modal fade" id="chatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered" role="document">
 	    <div class="modal-content"  style="width:900px;">
 	      <div class="modal-header">
@@ -547,6 +607,7 @@
                     <i class="ni ni-send"></i>
                   </button>
                 </div>
+                
               </form>
             </div>
         </div>

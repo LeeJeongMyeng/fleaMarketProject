@@ -51,9 +51,13 @@
   		})
   		
   		// 큰사진 클릭 시, file값 클릭
-  		$("#imgTab td").eq(5).click(function(){
+  		$("#bigphoto").click(function(){
   			$("#fileClick6").click()
-  			
+  			imgView("img6")
+  			$("#fileClick6").change(function(){
+  				// 큰사진 숨기기
+  				$("#bigphoto").hide()
+  			})
   		})
   		// 작은사진
   		$("#imgTab td").eq(0).click(function(){
@@ -103,7 +107,7 @@
 			          return false;
 			        }
 			      }
-			      preview(arr,clickImg);
+			      preview(files,clickImg);
 			});//file change
 		}
   	
@@ -140,90 +144,42 @@
 	        str += '<span>'+fileName+'</span><br>';
 	        //이미지 파일 미리보기
 	        var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
-			if(clickImg=="img1"){
+			
 				if(f.type.match('image.*')){
 	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-			            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
-			            	str += '</li></div>';
-			            $(str).appendTo('#preview1');
-		          } 
+		            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
+		            	str += '</li></div>';
+		            	$(str).appendTo('#preview1');
+		            	if(clickImg=="img1"){
+		           			$(str).appendTo('#preview1');
+		            	}else if(clickImg=="img2"){
+		            		$(str).appendTo('#preview2');
+		    	  		}else if(clickImg=="img3"){
+		    	  			$(str).appendTo('#preview3');
+		    	  		}else if(clickImg=="img4"){
+		    	  			$(str).appendTo('#preview4');
+		    	  		}else if(clickImg=="img5"){
+		    	  			$(str).appendTo('#preview5');
+		    	  		}
+			    	 }
 		          reader.readAsDataURL(f);
 		        }else{
-		          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
-		          $(str).appendTo('#preview1');
+		          	str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
+		          	
+		          	if(clickImg=="img1"){
+	           			 $(str).appendTo('#preview1');
+	            	}else if(clickImg=="img2"){
+	            		 $(str).appendTo('#preview2');
+	    	  		}else if(clickImg=="img3"){
+	    	  			 $(str).appendTo('#preview3');
+	    	  		}else if(clickImg=="img4"){
+	    	  			 $(str).appendTo('#preview4');
+	    	  		}else if(clickImg=="img5"){
+	    	  			 $(str).appendTo('#preview5');
+	    	  		}
 		        }
-				
-	  		}else if(clickImg=="img2"){
-	  			if(f.type.match('image.*')){
-	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-	            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
-	            	str += '</li></div>';
-	            $(str).appendTo('#preview2');
-		          } 
-		          reader.readAsDataURL(f);
-		        }else{
-		          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
-		          $(str).appendTo('#preview2');
-		        }
-	  			
-	  		}else if(clickImg=="img3"){
-	  			if(f.type.match('image.*')){
-	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-	            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
-	            	str += '</li></div>';
-	            $(str).appendTo('#preview3');
-		          } 
-		          reader.readAsDataURL(f);
-		        }else{
-		          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
-		          $(str).appendTo('#preview3');
-		        }
-	  			
-	  		}else if(clickImg=="img4"){
-	  			if(f.type.match('image.*')){
-	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-	            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
-	            	str += '</li></div>';
-	            $(str).appendTo('#preview4');
-		          } 
-		          reader.readAsDataURL(f);
-		        }else{
-		          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
-		          $(str).appendTo('#preview4');
-		        }
-	  			
-	  		}else if(clickImg=="img5"){
-	  			if(f.type.match('image.*')){
-	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-	            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
-	            	str += '</li></div>';
-	            $(str).appendTo('#preview5');
-		          } 
-		          reader.readAsDataURL(f);
-		        }else{
-		          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
-		          $(str).appendTo('#preview5');
-		        }
-	  		}
-	  		// 큰사진
-	  		/* else if(clickImg=="img6"){
-	  			if(f.type.match('image.*')){
-		          	var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
-	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-	            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
-	            	str += '</li></div>';
-	            $(str).appendTo('#preview');
-		          } 
-		          reader.readAsDataURL(f);
-		        }else{
-		          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
-		          $(str).appendTo('#preview');
-		        }
-	  		} */
-	        
 	      });//arr.forEach
 	    }
-	
 	});
 	function updateImpossible(what){
 		if(what==="작성자"){
@@ -252,8 +208,8 @@
 
 <body class="g-sidenav-show bg-gray-100">
 	<jsp:include page="header.jsp"></jsp:include>
-	<form method="post" enctype="multipart/form-data" action="${path}/communityUpdate.do" ><!--  -->
-	  <input type="hidden" name="communitynumber" value="${boardInfo.communitynumber}">
+	<form method="post" enctype="multipart/form-data" action="${path}/communityUpdate.do"><!-- action="${path}/communityUpdate.do" -->
+	  <input type="hidden" name="communitynumber" value="${boardInfo.getCommunitynumber()}">
       <div class="row mt-4" >
          <div class="card h-100" style="margin-top:8%;">
            <div class="card-body">
@@ -270,48 +226,6 @@
 			              <!--  </label> -->
 		                  
 		                 <div class="my-gallery d-flex mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery">
-			                    <%-- <figure class="ms-2 me-2" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-			                       <div class="row w-800">
-				                        <c:forEach var="boardImgs" items="${boardImgArr}">
-				                        	<div class="col-3" >
-						                       	<div class="laclass" for="fileClick2" >
-						                        	<img id="smallphoto" class="w-100 min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
-						                        		 src="${path}/resource/community/${boardImgs}" alt="이미지 없음"/>
-						                   		</div>
-					                   		</div>
-				                        	<div class="col-3" >
-						                       	<div class="laclass" for="fileClick2" >
-						                        	<img id="smallphoto" class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
-								                        		 src="${path}/resource/community/${boardImgArr[2]}" alt="이미지 없음" style="width:auto; height:150px;" />
-						                   		</div>
-					                   		</div>
-				                        	<div class="col-3" >
-						                       	<div class="laclass" for="fileClick2" >
-						                        	<img id="smallphoto" class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
-								                        		 src="${path}/resource/community/${boardImgArr[3]}" alt="이미지 없음" style="width:auto; height:150px;" />
-						                   		</div>
-					                   		</div>
-				                        	<div class="col-3" >
-						                       	<div class="laclass" for="fileClick2" >
-						                        	<img id="smallphoto" class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
-								                        		 src="${path}/resource/community/${boardImgArr[4]}" alt="이미지 없음" style="width:auto; height:150px;" />
-						                   		</div>
-					                   		</div>
-				                        	<div class="col-3" >
-						                       	<div class="laclass" for="fileClick2" >
-						                        	<img id="smallphoto" class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
-								                        		 src="${path}/resource/community/${boardImgArr[4]}" alt="이미지 없음" style="width:auto; height:150px;" />
-						                   		</div>
-					                   		</div>
-				                        	<div class="col-3" >
-						                       	<div class="laclass" for="fileClick2" >
-						                        	<img id="smallphoto" class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
-								                        		 src="${path}/resource/community/${boardImgArr[5]}" alt="이미지 없음" style="width:auto; height:150px;" />
-						                   		</div>
-					                   		</div>
-				                   		</c:forEach>
-			                   		</div>
-			                    </figure> --%>
 			                    <table class="ms-4" id="imgTab">
 			                    	<tbody>
 				                    	<tr>
@@ -350,12 +264,12 @@
 		             </div>
            		</div>
         	</div>
-        	  		<input type="file" name="updateFile" id="fileClick1" hidden multiple>
-                	<input type="file" name="updateFile" id="fileClick2" hidden multiple>
-                	<input type="file" name="updateFile" id="fileClick3" hidden multiple>
-                	<input type="file" name="updateFile" id="fileClick4" hidden multiple>
-                	<input type="file" name="updateFile" id="fileClick5" hidden multiple>
-                	<input type="file" name="updateFile" id="fileClick6" hidden multiple>
+        	  		<input type="file" name="updateFile" id="fileClick1" multiple>
+                	<input type="file" name="updateFile" id="fileClick2" multiple>
+                	<input type="file" name="updateFile" id="fileClick3" multiple>
+                	<input type="file" name="updateFile" id="fileClick4" multiple>
+                	<input type="file" name="updateFile" id="fileClick5" multiple>
+                	<input type="file" name="updateFile" id="fileClick6" multiple>
         <div class="row mt-4">
           <div class="card">
             <div class="card-body">
