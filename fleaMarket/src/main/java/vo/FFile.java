@@ -14,7 +14,7 @@ public class FFile {
 		this.filePath = filePath;
 	}
 	//수정시
-	public FFile(String postingNumber, String filename, String filePath) {
+	public FFile(String filename, String filePath,String postingNumber) {
 		this.postingNumber = postingNumber;
 		this.filename = filename;
 		this.filePath = filePath;

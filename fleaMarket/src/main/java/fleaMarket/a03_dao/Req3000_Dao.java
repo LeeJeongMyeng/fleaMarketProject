@@ -1,6 +1,7 @@
 package fleaMarket.a03_dao;
 import java.util.List;
 
+import vo.Calendar;
 import vo.FFile;
 //fleaMarket.a03_dao.Req3000_Dao
 import vo.FleaMarket;
@@ -11,7 +12,7 @@ public interface Req3000_Dao {
 	public void insprofile(FFile fins);
 	
 	//캘린더
-	public List<FleaMarket> calList(); 
+	/* public List<FleaMarket> calList(Calendar sch); */
 	
 	//수정페이지 정보 불러오기
 	public FleaMarket fleaDetail(String postingNumber);	  

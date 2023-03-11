@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fleaMarket.a03_dao.Req3000_Dao;
+import vo.Calendar;
 import vo.FFile;
 import vo.FleaMarket;
 @Service
@@ -17,9 +18,9 @@ public class Req3000_ServiceIns implements Req3000_Service{
 		this.dao = dao;
 	}
 	//캘린더 
-	public List<FleaMarket> calList(){
-	      return dao.calList();
-	   }
+	/*
+	 * public List<FleaMarket> calList(Calendar sch){ return dao.calList(); }
+	 */
 	
 	//홍보글 등록
 	public void insertFleaMarket(FleaMarket ins){
