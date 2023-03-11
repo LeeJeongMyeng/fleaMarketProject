@@ -214,7 +214,7 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		            String imgArra[] = {"gif","jpg","jpe","png","bmp","ico","apng","jfif"};    
 		          //
 		            String subpath = (Arrays.asList(imgArra).indexOf(
-		            		file.getOriginalFilename().split("\\.")[1])==1)?"file/qna/":"img/qna/";
+		            		file.getOriginalFilename().split("\\.")[1])==-1)?"file/qna/":"img/qna/";
 		            
 		          //등록파일 vo객체에 set값 할당(for문 돌면서 계속 할당)
 		          qf.setQnano(qnano);
