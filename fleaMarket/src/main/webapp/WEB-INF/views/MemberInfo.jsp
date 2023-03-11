@@ -37,6 +37,11 @@ $(document).ready(function(){
 			alert(uptmsg)
 		}
 	
+    var LinkMsg = '${LinkMsg}'
+    	if(LinkMsg!=''){
+    		alert(LinkMsg)
+    	}
+	
 })
 	
 var SessAddress = '${Login.address}' //세션주소값

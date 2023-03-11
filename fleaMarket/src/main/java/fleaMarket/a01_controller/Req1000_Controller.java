@@ -96,7 +96,7 @@ public class Req1000_Controller {
    
    //Sns연동처리+로그인
    @RequestMapping("SnsEmailPlus.do")//기존계정에 연동계정 업데이트
-   public String SnsEmailPlus(Member upt,RedirectAttributes redirectAttributes,HttpSession session) {
+   public String SnsEmailPlus(Member upt,RedirectAttributes redirectAttributes,HttpSession session,Model d) {
      System.out.println(upt.getKakaoemail());
      
 	   service.SnsEmailPlus(upt);
@@ -106,9 +106,10 @@ public class Req1000_Controller {
 	   session.setAttribute("Login", service.Login(upt));
 	   //로그인이 되어있는 경우에서 연동하면 회원정보창으로 돌아가기
 	   if(upt.getEmail()!=null) {
+		   d.addAttribute("LinkMsg","연동이 완료되었습니다.");
 		   path="MemberInfo";
 	   }
-      
+	  
       return path;
    }
    

@@ -264,7 +264,7 @@ function ChangeDefualtProfile(){
 	$('#MemberInfo_Profileimg').attr('src','/fleaMarket/resource/img/Member/profileimg/defaultprofile.png')
 }
 
-//네이버 로그인
+//네이버연동-------------------------------------------------------------
 
  //네이버 로그인 로고
   	var naver_id_login = new naver_id_login("WQO4B5GCMQKA06XHFOuA", "http://localhost:8090/fleaMarket/MemberInfo.do");
@@ -292,3 +292,6 @@ function ChangeDefualtProfile(){
   function naverSnsplus(naveremail){
 	  location.href="SnsEmailPlus.do?email="+SessEmail+"&naveremail="+naveremail
   }
+  
+  
+  
