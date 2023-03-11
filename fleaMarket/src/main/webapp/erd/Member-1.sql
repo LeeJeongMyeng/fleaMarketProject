@@ -23,7 +23,7 @@ CREATE SEQUENCE FLEAMARKETMEMBER_seq
       start with 1
       nocache
       MINVALUE 0
-      MAXVALUE 100000;
+      MAXVALUE 1000;
 
 SELECT * FROM FLEAMARKETMEMBER;
 SELECT count(*) FROM FLEAMARKETMEMBER WHERE email = 'aoddl56@nate.com';
@@ -33,10 +33,15 @@ SELECT EMAIL,KAKAOEMAIL,NAVEREMAIL FROM FLEAMARKETMEMBER
     		WHERE (KAKAOEMAIL || NAVEREMAIL) LIKE '%'||''||'%';
     	
 SELECT f.*,p.PROFILEIMG as profileimgname FROM FLEAMARKETMEMBER f,PROFILE p
+WHERE f.EMAIL = p.EMAIL;
+ and f.KAKAOEMAIL='';
+    	
+SELECT f.*,p.PROFILEIMG as profileimgname FROM FLEAMARKETMEMBER f,PROFILE p
 			WHERE f.EMAIL(+) = p.EMAIL
-			AND f.email = '288888wjdaud@gmail.com';
-
-
+			AND f.NAVEREMAIL = '28888wjdaud@naver.com';
+    	
+SELECT * FROM FLEAMARKETMEMBER 		
+WHERE (EMAIL||kakaoemail) like '%'||'aoddl56@nate.com'||'%'
 
 
 --아디찾기
@@ -46,7 +51,7 @@ AND PERSONALNUMBER = '950828-1111111';
 --비번찾기
 --비번 초기화 후에,알려주기
 
-DELETE FLEAMARKETMEMBER WHERE email ='28888wjdaud@naver.com';
+
 INSERT INTO FLEAMARKETMEMBER values(
 '123@nate.com',
 '!dnfwlq12',
@@ -77,12 +82,12 @@ NULL,
 '관리자'
 );
 UPDATE FLEAMARKETMEMBER 
-SET BUSINESSNUMBER  = NULL, AUTHORITY ='일반셀러' 
-WHERE EMAIL ='28888wjdaud@naver.com';
+SET KAKAOEMAIL  = null
+WHERE EMAIL ='aoddl56@nate.com';
 
 UPDATE FLEAMARKETMEMBER 
-SET AUTHORITY  = '관리자' 
-WHERE EMAIL ='admin@contigo.com';
+SET AUTHORITY  = '일반셀러',BUSINESSNUMBER = NULL  
+WHERE EMAIL ='aoddl56@nate.com';
 
 
 ALTER TABLE FLEAMARKETMEMBER MODIFY password varchar2(300);
@@ -102,6 +107,6 @@ DELETE profile WHERE EMAIL ='28888wjdaud@naver.com';
 INSERT INTO PROFILE VALUES('aoddl56@nate.com','defaultprofile.png');
 
 UPDATE PROFILE 
-SET PROFILEIMG ='defaultprofile.png'
+SET EMAIL ='aoddl56@nate.com'
 WHERE EMAIL ='28888wjdaud@naver.com';
 

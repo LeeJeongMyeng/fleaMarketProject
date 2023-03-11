@@ -19,7 +19,7 @@
    console.log(naver_id_login.getProfileData('phonenumber'))
    console.log(naver_id_login.getProfileData('email'));
    window.opener.SNSResult('naver',naver_id_login.getProfileData('email'),
-   	naver_id_login.getProfileData('name'))
+   								naver_id_login.getProfileData('name'))
    window.close();
   }
  function MemberFindModal(method){

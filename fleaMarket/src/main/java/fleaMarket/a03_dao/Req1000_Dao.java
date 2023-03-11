@@ -19,6 +19,7 @@ public interface Req1000_Dao {
 	public Member CheckPeristalsisSNS_K(String snsemail);
 	public Member CheckPeristalsisSNS_N(String name);	
 	public void SnsEmailPlus(Member upt);
+	public void SnsEmailPlus2(Member upt);
 	public void MemberFindPassword(HashMap<String,String> map);
 	public void QNAInsert(QNA ins);
 	public void QNAFileInsert(QNAFile ins);

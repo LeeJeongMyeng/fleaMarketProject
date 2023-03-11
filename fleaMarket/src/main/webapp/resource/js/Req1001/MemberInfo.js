@@ -17,9 +17,11 @@ function RenderImg(input) {
     reader.onload = function(e) {
 		console.log(e.target.result[0])
       $('#MemberInfoForm #MemberInfo_Profileimg').attr('src',e.target.result) ;
-       $('#MemberInfoForm input[name=profileimgname]').val('');
+      $('#MemberInfoForm input[name=profileimgname]').val(input.files[0].name);
+       
     };
     reader.readAsDataURL(input.files[0]);
+    
   } else {
     document.getElementById('preview').src = "";
   }
@@ -261,3 +263,32 @@ function ChangeDefualtProfile(){
 	$('#MemberInfoForm input[name=profileimgname]').val('defaultprofile.png')
 	$('#MemberInfo_Profileimg').attr('src','/fleaMarket/resource/img/Member/profileimg/defaultprofile.png')
 }
+
+//네이버 로그인
+
+ //네이버 로그인 로고
+  	var naver_id_login = new naver_id_login("WQO4B5GCMQKA06XHFOuA", "http://localhost:8090/fleaMarket/MemberInfo.do");
+  	var state = naver_id_login.getUniqState();
+  	naver_id_login.setButton("white", 3,40);
+  	naver_id_login.setDomain("http://localhost:8090/fleaMarket/MemberInfo.do");
+  	naver_id_login.setState(state);
+  	naver_id_login.setPopup();
+  	naver_id_login.init_naver_id_login();
+  	
+// 네이버 로그인 기능
+// var naver_id_login = new naver_id_login("WQO4B5GCMQKA06XHFOuA", "http://localhost:8090/fleaMarket/SignIn.do");
+  // 접근 토큰 값 출력
+ // alert(naver_id_login.oauthParams.access_token);
+  // 네이버 사용자 프로필 조회
+  naver_id_login.get_naver_userprofile("naverSignInCallback()");
+  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+  function naverSignInCallback() {
+   console.log(naver_id_login.getProfileData('phonenumber'))
+   console.log(naver_id_login.getProfileData('email'));
+   window.opener.naverSnsplus(naver_id_login.getProfileData('email'))
+   window.close();
+  }
+  
+  function naverSnsplus(naveremail){
+	  location.href="SnsEmailPlus.do?email="+SessEmail+"&naveremail="+naveremail
+  }

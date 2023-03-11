@@ -91,34 +91,49 @@ public class Req1001_Controller {
 		public String MemberInfo() {
 			return "MemberInfo";
 		}
+		
+		
 		// 마이페이지 내 정보 수정 
 		@RequestMapping("UpdateMemberInfo.do")
 		public String UpdateMemberInfo(Member upt,@RequestParam("profileimg") MultipartFile profile,
 				Model d,HttpSession session) {
 			
-			//값 변경할꺼니까 세션먼저 지우기
-			session.removeAttribute("Login");
 			
-			System.out.println(upt.getBusinessnumber());
-			System.out.println(upt.getAuthority());
-			System.out.println(profile.getOriginalFilename());
-				//정보 수정 (대신 기본 사진은 삭제되면 안되니까 변경하게끔만 처리)
-				service.UpdateMemberInfo(upt);
-				//수정 시, 이미지파일이 null이아니면
-				
-				ProfileImg fupt = new ProfileImg();
-				fupt.setEmail(upt.getEmail());
-				if(profile.getOriginalFilename()!="") {
-					//수정할 파일이 있다는거니까 삭제처리
-					fileservice.DeleteFile(profilepath,upt.getProfileimgname());
-					//삽입하고 나온 파일이름을 셋팅
-					fupt.setProfileimg(fileservice.insprofileimg(profilepath,profile));
-				// 이미지를 기본으로 돌릴경우
-				}else if(upt.getProfileimgname().equals("defaultprofile.png")) {
-					fupt.setProfileimg("defaultprofile.png");
-				}
-				
+			
+			
+			
+			//유저정보 변경
+			service.UpdateMemberInfo(upt);
+			
+			
+			
+			Member mb = (Member)session.getAttribute("Login");
+			
+			//세션프사가 기본사진이냐?
+			boolean check = mb.getProfileimgname().equals("defaultprofile.png")?true:false;
+			
+			
+			ProfileImg fupt = new ProfileImg();
+			
+			fupt.setEmail(upt.getEmail());
+			
+			
+			//수정할 파일이 있다는거니까 삭제처리
+			if(profile.getOriginalFilename()!="") {
+			//근데 기존프사가 기본꺼엿으면 삭제 ㄴㄴ
+				if(!check) {fileservice.DeleteFile(profilepath,mb.getProfileimgname());}
+					fupt.setProfileimg(fileservice.insprofileimg(profilepath,profile));	
+					service.UpdateProfile(fupt);
+			//프사 내리는 경우의수
+			}else if(profile.getOriginalFilename()==""&& !check && upt.getProfileimgname().equals("defaultprofile.png") ) {
+				fileservice.DeleteFile(profilepath,mb.getProfileimgname());	
+				fupt.setProfileimg("defaultprofile.png");
 				service.UpdateProfile(fupt);
+			}
+				
+			
+			
+			
 			session.setAttribute("Login",service.getLogin(upt.getEmail()));
 			 d.addAttribute("uptmsg","회원 수정이 완료되었습니다.");
 			return "MemberInfo";

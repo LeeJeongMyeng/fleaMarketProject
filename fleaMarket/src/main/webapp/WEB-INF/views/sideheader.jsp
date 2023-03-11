@@ -33,7 +33,7 @@
 $(document).ready(function(){
 
 })
-
+var SessEmail = '${Login.email}'
 /* window.onmousewheel = function(e){
 	console.log(e)
 	var SHLB = $('.sideheadernav').width()

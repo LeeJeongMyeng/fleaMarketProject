@@ -86,13 +86,14 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	//로그인 처리
 	public Member Login(Member log) {
 		Member mem=null;
-		if(log.getKakaoemail()!=null) { //카카오이메일로그인시
-			mem = dao.kakaoLogin(log.getKakaoemail());
-		}else if(log.getNaveremail()!=null) { //네이버 이메일로그인시
-			mem = dao.naverLogin(log.getNaveremail());
-		}else { //일반로그인
-			
-			//이메일가지고 로그인정보를 받아옴
+		//카카오이메일로그인시
+		if(log.getKakaoemail()!=null) { 
+			mem = dao.Login(log.getKakaoemail());
+		//네이버 이메일로그인시
+		}else if(log.getNaveremail()!=null) { 
+			mem = dao.Login(log.getNaveremail());
+		//일반로그인
+		}else if(log.getPassword()!=null){ 
 			mem = dao.Login(log.getEmail());
 			if(mem!=null) {
 				if(mem.getPassword().equals("1111") || mem.getPassword().equals("admin")) {
@@ -102,10 +103,6 @@ public class Req1000_ServiceImp implements Req1000_Service {
 					mem = BCrypt.checkpw(log.getPassword(),mem.getPassword())?mem:null;
 				}
 			}
-			
-			
-			
-			
 		}
 		return mem;
 	}
@@ -118,18 +115,24 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		return dao.CheckPeristalsisSNS_K(snsemail);
 	}
 	
-	
-	
 	//네이버 연동
 	public Member CheckPeristalsisSNS_N(String name) {
 		return dao.CheckPeristalsisSNS_N(name);
 	}
 	
-	
-	
 	//계정에 SNS이메일 업뎃
 	public void SnsEmailPlus(Member upt) {
-		dao.SnsEmailPlus(upt);
+		//로그인 후 경우
+		if(upt.getEmail()==null) {
+			dao.SnsEmailPlus(upt);
+			
+		//로그인 전 경우
+		}else if(upt.getEmail()!=null) {
+			System.out.println(upt.getKakaoemail());
+			dao.SnsEmailPlus2(upt);
+		}
+		
+		
 	}
 	
 	

@@ -11,8 +11,8 @@
 <%@include file="sideheader.jsp" %>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
- 
-   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
 <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
 <title>내 정보 조회 및 수정</title>
@@ -42,6 +42,7 @@ $(document).ready(function(){
 var SessAddress = '${Login.address}' //세션주소값
 var SessCategory = '${Login.category}'
 var SessPassword = '${Login.password}'
+
 </script>
 
 <body class="g-sidenav-show   bg-gray-100">
@@ -96,26 +97,20 @@ var SessPassword = '${Login.password}'
               <div class="row mb-5">
                 <div class="col-6">
                   <label class="form-label">이름</label>
-                  
-                    <input id="firstName" name="name" class="form-control" type="text" value="${Login.name }" readonly>
-                  
+                    <input name="name" class="form-control" type="text" value="${Login.name }" readonly>
                 </div>
                 <div class="col-6">
                   <label class="form-label">이메일</label>
-                  
                     <input id="email" name="email" class="form-control" type="email" value="${Login.email }" readonly>
-                  
                 </div>
               </div>          
               <div class="row mb-4">
               	<div class="col-6">
-              		<div class="row">
-			          		
+              		<div class="row mt-4">
 				          <div class="col-4">
 				          <label>가입유형(권한)</label>
 					      	<input type="text" name="authority" class="form-control form-control mb-3" value="${Login.authority }" readonly>
 				          </div>
-				        		         
 				         <c:if test="${Login.authority=='일반셀러'}">
 					      <div class="col-4">
 					      <label>사업자로 변환</label>
@@ -128,6 +123,24 @@ var SessPassword = '${Login.password}'
  --%>							<input type="${Login.authority=='사업자'?'text':'hidden' }" name="businessnumber" class="form-control form-control mb-3" value="${Login.businessnumber }" readonly>
 						 </div>  
 	         		 </div>
+              	</div>
+              	<div class="col-6 mb-3">
+              	 		<label>${Login.kakaoemail==null?'카카오연동하기':'카카오이메일' }</label>
+              	 	<c:choose>
+              	 		<c:when test="${Login.kakaoemail!=null }">
+           		 	    	<input class="form-control" type="text" value="${Login.kakaoemail }" readonly>
+           		 	    </c:when>
+           		 	    <c:otherwise>
+           		 	    	<br><img src="${path}/resource/img/Member/SignIn/kakao_login_medium_narrow.png" style="height:41px;" onclick="kakaoLogin()"><br>
+           		 	    </c:otherwise>
+           		 	</c:choose>
+           		  		<label>${Login.kakaoemail==null?'네이버연동하기':'네이버이메일' }</label>
+           		  	<c:choose>
+           		  		<c:when test="${Login.naveremail!=null }">	
+	                    	<input class="form-control" type="text" value="${Login.naveremail }" readonly>
+	                    </c:when>
+	                </c:choose>
+	               <br><div id="naver_id_login" style="display:${Login.naveremail!=null?'none':''}"></div>
               	</div>
               </div>   
 	          

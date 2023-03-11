@@ -47,6 +47,7 @@ public class Req1000_Controller {
    @Value("${qna.upfile}")
    private String qnafilepath;
    
+   
 //=================================================================================
    @RequestMapping("SignIn.do")
    public String login(Model d) {
@@ -78,12 +79,7 @@ public class Req1000_Controller {
 	   String msg = "일치하는 회원이 없습니다. 다시 시도 부탁드립니다.";
 	   String path = "redirect:SignIn.do";
    // sns이메일값
-   if(d.asMap().get("SnsEmailPlus")!=null) {
-	   mem = service.Login((Member)d.asMap().get("SnsEmailPlus"));
-   // 기본이메일/패스워드
-   }else {
 	   mem = service.Login(log);
-   }
    if(mem!=null) {
 	   session.setAttribute("Login", mem);
 	   path="main"; 
@@ -105,14 +101,27 @@ public class Req1000_Controller {
    
  //------------------------------------------------------------------ 
    
-   //Sns연동처리
+   //Sns연동처리+로그인
    @RequestMapping("SnsEmailPlus.do")//기존계정에 연동계정 업데이트
-   public String SnsEmailPlus(Member upt,RedirectAttributes redirectAttributes) {
-      service.SnsEmailPlus(upt);
-      // 연동처리 후, 해당 이메일값 전달
-      redirectAttributes.addFlashAttribute("SnsEmailPlus",upt);
-      return "redirect:Login.do";
+   public String SnsEmailPlus(Member upt,RedirectAttributes redirectAttributes,HttpSession session) {
+     System.out.println(upt.getKakaoemail());
+	   service.SnsEmailPlus(upt);
+	   
+	   String path ="main";
+	   
+	   session.setAttribute("Login", service.Login(upt));
+	   //로그인이 안되어있는경우임
+	   if(upt.getEmail()!=null) {
+		   path="MemberInfo";
+	   }
+	   
+	
+      
+      return path;
    }
+   
+   
+   
  //------------------------------------------------------------------  
    @RequestMapping("Logout.do")
    public String Logout(HttpSession session) {
@@ -180,11 +189,7 @@ public class Req1000_Controller {
 	   return "redirect:QNAList.do";
    }
    
-   @PostMapping("QNAAnswer.do")
-   public String QNAAnswer() {
-	   
-	   return "";
-   }
+ 
    
    
 }

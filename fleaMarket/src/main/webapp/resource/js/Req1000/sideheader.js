@@ -16,8 +16,13 @@ function kakaoLogin(){
         	  if(typeof kakao_account != 'undefined'){
             	  kakaoemail = kakao_account.email;         	
               }
-              if(Loginemail==''){SNSResult('kakao',kakaoemail)} //로그인 전이면
-              //else{LinkSns('kakao',kakaoemail)} //로그인상태에서  	  	 
+              //로그인 전 
+              if(SessEmail==''){
+				  SNSResult('kakao',kakaoemail)
+			  //로그인상태에서 
+			  }else{
+				 location.href='SnsEmailPlus.do?email='+SessEmail+'&kakaoemail='+kakaoemail
+			  }  	  	 
           },
           fail: function (error) {
             console.log(error)
@@ -103,9 +108,9 @@ $('#SNSLoginbnt').click(function(){
 	  }
   })
   
+
   
  function kakaoLogOut(){
-	
     if (Kakao.Auth.getAccessToken()) {
       Kakao.API.request({
         url: '/v1/user/unlink',

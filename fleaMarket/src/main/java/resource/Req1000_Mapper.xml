@@ -47,8 +47,6 @@
     		INSERT INTO PROFILE VALUES(#{email},#{profileimg})
     	</insert>
     	
-
-    	
     	
     	<select id="Login" parameterType="string" resultType="member">
     		SELECT f.*,p.PROFILEIMG as profileimgname FROM FLEAMARKETMEMBER f,PROFILE p
@@ -58,7 +56,7 @@
     	<select id="kakaoLogin" parameterType="string" resultType="member">
     		SELECT f.*,p.PROFILEIMG as profileimgname FROM FLEAMARKETMEMBER f,PROFILE p
 			WHERE f.EMAIL(+) = p.EMAIL
-    		WHERE f.KAKAOEMAIL=#{kakaoemail}
+    		and f.KAKAOEMAIL=#{kakaoemail}
     	</select>
     	<select id="naverLogin" parameterType="string" resultType="member">
     		SELECT f.*,p.PROFILEIMG as profileimgname FROM FLEAMARKETMEMBER f,PROFILE p
@@ -68,18 +66,21 @@
     	<!-- 카카오연동시 계정 존재 야부 -->
     	<select id="CheckPeristalsisSNS_K" parameterType="string" resultType="member">
     		SELECT * FROM FLEAMARKETMEMBER 		
-    			WHERE EMAIL = #{snsemail}
+    		WHERE (EMAIL||kakaoemail) like '%'||#{snsemail}||'%'
     	</select>
     	<!-- 네이버 연동시 계정잇는지 여부 -->
     	<select id="CheckPeristalsisSNS_N" parameterType="string" resultType="member">
     		SELECT * FROM FLEAMARKETMEMBER 		
     			WHERE NAME = #{name}
     	</select>
+    	
+    	
     	<!-- sns연동 업데이트 -->
+    	<!-- 1. 로그인 전 -->
     	<update id="SnsEmailPlus" parameterType="member">
     		UPDATE FLEAMARKETMEMBER 
     		<choose>
-    			<when test="name==null">
+    			<when test="kakaoemail!=null">
     				SET KAKAOEMAIL = #{kakaoemail}
 					WHERE EMAIL =#{kakaoemail}
     			</when>
@@ -88,6 +89,20 @@
 					where name=#{name}
     			</otherwise>
     		</choose>
+    	</update>
+    	
+    	<!-- 2. 로그인 후 연동 -->
+    	<update id="SnsEmailPlus2" parameterType="member">
+    		UPDATE FLEAMARKETMEMBER 
+    		<choose>
+    			<when test="kakaoemail!=null">
+    				SET KAKAOEMAIL = #{kakaoemail}
+    			</when>
+    			<when test="naveremail!=null">
+    				SET NAVEREMAIL=#{naveremail}
+    			</when>
+    		</choose>
+    			WHERE EMAIL =#{email}
     	</update>
     	<!-- 비번찾기 -->
     	<update id="MemberFindPassword" parameterType="hashmap">

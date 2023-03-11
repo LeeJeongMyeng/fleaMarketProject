@@ -49,6 +49,7 @@ public class Req1000_RestController {
 	@RequestMapping("CheckPeristalsisSNS.do")
 	public String CheckPeristalsisSNS(@RequestParam(value="snsemail", required=false) String snsemail,
 			@RequestParam(value="name", required=false) String name,Model d){
+	
 		if(name==null) {
 			d.addAttribute("CheckPeristalsisSNS",service.CheckPeristalsisSNS_K(snsemail));
 		}else if(snsemail==null) {
