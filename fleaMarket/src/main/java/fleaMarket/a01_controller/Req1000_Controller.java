@@ -1,9 +1,8 @@
 package fleaMarket.a01_controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
-import java.util.Map;
+
 
 import javax.servlet.http.HttpSession;
 
@@ -11,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,13 +20,9 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fleaMarket.a02_service.Req1000_Service;
-import fleaMarket.a02_service.Req1001_Service;
-import fleaMarket.util.FileService;
-import vo.FApplicationSch;
 import vo.Member;
-import vo.ProfileImg;
 import vo.QNA;
-import vo.QNAFile;
+
 
 @Controller("Req1000")
 public class Req1000_Controller {
@@ -36,9 +31,7 @@ public class Req1000_Controller {
    public Req1000_Controller(Req1000_Service service) {
       this.service = service;
    }
-   @Autowired
-   private Req1001_Service service2;
-	
+
 	 
    
    @Value("${profile.upload}")
@@ -105,17 +98,16 @@ public class Req1000_Controller {
    @RequestMapping("SnsEmailPlus.do")//기존계정에 연동계정 업데이트
    public String SnsEmailPlus(Member upt,RedirectAttributes redirectAttributes,HttpSession session) {
      System.out.println(upt.getKakaoemail());
+     
 	   service.SnsEmailPlus(upt);
 	   
 	   String path ="main";
 	   
 	   session.setAttribute("Login", service.Login(upt));
-	   //로그인이 안되어있는경우임
+	   //로그인이 되어있는 경우에서 연동하면 회원정보창으로 돌아가기
 	   if(upt.getEmail()!=null) {
 		   path="MemberInfo";
 	   }
-	   
-	
       
       return path;
    }

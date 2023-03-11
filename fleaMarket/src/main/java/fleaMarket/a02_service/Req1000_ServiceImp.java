@@ -88,10 +88,10 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		Member mem=null;
 		//카카오이메일로그인시
 		if(log.getKakaoemail()!=null) { 
-			mem = dao.Login(log.getKakaoemail());
+			mem = dao.kakaoLogin(log.getKakaoemail());
 		//네이버 이메일로그인시
 		}else if(log.getNaveremail()!=null) { 
-			mem = dao.Login(log.getNaveremail());
+			mem = dao.naverLogin(log.getNaveremail());
 		//일반로그인
 		}else if(log.getPassword()!=null){ 
 			mem = dao.Login(log.getEmail());
@@ -128,7 +128,7 @@ public class Req1000_ServiceImp implements Req1000_Service {
 			
 		//로그인 전 경우
 		}else if(upt.getEmail()!=null) {
-			System.out.println(upt.getKakaoemail());
+			System.out.println("service단 snsplus"+upt.getKakaoemail());
 			dao.SnsEmailPlus2(upt);
 		}
 		
