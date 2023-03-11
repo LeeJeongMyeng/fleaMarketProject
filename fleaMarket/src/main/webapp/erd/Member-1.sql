@@ -1,12 +1,12 @@
 DROP TABLE FLEAMARKETMEMBER;
 CREATE TABLE fleamarketmember(
 	email varchar2(50) NOT NULL,
-	password varchar2(50),
+	password varchar2(100),
 	nickname varchar2(100),
 	personalnumber varchar2(100),
 	phonenumber varchar2(100),
 	address varchar2(300),
-	authority char,
+	authority varchar2(100),
 	businessnumber varchar2(20),
 	kakaoemail varchar2(100),
 	naveremail varchar2(100),
@@ -77,8 +77,8 @@ NULL,
 '관리자'
 );
 UPDATE FLEAMARKETMEMBER 
-SET AUTHORITY  = '사업자' 
-WHERE EMAIL ='222@naver.com';
+SET BUSINESSNUMBER  = NULL, AUTHORITY ='일반셀러' 
+WHERE EMAIL ='28888wjdaud@naver.com';
 
 UPDATE FLEAMARKETMEMBER 
 SET AUTHORITY  = '관리자' 
@@ -102,6 +102,6 @@ DELETE profile WHERE EMAIL ='28888wjdaud@naver.com';
 INSERT INTO PROFILE VALUES('aoddl56@nate.com','defaultprofile.png');
 
 UPDATE PROFILE 
-SET PROFILEIMG ='고릴라.jpg'
-WHERE EMAIL ='dbwls8382@naver.com';
+SET PROFILEIMG ='defaultprofile.png'
+WHERE EMAIL ='28888wjdaud@naver.com';
 

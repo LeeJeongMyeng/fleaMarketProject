@@ -34,27 +34,9 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 <script type="text/javascript">
-	$(document).ready(function(){
-		<%-- 
-		
-		--%>	
-	});
-	function kakaoLogOut(){
-	    if (Kakao.Auth.getAccessToken()) {
-	      Kakao.API.request({
-	        url: '/v1/user/unlink',
-	        success: function (response) {
-	           console.log(response)
-	           
-	        },
-	        fail: function (error) {
-	          console.log(error)
-	        },
-	      })
-	      Kakao.Auth.setAccessToken(undefined)
-	    }
-	    location.href="Logout.do"
-	  }  
+
+	
+	
 </script>
 </head>
 <style>
@@ -396,7 +378,7 @@ li{
 	                    <div class="d-none d-lg-block">
 	                      <ul class="list-group">
 	                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-	                          <a class="dropdown-item py-2 ps-3 border-radius-md" onclick="GoToPage('Logout')">
+	                          <a class="dropdown-item py-2 ps-3 border-radius-md" onclick="kakaoLogOut()">
 	                            <div class="d-flex">
 	                              <div class="icon h-10 me-3 d-flex mt-1">
 	                                <i class="ni ni-single-copy-04 text-primary"></i>
@@ -567,10 +549,14 @@ li{
     function GoToPage(page){
     	location.href=page+".do"   	
     }
+    
+  
+  
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
+  <script src="${path}/resource/js/Req1000/header.js"></script>
 </body>
 </html>

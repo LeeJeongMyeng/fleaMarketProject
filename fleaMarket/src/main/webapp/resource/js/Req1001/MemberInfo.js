@@ -17,6 +17,7 @@ function RenderImg(input) {
     reader.onload = function(e) {
 		console.log(e.target.result[0])
       $('#MemberInfoForm #MemberInfo_Profileimg').attr('src',e.target.result) ;
+       $('#MemberInfoForm input[name=profileimgname]').val('');
     };
     reader.readAsDataURL(input.files[0]);
   } else {
@@ -133,10 +134,10 @@ function UpdatePassword(){
 	}
 	return true;
 }
-//암호화 비번이랑 일치하는지 확인하는 친구!
 
 
-//비밀번호1 유효성
+
+//비밀번호1 유효성 ----------------------------------------------------------------------
 function chkPW(pass){
 	 var pw = pass;
 	 var num = pw.search(/[0-9]/g);
@@ -152,7 +153,9 @@ function chkPW(pass){
 			 	return true;
 		 }
 }
-//비번확인	
+
+
+//비번확인	----------------------------------------------------------------------
 function chkPW2(pass1val,pass2val){
 		if(pass1val!=pass2val){		
 			return false;
@@ -204,4 +207,57 @@ function MatchPassword(pass){
 	return MatchResult;
 }
 	
-		
+
+
+//사업자 확인 api ----------------------------------------------------------------------
+function exp0101(){
+	
+var buisnum = $('#BusinessUpdateModal input[name=businessnumber]')
+buisnum.removeClass('is-invalid');
+if(buisnum.val().length<10){
+	$("#buisnessnumberfeedback").text('사업자 번호를 10자리입니다.')
+	buisnum.addClass('is-invalid');
+	return false;
+}
+if(buisnum.val().length>10){
+	$("#buisnessnumberfeedback").text('숫자만으로 10자리를 입력해야합니다.')
+	buisnum.addClass('is-invalid');
+	return false;
+}
+var data = {"b_no":[buisnum.val()]};   
+	$.ajax({
+	  url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=qaJs1GHTyoLGcztYwOmuuQrV8qrgsos8R3r%2FpIQdyqX2HWAX%2Fy8tlU33sKXL0L0XkV%2FBAGqk8BT8KMVPoZn25g%3D%3D",  // serviceKey 값을 xxxxxx에 입력
+	  type: "POST",
+	  data: JSON.stringify(data), // json 을 string으로 변환하여 전송
+	  dataType: "JSON",
+	  contentType: "application/json",
+	  accept: "application/json",
+	  success: function(result) {
+	      console.log(result);
+	      var buisstatus=result.data[0].b_stt; //폐업자 / ''
+	      if(buisstatus=='폐업자' || buisstatus==''){
+			  buisnum.addClass('is-invalid');
+		  }else{
+			  $('#MemberInfoForm input[name=authority]').val('사업자')
+			  $('#MemberInfoForm input[name=businessnumber]').val(buisnum.val())
+			   buisnum.addClass('is-valid');
+			   buisnum.attr('readonly',true);
+			   console.log(buisnum.val())
+			   if(confirm('사업자 확인되었습니다. 사업자로 전환하시겠습니까?')){
+				   
+				   $('#MemberInfoForm').submit()
+				}else{
+					location.reload()
+				}
+		  	}
+	  },
+	  error: function(result) {
+	      console.log(result.responseText); //responseText의 에러메세지 확인
+	  }
+	});
+} 
+//기본이미지로 변경하기----------------------------------------------------------------------
+function ChangeDefualtProfile(){
+	$('#MemberInfoForm input[name=profileimgname]').val('defaultprofile.png')
+	$('#MemberInfo_Profileimg').attr('src','/fleaMarket/resource/img/Member/profileimg/defaultprofile.png')
+}

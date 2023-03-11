@@ -25,6 +25,9 @@
 			PHONENUMBER = #{phonenumber},
 			ADDRESS = #{address},
 			category = #{category}
+		 <if test="businessnumber!=null">
+		    ,authority=#{authority},businessnumber=#{businessnumber}
+		 </if>
 			where email = #{email}    
 		</update>
 		<!-- 회원정보(이미지) 수정 -->

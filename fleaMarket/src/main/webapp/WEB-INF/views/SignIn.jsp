@@ -30,7 +30,7 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
   <link href="${path}/resource/css/Req1000/SignIn.css" rel="stylesheet" />
-  <%@include file="header.jsp" %>
+  <%@include file="header.jsp" %> 
 
 </head>
 <script type="text/javascript">
@@ -95,7 +95,7 @@ console.log("dddd",msg)
 	                       
 	                       </div>
 	                       <div class="col-6 ms-n3">
-	                       		   <div id="naver_id_login"></div>
+	                          <div id="naver_id_login"></div>
 	                       </div>
 					   </div>
                     </div>

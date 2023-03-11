@@ -96,6 +96,15 @@ public class Req1000_Controller {
 
  //------------------------------------------------------------------ 
    
+   //회원정보창에서 사업자 전환
+    @RequestMapping("BusinessUpdate")
+    public String Login(Member upt) {
+    	
+    	return "";
+    }
+   
+ //------------------------------------------------------------------ 
+   
    //Sns연동처리
    @RequestMapping("SnsEmailPlus.do")//기존계정에 연동계정 업데이트
    public String SnsEmailPlus(Member upt,RedirectAttributes redirectAttributes) {

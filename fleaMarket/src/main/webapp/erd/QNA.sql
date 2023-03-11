@@ -1,6 +1,5 @@
 DROP TABLE FLEAMARKETQNA;
-CREATE TABLE FLEAMARKETQNA
-(
+CREATE TABLE FLEAMARKETQNA(
 	qnaNo varchar2(100) NOT NULL,
 	title varchar2(100),
 	content varchar2(2000),
@@ -9,8 +8,10 @@ CREATE TABLE FLEAMARKETQNA
 	email varchar2(50) NOT NULL,
 	method char,
 	category varchar2(100),
-	PRIMARY KEY (qnaNo)
-);
+	status varchar2(10),
+	refno varchar2(100),
+	secretwhether char,
+	PRIMARY KEY (qnaNo));
 
 DROP SEQUENCE FLEAMARKETQNA_seq;
 CREATE SEQUENCE FLEAMARKETQNA_seq 
@@ -51,7 +52,8 @@ CREATE TABLE QNAFile
 (
 	FileName varchar2(100),
 	filePath varchar2(200),
-	qnaNo varchar2(100) NOT NULL
+	qnaNo varchar2(100) NOT NULL,
+	filename2 varchar2(100)
 );
 SELECT * FROM qnafile;
 INSERT INTO qnafile values(FLEAMARKETQNA_seq.currval,'file/qna/','20');

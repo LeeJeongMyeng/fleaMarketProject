@@ -33,6 +33,16 @@
 $(document).ready(function(){
 
 })
+
+/* window.onmousewheel = function(e){
+	console.log(e)
+	var SHLB = $('.sideheadernav').width()
+	
+	
+	$('.sideheadernavLogoutBtn').css("width",SHLB)
+	
+} */
+
 </script>
 <style>
 main{
@@ -60,7 +70,7 @@ li{
 		<hr class="horizontal dark mt-0">
 		<div class="collapse navbar-collapse  w-auto h-auto"
 			id="sidenav-collapse-main">
-			<ul class="navbar-nav">
+			<ul class="navbar-nav sideheadernav">
 				<li class="nav-item"><a href="MemberInfo.do" class="nav-link "
 					aria-controls="dashboardsExamples" role="button"
 					aria-expanded="false">
@@ -107,7 +117,7 @@ li{
 				
 				
 				</li>
-					<c:if test="${Login.authority!='관리자'}">
+				<c:if test="${Login.authority!='관리자'}">
 				<li class="nav-item">
 				<a data-bs-toggle="collapse" href="#applicationsExamples" class="nav-link" aria-controls="applicationsExamples" role="button" aria-expanded="false">
 						<div class="icon icon-shape icon-sm text-center d-flex align-items-center justify-content-center">
@@ -181,8 +191,8 @@ li{
 					</div>
 						
 				</li>			
-						
 			</ul>
+				<a class="btn sideheadernavLogoutBtn" style="position:absolute;width:250px; background:#e45e72;color:white;" onclick="kakaoLogOut()">로그아웃</a>
 			
 			<%--nav-item --%>
 				
@@ -193,9 +203,8 @@ li{
 	</li>
 			</ul>
 		</div>
-	<div>
-	<a class="btn w-100" style="position: absolute;bottom:-11px;background:#e45e72;color:white;" href="Logout.do">로그아웃</a>
-	</div>
+	
+	
 	</aside> 
 	<div class="fixed-plugin">
 		<a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
@@ -352,6 +361,7 @@ li{
 	<!-- Github buttons -->
 	<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
+	<script src="${path}/resource/js/Req1000/sideheader.js"></script>
 </body>
 
 </html>

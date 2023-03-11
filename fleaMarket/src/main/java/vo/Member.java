@@ -81,17 +81,18 @@ public class Member {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getBusinessnumber() {
-		return businessnumber;
-	}
-	public void setBuisnessnumber(String businessnumber) {
-		this.businessnumber = businessnumber;
-	}
+	
 	public String getProfileimgname() {
 		return profileimgname;
 	}
 	public void setProfileimgname(String profileimgname) {
 		this.profileimgname = profileimgname;
+	}
+	public String getBusinessnumber() {
+		return businessnumber;
+	}
+	public void setBusinessnumber(String businessnumber) {
+		this.businessnumber = businessnumber;
 	}
 	
 	

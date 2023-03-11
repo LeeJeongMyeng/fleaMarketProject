@@ -95,28 +95,30 @@ public class Req1001_Controller {
 		@RequestMapping("UpdateMemberInfo.do")
 		public String UpdateMemberInfo(Member upt,@RequestParam("profileimg") MultipartFile profile,
 				Model d,HttpSession session) {
+			
 			//값 변경할꺼니까 세션먼저 지우기
 			session.removeAttribute("Login");
 			
+			System.out.println(upt.getBusinessnumber());
+			System.out.println(upt.getAuthority());
+			System.out.println(profile.getOriginalFilename());
 				//정보 수정 (대신 기본 사진은 삭제되면 안되니까 변경하게끔만 처리)
-				if(!upt.getProfileimgname().equals("defaultprofile.png")) {
-					service.UpdateMemberInfo(upt);
-				}	
-				
+				service.UpdateMemberInfo(upt);
 				//수정 시, 이미지파일이 null이아니면
-				if(profile.getOriginalFilename()!=null) {
-					
-					// 파일 삭제처리
+				
+				ProfileImg fupt = new ProfileImg();
+				fupt.setEmail(upt.getEmail());
+				if(profile.getOriginalFilename()!="") {
+					//수정할 파일이 있다는거니까 삭제처리
 					fileservice.DeleteFile(profilepath,upt.getProfileimgname());
-					
-					// 새 프로필 이미지넣을겸 파일 다시 폴더에 삽입처리 // 테이블에 수정을 위해 값 할당 이메일/새 프로필이미지
-					ProfileImg fupt = new ProfileImg();
-					fupt.setEmail(upt.getEmail());
+					//삽입하고 나온 파일이름을 셋팅
 					fupt.setProfileimg(fileservice.insprofileimg(profilepath,profile));
-					
-					//테이블 파일 업데이트 처리
-					service.UpdateProfile(fupt);	
+				// 이미지를 기본으로 돌릴경우
+				}else if(upt.getProfileimgname().equals("defaultprofile.png")) {
+					fupt.setProfileimg("defaultprofile.png");
 				}
+				
+				service.UpdateProfile(fupt);
 			session.setAttribute("Login",service.getLogin(upt.getEmail()));
 			 d.addAttribute("uptmsg","회원 수정이 완료되었습니다.");
 			return "MemberInfo";

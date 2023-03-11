@@ -86,6 +86,11 @@ var SessPassword = '${Login.password}'
 				<div class="col-4">
 					<label class="form-label">프로필사진 변경</label>
 					<input class="form-control form-control-sm mb-0 w-100" type="file" id="profileimg" name="profileimg" onchange="RenderImg(this);">
+				   	<button type="button" style="margin:0 13px;" class="btn btn-outline-danger btn-sm mb-0 mt-3" onclick="ChangeDefualtProfile()">기본이미지로 변경</button>                  
+				
+				</div>
+				<div class="col-4">
+					<!-- <label class="form-label">기본이미지로변경</label> -->
 				</div>
 			</div>
               <div class="row mb-5">
@@ -106,23 +111,22 @@ var SessPassword = '${Login.password}'
               	<div class="col-6">
               		<div class="row">
 			          		
-				          <div class="col-6">
+				          <div class="col-4">
 				          <label>가입유형(권한)</label>
 					      	<input type="text" name="authority" class="form-control form-control mb-3" value="${Login.authority }" readonly>
 				          </div>
-				         <c:choose>			         
-				         <c:when test="${Login.authority=='일반셀러'}">
+				        		         
+				         <c:if test="${Login.authority=='일반셀러'}">
 					      <div class="col-4">
 					      <label>사업자로 변환</label>
-					      	<input type="button" class="btn btn-primary w-100" style="font-size: x-small;background: #8451ce;" id="" value="사업자 신청"><br>
+					      	<input type="button" class="btn btn-primary w-100" style="font-size: x-small;background: #8451ce;" data-bs-toggle="modal" data-bs-target="#BusinessUpdateModal" value="사업자 신청"/>
 				          </div>  
-				          </c:when>	          
-				         <c:when test="${Login.authority=='사업자'}">				        
+				          </c:if>	          
 					      <div class="col-4">
-					       <label>사업자번호</label>	 
-							<input type="text" name="businessnumber" class="form-control form-control mb-3" value="${Login.businessnumber }" readonly>				          </div>  
-				          </c:when>
-				          </c:choose>                   
+					       <label style="display:${Login.authority=='사업자'?'':'none' }">사업자번호</label>	 
+<%-- 							<input type="${Login.authority=='사업자'?'text':'hidden' }" name="businessnumber" class="form-control form-control mb-3" value="${Login.businessnumber }" readonly>
+ --%>							<input type="${Login.authority=='사업자'?'text':'hidden' }" name="businessnumber" class="form-control form-control mb-3" value="${Login.businessnumber }" readonly>
+						 </div>  
 	         		 </div>
               	</div>
               </div>   
@@ -165,9 +169,19 @@ var SessPassword = '${Login.password}'
                   <div class="col-6">
                   		<label class="form-label">카테고리</label>
 		                  <select class="form-control" name="category" id="MemberInfo_category">		                    
-		                      <option>여성의류</option>
+		                      <option selected>카테고리 선택</option>
+							  <option>여성의류</option>
 							  <option>남성의류</option>
 							  <option>공통의류</option>
+							  <option>아동복</option>
+							  <option>잡화(지비츠,키링 등)</option>
+							  <option>쥬얼리</option>
+							  <option>수공예품(뜨개상품 등)</option>
+							  <option>수제식품</option>
+							  <option>캔들/디퓨저/향수</option>
+							  <option>리빙(컵,그릇)</option>
+							  <option>공방체험</option>			  
+							  <option>기타</option>
 		                  </select>
                   </div>
                   <div class="" style="display:flex;">
@@ -278,6 +292,44 @@ var SessPassword = '${Login.password}'
                       <div id="MemberFindResult"></div>
                       <div class="button-row d-flex mt-4">
                         <button class="btn ms-auto me-3" type="submit" style="background-color:#df4343; color:white;">탈퇴</button>
+                    	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+                      </div>
+                    </div>
+                 </form>   
+           </div>
+                  <!--single form panel-->
+	      </div>
+	      
+	      <div class="modal-footer">
+	        회사소개 | 이용약관 | <strong>개인정보처리방침</strong>
+	      </div>
+	     
+	    </div>
+	  </div>
+	</div> <!-- sns확인모달 모달끝 -->
+	
+	<div class="modal fade" id="BusinessUpdateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content" style="top:119px;">
+	      <div class="modal-header" style="background:#e45e72;color:white;">
+	        <h3 class="modal-title fs-6 text-center" id="MemberFindTitle" style="color: white;">사업자 전환</h3>
+			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      	</div>
+	     
+	      <div class="modal-body">
+			<div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
+                    <form id="LeaveMemberForm" action="LeaveMember.do" method="post" onsubmit="return LeaveMember()">
+                    <div class="multisteps-form__content">
+                      <div class="row mt-3 mb-3">
+                        <div class="col-12">
+                          <label>사업자 번호를 입력후 인증을 진행해주세요</label>
+                          <input class="form-control w-50"  type="text" name="businessnumber" value="" placeholder="-제외 10자리" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"/>
+                          <div class="invalid-feedback">유효한 사업자번호가 아닙니다. 다시 진행해주세요.</div>
+                        </div>
+                      </div>
+                      <div id="MemberFindResult"></div>
+                      <div class="button-row d-flex mt-4">
+                        <button class="btn ms-auto me-3" type="button" style="background:#e45e72;color:white;" onclick="exp0101()">인증하기</button>
                     	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
                       </div>
                     </div>

@@ -143,6 +143,7 @@
     	<update id="QNAAnswerUpdate" parameterType="string">
     		update FLEAMARKETQNA set status = '답변완료' where qnano=#{qnano}
     	</update>
+    	
     </mapper>
     
     
