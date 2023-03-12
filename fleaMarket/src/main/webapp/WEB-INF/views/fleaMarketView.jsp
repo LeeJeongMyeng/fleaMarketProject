@@ -167,21 +167,23 @@
                         </div>
                      </div>
                   </div>
-                    <div class="col-12"> <!-- 첨부파일 -->
-                      <label>파일 다운로드</label>
-                      <c:forEach var="noimg" items="${noimgfiles}">
-						<form action="downloadFFile.do" method="get">
-							<div style="width:50%;">
-								<div class="fallback">
-									 <div class="download_Wrap">
-									 	<input type="hidden" name="filename"  value="${noimg}">
-										<input value="${noimg}" type="submit" class="form-control">
-									 </div>
+                  <c:if test="${fleamarket.checkForm != 'N'}">	
+	                    <div class="col-12"> <!-- 첨부파일 -->
+	                      <label>파일 다운로드</label>
+	                      <c:forEach var="noimg" items="${noimgfiles}">
+							<form action="downloadFFile.do" method="get">
+								<div style="width:50%;">
+									<div class="fallback">
+										 <div class="download_Wrap">
+										 	<input type="hidden" name="filename"  value="${noimg}">
+											<input value="${noimg}" type="submit" class="form-control">
+										 </div>
+									</div>
 								</div>
-							</div>
-						</form>
-					  </c:forEach>
-                    </div>
+							</form>
+						  </c:forEach>
+	                    </div>
+	                </c:if>
                     <c:choose>
 	                    <c:when test="${Login.email != fleamarket.email}">	
 							<div class="row mt-4">

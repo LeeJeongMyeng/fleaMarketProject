@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import vo.ApplicationFile;
 import vo.FApplication;
 import vo.FApplicationSch;
 import vo.FleaMarket;
+import vo.Member;
 
 @Service
 public class FMViewService {
@@ -134,7 +137,7 @@ public class FMViewService {
 	}
 	
 	// 내 신청 전체 조회(최신순)
-	public List<FApplication> appMyList(FApplicationSch sch){		
+	public List<FApplication> appMyList(FApplicationSch sch){
 		if(sch.getTitle()==null) sch.setTitle("");
 		sch.setCount(dao.totCntMy(sch));
 		if(sch.getCurPage()==0) {

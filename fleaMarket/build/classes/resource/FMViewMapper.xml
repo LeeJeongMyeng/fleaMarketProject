@@ -92,6 +92,7 @@
 			AND fm.email = m.email(+)
 			AND fm.email = p.email(+)
 			AND fm.title LIKE '%'||#{title}||'%'
+			and a.email = #{search}
 			ORDER BY a.applicationno DESC)
 		WHERE cnt BETWEEN #{start} AND #{end}
 	</select>

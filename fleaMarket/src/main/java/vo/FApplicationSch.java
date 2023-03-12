@@ -3,6 +3,7 @@ package vo;
 public class FApplicationSch {
 	// 1. 검색
 	private String title;
+	private String search;
 	// 2. 페이징 처리 1단계
 	private int count; // 전체 데이터 건수
 	private int pageSize; // 한 페이지에 보여줄 데이터 건수
@@ -73,6 +74,12 @@ public class FApplicationSch {
 	}
 	public void setEndBlock(int endBlock) {
 		this.endBlock = endBlock;
+	}
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
 	}
 	
 }

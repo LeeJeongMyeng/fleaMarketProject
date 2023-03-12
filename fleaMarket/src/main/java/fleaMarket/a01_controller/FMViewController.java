@@ -24,6 +24,7 @@ import fleaMarket.util.FileService;
 import vo.ApplicationFile;
 import vo.FApplication;
 import vo.FApplicationSch;
+import vo.Member;
 
 @Controller
 public class FMViewController {
@@ -123,7 +124,9 @@ public class FMViewController {
 	
 	// 내 신청 전체 조회(최신순) , HttpSession session
 	@RequestMapping("appMyList.do")
-	public String appMyList(@ModelAttribute("sch") FApplicationSch sch, Model d) {		 
+	public String appMyList(@ModelAttribute("sch") FApplicationSch sch, Model d,HttpSession session) {	
+		Member mb = (Member)session.getAttribute("Login");
+		sch.setSearch(mb.getEmail());
 		d.addAttribute("list",service.appMyList(sch));
 		return "appMyList";
 	}
