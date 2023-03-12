@@ -46,7 +46,7 @@ function handleImgsFilesSelect(e) {
 	var filetag = $(this)
 	var filetagid = "#"+$(this).attr('id')
     var fileArr = Array.from(e.target.files);// 이벤트로 넘어온 파일들을 배열형식으로 담음(FileList -> Array)
-    for(var i=fileArr.length-1; i>0; i--){
+    for(var i=fileArr.length-1; i=0; i--){
     	if(!Checkfiles1(fileArr[i].name)){fileArr.splice(i, 1);}
     } 
      /*fileArr.forEach(function(f,index) { //배열형식의 파일들의 확장자 검사 돌림
@@ -85,7 +85,7 @@ function handleImgsFilesSelect2(e) {
 	var filetag = $(this) 
 	var filetagid = "#"+$(this).attr('id') 
     var fileArr = Array.from(e.target.files);
-    for(var i=fileArr.length-1; i>0; i--){
+    for(var i=fileArr.length-1; i=0; i--){
     	if(!Checkfiles2(fileArr[i].name)){fileArr.splice(i, 1);}
     }    
      fileArr.forEach(function(f,index) { //배열형식의 파일들의 확장자 검사 돌림
