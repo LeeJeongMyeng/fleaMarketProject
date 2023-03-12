@@ -12,6 +12,7 @@ public class FApplication {
 	
 	private String title;
 	private String nickname;
+	private String filename;
 	
 	public int getCnt() {
 		return cnt;
@@ -60,6 +61,12 @@ public class FApplication {
 	}
 	public void setNickname(String nickname) {
 		this.nickname = nickname;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 	
 }

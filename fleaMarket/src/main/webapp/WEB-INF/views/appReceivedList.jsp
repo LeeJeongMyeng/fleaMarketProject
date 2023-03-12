@@ -34,14 +34,6 @@
    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
    crossorigin="anonymous"></script>
   <script type="text/javascript">
-  /*
-	var msg = "${msg}"
-	if(msg=="수정완료"){
-		if(confirm(msg+" 전체조회화면 이동하시겠습니까?")){
-			location.href = "${path}/list.do";
-		}
-	}*/
-
 	$(document).ready(function(){
 	
 	});
@@ -56,8 +48,8 @@
 		success:function(data){
 			console.log("zzzzzz")
 			 var msg="";
-			if(approvalwhether=='a'){msg="승인처리되었습니다."}
-			else{msg="거부처리 되었습니다."}
+			if(approvalwhether=='a'){msg="승인되었습니다."}
+			else{msg="거부되었습니다."}
 			alert(msg)
 			location.reload(); 
 		},
@@ -185,7 +177,7 @@
 	                    <th>제목</th>
 	                    <th>등록일</th>
 	                    <th>상태</th>
-	                    <th>작성자</th>
+	                    <th>신청자</th>
 	                    <th>첨부파일</th>
 	                  </tr>
 	                </thead>
@@ -201,7 +193,7 @@
 		                      <span class="my-2 text-xs">${fapplication.title}</span>
 		                    </td>
 		                    <td class="font-weight-bold">
-		                      <span class="my-2 text-xs"><fmt:formatDate pattern='yyyy.MM.dd' value="${fapplication.applicationDate}"/></span>
+		                      <span class="my-2 text-xs"><fmt:formatDate pattern='yyyy-MM-dd' value="${fapplication.applicationDate}"/></span>
 		                    </td>
 		                    <td class="text-xs font-weight-bold">
 		                      <div class="d-flex align-items-center">
@@ -228,8 +220,10 @@
 		                      </div>
 		                    </td>
 		                    <td class="text-xs font-weight-bold">
-		                      <i class="bi bi-paperclip"></i>
-		                      <span class="my-2 text-xs">신청양식.pdf</span>
+		                    	<c:if test="${myfapp.filename != null}">
+			                      <i class="bi bi-paperclip"></i>
+			                      <span class="my-2 text-xs">${fapplication.filename}</span>
+			                    </c:if>
 		                    </td>
 		                  </tr>
 	                  </c:forEach>

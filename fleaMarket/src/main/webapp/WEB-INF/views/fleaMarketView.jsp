@@ -36,9 +36,6 @@
    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
    crossorigin="anonymous"></script>
   <script type="text/javascript">
-   var sessEmail = "${Login.email}"
-   var writerEmail = "${fleamarket.email}"
-   
    $(document).ready(function(){   
 	   	var msg = "${msg}"
 	   	// msg 확인 필요
@@ -56,14 +53,6 @@
 			$("#frmNofile").submit()
 		})
 	});
-	/*
-   function goDetail(postingNumber){
-	   $("#frmNofile").submit(postingNumber)
-	}
-  	$("#regBtn").click(function(){
-		$("#frmNofile").submit()
-	})
-	*/
 	function uptBtn(postingNumber){
   		alert("수정 페이지로 이동 하시겠습니까?")
 		location.href="${path}/FleaMarketUptPage.do?postingNumber="+postingNumber
@@ -180,14 +169,6 @@
                   </div>
                     <div class="col-12"> <!-- 첨부파일 -->
                       <label>파일 다운로드</label>
-                      <%----------------------------- 전체다운로드
-                      <form>
-                      <c:forEach var="noimg" items="${noimgfiles}">
-                      	<input type="hidden" name="filename" value="${noimg }"/>
-                      </c:forEach>
-                      <button type="submit">전체다운로드</button>
-                      </form>
-                       ----------------------------- --%>
                       <c:forEach var="noimg" items="${noimgfiles}">
 						<form action="downloadFFile.do" method="get">
 							<div style="width:50%;">

@@ -4,6 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -95,14 +97,6 @@ public class FMViewController {
 	}
 	
 	// 받은 신청 상세 조회
-	/*
-	승인위해..
-	@GetMapping("appReceivedView.do")
-	public String appReceivedView(@RequestParam("applicationNo") int applicationNo, Model d) {
-		d.addAttribute("appReceived",service.appReceivedView(applicationNo));
-		return "appReceivedList";
-	}
-	*/
 	@PostMapping("appFileView.do")
 	public String appFileView(@RequestParam("applicationNo") int applicationNo, Model d) {
 		String a= service.appFileView(applicationNo);
@@ -120,20 +114,17 @@ public class FMViewController {
 	}
 	
 	// 받은 신청 승인
-	
 	@PostMapping("updateAppRe.do")
 	public String updateAppRe(@RequestParam("applicationNo") String applicationNo,
-								@RequestParam("approvalWhether") String approvalWhether,  Model d) {
-		
-		service.updateAppRe(applicationNo,approvalWhether);
-		 
+								@RequestParam("approvalWhether") String approvalWhether,  Model d) {		
+		service.updateAppRe(applicationNo,approvalWhether);		 
 		return "pageJsonReport";
 	}
 	
-	
-	// 내 신청 목록
+	// 내 신청 전체 조회(최신순) , HttpSession session
 	@RequestMapping("appMyList.do")
-	public String appMyList() {
+	public String appMyList(@ModelAttribute("sch") FApplicationSch sch, Model d) {		 
+		d.addAttribute("list",service.appMyList(sch));
 		return "appMyList";
 	}
 	

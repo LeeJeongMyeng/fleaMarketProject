@@ -121,11 +121,9 @@ public class FMViewService {
 	}
 	
 	// 받은 신청 상세 조회
-	public String appFileView(int applicationNo) {
-		//String flist[] = dao.appFileView(applicationNo).split(",");		
+	public String appFileView(int applicationNo) {		
 		return dao.appFileView(applicationNo);
 	}
-	
 	
 	// 받은 신청 승인
 	public void updateAppRe(String applicationNo,String approvalWhether) {
@@ -135,5 +133,42 @@ public class FMViewService {
 		dao.updateAppRe(map);
 	}
 	
-	
+	// 내 신청 전체 조회(최신순)
+	public List<FApplication> appMyList(FApplicationSch sch){		
+		if(sch.getTitle()==null) sch.setTitle("");
+		sch.setCount(dao.totCntMy(sch));
+		if(sch.getCurPage()==0) {
+			sch.setCurPage(1);
+		}
+		if(sch.getPageSize()==0) {
+			sch.setPageSize(10);
+		}
+		sch.setPageCount(
+				(int)Math.ceil(
+				sch.getCount()/(double)sch.getPageSize())
+				);
+		if(sch.getCurPage()>sch.getPageCount()) {
+			sch.setCurPage(sch.getPageCount());
+		}			
+		
+		sch.setEnd(sch.getCurPage()*sch.getPageSize());
+		sch.setStart((sch.getCurPage()-1)*sch.getPageSize()+1);
+		sch.setBlockSize(3);
+		
+		int blocknum = (int)Math.ceil(sch.getCurPage()/
+					(double)sch.getBlockSize());
+		int endBlock = blocknum*sch.getBlockSize();
+		if(endBlock>sch.getPageCount()) {
+			endBlock = sch.getPageCount();
+		}
+		
+		sch.setEndBlock(endBlock);
+		sch.setStartBlock((blocknum-1)*sch.getBlockSize()+1);
+		if(((blocknum-1)*sch.getBlockSize()+1)<0) {
+			sch.setStartBlock(0);
+		}
+		
+		return dao.appMyList(sch);
+	}
+		
 }

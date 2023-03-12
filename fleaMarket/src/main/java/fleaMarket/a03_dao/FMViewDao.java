@@ -16,8 +16,8 @@ public interface FMViewDao {
 	public void insAppFile(ApplicationFile f);
 	public int totCnt(FApplicationSch sch);
 	public List<FApplication> appReceivedList(FApplicationSch sch);
-	//public ApplicationFile appReceivedView(int applicationNo);
 	public String appFileView(int applicationNo);
 	public void updateAppRe(Map<String,String> map);
-	
+	public int totCntMy(FApplicationSch sch);
+	public List<FApplication> appMyList(FApplicationSch sch);
 }

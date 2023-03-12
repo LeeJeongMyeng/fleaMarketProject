@@ -29,142 +29,109 @@
   <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
-</head>
+  
+  <script src="https://code.jquery.com/jquery-3.6.3.min.js"
+   integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
+   crossorigin="anonymous"></script>
+  <script type="text/javascript">
+	$(document).ready(function(){
+	
+	});
+	
+	function updateAppRe(applicationNo,approvalwhether){
+		// 유효성 check
+		$.ajax({
+		url:"updateAppRe.do",
+		type:"post",
+		data:"applicationNo="+applicationNo+"&approvalWhether="+approvalwhether,
+		dataType:"json",
+		success:function(data){
+			console.log("zzzzzz")
+			 var msg="";
+			if(approvalwhether=='a'){msg="수정되었습니다."}
+			else{msg="삭제되었습니다."}
+			alert(msg)
+			location.reload(); 
+		},
+		error:function(xhr,status,err){
+              console.log(xhr)
+              console.log(status)
+              console.log(err)
+        }
+	})
+		
+	}
+	
+	// 페이징
+	function goPage(cnt){
+		$("[name=curPage]").val(cnt);
+		$("#frmSch").submit()
+	}
+	
+    function getFiles(appno){
+    	console.log(appno)
+		$.ajax({
+			url:"appFileView.do",
+			type:"post",
+			data:"applicationNo="+appno,
+			dataType:"json",
+			success:function(data){
+				console.log(data.appFile)
+				var files = data.appFile;
+				var filelist = files.split(',');
+				
+				var str = "";
+				filelist.forEach(function(f){
+					str += "<input class='form-control w-50 mb-2' onclick=\"javascript:location.href='downloadAppFile.do?filename="+f+"'\" name='filename' type='text' value='"+f+"' readonly/>"
+				})
+				str += "<button class='m-1 btn btn-primary' type='button' onclick=\"alldown('downloadAppFileForm')\">전체다운로드</button>";
+				
+				$('#downloadAppFileForm').html(str)
+				
+				$(".ApprovalBtnWrap button:nth-child(1)").attr("onclick","updateAppRe("+appno+",'a')")
+				$(".ApprovalBtnWrap button:nth-child(2)").attr("onclick","updateAppRe("+appno+",'r')")
+				
+				
+			$('#ApplicaionNoFilesModalBtn').click()
+			},
+			error:function(xhr,status,err){
+	              console.log(xhr)
+	              console.log(status)
+	              console.log(err)
+	        }
+		})
+	}
+	
+	// 신청글 상세 조회 모달창
+	function alldown(){
+		var len = $('#downloadAppFileForm').children('input[name=filename]').length
+		var start=1;
+		setInterval(function() {
+			$("#downloadAppFileForm input[name=filename]:nth-child("+start+")").click()
+			start++
+			if(start==len){clearInterval()}
+		},500)
+		console.log(nth)
+		
+		}
+		
+	
 
+</script>
+</head>
+<style>
+
+  	#downloadAppFileForm input:hover{
+  		text-decoration:underline;
+  		cursor:pointer;
+  	}
+
+</style>
 <body class="g-sidenav-show   bg-gray-100">
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
   <main class="main-content position-relative border-radius-lg ">
-    <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg  px-0 mx-4 shadow-none border-radius-xl z-index-sticky " id="navbarBlur" data-scroll="false">
-      <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm">
-              <a class="text-white" href="javascript:;">
-                <i class="ni ni-box-2"></i>
-              </a>
-            </li>
-            <li class="breadcrumb-item text-sm text-white"><a class="opacity-5 text-white" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-white active" aria-current="page">Order List</li>
-          </ol>
-          <h6 class="font-weight-bolder mb-0 text-white">Order List</h6>
-        </nav>
-        <div class="sidenav-toggler sidenav-toggler-inner d-xl-block d-none ">
-          <a href="javascript:;" class="nav-link p-0">
-            <div class="sidenav-toggler-inner">
-              <i class="sidenav-toggler-line bg-white"></i>
-              <i class="sidenav-toggler-line bg-white"></i>
-              <i class="sidenav-toggler-line bg-white"></i>
-            </div>
-          </a>
-        </div>
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
-            <div class="input-group">
-              <span class="input-group-text text-body"><i class="fas fa-search" aria-hidden="true"></i></span>
-              <input type="text" class="form-control" placeholder="Type here...">
-            </div>
-          </div>
-          <ul class="navbar-nav  justify-content-end">
-            <li class="nav-item d-flex align-items-center">
-              <a href="${path}/pages/authentication/signin/illustration.html" class="nav-link text-white font-weight-bold px-0" target="_blank">
-                <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
-              </a>
-            </li>
-            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
-                <div class="sidenav-toggler-inner">
-                  <i class="sidenav-toggler-line bg-white"></i>
-                  <i class="sidenav-toggler-line bg-white"></i>
-                  <i class="sidenav-toggler-line bg-white"></i>
-                </div>
-              </a>
-            </li>
-            <li class="nav-item px-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white p-0">
-                <i class="fa fa-cog fixed-plugin-button-nav cursor-pointer"></i>
-              </a>
-            </li>
-            <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-white p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <i class="fa fa-bell cursor-pointer"></i>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-end px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton">
-                <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
-                    <div class="d-flex py-1">
-                      <div class="my-auto">
-                        <img src="${path}/assets/img/team-2.jpg" class="avatar avatar-sm  me-3 " alt="user image">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">New message</span> from Laur
-                        </h6>
-                        <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          13 minutes ago
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
-                    <div class="d-flex py-1">
-                      <div class="my-auto">
-                        <img src="${path}/assets/img/small-logos/logo-spotify.svg" class="avatar avatar-sm bg-gradient-dark  me-3 " alt="logo spotify">
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">New album</span> by Travis Scott
-                        </h6>
-                        <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          1 day
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-                <li>
-                  <a class="dropdown-item border-radius-md" href="javascript:;">
-                    <div class="d-flex py-1">
-                      <div class="avatar avatar-sm bg-gradient-secondary  me-3  my-auto">
-                        <svg width="12px" height="12px" viewBox="0 0 43 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-                          <title>credit-card</title>
-                          <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                            <g transform="translate(-2169.000000, -745.000000)" fill="#FFFFFF" fill-rule="nonzero">
-                              <g transform="translate(1716.000000, 291.000000)">
-                                <g transform="translate(453.000000, 454.000000)">
-                                  <path class="color-background" d="M43,10.7482083 L43,3.58333333 C43,1.60354167 41.3964583,0 39.4166667,0 L3.58333333,0 C1.60354167,0 0,1.60354167 0,3.58333333 L0,10.7482083 L43,10.7482083 Z" opacity="0.593633743"></path>
-                                  <path class="color-background" d="M0,16.125 L0,32.25 C0,34.2297917 1.60354167,35.8333333 3.58333333,35.8333333 L39.4166667,35.8333333 C41.3964583,35.8333333 43,34.2297917 43,32.25 L43,16.125 L0,16.125 Z M19.7083333,26.875 L7.16666667,26.875 L7.16666667,23.2916667 L19.7083333,23.2916667 L19.7083333,26.875 Z M35.8333333,26.875 L28.6666667,26.875 L28.6666667,23.2916667 L35.8333333,23.2916667 L35.8333333,26.875 Z"></path>
-                                </g>
-                              </g>
-                            </g>
-                          </g>
-                        </svg>
-                      </div>
-                      <div class="d-flex flex-column justify-content-center">
-                        <h6 class="text-sm font-weight-normal mb-1">
-                          Payment successfully completed
-                        </h6>
-                        <p class="text-xs text-secondary mb-0">
-                          <i class="fa fa-clock me-1"></i>
-                          2 days
-                        </p>
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-    <!-- End Navbar -->
     <div class="container-fluid py-4">
+      <!-- 상단 버튼 추가 시
       <div class="d-sm-flex justify-content-between">
         <div>
           <a href="javascript:;" class="btn btn-icon btn-outline-white">
@@ -188,166 +155,99 @@
           </div>
         </div>
       </div>
+       -->
       <div class="row">
         <div class="col-12">
           <div class="card">
             <div class="table-responsive">
-              <table class="table table-flush" id="datatable-search">
-                <thead class="thead-light">
-                  <tr>
-                    <th>번호</th>
-                    <th>제목</th>
-                    <th>등록일</th>
-                    <th>상태</th>
-                    <th>승인자</th>
-                    <th>첨부파일</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr data-bs-toggle="modal" data-bs-target="#jkanban-info-modal">
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <p class="text-xs font-weight-bold ms-2 mb-0">1</p>
-                      </div>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">소상공인 행복마켓</span>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">2023.01.01</span>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-check" aria-hidden="true"></i></button>
-                        <span>승인</span>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <img src="${path}/assets/img/team-2.jpg" class="avatar avatar-xs me-2" alt="user image">
-                        <span>김철수</span>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <i class="bi bi-paperclip"></i>
-                      <span class="my-2 text-xs">신청양식.pdf</span>
-                    </td>
-                  </tr>
-                  <tr data-bs-toggle="modal" data-bs-target="#jkanban-info-modal">
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <p class="text-xs font-weight-bold ms-2 mb-0">2</p>
-                      </div>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">소상공인 행복마켓</span>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">2023.01.01</span>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <span>-</span>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <div class="avatar avatar-xs me-2 bg-gradient-dark">
-                          <span>M</span>
-                        </div>
-                        <span>마영희</span>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <i class="bi bi-paperclip"></i>
-                      <span class="my-2 text-xs">
-                        신청양식.pdf
-                      </span>
-                    </td>
-                  </tr>
-                  <tr data-bs-toggle="modal" data-bs-target="#jkanban-info-modal">
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <p class="text-xs font-weight-bold ms-2 mb-0">3</p>
-                      </div>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">소상공인 행복마켓</span>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">2023.01.01</span>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-check" aria-hidden="true"></i></button>
-                        <span>승인</span>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <div class="d-flex align-items-center">
-                          <img src="${path}/assets/img/team-3.jpg" class="avatar avatar-xs me-2" alt="user image">
-                          <span>박선희</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <i class="bi bi-paperclip"></i>
-                      <span class="my-2 text-xs">
-                        신청양식.pdf
-                      </span>
-                    </td>
-                  </tr>
-                  <tr data-bs-toggle="modal" data-bs-target="#jkanban-info-modal">
-                    <td>
-                      <div class="d-flex align-items-center">
-                        <p class="text-xs font-weight-bold ms-2 mb-0">4</p>
-                      </div>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">소상공인 행복마켓</span>
-                    </td>
-                    <td class="font-weight-bold">
-                      <span class="my-2 text-xs">2023.01.01</span>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-times" aria-hidden="true"></i></button>
-                        <span>거부</span>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <div class="d-flex align-items-center">
-                        <div class="d-flex align-items-center">
-                          <img src="${path}/assets/img/team-4.jpg" class="avatar avatar-xs me-2" alt="user image">
-                          <span>이영수</span>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="text-xs font-weight-bold">
-                      <i class="bi bi-paperclip"></i>
-                      <span class="my-2 text-xs">
-                        신청양식.pdf
-                      </span>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <div class="dataTable-top">
+              	<div class="dataTable-search">
+              		<form id="frmSch" class="d-flex"  method="post"> 
+	              		<input name="title" value="${sch.title}" class="form-control" placeholder="제목을 입력하세요" type="text">
+	              		<!-- <button class="btn btn-primary" type="submit">검색</button> -->
+	              		<input type="hidden" name="curPage" value="${sch.curPage}"/>
+	              	</form>
+              	</div>
+              </div>
+              <div class="dataTable-container">
+	              <table class="table table-flush dataTable-table" id="datatable-search">
+	                <thead class="thead-light">
+	                  <tr>
+	                    <th>번호</th>
+	                    <th>제목</th>
+	                    <th>등록일</th>
+	                    <th>상태</th>
+	                    <th>작성자</th>
+	                    <th>첨부파일</th>
+	                  </tr>
+	                </thead>
+	                <tbody>
+	                  <c:forEach var="myfapp" items="${list}">
+		                  <tr onclick="getFiles('${myfapp.applicationNo}')">
+		                    <td>
+		                      <div class="d-flex align-items-center">
+		                      	<p class="text-xs font-weight-bold ms-2 mb-0">${myfapp.cnt}</p>
+		                      </div>
+		                    </td>
+		                    <td class="font-weight-bold">
+		                      <span class="my-2 text-xs">${myfapp.title}</span>
+		                    </td>
+		                    <td class="font-weight-bold">
+		                      <span class="my-2 text-xs"><fmt:formatDate pattern='yyyy-MM-dd' value="${myfapp.applicationDate}"/></span>
+		                    </td>
+		                    <td class="text-xs font-weight-bold">
+		                      <div class="d-flex align-items-center">
+		                        <c:choose>
+				                   <c:when test="${myfapp.approvalWhether == 'a'}">
+				                      <button class="btn btn-icon-only btn-rounded btn-outline-success mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-check" aria-hidden="true"></i></button>
+	                        		  <span>승인</span>
+				                   </c:when>
+				                   <c:when test="${myfapp.approvalWhether == 'r'}">
+				                      <button class="btn btn-icon-only btn-rounded btn-outline-danger mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="fas fa-times" aria-hidden="true"></i></button>
+	                       			  <span>거부</span>
+				                   </c:when>
+				                   <c:otherwise>
+				                      <button class="btn btn-icon-only btn-rounded btn-outline-dark mb-0 me-2 btn-sm d-flex align-items-center justify-content-center"><i class="ni ni-fat-delete" aria-hidden="true"></i></button>		                   
+				                   	  <span>대기</span>
+				                   </c:otherwise>
+				                </c:choose>      
+		                      </div>
+		                    </td>
+		                    <td class="text-xs font-weight-bold">
+		                      <div class="d-flex align-items-center">
+		                        <img src="${path}/resource/img/Member/profileimg/defaultprofile.png" class="avatar avatar-xs me-2" alt="user image">
+		                        <span>${myfapp.nickname}</span>
+		                      </div>
+		                    </td>
+		                    <td class="text-xs font-weight-bold">
+			                    <c:if test="${myfapp.filename != null}">
+			                      <i class="bi bi-paperclip"></i>
+			                      <span class="my-2 text-xs">${myfapp.filename}</span>
+			                    </c:if>
+		                    </td>
+		                  </tr>
+	                  </c:forEach>
+	                </tbody>
+	              </table>
+	           </div>
             </div>
+            
             <!-- 페이지네이션 -->
             <nav aria-label="Page navigation example">
 			  <ul class="pagination justify-content-center">
-			    <li class="page-item disabled">
-			      <a class="page-link" href="javascript:;" tabindex="-1">
+			    <li class="page-item">
+			      <a class="page-link" href="javascript:goPage(${sch.startBlock-1});">
 			        <i class="fa fa-angle-left"></i>
 			        <span class="sr-only">Previous</span>
 			      </a>
 			    </li>
-			    <li class="page-item active"><a class="page-link" href="javascript:;">1</a></li>
-			    <li class="page-item"><a class="page-link" href="javascript:;">2</a></li>
-			    <li class="page-item"><a class="page-link" href="javascript:;">3</a></li>
+			    <c:forEach var="cnt" begin="${sch.startBlock}" end="${sch.endBlock}">
+			    	<li class="page-item ${sch.curPage==cnt?'active':''}">
+			    		<a class="page-link" href="javascript:goPage(${cnt});">${cnt}</a>
+			    	</li>
+			    </c:forEach>
 			    <li class="page-item">
-			      <a class="page-link" href="javascript:;">
+			      <a class="page-link" href="javascript:goPage(${sch.endBlock+1});">
 			        <i class="fa fa-angle-right"></i>
 			        <span class="sr-only">Next</span>
 			      </a>
@@ -472,8 +372,12 @@
     </div>
   </div>
   
+  
+  
+  
   <!-- 신청 조회 모달창 (양식 O) -->
-  <div class="modal fade" id="jkanban-info-modal" style="display: none" tabindex="-1" role="dialog">
+  <div data-bs-toggle="modal" data-bs-target="#ApplicaionNoFilesModal" id="ApplicaionNoFilesModalBtn"></div>
+  <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="ApplicaionNoFilesModal" style="display: none" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -483,16 +387,16 @@
           </button>
         </div>
         <div class="pt-4 modal-body">
-          <div class="form-group">
-          	<label>첨부파일</label> <!-- 첨부파일 -->
-            <div action="/file-upload" class="form-control dropzone" id="productImg"></div>
-          </div>
+          	<label>첨부파일(개별 다운로드)</label> <!-- 첨부파일 -->
+			<form id="downloadAppFileForm" action="downloadAppFile.do" method="get">
+					<%--여기에 파일리스트삽입 --%>
+			</form>
           <div class="alert alert-success d-none">Changes saved!</div>
-          <div class="text-end">
-            <button class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
+          <div class="text-end ApprovalBtnWrap">
+            <button class="m-1 btn btn-primary" data-bs-dismiss="modal" onclick="updateAppRe('a')">
               수정
             </button>
-            <button class="m-1 btn btn-danger" data-toggle="modal" data-target="#jkanban-info-modal">
+            <button class="m-1 btn btn-danger"  data-bs-dismiss="modal" onclick="updateAppRe('r')">
               삭제
             </button>
           </div>
@@ -500,51 +404,7 @@
       </div>
     </div>
   </div>
-  
-  <!-- 수정 완료 알림 모달창 (양식 X) -->
-  <div class="modal fade" id="jkanban-info-modal-accept" style="display: none" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="h5 modal-title">신청 조회</h5>
-          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="pt-4 modal-body">
-          <div class="form-group text-center">수정되었습니다.</div>
-          <div class="text-end">
-            <button class="btn btn-primary btn-block" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
-              확인
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-  <!-- 삭제 완료 알림 모달창 (양식 X) -->
-  <div class="modal fade" id="jkanban-info-modal-reject" style="display: none" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="h5 modal-title">신청 조회</h5>
-          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="pt-4 modal-body">
-          <div class="form-group text-center">삭제되었습니다.</div>
-          <div class="text-end">
-            <button class="btn btn-primary btn-block" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
-              확인
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
+ 
   <!--   Core JS Files   -->
   <script src="${path}/assets/js/core/popper.min.js"></script>
   <script src="${path}/assets/js/core/bootstrap.min.js"></script>
@@ -563,6 +423,13 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
+    
+    
+   
+    
+
+    
+    
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
