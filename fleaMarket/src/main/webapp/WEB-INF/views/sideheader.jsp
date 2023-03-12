@@ -107,7 +107,7 @@ li{
 						<ul class="nav ms-4">
 							<li class="nav-item active">
 								<a class="nav-link" href="AdminSearch.do">
-								  <span class="sidenav-normal">가입회원 목록조회<b class="caret"></b></span>
+								  <span class="sidenav-normal">회원목록조회<b class="caret"></b></span>
 								</a>
 							</li>	
 						</ul>
@@ -171,12 +171,26 @@ li{
 									<span class="sidenav-normal">플리마켓</span>
 								</a>
 							</li>
-					
 							<li class="nav-item ">
-								<a class="nav-link " href="#"> 
-									<span class="sidenav-normal">커뮤니티</span>
+								<a class="nav-link " href="QNAList.do"> 
+									<span class="sidenav-normal">고객센터</span>
 								</a>
 							</li>
+							<c:if test="${Login.authority=='관리자'}">
+							<li class="nav-item ">
+								<a class="nav-link" href="MemberQnAreg.do"> 
+									<span class="sidenav-normal">공지사항 등록</span>
+								</a>
+							</li>
+							</c:if>
+							<c:if test="${Login.authority!='관리자'}">
+							<li class="nav-item ">
+								<a class="nav-link" href="MemberQnAreg.do"> 
+									<span class="sidenav-normal">문의사항 등록</span>
+								</a>
+							</li>
+							</c:if>
+							<c:if test="${Login.authority!='관리자'}">
 							<li class="nav-item ">
 								<a class="nav-link" href="${path}/communityMemberRoom.do?email=${Login.email}"> 
 									<span class="sidenav-normal">마이룸</span>
@@ -187,7 +201,9 @@ li{
 									<span class="sidenav-normal">나의 팔로워</span>
 								</a>
 							</li>
+							</c:if>
 						</ul>
+						
 					</div>
 						
 				</li>			
