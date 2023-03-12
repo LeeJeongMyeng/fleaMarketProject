@@ -120,6 +120,14 @@ SET imgname=''
 WHERE communitynumber ='69';
 
 SELECT DISTINCT *
+FROM BoardImg i
+ORDER BY COMMUNITYNUMBER;
+
+SELECT DISTINCT *
+FROM capplicaion c
+ORDER BY COMMUNITYNUMBER;
+
+SELECT DISTINCT *
 FROM BoardImg i,capplicaion c
 WHERE i.communitynumber=c.communitynumber
 AND c.email='yujin@mail.com'
@@ -127,8 +135,8 @@ ORDER BY registdate desc;
 
 SELECT *
 FROM BoardImg i,capplicaion c
-WHERE i.communitynumber=c.communitynumber
-AND c.communitynumber ='68';
+WHERE i.communitynumber=c.communitynumber;
+AND c.communitynumber ='1';
 
 AND c.email='yujin@gmail.com'
 ORDER BY registdate;
@@ -295,6 +303,7 @@ AND myemail='yujin@mail.com';
 select *
 FROM FLEAMARKETMEMBER m, profile pro
 WHERE m.EMAIL =pro.email
+AND m.email!='test@gmail.com'
 AND m.email NOT in (SELECT following 
 					FROM friend
 					WHERE myemail='yujin@mail.com');

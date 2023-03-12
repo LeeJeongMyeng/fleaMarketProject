@@ -20,16 +20,22 @@
 
 <script type="text/javascript">
 	$(document).ready(function(e){
-
+		// 로그인 체크
+		  var login = "${Login.email}"
+		  loginCk(login)
 		 // 내용값 넣기(value)
 		$(".ql-editor").append("${boardInfo.content}")
 		console.log($('#edit-deschiption-edit .ql-editor').text())
 		// 글자수 갯수
+		//$("#textCnt").text(expeditor.text().length)
 		$("#edit-deschiption-edit").keyup(function(){
 			$("#textCnt").text(expeditor.text().length)
 		})
 		var expeditor=$('#edit-deschiption-edit .ql-editor')
 		$("#update").click(function(){
+			if($("input[name='indexNo']").is(":checked")==false){
+				$("#notchecked").attr("checked",true)
+			}
 			// 유효성체크
 			  if($("input[name='title']").val()==""){
 				  alert("[안내메시지] 제목을 입력하여야 게시글 등록이 가능합니다.")
@@ -49,138 +55,162 @@
 				  $("form").submit()
 			  }
   		})
-  		
+  		/* 
   		// 큰사진 클릭 시, file값 클릭
   		$("#bigphoto").click(function(){
-  			$("#fileClick6").click()
-  			imgView("img6")
-  			$("#fileClick6").change(function(){
+  			$("#fileClick1").click()
+  			$("#fileClick1").change(function(){
   				// 큰사진 숨기기
-  				$("#bigphoto").hide()
+  				//$("#bigphoto").hide()
+  				$("#index0").prop("checked", true)
   			})
   		})
   		// 작은사진
-  		$("#imgTab td").eq(0).click(function(){
-  			$("#fileClick1").click()
-  			imgView("img1")
-  			$("#fileClick1").change(function(){
-  				$(".regimg").eq(1).hide()
-  			})
-  		})
-  		$("#imgTab td").eq(1).click(function(){
+  		$("#imgTab td").eq(0).click(function(e){
   			$("#fileClick2").click()
-  			imgView("img2")
-  			$("#fileClick2").change(function(){
-  				$(".regimg").eq(2).hide()
+  			$("#fileClick2").change(function(e){
+  				//$(".regimg").eq(1).hide()
+  				$("#index1").prop("checked", true)
   			})
   		})
-  		$("#imgTab td").eq(2).click(function(){
+  		$("#imgTab td").eq(1).click(function(e){
   			$("#fileClick3").click()
-  			imgView("img3")
-  			$("#fileClick3").change(function(){
-  				$(".regimg").eq(3).hide()
+  			$("#fileClick3").change(function(e){
+  				//$(".regimg").eq(2).hide()
+  				$("#index2").prop("checked", true)
   			})
   		})
-  		$("#imgTab td").eq(3).click(function(){
+  		$("#imgTab td").eq(2).click(function(e){
   			$("#fileClick4").click()
-  			imgView("img4")
-  			$("#fileClick4").change(function(){
-  				$(".regimg").eq(4).hide()
+  			$("#fileClick4").change(function(e){
+  				//$(".regimg").eq(3).hide()
+  				$("#index3").prop("checked", true)
   			})
   		})
-  		$("#imgTab td").eq(4).click(function(){
+  		$("#imgTab td").eq(3).click(function(e){
   			$("#fileClick5").click()
-  			imgView("img5")
-  			$("#fileClick5").change(function(){
-  				$(".regimg").eq(5).hide()
+  			$("#fileClick5").change(function(e){
+  				//$(".regimg").eq(4).hide()
+  				$("#index4").prop("checked", true)
   			})
   		})
-  		// 이미지 미리보기 기능
-	  	function imgView(clickImg){
-			$("input[type='file']").change(function(e){
-			      var files = e.target.files;
-			      var arr =Array.prototype.slice.call(files);
-			      
-			      //업로드 가능 파일인지 체크
-			      for(var i=0;i<files.length;i++){
-			        if(!checkExtension(files[i].name,files[i].size)){
-			          return false;
-			        }
-			      }
-			      preview(files,clickImg);
-			});//file change
-		}
-  	
-	  // 사진 용량에 따른 유효성체크
-	  function checkExtension(fileName,fileSize){
+  		$("#imgTab td").eq(4).click(function(e){
+  			$("#fileClick6").click()
+  			$("#fileClick6").change(function(e){
+  				//$(".regimg").eq(5).hide()
+  				$("#index5").prop("checked", true)
+  			})
+  		}) */
+  		$("#imgChange").click(function(){
+  			$("#bigphoto").hide()
+  			$("#imgTab").hide()
+  			$('#fileClick1').show()
+  			
+  		})
+  		// 이미지 변경
+  		$('#fileClick1').hide()
+	  	$('#fileClick2').hide()
+	  	$('#fileClick3').hide()
+	  	$('#fileClick4').hide()
+	  	$('#fileClick5').hide()
+	  	$('#fileClick6').hide()
+	  	$('#fileClick7').hide()
+		  //div 내용 비워주기
+		      //$('#preview').empty();
+		      
+	    $("input[type='file']").change(function(e){
+			if($('#uploadFile1').val()!=""){
+				  $('#fileClick1').hide()
+				  $('#fileClick2').show()
+			 }
+			 if($('#fileClick2').val()!=""){
+				  $('#fileClick2').hide()
+				  $('#fileClick3').show()
+			 }
+			 if($('#fileClick3').val()!=""){
+				  $('#fileClick3').hide()
+				  $('#fileClick4').show()
+			 }
+			 if($('#fileClick4').val()!=""){
+				  $('#fileClick4').hide()
+				  $('#fileClick5').show()
+			 }
+			  
+			 if($('#fileClick5').val()!=""){
+				  $('#fileClick5').hide()
+				  $('#fileClick6').show()
+			 }
+			 
+			 if($('#fileClick6').val()!=""){
+				 $('#fileClick6').hide()
+				 $('#fileClick7').show()
+				 
+				 $('#fileClick7').click(function(){
+					 alert("[안내메시지]사진은 6장이상 등록이 불가합니다.")
+					 $('#fileClick7').attr("readonly",true)
+			 	 })
+			 }
+			  
+		      var files = e.target.files;
+		      var arr =Array.prototype.slice.call(files);
+		      
+		      //업로드 가능 파일인지 체크
+		      for(var i=0;i<files.length;i++){
+		        if(!checkExtension(files[i].name,files[i].size)){
+		          return false;
+		        }
+		      }
+		      preview(arr);
+		    });//file change
+		  
+		  // 사진 용량에 따른 유효성체크
+		  function checkExtension(fileName,fileSize){
 
-	      var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
-	      var maxSize = 20971520;  //20MB
-	      
-	      if(fileSize >= maxSize){
-	        alert('파일 사이즈 초과');
-	        $("input[type='file']").val("");  //파일 초기화
-	        return false;
-	      }
-	      
-	      if(regex.test(fileName)){
-	        alert('[안내메시지]업로드 불가능한 파일이 있습니다.');
-	        $("input[type='file']").val("");  //파일 초기화
-	        return false;
-	      }
-	      return true;
-	    }
-	  	//이미지 넣기
-	  	function preview(arr, clickImg){
-	  		//function(f){
-	  		arr.forEach(function(f){
-	        //파일명이 길면 파일명...으로 처리
-	        var fileName = f.name;
-	        if(fileName.length > 10){
-	          fileName = fileName.substring(0,7)+"...";
-	        }
-	        //div에 이미지 추가
-	        var str = '<div style="display: inline-flex; padding: 10px;"><li>';
-	        str += '<span>'+fileName+'</span><br>';
-	        //이미지 파일 미리보기
-	        var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
-			
-				if(f.type.match('image.*')){
+		      var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+		      var maxSize = 20971520;  //20MB
+		      
+		      if(fileSize >= maxSize){
+		        alert('파일 사이즈 초과');
+		        $("input[type='file']").val("");  //파일 초기화
+		        return false;
+		      }
+		      
+		      if(regex.test(fileName)){
+		        alert('[안내메시지]업로드 불가능한 파일이 있습니다.');
+		        $("input[type='file']").val("");  //파일 초기화
+		        return false;
+		      }
+		      return true;
+		    }
+		  //이미지 넣기
+		  function preview(arr){
+		      arr.forEach(function(f){
+		        //파일명이 길면 파일명...으로 처리
+		        var fileName = f.name;
+		        if(fileName.length > 10){
+		          fileName = fileName.substring(0,7)+"...";
+		        }
+		        //div에 이미지 추가
+		        var str = '<div style="display: inline-flex; padding: 10px;"><li>';
+		        str += '<span>'+fileName+'</span><br>';
+		        //이미지 파일 미리보기
+		        if(f.type.match('image.*')){
+		          	var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
 	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
-		            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
-		            	str += '</li></div>';
-		            	$(str).appendTo('#preview1');
-		            	if(clickImg=="img1"){
-		           			$(str).appendTo('#preview1');
-		            	}else if(clickImg=="img2"){
-		            		$(str).appendTo('#preview2');
-		    	  		}else if(clickImg=="img3"){
-		    	  			$(str).appendTo('#preview3');
-		    	  		}else if(clickImg=="img4"){
-		    	  			$(str).appendTo('#preview4');
-		    	  		}else if(clickImg=="img5"){
-		    	  			$(str).appendTo('#preview5');
-		    	  		}
-			    	 }
+	            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
+	            	str += '</li></div>';
+	            $(str).appendTo('#preview');
+		          } 
 		          reader.readAsDataURL(f);
 		        }else{
-		          	str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
-		          	
-		          	if(clickImg=="img1"){
-	           			 $(str).appendTo('#preview1');
-	            	}else if(clickImg=="img2"){
-	            		 $(str).appendTo('#preview2');
-	    	  		}else if(clickImg=="img3"){
-	    	  			 $(str).appendTo('#preview3');
-	    	  		}else if(clickImg=="img4"){
-	    	  			 $(str).appendTo('#preview4');
-	    	  		}else if(clickImg=="img5"){
-	    	  			 $(str).appendTo('#preview5');
-	    	  		}
+		          str += '<img src="/resources/img/fileImg.png" title="'+f.name+'" width=100 height=100 />';
+		          $(str).appendTo('#preview');
 		        }
-	      });//arr.forEach
-	    }
-	});
+		      });//arr.forEach
+		    }
+	}); 
+	
+	
 	function updateImpossible(what){
 		if(what==="작성자"){
 			alert("[안내메시지]작성자는 변경이 불가합니다.")
@@ -208,7 +238,7 @@
 
 <body class="g-sidenav-show bg-gray-100">
 	<jsp:include page="header.jsp"></jsp:include>
-	<form method="post" enctype="multipart/form-data" action="${path}/communityUpdate.do"><!-- action="${path}/communityUpdate.do" -->
+	<form method="post" enctype="multipart/form-data" action="${path}/communityUpdate.do"><!--  -->
 	  <input type="hidden" name="communitynumber" value="${boardInfo.getCommunitynumber()}">
       <div class="row mt-4" >
          <div class="card h-100" style="margin-top:8%;">
@@ -217,6 +247,14 @@
              <div class="row">
                <div class="col-12">
                  <div class="card-body">
+      				<input type="file" name="updateFile" class="form-control" id="fileClick1" multiple>
+                	<input type="file" name="updateFile" class="form-control" id="fileClick2" multiple>
+                	<input type="file" name="updateFile" class="form-control" id="fileClick3" multiple>
+                	<input type="file" name="updateFile" class="form-control" id="fileClick4" multiple>
+                	<input type="file" name="updateFile" class="form-control" id="fileClick5" multiple>
+                	<input type="file" name="updateFile" class="form-control" id="fileClick6" multiple>
+                	<input type="file"  id="fileClick7" class="form-control" multiple>
+                	<div id="preview"></div>
 		             <div class="row" style="margin-left:30%;">
 			              <!-- <label style="border:1px solid black" >  -->
 				               <img id="bigphoto" class="border-radius-lg shadow-lg ms-5 regimg" src="${path}/resource/community/${boardImgArr[0]}" 
@@ -224,11 +262,12 @@
 				                <span id="noImg" class="ms-5" style="color:red;"></span>
 				                
 			              <!--  </label> -->
-		                  
+		                  					
 		                 <div class="my-gallery d-flex mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery">
 			                    <table class="ms-4" id="imgTab">
 			                    	<tbody>
 				                    	<tr>
+				                    		
 					                    	<td style="border:30px solid white;">
 					                    		<img class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
 								                        		 src="${path}/resource/community/${boardImgArr[1]}" alt="이미지 없음" style="width:auto; height:150px;" />
@@ -256,7 +295,8 @@
 								           	</td>
 					                    </tr>
 					                    <tr>
-					                    	<td colspan="5" style="color:red; text-align:center;">※ 사진을 클릭하시면 수정이 가능합니다.</td>
+					                    	<td colspan="5"><button type="button" id="imgChange" class="btn btn-outline-primary" style="margin-left:40%;" >사진 수정</button></td>
+					                    	<!-- <td colspan="5" style="color:red; text-align:center;">※ 사진을 클릭하시면 수정이 가능합니다.</td> -->
 					                    </tr>
 				                    </tbody>
 			                    </table>
@@ -264,12 +304,17 @@
 		             </div>
            		</div>
         	</div>
-        	  		<input type="file" name="updateFile" id="fileClick1" multiple>
-                	<input type="file" name="updateFile" id="fileClick2" multiple>
-                	<input type="file" name="updateFile" id="fileClick3" multiple>
-                	<input type="file" name="updateFile" id="fileClick4" multiple>
-                	<input type="file" name="updateFile" id="fileClick5" multiple>
-                	<input type="file" name="updateFile" id="fileClick6" multiple>
+        	  		
+                	<!-- 
+                	
+                	<input type="checkbox" name="indexNo" id="notchecked" value="6">
+                	<input type="checkbox" name="indexNo" id="index0" value="0" >
+                	<input type="checkbox" name="indexNo" id="index1" value="1" >
+                	<input type="checkbox" name="indexNo" id="index2" value="2" >
+                	<input type="checkbox" name="indexNo" id="index3" value="3" >
+                	<input type="checkbox" name="indexNo" id="index4" value="4" >
+                	<input type="checkbox" name="indexNo" id="index5" value="5" > -->
+                	
         <div class="row mt-4">
           <div class="card">
             <div class="card-body">

@@ -75,6 +75,7 @@
 				and m.email=#{email}
 			</if>
 			<if test="div=='unfollowMem'.toString()">
+				AND m.email!=#{email}
 				AND m.email NOT in (SELECT following 
 							FROM friend
 							WHERE myemail=#{email})

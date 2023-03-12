@@ -172,7 +172,7 @@
 	              <h5 class="mt-3 mb-0"><span id="meRepCnt"></span><span class="text-secondary text-sm">개</span></h5>
 	              <p class="mb-0">${roommember.nickname}님이 쓰신 댓글 갯수</p>
 	              <button type="button" class="btn btn-outline-primary mt-2" data-bs-toggle="modal" data-bs-target="#repModal">
-	              		댓글보러가기</button>
+	              		댓글보기</button>
 	            </div>
 	          </div>
 	        </div>
@@ -192,7 +192,7 @@
               <div class="avatar-group">
               	<c:forEach var="followers" items="${follower}">
 	                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="${folloewers.nickname}" >
-	                  <img alt="Image placeholder" src="${path}/resource/img/Member/profileimg/${followers.profileimg}" style="width:55px;height:45px;" onclick="memberRoom(${folloewers.email})">
+	                  <img alt="팔로우 없음" src="${path}/resource/img/Member/profileimg/${followers.profileimg}" style="width:55px;height:45px;" onclick="memberRoom(${folloewers.email})">
 	                </a>
                 </c:forEach>
               </div>
@@ -201,7 +201,7 @@
             <hr class="vertical light mt-0">
           </div>
           <div class="ps-4">
-            <button class="btn bg-gradient-info btn-icon-only mb-0 mt-3" data-toggle="modal" data-target="#new-board-modal">
+            <button class="btn bg-gradient-info btn-icon-only mb-0 mt-3" data-bs-toggle="modal" data-bs-target="#unfollModal">
               <i class="fa fa-plus"></i>
             </button>
           </div>
@@ -213,7 +213,7 @@
           <div class="card h-100">
             <div class="card-header pb-0 p-3">
               <div class="d-flex justify-content-between">
-                <h6 class="mb-0">커뮤니티 카테고리별 ${roommember.nickname}님의 게시물 갯수</h6>
+                <h6 class="mb-0">카테고리별 ${roommember.nickname}님의 게시글 갯수</h6>
                 <button type="button" class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" 
                 		data-bs-toggle="modal" data-bs-target="#boardCntModal">
                   <i class="fas fa-info" aria-hidden="true"></i>
@@ -273,84 +273,247 @@
           </div>
         </div>
       </div>
-      <div class="mt-3 kanban-container" style="width:100%;">
-        <div class="py-2 min-vh-100 d-inline-flex">
-          <div id="myKanban"></div>
-        </div>
-      </div>
-      
       <!-- 게시글내역  -->
-      <div class="modal fade" id="new-board-modal" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="h5 modal-title">너의 게시물명을 입력해라</h5>
-              <button type="button" class="btn close pe-1" data-dismiss="modal" data-target="#new-board-modal" aria-label="Close">
-                <span aria-hidden="true">×</span>
-              </button>
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-1">홍보</h6>
             </div>
-            <div class="pt-4 modal-body">
-              <div class="mb-4 input-group">
-                <span class="input-group-text">
-                  <i class="far fa-edit"></i>
-                </span>
-                <input class="form-control" placeholder="Board Name" type="text" id="jkanban-new-board-name" />
-              </div>
-              <div class="text-end">
-                <button class="m-1 btn btn-primary" id="jkanban-add-new-board" data-toggle="modal" data-target="#new-board-modal">
-                  Save changes
-                </button>
-                <button class="m-1 btn btn-secondary" data-dismiss="modal" data-target="#new-board-modal">
-                  Close
-                </button>
+     		<c:if test="${not empty adv[0].title}">
+            <div class="card-body p-3">
+              <div class="row">
+	              <c:forEach var="advlist" items="${adv}">
+	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+	                  <div class="card card-blog card-plain">
+	                    <div class="position-relative">
+	                      <a class="d-block shadow-xl border-radius-xl">
+	                        <img src="${path}/resource/community/${advlist.imgname}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+	                      </a>
+	                    </div>
+	                    <div class="card-body px-1 pb-0">
+	                      <a href="javascript:;">
+	                        <h5>
+	                          ${idvlist.title}
+	                        </h5>
+	                      </a>
+	                      <p class="mb-4 text-sm">
+	                         ${idvlist.content}
+	                      </p>
+	                      <div class="d-flex align-items-center justify-content-between">
+	                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</button>
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
+	               </c:forEach>
+                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                  <div class="card h-100 card-plain border">
+                    <div class="card-body d-flex flex-column justify-content-center text-center">
+                      <a href="javascript:;">
+                        <i class="fa fa-plus text-secondary mb-3"></i>
+                        <h5 class=" text-secondary"> 더 보기 </h5>
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+            </c:if>
+            <c:if test="${empty adv[0].title}">
+            	<h6 style="color:grey; text-align:center;">게시글이 없습니다.</h6>
+            </c:if>
           </div>
         </div>
       </div>
-      <div class="hidden opacity-50 fixed inset-0 z-40 bg-black" id="new-board-modal-backdrop"></div>
-      <div class="modal fade" id="jkanban-info-modal" style="display: none" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="h5 modal-title">게시물 상세보기</h5>
-              <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-1">사업아이디어</h6>
             </div>
-            <div class="pt-4 modal-body">
-              <input id="jkanban-task-id" class="d-none" />
-              <div class="mb-4 input-group">
-                <span class="input-group-text">
-                  <i class="far fa-edit"></i>
-                </span>
-                <input class="form-control" placeholder="Task Title" type="text" id="jkanban-task-title" />
-              </div>
-              <div class="mb-4 input-group">
-                <span class="input-group-text">
-                  <i class="fas fa-user"></i>
-                </span>
-                <input class="form-control" placeholder="Task Assignee" type="text" id="jkanban-task-assignee" />
-              </div>
-              <div class="form-group">
-                <textarea class="form-control" placeholder="Task Description" id="jkanban-task-description" rows="4"></textarea>
-              </div>
-              <div class="alert alert-success d-none">Changes saved!</div>
-              <div class="text-end">
-                <button class="m-1 btn btn-primary" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
-                  Save changes
-                </button>
-                <button class="m-1 btn btn-secondary" data-dismiss="modal" data-target="#jkanban-info-modal">
-                  Close
-                </button>
+            <c:if test="${not empty idea[0].title}">
+            <div class="card-body p-3">
+              <div class="row">
+	              <c:forEach var="idealist" items="${idea}">
+	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+	                  <div class="card card-blog card-plain">
+	                    <div class="position-relative">
+	                      <a class="d-block shadow-xl border-radius-xl">
+	                        <img src="${path}/resource/community/${idealist.imgname}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+	                      </a>
+	                    </div>
+	                    <div class="card-body px-1 pb-0">
+	                      <a href="javascript:;">
+	                        <h5>
+	                          ${idea.title}
+	                        </h5>
+	                      </a>
+	                      <p class="mb-4 text-sm">
+	                       	${idea.content}
+	                      </p>
+	                      <div class="d-flex align-items-center justify-content-between">
+	                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</button>
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
+	                </c:forEach>
+                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                  <div class="card h-100 card-plain border">
+                    <div class="card-body d-flex flex-column justify-content-center text-center">
+                      <a href="javascript:;">
+                        <i class="fa fa-plus text-secondary mb-3"></i>
+                        <h5 class=" text-secondary"> 더 보기 </h5>
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
+            </c:if>
+            <c:if test="${empty idea[0].title}">
+            	<h6 style="color:grey; text-align:center;">게시글이 없습니다.</h6>
+            </c:if>
           </div>
         </div>
       </div>
-      <div class="hidden opacity-50 fixed inset-0 z-40 bg-black" id="jkanban-info-modal-backdrop"></div>
-    </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-1">사는 이야기</h6>
+            </div>
+            <div class="card-body p-3">
+            <c:if test="${not empty life[0].title}">
+              <div class="row">
+	              <c:forEach var="lifelist" items="${life}">
+	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+	                  <div class="card card-blog card-plain">
+	                    <div class="position-relative">
+	                      <a class="d-block shadow-xl border-radius-xl">
+	                        <img src="${path}/resource/community/${lifelist.imgname}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+	                      </a>
+	                    </div>
+	                    <div class="card-body px-1 pb-0">
+	                      <a href="javascript:;">
+	                        <h5>
+	                          	${lifelist.title}
+	                        </h5>
+	                      </a>
+	                      <p class="mb-4 text-sm">
+	                      		${lifelist.content}
+	                      </p>
+	                      <div class="d-flex align-items-center justify-content-between">
+	                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</button>
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
+	                </c:forEach>
+                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                  <div class="card h-100 card-plain border">
+                    <div class="card-body d-flex flex-column justify-content-center text-center">
+                      <a href="javascript:;">
+                        <i class="fa fa-plus text-secondary mb-3"></i>
+                        <h5 class=" text-secondary"> 더보기 </h5>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </c:if>
+            <c:if test="${empty life[0].title}">
+            	<h6 style="color:grey; text-align:center;">게시글이 없습니다.</h6>
+            </c:if>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0 p-3">
+              <h6 class="mb-1">꿀팁</h6>
+            </div>
+            <c:if test="${not empty tip[0].title}">
+            <div class="card-body p-3">
+              <div class="row">
+	              <c:forEach var="tiplist" items="${tip}">
+	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+	                  <div class="card card-blog card-plain">
+	                    <div class="position-relative">
+	                      <a class="d-block shadow-xl border-radius-xl">
+	                        <%-- <img src="${path}/resource/community/${advlist.imgname}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl"> --%>
+	                      </a>
+	                    </div>
+	                    <div class="card-body px-1 pb-0">
+	                      <a href="javascript:;">
+	                        <h5>
+	                          	${tiplist.title}
+	                        </h5>
+	                      </a>
+	                      <p class="mb-4 text-sm">
+	                       		${tiplist.content}
+	                      </p>
+	                      <div class="d-flex align-items-center justify-content-between">
+	                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</button>
+	                      </div>
+	                    </div>
+	                  </div>
+	                </div>
+	                </c:forEach>
+                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
+                  <div class="card h-100 card-plain border">
+                    <div class="card-body d-flex flex-column justify-content-center text-center">
+                      <a href="javascript:;">
+                        <i class="fa fa-plus text-secondary mb-3"></i>
+                        <h5 class=" text-secondary"> 더 보기 </h5>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </c:if>
+            <c:if test="${empty tip[0].title}">
+            	<h6 style="color:grey; text-align:center;">게시글이 없습니다.</h6>
+            </c:if>
+          </div>
+        </div>
+      </div>
   </main>
+  <!-- 팔로우 추가 회원(언팔중인 회원) 보러가기 모달창 -->
+  <div class="modal fade w-500" id="unfollModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document" style="width:800px;">
+		  <div class="modal-content" >
+		    <div class="modal-header">
+		      <h5 class="modal-title" id="exampleModalLabel">팔로우 하고싶은 회원정보<br></h5>
+		      
+		      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+		        <span aria-hidden="true">&times;</span>
+		      </button>
+		    </div>
+		    <div class="modal-body">
+		      	<table class="table align-items-center mb-0">
+		      		<tr><th>프로필</th><th>이메일</th><th>닉네임</th><th>room구경가기</th><th>팔로우</th></tr>
+		      		<c:forEach var="unfollowmem" items="${unfollowMember}">
+		      			<tr>
+		      			<td><img src="${path}/resource/img/Member/profileimg/${unfollowmem.profileimg}" style="width:40px;height:40px;"></td>
+		      			<td>${unfollowmem.email}</td>
+		      			<td>${unfollowmem.nickname}</td>
+		      			<td class="align-middle text-center"><button id="roomGo" class="btn btn-outline-primary mt-2"><i class="ni ni-shop"></i></button></td>
+		      			<td class="align-middle text-center"><button id="followinsert" class="btn btn-outline-primary mt-2"><i class="ni ni-fat-add"></i></button></td>
+		      			</tr>
+		      		</c:forEach>
+		      	</table>
+		    </div>
+		    <div class="modal-footer">
+		      <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
+		    </div>
+		  </div>
+		</div>
+	</div>
   <!-- 게시글 갯수정보 모달창  -->
 	<div class="modal fade" id="boardCntModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
@@ -719,7 +882,7 @@
 	console.log("꿀팁",tip)
 	
 	if(arrFun(adv)==0 && arrFun(idea)==0 && arrFun(life)==0 && arrFun(tip)==0){
-		$("#chartposition").text("등록된 게시물이 없습니다.")
+		$("#chartposition").text("등록된 게시글이 없습니다.")
 	}
     // Pie chart
     new Chart(ctx2, {
@@ -777,183 +940,7 @@
       },
     });
   </script>
-  <script>
-    // 게시물 기능
-
-    (function() {
-      if (document.getElementById("myKanban")) {
-        var KanbanTest = new jKanban({
-          element: "#myKanban",
-          gutter: "5px",
-          widthBoard: "340px",
-          click: el => {
-            let jkanbanInfoModal = document.getElementById("jkanban-info-modal");
-
-            let jkanbanInfoModalTaskId = document.querySelector(
-              "#jkanban-info-modal #jkanban-task-id"
-            );
-            let jkanbanInfoModalTaskTitle = document.querySelector(
-              "#jkanban-info-modal #jkanban-task-title"
-            );
-            let jkanbanInfoModalTaskAssignee = document.querySelector(
-              "#jkanban-info-modal #jkanban-task-assignee"
-            );
-            let jkanbanInfoModalTaskDescription = document.querySelector(
-              "#jkanban-info-modal #jkanban-task-description"
-            );
-            let taskId = el.getAttribute("data-eid");
-
-            let taskTitle = el.querySelector('p.text').innerHTML;
-            let taskAssignee = el.getAttribute("data-assignee");
-            let taskDescription = el.getAttribute("data-description");
-            jkanbanInfoModalTaskId.value = taskId;
-            jkanbanInfoModalTaskTitle.value = taskTitle;
-            jkanbanInfoModalTaskAssignee.value = taskAssignee;
-            jkanbanInfoModalTaskDescription.value = taskDescription;
-            var myModal = new bootstrap.Modal(jkanbanInfoModal, {
-              show: true
-            });
-            myModal.show();
-          },
-          buttonClick: function(el, boardId) {
-            if (
-              document.querySelector("[data-id='" + boardId + "'] .itemform") ===
-              null
-            ) {
-              // create a form to enter element
-              var formItem = document.createElement("form");
-              formItem.setAttribute("class", "itemform");
-              formItem.innerHTML = `<div class="form-group">
-          <textarea class="form-control" rows="2" autofocus></textarea>
-          </div>
-          <div class="form-group">
-              <button type="submit" class="btn bg-gradient-success btn-sm pull-end">댓글쓰기</button>
-              <button type="button" id="kanban-cancel-item" class="btn bg-gradient-light btn-sm pull-end me-2">취소</button>
-          </div>`;
-
-              KanbanTest.addForm(boardId, formItem);
-              formItem.addEventListener("submit", function(e) {
-                e.preventDefault();
-                var text = e.target[0].value;
-                let newTaskId =
-                  "_" + text.toLowerCase().replace(/ /g, "_") + boardId;
-                KanbanTest.addElement(boardId, {
-                  id: newTaskId,
-                  title: text,
-                  class: ["border-radius-md"]
-                });
-                formItem.parentNode.removeChild(formItem);
-              });
-              document.getElementById("kanban-cancel-item").onclick = function() {
-                formItem.parentNode.removeChild(formItem);
-              };
-            }
-          },
-          addItemButton: true,
-          boards: [{
-              id: "_backlog",
-              title: "홍보글",
-              item: [{
-                  id: "_task_1_title_id",
-                  title: '<img src="${path}/assets/img/home-decor-1.jpg" class="w-100"><span class="mt-3 badge badge-sm bg-gradient-success">Done</span><p class="text mt-2">Redesign for the home page</p><div class="d-flex"><div> <i class="fa fa-paperclip me-1 text-sm"></i><span class="text-sm">8</span></div><div class="avatar-group ms-auto"><a href="javascript:;" class="avatar avatar-xs me-2 rounded-circle" data-toggle="tooltip" data-original-title="Jessica Rowland"><img alt="Image placeholder" src="${path}/assets/img/team-5.jpg" class=""></a><a href="javascript:;" class="avatar avatar-xs rounded-circle me-2" data-toggle="tooltip" data-original-title="Audrey Love"><img alt="Image placeholder" src="${path}/assets/img/team-1.jpg" class="rounded-circle"></a><a href="javascript:;" class="avatar avatar-xs me-2 rounded-circle" data-toggle="tooltip" data-original-title="Michael Lewis"><img alt="Image placeholder" src="${path}/assets/img/team-4.jpg" class="rounded-circle"></a></div></div>',
-                  assignee: "Done Joe",
-                  description: "This task's description is for something, but not for anything",
-                  class: ["border-radius-md"]
-                }
-              ]
-            },
-            {
-              id: "_progress",
-              title: "사업아이디어",
-              item: [{
-                  id: "_task_3_title_id",
-                  title: '<img src="${path}/assets/img/home-decor-1.jpg" class="w-100"><span class="mt-3 badge badge-sm bg-gradient-success">Done</span><p class="text mt-2">Redesign for the home page</p><div class="d-flex"><div> <i class="fa fa-paperclip me-1 text-sm"></i><span class="text-sm">8</span></div><div class="avatar-group ms-auto"><a href="javascript:;" class="avatar avatar-xs me-2 rounded-circle" data-toggle="tooltip" data-original-title="Jessica Rowland"><img alt="Image placeholder" src="${path}/assets/img/team-5.jpg" class=""></a><a href="javascript:;" class="avatar avatar-xs rounded-circle me-2" data-toggle="tooltip" data-original-title="Audrey Love"><img alt="Image placeholder" src="${path}/assets/img/team-1.jpg" class="rounded-circle"></a><a href="javascript:;" class="avatar avatar-xs me-2 rounded-circle" data-toggle="tooltip" data-original-title="Michael Lewis"><img alt="Image placeholder" src="${path}/assets/img/team-4.jpg" class="rounded-circle"></a></div></div>',
-                  assignee: "Done Joe",
-                  description: "This task's description is for something, but not for anything",
-                  class: ["border-radius-md"]
-                }
-              ]
-            },
-            {
-              id: "_working",
-              title: "사는 이야기",
-              item: [{
-                  id: "_task_do_something_2_id",
-                  title: '<img src="${path}/assets/img/home-decor-1.jpg" class="w-100"><span class="mt-3 badge badge-sm bg-gradient-success">Done</span><p class="text mt-2">Redesign for the home page</p><div class="d-flex"><div><i class="fa fa-paperclip me-1 text-sm"></i><span class="text-sm">8</span></div><div class="avatar-group ms-auto"><a href="javascript:;" class="avatar avatar-xs me-2 rounded-circle" data-toggle="tooltip" data-original-title="Jessica Rowland"><img alt="Image placeholder" src="${path}/assets/img/team-5.jpg" class=""></a><a href="javascript:;" class="avatar avatar-xs rounded-circle me-2" data-toggle="tooltip" data-original-title="Audrey Love"><img alt="Image placeholder" src="${path}/assets/img/team-1.jpg" class="rounded-circle"></a><a href="javascript:;" class="avatar avatar-xs me-2 rounded-circle" data-toggle="tooltip" data-original-title="Michael Lewis"><img alt="Image placeholder" src="${path}/assets/img/team-4.jpg" class="rounded-circle"></a></div></div>',
-                  assignee: "Done Joe",
-                  description: "This task's description is for something, but not for anything",
-                  class: ["border-radius-md"]
-                }
-              ]
-            },
-            {
-              id: "_done",
-              title: "꿀팁",
-              item: [{
-                  id: "_task_all_right_id",
-                  title: '<img src="${path}/assets/img/home-decor-1.jpg" class="w-100"><span class="mt-3 badge badge-sm bg-gradient-success">Done</span><p class="text mt-2">Redesign for the home page</p><div class="d-flex"><div> <i class="fa fa-paperclip me-1 text-sm"></i><span class="text-sm">8</span></div><div class="avatar-group ms-auto"><a href="javascript:;" class="avatar avatar-xs me-2 rounded-circle" data-toggle="tooltip" data-original-title="Jessica Rowland"><img alt="Image placeholder" src="${path}/assets/img/team-5.jpg" class=""></a><a href="javascript:;" class="avatar avatar-xs rounded-circle me-2" data-toggle="tooltip" data-original-title="Audrey Love"><img alt="Image placeholder" src="${path}/assets/img/team-1.jpg" class="rounded-circle"></a><a href="javascript:;" class="avatar avatar-xs me-2 rounded-circle" data-toggle="tooltip" data-original-title="Michael Lewis"><img alt="Image placeholder" src="${path}/assets/img/team-4.jpg" class="rounded-circle"></a></div></div>',
-                  assignee: "Done Joe",
-                  description: "This task's description is for something, but not for anything",
-                  class: ["border-radius-md"]
-                },
-                {
-                  id: "_task_ok_id",
-                  title: '<span class="mt-2 badge badge-sm bg-gradient-success">Done</span><p class="text mt-2">Schedule winter campaign</p><div class="d-flex"><div> <i class="fa fa-paperclip me-1 text-sm"></i><span class="text-sm">2</span></div><div class="avatar-group ms-auto"><a href="javascript:;" class="avatar avatar-xs me-2 rounded-circle" data-toggle="tooltip" data-original-title="Michael Laurence"><img alt="Image placeholder" src="${path}/assets/img/team-1.jpg" class=""></a><a href="javascript:;" class="avatar avatar-xs me-2 rounded-circle" data-toggle="tooltip" data-original-title="Michael Lewis"><img alt="Image placeholder" src="${path}/assets/img/team-4.jpg" class="rounded-circle"></a></div></div>',
-                  assignee: "Done Joe",
-                  description: "This task's description is for something, but not for anything",
-                  class: ["border-radius-md"]
-                }
-              ]
-            }
-          ]
-        });
-
-        var addBoardDefault = document.getElementById("jkanban-add-new-board");
-        addBoardDefault.addEventListener("click", function() {
-          let newBoardName = document.getElementById("jkanban-new-board-name")
-            .value;
-          let newBoardId = "_" + newBoardName.toLowerCase().replace(/ /g, "_");
-          KanbanTest.addBoards([{
-            id: newBoardId,
-            title: newBoardName,
-            item: []
-          }]);
-          document.querySelector('#new-board-modal').classList.remove('show');
-          document.querySelector('body').classList.remove('modal-open');
-
-          document.querySelector('.modal-backdrop').remove();
-        });
-
-        var updateTask = document.getElementById("jkanban-update-task");
-        updateTask.addEventListener("click", function() {
-          let jkanbanInfoModalTaskId = document.querySelector(
-            "#jkanban-info-modal #jkanban-task-id"
-          );
-          let jkanbanInfoModalTaskTitle = document.querySelector(
-            "#jkanban-info-modal #jkanban-task-title"
-          );
-          let jkanbanInfoModalTaskAssignee = document.querySelector(
-            "#jkanban-info-modal #jkanban-task-assignee"
-          );
-          let jkanbanInfoModalTaskDescription = document.querySelector(
-            "#jkanban-info-modal #jkanban-task-description"
-          );
-          KanbanTest.replaceElement(jkanbanInfoModalTaskId.value, {
-            title: jkanbanInfoModalTaskTitle.value,
-            assignee: jkanbanInfoModalTaskAssignee.value,
-            description: jkanbanInfoModalTaskDescription.value
-          });
-          jkanbanInfoModalTaskId.value = jkanbanInfoModalTaskId.value;
-          jkanbanInfoModalTaskTitle.value = jkanbanInfoModalTaskTitle.value;
-          jkanbanInfoModalTaskAssignee.value = jkanbanInfoModalTaskAssignee.value;
-          jkanbanInfoModalTaskDescription.value = jkanbanInfoModalTaskDescription.value;
-          document.querySelector('#jkanban-info-modal').classList.remove('show');
-          document.querySelector('body').classList.remove('modal-open');
-          document.querySelector('.modal-backdrop').remove();
-        });
-      }
-    })();
-  </script>
+  
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
