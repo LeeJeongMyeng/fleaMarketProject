@@ -20,9 +20,6 @@
 
 <script type="text/javascript">
 	$(document).ready(function(e){
-		// 로그인 체크
-		  var login = "${Login.email}"
-		  loginCk(login)
 		 // 내용값 넣기(value)
 		$(".ql-editor").append("${boardInfo.content}")
 		console.log($('#edit-deschiption-edit .ql-editor').text())
