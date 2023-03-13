@@ -322,11 +322,11 @@
               <div class="row" style="--bs-gutter-x:0;">
                 <div class="col-12 col-sm-6">
                    <label class="postUpdateTitle" style="width:90%;">카테고리</label>
-	               <input class="form-control" onclick="updateImpossible('카테고리')" value="${boardInfo.category}" type="text" readonly style="width:90%;"/>
+	               <input name="category" class="form-control" onclick="updateImpossible('카테고리')" value="${boardInfo.category}" type="text" readonly style="width:90%;"/>
                 </div>
                 <div class="col-12 col-sm-6 mt-3 mt-sm-0">
                   <label class="postUpdateTitle">작성자</label>
-                  <input class="form-control" onclick="updateImpossible('작성자')" value="yujin@gmail.com" type="text" readonly style="width:90%;"/><!-- ${Login.email} -->
+                  <input class="form-control" onclick="updateImpossible('작성자')" value="${Login.email}" type="text" readonly style="width:90%;"/><!--  -->
                 </div>
               </div>
               <div class="row" style="--bs-gutter-x:0;">
