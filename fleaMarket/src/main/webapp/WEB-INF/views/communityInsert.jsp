@@ -29,11 +29,12 @@
   <script src="${path}/resource/js/Req4002/commonfunction.js"></script>
   <script type="text/javascript">
 	  $(document).ready(function(e){
-		  // 로그인 체크
-		  var login = "${Login.email}"
-		  loginCk(login)
-		   var expeditor=$('#edit-deschiption .ql-editor')
+		  // 카테고리에 따른 selcted 처리
+		  var categoryVal="${category}"
+		  $("#categoryVal").val(categoryVal).prop("selected",true);
+			
 		  // 글자수 갯수
+		   var expeditor=$('#edit-deschiption .ql-editor')
 		  $("#edit-deschiption").keyup(function(){
 			 $("#textCnt").text(expeditor.text().length)
 		  })
@@ -193,8 +194,8 @@
                       <div class="row" style="padding:5px; margin-top:2%;">
                         <div class="col-12 col-sm-6">
                          <label class="postInsertTitle">카테고리</label>
-                          <select class="form-control" name="category" id="choices-category">
-                            <option selected="">홍보글</option>
+                          <select class="form-control" name="category" id="category">
+                            <option>홍보글</option>
                             <option>사업아이디어</option>
                             <option>사는이야기</option>
                             <option>꿀팁</option>

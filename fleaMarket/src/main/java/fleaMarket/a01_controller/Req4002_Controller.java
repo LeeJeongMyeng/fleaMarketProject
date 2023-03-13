@@ -79,12 +79,13 @@ public class Req4002_Controller {
 	}
 	
 	@RequestMapping("communityInsertPage.do")
-	public String communityInsertPage() {
+	public String communityInsertPage(@RequestParam("category") String category, Model d) {
+		d.addAttribute("category", category);
 		return "communityInsert";
 	}
 	
 	@PostMapping("communityInsert.do")
-	public String communityInsert(@RequestParam("mediaFile") List<MultipartFile> mfiles,Capplication ins, Model d) {
+	public String communityInsert(@RequestParam("mediaFile") List<MultipartFile> mfiles, RedirectAttributes rttr,Capplication ins, Model d) {
 		service.communityInsert(ins);
 		BoardImg f = new BoardImg();
 		if( mfiles!=null ){
@@ -106,6 +107,7 @@ public class Req4002_Controller {
 		}
 		String category = ins.getCategory();
 		System.out.println("category"+category);
+		rttr.addFlashAttribute("msg", "등록성공");
 		//d.addAttribute("msg", "등록 성공");
 		d.addAttribute("category",ins.getCategory());
 		return "redirect:/CommunityList.do";// 전체조회페이지로 이동

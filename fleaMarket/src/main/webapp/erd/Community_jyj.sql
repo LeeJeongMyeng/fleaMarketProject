@@ -101,6 +101,7 @@ CREATE TABLE HashTag
 (
 	hashtag varchar2(1000)
 );
+SELECT * FROM 
 
 -- 커뮤니티 게시글 이미지
 CREATE TABLE BoardImg
