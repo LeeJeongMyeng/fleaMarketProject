@@ -34,7 +34,6 @@ public class Req4002_Controller {
 	@Autowired
 	private FileService fileservice;
 	
-	
 	// 파일경로
 	@Value("${board.upload2}")
 	private String upload;
@@ -53,6 +52,8 @@ public class Req4002_Controller {
 		System.out.println("인덱스"+inCnt); // 넣은 숫자값+1
 		if(inCnt==-1) {
 			inCnt = 5;
+		}else if(inCnt==0) {
+			inCnt = 1;
 		}
 		String imgnameVal="";
 		for(int i=0;i<(inCnt+1);i++) {
@@ -208,7 +209,7 @@ public class Req4002_Controller {
 //			service.communityFileUpdate(f); //이미지
 //		}
 		//d.addAttribute("communityNumber", no);
-		d.addAttribute("msg", "수정 성공");
+		d.addAttribute("msg", "수정성공");
 		String encodeCategory ="";
 		//System.out.println("카테고리"+ufn);
 		String encodedParam;
@@ -219,8 +220,6 @@ public class Req4002_Controller {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		//String a = ufn;
-		//String referer = request.getHeader("Referer");
 		// 카테고리,키워드 (공백가능), 커뮤니티넘버, shift(정렬)(공백가능),타입(공백가능), 키워드 (공백가능),커뮤니티넘버
 		return "redirect:/CommunityDetail.do?communityNumber="+upt.getCommunitynumber()+"&category="+encodeCategory; // 상세조회페이지로 이동
 	}
