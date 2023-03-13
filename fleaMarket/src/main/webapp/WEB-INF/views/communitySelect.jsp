@@ -33,6 +33,11 @@
 <link id="pagestyle"
 	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 	<script src="https://kit.fontawesome.com/3aab1ef667.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+
+  
+  <script src="../../assets/js/plugins/sweetalert.min.js"></script>
 <style>
 .disflex {
 	display: flex;
@@ -142,7 +147,7 @@
 							<button type="button" id= "btbutn" class="btn btn-outline-dark" name = "showBtn" value="all">전체글</button>
 							<button type="button" id= "btbutn" class="btn btn-outline-dark" name = "showBtn" value="best">인기글</button>
 							</div>
-							<button onclick="location.href='${path}/communityInsertPage.do'" type="button"
+							<button id = "insertButton" type="button"
 								class="btn bg-gradient-primary btn-sm mb-0 insertStyle">+
 								게시물 등록하기</button>
 
@@ -313,10 +318,27 @@
 		</div>
 	</footer>
 </div>
+<form id = "insertForm" method = "post" action="${path }/communityInsertPage.do" >
+       <input type = "hidden" name = "category" value = "${pageMaker.cri.category }"/>
+</form>
 	<!--   Core JS Files   -->
 	
 	<script src="${path}/assets/js/plugins/datatables.js"></script>
 	<script>
+  var insertForm = $("#insertForm");
+  $('#insertButton').on("click",function(){
+	  var sessions = '${session}'
+	  if(sessions == ''){
+			 Swal.fire({
+				    icon:'warning',
+			        text:'로그인 후에 이용하실 수 있습니다.',
+			 })
+	 }else{
+		  insertForm.find("input[name='category']").val();
+		  insertForm.submit();
+	  }
+  })
+  
   $("#formDetail").on("click",function(e){
 	  pageForm.submit();
   })

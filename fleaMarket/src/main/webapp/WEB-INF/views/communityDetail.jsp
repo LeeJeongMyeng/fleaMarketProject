@@ -81,10 +81,10 @@
 								<ul class="dropdown-menu"
 									aria-labelledby="navbarDropdownMenuLink2" style = "display:flex;align-items:center;gap:10px;flex-direction: column;'">
 									<li><button class="btn btn-outline-secondary" id="promptStart" style = "font-size:12px;"><i class="ni ni-air-baloon"></i>신고하기</button></li>
-									<li><a class="dropdown-item"
-										href="${path }/communityUpdatePage.do?communityNumber=${detail.communitynumber }">
-											<i class="ni ni-fat-add"></i> 수정하기
-									</a></li>
+									<li>
+									<!-- Button trigger modal -->
+									<button class="btn btn-outline-secondary" id="updateStart" style = "font-size:12px;"><i class="ni ni-fat-delete"></i>수정하기</button>
+								</li>
 									<li>
 									<!-- Button trigger modal -->
 									<button class="btn btn-outline-secondary" id="confirmStart" style = "font-size:12px;"><i class="ni ni-fat-delete"></i>삭제하기</button>
@@ -155,7 +155,13 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                 <!-- 제목 -->
                   <h3 class="mt-lg-0 mt-4">${detail.title }</h3>
                   <!-- 작성날짜 -->
+                  <c:if test = "${detail.updateDate eq null }">
                   <small class="d-block text-muted">${detail.registDate }</small>
+                  </c:if>
+                  <c:if test = "${detail.updateDate ne null }">
+                  <small class = "d-block text-muted">${detail.updateDate} 수정됨</small>
+                  </c:if>
+                  
                   <div class="d-flex mt-3">
                   <div class="flex-shrink-0">
                     <img alt="Image placeholder" class="avatar rounded-circle" src="${path}/resource/img/Member/profileimg/${detail.profileimg}">
@@ -408,6 +414,9 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 <input type="hidden" name="communityNumber" value="${dlist[0].communitynumber}"> 
 <input type="hidden" name="irrType">
 </form>
+<form id = "updateForm" method = "get" action = "${path }/communityUpdatePage.do">
+<input type="hidden" name="communityNumber" value="${dlist[0].communitynumber}"> 
+</form>
 	<form id="moveForm" method="get">
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 		<input type="hidden" name="communityNumber" value="${dlist[0].communitynumber}">
@@ -419,8 +428,9 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 	<!--   Core JS Files   -->
 	
   <script>
- //신고 처리 
+ 
  var moveForm = $("#moveForm");
+ var updateForm = $("#updateForm");
  $(".page-item a").on("click", function(e) {
 
 			e.preventDefault(); //기본 동작 제한    
@@ -432,7 +442,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 			moveForm.find("input[name='pageNum']").val($(this).attr("href"));
 			moveForm.submit();
 });
- 
+//신고 처리 
  console.log('${irrmsg}');
  const irrResult = '${irrmsg}';
  if(irrResult==="irrSuccess"){
@@ -450,6 +460,34 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 	      
 	 })
  }
+ //수정 처리
+ const uptResult = '${msg}'
+ if(uptResult==='수정성공'){
+	 Swal.fire({
+		 icon: 'success',
+	     title: '수정 성공',
+	 })
+ }
+ 
+ $('#updateStart').click(function(){
+	 if(myEmail!=following){
+		 Swal.fire({
+			 icon:'error',
+			 title:'작성자가 아닙니다.'
+		 })
+	 }
+	 if(myEmail==''){
+		 Swal.fire({
+			    icon:'warning',
+		        text:'로그인 후에 이용하실 수 있습니다.',
+		 })
+	 }
+	 if(myEmail==following){
+		 updateForm.find("input[name=communityNumber]").val();
+		 updateForm.submit();
+	 }
+ })
+ 
  $("#promptStart").click(function () {
 	 Swal.fire({
 		  confirmButtonText: '신고',

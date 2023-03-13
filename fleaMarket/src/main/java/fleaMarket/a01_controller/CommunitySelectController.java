@@ -61,7 +61,7 @@ public class CommunitySelectController {
 
 	//기본 조회(get)
 	@GetMapping("CommunityList.do")
-	public String communityList(@RequestParam(value = "showTemplete",required = false , defaultValue="all") String showTemplete,Model model,Criteria cri) throws Exception{
+	public String communityList(@RequestParam(value = "showTemplete",required = false , defaultValue="all") String showTemplete,Model model,Criteria cri,HttpSession session) throws Exception{
 		// 변수도 넣을수 있고, 객체도 넣어서 확인가능 
 		// info는 debug 보다 더 작은 Level 만 확인가능 
 		// sysout == info로 쓰셈
@@ -70,9 +70,16 @@ public class CommunitySelectController {
 		String email = m.getEmail();
 		*/
 		logger.info("log"+cri);
+		
+		Optional<Member> member = Optional.ofNullable((Member)session.getAttribute("Login"));
+		if(member.isPresent()) {
+		    String sessions = member.get().getEmail();
+		    model.addAttribute("session", sessions);
+		}
+	    
 		List<CapplicationList> clist;
 		if(showTemplete.equals("all") || showTemplete == "") {
-			clist = service.getCommunityList(cri);
+			clist = service.getCommunityList(cri);			
 			model.addAttribute("bestValue",showTemplete);
 			model.addAttribute("list",clist);
 			model.addAttribute("pageMaker",new PageDTO(cri,service.getCommunitySelectNum(cri)));
