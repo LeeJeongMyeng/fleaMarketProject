@@ -1,6 +1,5 @@
 package vo;
 
-import org.springframework.web.util.UriComponentsBuilder;
 
 public class Criteria {
 	private int communityNumber;

@@ -21,7 +21,7 @@
 		<typeAlias alias="qna" type = "vo.QNA"/>
 		<typeAlias alias="qnafile" type = "vo.QNAFile"/>
 		<typeAlias alias="reply" type ="vo.ReplyVo"/>
-		<typeAlias alias="calendar" type ="vo.Calendar"/>
+		<typeAlias alias="irregular" type = "vo.irregularReportVo"/>
 	</typeAliases>
 
 	<!-- 2. 사용 XXXMapper.xml을 추가 -->

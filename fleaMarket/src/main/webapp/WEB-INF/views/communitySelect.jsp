@@ -154,7 +154,7 @@
 											<option value="2"
 												<c:out value="${pageMaker.cri.shift eq 'viewCnt'?'selected':'' }"/>>조회수 순</option>
 											<option value="3"
-												<c:out value="${pageMaker.cri.shift eq 'like'?'selected':'' }"/>>좋아요 순</option>
+												<c:out value="${pageMaker.cri.shift eq 'likeCnt '?' selected':'' }"/>>좋아요 순</option>
 							</select>
 							<!-- 카테고리 조회 -->
 							<form id = "showForm" method = "get">
@@ -198,12 +198,13 @@
 												<img class="w-10 ms-3"
 													src="${path }/resource/community/${lists.imgName}">
 												<h6 class="ms-3 my-auto"><a href ="${path}
-												/CommunityDetail.do?communityNumber=${lists.communitynumber}&pageNum=${pageMaker.cri.pageNum} 
+												/CommunityDetail.do?communityNumber=${lists.communitynumber}
+												&pageNum=${pageMaker.cri.pageNum} 
 												&keyword=${pageMaker.cri.keyword}
 												&type=${pageMaker.cri.type}
 												&shift=${pageMaker.cri.shift}
 												&category=${pageMaker.cri.category}
-												&showTemplete=${bestValue}">${lists.title }</a></h6>
+												">${lists.title }</a></h6>
 										</td>
 										<td class="text-sm">${lists.nickname }</td>
 										<td class="text-sm">${lists.viewCnt }</td>
@@ -274,7 +275,7 @@
 							<input type="hidden" name ="shift" value ="${pageMaker.cri.shift }">
 							<input type="hidden" name = "category" value = "${pageMaker.cri.category }">
 							<input type="hidden" name ="showTemplete" value = "${bestValue}">
-						</form>
+				</form>
 			</div>
 		</div>
 	</div>

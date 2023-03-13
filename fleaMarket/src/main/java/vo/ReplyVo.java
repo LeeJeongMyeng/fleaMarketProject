@@ -7,7 +7,7 @@ public class ReplyVo {
 	private String repcontent;
 	private int repclass;
 	private int groupOrderid;
-	private int groupId;
+	private int groupid;
 	private String repDate;
 	//기본 이미지, 닉네임 받아오기
 	private String nickname;
@@ -32,8 +32,8 @@ public class ReplyVo {
 	public int getGroupOrderid() {
 		return groupOrderid;
 	}
-	public int getGroupId() {
-		return groupId;
+	public int getGroupid() {
+		return groupid;
 	}
 	public String getRepDate() {
 		return repDate;
@@ -62,8 +62,8 @@ public class ReplyVo {
 	public void setGroupOrderid(int groupOrderid) {
 		this.groupOrderid = groupOrderid;
 	}
-	public void setGroupId(int groupId) {
-		this.groupId = groupId;
+	public void setGroupid(int groupid) {
+		this.groupid = groupid;
 	}
 	public void setRepDate(String repDate) {
 		this.repDate = repDate;

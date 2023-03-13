@@ -26,6 +26,7 @@ import vo.Criteria;
 import vo.Member;
 import vo.PageDTO;
 import vo.ReplyVo;
+import vo.irregularReportVo;
 
 @Controller
 public class CommunitySelectController {
@@ -92,7 +93,7 @@ public class CommunitySelectController {
 	//상세 조회(get)
 	@GetMapping("CommunityDetail.do")
 	public String communityDetailList(@RequestParam(value = "showTemplete",required = false , defaultValue="all") String showTemplete,
-			@RequestParam("communityNumber") int communityNumber,HttpSession session,Model model,
+			@RequestParam("communityNumber") int communityNumber,HttpSession session,Model model,Criteria cri,
 			HttpServletRequest request,HttpServletResponse response) throws Exception {
 		//세션처리이 있을때만 model 보내는 것 
 		//Optional.ofNullable((Member)session.getAttribute("Login")).orElse("");
@@ -111,21 +112,31 @@ public class CommunitySelectController {
 		}
 		
 		//상세조회 정보 
-		List<CapplicationList> clist = service.getCommunityDetailList(communityNumber);
+		List<CapplicationList> clist = service.getCommunityDetailList(cri);
 		//이미지 다중불러오기.
 		List<String> imgList = service.getCommunityImg(communityNumber);
 		
 		
 		//int 좋아요 수 
 		int likeCnt = service.getLikeCnt(communityNumber);
-		List<ReplyVo> replyList = repservice.replyList(communityNumber);
-		int replyCnt = repservice.getReplyCnt(communityNumber);		
+		//댓글 리스트 
+		List<ReplyVo> replyList = repservice.replyList(communityNumber,cri);
+		int replyCnt = repservice.getReplyCnt(communityNumber);
+		//이전페이지 모델화함 
+		//나중에 바꿀때 편하게 하기위해서 vo로 안보냈음.
+		logger.info(cri.getCategory());
+		logger.info(cri.getKeyword());
+		model.addAttribute("keyword",cri.getKeyword());
+		model.addAttribute("type",cri.getType());
+		model.addAttribute("shift",cri.getShift());
+		model.addAttribute("category",cri.getCategory());
+		
 		model.addAttribute("dlist",clist);		
 		model.addAttribute("imgList",imgList);
 		model.addAttribute("replyCnt",replyCnt);
 		model.addAttribute("likeCnt",likeCnt);	
 		model.addAttribute("replyList",replyList);
-		
+		model.addAttribute("pageMaker",new PageDTO(cri,repservice.getReplyCnt(communityNumber)));
 		/*
 		 * 조회수 중복 방지 쿠키 <쿠키 이용/ 중복 방지> 
 		 */
@@ -137,13 +148,14 @@ public class CommunitySelectController {
 					if(cookie.getValue().contains(request.getParameter("communityNumber"))) {
 						logger.info(cookie.getName());
 					}else{
-						cookie.setValue(cookie.getValue()+"_"+request.getParameter("communityNumber"));
+						cookie.setValue(cookie.getValue()+"s"+request.getParameter("communityNumber").replaceAll("\\+", "%20"));
 						response.addCookie(cookie);
 						service.updateViewCnt(communityNumber);
 						
 					}
 			}
 		}
+		//쿠키 추가 한번도 방문 안했을 때, 
 		if(visitor == 0) {
 			Cookie cookie1 = new Cookie("visit",request.getParameter("communityNumber"));
 			response.addCookie(cookie1);
@@ -154,10 +166,24 @@ public class CommunitySelectController {
 		 */
 		return "communityDetail";
 	}
+	@PostMapping("deleteBoard.do")
+	public String deleteBoard(@RequestParam int communityNumber,@RequestParam String category,HttpSession session,HttpServletRequest request) {
+		Member member = (Member)session.getAttribute("Login");
+		Optional<String> opt = Optional.ofNullable(member.getEmail());
+		//세션이 없을때 
+		String email = opt.orElse("");
+		int result = service.getDeleteBoard(communityNumber,email);
+		if(result == 0) {
+			String referer = request.getHeader("Referer");
+			return "redirect:"+referer;
+		}
+		return "redirect:/CommunityList.do?category="+category;
+	}
+	
 	//처리
     //댓글 등록 
 	@PostMapping("writeReply.do")
-	public String writeReply(@RequestParam int communitynumber,@RequestParam String content,HttpSession session,RedirectAttributes rttr) {
+	public String writeReply(@RequestParam int communitynumber,@RequestParam String content,HttpSession session,HttpServletRequest request) {
 		Member member = (Member)session.getAttribute("Login");
 		Optional<String> opt = Optional.ofNullable(member.getEmail());
 		String sessions = opt.orElse("");
@@ -168,11 +194,12 @@ public class CommunitySelectController {
 		int communityNumber = communitynumber;
 		//나중에 등록, 리스트 구현 후 개수 받아올 예정 
 		int result = repservice.insertReply(vo);
-		rttr.addFlashAttribute("communityNumber", communitynumber);
-		return "redirect:/CommunityDetail.do?communityNumber=" + communityNumber;
+		String referer = request.getHeader("Referer");
+		return "redirect:"+referer;
 	}
 	@RequestMapping("writeReReply.do")
-	public String writeReReply(@RequestParam int communitynumber,@RequestParam int groupId,@RequestParam String content,HttpSession session) {
+	public String writeReReply(@RequestParam int communitynumber,@RequestParam int groupid,@RequestParam String content,HttpSession session,
+			HttpServletRequest request) {
 		Member member = (Member)session.getAttribute("Login");
 		Optional<String> opt = Optional.ofNullable(member.getEmail());
 		String sessions = opt.orElse("");
@@ -180,10 +207,29 @@ public class CommunitySelectController {
 		vo.setCommunityNumber(communitynumber);
 		vo.setRepcontent(content);
 		vo.setEmail(sessions);
-		vo.setGroupId(groupId);
+		vo.setGroupid(groupid);
 		int communityNumber = communitynumber;
 		repservice.insertReReply(vo);
-		return "redirect:/CommunityDetail.do?communityNumber=" + communityNumber;
+		//이전페이지 url 
+		String referer = request.getHeader("Referer");
+		return "redirect:"+referer;
+	}
+	@PostMapping("insertReport.do")
+	public String insertReport(irregularReportVo vo,HttpSession session,HttpServletRequest request,RedirectAttributes rttr) {
+		Member member = (Member)session.getAttribute("Login");
+		Optional<String> opt = Optional.ofNullable(member.getEmail());
+		String sessions = opt.orElse("");
+		//세션 이메일에 넣기 ㅋ 
+		vo.setEmail(sessions);
+		int result = service.insertIrrReport(vo);
+		if(result == 0) {
+			rttr.addFlashAttribute("irrmsg","irrfail");
+		}
+		if(result == 1) {
+			rttr.addFlashAttribute("irrmsg","irrSuccess");
+		}
+		String referer = request.getHeader("Referer");
+		return "redirect:"+referer;
 	}
 	
 }

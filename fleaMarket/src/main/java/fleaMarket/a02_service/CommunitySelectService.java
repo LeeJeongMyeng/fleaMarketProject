@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import vo.Capplication;
 import vo.CapplicationList;
 import vo.Criteria;
+import vo.irregularReportVo;
 
 @Service
 public interface CommunitySelectService {
@@ -22,9 +22,11 @@ public interface CommunitySelectService {
 	 
 	 public List<CapplicationList> getCommunityBestList(Criteria cri);
 	 
-	 public List<CapplicationList> getCommunityDetailList(int communityNumber);
+	 public List<CapplicationList> getCommunityDetailList(Criteria cri);
 	 
 	 public List<String> getCommunityImg(int communityNumber);
+	 
+	 public int getDeleteBoard(int communityNumber,String email);
 	 
 	 //팔로우/팔로잉 count  // myEmail 세션값, -> 팔로잉 목록 조회 
 	 public int getFollowYesOrNot(int communityNumber,String email);
@@ -43,4 +45,6 @@ public interface CommunitySelectService {
 	
 	 //조회수 
 	 public void updateViewCnt(int communityNumber);
+	 public int insertIrrReport(irregularReportVo vo);
+	 
 }

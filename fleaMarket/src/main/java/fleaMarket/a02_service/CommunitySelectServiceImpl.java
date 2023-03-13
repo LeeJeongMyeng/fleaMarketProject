@@ -14,6 +14,7 @@ import fleaMarket.a03_dao.CommunitySelectDao;
 import vo.BoardImg;
 import vo.CapplicationList;
 import vo.Criteria;
+import vo.irregularReportVo;
 
 
 
@@ -46,7 +47,7 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 			cri.setShift("viewCnt");
 		}
 		if(cri.getShift().equals("3")) {
-			cri.setShift("like");
+			cri.setShift("likeCnt");
 		}		
 		//게시판 카테고리 비즈니스 로직 설정
 		List<CapplicationList> clist = new ArrayList<CapplicationList>();
@@ -90,7 +91,7 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 			cri.setShift("viewCnt");
 		}
 		if(cri.getShift().equals("3")) {
-			cri.setShift("like");
+			cri.setShift("likeCnt");
 		}		
 		clist = mapper.getBestCommunityList(cri);
 		
@@ -113,41 +114,48 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 	
 	}
 	@Override
-	public List<CapplicationList> getCommunityDetailList(int communityNumber) {
+	public List<CapplicationList> getCommunityDetailList(Criteria cri) {
 		// TODO Auto-generated method stub
-	    		
-		return mapper.getCommunityDetailList(communityNumber);
+		if(cri.getShift()==null || cri.getShift().equals("1")) {
+			cri.setShift("registDate");
+		}
+		if(cri.getShift().equals("2")) {
+			cri.setShift("viewCnt");
+		}
+		if(cri.getShift().equals("3")) {
+			cri.setShift("likeCnt");
+		}		
+	    
+		return mapper.getCommunityDetailList(cri);
 	}
 	
 	@Override
 	public List<String> getCommunityImg(int communityNumber) {
 		// TODO Auto-generated method stub
-		List<BoardImg> clist = new ArrayList<BoardImg>();
-		clist = mapper.getCommunityImgList(communityNumber);
+		String img = mapper.getCommunityImgList(communityNumber);
 		List<String> slist = new ArrayList<>();
-		
-		for(int i = 0;i<clist.size();i++) {
-			BoardImg img = clist.get(i);
-			Optional<String> opt = Optional.ofNullable(img.getImgname());
-			String separate = opt.orElse("default_Img.png");
-			if(img.getImgname()==null) img.setImgname("");
-			separate = img.getImgname();
-		StringTokenizer st = new StringTokenizer(separate,"&SEP&");
-		System.out.println(st.countTokens());
+		//Null 처리 
+		Optional<String> opt = Optional.ofNullable(img);
+	    String separate = opt.orElse("default_Img.png");
+	    
+		System.out.println(separate);
+	    StringTokenizer st = new StringTokenizer(separate,"&SEP&");
 		int s = 0;
-			if(st.countTokens()>=1) {
-				
+		//이미지 파일이 한개일때 
+		if(st.countTokens()==1) {
+			slist.add(separate);
+		}
+		//이미지 파일이 여러개일때 
+		if(st.countTokens()>1) {				
 				while(st.hasMoreTokens()) {
-					slist.add(i, st.nextToken());
+					slist.add(s, st.nextToken());
 					s++;
 				}
-			}
 		}
-		return slist;
-			
-			
 		
+		return slist;					
 	}
+	
 	@Override
 	// int 1, 0 
 	public int getFollowYesOrNot(int communityNumber,String email) {
@@ -228,6 +236,25 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 	public void updateViewCnt(int communityNumber) {
 		// TODO Auto-generated method stub
 		mapper.updateViewCnt(communityNumber);
+	}
+	@Override
+	public int getDeleteBoard(int communityNumber, String email) {
+		// TODO Auto-generated method stub
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("communityNumber",communityNumber);
+		map.put("email", email);
+		return mapper.deleteBoard(map);
+	}
+	@Override
+	public int insertIrrReport(irregularReportVo vo) {
+		// TODO Auto-generated method stub
+		int result = 0;
+		//중복확인 
+		if(mapper.getCountReport(vo)==0) {
+			result = mapper.insertIrrReport(vo);
+		}
+		
+		return result;
 	}
 		
 }

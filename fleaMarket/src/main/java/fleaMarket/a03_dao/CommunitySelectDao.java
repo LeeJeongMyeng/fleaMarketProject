@@ -2,9 +2,9 @@ package fleaMarket.a03_dao;
 import java.util.List;
 import java.util.Map;
 
-import vo.BoardImg;
 import vo.CapplicationList;
 import vo.Criteria;
+import vo.irregularReportVo;
 
 public interface CommunitySelectDao {
 	//커뮤니티 전체 조회 count / 검색 
@@ -17,10 +17,10 @@ public interface CommunitySelectDao {
 	//인기글 처리 
 	public List<CapplicationList> getBestCommunityList(Criteria cri);
 	
-	public List<CapplicationList> getCommunityDetailList(int communityNumber);
+	public List<CapplicationList> getCommunityDetailList(Criteria cri);
 	//조회수 업데이트 
 	public void updateViewCnt(int communityNumber);
-	public List<BoardImg> getCommunityImgList(int communityNumber);
+	public String getCommunityImgList(int communityNumber);
 	// json 
 	public int getFollowYesOrNot(Map<String,Object> map);
 	
@@ -36,6 +36,9 @@ public interface CommunitySelectDao {
 	
 	public int getLikeDelete(Map<String,Object> map);
 	
-	
-	
+	public int deleteBoard(Map<String,Object> map);
+	//게시물 신고하기 
+	public int insertIrrReport(irregularReportVo vo);
+	//중복확인
+	public int getCountReport(irregularReportVo vo);
 }

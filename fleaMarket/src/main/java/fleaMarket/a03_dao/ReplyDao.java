@@ -1,5 +1,6 @@
 package fleaMarket.a03_dao;
 import java.util.List;
+import java.util.Map;
 
 import vo.ReplyVo;
 public interface ReplyDao {
@@ -8,7 +9,7 @@ public interface ReplyDao {
 	public int replyMax();
 	public int replyCheck(ReplyVo vo);
 	public int rereplyWrite(ReplyVo vo);
-	public List<ReplyVo> replyList(int communityNumber);
+	public List<ReplyVo> replyList(Map<String,Object> map);
 	public int getGroupOrder(int groupId);
 	public int getReplyCnt(int communityNumber);
 }

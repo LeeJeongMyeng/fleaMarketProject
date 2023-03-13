@@ -42,6 +42,12 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/3aab1ef667.js" crossorigin="anonymous"></script>
+  <!-- 삭제하기 알람창  -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
+
+  
+  <script src="../../assets/js/plugins/sweetalert.min.js"></script>
   <style>
   .dropdown{
   display: flex;
@@ -55,41 +61,39 @@
   }
   </style>
 </head>
-
+<%@ include file="header.jsp" %>
 <body class="g-sidenav-show   bg-gray-100">
   
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <div class="row">
         <div class="col-12">
-          <div class="card">
+          <div class="card" style = "margin-top: 150px">
             <div class="card-body">
               <c:forEach var = "detail" items = "${dlist }">
-              <div class="dropdown">
-              <h5 class="mb-4">${detail.nickname }님의 게시물</h5>
-  <a href="#" class="btn bg-gradient-white dropdown-toggle " data-bs-toggle="dropdown" id="navbarDropdownMenuLink2">
-       <i class="ni ni-settings"></i>
-  </a>
-  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
-      <li>
-          <a class="dropdown-item" href="#">
-            <i class="ni ni-bulb-61"></i> 신고하기
-          </a>
-      </li>
-      <li>
-          <a class="dropdown-item" href="${path }/communityUpdatePage.do?communityNumber=${detail.communitynumber }">
-             <i class="ni ni-fat-add"></i> 수정하기
-          </a>
-      </li>
-      <li>
-          <a class="dropdown-item" href="#">
-             <i class="ni ni-fat-delete"></i> 삭제하기
-          </a>
-      </li>
-  </ul>
-</div> 
+							<div class="dropdown">
+								<h5 class="mb-4">${detail.nickname }님의게시물</h5>
+								<a class="btn bg-gradient-white dropdown-toggle "
+									data-bs-toggle="dropdown" id="navbarDropdownMenuLink2"
+									> <i
+									class="ni ni-settings"></i>
+								</a>
+								<ul class="dropdown-menu"
+									aria-labelledby="navbarDropdownMenuLink2" style = "display:flex;align-items:center;gap:10px;flex-direction: column;'">
+									<li><button class="btn btn-outline-secondary" id="promptStart" style = "font-size:12px;"><i class="ni ni-air-baloon"></i>신고하기</button></li>
+									<li><a class="dropdown-item"
+										href="${path }/communityUpdatePage.do?communityNumber=${detail.communitynumber }">
+											<i class="ni ni-fat-add"></i> 수정하기
+									</a></li>
+									<li>
+									<!-- Button trigger modal -->
+									<button class="btn btn-outline-secondary" id="confirmStart" style = "font-size:12px;"><i class="ni ni-fat-delete"></i>삭제하기</button>
+								</li>
+									
+								</ul>
+							</div>
 
-              <div class="row">
+							<div class="row">
                 <div class="col-xl-5 col-lg-6 text-center">
                   <img class="w-100 border-radius-lg shadow-lg mx-auto" src="${path }/resource/community/${imgList[0]}" alt="chair">
                   <div class="my-gallery d-flex mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery">
@@ -186,9 +190,17 @@ It's a separate element, as animating opacity is faster than rgba(). -->
               
               </c:forEach>
               <div class = "dstep">
-              <button type="button" class="btn btn-primary"><i class="ni ni-bold-left"></i></button>
-              <button type="button" class="btn btn-primary">목록</button>
-              <button type="button" class="btn btn-primary"><i class="ni ni-bold-right"></i></button>
+              <c:if test="${dlist[0].prevNum ne 0 }">
+              <a href = "${path}/CommunityDetail.do?communityNumber=${dlist[0].prevNum}&keyword=${keyword}&type=${type}&shift=${shift }&category=${category}">
+              <button type="button" class="btn btn-primary"><i class="ni ni-bold-left"></i></button></a>
+              </c:if>
+              <a href = "${path}/CommunityList.do?keyword=${keyword}&type=${type}&shift=${shift }&category=${category}">
+              <button type="button" class="btn btn-primary">목록</button></a>
+              
+              <c:if test="${dlist[0].nextNum ne 0 }">
+              <a href = "${path}/CommunityDetail.do?communityNumber=${dlist[0].nextNum}&keyword=${keyword}&type=${type}&shift=${shift }&category=${category}">
+              <button type="button" class="btn btn-primary"><i class="ni ni-bold-right"></i></button></a>
+              </c:if>
               </div>
               <div class="row align-items-center px-2 mt-4 mb-2">
                 <div class="col-sm-6">
@@ -276,7 +288,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                       <div>
                         <i class="fa-solid fa-trash cursor-pointer"></i>
                       </div>
-                      <span class="text-sm me-2 cursor-pointer">삭제</span>
+                      <span id = "deleteSpan" class="text-sm me-2 cursor-pointer">삭제</span>
                     </div>
                   </div>
                 </div>
@@ -294,7 +306,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                   <div class="flex-grow-1 my-auto">
                       <form method = "post" action = "${path}/writeReReply.do" class="align-items-center">
                       <input type = "hidden" name = "communitynumber" value = "${dlist[0].communitynumber}">
-                      <input type = "hidden" name = "groupId" value = "${rep.groupId }"/>
+                      <input type = "hidden" name = "groupid" value = "${rep.groupid }"/>
                 <div class="d-flex">
                    <textarea name = "content" class="form-control" placeholder="Write your comment" rows="1"></textarea>
                   <button  class="btn bg-gradient-primary mb-0 ms-2" style = "height: 38px;width: 70px;">
@@ -322,15 +334,37 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                   </button>
                 </div>
               </form>
-
- 
                   </div>
                 </div>
                 </c:if>
               </div>
             </div>
           </div>
-        </div>         
+        </div>
+        <nav aria-label="Page navigation example" style = "margin-top: 20px;">
+							<ul class="pagination pagination-white justify-content-center" id="pageInfo">
+								<c:if test="${pageMaker.prev}">
+									<li class="page-item"><a class="page-link pagingnum"
+										href="${pageMaker.startPage-1}" tabindex="-1"> <i
+											class="fa fa-angle-left"></i> <span class="sr-only">Previous</span>
+									</a></li>
+								</c:if>
+
+								<c:forEach var="num" begin="${pageMaker.startPage}"
+									end="${pageMaker.endPage}">
+									<li class="page-item ${pageMaker.cri.pageNum == num ? "active":"" }">
+										<a class="page-link" href="${num }">${num }</a>
+									</li>
+								</c:forEach>
+
+								<c:if test="${pageMaker.next }">
+									<li class="page-item"><a class="page-link pagingnum"
+										href="${pageMaker.endPage+1}"> <i
+											class="fa fa-angle-right"></i> <span class="sr-only">Next</span>
+									</a></li>
+								</c:if>
+							</ul>
+						</nav>         
       <footer class="footer pt-3  ">
         <div class="container-fluid">
           <div class="row align-items-center justify-content-lg-between">
@@ -366,14 +400,121 @@ It's a separate element, as animating opacity is faster than rgba(). -->
     </div>
   </main>
   
-  <!--   Core JS Files   -->
-  <script src="${path}/assets/js/core/popper.min.js"></script>
-  <script src="${path}/assets/js/core/bootstrap.min.js"></script>
-  <script src="${path}/assets/js/plugins/choices.min.js"></script>
-  <script src="${path}/assets/js/plugins/photoswipe.min.js"></script>
-  <script src="${path}/assets/js/plugins/photoswipe-ui-default.min.js"></script>
+ <form id="infoForm" method="post" action = "${path }/deleteBoard.do">
+							<input type="hidden" name="communityNumber" value="${dlist[0].communitynumber}"> 
+							<input type="hidden" name="category" value = "${category}">					
+</form>
+<form id = "irrForm" method = "post" action="${path }/insertReport.do">
+<input type="hidden" name="communityNumber" value="${dlist[0].communitynumber}"> 
+<input type="hidden" name="irrType">
+</form>
+	<form id="moveForm" method="get">
+		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
+		<input type="hidden" name="communityNumber" value="${dlist[0].communitynumber}">
+		<input type="hidden" name="amount" value="${pageMaker.cri.amount}">
+		<input type="hidden" name="keyword" value = "${keyword }">
+		<input type="hidden" name="shift" value = "${shift }">
+		<input type="hidden" name="category" value = "${category }">
+	</form>
+	<!--   Core JS Files   -->
+	
   <script>
+ //신고 처리 
+ var moveForm = $("#moveForm");
+ $(".page-item a").on("click", function(e) {
 
+			e.preventDefault(); //기본 동작 제한    
+			moveForm.find("input[name='communityNumber']").val();
+			moveForm.find("input[name='keyword']").val();
+			moveForm.find("input[name='shift']").val();
+			moveForm.find("input[name='category']").val();
+			moveForm.find("input[name='amount']").val(10);
+			moveForm.find("input[name='pageNum']").val($(this).attr("href"));
+			moveForm.submit();
+});
+ 
+ console.log('${irrmsg}');
+ const irrResult = '${irrmsg}';
+ if(irrResult==="irrSuccess"){
+	 Swal.fire({
+		 icon: 'success',
+	      title: '신고해주셔서 감사합니다.',
+	      text: '관리자가 검토후 삭제절차가 진행됩니다.',
+	 })
+ }
+ if(irrResult==="irrfail"){
+	 Swal.fire({
+		 icon: 'error',
+	     title: '신고 실패',
+	     text:'신고한 게시물입니다.'
+	      
+	 })
+ }
+ $("#promptStart").click(function () {
+	 Swal.fire({
+		  confirmButtonText: '신고',
+		  cancelButtonText: '취소',
+		  showCancelButton: true,
+		  icon: "warning",
+		  html: '<h2>신고사유</h2><select name="irrReport" id="irrReport"> <option value=1>스팸/홍보/도배글입니다.</option> <option value=2>음란물/욕설 표현 포함글입니다.</option> <option value=3>정치/혐오 글입니다.</option> <option value=4>개인정보 노출 게시물입니다.</option> </select>',
+		  
+	 }).then((result) => {
+		 if(result.isConfirmed){
+			 var elm = document.getElementById("irrReport");
+			 alert(elm.value);
+		     var session = '${session}';
+		    	//삭제조건이 맞을때, 작성자 == 세션 
+		    	if(session!=''){
+		    		$('input[name=irrType]').attr('value',elm.value);
+		    		irrForm.submit();
+		    	}else{
+		    		Swal.fire({
+		    				icon:'warning',
+		    		        text:'로그인 후에 이용하실 수 있습니다.',
+		    		        
+		    	})
+		    	   
+		    	}  
+		 }
+	 })
+ });
+ //삭제 처리  
+  $("#confirmStart").click(function () {
+	    Swal.fire({
+	      title: '정말 삭제하시겠습니까?',
+	      text: "다시 되돌릴 수 없습니다. 신중하세요.",
+	      icon: 'warning',
+	      showCancelButton: true,
+	      confirmButtonColor: '#3085d6',
+	      cancelButtonColor: '#d33',
+	      confirmButtonText: '삭제',
+	      cancelButtonText: '취소',
+	      reverseButtons: false, //버튼 순서 거꾸로
+	      
+	    }).then((result) => {
+	      if (result.isConfirmed) {
+	    	var writer = '${dlist[0].email}';
+	    	var session = '${session}';
+	    	//삭제조건이 맞을때, 작성자 == 세션 
+	    	if(writer == session){
+	    		infoForm.submit();
+	    	}else if(session==''){
+	    		Swal.fire({
+	    				icon:'warning',
+	    		        text:'로그인 후에 이용하실 수 있습니다.',
+	    		        
+	    		})
+	    	   
+	    	}else{
+	    		Swal.fire({
+	    				icon:'warning',
+	    				text:'작성자가 아닙니다.',
+	    				
+	    		})
+	    	}        
+	      }
+	    })
+	  });
 
 //function onclick 
 function contItem(idx){		   
@@ -382,16 +523,20 @@ function contItem(idx){
 		  $('#showHide'+idx).css({"display":"flex"});
 		  }else{
 	      $('#showHide'+idx).css({"display":"none"});
-		  }
-	      }else{
-	    	  var delConfirm = confirm('로그인 후 이용이 가능합니다.');
-	    	   if (delConfirm) {
-	    	      alert('로그인창으로 이동합니다');
-	    	      location.href = "#";
-	    	   }
 	      }
-	 
+	}else{
+		Swal.fire({
+			icon:'warning',
+	        text:'로그인 후에 이용하실 수 있습니다.',
+	        confirmButtonText: '로그인하러가기',
+	        showCancelButton: true,
+		    cancelButtonText: '취소',
+	        
+	})
+	}
 }
+	 
+
 //  
     var myEmail = '${session}';
     var communityNumber = '${dlist[0].communitynumber}';
@@ -782,21 +927,12 @@ $("#Heart").on("click", function(e) {
     initPhotoSwipeFromDOM('.my-gallery');
   </script>
   <!-- Kanban scripts -->
-  <script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
-  <script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
+  
+  
   <!-- Github buttons -->
-  <script async defer src="https://buttons.github.io/buttons.js"></script>
+ 
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-  <script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
+
 </body>
 
 </html>

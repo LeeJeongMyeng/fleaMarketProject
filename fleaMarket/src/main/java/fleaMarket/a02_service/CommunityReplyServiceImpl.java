@@ -1,12 +1,15 @@
 package fleaMarket.a02_service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fleaMarket.a03_dao.ReplyDao;
+import vo.Criteria;
 import vo.ReplyVo;
 
 @Service
@@ -29,19 +32,23 @@ public class CommunityReplyServiceImpl implements CommunityReplyService {
 	public int insertReply(ReplyVo vo) {
 		// TODO Auto-generated method stub
 		//GroupID setting
+		
 		int groupId = mapper.replyMax()+1;
 		//새로 등록하기 때문에 max 에서 +1 로직
-		vo.setGroupId(groupId);
+		vo.setGroupid(groupId);
 		int result = mapper.replyWrite(vo);
 		return result;
 	}
 	
 
 	@Override
-	public List<ReplyVo> replyList(int communityNumber) {
+	public List<ReplyVo> replyList(int communityNumber,Criteria cri) {
 		// TODO Auto-generated method stub
 		List<ReplyVo> clist = new ArrayList<ReplyVo>();
-		clist = mapper.replyList(communityNumber);
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("communityNumber",communityNumber);
+		map.put("vo", cri);
+		clist = mapper.replyList(map);
 		return clist;
 	}
 
@@ -49,7 +56,7 @@ public class CommunityReplyServiceImpl implements CommunityReplyService {
 	public int insertReReply(ReplyVo vo) {
 		// TODO Auto-generated method stub
 		// groupOrder + 1
-		int groupId = vo.getGroupId();
+		int groupId = vo.getGroupid();
 		int groupOrder = mapper.getGroupOrder(groupId)+1;
 		vo.setGroupOrderid(groupOrder);
 		int result = mapper.rereplyWrite(vo);
