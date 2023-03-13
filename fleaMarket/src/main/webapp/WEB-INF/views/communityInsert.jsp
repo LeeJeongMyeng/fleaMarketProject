@@ -247,13 +247,13 @@
                           <table>
 						    <tr >
 						      <td align="center">
-						        <input type="file" name="mediaFile" id="uploadFile1" class="form-control" multiple="multiple" style="width:1100px;">
-						        <input type="file" name="mediaFile" id="uploadFile2" class="form-control" multiple style="width:1100px;">
-						        <input type="file" name="mediaFile" id="uploadFile3" class="form-control" multiple style="width:1100px;">
-						        <input type="file" name="mediaFile" id="uploadFile4" class="form-control" multiple style="width:1100px;">
-						        <input type="file" name="mediaFile" id="uploadFile5" class="form-control" multiple style="width:1100px;">
-						        <input type="file" name="mediaFile" id="uploadFile6" class="form-control" multiple style="width:1100px;">
-						        <input type="file" id="uploadFile7" class="form-control" multiple style="width:1100px;">
+						        <input type="file" name="mediaFile" id="uploadFile1" class="form-control" multiple="multiple" style="width:780px;">
+						        <input type="file" name="mediaFile" id="uploadFile2" class="form-control" multiple style="width:780px;">
+						        <input type="file" name="mediaFile" id="uploadFile3" class="form-control" multiple style="width:780px;">
+						        <input type="file" name="mediaFile" id="uploadFile4" class="form-control" multiple style="width:780px;">
+						        <input type="file" name="mediaFile" id="uploadFile5" class="form-control" multiple style="width:780px;">
+						        <input type="file" name="mediaFile" id="uploadFile6" class="form-control" multiple style="width:780px;">
+						        <input type="file" id="uploadFile7" class="form-control" multiple style="width:780px;">
 						        <div id="preview"></div>
 						      </td>
 						    </tr>

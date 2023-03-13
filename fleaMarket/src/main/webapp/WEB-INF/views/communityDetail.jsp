@@ -480,6 +480,11 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 		 Swal.fire({
 			    icon:'warning',
 		        text:'로그인 후에 이용하실 수 있습니다.',
+		        confirmButtonText:'로그인하러가기',
+		        showCancelButton: true,
+		        cancelButtonText:'취소',
+		 }).then((result) =>{
+			 location.href = "${path}/SignIn.do";
 		 })
 	 }
 	 if(myEmail==following){
@@ -507,10 +512,14 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 		    		irrForm.submit();
 		    	}else{
 		    		Swal.fire({
-		    				icon:'warning',
-		    		        text:'로그인 후에 이용하실 수 있습니다.',
-		    		        
-		    	})
+					    icon:'warning',
+				        text:'로그인 후에 이용하실 수 있습니다.',
+				        confirmButtonText:'로그인하러가기',
+				        showCancelButton: true,
+				        cancelButtonText:'취소',
+				 }).then((result) =>{
+					 location.href = "${path}/SignIn.do";
+				 })
 		    	   
 		    	}  
 		 }
@@ -538,10 +547,14 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 	    		infoForm.submit();
 	    	}else if(session==''){
 	    		Swal.fire({
-	    				icon:'warning',
-	    		        text:'로그인 후에 이용하실 수 있습니다.',
-	    		        
-	    		})
+				    icon:'warning',
+			        text:'로그인 후에 이용하실 수 있습니다.',
+			        confirmButtonText:'로그인하러가기',
+			        showCancelButton: true,
+			        cancelButtonText:'취소',
+			 }).then((result) =>{
+				 location.href = "${path}/SignIn.do";
+			 })
 	    	   
 	    	}else{
 	    		Swal.fire({
@@ -564,13 +577,14 @@ function contItem(idx){
 	      }
 	}else{
 		Swal.fire({
-			icon:'warning',
+		    icon:'warning',
 	        text:'로그인 후에 이용하실 수 있습니다.',
-	        confirmButtonText: '로그인하러가기',
+	        confirmButtonText:'로그인하러가기',
 	        showCancelButton: true,
-		    cancelButtonText: '취소',
-	        
-	})
+	        cancelButtonText:'신고',
+	 }).then((result) =>{
+		 location.href = "${path}/SignIn.do";
+	 })
 	}
 }
 	 

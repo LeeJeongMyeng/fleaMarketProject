@@ -183,7 +183,7 @@
 									<th>좋아요</th>
 									<th>작성날짜</th>
 									<th>room</th>
-									<th>Action</th>
+									
 								</tr>
 							</thead>
 							
@@ -217,17 +217,7 @@
 										<td class="text-sm">${lists.registDate }</td>
 										<td style="text-align: center; padding-top: 12px;"><span
 											class="badge badge-secondary badge-sm">room 가기</span></td>
-										<td class="text-sm"><a href="javascript:;"
-											data-bs-toggle="tooltip"
-											data-bs-original-title="Preview product"> <i
-												class="fas fa-eye text-secondary"></i>
-										</a> <a href="javascript:;" class="mx-3" data-bs-toggle="tooltip"
-											data-bs-original-title="Edit product"> <i
-												class="fas fa-user-edit text-secondary"></i>
-										</a> <a href="javascript:;" data-bs-toggle="tooltip"
-											data-bs-original-title="Delete product"> <i
-												class="fas fa-trash text-secondary"></i>
-										</a></td>
+										
 									</tr>
 								</c:forEach>
 							</tbody>
@@ -325,14 +315,26 @@
 	
 	<script src="${path}/assets/js/plugins/datatables.js"></script>
 	<script>
+	var msg = '${msg}';
+	if(msg==='등록성공'){
+		 Swal.fire({
+			 icon:'success',
+		     text:'등록성공!',
+		 })
+	}
   var insertForm = $("#insertForm");
   $('#insertButton').on("click",function(){
 	  var sessions = '${session}'
 	  if(sessions == ''){
-			 Swal.fire({
-				    icon:'warning',
-			        text:'로그인 후에 이용하실 수 있습니다.',
-			 })
+		  Swal.fire({
+			    icon:'warning',
+		        text:'로그인 후에 이용하실 수 있습니다.',
+		        confirmButtonText:'로그인하러가기',
+		        showCancelButton: true,
+		        cancelButtonText:'취소',
+		 }).then((result) =>{
+			 location.href = "${path}/SignIn.do";
+		 })
 	 }else{
 		  insertForm.find("input[name='category']").val();
 		  insertForm.submit();
