@@ -108,7 +108,7 @@ public class Req4002_Controller {
 	}
 	
 	@RequestMapping("communityUpdatePage.do")
-	public String communityUpdatePage(@RequestParam("communityNumber") int upt,Model d) {
+	public String communityUpdatePage(@RequestParam("communityNumber") int upt, Model d) {
 		Capplication boardInfoVo = service.boardDetailSelect(upt);
 		
 		ArrayList<String> boardArr = new ArrayList<String>(); // 동적 배열
@@ -124,6 +124,7 @@ public class Req4002_Controller {
 		
 		boardArr.indexOf("");
 		d.addAttribute("boardInfo", boardInfoVo);
+		d.addAttribute("category", boardInfoVo.getCategory() );
 		//String referer = request.getHeader("Referer");
 		return "communityUpdate";
 				
@@ -131,7 +132,7 @@ public class Req4002_Controller {
 	
 	// 파일 업데이트 기능메서드 (아직 구성중)
 	@PostMapping("communityUpdate.do")
-	public String communityUpdate(@RequestParam("updateFile") List<MultipartFile> mfiles,HttpServletRequest request,Capplication upt, Model d) { //,@RequestParam("indexNo") List<String> idx
+	public String communityUpdate(@RequestParam("updateFile") List<MultipartFile> mfiles,@RequestParam("category") String cat, HttpServletRequest request,Capplication upt, Model d) { //,@RequestParam("indexNo") List<String> idx
 		service.communityUpdate(upt); // text형들 수정
 		BoardImg f = new BoardImg();
 		if(mfiles!=null) {
@@ -208,9 +209,10 @@ public class Req4002_Controller {
 //		}
 		//d.addAttribute("communityNumber", no);
 		d.addAttribute("msg", "수정 성공");
+		
 		//String referer = request.getHeader("Referer");
 		// 카테고리,키워드 (공백가능), 커뮤니티넘버, shift(정렬)(공백가능),타입(공백가능), 키워드 (공백가능),커뮤니티넘버
-		return "redirect:/CommunityDetail.do?communityNumber="+upt.getCommunitynumber()+"&category="+upt.getCategory(); // 상세조회페이지로 이동
+		return "redirect:/CommunityDetail.do?communityNumber="+upt.getCommunitynumber()+"&category="+cat; // 상세조회페이지로 이동
 	}
 	
 	@RequestMapping("chatting.do")
