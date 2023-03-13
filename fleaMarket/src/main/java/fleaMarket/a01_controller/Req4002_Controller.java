@@ -1,11 +1,12 @@
 package fleaMarket.a01_controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -208,10 +209,20 @@ public class Req4002_Controller {
 //		}
 		//d.addAttribute("communityNumber", no);
 		d.addAttribute("msg", "수정 성공");
-		
+		String encodeCategory ="";
+		//System.out.println("카테고리"+ufn);
+		String encodedParam;
+		try {
+			encodedParam = URLEncoder.encode(upt.getCategory(), "UTF-8");
+			encodeCategory = encodedParam;
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//String a = ufn;
 		//String referer = request.getHeader("Referer");
 		// 카테고리,키워드 (공백가능), 커뮤니티넘버, shift(정렬)(공백가능),타입(공백가능), 키워드 (공백가능),커뮤니티넘버
-		return "redirect:/CommunityDetail.do?communityNumber="+upt.getCommunitynumber()+"&category="+upt.getCategory(); // 상세조회페이지로 이동
+		return "redirect:/CommunityDetail.do?communityNumber="+upt.getCommunitynumber()+"&category="+encodeCategory; // 상세조회페이지로 이동
 	}
 	
 	@RequestMapping("chatting.do")
