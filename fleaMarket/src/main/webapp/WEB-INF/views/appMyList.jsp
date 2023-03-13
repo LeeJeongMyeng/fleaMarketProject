@@ -114,8 +114,6 @@
 		console.log(nth)
 		
 		}
-		
-	
 
 </script>
 </head>
@@ -215,7 +213,7 @@
 		                    </td>
 		                    <td class="text-xs font-weight-bold">
 		                      <div class="d-flex align-items-center">
-		                        <img src="${path}/resource/img/Member/profileimg/defaultprofile.png" class="avatar avatar-xs me-2" alt="user image">
+		                        <img src="${path}/resource/img/Member/profileimg/${myfapp.profileimg}" alt="${path}/resource/img/Member/profileimg/defaultprofile.png" class="avatar avatar-xs me-2">
 		                        <span>${myfapp.nickname}</span>
 		                      </div>
 		                    </td>
@@ -423,13 +421,6 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-    
-    
-   
-    
-
-    
-    
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

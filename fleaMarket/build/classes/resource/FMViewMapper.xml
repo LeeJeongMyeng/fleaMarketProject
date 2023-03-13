@@ -28,10 +28,10 @@
 	<!-- 전체 데이터 -->
 	<select id="totCnt"  resultType="int" parameterType="fapplicationsch">
 		SELECT count(*)
-		FROM FApplication fa, fleaMarket fm, fleamarketmember m
-		WHERE fa.postingNumber = fm.postingNumber(+)
-		AND fa.email = m.email(+)
+		FROM fapplication a, fleaMarket fm
+		WHERE a.postingNumber = fm.postingNumber(+)
 		AND fm.title like '%'||#{title}||'%'
+		AND fm.email = #{search}
 	</select>
 	<select id="appReceivedList" resultType="fapplication" parameterType="fapplicationsch">
 		SELECT *
@@ -50,6 +50,7 @@
 			AND a.email = m.email(+)
 			AND a.email = p.email(+)
 			AND fm.title like '%'||#{title}||'%'
+			AND fm.email = #{search}
 			ORDER BY a.applicationno DESC)
 		WHERE cnt BETWEEN #{start} AND #{end}
 	</select>
@@ -70,10 +71,10 @@
 	<!-- 전체 데이터 -->
 	<select id="totCntMy"  resultType="int" parameterType="fapplicationsch">
 		SELECT count(*)
-		FROM FApplication fa, fleaMarket fm, fleamarketmember m
-		WHERE fa.postingNumber = fm.postingNumber(+)
-		AND fm.email = m.email(+)
+		FROM fapplication a, fleaMarket fm
+		WHERE a.postingNumber = fm.postingNumber(+)
 		AND fm.title like '%'||#{title}||'%'
+		AND a.email = #{search}
 	</select>
 	<select id="appMyList" resultType="fapplication" parameterType="fapplicationsch">
 		SELECT *
@@ -92,7 +93,7 @@
 			AND fm.email = m.email(+)
 			AND fm.email = p.email(+)
 			AND fm.title LIKE '%'||#{title}||'%'
-			and a.email = #{search}
+			AND a.email = #{search}
 			ORDER BY a.applicationno DESC)
 		WHERE cnt BETWEEN #{start} AND #{end}
 	</select>

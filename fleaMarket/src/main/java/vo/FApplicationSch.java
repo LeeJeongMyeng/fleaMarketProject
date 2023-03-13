@@ -21,6 +21,12 @@ public class FApplicationSch {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	public String getSearch() {
+		return search;
+	}
+	public void setSearch(String search) {
+		this.search = search;
+	}
 	public int getCount() {
 		return count;
 	}
@@ -74,12 +80,6 @@ public class FApplicationSch {
 	}
 	public void setEndBlock(int endBlock) {
 		this.endBlock = endBlock;
-	}
-	public String getSearch() {
-		return search;
-	}
-	public void setSearch(String search) {
-		this.search = search;
 	}
 	
 }

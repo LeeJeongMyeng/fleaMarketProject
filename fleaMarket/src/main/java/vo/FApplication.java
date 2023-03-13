@@ -13,6 +13,7 @@ public class FApplication {
 	private String title;
 	private String nickname;
 	private String filename;
+	private String profileimg;
 	
 	public int getCnt() {
 		return cnt;
@@ -67,6 +68,12 @@ public class FApplication {
 	}
 	public void setFilename(String filename) {
 		this.filename = filename;
+	}
+	public String getProfileimg() {
+		return profileimg;
+	}
+	public void setProfileimg(String profileimg) {
+		this.profileimg = profileimg;
 	}
 	
 }

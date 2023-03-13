@@ -36,23 +36,51 @@
    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
    crossorigin="anonymous"></script>
   <script type="text/javascript">
+	
    $(document).ready(function(){   
-	   	var msg = "${msg}"
-	   	// msg 확인 필요
-		if(msg!=""){
-			alert(msg+"\n 조회 화면으로 이동합니다")
+	    var $sessEmail = '${Login.email}'
+	    var $startDate = '${fleamarket.recruitmentStartDate}'
+	    var $endDate = '${fleamarket.recruitmentEndDate}'
+	    var $msg = '${msg}'
+	   
+	    // 모집 상태
+		var $today = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, -14); // 현재 날짜 yyyy-MM-dd		
+		var $sdate = (new Date($startDate)).toISOString().substring(0,10)
+		var $edate = (new Date($endDate)).toISOString().substring(0,10)
+		if($today < $edate || $today == $edate){
+			$('.badge').addClass( 'badge-success' );
+			$('.badge').text("모집중");
+		}else{
+			$('.badge').addClass( 'badge-danger' );
+			$('.badge').text("모집마감");
+			$("[name=appBtn]").hide(); // 신청하기 버튼 숨기기
 		}
-		$("[name=regBtn]").click(function(){
-			console.log(sessEmail)
-			/*
-			if(sessEmail==""){
-				alert("로그인을 하여야 합니다\n로그인 화면이동");
+		
+	   	// 신청 시 로그인 유효성
+		$("[name=appBtn]").click(function(){
+			if($sessEmail==""){
+				// 모달창 열리지 않게
+				$(this).removeAttr("data-bs-toggle");
+				$(this).removeAttr("data-bs-target");
+				alert("로그인 후 이용해주세요");
 				location.href="${path}/SignIn.do"
 			}
-			*/
-			$("#frmNofile").submit()
 		})
+		
+	   	// msg 확인 필요
+		if($msg!=""){
+			alert($msg+"\n 조회 화면으로 이동합니다")
+		}
+		
+		$("[name=regBtn]").click(function(){
+			$("#frmfile").submit();
+		})
+		
+		
 	});
+   
+   
+   
 	function uptBtn(postingNumber){
   		alert("수정 페이지로 이동 하시겠습니까?")
 		location.href="${path}/FleaMarketUptPage.do?postingNumber="+postingNumber
@@ -149,7 +177,7 @@
                   <br>
                   <h6 class="mb-0 mt-3">모집기간</h6>
                   <h5>${fleamarket.recruitmentStartDate} - ${fleamarket.recruitmentEndDate}</h5>
-                  <span class="badge badge-success">모집중</span>
+                  <span class="badge"></span>
                   <p  style="margin-top:15px;">
                   ${fleamarket.content}
                   </p>
@@ -167,7 +195,7 @@
                         </div>
                      </div>
                   </div>
-                  <c:if test="${fleamarket.checkForm != 'N'}">	
+                  <c:if test="${fleamarket.checkForm == 'P'}">	
 	                    <div class="col-12"> <!-- 첨부파일 -->
 	                      <label>파일 다운로드</label>
 	                      <c:forEach var="noimg" items="${noimgfiles}">
@@ -188,7 +216,7 @@
 	                    <c:when test="${Login.email != fleamarket.email}">	
 							<div class="row mt-4">
 			                    <div class="col-lg-5 ms-auto">
-			                      <button class="btn btn-primary mb-0 mt-lg-auto w-100" type="button" name="appBtn" data-bs-toggle="modal" data-bs-target="#jkanban-info-modal-nofile">신청하기</button>
+			                      <button class="btn btn-primary mb-0 mt-lg-auto w-100" type="button" name="appBtn" data-bs-toggle="modal" data-bs-target="#modal-file">신청하기</button>
 			                    </div>
 			                </div>
 			            </c:when>
@@ -276,7 +304,7 @@
   
   
   <!-- 신청하기 모달창 (양식 O) -->  
-  <div class="modal fade" id="jkanban-info-modal-nofile" style="display: none" tabindex="-1" role="dialog">
+  <div class="modal fade" id="modal-file" style="display: none" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -286,17 +314,23 @@
           </button>
         </div>
         <div class="pt-4 modal-body">
-          <!-- <div class="form-group text-center">신청하시겠습니까?</div> -->
-          <div class="form-group text-center">신청 파일을 첨부해 주세요</div>
-          <form id="frmNofile" method="post" action="${path}/insApp.do" 
+          <form id="frmfile" method="post" action="${path}/insApp.do" 
           enctype="multipart/form-data" onsubmit="return checkForm1()">
-          	<label>파일 첨부</label>
-         	<div class="row mt-3">
-              <div class="col-md-12">
-                <input type="file" name="appFile" class="form-control col-md-12 mb-3" id="appFile" multiple>
-                 <div id="image_container"></div>
-              </div>
-            </div>
+          <c:choose>
+	      	<c:when test="${fleamarket.checkForm == 'N'}">
+          		<div class="form-group text-center">신청하시겠습니까?</div>
+          	</c:when>
+          	<c:otherwise>
+	            <div class="form-group text-center">신청 파일을 첨부해 주세요</div>
+	          	<label>파일 첨부</label>
+	         	<div class="row mt-3">
+	              <div class="col-md-12">
+	                <input type="file" name="appFile" class="form-control col-md-12 mb-3" id="appFile" multiple>
+	                 <div id="image_container"></div>
+	              </div>
+	            </div>
+	        </c:otherwise>
+	      </c:choose>
             <input type="hidden" name="postingNumber" value="${fleamarket.postingNumber}"/>
 	        <input type="hidden" name="email" value="${Login.email}"/>
           	<div class="text-end">
@@ -719,31 +753,21 @@
 	       });
 	});  
 	
-	//유효성 체크
-	 function checkForm1(){	
-		//로그인 유효성 체크
-			if(!document.aform.email.value){
-			    var loginState="로그인을 하셔야합니다."
-			    alert(loginState)
-			    if(loginState+"\n 로그인 화면으로 이동하시겠습니까?"){
-					location.href="SignIn.do"
-				}        
-		        return false;
+	// 유효성 체크
+	function checkForm1(){
+		// 첨부파일 유효성 체크 
+		// var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf|ppt|docx|hwp)$/;
+		 if(!document.aform.appFile.value){
+		     alert("첨부파일은 필수");
+		     return false;
 		 }
-		
-		//첨부파일 유효성 체크 
-			var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf|ppt|docx|hwp)$/;
-			 if(!document.aform.appFile.value){
-			     alert("첨부파일은 필수");
-			     return false;
-			 }
-
-			 if(!fileForm.test(document.aform.appFile.value)){
-			     alert("첨부할 수 없는 파일입니다.");
-			     return false;
-			 }
-			 
-			  return true;
-			}
+		 /*
+		 if(!fileForm.test(document.aform.appFile.value)){
+		     alert("첨부할 수 없는 파일입니다.");
+		     return false;
+		 }
+		 */
+		 return true;
+	}
 </script>
 </html>

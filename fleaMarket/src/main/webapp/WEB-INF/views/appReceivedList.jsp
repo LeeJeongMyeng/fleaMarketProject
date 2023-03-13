@@ -41,25 +41,23 @@
 	function updateAppRe(applicationNo,approvalwhether){
 		// 유효성 check
 		$.ajax({
-		url:"updateAppRe.do",
-		type:"post",
-		data:"applicationNo="+applicationNo+"&approvalWhether="+approvalwhether,
-		dataType:"json",
-		success:function(data){
-			console.log("zzzzzz")
-			 var msg="";
-			if(approvalwhether=='a'){msg="승인되었습니다."}
-			else{msg="거부되었습니다."}
-			alert(msg)
-			location.reload(); 
-		},
-		error:function(xhr,status,err){
-              console.log(xhr)
-              console.log(status)
-              console.log(err)
-        }
-	})
-		
+			url:"updateAppRe.do",
+			type:"post",
+			data:"applicationNo="+applicationNo+"&approvalWhether="+approvalwhether,
+			dataType:"json",
+			success:function(data){
+				var msg="";
+				if(approvalwhether=='a'){msg="승인되었습니다."}
+				else{msg="거부되었습니다."}
+				alert(msg)
+				location.reload(); 
+			},
+			error:function(xhr,status,err){
+	              console.log(xhr)
+	              console.log(status)
+	              console.log(err)
+	        }
+		})
 	}
 	
 	// 페이징
@@ -92,7 +90,7 @@
 				$(".ApprovalBtnWrap button:nth-child(2)").attr("onclick","updateAppRe("+appno+",'r')")
 				
 				
-			$('#ApplicaionNoFilesModalBtn').click()
+				$('#ApplicaionNoFilesModalBtn').click()
 			},
 			error:function(xhr,status,err){
 	              console.log(xhr)
@@ -114,8 +112,6 @@
 		console.log(nth)
 		
 		}
-		
-	
 
 </script>
 </head>
@@ -215,12 +211,12 @@
 		                    </td>
 		                    <td class="text-xs font-weight-bold">
 		                      <div class="d-flex align-items-center">
-		                        <img src="${path}/resource/img/Member/profileimg/defaultprofile.png" class="avatar avatar-xs me-2" alt="user image">
+		                      	<img src="${path}/resource/img/Member/profileimg/${fapplication.profileimg}" alt="${path}/resource/img/Member/profileimg/defaultprofile.png" class="avatar avatar-xs me-2">
 		                        <span>${fapplication.nickname}</span>
 		                      </div>
 		                    </td>
 		                    <td class="text-xs font-weight-bold">
-		                    	<c:if test="${myfapp.filename != null}">
+		                    	<c:if test="${myfapp.filename != null}" >
 			                      <i class="bi bi-paperclip"></i>
 			                      <span class="my-2 text-xs">${fapplication.filename}</span>
 			                    </c:if>
@@ -391,7 +387,6 @@
 			<form id="downloadAppFileForm" action="downloadAppFile.do" method="get">
 					<%--여기에 파일리스트삽입 --%>
 			</form>
-          <div class="alert alert-success d-none">Changes saved!</div>
           <div class="text-end ApprovalBtnWrap">
             <button class="m-1 btn btn-primary" data-bs-dismiss="modal" onclick="updateAppRe('a')">
               승인
@@ -423,13 +418,6 @@
       }
       Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
     }
-    
-    
-   
-    
-
-    
-    
   </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>

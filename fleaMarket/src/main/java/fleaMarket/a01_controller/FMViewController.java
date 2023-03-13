@@ -87,12 +87,14 @@ public class FMViewController {
 			 service.insAppFile(af);
 		}
 		rttr.addFlashAttribute("msg","등록 성공");
-		return "redirect:appReceivedList.do";
+		return "redirect:appMyList.do";
 	}	
 	
 	// 받은 신청 전체 조회(최신순)
 	@RequestMapping("appReceivedList.do")
-	public String appReceivedList(@ModelAttribute("sch") FApplicationSch sch,Model d) {		 
+	public String appReceivedList(@ModelAttribute("sch") FApplicationSch sch, Model d, HttpSession session) {	
+		Member mb = (Member)session.getAttribute("Login");
+		sch.setSearch(mb.getEmail());
 		d.addAttribute("list",service.appReceivedList(sch));
 		return "appReceivedList";
 	}
@@ -107,7 +109,7 @@ public class FMViewController {
 	
 	// 신청글 파일 다운로드
 	@GetMapping("downloadAppFile.do")
-	public String downloadAppFile(@RequestParam("filename") String filename,Model d) {	
+	public String downloadAppFile(@RequestParam("filename") String filename, Model d) {	
 		
 		d.addAttribute("downloadPath",appPath);
 		d.addAttribute("downloadName",filename);
@@ -122,9 +124,9 @@ public class FMViewController {
 		return "pageJsonReport";
 	}
 	
-	// 내 신청 전체 조회(최신순) , HttpSession session
+	// 내 신청 전체 조회(최신순)
 	@RequestMapping("appMyList.do")
-	public String appMyList(@ModelAttribute("sch") FApplicationSch sch, Model d,HttpSession session) {	
+	public String appMyList(@ModelAttribute("sch") FApplicationSch sch, Model d, HttpSession session) {	
 		Member mb = (Member)session.getAttribute("Login");
 		sch.setSearch(mb.getEmail());
 		d.addAttribute("list",service.appMyList(sch));
