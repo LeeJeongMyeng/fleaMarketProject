@@ -1,6 +1,7 @@
 package fleaMarket.a01_controller;
 
 import java.io.UnsupportedEncodingException;
+import java.lang.ProcessBuilder.Redirect;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import fleaMarket.a02_service.Req4002_Service;
 import fleaMarket.util.FileService;
@@ -133,7 +135,7 @@ public class Req4002_Controller {
 	
 	// 파일 업데이트 기능메서드 (아직 구성중)
 	@PostMapping("communityUpdate.do")
-	public String communityUpdate(@RequestParam("updateFile") List<MultipartFile> mfiles, Capplication upt, Model d) { //,@RequestParam("indexNo") List<String> idx
+	public String communityUpdate(@RequestParam("updateFile") List<MultipartFile> mfiles, Capplication upt,RedirectAttributes rttr) { //,@RequestParam("indexNo") List<String> idx
 		service.communityUpdate(upt); // text형들 수정
 		BoardImg f = new BoardImg();
 		if(mfiles!=null) {
@@ -209,7 +211,8 @@ public class Req4002_Controller {
 //			service.communityFileUpdate(f); //이미지
 //		}
 		//d.addAttribute("communityNumber", no);
-		d.addAttribute("msg", "수정성공");
+		rttr.addFlashAttribute("msg", "수정성공");
+		//d.addAttribute("msg", "수정성공");
 		String encodeCategory ="";
 		//System.out.println("카테고리"+ufn);
 		String encodedParam;
