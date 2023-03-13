@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,7 +108,7 @@ public class Req4002_Controller {
 	}
 	
 	@RequestMapping("communityUpdatePage.do")
-	public String communityUpdatePage(@RequestParam("communityNumber") int upt,Model d) {
+	public String communityUpdatePage(@RequestParam("communityNumber") int upt,HttpServletRequest request,Model d) {
 		Capplication boardInfoVo = service.boardDetailSelect(upt);
 		
 		ArrayList<String> boardArr = new ArrayList<String>(); // 동적 배열
@@ -123,7 +124,9 @@ public class Req4002_Controller {
 		
 		boardArr.indexOf("");
 		d.addAttribute("boardInfo", boardInfoVo);
-		return "communityUpdate";
+		String referer = request.getHeader("Referer");
+		return "redirect:"+referer;
+				
 	}
 	
 	// 파일 업데이트 기능메서드 (아직 구성중)
