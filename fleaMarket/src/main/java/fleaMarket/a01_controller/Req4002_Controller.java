@@ -208,8 +208,9 @@ public class Req4002_Controller {
 //		}
 		//d.addAttribute("communityNumber", no);
 		d.addAttribute("msg", "수정 성공");
-		String referer = request.getHeader("Referer");
-		return "redirect:"+referer; // 상세조회페이지로 이동
+		//String referer = request.getHeader("Referer");
+		// 카테고리,키워드 (공백가능), 커뮤니티넘버, shift(정렬)(공백가능),타입(공백가능), 키워드 (공백가능),커뮤니티넘버
+		return "redirect:/CommunityDetail.do?communityNumber="+upt.getCommunitynumber()+"&category="+upt.getCategory(); // 상세조회페이지로 이동
 	}
 	
 	@RequestMapping("chatting.do")
