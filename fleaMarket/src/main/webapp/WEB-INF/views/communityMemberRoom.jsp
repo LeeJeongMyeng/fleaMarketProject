@@ -309,11 +309,8 @@
 	                          ${advlist.title}
 	                        </h5>
 	                      </a>
-	                      <p class="mb-4 text-sm">
-	                         ${advlist.content}
-	                      </p>
 	                      <div class="d-flex align-items-center justify-content-between">
-	                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</button>
+	                        <a href="${path}/CommunityDetail.do?communityNumber=${advlist.communitynumber}&keyword=&type=&shift=registDate&category=${advlist.category}" type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</a>
 	                      </div>
 	                    </div>
 	                  </div>
@@ -361,11 +358,8 @@
 	                          ${idealist.title}
 	                        </h5>
 	                      </a>
-	                      <p class="mb-4 text-sm">
-	                       	${idealist.content}
-	                      </p>
 	                      <div class="d-flex align-items-center justify-content-between">
-	                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</button>
+	                        <a href="${path}/CommunityDetail.do?communityNumber=${idealist.communitynumber}&keyword=&type=&shift=registDate&category=${idealist.category}" type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</a>
 	                      </div>
 	                    </div>
 	                  </div>
@@ -413,11 +407,8 @@
 	                          	${lifelist.title}
 	                        </h5>
 	                      </a>
-	                      <p class="mb-4 text-sm">
-	                      		${lifelist.content}
-	                      </p>
 	                      <div class="d-flex align-items-center justify-content-between">
-	                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</button>
+	                        <a href="${path}/CommunityDetail.do?communityNumber=${lifelist.communitynumber}&keyword=&type=&shift=registDate&category=${lifelist.category}" type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</a>
 	                      </div>
 	                    </div>
 	                  </div>
@@ -465,11 +456,8 @@
 	                          	${tiplist.title}
 	                        </h5>
 	                      </a>
-	                      <p class="mb-4 text-sm">
-	                       		${tiplist.content}
-	                      </p>
 	                      <div class="d-flex align-items-center justify-content-between">
-	                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</button>
+	                        <a href="${path}/CommunityDetail.do?communityNumber=${tiplist.communitynumber}&keyword=&type=&shift=registDate&category=${tiplist.category}" type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</a>
 	                      </div>
 	                    </div>
 	                  </div>
@@ -600,10 +588,15 @@
 		    </div>
 		    <div class="modal-body">
 		      	<table id="boardCntTab" class="table align-items-center mb-0">
-		      		<tr><th>게시글명</th><th>댓글내용</th></tr>
+		      		<tr><th>카테고리</th><th>게시글명</th><th>댓글내용</th></tr>
 		      		<c:if test="${not empty replyInfo}">
 			      		<c:forEach var="repInfo" items="${replyInfo}">
-			      			<tr><td>${repInfo.title}</td><td>${repInfo.repcontent}</td></tr>
+			      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${repInfo.communitynumber}&keyword=&type=&shift=registDate&category=${repInfo.category}'">
+			      				<td>${repInfo.category}</td>
+			      				<td>${repInfo.title}</td>
+			      				<td>${repInfo.repcontent}</td>
+			      			</tr>
+			      			
 			      		</c:forEach>
 		      		</c:if>
 		      		<c:if test="${empty replyInfo}">

@@ -200,11 +200,10 @@ CREATE TABLE chat
 	message varchar2(2000),
 	sendTime varchar2(500),
 	senderemail varchar2(50) NOT NULL,
-	communityNumber varchar2(100) NOT NULL,
 	PRIMARY KEY (room_id)
 );
 DROP TABLE chat CASCADE CONSTRAINTS;
-
+SELECT * FROM chat;
 -- 채팅파일
 CREATE TABLE chattingFile
 (
