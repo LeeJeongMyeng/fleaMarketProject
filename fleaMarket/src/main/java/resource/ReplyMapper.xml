@@ -6,7 +6,7 @@
    <mapper namespace="fleaMarket.a03_dao.ReplyDao">
      <!-- 부 모댓글 쓰기 -->
      <insert id = "replyWrite" parameterType = "reply">
-         INSERT INTO REPLY values(replys_seq.nextval,#{communityNumber},#{email},#{repcontent},0,0,#{groupid},sysdate)
+         INSERT INTO REPLY values(replys_seq.nextval,#{communityNumber},#{email},#{repcontent},0,0,#{groupid},sysdate,'',0)
      </insert>
      <!-- groupId를 구하기 위함. -->
      <select id = "replyMax" resultType = "int">
@@ -26,6 +26,9 @@ FROM (SELECT ROWNUM RNUM,
                  , r.repclass
                  , r.repcontent
                  , r.REPDATE
+                 , r.Email
+                 , r.repUpdateDate
+                 , r.isdeleted
                  , f.NICKNAME
                  , p.PROFILEIMG
             FROM REPLY r,
@@ -43,7 +46,7 @@ FROM (SELECT ROWNUM RNUM,
 </select>
 <!-- 답글 달기 -->
       <insert id = "rereplyWrite" parameterType = "reply">
-          INSERT INTO REPLY values(replys_seq.nextval,#{communityNumber},#{email},#{repcontent},1,#{groupOrderid},#{groupid},sysdate) 
+          INSERT INTO REPLY values(replys_seq.nextval,#{communityNumber},#{email},#{repcontent},1,#{groupOrderid},#{groupid},sysdate,'',0) 
       </insert>
       
  <!-- Orderby 해주기위해 답글..  -->     
@@ -54,4 +57,19 @@ FROM (SELECT ROWNUM RNUM,
  <select id = "getReplyCnt" resultType = "int">
  SELECT count(*) FROM REPLY WHERE COMMUNITYNUMBER = #{communityNumber}
  </select>
+ <update id = "updateReply">
+ UPDATE reply SET REPCONTENT = #{repcontent}, repUpdateDate = sysdate WHERE COMMUNITYNUMBER = #{communityNumber} AND REPLYNO = #{replyNo}
+ </update>
+ <select id = "getRepCount" resultType = "int">
+ SELECT count(*) FROM REPLY WHERE COMMUNITYNUMBER = #{communityNumber} and GROUPID = #{groupid}
+ </select>
+ <select id = "delCount" resultType="int">
+ select count(*) FROM REPLY WHERE COMMUNITYNUMBER = #{communityNumber} and GROUPID = #{groupid} AND isdeleted = 1
+ </select>
+ <update id="delUpdate">
+ UPDATE reply SET isdeleted = 1 WHERE COMMUNITYNUMBER = #{communityNumber} AND REPLYNO = #{replyNo}
+ </update>
+ <delete id = "deleteReply">
+ DELETE FROM reply WHERE groupid = #{groupid}
+ </delete>
    </mapper>

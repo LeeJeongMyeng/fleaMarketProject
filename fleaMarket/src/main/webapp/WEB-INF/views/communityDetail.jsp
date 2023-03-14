@@ -256,26 +256,44 @@ It's a separate element, as animating opacity is faster than rgba(). -->
               <div>
               <!-- 부모 글  -->
              
-                <div class="d-flex" style = "height: auto";>
+                <div class="d-flex" style = "height: auto;margin-top: 25px;">
                 <c:if test = "${rep.repclass eq '0'}">
                   <div class="flex-shrink-0">
                     <img alt="Image placeholder" class="avatar rounded-circle" src="${path}/resource/img/Member/profileimg/${rep.profileimg}">
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h6 class="h5 mt-0">${rep.nickname }</h6>
-                    <p class="text-sm">${rep.repcontent }</p>
-                    <div class="d-flex">
+                    <h6 class="h5 mt-0" style = "display: inline-block">${rep.nickname }</h6>
+	                <c:if test = "${rep.repUpdateDate eq null }">
+                    <b style="margin-left: 10px;font-size: 12px;color: #afaaaa;">${rep.repDate }</b>
+                    </c:if>
+                    <c:if test = "${rep.repUpdateDate ne null }">
+                    <b style="margin-left: 10px;font-size: 12px;color: #afaaaa;">${rep.repUpdateDate } 수정됨</b>
+                    </c:if>
+                    <c:if test = "${rep.isDeleted eq 1 }">
+                    <p class="text-sm"><span>삭제된 댓글입니다.</span></p>
+                    </c:if>
+                    <c:if test = "${rep.isDeleted eq 0 }">
+                    <p id = "cont${rep.replyNo }" class="text-sm"><span>${rep.repcontent }</span></p>
+                     <div class="d-flex" style ="gap:5px;">
                       <div>
-                        <i class="ni ni-like-2 me-1 cursor-pointer opacity-6"></i>
+                        <i class="fa-solid fa-pen-to-square cursor-pointer"></i>
                       </div>
-                      <span class="text-sm me-2">3 likes</span>
+                      <span class="text-sm me-2 cursor-pointer" onclick="updateItem(${rep.replyNo})">수정</span>
+                      <div>
+                        <i class="fa-solid fa-trash cursor-pointer"></i>
+                      </div>
+                       <span id = "deleteSpan" class="text-sm me-2 cursor-pointer" onclick = "deleteItem(${rep.replyNo})">삭제</span>
                       <div>
                         <i class="ni ni-curved-next me-1 cursor-pointer opacity-6"></i>
                       </div>
                       <span class="text-sm me-2 cursor-pointer" onclick="contItem(${rep.replyNo})">댓글 달기</span>
                     </div>
-                  </div>
+                    </c:if>
+                   
+                     </div>
+                 
                   </c:if>
+            
                   <c:if test = "${rep.repclass eq '1'}">
                 <div class="d-flex" style ="gap:5px;">
                 <i class="fa-solid fa-arrow-right" style = "margin-top: 15px;
@@ -284,19 +302,31 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                     <img alt="Image placeholder" class="avatar rounded-circle" src="${path}/resource/img/Member/profileimg/${rep.profileimg}">
                   </div>
                   <div class="flex-grow-1 ms-3">
-                    <h6 class="h5 mt-0">${rep.nickname }</h6>
-                    <p class="text-sm">${rep.repcontent }</p>
+                    <h6 class="h5 mt-0" style = "display: inline-block">${rep.nickname }</h6>
+                    <c:if test = "${rep.repUpdateDate eq null}">
+                    <b style="margin-left: 10px;font-size: 12px;color: #afaaaa;">${rep.repDate }</b>
+                    </c:if>
+                    <c:if test = "${rep.repUpdateDate ne null}">
+                    <b style="margin-left: 10px;font-size: 12px;color: #afaaaa;">${rep.repUpdateDate } 수정됨</b>
+                    </c:if>
+                    <c:if test = "${rep.isDeleted eq 1 }">
+                    <p class="text-sm"><span>삭제된 댓글입니다.</span></p>
+                    </c:if>
+                    <c:if test = "${rep.isDeleted eq 0 }">
+                    <p id = "cont${rep.replyNo }" class="text-sm" style ="margin-top: 5px;"><span style="font-size:17px">${rep.repcontent }</span></p>
                     <div class="d-flex" style ="gap:5px;">
                       <div>
                         <i class="fa-solid fa-pen-to-square cursor-pointer"></i>
                       </div>
-                      <span class="text-sm me-2 cursor-pointer">수정</span>
+                      <span class="text-sm me-2 cursor-pointer" onclick="updateItem(${rep.replyNo})">수정</span>
                       <div>
                         <i class="fa-solid fa-trash cursor-pointer"></i>
                       </div>
-                      <span id = "deleteSpan" class="text-sm me-2 cursor-pointer">삭제</span>
+                      <span id = "deleteSpan" class="text-sm me-2 cursor-pointer" onclick = "deleteItem(${rep.replyNo})">삭제</span>
                     </div>
+                     </c:if>
                   </div>
+                 
                 </div>
                 </c:if>
                 </div>                                   
@@ -305,6 +335,18 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                 "
                     margin-left: 60px;margin-right: 80px;margin-bottom:25px;display:none"
                 >
+                <form id = "updateReplyForm${rep.replyNo }" method = "post" action = "${path}/updateReply.do">
+                  <input type= "hidden" name = "replyNo" value = "${rep.replyNo }"/>
+                  <input type= "hidden" name = "communityNumber" value = "${dlist[0].communitynumber}"/>
+                  <input type= "hidden" name = "repcontent" value = "${rep.repcontent }"/>
+                  <input type= "hidden" name = "email" value = "${rep.email }"/>
+                </form>
+                <form id = "deleteReplyForm${rep.replyNo }" method = "post" action = "${path }/deleteReply.do">
+                  <input type = "hidden" name = "replyNo" value = "${rep.replyNo}"/>
+                  <input type= "hidden" name = "communityNumber" value = "${dlist[0].communitynumber}"/>
+                  <input type = "hidden" name = "groupid" value = "${rep.groupid }"/>
+                  <input type= "hidden" name = "email" value = "${rep.email }"/>
+                </form>
                   <div class="flex-shrink-0">
                     <!-- 세션 프로필 아이디. -->
                     <img alt="Image placeholder" class="avatar rounded-circle me-3" src="${path}/resource/img/Member/profileimg/${profileImg}">
@@ -405,18 +447,26 @@ It's a separate element, as animating opacity is faster than rgba(). -->
       </footer>
     </div>
   </main>
-  
+ 
+ 
+ <!-- 삭제 게시물 폼 -->
  <form id="infoForm" method="post" action = "${path }/deleteBoard.do">
 							<input type="hidden" name="communityNumber" value="${dlist[0].communitynumber}"> 
 							<input type="hidden" name="category" value = "${category}">					
 </form>
+
+<!-- 신고사유 폼  -->
 <form id = "irrForm" method = "post" action="${path }/insertReport.do">
 <input type="hidden" name="communityNumber" value="${dlist[0].communitynumber}"> 
 <input type="hidden" name="irrType">
 </form>
+
+<!-- 업데이트페이지 -->
 <form id = "updateForm" method = "get" action = "${path }/communityUpdatePage.do">
-<input type="hidden" name="communityNumber" value="${dlist[0].communitynumber}"> 
+<input type="hidden" name="communityNumber" value="${dlist[0].communitynumber}">
 </form>
+
+<!-- 이전글 다음글 form  -->
 	<form id="moveForm" method="get">
 		<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum}">
 		<input type="hidden" name="communityNumber" value="${dlist[0].communitynumber}">
@@ -428,7 +478,101 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 	<!--   Core JS Files   -->
 	
   <script>
+  //댓글 삭제 
+ function deleteItem(idx){
+	  var dpd = $("#deleteReplyForm"+idx);
+	  var emails = dpd.find("input[name='email']").val();
+	  
+	  if(myEmail == ''){
+		  Swal.fire({
+			    icon:'warning',
+		        text:'로그인 후에 이용하실 수 있습니다.',
+		        confirmButtonText:'로그인하러가기',
+		        showCancelButton: true,
+		        cancelButtonText:'취소',
+		 }).then((result) =>{
+			 if(result.isConfirmed){
+			 location.href = "${path}/SignIn.do";
+			 }
+		 })
+	  }else if(myEmail==emails){
+		  Swal.fire({
+			  icon:"error",
+			  title: '정말 삭제하시겠습니까?',
+		      confirmButtonText:'삭제',
+		      showCancelButton: true,
+		      cancelButtonText:'취소',	      
+		}).then(function(result) { 
+			if(result.isConfirmed){
+			    dpd.find("input[name=replyNo]").val();
+			    dpd.find("input[name=communityNumber]").val();
+			    dpd.find("input[name=groupid]").val();
+			    dpd.submit();
+			}
+			
+			
+		});
+	  }else{
+		  Swal.fire({
+				icon:'warning',
+				text:'작성자가 아닙니다.',				
+		})
+		 
+	  }
+  }
+ //댓글 수정 처리
  
+ function updateItem(idx){
+	    var upd = $("#updateReplyForm"+idx);
+	    var content = upd.find("input[name='repcontent']").val();
+	    var email = upd.find("input[name='email']").val();
+	    console.log(myEmail)
+	    console.log(email);
+	    
+	    if(myEmail==''){
+			 Swal.fire({
+				    icon:'warning',
+			        text:'로그인 후에 이용하실 수 있습니다.',
+			        confirmButtonText:'로그인하러가기',
+			        showCancelButton: true,
+			        cancelButtonText:'취소',
+			 }).then((result) =>{
+				 if(result.isConfirmed){
+				 location.href = "${path}/SignIn.do";
+				 }
+			 })
+		 }
+	    else if(myEmail == email){
+	    Swal.fire({
+			  title: '수정 내용을 적어주세요!',
+			  input: 'textarea',
+		      inputValue:content,
+		      confirmButtonText:'수정',
+		      showCancelButton: true,
+		      cancelButtonText:'취소',
+		      
+		}).then(function(result) { 
+			if(result.isConfirmed){
+			    upd.find("input[name=replyNo]").val();
+			    upd.find("input[name=communityNumber]").val();
+			    upd.find("input[name=repcontent]").val(result.value);
+			    upd.submit();
+			}
+			
+			
+		});
+		
+}else{
+				
+	 Swal.fire({
+			icon:'warning',
+			text:'작성자가 아닙니다.',
+			
+	})
+	 
+					 
+}
+ }
  var moveForm = $("#moveForm");
  var updateForm = $("#updateForm");
  $(".page-item a").on("click", function(e) {
@@ -461,11 +605,17 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 	 })
  }
  //수정 처리
- const uptResult = '${msg}'
- if(uptResult==='수정성공'){
+ const Result = '${msg}'
+ if(Result==='수정성공'){
 	 Swal.fire({
 		 icon: 'success',
 	     title: '수정 성공',
+	 })
+ }
+ if(Result==='삭제완료'){
+	 Swal.fire({
+		 icon: 'success',
+	     title: '삭제 완료',
 	 })
  }
  
@@ -484,7 +634,9 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 		        showCancelButton: true,
 		        cancelButtonText:'취소',
 		 }).then((result) =>{
+			 if(result.isConfirmed){
 			 location.href = "${path}/SignIn.do";
+			 }
 		 })
 	 }
 	 if(myEmail==following){
@@ -518,7 +670,9 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 				        showCancelButton: true,
 				        cancelButtonText:'취소',
 				 }).then((result) =>{
-					 location.href = "${path}/SignIn.do";
+					 if(result.isConfirmed){
+						 location.href = "${path}/SignIn.do";
+						 }
 				 })
 		    	   
 		    	}  
@@ -553,7 +707,9 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 			        showCancelButton: true,
 			        cancelButtonText:'취소',
 			 }).then((result) =>{
-				 location.href = "${path}/SignIn.do";
+				 if(result.isConfirmed){
+					 location.href = "${path}/SignIn.do";
+					 }
 			 })
 	    	   
 	    	}else{
@@ -581,9 +737,11 @@ function contItem(idx){
 	        text:'로그인 후에 이용하실 수 있습니다.',
 	        confirmButtonText:'로그인하러가기',
 	        showCancelButton: true,
-	        cancelButtonText:'신고',
+	        cancelButtonText:'취소',
 	 }).then((result) =>{
+		 if (result.isConfirmed) {
 		 location.href = "${path}/SignIn.do";
+		 }
 	 })
 	}
 }
@@ -660,11 +818,17 @@ function contItem(idx){
     		}
     	})
     }else{
-    	   var delConfirm = confirm('로그인 후 이용이 가능합니다.');
-    	   if (delConfirm) {
-    	      alert('로그인창으로 이동합니다');
-    	      location.href = "#";
-    	   }
+    	Swal.fire({
+		    icon:'warning',
+	        text:'로그인 후에 이용하실 수 있습니다.',
+	        confirmButtonText:'로그인하러가기',
+	        showCancelButton: true,
+	        cancelButtonText:'취소',
+	 }).then((result) =>{
+		 if (result.isConfirmed) {
+		 location.href = "${path}/SignIn.do";
+		 }
+	 })
     }
  
  });
@@ -729,11 +893,17 @@ $("#Heart").on("click", function(e) {
    	        console.log('Fetch Error',err);
    	    });
 }}else{
-	var delConfirm = confirm('로그인 후 이용이 가능합니다.');
-	   if (delConfirm) {
-	      alert('로그인창으로 이동합니다');
-	      location.href = "#";
-	   }
+	Swal.fire({
+	    icon:'warning',
+        text:'로그인 후에 이용하실 수 있습니다.',
+        confirmButtonText:'로그인하러가기',
+        showCancelButton: true,
+        cancelButtonText:'취소',
+ }).then((result) =>{
+	 if (result.isConfirmed) {
+	 location.href = "${path}/SignIn.do";
+	 }
+ })
 }})
 
 

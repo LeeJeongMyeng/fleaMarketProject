@@ -10,4 +10,6 @@ public interface CommunityReplyService {
 	public int insertReReply(ReplyVo vo);
 	public List<ReplyVo> replyList(int communityNumber,Criteria cri);
 	public int getReplyCnt(int communityNumber);
+	public int updateReply(ReplyVo vo);
+	public String deleteReply(ReplyVo vo);
 }

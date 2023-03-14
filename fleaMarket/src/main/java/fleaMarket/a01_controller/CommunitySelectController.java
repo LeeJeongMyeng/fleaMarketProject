@@ -238,5 +238,25 @@ public class CommunitySelectController {
 		String referer = request.getHeader("Referer");
 		return "redirect:"+referer;
 	}
-	
+	@PostMapping("updateReply.do")
+	public String updateReport(ReplyVo vo,HttpServletRequest request,RedirectAttributes rttr) {
+		int result = repservice.updateReply(vo);
+		String msg = "";
+		if(result==1) {
+			msg = "update";
+		}else {
+			msg = "fail";
+		}
+		String referer = request.getHeader("Referer");
+		
+		return "redirect:"+referer;
+	}
+	@PostMapping("deleteReply.do")
+	public String deleteReply(ReplyVo vo,HttpServletRequest request,RedirectAttributes rttr) {
+		String msg = repservice.deleteReply(vo);
+		logger.info(msg);
+        String referer = request.getHeader("Referer");
+        rttr.addFlashAttribute("msg",msg);
+		return "redirect:"+referer;
+	}
 }

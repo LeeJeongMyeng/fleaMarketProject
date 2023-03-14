@@ -12,4 +12,10 @@ public interface ReplyDao {
 	public List<ReplyVo> replyList(Map<String,Object> map);
 	public int getGroupOrder(int groupId);
 	public int getReplyCnt(int communityNumber);
+	public int updateReply(ReplyVo vo);
+	public List<ReplyVo> getRepContent(ReplyVo vo);
+	public int getRepCount(ReplyVo vo);
+	public int delCount(ReplyVo vo);
+	public int delUpdate(ReplyVo vo);
+	public int deleteReply(int groupid);
 }

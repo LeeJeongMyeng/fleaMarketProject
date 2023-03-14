@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,6 +68,45 @@ public class CommunityReplyServiceImpl implements CommunityReplyService {
 		int replyCount = mapper.getReplyCnt(communityNumber);
 		return replyCount;
 	}
+	
+	public int updateReply(ReplyVo vo) {
+		return mapper.updateReply(vo);
+	}
+
+	@Override
+	public String deleteReply(ReplyVo vo) {
+		// TODO Auto-generated method stub
+		
+		int groupid = vo.getGroupid();
+		// 댓글 그룹 아이디 총 개수 
+		int groupTotalCnt = mapper.getRepCount(vo);
+		int deleteCnt = mapper.delCount(vo);
+		int updateReply = 0;
+		int deleteReply = 0;
+		String msg = "";
+		// 업데이트 처리 
+		if(groupTotalCnt!=deleteCnt) {
+			updateReply = mapper.delUpdate(vo);
+			if(updateReply==1) {
+				deleteCnt += 1;
+				msg = "삭제완료";
+			}
+		}
+		
+		if(groupTotalCnt == deleteCnt) {
+			deleteReply = mapper.deleteReply(groupid);
+			msg = "삭제완료";
+		}
+		//checking
+		
+		
+		// groupid 전체가 null 이면 삭제처리 
+		
+		return msg;
+		
+		
+	}
+	
 	
 	
 

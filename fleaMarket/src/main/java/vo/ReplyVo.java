@@ -9,11 +9,26 @@ public class ReplyVo {
 	private int groupOrderid;
 	private int groupid;
 	private String repDate;
+	private String repUpdateDate;
 	//기본 이미지, 닉네임 받아오기
 	private String nickname;
 	private String profileimg;
+	private int isDeleted;
 	
 	
+	
+	public int getIsDeleted() {
+		return isDeleted;
+	}
+	public void setIsDeleted(int isDeleted) {
+		this.isDeleted = isDeleted;
+	}
+	public String getRepUpdateDate() {
+		return repUpdateDate;
+	}
+	public void setRepUpdateDate(String repUpdateDate) {
+		this.repUpdateDate = repUpdateDate;
+	}
 	public int getReplyNo() {
 		return replyNo;
 	}
