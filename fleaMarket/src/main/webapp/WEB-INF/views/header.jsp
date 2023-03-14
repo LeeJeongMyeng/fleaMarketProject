@@ -282,25 +282,31 @@ li{
                             </div>
                           </a>
                         </li>
-                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="MemberQnAreg.do">
-                            <div class="d-flex">
-                             <div class="icon h-10 me-3 d-flex mt-1">
-                               <i class="ni ni-laptop text-primary"></i>
-                             </div>
-                             <div class="w-100 d-flex align-items-center justify-content-between">
-                                <div>		
-                                <c:if test="${Login.authority=='관리자'}">
-                                  <p class="dropdown-header text-dark p-0">공지사항 등록</p>
-                                </c:if>
-                                <c:if test="${Login.authority!='관리자'}">
-                                  <p class="dropdown-header text-dark p-0">문의사항 등록</p>
-                                </c:if>
-                                </div>
-                              </div>
-                            </div>
-                          </a>
-                        </li>
+                     <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
+  <c:choose>
+    <c:when test="${empty Login}">
+    </c:when>
+    <c:otherwise>
+      <a class="dropdown-item py-2 ps-3 border-radius-md" href="MemberQnAreg.do">
+        <div class="d-flex">
+          <div class="icon h-10 me-3 d-flex mt-1">
+            <i class="ni ni-laptop text-primary"></i>
+          </div>
+          <div class="w-100 d-flex align-items-center justify-content-between">
+            <div>		
+              <c:if test="${Login.authority=='관리자'}">
+                <p class="dropdown-header text-dark p-0">공지사항 등록</p>
+              </c:if>
+              <c:if test="${Login.authority!='관리자'}">
+                <p class="dropdown-header text-dark p-0">문의사항 등록</p>
+              </c:if>
+            </div>
+          </div>
+        </div>
+      </a>
+    </c:otherwise>
+  </c:choose>
+</li>
                       </ul>
                     </div>
                     <!-- responsive -->
