@@ -50,7 +50,7 @@
 			AND (m.email LIKE '%'||#{keyword}||'%'
 			OR m.nickname LIKE '%'||#{keyword}||'%')
 			<choose>
-				<when  test="div==null">
+				<when test="div==null">
 					AND myemail=#{myemail}
 				</when>
 				<when test="div!=null">
@@ -91,12 +91,13 @@
 		</select>
 		
 		<!-- 게시글 조회 -->
-		<select id="boardSelect" parameterType="HashMap" resultType="roommemberinfo">
-			SELECT * FROM capplicaion
-			WHERE email=#{email}
-			<if test='category!=null'>
-				AND category=#{category}
-			</if>
+		<select id="boardSelect" parameterType="roommemberinfo" resultType="roommemberinfo">
+			SELECT *
+			FROM BoardImg i,capplicaion c
+			WHERE i.communitynumber=c.communitynumber
+			AND email = #{email}
+			AND category LIKE '%'||#{category}||'%'
+			AND  TO_CHAR(REGISTDATE, 'mm') LIKE '%'||#{registDateMonth}||'%'
 		</select>
 		
 		<!-- 게시글댓글 조회 / 내가쓴 댓글 조회 (구분자를 주기위해 파라미터값 vo로 넣기)-->

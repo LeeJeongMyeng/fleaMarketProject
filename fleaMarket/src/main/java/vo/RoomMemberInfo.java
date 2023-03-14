@@ -11,6 +11,7 @@ public class RoomMemberInfo {
 	private String email;
 	private String hashtag;
 	private int viewcnt;
+	private String registDateMonth;
 	
 	//커뮤니티 게시글 이미지
 	private String imgname;
@@ -90,6 +91,12 @@ public class RoomMemberInfo {
 	}
 	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
+	}
+	public String getRegistDateMonth() {
+		return registDateMonth;
+	}
+	public void setRegistDateMonth(String registDateMonth) {
+		this.registDateMonth = registDateMonth;
 	}
 	public String getImgpath() {
 		return imgpath;

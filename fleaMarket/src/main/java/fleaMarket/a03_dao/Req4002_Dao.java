@@ -31,5 +31,5 @@ public interface Req4002_Dao {
 	// 룸회원 댓글 조회
 	public List<RoomMemberInfo> boardReplySelect(Map<String, String> map);
 	// 커뮤니티 조회(전체, 카테고리별)
-	public List<RoomMemberInfo> boardSelect(Map<String, String> map);
+	public List<RoomMemberInfo> boardSelect(RoomMemberInfo sel);
 }

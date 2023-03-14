@@ -10,6 +10,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -295,18 +296,46 @@ public class Req4002_Controller {
 		Map<String, String> repMap = new HashMap<String, String>();
 		repMap.put("email", email);
 		
-		// 나의 게시판 정보
+		// 나의 게시판 정보(댓글정보)
 		repMap.put("div", "meboard");
 		d.addAttribute("boardreplyInfo", service.boardReplySelect(repMap));
+		System.out.println("내가쓴 게시판 정보(댓글): "+service.boardReplySelect(repMap));
 		
 		// 나의 댓글 정보
 		repMap.put("div", "mereply");
 		d.addAttribute("replyInfo", service.boardReplySelect(repMap));
+		System.out.println("내가 쓴 댓글 정보: "+service.boardReplySelect(repMap));
 		
 		// 카테고리별 게시판 조회
-		 Map<String, String> boardMap = new HashMap<String, String>();
-		 boardMap.put("email", email);
-		 boardMap.put("category", null);
+		board.setEmail(email);
+			// 월별
+		for(int i=1;i<13;i++) {
+			if(i<10) {
+				board.setRegistDateMonth("0"+i);
+				System.out.println("게시글 번호:"+board.getRegistDateMonth());
+				d.addAttribute("month"+i, service.boardSelect(board).size()); 
+				System.out.println(i+"월 게시글 수:"+service.boardSelect(board).size());
+			}else {
+				board.setRegistDateMonth(Integer.toString(i));
+				System.out.println("10이상 게시글 번호"+board.getRegistDateMonth());
+				d.addAttribute("month"+i, service.boardSelect(board).size()); 
+				System.out.println(i+"월 게시글 수:"+service.boardSelect(board).size());
+			}
+		}
+		board.setRegistDateMonth("");
+			//카테고리별 
+		board.setCategory("홍보글");
+		d.addAttribute("adv", service.boardSelect(board));
+		
+		board.setCategory("사업아이디어");
+		d.addAttribute("idea", service.boardSelect(board));
+		
+		board.setCategory("사는이야기");
+		d.addAttribute("life", service.boardSelect(board));
+		
+		board.setCategory("꿀팁");
+		d.addAttribute("tip", service.boardSelect(board)); 
+		
 		
 		// 좋아요 누적처리 및 커뮤니티 정보 (전윤환이 좋아요 테이블따로만들어서 필요없게 됨..기가막히게짯는데 -ㅅ-)
 //		int totlike=0;
@@ -315,20 +344,8 @@ public class Req4002_Controller {
 //			System.out.println("좋아요수:"+e.getLikecnt());
 //			System.out.println("전체좋아요수:"+totlike);
 //		}
-		d.addAttribute("boardInfo", service.boardSelect(boardMap));
+//		d.addAttribute("boardInfo", service.boardSelect(boardMap));
 //		d.addAttribute("likeCnt", totlike);
-		
-		boardMap.put("category", "홍보글");
-		d.addAttribute("adv", service.boardSelect(boardMap));
-		
-		boardMap.put("category", "사업아이디어");
-		d.addAttribute("idea", service.boardSelect(boardMap));
-		
-		boardMap.put("category", "사는이야기");
-		d.addAttribute("life", service.boardSelect(boardMap));
-		
-		boardMap.put("category", "꿀팁");
-		d.addAttribute("tip", service.boardSelect(boardMap)); 
 		
 		return "communityMemberRoom";
 	}

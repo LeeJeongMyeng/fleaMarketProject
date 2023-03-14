@@ -67,12 +67,13 @@
 		var boardrepInfos = "${boardreplyInfo}"
 		$("#meBoardRepCnt").text(arrFun(boardrepInfos))
 		
-		// 게시글 갯수정보
-		$("#boardCntTab td").eq(0).text(arrFun("${adv}")) //
-		$("#boardCntTab td").eq(1).text(arrFun("${idea}"))
-		$("#boardCntTab td").eq(2).text(arrFun("${life}"))
-		$("#boardCntTab td").eq(3).text(arrFun("${tip}"))
+		// 카테고리별 게시글 갯수정보
+		$("#boardCategoryCntTab td").eq(0).text(arrFun("${adv}")) //
+		$("#boardCategoryCntTab td").eq(1).text(arrFun("${idea}"))
+		$("#boardCategoryCntTab td").eq(2).text(arrFun("${life}"))
+		$("#boardCategoryCntTab td").eq(3).text(arrFun("${tip}"))
 		
+		// 월별 게시글 갯수정보
 		
 		// 내가쓴 댓글 정보
 		var replyInfos = "${replyInfo}"
@@ -187,12 +188,22 @@
         </div>
         <div class="ms-auto d-flex">
           <div class="pe-4 mt-1 position-relative" >
-            <p class="text-black text-s font-weight-bold mb-2">팔로우한 회원들:</p> <!-- 시간남으면 팔로잉한 회원들 추가하기 -->
+            <p class="text-black text-s font-weight-bold mb-2">${roommember.nickname}님이 팔로우한 회원들:</p> <!-- 시간남으면 팔로잉한 회원들 추가하기 -->
             <div class="d-flex align-items-center justify-content-center">
               <div class="avatar-group">
               	<c:forEach var="followers" items="${follower}">
 	                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="${folloewers.nickname}" >
-	                  <img alt="팔로우 없음" src="${path}/resource/img/Member/profileimg/${followers.profileimg}" style="width:55px;height:45px;" onclick="memberRoom(${folloewers.email})">
+	                  <img alt="프로필 없음" src="${path}/resource/img/Member/profileimg/${followers.profileimg}" style="width:55px;height:45px;" onclick="memberRoom(${folloewers.email})">
+	                </a>
+                </c:forEach>
+              </div>
+            </div>
+            <p class="text-black text-s font-weight-bold mb-2">${roommember.nickname}님이 팔로잉된 회원들:</p> <!-- 시간남으면 팔로잉한 회원들 추가하기 -->
+            <div class="d-flex align-items-center justify-content-center">
+              <div class="avatar-group">
+              	<c:forEach var="followings" items="${following}">
+	                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="${followings.nickname}" >
+	                  <img alt="프로필 없음" src="${path}/resource/img/Member/profileimg/${followings.profileimg}" style="width:55px;height:45px;" onclick="memberRoom(${followings.email})">
 	                </a>
                 </c:forEach>
               </div>
@@ -215,7 +226,7 @@
               <div class="d-flex justify-content-between">
                 <h6 class="mb-0">카테고리별 ${roommember.nickname}님의 게시글 갯수</h6>
                 <button type="button" class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" 
-                		data-bs-toggle="modal" data-bs-target="#boardCntModal">
+                		data-bs-toggle="modal" data-bs-target="#boardCategoryCntModal">
                   <i class="fas fa-info" aria-hidden="true"></i>
                 </button>
               </div>
@@ -254,7 +265,8 @@
             <div class="card-header pb-0 p-3">
               <div class="d-flex justify-content-between">
                 <h6 class="mb-0">월별 게시글 등록 갯수</h6>
-                <button type="button" class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" data-bs-toggle="tooltip" data-bs-placement="bottom" title="" data-bs-original-title="See which ads perform better">
+                <button type="button" class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" 
+                		data-bs-toggle="modal" data-bs-target="#boardMonthCntModal">
                   <i class="fas fa-info" aria-hidden="true"></i>
                 </button>
               </div>
@@ -283,22 +295,22 @@
      		<c:if test="${not empty adv[0].title}">
             <div class="card-body p-3">
               <div class="row">
-	              <c:forEach var="advlist" items="${adv}">
+	              <c:forEach var="advlist" items="${adv}" end="2">
 	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
 	                  <div class="card card-blog card-plain">
 	                    <div class="position-relative">
 	                      <a class="d-block shadow-xl border-radius-xl">
-	                        <img src="${path}/resource/community/${advlist.imgname}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+	                        <img src="${path}/resource/community/${advlist.imgname}" alt="이미지 없음" class="img-fluid shadow border-radius-xl">
 	                      </a>
 	                    </div>
 	                    <div class="card-body px-1 pb-0">
 	                      <a href="javascript:;">
 	                        <h5>
-	                          ${idvlist.title}
+	                          ${advlist.title}
 	                        </h5>
 	                      </a>
 	                      <p class="mb-4 text-sm">
-	                         ${idvlist.content}
+	                         ${advlist.content}
 	                      </p>
 	                      <div class="d-flex align-items-center justify-content-between">
 	                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</button>
@@ -335,22 +347,22 @@
             <c:if test="${not empty idea[0].title}">
             <div class="card-body p-3">
               <div class="row">
-	              <c:forEach var="idealist" items="${idea}">
+	              <c:forEach var="idealist" items="${idea}" end="2">
 	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
 	                  <div class="card card-blog card-plain">
 	                    <div class="position-relative">
 	                      <a class="d-block shadow-xl border-radius-xl">
-	                        <img src="${path}/resource/community/${idealist.imgname}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+	                        <img src="${path}/resource/community/${idealist.imgname}" alt="이미지 없음" class="img-fluid shadow border-radius-xl">
 	                      </a>
 	                    </div>
 	                    <div class="card-body px-1 pb-0">
 	                      <a href="javascript:;">
 	                        <h5>
-	                          ${idea.title}
+	                          ${idealist.title}
 	                        </h5>
 	                      </a>
 	                      <p class="mb-4 text-sm">
-	                       	${idea.content}
+	                       	${idealist.content}
 	                      </p>
 	                      <div class="d-flex align-items-center justify-content-between">
 	                        <button type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</button>
@@ -387,12 +399,12 @@
             <div class="card-body p-3">
             <c:if test="${not empty life[0].title}">
               <div class="row">
-	              <c:forEach var="lifelist" items="${life}">
+	              <c:forEach var="lifelist" items="${life}" end="2">
 	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
 	                  <div class="card card-blog card-plain">
 	                    <div class="position-relative">
 	                      <a class="d-block shadow-xl border-radius-xl">
-	                        <img src="${path}/resource/community/${lifelist.imgname}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+	                        <img src="${path}/resource/community/${lifelist.imgname}" alt="이미지 없음" class="img-fluid shadow border-radius-xl">
 	                      </a>
 	                    </div>
 	                    <div class="card-body px-1 pb-0">
@@ -439,12 +451,12 @@
             <c:if test="${not empty tip[0].title}">
             <div class="card-body p-3">
               <div class="row">
-	              <c:forEach var="tiplist" items="${tip}">
+	              <c:forEach var="tiplist" items="${tip}" end="2">
 	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
 	                  <div class="card card-blog card-plain">
 	                    <div class="position-relative">
 	                      <a class="d-block shadow-xl border-radius-xl">
-	                        <%-- <img src="${path}/resource/community/${advlist.imgname}" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl"> --%>
+	                        <img src="${path}/resource/community/${tiplist.imgname}" alt="이미지없음" class="img-fluid shadow border-radius-xl">
 	                      </a>
 	                    </div>
 	                    <div class="card-body px-1 pb-0">
@@ -486,7 +498,7 @@
   <!-- 팔로우 추가 회원(언팔중인 회원) 보러가기 모달창 -->
   <div class="modal fade w-500" id="unfollModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document" style="width:800px;">
-		  <div class="modal-content" >
+		  <div class="modal-content" style="width:750px;">
 		    <div class="modal-header">
 		      <h5 class="modal-title" id="exampleModalLabel">팔로우 하고싶은 회원정보<br></h5>
 		      
@@ -502,7 +514,7 @@
 		      			<td><img src="${path}/resource/img/Member/profileimg/${unfollowmem.profileimg}" style="width:40px;height:40px;"></td>
 		      			<td>${unfollowmem.email}</td>
 		      			<td>${unfollowmem.nickname}</td>
-		      			<td class="align-middle text-center"><button id="roomGo" class="btn btn-outline-primary mt-2"><i class="ni ni-shop"></i></button></td>
+		      			<td class="align-middle text-center"><a href="communityMemberRoom.do?email=${unfollowmem.email}" id="roomGo" class="btn btn-outline-primary mt-2"><i class="ni ni-shop"></i></a></td>
 		      			<td class="align-middle text-center"><button id="followinsert" class="btn btn-outline-primary mt-2"><i class="ni ni-fat-add"></i></button></td>
 		      			</tr>
 		      		</c:forEach>
@@ -514,18 +526,18 @@
 		  </div>
 		</div>
 	</div>
-  <!-- 게시글 갯수정보 모달창  -->
-	<div class="modal fade" id="boardCntModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- 카테고리별 게시글 갯수정보 모달창  -->
+	<div class="modal fade" id="boardCategoryCntModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 		  <div class="modal-content">
 		    <div class="modal-header">
-		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님이 쓴 게시글 수</h5>
+		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님이 쓴 카테고리별 게시글 수</h5>
 		      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 		        <span aria-hidden="true">&times;</span>
 		      </button>
 		    </div>
 		    <div class="modal-body">
-		      	<table id="boardCntTab" class="table align-items-center mb-0">
+		      	<table id="boardCategoryCntTab" class="table align-items-center mb-0">
 		      		<tr><th>홍보글</th><td></td></tr>
 		      		<tr><th>사업아이디어</th><td></td></tr>
 		      		<tr><th>사는이야기</th><td></td></tr>
@@ -538,14 +550,50 @@
 		  </div>
 		</div>
 	</div>
-  <!-- 댓글보러가기 모달창 -->
-  <div class="modal fade" id="repModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <!-- 월별 게시글 갯수정보 모달창  -->
+	<div class="modal fade" id="boardMonthCntModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 		  <div class="modal-content">
 		    <div class="modal-header">
+		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님이 쓴 월별 게시글 수</h5>
+		      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+		        <span aria-hidden="true">&times;</span>
+		      </button>
+		    </div>
+		    <div class="modal-body">
+		      	<table id="boardMonthCntTab" class="table align-items-center mb-0">
+		      		<%-- <c:forEach var="i" begin="1" end="12" > --%>
+		      			<%-- <c:set var="monthval" value="month${i}"> --%>
+		      			<%-- <tr><th>${i}월</th><td>${month1}</td></tr><!-- <c:out value="${monthval}"></c:out> --> --%>
+		      			<tr><th>1월</th><td>${month1} 개</td></tr>
+		      			<tr><th>2월</th><td>${month2} 개</td></tr>
+		      			<tr><th>3월</th><td>${month3} 개</td></tr>
+		      			<tr><th>4월</th><td>${month4} 개</td></tr>
+		      			<tr><th>5월</th><td>${month5} 개</td></tr>
+		      			<tr><th>6월</th><td>${month6} 개</td></tr>
+		      			<tr><th>7월</th><td>${month7} 개</td></tr>
+		      			<tr><th>8월</th><td>${month8} 개</td></tr>
+		      			<tr><th>9월</th><td>${month9} 개</td></tr>
+		      			<tr><th>10월</th><td>${month10} 개</td></tr>
+		      			<tr><th>11월</th><td>${month11} 개</td></tr>
+		      			<tr><th>12월</th><td>${month12} 개</td></tr>
+		      			<%-- </c:set> --%>
+		      		<%-- </c:forEach> --%>
+		      	</table>
+		    </div>
+		    <div class="modal-footer">
+		      <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
+		    </div>
+		  </div>
+		</div>
+	</div>
+  <!-- 댓글보러가기 모달창 -->
+  <div class="modal fade" id="repModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+		  <div class="modal-content" style="width:1200px; margin-left:-50%;">
+		    <div class="modal-header">
 		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님이 쓴 댓글 정보<br>
 		      <span style="color:grey; font-size:11pt;">＊ 게시글 클릭 시, 게시글 상세조회 페이지로 이동</span></h5>
-		      
 		      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 		        <span aria-hidden="true">&times;</span>
 		      </button>
@@ -553,9 +601,15 @@
 		    <div class="modal-body">
 		      	<table id="boardCntTab" class="table align-items-center mb-0">
 		      		<tr><th>게시글명</th><th>댓글내용</th></tr>
-		      		<c:forEach var="repInfo" items="${boardreplyInfo}">
-		      			<tr><td>${repInfo.title}</td><td>${repInfo.repcontent}</td></tr>
-		      		</c:forEach>
+		      		<c:if test="${not empty replyInfo}">
+			      		<c:forEach var="repInfo" items="${replyInfo}">
+			      			<tr><td>${repInfo.title}</td><td>${repInfo.repcontent}</td></tr>
+			      		</c:forEach>
+		      		</c:if>
+		      		<c:if test="${empty replyInfo}">
+			      		<tr><td colspan="2" style="color:grey; text-align:center;"> 등록한 댓글이 없습니다.</td></tr>
+		      		</c:if>
+		      		
 		      	</table>
 		    </div>
 		    <div class="modal-footer">
@@ -803,7 +857,7 @@
     gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
     gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
     gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)'); //purple colors
-
+	
     // Line chart
     new Chart(ctx1, {
       type: "line",
@@ -819,7 +873,7 @@
             borderWidth: 3,
             backgroundColor: gradientStroke2,
             fill: true,
-            data: [0, 0, 0, 0, 10, 20, 30, 40, 50, 60, 70, 80],
+            data: [${month1}, ${month2}, ${month3}, ${month4}, ${month5}, ${month6}, ${month7}, ${month8}, ${month9}, ${month10}, ${month11}, ${month12}],
             maxBarThickness: 6
           }
         ],

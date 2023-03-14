@@ -44,6 +44,7 @@ public class Req4002_Service {
 	public List<FollowMemberInfo> followerSelect(FollowMemberInfo index) {
 		if(index.getKeyword()==null) index.setKeyword("");
 		if(index.getMyemail()==null) index.setMyemail("");
+		//if(index.getDiv()==null) index.setDiv("");
 		return dao.followerSelect(index);
 	}
 	
@@ -63,7 +64,10 @@ public class Req4002_Service {
 		return dao.boardReplySelect(map);
 	}
 	
-	public List<RoomMemberInfo> boardSelect(Map<String, String> map){
-		return dao.boardSelect(map);
+	public List<RoomMemberInfo> boardSelect(RoomMemberInfo sel){
+		if(sel.getCategory()==null) sel.setCategory("");
+		if(sel.getEmail()==null) sel.setEmail("");
+		if(sel.getRegistDateMonth()==null) sel.setRegistDateMonth("");
+		return dao.boardSelect(sel);
 	}
 }

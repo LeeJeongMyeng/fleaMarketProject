@@ -86,13 +86,36 @@ SET likecnt='5'
 WHERE communityNumber='comBoard20';
 
 UPDATE capplicaion 
+SET registdate='20230203'
+WHERE communityNumber='123';
+
+UPDATE capplicaion 
 SET title='',
 	content='',
 	hashtag='#태그할수 있을까?',
 	updatedate=sysdate
 WHERE communityNumber='comBoard23';
+--mm IN (SELECT TO_CHAR(REGISTDATE, 'yyyy-mm-dd')
+SELECT *
+FROM BoardImg i,capplicaion c
+WHERE i.communitynumber=c.communitynumber
+and email = 'yujin@gmail.com'
+AND category LIKE '%'||''||'%'
+AND  TO_CHAR(REGISTDATE, 'mm') LIKE '%'||'05'||'%';
+--registdate IN (SELECT registdate * FROM capplicaion WHERE TO_CHAR(registdate,'mm')='03')
 
-SELECT * FROM capplicaion;
+SELECT * 
+FROM capplicaion c, reply r
+WHERE c.COMMUNITYNUMBER = r.COMMUNITYNUMBER
+AND c.email=#{email}
+--AND r.email=#{email}
+ORDER BY repdate DESC;
+
+
+SELECT * FROM capplicaion
+WHERE email = 'yujin@gmail.com';
+AND category LIKE '%'||'홍보글'||'%';
+AND  ;
 WHERE communityNumber='comBoard23';
 INSERT INTO capplicaion values(communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','yujin@gmail.com','#태그1 #태그2',0);
 INSERT INTO capplicaion values(communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','dbwls8382@gmail.com','#태그1 #태그2',0);
@@ -234,12 +257,13 @@ WHERE email='yujin@gmail.com';
 SELECT * FROM capplicaion;
 
 SELECT * 
-FROM capplicaion c, reply r
+FROM capplicaion c, reply r -- r 이메일이 내가쓴 댓글, c 이메일이 내게시글에 올라온 댓글수
 WHERE c.COMMUNITYNUMBER = r.COMMUNITYNUMBER
-AND c.email='yujin@mail.com'
---AND r.email='yujin@mail.com';
+AND c.email='yujin@gmail.com';
+AND r.email='yujin@gmail.com';
 ORDER BY repdate desc;
 
+--AND c.email='yujin@gmail.com'
 
 SELECT * FROM capplicaion c
 WHERE email='yujin@gmail.com'
@@ -321,8 +345,8 @@ AND f.following=pro.email
 AND 1=1
 AND (m.email LIKE '%'||''||'%'
 OR m.nickname LIKE '%'||''||'%')
---AND myemail='yujin@gmail.com'
-AND following='yujin@mail.com';
+AND myemail='yujin@gmail.com';
+AND following='yujin@gmail.com';
 
 select pro.profileimg,m.nickname,m.email
 FROM FLEAMARKETMEMBER m,friend f,profile pro
