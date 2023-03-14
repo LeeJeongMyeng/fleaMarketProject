@@ -56,8 +56,8 @@
 								<div class="card-header pb-0 p-3">
 									<!--   <img src="${path}/assets/img/@@@.jpg" > -->
 									<br>
-									<h6>CONTIGO는 스페인어로 당신과 함께라는 뜻으로</h6>
-									<h6>지역사회와 함께 성장하는 올바른 가치를 추구합니다.</h6>
+									  <img src="${path}/assets/img/footer.png" style="width:100%; height:750px;">
+									<h5></h5>
 								</div>
 
 
