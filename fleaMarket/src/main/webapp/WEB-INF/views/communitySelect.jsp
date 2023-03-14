@@ -215,8 +215,9 @@
 										<td class="text-sm">${lists.viewCnt }</td>
 										<td class="text-sm">${lists.likeCnt }</td>
 										<td class="text-sm">${lists.registDate }</td>
-										<td style="text-align: center; padding-top: 12px;"><span
-											class="badge badge-secondary badge-sm">room 가기</span></td>
+										<td style="text-align: center; padding-top: 12px;">
+										<a href = "communityMemberRoom.do?email=${lists.email}"><span
+											class="badge badge-secondary badge-sm">room 가기</span></a></td>
 										
 									</tr>
 								</c:forEach>

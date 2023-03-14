@@ -656,7 +656,6 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 	 }).then((result) => {
 		 if(result.isConfirmed){
 			 var elm = document.getElementById("irrReport");
-			 alert(elm.value);
 		     var session = '${session}';
 		    	//삭제조건이 맞을때, 작성자 == 세션 
 		    	if(session!=''){
