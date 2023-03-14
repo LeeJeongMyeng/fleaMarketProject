@@ -34,7 +34,6 @@
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 <script type="text/javascript">
-
 	
 	
 </script>
@@ -208,9 +207,20 @@ li{
                             <a href="${path}/chatting.do" class="dropdown-item border-radius-md">
                               <span class="ps-3">채팅목록</span>
                             </a>
-                            <a href="${path}/communityMemberRoom.do?email=${Login.email}" class="dropdown-item border-radius-md">
+                            <a href="#" onclick="myRoomLoginCk()" class="dropdown-item border-radius-md">
                               <span class="ps-3">My Room</span>
                             </a>
+                            <script>
+	                            function myRoomLoginCk(){
+	                            	if("${Login.email}"==""){
+	                            		if(confirm("[안내메시지]로그인을 하셔야 MyRoom 이용이 가능합니다.\n로그인하러 가시겠습니까?")){
+	                            			location.href="${path}/SignIn.do"
+	                            		}
+	                            	}else{
+	                            		location.href="${path}/communityMemberRoom.do?email=${Login.email}"
+	                            	}
+	                            }
+                            </script>
                             <a href="${path}/communityFollowMember.do?myemail=${Login.email}" class="dropdown-item border-radius-md">
                               <span class="ps-3">나의 팔로워 목록</span>
                             </a>
