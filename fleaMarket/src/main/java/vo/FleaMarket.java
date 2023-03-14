@@ -16,7 +16,15 @@ public class FleaMarket {
 	private String checkForm; 
 	private int viewCnt;
 	private String address;
+	private String addrs1;
+	
 
+	public String getAddrs1() {
+		return addrs1;
+	}
+	public void setAddrs1(String addrs1) {
+		this.addrs1 = addrs1;
+	}
 	public int getCnt() {
 		return cnt;
 	}

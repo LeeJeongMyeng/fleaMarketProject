@@ -215,55 +215,8 @@
     <div class="card shadow-lg mx-4 card-profile-bottom">
       <div class="card-body p-3">
         <div class="row gx-4">
-          <div class="col-auto">
-            <div class="avatar avatar-xl position-relative">
-              <img src="${path}/assets/img/team-1.jpg" alt="profile_image" class="w-100 border-radius-lg shadow-sm">
-            </div>
-          </div>
-          <div class="col-auto my-auto">
-            <div class="h-100">
-              <h5 class="mb-1">
-                Sayo Kravits
-              </h5>
-              <p class="mb-0 font-weight-bold text-sm">
-                Public Relations
-              </p>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
-            <div class="nav-wrapper position-relative end-0">
-              <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                <li class="nav-item">
-                  <a class="nav-link mb-0 px-0 py-1 active d-flex align-items-center justify-content-center " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
-                    <i class="ni ni-app"></i>
-                    <span class="ms-2">App</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
-                    <i class="ni ni-email-83"></i>
-                    <span class="ms-2">Messages</span>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
-                    <i class="ni ni-settings-gear-65"></i>
-                    <span class="ms-2">Settings</span>
-                  </a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container-fluid py-4">
-     
-      <div class="row mt-4">
-        <div class="col-12">
-          <div class="card mb-4">
-            <div class="card-header pb-0 p-3">
-              <h6 class="mb-1">플리마켓 조회</h6>
+        
+           <h6 class="mb-1">플리마켓 조회</h6>
 						<div class="ms-auto my-auto mt-lg-0 mt-4">
 								<form  action="totalSearch.do" method="post">
 									<div class="input-group mb-3">
@@ -275,6 +228,29 @@
 								</form>
 							</div>
 						</div>
+ 
+        </div>
+      </div>
+    </div>
+    
+    <div class="container-fluid py-4">
+     
+      <div class="row mt-4">
+        <div class="col-12">
+          <div class="card mb-4">
+            <div class="card-header pb-0 p-3">
+             <%--  <h6 class="mb-1">플리마켓 조회</h6>
+						<div class="ms-auto my-auto mt-lg-0 mt-4">
+								<form  action="totalSearch.do" method="post">
+									<div class="input-group mb-3">
+										<input type="text" name="title" class="form-control"
+											placeholder="　제목을 입력하세요" value="${sch.title}"> 
+										<button class="btn btn-outline-primary mb-0" type="submit">검색</button>
+										<div class="ms-auto my-auto"></div>
+									</div>
+								</form>
+							</div>
+						</div> --%>
             <div class="card-body p-3">
             
             
@@ -287,7 +263,7 @@
                   <div class="card card-blog card-plain">                 
                     <div class="position-relative">
                       <a class="d-block shadow-xl border-radius-xl">                    
-                       <img src="${path }/resource/img/fleaMarket/${fm.fnolist }" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl">
+                       <img src="${path }/resource/img/fleaMarket/${fm.fnolist }" alt="img-blur-shadow" class="img-fluid shadow border-radius-xl" style="width:350px;height:200px;">
                     </a>
                     </div>
        

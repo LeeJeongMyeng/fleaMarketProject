@@ -1,11 +1,15 @@
 package fleaMarket.a02_service;
 
-import java.util.List;
+import java.util.Arrays;
 
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import fleaMarket.a03_dao.Req3000_Dao;
+import fleaMarket.util.FileService;
 import vo.Calendar;
 import vo.FFile;
 import vo.FleaMarket;
@@ -13,24 +17,61 @@ import vo.FleaMarket;
 public class Req3000_ServiceIns implements Req3000_Service{
 	
 	private Req3000_Dao dao;
-	@Autowired(required = false)
+	
+	@Autowired 
+	private FileService fileservice;
+	
+	  @Value("${fleamarket.upload3}") 
+		private String profilepath;
+	
 	public Req3000_ServiceIns(Req3000_Dao dao) {
 		this.dao = dao;
 	}
 	//캘린더 
-	/*
-	 * public List<FleaMarket> calList(Calendar sch){ return dao.calList(); }
-	 */
+	
+	   public List<Calendar> calList(){
+		      return dao.calList();
+		   }
 	
 	//홍보글 등록
 	public void insertFleaMarket(FleaMarket ins){
     	dao.insertFleaMarket(ins);
     }
 	
+		
+	public String insertFleaFileModule(List<MultipartFile> pro) {
+		 FFile fins = null;
+		 int result=0; 
+		 String msg="";
+		for(MultipartFile f:pro){
+        //HashMap으로 파일이름과 경로를 반환함
+       // 이미지 확장자냐에 따른 경로 심기.
+          String imgArra[] = {"gif","jpg","jpe","png","bmp","ico","apng","jfif"};    
+        
+          String subpath = (Arrays.asList(imgArra).indexOf(
+          		f.getOriginalFilename().split("\\.")[1])==-1)?"fleafile/":"img/fleaMarket/";
+          
+        fileservice.insprofileimg(profilepath+subpath, f); 
+          
+        //등록파일 vo객체에 set값 할당(for문 돌면서 계속 할당)
+        fins= new FFile(f.getOriginalFilename(),profilepath+subpath); 
+        
+        result=dao.insprofile(fins); 
+        if(result>=1) {
+        	msg="등록 성공";
+        }else {
+        	msg = "등록 실패";
+        }
+        // int result == 1 일떼 STRING RESULT = "성공" 
+		}
+		 return msg;
+		}	
+		
 	//파일처리
-	public void insprofile(FFile fins) {
-		dao.insprofile(fins);
+	public int insprofile(FFile fins) {
+		return dao.insprofile(fins);
 	}
+		
 	//수정페이지 상세 정보 불러오기 
 	public FleaMarket fleaDetail(String postingNumber) {
 		
