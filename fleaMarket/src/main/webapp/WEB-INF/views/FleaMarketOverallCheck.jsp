@@ -254,10 +254,10 @@
             <div class="card-body p-3">
             
             
-            <!-- card 중앙정렬  -->
+          
               <div class="row" style="justify-content: center;">
-              
-              <!-- 1개의 박스 -->
+                  <c:when test="${not empty fmap}">
+            
               <c:forEach var="fm" items="${fmap}">
                 <div class="col-xl-3 col-md-6 mb-xl-0 mb-4 TotList">
                   <div class="card card-blog card-plain">                 
@@ -272,11 +272,11 @@
                      
                   <div class="card-body px-1 pb-0">
                     
-                   <!-- 제목 -->
+                
                         <h5>
                        	${fm.fno.title }
                         </h5>
-                   <!-- 간단한 설명 -->
+               
                       <p class="mb-4 text-sm">
                          ${fm.fno.address}
                       </p>
@@ -288,6 +288,11 @@
                   </div>
                 </div>
                 </c:forEach>
+                </c:when>
+                <c:otherwise>
+                <h2>에러페이지</h2>
+                </c:otherwise>
+                
               </div>
             </div>
           
