@@ -256,6 +256,7 @@
             
           
               <div class="row" style="justify-content: center;">
+              <c:choose>    
                   <c:when test="${not empty fmap}">
             
               <c:forEach var="fm" items="${fmap}">
@@ -292,7 +293,7 @@
                 <c:otherwise>
                 <h2>에러페이지</h2>
                 </c:otherwise>
-                
+                </c:choose>
               </div>
             </div>
           
