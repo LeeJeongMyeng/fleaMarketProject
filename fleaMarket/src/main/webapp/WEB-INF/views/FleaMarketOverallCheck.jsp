@@ -239,18 +239,6 @@
         <div class="col-12">
           <div class="card mb-4">
             <div class="card-header pb-0 p-3">
-             <%--  <h6 class="mb-1">플리마켓 조회</h6>
-						<div class="ms-auto my-auto mt-lg-0 mt-4">
-								<form  action="totalSearch.do" method="post">
-									<div class="input-group mb-3">
-										<input type="text" name="title" class="form-control"
-											placeholder="　제목을 입력하세요" value="${sch.title}"> 
-										<button class="btn btn-outline-primary mb-0" type="submit">검색</button>
-										<div class="ms-auto my-auto"></div>
-									</div>
-								</form>
-							</div>
-						</div> --%>
             <div class="card-body p-3">
             
             
@@ -290,8 +278,9 @@
                 </div>
                 </c:forEach>
                 </c:when>
-                <c:otherwise>
-                <h2>에러페이지</h2>
+                <c:otherwise>             
+                <img src="/fleaMarket/resource/img/nosearchPage/t1.png" alt="이미지가 없음" style="width:200px;">
+               <h2 style="text-align:center;">검색된 결과가 없습니다.</h2>
                 </c:otherwise>
                 </c:choose>
               </div>

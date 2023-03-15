@@ -86,8 +86,16 @@
           <div class="card z-index-2 h-100">
           	<h2>날씨
           	</h2>
+	<iframe src="http://localhost:7081/fleaMarket/dongeun/wether.jsp" style="width:100%;height:100%;">
+							    <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
+    </iframe>
           </div>
         </div>
+        
+        
+        
+        
+        
         <div class="col-lg-5"  style="width:50%;">
           <div class="card card-carousel overflow-hidden h-100 p-0" >
             <div id="carouselExampleCaptions" class="carousel slide h-100" data-bs-ride="carousel">
@@ -312,6 +320,8 @@
       },
     });
   </script>
+  
+
 
 </body>
 </html>
