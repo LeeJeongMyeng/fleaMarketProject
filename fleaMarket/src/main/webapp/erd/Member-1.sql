@@ -90,6 +90,17 @@ SET AUTHORITY  = '일반셀러',BUSINESSNUMBER = NULL
 WHERE EMAIL ='aoddl56@nate.com';
 
 
+SELECT count(*) FROM FLEAMARKETMEMBER f
+WHERE (name || email || nickname) like '%'||'28888'||'%'
+AND authority = '사업자';
+
+SELECT a.* FROM (select rownum cnt,f.*
+from FLEAMARKETMEMBER f
+where (name || email || nickname) like '%'||'28888'||'%'
+and authority = '사업자') a
+WHERE cnt BETWEEN 1 AND 3;
+
+
 ALTER TABLE FLEAMARKETMEMBER MODIFY password varchar2(300);
 ----------------------------------------------------------------------------------
 DROP TABLE profile;

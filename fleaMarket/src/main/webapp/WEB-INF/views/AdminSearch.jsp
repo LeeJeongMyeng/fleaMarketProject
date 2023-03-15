@@ -84,20 +84,22 @@
 						</div>
 							<div class="card-body px-0 pb-0">
 							</div>
-							<form id="AdminSearchForm" action="AdminSearch.do" method="post" onsubmit="return false;">
+							<form id="AdminSearchForm" action="AdminSearch.do" method="post">
+							<input type="hidden" name="curPage" value="${sch.curPage}"/>
 							<div class="row">
 								<div class="col-4 input-group mb-3 w-25">
 								  <button class="btn btn-outline-primary bg-primary mb-0 ms-3" type="button" style="color:white;" id="button-addon1" onclick="ResetAuthRadioSubmit()">　검색　</button>
-								  <input type="text" class="form-control form-control-outline-primary ps-2" style="border: 1px solid #5e72e4;"  name="name" value="${sch.name}" placeholder="　회원명을 입력하세요">
+								  <input type="text" class="form-control form-control-outline-primary ps-2" style="border: 1px solid #5e72e4;"  name="title" value="${sch.title}"
+								  onkeypress="javascript:if(event.keyCode == 13){ResetAuthRadioSubmit()}" placeholder="　회원명을 입력하세요">
 								</div>
 								<div class="btn-group col-3" role="group" aria-label="Basic radio toggle button group">
-								  <input type="radio" class="btn-check authorityradio" value="전체" name="authority" id="btnradio1" autocomplete="off" checked>
+								  <input type="radio" class="btn-check authorityradio" value="전체" name="search" id="btnradio1" autocomplete="off" checked>
 								  <label class="btn btn-outline-primary" for="btnradio1">전체</label>
 								
-								  <input type="radio" class="btn-check authorityradio" value="일반셀러" name="authority" id="btnradio2" autocomplete="off">
+								  <input type="radio" class="btn-check authorityradio" value="일반셀러" name="search" id="btnradio2" autocomplete="off">
 								  <label class="btn btn-outline-primary" for="btnradio2">일반셀러</label>
 								
-								  <input type="radio" class="btn-check authorityradio" value="사업자" name="authority" id="btnradio3" autocomplete="off">
+								  <input type="radio" class="btn-check authorityradio" value="사업자" name="search" id="btnradio3" autocomplete="off">
 								  <label class="btn btn-outline-primary" for="btnradio3">사업자</label>
 								</div>
 								<div class="col-2 ms-auto my-auto">
@@ -149,16 +151,27 @@
 								</form>
 							</div>
 							
-							<div class="pagination_wrap">
-								<div class="pagination">
-									<i class="fa-solid" id="PageNationPrevBtn">이전</i>
-									<ol id="numbers">
-									<!-- 페이지네이션 번호들이 오는곳 -->
-									</ol>
-									
-									<i class="fa-solid" id="PageNationNextBtn">다음</i>
-								</div>			
-							</div> 
+							<nav aria-label="Page navigation example">
+											  <ul class="pagination justify-content-center">
+											    <li class="page-item">
+											      <a class="page-link" href="javascript:goPage(${sch.startBlock-1});">
+											        <i class="fa fa-angle-left"></i>
+											        <span class="sr-only">Previous</span>
+											      </a>
+											    </li>
+											    <c:forEach var="cnt" begin="${sch.startBlock}" end="${sch.endBlock}">
+											    	<li class="page-item ${sch.curPage==cnt?'active':''}">
+											    		<a class="page-link" href="javascript:goPage(${cnt});">${cnt}</a>
+											    	</li>
+											    </c:forEach>
+											    <li class="page-item">
+											      <a class="page-link" href="javascript:goPage(${sch.endBlock+1});">
+											        <i class="fa fa-angle-right"></i>
+											        <span class="sr-only">Next</span>
+											      </a>
+											    </li>
+											  </ul>
+											</nav>
 							
 						</div>
 					</div>
@@ -201,7 +214,7 @@
 	</main>
 <script>
 //검색 후 해당 선택값(전체/일반셀러/사업자) 체크되도록하기 위한 변수
-var SchAuthorityRadioVal = '${sch.authority}'
+var SchAuthorityRadioVal = '${sch.search}'
 console.log(SchAuthorityRadioVal)
 
 

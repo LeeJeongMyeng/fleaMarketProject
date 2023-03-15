@@ -10,7 +10,8 @@ import vo.QNA;
 import vo.QNAFile;
 
 public interface Req1001_Dao {
-	public List<Member> MemberList(Member sch);
+	public int totMemCnt(FApplicationSch sch);
+	public List<Member> MemberList(FApplicationSch sch);
 	public Member getMember(String nickname);	
 	public void UpdateMemberInfo(Member upt);
 	public void UpdateProfile(ProfileImg upt);

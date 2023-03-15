@@ -80,9 +80,7 @@ public class Req1001_Controller {
 		// 마이페이지 
 		//http://localhost:7080/fleaMarket/AdminSearch.do 관리자페이지 - 회원조회
 		@RequestMapping("AdminSearch.do")
-		public String AdminSearch(@ModelAttribute("sch")Member sch,Model d) {
-			System.out.println(sch.getAuthority());
-			
+		public String AdminSearch(@ModelAttribute("sch") FApplicationSch sch,Model d) {
 			d.addAttribute("MemberList",service.MemberList(sch));
 				return "AdminSearch";
 		}

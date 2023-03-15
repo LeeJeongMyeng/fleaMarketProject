@@ -18,7 +18,7 @@
 	 
 	//이메일 양식확인
 $('#CheckEmailBtn').click(function(){
-	var RegEmail = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]$/i;
+	var RegEmail = /[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[.0-9a-zA-Z])*.[a-zA-Z]$/i;
 	var EmailVal = $('[name=email]').val()
 	var Emaildoc = $('[name=email]')
 	if(!RegEmail.test(EmailVal) || EmailVal==''){
