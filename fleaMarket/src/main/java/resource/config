@@ -9,7 +9,7 @@ jdbc.pass=1111
 //회원가입시 프로필사진 업로드
 profile.upload=C:/a01_javaxep/workspace/git/fleaMarketProject/fleaMarket/src/main/webapp/resource/img/Member/profileimg/
 board.upload2=C:/a01_javaexp/workspace/fleaMarketProject/fleaMarket/src/main/webapp/resource/community/
-fleamarket.upload3=C:/Users/gram/git/fleaMarketProject/fleaMarket/src/main/webapp/resource/img/fleaMarket/
+fleamarket.upload3=C:/Users/gram/git/fleaMarketProject/fleaMarket/src/main/webapp/resource/
 // 플리마켓 신청글
 app.upload=C:/a01_javaexp/workspace/fleaMarketProject/fleaMarket/src/main/webapp/resource/img/application/
 //공지,문의사항 파일
