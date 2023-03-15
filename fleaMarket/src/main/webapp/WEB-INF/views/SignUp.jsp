@@ -234,8 +234,10 @@
               <div class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signup-ill.jpg');
           background-size: cover;">
                 <span class="mask bg-primary opacity-4"></span>
-                <h4 class="mt-5 text-white font-weight-bolder position-relative">당신의 <span>플리마켓</span> 여정의 시작을<br> 진심으로 응원합니다.</h4>
-                <p class="text-white position-relative">ㅋㅋ!!! 좋은글귀넣기 ㅋㅋㅋ!!!</p>
+                <h4 class="mt-5 text-white font-weight-bolder position-relative">
+              콘티고와 함께하는 <br>새로운 여정의 시작을 환영합니다.
+                </h4>
+                <p class="text-white position-relative">Nothing great in the world has been accomplished without passion.</p>
               </div>
                 <div class="card-footer text-center pt-0 px-sm-4 px-1" id="SignUp_Login">
                   <p class="mb-4 mx-auto">
