@@ -34,33 +34,6 @@
    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
    crossorigin="anonymous"></script>
   <script type="text/javascript">
-	$(document).ready(function(){
-	
-	});
-	
-	function updateAppRe(applicationNo,approvalwhether){
-		// 유효성 check
-		$.ajax({
-		url:"updateAppRe.do",
-		type:"post",
-		data:"applicationNo="+applicationNo+"&approvalWhether="+approvalwhether,
-		dataType:"json",
-		success:function(data){
-			console.log("zzzzzz")
-			 var msg="";
-			if(approvalwhether=='a'){msg="수정되었습니다."}
-			else{msg="삭제되었습니다."}
-			alert(msg)
-			location.reload(); 
-		},
-		error:function(xhr,status,err){
-              console.log(xhr)
-              console.log(status)
-              console.log(err)
-        }
-	})
-		
-	}
 	
 	// 페이징
 	function goPage(cnt){
@@ -68,7 +41,8 @@
 		$("#frmSch").submit()
 	}
 	
-    function getFiles(appno){
+	// 내 신청 상세 조회 모달창
+    function getFiles(index,appno){
     	console.log(appno)
 		$.ajax({
 			url:"appFileView.do",
@@ -76,23 +50,30 @@
 			data:"applicationNo="+appno,
 			dataType:"json",
 			success:function(data){
-				console.log(data.appFile)
+				
 				var files = data.appFile;
-				var filelist = files.split(',');
+				var str = "<input type=\"hidden\" name=\"applicationNo\" value=\""+appno+"\"/>";
 				
-				var str = "";
-				filelist.forEach(function(f){
-					str += "<input class='form-control w-50 mb-2' onclick=\"javascript:location.href='downloadAppFile.do?filename="+f+"'\" name='filename' type='text' value='"+f+"' readonly/>"
-				})
-				str += "<button class='m-1 btn btn-primary' type='button' onclick=\"alldown('downloadAppFileForm')\">전체다운로드</button>";
-				
+				if(files == null){ // 첨부 파일 없을 때
+					str += "<div class='form-group text-center'>삭제하시겠습니까?</div>"
+					$(".modal-body > label").hide()
+					$(".ApprovalBtnWrap button:nth-child(1)").hide()
+				}else{ // 첨부 파일 있을 때
+					var filelist = files.split(',');
+					
+					filelist.forEach(function(f){
+						
+						str+="<input class='form-control w-50 mb-2' onclick=\"javascript:location.href='downloadAppFile.do?filename="+f+"'\" name='filename' type='text' value='"+f+"' readonly/>"
+					})
+					
+					str += "<input type='file' name='addFile' class='form-control w-50 mb-2' id='addFile' multiple>"
+					$(".modal-body > label").show()
+					$(".ApprovalBtnWrap button:nth-child(1)").show()
+				}
 				$('#downloadAppFileForm').html(str)
-				
-				$(".ApprovalBtnWrap button:nth-child(1)").attr("onclick","updateAppRe("+appno+",'a')")
-				$(".ApprovalBtnWrap button:nth-child(2)").attr("onclick","updateAppRe("+appno+",'r')")
-				
-				
-			$('#ApplicaionNoFilesModalBtn').click()
+				$(".ApprovalBtnWrap button:nth-child(1)").attr("onclick","goApp("+index+",'uptApp')") // 수정 버튼
+				$(".ApprovalBtnWrap button:nth-child(2)").attr("onclick","goApp("+index+",'delApp')") // 삭제 버튼
+				$('#ApplicaionModalBtn').click() // 모달창
 			},
 			error:function(xhr,status,err){
 	              console.log(xhr)
@@ -102,19 +83,40 @@
 		})
 	}
 	
-	// 신청글 상세 조회 모달창
-	function alldown(){
-		var len = $('#downloadAppFileForm').children('input[name=filename]').length
-		var start=1;
-		setInterval(function() {
-			$("#downloadAppFileForm input[name=filename]:nth-child("+start+")").click()
-			start++
-			if(start==len){clearInterval()}
-		},500)
-		console.log(nth)
-		
+	// 내 신청 수정/삭제 유효성 검사
+  	function goApp(index,methods){
+		var statusText = $('#datatable-search tbody tr:nth-child('+index+') td:nth-child(4) span').text()
+		if(statusText != '대기'){
+			alert('승인/거부된 신청은 편집할 수 없습니다');
+			return false;
 		}
-
+		if(methods=='uptApp' && $('#addFile').val()==''){
+			alert('파일을 첨부해 주세요');
+			return false;
+		}
+		console.log(methods+".do")
+		$('#downloadAppFileForm').attr({action:methods+".do", method:"post"})
+		$('#downloadAppFileForm').submit()
+  	}
+  
+ 	// 내 신청 삭제
+	function delApp(applicationNo){
+		$.ajax({
+			url:"delApp.do",
+			type:"post",
+			data:"applicationNo="+applicationNo,
+			dataType:"json",
+			success:function(data){
+				alert("삭제되었습니다")
+				location.reload(); 
+			},
+			error:function(xhr,status,err){
+	              console.log(xhr)
+	              console.log(status)
+	              console.log(err)
+	        }
+		})
+	}
 </script>
 </head>
 <style>
@@ -169,6 +171,12 @@
               </div>
               <div class="dataTable-container">
 	              <table class="table table-flush dataTable-table" id="datatable-search">
+	              	<col width="10%">
+				   	<col width="20%">
+				   	<col width="15%">
+				   	<col width="15%">
+				   	<col width="15%">
+				   	<col width="25%">
 	                <thead class="thead-light">
 	                  <tr>
 	                    <th>번호</th>
@@ -180,8 +188,8 @@
 	                  </tr>
 	                </thead>
 	                <tbody>
-	                  <c:forEach var="myfapp" items="${list}">
-		                  <tr onclick="getFiles('${myfapp.applicationNo}')">
+	                  <c:forEach var="myfapp" items="${list}" varStatus="s">
+		                  <tr onclick="getFiles(${s.count},'${myfapp.applicationNo}')">
 		                    <td>
 		                      <div class="d-flex align-items-center">
 		                      	<p class="text-xs font-weight-bold ms-2 mb-0">${myfapp.cnt}</p>
@@ -289,93 +297,13 @@
       </footer>
     </div>
   </main>
-  <div class="fixed-plugin">
-    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-      <i class="fa fa-cog py-2"> </i>
-    </a>
-    <div class="card shadow-lg">
-      <div class="card-header pb-0 pt-3 bg-transparent ">
-        <div class="float-start">
-          <h5 class="mt-3 mb-0">Argon Configurator</h5>
-          <p>See our dashboard options.</p>
-        </div>
-        <div class="float-end mt-4">
-          <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-            <i class="fa fa-close"></i>
-          </button>
-        </div>
-        <!-- End Toggle Button -->
-      </div>
-      <hr class="horizontal dark my-1">
-      <div class="card-body pt-sm-3 pt-0 overflow-auto">
-        <!-- Sidebar Backgrounds -->
-        <div>
-          <h6 class="mb-0">Sidebar Colors</h6>
-        </div>
-        <a href="javascript:void(0)" class="switch-trigger background-color">
-          <div class="badge-colors my-2 text-start">
-            <span class="badge filter bg-gradient-primary active" data-color="primary" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-dark" data-color="dark" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-info" data-color="info" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-success" data-color="success" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-warning" data-color="warning" onclick="sidebarColor(this)"></span>
-            <span class="badge filter bg-gradient-danger" data-color="danger" onclick="sidebarColor(this)"></span>
-          </div>
-        </a>
-        <!-- Sidenav Type -->
-        <div class="mt-3">
-          <h6 class="mb-0">Sidenav Type</h6>
-          <p class="text-sm">Choose between 2 different sidenav types.</p>
-        </div>
-        <div class="d-flex">
-          <button class="btn bg-gradient-primary w-100 px-3 mb-2 active me-2" data-class="bg-white" onclick="sidebarType(this)">White</button>
-          <button class="btn bg-gradient-primary w-100 px-3 mb-2" data-class="bg-default" onclick="sidebarType(this)">Dark</button>
-        </div>
-        <p class="text-sm d-xl-none d-block mt-2">You can change the sidenav type just on desktop view.</p>
-        <!-- Navbar Fixed -->
-        <div class="d-flex my-3">
-          <h6 class="mb-0">Navbar Fixed</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarFixed" onclick="navbarFixed(this)">
-          </div>
-        </div>
-        <hr class="horizontal dark mb-1">
-        <div class="d-flex my-4">
-          <h6 class="mb-0">Sidenav Mini</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="navbarMinimize" onclick="navbarMinimize(this)">
-          </div>
-        </div>
-        <hr class="horizontal dark my-sm-4">
-        <div class="mt-2 mb-5 d-flex">
-          <h6 class="mb-0">Light / Dark</h6>
-          <div class="form-check form-switch ps-0 ms-auto my-auto">
-            <input class="form-check-input mt-1 ms-auto" type="checkbox" id="dark-version" onclick="darkMode(this)">
-          </div>
-        </div>
-        <a class="btn btn-primary w-100" href="https://www.creative-tim.com/product/argon-dashboard-pro">Buy now</a>
-        <a class="btn btn-dark w-100" href="https://www.creative-tim.com/product/argon-dashboard">Free demo</a>
-        <a class="btn btn-outline-dark w-100" href="https://www.creative-tim.com/learning-lab/bootstrap/overview/argon-dashboard">View documentation</a>
-        <div class="w-100 text-center">
-          <a class="github-button" href="https://github.com/creativetimofficial/ct-argon-dashboard-pro" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star creativetimofficial/argon-dashboard on GitHub">Star</a>
-          <h6 class="mt-3">Thank you for sharing!</h6>
-          <a href="https://twitter.com/intent/tweet?text=Check%20Argon%20Dashboard%20PRO%20made%20by%20%40CreativeTim%20%23webdesign%20%23dashboard%20%23bootstrap5&amp;url=https%3A%2F%2Fwww.creative-tim.com%2Fproduct%2Fargon-dashboard-pro" class="btn btn-dark mb-0 me-2" target="_blank">
-            <i class="fab fa-twitter me-1" aria-hidden="true"></i> Tweet
-          </a>
-          <a href="https://www.facebook.com/sharer/sharer.php?u=https://www.creative-tim.com/product/argon-dashboard-pro" class="btn btn-dark mb-0 me-2" target="_blank">
-            <i class="fab fa-facebook-square me-1" aria-hidden="true"></i> Share
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
   
   
   
   
-  <!-- 신청 조회 모달창 (양식 O) -->
-  <div data-bs-toggle="modal" data-bs-target="#ApplicaionNoFilesModal" id="ApplicaionNoFilesModalBtn"></div>
-  <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="ApplicaionNoFilesModal" style="display: none" role="dialog">
+  <!-- 신청 조회 모달창 -->
+  <div data-bs-toggle="modal" data-bs-target="#ApplicaionModal" id="ApplicaionModalBtn"></div>
+  <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true" id="ApplicaionModal" style="display: none" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -385,16 +313,15 @@
           </button>
         </div>
         <div class="pt-4 modal-body">
-          	<label>첨부파일(개별 다운로드)</label> <!-- 첨부파일 -->
-			<form id="downloadAppFileForm" action="downloadAppFile.do" method="get">
-					<%--여기에 파일리스트삽입 --%>
+          	<label>첨부파일</label> <!-- 첨부파일 -->
+			<form id="downloadAppFileForm" action="downloadAppFile.do" method="get" enctype="multipart/form-data">
+				<%-- 여기에 파일리스트 삽입 --%>
 			</form>
-          <div class="alert alert-success d-none">Changes saved!</div>
           <div class="text-end ApprovalBtnWrap">
-            <button class="m-1 btn btn-primary" data-bs-dismiss="modal" onclick="updateAppRe('a')">
+            <button class="m-1 btn btn-primary" data-bs-dismiss="modal">
               수정
             </button>
-            <button class="m-1 btn btn-danger"  data-bs-dismiss="modal" onclick="updateAppRe('r')">
+            <button class="m-1 btn btn-danger"  data-bs-dismiss="modal">
               삭제
             </button>
           </div>
@@ -407,21 +334,10 @@
   <script src="${path}/assets/js/core/popper.min.js"></script>
   <script src="${path}/assets/js/core/bootstrap.min.js"></script>
   <script src="${path}/assets/js/plugins/dropzone.min.js"></script> <!-- file box -->
-  <script src="${path}/assets/js/plugins/perfect-scrollbar.min.js"></script>
-  <script src="${path}/assets/js/plugins/smooth-scrollbar.min.js"></script>
   <!-- Kanban scripts -->
   <script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
   <script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>
   <script src="${path}/assets/js/plugins/datatables.js"></script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->

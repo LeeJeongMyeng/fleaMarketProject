@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +13,6 @@ import vo.ApplicationFile;
 import vo.FApplication;
 import vo.FApplicationSch;
 import vo.FleaMarket;
-import vo.Member;
 
 @Service
 public class FMViewService {
@@ -60,6 +57,11 @@ public class FMViewService {
 		
 	}
 	
+	// 신청 중복 검사
+	public int duplicateApp(FApplication sch) {
+		System.out.println("#####################"+dao.duplicateApp(sch));
+		return dao.duplicateApp(sch);
+	}
 	
 	// 신청글 + 파일첨부 등록
 	public void insApp(FApplication ins) {
@@ -123,11 +125,6 @@ public class FMViewService {
 		return dao.appReceivedList(sch);
 	}
 	
-	// 받은 신청 상세 조회
-	public String appFileView(int applicationNo) {		
-		return dao.appFileView(applicationNo);
-	}
-	
 	// 받은 신청 승인
 	public void updateAppRe(String applicationNo,String approvalWhether) {
 		Map<String,String> map = new HashMap<String,String>();
@@ -173,5 +170,24 @@ public class FMViewService {
 		
 		return dao.appMyList(sch);
 	}
+	
+	// 신청 상세 조회
+	public String appFileView(int applicationNo) {		
+		return dao.appFileView(applicationNo);
+	}
+	
+	// 내 신청 수정
+	public void uptApp(int applicationNo,String filenames) {
+		ApplicationFile af = new ApplicationFile();
+		af.setApplicationNo(applicationNo);
+		af.setFilename(filenames);
+		dao.uptApp(af);
+	}
 		
+	// 내 신청 삭제
+	public void delApp(int applicationNo) {
+		dao.delApp(applicationNo);
+	}
+	
+	
 }

@@ -36,53 +36,83 @@
    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
    crossorigin="anonymous"></script>
   <script type="text/javascript">
+  
+  	var $sessEmail = '${Login.email}'
+	var $startDate = '${fleamarket.recruitmentStartDate}'
+	var $endDate = '${fleamarket.recruitmentEndDate}'
+	var $msg = '${msg}'
 	
    $(document).ready(function(){   
-	    var $sessEmail = '${Login.email}'
-	    var $startDate = '${fleamarket.recruitmentStartDate}'
-	    var $endDate = '${fleamarket.recruitmentEndDate}'
-	    var $msg = '${msg}'
-	   
 	    // 모집 상태
 		var $today = new Date(new Date().getTime() - new Date().getTimezoneOffset() * 60000).toISOString().slice(0, -14); // 현재 날짜 yyyy-MM-dd		
-		var $sdate = (new Date($startDate)).toISOString().substring(0,10)
-		var $edate = (new Date($endDate)).toISOString().substring(0,10)
-		if($today < $edate || $today == $edate){
+		var $sdate = (new Date($startDate)).toISOString().substring(0,10) // 모집 시작일
+		var $edate = (new Date($endDate)).toISOString().substring(0,10) // 모집 마감일
+		if($today < $edate || $today == $edate){ // 오늘이 마감일 이전이거나 같으면 
 			$('.badge').addClass( 'badge-success' );
 			$('.badge').text("모집중");
 		}else{
 			$('.badge').addClass( 'badge-danger' );
 			$('.badge').text("모집마감");
-			$("[name=appBtn]").hide(); // 신청하기 버튼 숨기기
+			$("#appBtn").hide(); // 신청하기 버튼 숨기기
 		}
-		
-	   	// 신청 시 로그인 유효성
-		$("[name=appBtn]").click(function(){
-			if($sessEmail==""){
-				// 모달창 열리지 않게
-				$(this).removeAttr("data-bs-toggle");
-				$(this).removeAttr("data-bs-target");
-				alert("로그인 후 이용해주세요");
-				location.href="${path}/SignIn.do"
-			}
-		})
 		
 	   	// msg 확인 필요
 		if($msg!=""){
-			alert($msg+"\n 조회 화면으로 이동합니다")
+			alert($msg+"\n 내 신청 조회 화면으로 이동합니다")
 		}
 		
+	   	// 모달창 확인 버튼
 		$("[name=regBtn]").click(function(){
+			// 파일 첨부 검사
+			if($("#appFile").val()==""){
+			     alert("파일을 첨부해 주세요");
+			     return false;
+			 }
+			return true;
 			$("#frmfile").submit();
 		})
-		
-		
 	});
-   
-   
+	    
+	// 신청 버튼 클릭 시 유효성 
+	function appCheck(){
+		// 로그인 검사
+		if($sessEmail==""){
+			// 모달창 열리지 않게
+			$(this).removeAttr("data-bs-toggle");
+			$(this).removeAttr("data-bs-target");
+			alert("로그인 후 이용해주세요");
+			location.href="${path}/SignIn.do"
+		}else{
+			// 중복 신청 검사
+			var postingNumber = "${fleamarket.postingNumber}"
+			var qstr ="postingNumber="+postingNumber+"&email="+$sessEmail
+			$.ajax({
+				url:"duplicateApp.do",
+				type:"post",
+				data:qstr,
+				dataType:"json",
+				success:function(data){
+					console.log(data.duplicateApp);
+					var cnt=data.duplicateApp;
+					
+					if(cnt == 0){
+						$("#appModal").click();
+					}else{
+						alert("중복 신청할 수 없습니다")
+					}
+					
+				},
+				error:function(xhr,status,error){
+	                  console.log(xhr)
+	                  console.log(status)
+	                  console.log(error)
+	            }
+			})
+		}
+	}
    
 	function uptBtn(postingNumber){
-  		alert("수정 페이지로 이동 하시겠습니까?")
+  		alert("수정 페이지로 이동하시겠습니까?")
 		location.href="${path}/FleaMarketUptPage.do?postingNumber="+postingNumber
 	}	
 	function delBtn(postingNumber){
@@ -216,7 +246,7 @@
 	                    <c:when test="${Login.email != fleamarket.email}">	
 							<div class="row mt-4">
 			                    <div class="col-lg-5 ms-auto">
-			                      <button class="btn btn-primary mb-0 mt-lg-auto w-100" type="button" name="appBtn" data-bs-toggle="modal" data-bs-target="#modal-file">신청하기</button>
+			                      <button id="appBtn" class="btn btn-primary mb-0 mt-lg-auto w-100" type="button" onclick="appCheck()">신청하기</button>
 			                    </div>
 			                </div>
 			            </c:when>
@@ -239,7 +269,6 @@
                   </div>
                 </div>
               </div>
-              
             </div>
           </div>
         </div>
@@ -278,32 +307,13 @@
       </footer>
     </div>
   </main>
-  <div class="fixed-plugin">
-    <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
-      <i class="fa fa-cog py-2"> </i>
-    </a>
-    <div class="card shadow-lg">
-      <div class="card-header pb-0 pt-3 bg-transparent ">
-        <div class="float-start">
-          <h5 class="mt-3 mb-0">Argon Configurator</h5>
-          <p>See our dashboard options.</p>
-        </div>
-        <div class="float-end mt-4">
-          <button class="btn btn-link text-dark p-0 fixed-plugin-close-button">
-            <i class="fa fa-close"></i>
-          </button>
-        </div>
-        <!-- End Toggle Button -->
-      </div>
-      <hr class="horizontal dark my-1">
-    </div>
-  </div>
   
   
   
   
   
-  <!-- 신청하기 모달창 (양식 O) -->  
+  <!-- 신청하기 모달창 -->  
+  <div id="appModal" data-bs-toggle="modal" data-bs-target="#modal-file"></div>
   <div class="modal fade" id="modal-file" style="display: none" tabindex="-1" role="dialog">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -314,23 +324,22 @@
           </button>
         </div>
         <div class="pt-4 modal-body">
-          <form id="frmfile" method="post" action="${path}/insApp.do" 
-          enctype="multipart/form-data" onsubmit="return checkForm1()">
-          <c:choose>
-	      	<c:when test="${fleamarket.checkForm == 'N'}">
-          		<div class="form-group text-center">신청하시겠습니까?</div>
-          	</c:when>
-          	<c:otherwise>
-	            <div class="form-group text-center">신청 파일을 첨부해 주세요</div>
-	          	<label>파일 첨부</label>
-	         	<div class="row mt-3">
-	              <div class="col-md-12">
-	                <input type="file" name="appFile" class="form-control col-md-12 mb-3" id="appFile" multiple>
-	                 <div id="image_container"></div>
-	              </div>
-	            </div>
-	        </c:otherwise>
-	      </c:choose>
+          <form id="frmfile" method="post" action="${path}/insApp.do" enctype="multipart/form-data">
+	          <c:choose>
+		      	<c:when test="${fleamarket.checkForm == 'N'}">
+	          		<div class="form-group text-center">신청하시겠습니까?</div>
+	          	</c:when>
+	          	<c:otherwise>
+		            <div class="form-group text-center">신청 파일을 첨부해 주세요</div>
+		          	<label>파일 첨부</label>
+		         	<div class="row mt-3">
+		              <div class="col-md-12">
+		                <input type="file" name="appFile" class="form-control col-md-12 mb-3" id="appFile" multiple>
+		                 <div id="image_container"></div>
+		              </div>
+		            </div>
+		        </c:otherwise>
+		      </c:choose>
             <input type="hidden" name="postingNumber" value="${fleamarket.postingNumber}"/>
 	        <input type="hidden" name="email" value="${Login.email}"/>
           	<div class="text-end">
@@ -343,29 +352,6 @@
 		   	 </div>
 		   </form>
          </div>
-      </div>
-    </div>
-  </div>
-
-  
-  <!-- 신청 완료 알림 모달창 (양식 X) -->
-  <div class="modal fade" id="jkanban-info-modal-done" style="display: none" tabindex="-1" role="dialog">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="h5 modal-title">신청하기</h5>
-          <button type="button" class="btn-close text-dark" data-bs-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="pt-4 modal-body">
-          <div class="form-group text-center">신청되었습니다.</div>
-          <div class="text-end">
-            <button class="btn btn-primary btn-block" id="jkanban-update-task" data-toggle="modal" data-target="#jkanban-info-modal">
-              확인
-            </button>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -604,23 +590,12 @@
       document.querySelector('#jkanban-info-modal').classList.remove('show');
       document.querySelector('body').classList.remove('modal-open');
       document.querySelector('.modal-backdrop').remove();
-
-
     });
     
   </script>
   <!-- Kanban scripts -->
   <script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
   <script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>
-  <script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
   <!-- Github buttons -->
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
@@ -753,21 +728,6 @@
 	       });
 	});  
 	
-	// 유효성 체크
-	function checkForm1(){
-		// 첨부파일 유효성 체크 
-		// var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf|ppt|docx|hwp)$/;
-		 if(!document.aform.appFile.value){
-		     alert("첨부파일은 필수");
-		     return false;
-		 }
-		 /*
-		 if(!fileForm.test(document.aform.appFile.value)){
-		     alert("첨부할 수 없는 파일입니다.");
-		     return false;
-		 }
-		 */
-		 return true;
-	}
+	
 </script>
 </html>

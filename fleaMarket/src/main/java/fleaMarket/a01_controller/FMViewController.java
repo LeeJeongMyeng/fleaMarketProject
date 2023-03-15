@@ -61,6 +61,17 @@ public class FMViewController {
 		return "downloadView";
 	}
 	
+	// 신청 중복 검사
+	@PostMapping("duplicateApp.do")
+	public String duplicateApp(FApplication sch, Model d) {
+		System.out.println(sch.getPostingNumber());
+		System.out.println(sch.getEmail());
+		int a =service.duplicateApp(sch);
+		System.out.println(a);
+		d.addAttribute("duplicateApp", a);
+		return "pageJsonReport";
+	}
+	
 	// 신청글 + 파일첨부 등록
 	@PostMapping("/insApp.do")
 	public String insApp(FApplication ins, RedirectAttributes rttr, MultipartHttpServletRequest appFile){
@@ -68,9 +79,8 @@ public class FMViewController {
 		service.insApp(ins);
 
 		List<MultipartFile> fileList = appFile.getFiles("appFile");
-		 
 		// 들어온 파일이 있다면 실행
-		if(fileList!=null) {
+		if(!fileList.isEmpty()) {
 			String filenames = "";
 			int indexnum =0;
 			for (MultipartFile mf : fileList) {
@@ -99,14 +109,6 @@ public class FMViewController {
 		return "appReceivedList";
 	}
 	
-	// 받은 신청 상세 조회
-	@PostMapping("appFileView.do")
-	public String appFileView(@RequestParam("applicationNo") int applicationNo, Model d) {
-		String a= service.appFileView(applicationNo);
-		d.addAttribute("appFile",a);
-		return "pageJsonReport";
-	}
-	
 	// 신청글 파일 다운로드
 	@GetMapping("downloadAppFile.do")
 	public String downloadAppFile(@RequestParam("filename") String filename, Model d) {	
@@ -119,7 +121,7 @@ public class FMViewController {
 	// 받은 신청 승인
 	@PostMapping("updateAppRe.do")
 	public String updateAppRe(@RequestParam("applicationNo") String applicationNo,
-								@RequestParam("approvalWhether") String approvalWhether,  Model d) {		
+								@RequestParam("approvalWhether") String approvalWhether, Model d) {		
 		service.updateAppRe(applicationNo,approvalWhether);		 
 		return "pageJsonReport";
 	}
@@ -133,5 +135,56 @@ public class FMViewController {
 		return "appMyList";
 	}
 	
+	// 신청 상세 조회
+	@PostMapping("appFileView.do")
+	public String appFileView(@RequestParam("applicationNo") int applicationNo, Model d) {
+		String a= service.appFileView(applicationNo);
+		d.addAttribute("appFile",a);
+		return "pageJsonReport";
+	}
+	
+	// 내 신청 수정
+	@RequestMapping("uptApp.do")
+	public String uptApp(@RequestParam("applicationNo") int applicationNo, 
+						@RequestParam(value="filename", required=false) List<String> filename, // 기존 파일리스트
+						MultipartHttpServletRequest addfile, //새로 올린 파일
+						Model d) {		
 
+		// 1. 기존리스트(filename)에 대한 것을 다 삭제 처리한다.
+		if(filename!=null) {
+			for(String fname:filename) {
+				fileservice.DeleteFile(appPath,fname);
+			}
+		}
+		// 2. 새로 들어온 파일들에 대해서 업로드 처리하고, 배열화
+			List<MultipartFile> fileList = addfile.getFiles("addFile");
+			String filenames = "";
+			
+			for(int i=0; i<fileList.size(); i++) {
+				String fname = fileservice.insprofileimg(appPath, fileList.get(i));
+				
+				filenames+=fname;
+				
+				if(i!=fileList.size()-1) {filenames+=",";}
+				
+			}
+		// 3. 배열화된 것을 테이블에 업데이트
+		 
+		 service.uptApp(applicationNo,filenames);
+
+		 return "redirect:appMyList.do";
+	}
+	
+	// 내 신청 삭제
+	@RequestMapping("delApp.do")
+	public String delApp(@RequestParam("applicationNo") int applicationNo,
+			@RequestParam(value="filename", required=false) List<String> filename,Model d) {
+		if(filename!=null) {
+			for(String fname:filename) {
+				fileservice.DeleteFile(appPath,fname);
+			}
+		}
+		service.delApp(applicationNo);		 
+		return "redirect:appMyList.do";
+	}
 }

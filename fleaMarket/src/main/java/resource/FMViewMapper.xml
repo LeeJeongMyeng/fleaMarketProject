@@ -15,6 +15,13 @@
 		WHERE postingNumber = #{postingNumber}
 	</select>
 	
+	<!-- 신청 중복 검사 -->
+   	<select id="duplicateApp" resultType="int" parameterType="fapplication">
+   		SELECT count(applicationno)
+		FROM FApplication
+   		WHERE postingNumber = #{postingNumber}
+   		AND email = #{email}
+   	</select>
 	<!-- 신청글 등록 -->
 	<insert id="insApp" parameterType="fapplication">
 		INSERT INTO FApplication VALUES (#{postingNumber},#{email},FApplication_seq.nextval,sysdate,null)		
@@ -54,12 +61,7 @@
 			ORDER BY a.applicationno DESC)
 		WHERE cnt BETWEEN #{start} AND #{end}
 	</select>
-	<!-- 받은 신청 상세 조회 -->
-	<select id="appFileView" resultType="string" parameterType="int">
-		SELECT filename
-		FROM ApplicationFile
-		WHERE applicationNo = #{applicationNo}
-	</select>
+	
 	<!-- 받은 신청 승인 -->
 	<update id="updateAppRe" parameterType="hashmap">
 		UPDATE FApplication
@@ -97,6 +99,24 @@
 			ORDER BY a.applicationno DESC)
 		WHERE cnt BETWEEN #{start} AND #{end}
 	</select>
+	<!-- 신청 상세 조회 -->
+	<select id="appFileView" resultType="string" parameterType="int">
+		SELECT filename
+		FROM ApplicationFile
+		WHERE applicationNo = #{applicationNo}
+	</select>
+	<!-- 내 신청 수정 -->
+	<update id="uptApp" parameterType="applicationfile">
+	    update applicationfile
+	    set filename = #{filename}
+	    where applicationNo = #{applicationNo}
+	</update>	
+	<!-- 내 신청 삭제 -->
+	<delete id="delApp" parameterType="int">
+		DELETE
+		FROM FApplication 
+		WHERE applicationno = #{applicationno}
+	</delete>
 	
 </mapper>		
 		
