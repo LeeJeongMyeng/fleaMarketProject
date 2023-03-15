@@ -43,11 +43,7 @@
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/3aab1ef667.js" crossorigin="anonymous"></script>
   <!-- 삭제하기 알람창  -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-
   
-  <script src="../../assets/js/plugins/sweetalert.min.js"></script>
   <style>
   .dropdown{
   display: flex;
@@ -99,7 +95,7 @@
                   <div class="my-gallery d-flex mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery">
                   <c:forEach var = "img" items = "${imgList}" begin = "1" end = "5">
                     <figure class="ms-2 me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
-                      <a href="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/product-thumb-1.jpg" itemprop="contentUrl" data-size="500x600">
+                      <a href="${path }/resource/community/${img}" itemprop="contentUrl" data-size="500x600">
                         <img class="w-100 min-height-100 max-height-100 border-radius-lg shadow" src="${path }/resource/community/${img}" alt="Image description" />
                       </a>
                     </figure>
@@ -114,7 +110,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                     <div class="pswp__scroll-wrap">
                       <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
                       <!-- don't modify these 3 pswp__item elements, data is added later on. -->
-                      <div class="pswp__container">
+                      <div class="pswp__container" style = "margin-top: 50px;">
                         <div class="pswp__item"></div>
                         <div class="pswp__item"></div>
                         <div class="pswp__item"></div>
@@ -230,22 +226,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                     </div>
                   </div>
                 </div>
-                <div class="col-sm-6 d-none d-sm-block">
-                  <div class="d-flex align-items-center justify-content-sm-end">
-                    <div class="d-flex align-items-center">
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-toggle="tooltip" data-original-title="Jessica Rowland">
-                        <img alt="Image placeholder" src="${path}/assets/img/team-5.jpg" class="">
-                      </a>
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-toggle="tooltip" data-original-title="Audrey Love">
-                        <img alt="Image placeholder" src="${path}/assets/img/team-2.jpg" class="rounded-circle">
-                      </a>
-                      <a href="javascript:;" class="avatar avatar-xs rounded-circle" data-toggle="tooltip" data-original-title="Michael Lewis">
-                        <img alt="Image placeholder" src="${path}/assets/img/team-1.jpg" class="rounded-circle">
-                      </a>
-                    </div>
-                    <small class="ps-2 font-weight-bold">and 30+ more</small>
-                  </div>
-                </div>
+              
                 <hr class="horizontal dark my-3">
               </div>
               <!-- Comments -->
@@ -476,7 +457,8 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 		<input type="hidden" name="category" value = "${category }">
 	</form>
 	<!--   Core JS Files   -->
-	
+  <script src="${path}/assets/js/plugins/photoswipe.min.js"></script>
+  <script src="${path}/assets/js/plugins/photoswipe-ui-default.min.js"></script>
   <script>
   //댓글 삭제 
  function deleteItem(idx){
@@ -487,6 +469,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 		  Swal.fire({
 			    icon:'warning',
 		        text:'로그인 후에 이용하실 수 있습니다.',
+		        confirmButtonColor: '#5e72e4',
 		        confirmButtonText:'로그인하러가기',
 		        showCancelButton: true,
 		        cancelButtonText:'취소',
@@ -533,6 +516,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 			 Swal.fire({
 				    icon:'warning',
 			        text:'로그인 후에 이용하실 수 있습니다.',
+			        confirmButtonColor: '#5e72e4',
 			        confirmButtonText:'로그인하러가기',
 			        showCancelButton: true,
 			        cancelButtonText:'취소',
@@ -630,6 +614,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 		 Swal.fire({
 			    icon:'warning',
 		        text:'로그인 후에 이용하실 수 있습니다.',
+		        confirmButtonColor: '#5e72e4',
 		        confirmButtonText:'로그인하러가기',
 		        showCancelButton: true,
 		        cancelButtonText:'취소',
@@ -656,6 +641,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 	 }).then((result) => {
 		 if(result.isConfirmed){
 			 var elm = document.getElementById("irrReport");
+			 
 		     var session = '${session}';
 		    	//삭제조건이 맞을때, 작성자 == 세션 
 		    	if(session!=''){
@@ -665,6 +651,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 		    		Swal.fire({
 					    icon:'warning',
 				        text:'로그인 후에 이용하실 수 있습니다.',
+				        confirmButtonColor: '#5e72e4',
 				        confirmButtonText:'로그인하러가기',
 				        showCancelButton: true,
 				        cancelButtonText:'취소',
@@ -702,6 +689,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 	    		Swal.fire({
 				    icon:'warning',
 			        text:'로그인 후에 이용하실 수 있습니다.',
+			        confirmButtonColor: '#5e72e4',
 			        confirmButtonText:'로그인하러가기',
 			        showCancelButton: true,
 			        cancelButtonText:'취소',
@@ -734,6 +722,7 @@ function contItem(idx){
 		Swal.fire({
 		    icon:'warning',
 	        text:'로그인 후에 이용하실 수 있습니다.',
+	        confirmButtonColor: '#5e72e4',
 	        confirmButtonText:'로그인하러가기',
 	        showCancelButton: true,
 	        cancelButtonText:'취소',
@@ -820,6 +809,7 @@ function contItem(idx){
     	Swal.fire({
 		    icon:'warning',
 	        text:'로그인 후에 이용하실 수 있습니다.',
+	        confirmButtonColor: '#5e72e4',
 	        confirmButtonText:'로그인하러가기',
 	        showCancelButton: true,
 	        cancelButtonText:'취소',
@@ -895,6 +885,7 @@ $("#Heart").on("click", function(e) {
 	Swal.fire({
 	    icon:'warning',
         text:'로그인 후에 이용하실 수 있습니다.',
+        confirmButtonColor: '#5e72e4',
         confirmButtonText:'로그인하러가기',
         showCancelButton: true,
         cancelButtonText:'취소',

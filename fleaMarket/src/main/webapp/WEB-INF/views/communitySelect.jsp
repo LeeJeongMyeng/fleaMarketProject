@@ -32,12 +32,7 @@
 <!-- CSS Files -->
 <link id="pagestyle"
 	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
-	<script src="https://kit.fontawesome.com/3aab1ef667.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css">
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.js"></script>
-
-  
-  <script src="../../assets/js/plugins/sweetalert.min.js"></script>
+	<script src="https://kit.fontawesome.com/3aab1ef667.js" crossorigin="anonymous"></script>	
 <style>
 .disflex {
 	display: flex;
@@ -144,8 +139,8 @@
 							</div>
 						<div class="btnStyle">
 						    <div class = "buttonSelect">
-							<button type="button" id= "btbutn" class="btn btn-outline-dark" name = "showBtn" value="all">전체글</button>
-							<button type="button" id= "btbutn" class="btn btn-outline-dark" name = "showBtn" value="best">인기글</button>
+							<button type="button"  class="btn btn-outline-dark btbutn1" name = "showBtn" value="all">전체글</button>
+							<button type="button"  class="btn btn-outline-dark btbutn2" name = "showBtn" value="best">인기글</button>
 							</div>
 							<button id = "insertButton" type="button"
 								class="btn bg-gradient-primary btn-sm mb-0 insertStyle">+
@@ -153,13 +148,13 @@
 
 							
 							<select class="bg-gradient-primary form-control" id="Sort"
-							style = "width: 150px;height:44px;color: aliceblue;">
+							style = "width: 150px;height:44px;color: aliceblue;text-align: center;">
 											<option value="1"
 												<c:out value="${pageMaker.cri.shift eq 'registDate'?'selected':'' }"/>>최근 등록 순</option>
 											<option value="2"
 												<c:out value="${pageMaker.cri.shift eq 'viewCnt'?'selected':'' }"/>>조회수 순</option>
 											<option value="3"
-												<c:out value="${pageMaker.cri.shift eq 'likeCnt '?' selected':'' }"/>>좋아요 순</option>
+												<c:out value="${pageMaker.cri.shift eq 'likeCnt'?'selected':'' }"/>>좋아요 순</option>
 							</select>
 							<!-- 카테고리 조회 -->
 							<form id = "showForm" method = "get">
@@ -316,6 +311,11 @@
 	
 	<script src="${path}/assets/js/plugins/datatables.js"></script>
 	<script>
+
+	
+		
+		
+
 	var msg = '${msg}';
 	if(msg==='등록성공'){
 		 Swal.fire({
@@ -334,7 +334,9 @@
 		        showCancelButton: true,
 		        cancelButtonText:'취소',
 		 }).then((result) =>{
+			 if(result.isConfirmed){
 			 location.href = "${path}/SignIn.do";
+			 }
 		 })
 	 }else{
 		  insertForm.find("input[name='category']").val();
@@ -348,7 +350,12 @@
   var moveForm = $("#moveForm");
   //인기글 목록
   var showpower = "${bestValue}";
-  
+  const a = moveForm.find("input[name='showTemplete']").val();
+	if(a=='all'){
+		$('.btbutn1').addClass('active');
+	}else{
+		$('.btbutn2').addClass('active');
+	}
   // 페이지/ 정렬 / 인기글 처리 
   $("#Sort").on("change",function(e){
 	  let shift = $("#Sort option:selected").val();
@@ -361,6 +368,7 @@
         //인기글 / 전체글 클릭처리 
 		$('button[name=showBtn]').on("click", function(e) {
 			let show = $(this).attr('value');
+			
 			
 				e.preventDefault();
 				//인기글, 전체 버튼클릭시 초기화 

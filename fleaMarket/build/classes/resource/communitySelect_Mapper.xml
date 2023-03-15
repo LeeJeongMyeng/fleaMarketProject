@@ -44,7 +44,7 @@ FROM (SELECT ROWNUM RNUM,
                    m.nickname,
                    count(c2.COMMUNITYNUMBER) likeCnt,
                    CASE
-                       WHEN c.viewCnt >= 30 AND c.registDate >= SYSDATE - 1
+                       WHEN c.viewCnt >= 30 
                            THEN 'T'
                        ELSE 'F'
                        END AS bestType
@@ -78,7 +78,7 @@ FROM (SELECT ROWNUM RNUM,
 
 				<when test="shift eq 'viewCnt'"> viewCnt </when>
 
-				<otherwise>likeCnt</otherwise>
+				<when test="shift eq 'likeCnt'"> likeCnt </when>
 
 			</choose>
 
@@ -108,7 +108,7 @@ FROM (SELECT ROWNUM RNUM,
                    m.nickname,
                    count(c2.COMMUNITYNUMBER) likeCnt,
                    CASE
-                       WHEN c.viewCnt >= 30 AND c.registDate >= SYSDATE - 1
+                       WHEN c.viewCnt >= 30 
                            THEN 'T'
                        ELSE 'F'
                        END AS bestType
@@ -118,7 +118,6 @@ FROM (SELECT ROWNUM RNUM,
             WHERE m.EMAIL = c.EMAIL
             AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER
             AND viewCnt >= 30 
-            AND registDate >= SYSDATE -1
             AND 
       ]]>
 		<include refid="criteria"></include>

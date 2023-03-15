@@ -48,7 +48,9 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 		}
 		if(cri.getShift().equals("3")) {
 			cri.setShift("likeCnt");
-		}		
+		}
+		
+		System.out.println("shift"+":"+cri.getShift());
 		//게시판 카테고리 비즈니스 로직 설정
 		List<CapplicationList> clist = new ArrayList<CapplicationList>();
 		clist = mapper.getCommunityList(cri);
