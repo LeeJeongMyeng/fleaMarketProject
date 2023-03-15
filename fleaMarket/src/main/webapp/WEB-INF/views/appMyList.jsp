@@ -99,11 +99,11 @@
   	function goApp(index,methods){
 		var statusText = $('#datatable-search tbody tr:nth-child('+index+') td:nth-child(4) span').text()
 		if(statusText != '대기'){
-			alert('승인/거부된 신청은 편집할 수 없습니다');
+			cantUptAlert();
 			return false;
 		}
 		if(methods=='uptApp' && $('#addFile').val()==''){
-			alert('파일을 첨부해 주세요');
+			insFileAlert();
 			return false;
 		}
 		console.log(methods+".do")
@@ -119,7 +119,7 @@
 			data:"applicationNo="+applicationNo,
 			dataType:"json",
 			success:function(data){
-				alert("삭제되었습니다")
+				delAlert();
 				location.reload(); 
 			},
 			error:function(xhr,status,err){
@@ -129,6 +129,29 @@
 	        }
 		})
 	}
+ 	
+ 	// alert
+ 	function cantUptAlert(){
+ 		Swal.fire({
+		    icon:'warning',
+	        text:'승인/거부된 신청은 편집할 수 없습니다',
+	        confirmButtonText:'확인'
+		 })
+ 	}
+ 	function insFileAlert(){
+ 		Swal.fire({
+		    icon:'warning',
+	        text:'파일을 첨부해 주세요',
+	        confirmButtonText:'확인'
+	 	})
+ 	}
+ 	function delAlert(){
+ 		Swal.fire({
+		    icon:'warning',
+	        text:'삭제되었습니다',
+	        confirmButtonText:'확인'
+	 	})
+ 	}
 </script>
 </head>
 <style>
