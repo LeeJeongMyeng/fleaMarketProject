@@ -111,20 +111,31 @@
 								 <input name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}" multiple/>
 								 <div id="imgs_wrap" style="display:flex;">
 							</div>	
-   						
+   						</div>
+   						<div align="right">
+							<%--
 							<div class="" style="margin-left:80%;">
-							
-							<c:if test="${Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email }">
-								<button type="submit" class="btn btn-outline-primary btn-md mb-0 me-1">수정</button>
-								<button type="button"  data-bs-toggle="modal" data-bs-target="#QNADeleteModal" id="DeleteQnaModalbtn"  class="btn btn-outline-danger btn-md mb-0 me-1">삭제</button>  <!-- 모달창추가 -->
-							</c:if>
-							<button type="button" id="goQnaList" class="btn btn-outline-secondary btn-md mb-0 me-1">취소</button>	
+							 --%>
+						<%--
+						${(Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email)?'':'none'}
+						  <c:if test="${Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email }">--%>	
+								<button type="submit" ${(Login.authority=='관리자' || (qna.method=='q' && Login.email==qna.email))?'':'style="display:none;"'} class="btn btn-outline-primary btn-md mb-0 me-1">수정</button>
+								<button type="button" ${(Login.authority=='관리자' || (qna.method=='q' && Login.email==qna.email))?'':'style="display:none;"'} data-bs-toggle="modal" data-bs-target="#QNADeleteModal" id="DeleteQnaModalbtn"  class="btn btn-outline-danger btn-md mb-0 me-1">삭제</button>  <!-- 모달창추가 -->
+						<%--  	</c:if>--%>
+							<%--
 							<c:if test="${Login.authority=='관리자' && qna.method=='q'}">
-								<button type="button" class="btn btn-outline-success btn-md mb-0 me-1" id="QNAAnswerBtn">답변</button>  
+							--%>
+								
+							<button type="button" ${Login.authority=='관리자' && qna.method=='q'?'':'style="display:none;"'} class="btn btn-outline-success btn-md mb-0 me-1" id="QNAAnswerBtn">답변</button>  
+							<button type="button" id="goQnaList" class="btn btn-outline-secondary btn-md mb-0 me-1" style="margin-left:auto;">취소</button>	
+							<%--
 							</c:if>
+							 --%> 
+							</div>
 							</form>
+							<%--
 							</div>	
-							
+							--%>
 
 						<c:forEach var="QNAFile" items="${qna2}">
 						<form action="downloadqna.do" method="get">
