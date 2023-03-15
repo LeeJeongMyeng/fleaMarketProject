@@ -76,7 +76,6 @@ var SessionEmail = '${Login.email}'
 												<input type="text" name="title" class="form-control" placeholder="　제목/작성자 입력하세요" >
 												<input type="hidden" name="curPage" value="${sch.curPage}"/>
 												<button class="btn btn-outline-primary mb-0" type="submit">검색</button>
-											<div class="ms-auto my-auto"></div>
 											</div>
 										</form>
 										</div>
