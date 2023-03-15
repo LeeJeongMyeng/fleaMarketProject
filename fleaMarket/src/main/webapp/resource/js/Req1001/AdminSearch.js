@@ -66,3 +66,10 @@ $("#cbx_chkAll").click(function() {
 
 
 //==========================================================================================
+function DeleteMembersFormfun(){
+	if($('#DeleteCheckOk').is(":checked")){
+		$('#DeleteMembersForm').submit()
+	}else{
+		alert("탈퇴처리 동의체크를 해주세요.")
+	}
+}

@@ -65,14 +65,13 @@
 													<div class="modal-body">
 														<p>선택한 회원을 탈퇴시키겠습니까?</p>
 														<div class="form-check">
-															<input class="form-check-input" type="checkbox" value=""
-																id="importCheck"> 
+															<input class="form-check-input" type="checkbox" value="" id="DeleteCheckOk"> 
 																* 탈퇴처리에 동의하시면 다시 한 번 체크를 해주세요.
 														</div>
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn bg-gradient-secondary btn-sm" data-bs-dismiss="modal">취소</button>
-														<button type="button" class="btn bg-gradient-primary btn-sm" onclick="javascript:$('#DeleteMembersForm').submit()">탈퇴</button>
+														<button type="button" class="btn bg-gradient-primary btn-sm" onclick="DeleteMembersFormfun()">탈퇴</button>
 													</div>
 												</div>
 											</div>
