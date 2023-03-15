@@ -237,10 +237,10 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<form method="post" enctype="multipart/form-data" action="${path}/communityUpdate.do"><!--  -->
 	  <input type="hidden" name="communitynumber" value="${boardInfo.getCommunitynumber()}">
-      <div class="row mt-4" >
+      <div class="row mt-4">
          <div class="card h-100" style="margin-top:8%;">
-           <div class="card-body">
-             <h5 class="font-weight-bolder" style="text-align:center; font-size:20pt;"><span>커뮤니티(조건걸어서 무슨커뮤니티인지 넣기)</span> 게시글 변경</h5>
+           <div class="card-body" >
+             <h5 class="font-weight-bolder" style="text-align:center; font-size:20pt;"><span>"${boardInfo.category}" 커뮤니티</span> 게시글 변경</h5>
              <div class="row">
                <div class="col-12">
                  <div class="card-body">
@@ -252,44 +252,25 @@
                 	<input type="file" name="updateFile" class="form-control" id="fileClick6" multiple>
                 	<input type="file"  id="fileClick7" class="form-control" multiple>
                 	<div id="preview"></div>
-		             <div class="row" style="margin-left:30%;">
+		             <div class="row" style="margin-left:35%;">
 			              <!-- <label style="border:1px solid black" >  -->
-				               <img id="bigphoto" class="border-radius-lg shadow-lg ms-5 regimg" src="${path}/resource/community/${boardImgArr[0]}" 
+				               <img id="bigphoto" class="border-radius-lg shadow-lg ms-5 regimg" src="${path}/resource/community/${boardImgArrOne}" 
 				                  			alt="이미지 없음" style="width:auto; height:400px;">
 				                <span id="noImg" class="ms-5" style="color:red;"></span>
 				                
 			              <!--  </label> -->
 		                  					
-		                 <div class="my-gallery d-flex mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery">
-			                    <table class="ms-4" id="imgTab">
+		                 <div class="my-gallery d-flex mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery" >
+			                    <table id="imgTab">
 			                    	<tbody>
 				                    	<tr>
-				                    		
-					                    	<td style="border:30px solid white;">
-					                    		<img class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
-								                        		 src="${path}/resource/community/${boardImgArr[1]}" alt="이미지 없음" style="width:auto; height:150px;" />
-								           		<div id="preview1"></div>
-								           	</td>
-					                    	<td style="border:30px solid white;">
-					                    		<img class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
-								                        		 src="${path}/resource/community/${boardImgArr[2]}" alt="이미지 없음" style="width:auto; height:150px;" />
-								           		<div id="preview2"></div>
-								           	</td>
-					                    	<td style="border:30px solid white;">
-					                    		<img class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
-								                        		 src="${path}/resource/community/${boardImgArr[3]}" alt="이미지 없음" style="width:auto; height:150px;" />
-								           		<div id="preview3"></div>
-								           	</td>
-					                    	<td style="border:30px solid white;">
-					                    		<img class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
-								                        		 src="${path}/resource/community/${boardImgArr[4]}" alt="이미지 없음" style="width:auto; height:150px;" />
-								           		<div id="preview4"></div>
-								           	</td>
-					                    	<td style="border:30px solid white;">
-					                    		<img class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
-								                        		 src="${path}/resource/community/${boardImgArr[5]}" alt="이미지 없음" style="width:auto; height:150px;" />
-								           		<div id="preview5"></div>
-								           	</td>
+				                    		<c:forEach var="boardImg" items="${boardImgArr}">
+						                    	<td style="border:30px solid white;">
+						                    		<img class="min-height-100 max-height-100 border-radius-lg shadow ms-2 regimg" 
+									                        		 src="${path}/resource/community/${boardImg}" alt="이미지 없음" style="width:auto; height:150px;" />
+									           		<div id="preview1"></div>
+									           	</td>
+								           	</c:forEach>
 					                    </tr>
 					                    <tr>
 					                    	<td colspan="5"><button type="button" id="imgChange" class="btn btn-outline-primary" style="margin-left:40%;" >사진 수정</button></td>

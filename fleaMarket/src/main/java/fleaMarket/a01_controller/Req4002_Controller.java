@@ -24,6 +24,7 @@ import fleaMarket.util.FileService;
 import vo.BoardImg;
 import vo.Capplication;
 import vo.FollowMemberInfo;
+import vo.Member;
 import vo.RoomMemberInfo;
 
 @Controller
@@ -135,6 +136,8 @@ public class Req4002_Controller {
 				System.out.println("사진명:"+imgname);
 				boardArr.add(imgname);
 			}
+			d.addAttribute("boardImgArrOne", boardArr.get(0));
+			boardArr.remove(0);
 			d.addAttribute("boardImgArr", boardArr);
 		}
 		
@@ -248,7 +251,7 @@ public class Req4002_Controller {
 	public String communityFollowMember(FollowMemberInfo sel, Model d,HttpSession session) {
 		session.getAttribute("Login");
 		d.addAttribute("follower", service.followerSelect(sel));
-		// System.out.println(service.followerSelect(sel));
+		//System.out.println(service.followerSelect(sel));
 		return "communityFollowMember";
 	}
 	
@@ -258,18 +261,30 @@ public class Req4002_Controller {
 		d.addAttribute("msg", "언팔로우");
 		return "communityFollowMember";
 	}
-//	@RequestMapping("followAdd.do")
-//	public String followAdd(@RequestParam("roomEmail") String roomEmail,HttpSession session,Model d) {
-//		return "";
-//	}
+	@RequestMapping("followAdd.do")
+	public String followAdd(@RequestParam("roomEmail") String roomEmail,@RequestParam("loginEmail") String loginEmail, RedirectAttributes rttr) {
+		if(loginEmail!=null && roomEmail!=null ) {
+			if(service.followCheck(loginEmail, roomEmail)<1) { // 팔로우가 되어있는지 유효성 체크
+				service.insertFriend(loginEmail,roomEmail);
+				rttr.addFlashAttribute("followemail", roomEmail);
+				rttr.addFlashAttribute("followSuccess", "성공");
+			}
+			System.out.println("팔로우 여부"+service.followCheck(loginEmail, roomEmail));
+		}
+		return "redirect:/communityMemberRoom.do?email="+roomEmail+"&LoginEmail="+loginEmail;
+	}
 	
 	@RequestMapping("communityMemberRoom.do")
-	public String communityMemberRoom(@RequestParam("email") String email , FollowMemberInfo sel,HttpSession session,
-			RoomMemberInfo board,Model d) {
-		// 팔로우 추가
-		System.out.println("세션정보::"+session.getAttribute("Login"));
-		String loginEmail = String.valueOf(session.getAttribute("Login"));
-		service.insertFriend(loginEmail, email);
+	public String communityMemberRoom(@RequestParam("email") String email, @RequestParam(value="loginEmail", required = false) String loginEmail,FollowMemberInfo sel,HttpSession session, RoomMemberInfo board,Model d) {
+		//if(session.getAttribute("Login")==null) session.setAttribute("Login","");
+		//System.out.println(session.getAttribute("Login").toString());
+		if(loginEmail!=null) {
+			 if(service.followCheck(loginEmail, email)<1) { // 팔로우가 안되어있으면 유효성 체크
+				 d.addAttribute("followWhether", "0"); 
+			 }else { 
+				 d.addAttribute("followWhether", "1"); 
+			 }
+		}
 		
 		session.getAttribute("Login");
 		// 룸주인 회원정보 
@@ -370,6 +385,4 @@ public class Req4002_Controller {
 		
 		return "communityMemberRoom";
 	}
-	
-	
 }
