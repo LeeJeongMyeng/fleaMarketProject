@@ -95,7 +95,7 @@ li{
                           </a>
                         </li>
                         <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="fRegistration.do">
+                          <a class="dropdown-item py-2 ps-3 border-radius-md" onclick="registration()" href="#">
                             <div class="d-flex">
                              <div class="icon h-10 me-3 d-flex mt-1">
                                <i class="ni ni-laptop text-primary"></i>
@@ -110,7 +110,17 @@ li{
                         </li>
                       </ul>
                     </div>
-                  
+                  <script>
+	                            function registration(){
+	                            	if("${Login.email}"==""){
+	                            		if(confirm("[안내메시지]로그인을 하셔야 등록 페이지 이용이 가능합니다.\n로그인하러 가시겠습니까?")){
+	                            			location.href="${path}/SignIn.do"
+	                            		}
+	                            	}else{
+	                            		location.href="${path}/fRegistration.do?email=${Login.email}"
+	                            	}
+	                            }
+                            </script>
                   
                   
                   

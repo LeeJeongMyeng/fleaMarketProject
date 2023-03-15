@@ -28,7 +28,9 @@ import vo.FleaMarket;
 public class Req3000_Controller {
 
 	private Req3000_Service service;
-
+//	http://223.26.182.204:7080/fleaMarket/callmain.do
+	
+	
 	@Autowired(required = false)
 	public Req3000_Controller(Req3000_Service service) {
 		this.service = service;
@@ -56,7 +58,7 @@ public class Req3000_Controller {
 	@Value("${fleamarket.upload3}")
 	private String profilepath;
 
-//http://localhost:7081/fleaMarket/fRegistration.do	
+//http://localhost:7080/fleaMarket/fRegistration.do	
 	@RequestMapping("fRegistration.do")
 	public String fRegistration(Model d, Faddresss ins) {
 		d.addAttribute("add", ins.getAddrs0());
@@ -163,6 +165,13 @@ public class Req3000_Controller {
 		d.addAttribute("fmap", listmap);
 
 		return "FleaMarketOverallCheck";
+	}
+	
+//	http://223.26.182.204:7080/fleaMarket/WetherPage.do
+	@GetMapping("WetherPage.do")
+	public String WetherPage() {
+	
+		return "wether";
 	}
 
 }

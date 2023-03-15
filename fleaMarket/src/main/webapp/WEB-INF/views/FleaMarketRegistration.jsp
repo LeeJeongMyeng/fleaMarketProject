@@ -124,7 +124,7 @@ $(document).ready(function(){
 							<input type="hidden" name="email" value="${Login.email}">
 							<input type="hidden" name="bisenessNumber" value="${Login.businessnumber}">
 							<label for="title" class="form-label labelFont">제목</label> 
-							<input type="text" class="form-control" id="projectName" name="title">
+							<input type="text" class="form-control" id="projectName" name="title" style="width:50%;">
 
 			                <br>
                             <!-- 주소지정해주기 -->
@@ -132,8 +132,8 @@ $(document).ready(function(){
 								<div class="col-6">
 									<label class="form-label labelFont">주소 설정</label> 
 									<div class = "s_form">
-									   <input type="button" onclick="execDaumPostcode()" value="우편번호 찾기"><br>
-									   <input name = "addrs1" type="text" onkeyup="callAdd(this)" id="sample6_address" class="form-control soooo2" placeholder="주소">
+									   <input type="button" onclick="execDaumPostcode()" style="margin-bottom: 9px;" value="우편번호 찾기"><br>									  
+									   <input name = "addrs1" type="text" onkeyup="callAdd(this)" id="sample6_address" class="form-control soooo2" style="width:102%;" placeholder="주소">
 									
 									
 									<script>
@@ -271,6 +271,7 @@ $(document).ready(function(){
 					<div class="d-flex justify-content-end mt-4">
 						<button type="button" id="insBtn"
 							class="btn bg-gradient-primary m-0 ms-2">등록하기</button>
+							
 					</div>
 				</div>
 			</div>
@@ -375,14 +376,14 @@ $('input[name=recruitmentEndDate]').attr("min", today);
   
 
 //파일처리 show/hide 
-$('#choices-gender').change(function() {
+/*  $('#choices-gender').change(function() {
     var result = $('#choices-gender option:selected').val();
     if (result == 'P') {
       $('.div1').show();
     } else {
       $('.div1').hide();
     }
-  }); 
+  });  */
 </script>
 
 
