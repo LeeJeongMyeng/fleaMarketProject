@@ -29,9 +29,9 @@
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
   <!-- 카카오맵 api -->
   <script type="text/javascript"
-	   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=91e22fb67ec6ac7eabb75fa26b7d3d4d&libraries=services,clusterer,drawing"></script>
+	   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=491d6062da8be4de279d8ef2a5a72e75&libraries=services,clusterer,drawing"></script>
 	<script type="text/javascript"
-	   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=91e22fb67ec6ac7eabb75fa26b7d3d4d"></script>
+	   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=491d6062da8be4de279d8ef2a5a72e75"></script>
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"
    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
    crossorigin="anonymous"></script>
