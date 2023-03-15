@@ -26,7 +26,7 @@ public interface Req3000_Dao {
 	public void UptFleaMarket(FleaMarket upt);
 	
 	//파일 수정
-		public void UptFFile(FFile fupt);
+	public void UptFFile(FFile fupt);
 	//전체조회
 	public List<FleaMarket> getFleaMarketList(FleaMarket sch);	
 	
@@ -39,5 +39,7 @@ public interface Req3000_Dao {
 	//파일 정보 불러오기(삭제) 
 	public List<FFile> DelFail(String postingNumber);
 	
+	//캘린더 등록
+	public void insertCalendar(FleaMarket ins);
 	
 }

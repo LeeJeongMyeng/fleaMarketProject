@@ -66,7 +66,7 @@ function displayCenterInfo(result, status) {
 
        // 인포윈도우로 장소에 대한 설명을 표시합니다
        var infowindow = new kakao.maps.InfoWindow({
-           content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+           content: '<div style="width:150px;text-align:center;padding:6px 0;">여기</div>'
        });
        infowindow.open(map, marker);
 
@@ -214,17 +214,46 @@ function displayCenterInfo(result, status) {
 	     alert("내용 적어주세요");
 	     return false;
 	 }
-	 
-	var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf|docx|hwp)$/;
-	 if(!document.aform.pro.value){
+	  if(!document.aform.pro.value){
 	     alert("첨부파일은 필수");
 	     return false;
 	 }
+	 
+	 var fileForm0 = /(.*?)\.(docx|hwp)$/;
+	 
+	 var fileArr = Array.from(document.getElementById('isFile').files[0]);// 이벤트로 넘어온 파일들을 배열형식으로 담음(FileList -> Array)
+     //파일이 배열로 잘 바뀌엇는지 확인
+     console.log(fileArr);
+     var filecheck = false;
+     for(var i=fileArr.length-1; i>=0; i--){
+		 var fileName = fileArr[i].name
+		//파일이름의 확장자
+		var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+		//검사할 확장자의 배열
+    	var extension = ['.doc','docx','ppt','pptx','xls','pdf','hwp','txt'];
+    	
+    	extension.forEach(function(element) {
+	        if(ext == element){
+	            filecheck = true;
+	        }
+    	})
+	 }
+	
+	if(document.aform.checkForm.value=="P"&&filecheck==false){
+		alert("개인양식일때는 첨부파일 필수 입니다.")
+		return false;
+		}
+	
+	/*var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf|docx|hwp)$/;
+	 if(!document.aform.pro.value){
+	     alert("첨부파일은 필수");
+	     return false;
+	 }*/
 
-	 if(!fileForm.test(document.aform.pro.value)){
+	/* if(!fileForm.test(document.aform.pro.value)){
 	     alert("첨부할 수 없는 파일입니다.");
 	     return false;
-	 }
+	 }*/
 	 
 	  return true;
 	}
