@@ -1,5 +1,6 @@
 package fleaMarket.a02_service;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -65,9 +66,17 @@ public class Req4002_Service {
 	}
 	
 	public List<RoomMemberInfo> boardSelect(RoomMemberInfo sel){
+		//if(sel.getImgname()==null) sel.setImgname("");
 		if(sel.getCategory()==null) sel.setCategory("");
 		if(sel.getEmail()==null) sel.setEmail("");
 		if(sel.getRegistDateMonth()==null) sel.setRegistDateMonth("");
 		return dao.boardSelect(sel);
+	}
+	
+	public void insertFriend(String login,String follwing) {
+		Map<String, String> followAddMap = new HashMap<String, String>();
+		followAddMap.put("myEmail", login);
+		followAddMap.put("following", follwing);
+		dao.insertFriend(followAddMap);
 	}
 }

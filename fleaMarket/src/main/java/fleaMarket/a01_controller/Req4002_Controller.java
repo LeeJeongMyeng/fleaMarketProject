@@ -1,7 +1,6 @@
 package fleaMarket.a01_controller;
 
 import java.io.UnsupportedEncodingException;
-import java.lang.ProcessBuilder.Redirect;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,7 +9,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.poi.util.SystemOutLogger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -260,11 +258,20 @@ public class Req4002_Controller {
 		d.addAttribute("msg", "언팔로우");
 		return "communityFollowMember";
 	}
+//	@RequestMapping("followAdd.do")
+//	public String followAdd(@RequestParam("roomEmail") String roomEmail,HttpSession session,Model d) {
+//		return "";
+//	}
 	
 	@RequestMapping("communityMemberRoom.do")
-	public String communityMemberRoom(@RequestParam("email") String email,FollowMemberInfo sel,
+	public String communityMemberRoom(@RequestParam("email") String email , FollowMemberInfo sel,HttpSession session,
 			RoomMemberInfo board,Model d) {
+		// 팔로우 추가
+		System.out.println("세션정보::"+session.getAttribute("Login"));
+		String loginEmail = String.valueOf(session.getAttribute("Login"));
+		service.insertFriend(loginEmail, email);
 		
+		session.getAttribute("Login");
 		// 룸주인 회원정보 
 		Map<String, String> memInfoMap = new HashMap<String, String>();
 		
@@ -285,7 +292,8 @@ public class Req4002_Controller {
 		// 팔로우 정보
 		sel.setMyemail(email);
 		d.addAttribute("follower", service.followerSelect(sel));
-		// 팔로잉 정보
+		
+		// 팔로잉 정보 (제대로 안뜸)
 		// https://mititch.tistory.com/77
 		// 정보은닉이 안되어(캡슐화X), 좋지않은코드.. 객체에 직접 데이터 넣기.. Map<String, String> 파라미터명이나, 매퍼 나누기
 		FollowMemberInfo following = new FollowMemberInfo();
@@ -299,12 +307,12 @@ public class Req4002_Controller {
 		// 나의 게시판 정보(댓글정보)
 		repMap.put("div", "meboard");
 		d.addAttribute("boardreplyInfo", service.boardReplySelect(repMap));
-		System.out.println("내가쓴 게시판 정보(댓글): "+service.boardReplySelect(repMap));
+//		System.out.println("내가쓴 게시판 정보(댓글): "+service.boardReplySelect(repMap));
 		
 		// 나의 댓글 정보
 		repMap.put("div", "mereply");
 		d.addAttribute("replyInfo", service.boardReplySelect(repMap));
-		System.out.println("내가 쓴 댓글 정보: "+service.boardReplySelect(repMap));
+//		System.out.println("내가 쓴 댓글 정보: "+service.boardReplySelect(repMap));
 		
 		// 카테고리별 게시판 조회
 		board.setEmail(email);
@@ -312,18 +320,32 @@ public class Req4002_Controller {
 		for(int i=1;i<13;i++) {
 			if(i<10) {
 				board.setRegistDateMonth("0"+i);
-				System.out.println("게시글 번호:"+board.getRegistDateMonth());
+//				System.out.println("게시글 번호:"+board.getRegistDateMonth());
 				d.addAttribute("month"+i, service.boardSelect(board).size()); 
-				System.out.println(i+"월 게시글 수:"+service.boardSelect(board).size());
+//				System.out.println(i+"월 게시글 수:"+service.boardSelect(board).size());
 			}else {
 				board.setRegistDateMonth(Integer.toString(i));
-				System.out.println("10이상 게시글 번호"+board.getRegistDateMonth());
+//				System.out.println("10이상 게시글 번호"+board.getRegistDateMonth());
 				d.addAttribute("month"+i, service.boardSelect(board).size()); 
-				System.out.println(i+"월 게시글 수:"+service.boardSelect(board).size());
+//				System.out.println(i+"월 게시글 수:"+service.boardSelect(board).size());
 			}
 		}
 		board.setRegistDateMonth("");
-			//카테고리별 
+			//카테고리별
+//		System.out.println("getImgname"+board.getImgname());
+//		String[] firstImg;
+//		for(RoomMemberInfo a:service.boardSelect(board)) {
+//			//System.out.println(a.getImgname());
+//				if(a.getImgname()!=null) {
+//					firstImg = a.getImgname().split("&SEP&");
+//					System.out.println("사진 첫번쨰"+firstImg[0]);
+////					board.setImgname(firstImg[0]);
+//				}else {
+//					//board.setImgname("default_Img.png");
+//				}
+//		}
+//		System.out.println("사진배열:"+board.getImgname());
+		
 		board.setCategory("홍보글");
 		d.addAttribute("adv", service.boardSelect(board));
 		
@@ -335,7 +357,6 @@ public class Req4002_Controller {
 		
 		board.setCategory("꿀팁");
 		d.addAttribute("tip", service.boardSelect(board)); 
-		
 		
 		// 좋아요 누적처리 및 커뮤니티 정보 (전윤환이 좋아요 테이블따로만들어서 필요없게 됨..기가막히게짯는데 -ㅅ-)
 //		int totlike=0;

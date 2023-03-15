@@ -339,13 +339,22 @@ SELECT * FROM friend;
 
 select *
 FROM FLEAMARKETMEMBER m,friend f,profile pro
-WHERE f.following=m.email
-AND f.following=pro.email
-AND 1=1
+WHERE 1=1
 AND (m.email LIKE '%'||''||'%'
 OR m.nickname LIKE '%'||''||'%')
-AND myemail='yujin@gmail.com';
+--AND f.following=pro.email
+--and f.following=m.email
+--AND myemail='yujin@gmail.com';
+AND f.myemail=pro.email
+AND f.myemail = m.email
 AND following='yujin@gmail.com';
+
+SELECT m.email,profileimg
+FROM FLEAMARKETMEMBER m,profile pro
+WHERE m.email=pro.email;
+
+
+DELETE FROM friend WHERE myemail='e';
 
 select pro.profileimg,m.nickname,m.email
 FROM FLEAMARKETMEMBER m,friend f,profile pro

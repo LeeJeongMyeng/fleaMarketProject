@@ -47,9 +47,12 @@
 				$("#roombusinessnumber").hide()
 				$("#bulbicon").attr("src","${path}/assets/img/small-logos/icon-bulb.svg")
 			}
+			/* $("#followbutton").click(function(){
+				alert("팔로우 추가")
+			}) */
+			
 		})
 		// 아래 차트 js에 갯수 계산 기능 있음 arrFun(obj)
-		
 		// 팔로우수 넣기
 		var followMembers="${follower}"
 		$("#folloewcnt").text(arrFun(followMembers))
@@ -62,16 +65,27 @@
 		function memberRoom(email){
 			location.href="communityMemberRoom.do?email"+this
 		}
-			
+		// 팔로우 추가하기
+		function followAddFun10(){
+			alert("팔로우추가")
+			//$("#followAddForm").submit()
+		}
+		// 룸주인과 로그인 세션 값 비교에 따라 설정값 변경
+		var login=""
+		var room=""
+		if("${Login.email}"!="${roommember.email}"){
+			$("#followAdd").hide()
+			$("#flexSwitchCheckDefault00").hide()
+		}
 		// 내게시글 댓글 정보
 		var boardrepInfos = "${boardreplyInfo}"
 		$("#meBoardRepCnt").text(arrFun(boardrepInfos))
 		
 		// 카테고리별 게시글 갯수정보
-		$("#boardCategoryCntTab td").eq(0).text(arrFun("${adv}")) //
-		$("#boardCategoryCntTab td").eq(1).text(arrFun("${idea}"))
-		$("#boardCategoryCntTab td").eq(2).text(arrFun("${life}"))
-		$("#boardCategoryCntTab td").eq(3).text(arrFun("${tip}"))
+		$("#boardCategoryCntTab td").eq(0).text(arrFun("${adv}")+"개") //
+		$("#boardCategoryCntTab td").eq(1).text(arrFun("${idea}")+"개")
+		$("#boardCategoryCntTab td").eq(2).text(arrFun("${life}")+"개")
+		$("#boardCategoryCntTab td").eq(3).text(arrFun("${tip}")+"개")
 		
 		// 월별 게시글 갯수정보
 		
@@ -109,20 +123,23 @@
             <div class="nav-wrapper position-relative end-0">
               <ul class="nav nav-pills nav-fill p-1" role="tablist">
                  <li class="nav-item">
-                  <a class="nav-link mb-0 px-0 py-1 active d-flex align-items-center justify-content-center " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">
+                 <form id="followAddForm" method="post" action="${path}/communityMemberRoom.do">
+                 	<input type="hidden" name="roomEmail" value="${roommember.email}">
+                 </form>
+                  <button id="followbutton" class="nav-link mb-0 px-0 py-1 active d-flex align-items-center justify-content-center" onclick="followAddFun10()" >
                     <i class="ni ni-fat-add"></i>
                     <!--<i class="ni ni-fat-delete"></i>  -->
                     <span class="ms-2">팔로우</span>
-                  </a>
+                  </button>
                 </li>
                 <li class="nav-item" data-bs-toggle="modal" data-bs-target="#chatModal">
-                  <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center  active " data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="false">
+                  <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center" data-bs-toggle="tab" href="" role="tab" aria-selected="false">
                     <i class="ni ni-chat-round"></i>
                     <span class="ms-2">채팅하기</span>
                   </a>
                 </li>
 <div class="moving-tab position-absolute nav-link" style="padding: 0px; transition: all 0.5s ease 0s; transform: translate3d(0px, 0px, 0px); width: 50%;">
-<a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center active" data-bs-toggle="tab" href="javascript:;" role="tab" aria-selected="true">-</a>
+	<a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center active">-</a>
 </div>
               </ul>
             </div>
@@ -191,28 +208,39 @@
             <p class="text-black text-s font-weight-bold mb-2">${roommember.nickname}님이 팔로우한 회원들:</p> <!-- 시간남으면 팔로잉한 회원들 추가하기 -->
             <div class="d-flex align-items-center justify-content-center">
               <div class="avatar-group">
-              	<c:forEach var="followers" items="${follower}">
-	                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="${folloewers.nickname}" >
-	                  <img alt="프로필 없음" src="${path}/resource/img/Member/profileimg/${followers.profileimg}" style="width:55px;height:45px;" onclick="memberRoom(${folloewers.email})">
-	                </a>
-                </c:forEach>
+	              <c:if test="${not empty follower}">
+	              	<c:forEach var="followers" items="${follower}">
+		                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="${followers.nickname}" >
+		                  <img alt="無" src="${path}/resource/img/Member/profileimg/${followers.profileimg}" style="width:55px;height:45px;" onclick="memberRoom(${followers.email})">
+		                </a>
+	                </c:forEach>
+	              </c:if>
+	              <c:if test="${empty follower}">
+	              	<span style="color:grey;">팔로우한 회원이 없습니다.</span>
+	              	<br><br><br>
+	              </c:if>
               </div>
             </div>
             <p class="text-black text-s font-weight-bold mb-2">${roommember.nickname}님이 팔로잉된 회원들:</p> <!-- 시간남으면 팔로잉한 회원들 추가하기 -->
             <div class="d-flex align-items-center justify-content-center">
               <div class="avatar-group">
-              	<c:forEach var="followings" items="${following}">
-	                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="${followings.nickname}" >
-	                  <img alt="프로필 없음" src="${path}/resource/img/Member/profileimg/${followings.profileimg}" style="width:55px;height:45px;" onclick="memberRoom(${followings.email})">
-	                </a>
-                </c:forEach>
+	              <c:if test="${not empty following}">
+	              	<c:forEach var="followings" items="${following}">
+		                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="${followings.nickname}" >
+		                  <img alt="無" src="${path}/resource/img/Member/profileimg/${followings.profileimg}" style="width:55px;height:45px;" onclick="memberRoom(${followings.email})">
+		                </a>
+	                </c:forEach>
+	              </c:if>
+	              <c:if test="${empty following}">
+	              	<span style="color:grey;">팔로잉한 회원이 없습니다.</span>
+	              </c:if>
               </div>
             </div>
             
             <hr class="vertical light mt-0">
           </div>
           <div class="ps-4">
-            <button class="btn bg-gradient-info btn-icon-only mb-0 mt-3" data-bs-toggle="modal" data-bs-target="#unfollModal">
+            <button id="followAdd" class="btn bg-gradient-info btn-icon-only mb-0 mt-3" data-bs-toggle="modal" data-bs-target="#unfollModal">
               <i class="fa fa-plus"></i>
             </button>
           </div>
@@ -298,18 +326,18 @@
 	              <c:forEach var="advlist" items="${adv}" end="2">
 	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
 	                  <div class="card card-blog card-plain">
-	                    <div class="position-relative">
+	                    <div class="position-relative" style="text-align: center">
 	                      <a class="d-block shadow-xl border-radius-xl">
-	                        <img src="${path}/resource/community/${advlist.imgname}" alt="이미지 없음" class="img-fluid shadow border-radius-xl">
+	                        <img src="${path}/resource/community/${advlist.imgname}" alt="이미지 없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
 	                      </a>
 	                    </div>
 	                    <div class="card-body px-1 pb-0">
 	                      <a href="javascript:;">
-	                        <h5>
+	                        <h5 style="text-align: center">
 	                          ${advlist.title}
 	                        </h5>
 	                      </a>
-	                      <div class="d-flex align-items-center justify-content-between">
+	                      <div class="d-flex align-items-center justify-content-between ms-10">
 	                        <a href="${path}/CommunityDetail.do?communityNumber=${advlist.communitynumber}&keyword=&type=&shift=registDate&category=${advlist.category}" type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</a>
 	                      </div>
 	                    </div>
@@ -319,7 +347,7 @@
                 <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                   <div class="card h-100 card-plain border">
                     <div class="card-body d-flex flex-column justify-content-center text-center">
-                      <a href="javascript:;">
+                      <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#boardAddModal">
                         <i class="fa fa-plus text-secondary mb-3"></i>
                         <h5 class=" text-secondary"> 더 보기 </h5>
                       </a>
@@ -347,18 +375,18 @@
 	              <c:forEach var="idealist" items="${idea}" end="2">
 	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
 	                  <div class="card card-blog card-plain">
-	                    <div class="position-relative">
+	                    <div class="position-relative" style="text-align: center">
 	                      <a class="d-block shadow-xl border-radius-xl">
-	                        <img src="${path}/resource/community/${idealist.imgname}" alt="이미지 없음" class="img-fluid shadow border-radius-xl">
+	                        <img src="${path}/resource/community/${idealist.imgname}" alt="이미지 없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
 	                      </a>
 	                    </div>
 	                    <div class="card-body px-1 pb-0">
 	                      <a href="javascript:;">
-	                        <h5>
+	                        <h5 style="text-align: center">
 	                          ${idealist.title}
 	                        </h5>
 	                      </a>
-	                      <div class="d-flex align-items-center justify-content-between">
+	                      <div class="d-flex align-items-center justify-content-between ms-10">
 	                        <a href="${path}/CommunityDetail.do?communityNumber=${idealist.communitynumber}&keyword=&type=&shift=registDate&category=${idealist.category}" type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</a>
 	                      </div>
 	                    </div>
@@ -368,7 +396,7 @@
                 <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                   <div class="card h-100 card-plain border">
                     <div class="card-body d-flex flex-column justify-content-center text-center">
-                      <a href="javascript:;">
+                      <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#boardAddModal">
                         <i class="fa fa-plus text-secondary mb-3"></i>
                         <h5 class=" text-secondary"> 더 보기 </h5>
                       </a>
@@ -396,18 +424,18 @@
 	              <c:forEach var="lifelist" items="${life}" end="2">
 	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
 	                  <div class="card card-blog card-plain">
-	                    <div class="position-relative">
+	                    <div class="position-relative" style="text-align: center">
 	                      <a class="d-block shadow-xl border-radius-xl">
-	                        <img src="${path}/resource/community/${lifelist.imgname}" alt="이미지 없음" class="img-fluid shadow border-radius-xl">
+	                        <img src="${path}/resource/community/${lifelist.imgname}" alt="이미지 없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
 	                      </a>
 	                    </div>
 	                    <div class="card-body px-1 pb-0">
 	                      <a href="javascript:;">
-	                        <h5>
+	                        <h5 style="text-align: center">
 	                          	${lifelist.title}
 	                        </h5>
 	                      </a>
-	                      <div class="d-flex align-items-center justify-content-between">
+	                      <div class="d-flex align-items-center justify-content-between ms-10">
 	                        <a href="${path}/CommunityDetail.do?communityNumber=${lifelist.communitynumber}&keyword=&type=&shift=registDate&category=${lifelist.category}" type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</a>
 	                      </div>
 	                    </div>
@@ -417,7 +445,7 @@
                 <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                   <div class="card h-100 card-plain border">
                     <div class="card-body d-flex flex-column justify-content-center text-center">
-                      <a href="javascript:;">
+                      <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#boardAddModal">
                         <i class="fa fa-plus text-secondary mb-3"></i>
                         <h5 class=" text-secondary"> 더보기 </h5>
                       </a>
@@ -445,18 +473,18 @@
 	              <c:forEach var="tiplist" items="${tip}" end="2">
 	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
 	                  <div class="card card-blog card-plain">
-	                    <div class="position-relative">
+	                    <div class="position-relative" style="text-align:center">
 	                      <a class="d-block shadow-xl border-radius-xl">
-	                        <img src="${path}/resource/community/${tiplist.imgname}" alt="이미지없음" class="img-fluid shadow border-radius-xl">
+	                        <img src="${path}/resource/community/${tiplist.imgname}" alt="이미지없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
 	                      </a>
 	                    </div>
 	                    <div class="card-body px-1 pb-0">
 	                      <a href="javascript:;">
-	                        <h5>
+	                        <h5 style="text-align: center">
 	                          	${tiplist.title}
 	                        </h5>
 	                      </a>
-	                      <div class="d-flex align-items-center justify-content-between">
+	                      <div class="d-flex align-items-center ms-10">
 	                        <a href="${path}/CommunityDetail.do?communityNumber=${tiplist.communitynumber}&keyword=&type=&shift=registDate&category=${tiplist.category}" type="button" class="btn btn-outline-primary btn-sm mb-0">보러가기</a>
 	                      </div>
 	                    </div>
@@ -466,7 +494,7 @@
                 <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                   <div class="card h-100 card-plain border">
                     <div class="card-body d-flex flex-column justify-content-center text-center">
-                      <a href="javascript:;">
+                      <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#boardAddModal" data-bs-notifyid="꿀팁">
                         <i class="fa fa-plus text-secondary mb-3"></i>
                         <h5 class=" text-secondary"> 더 보기 </h5>
                       </a>
@@ -488,7 +516,7 @@
 		<div class="modal-dialog modal-dialog-centered" role="document" style="width:800px;">
 		  <div class="modal-content" style="width:750px;">
 		    <div class="modal-header">
-		      <h5 class="modal-title" id="exampleModalLabel">팔로우 하고싶은 회원정보<br></h5>
+		      <h5 class="modal-title" id="exampleModalLabel">언팔로우 중인 회원정보<br></h5>
 		      
 		      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 		        <span aria-hidden="true">&times;</span>
@@ -499,7 +527,7 @@
 		      		<tr><th>프로필</th><th>이메일</th><th>닉네임</th><th>room구경가기</th><th>팔로우</th></tr>
 		      		<c:forEach var="unfollowmem" items="${unfollowMember}">
 		      			<tr>
-		      			<td><img src="${path}/resource/img/Member/profileimg/${unfollowmem.profileimg}" style="width:40px;height:40px;"></td>
+		      			<td><img src="${path}/resource/img/Member/profileimg/${unfollowmem.profileimg}" style="width:40px;height:40px;" alt="無"></td>
 		      			<td>${unfollowmem.email}</td>
 		      			<td>${unfollowmem.nickname}</td>
 		      			<td class="align-middle text-center"><a href="communityMemberRoom.do?email=${unfollowmem.email}" id="roomGo" class="btn btn-outline-primary mt-2"><i class="ni ni-shop"></i></a></td>
@@ -550,9 +578,9 @@
 		    </div>
 		    <div class="modal-body">
 		      	<table id="boardMonthCntTab" class="table align-items-center mb-0">
-		      		<%-- <c:forEach var="i" begin="1" end="12" > --%>
-		      			<%-- <c:set var="monthval" value="month${i}"> --%>
-		      			<%-- <tr><th>${i}월</th><td>${month1}</td></tr><!-- <c:out value="${monthval}"></c:out> --> --%>
+		      		<%-- <c:forEach var="i" begin="1" end="12" >
+		      			<c:set var="monthval" value="month${i}">
+		      			<tr><th>${i}월</th><td>${monthval}</td></tr><!-- <c:out value="${monthval}"></c:out>--> --%>
 		      			<tr><th>1월</th><td>${month1} 개</td></tr>
 		      			<tr><th>2월</th><td>${month2} 개</td></tr>
 		      			<tr><th>3월</th><td>${month3} 개</td></tr>
@@ -565,8 +593,8 @@
 		      			<tr><th>10월</th><td>${month10} 개</td></tr>
 		      			<tr><th>11월</th><td>${month11} 개</td></tr>
 		      			<tr><th>12월</th><td>${month12} 개</td></tr>
-		      			<%-- </c:set> --%>
-		      		<%-- </c:forEach> --%>
+		      			<%-- </c:set>
+		      	</c:forEach>  --%>
 		      	</table>
 		    </div>
 		    <div class="modal-footer">
@@ -596,13 +624,43 @@
 			      				<td>${repInfo.title}</td>
 			      				<td>${repInfo.repcontent}</td>
 			      			</tr>
-			      			
 			      		</c:forEach>
 		      		</c:if>
 		      		<c:if test="${empty replyInfo}">
 			      		<tr><td colspan="2" style="color:grey; text-align:center;"> 등록한 댓글이 없습니다.</td></tr>
 		      		</c:if>
 		      		
+		      	</table>
+		    </div>
+		    <div class="modal-footer">
+		      <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
+		    </div>
+		  </div>
+		</div>
+	</div>
+  <!-- 게시글 더 보러가기 모달창 -->
+  <div class="modal fade" id="boardAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+		  <div class="modal-content" style="width:1200px; margin-left:-50%;">
+		    <div class="modal-header">
+		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님 쓴 게시글 정보<br>
+		      <span style="color:grey; font-size:11pt;">＊ 게시글 클릭 시, 게시글 상세조회 페이지로 이동</span></h5>
+		      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+		        <span aria-hidden="true">&times;</span>
+		      </button>
+		    </div>
+		    <div class="modal-body">
+		      	<table id="boardCntTab" class="table align-items-center mb-0">
+		      		<tr><th>이미지</th><th>카테고리</th><th>게시글명</th></tr>
+		      		<c:if test="${not empty adv}">
+			      		<c:forEach var="advlist" items="${adv}">
+			      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${advlist.communitynumber}&keyword=&type=&shift=registDate&category=${advlist.category}'">
+			      				<td><img src="${path}/resource/img/Member/profileimg/${advlist.imgname}" style="width:auto;height:50px;" ></td>
+			      				<td>${advlist.category}</td>
+			      				<td>${advlist.title}</td>
+			      			</tr>
+			      		</c:forEach>
+		      		</c:if>
 		      	</table>
 		    </div>
 		    <div class="modal-footer">

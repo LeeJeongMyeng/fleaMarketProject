@@ -341,7 +341,13 @@
             <div class="row" style="--bs-gutter-x:0;">
                <label class="mt-4 postUpdateTitle">태그(#)</label><!-- 선택된값을 select되어있게 설정해야함..  -->
                 <select class="form-control" name="hashtag" id="choices-tags-edit" multiple>
-                  <option selected>In Stock</option><!-- 태그 테이블에서 콤보박스 생성  -->
+	                    <option selected>#홍보</option>
+	                    <option selected>#맛집</option>
+	                    <option selected>#3대학원</option>
+	                    <option selected>#재테크</option>
+	                    <option selected>#나를 이기자</option>
+	                    <option selected>#장수</option>
+	                    <option selected>#건강</option><!-- 태그 테이블에서 콤보박스 생성  -->
                 </select>
             </div>
           </div>

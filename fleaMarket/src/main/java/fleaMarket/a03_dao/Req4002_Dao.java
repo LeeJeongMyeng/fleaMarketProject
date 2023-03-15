@@ -32,4 +32,6 @@ public interface Req4002_Dao {
 	public List<RoomMemberInfo> boardReplySelect(Map<String, String> map);
 	// 커뮤니티 조회(전체, 카테고리별)
 	public List<RoomMemberInfo> boardSelect(RoomMemberInfo sel);
+	// 팔로우 등록
+	public void insertFriend(Map<String, String> map);
 }

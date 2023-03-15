@@ -44,16 +44,18 @@
 		<select id="followerSelect" parameterType="followmemberinfo" resultType="followmemberinfo">
 			select *
 			FROM FLEAMARKETMEMBER m,friend f,profile pro
-			WHERE f.following=m.email
-			AND f.following=pro.email
-			and 1=1
+			WHERE 1=1
 			AND (m.email LIKE '%'||#{keyword}||'%'
 			OR m.nickname LIKE '%'||#{keyword}||'%')
 			<choose>
 				<when test="div==null">
+					AND f.following=pro.email
+					AND f.following=m.email
 					AND myemail=#{myemail}
 				</when>
 				<when test="div!=null">
+					AND f.myemail=pro.email
+					AND f.myemail=m.email
 					AND following=#{myemail}
 				</when>
 			</choose>
@@ -113,5 +115,8 @@
 			</if>
 			ORDER BY repdate desc
 		</select>
-		
+		<!-- 팔로우 회원 추가  -->
+		 <insert id="insertFriend" parameterType = "HashMap">
+		 	  INSERT INTO FRIEND VALUES(#{myEmail},#{following})
+		 </insert>
     </mapper>
