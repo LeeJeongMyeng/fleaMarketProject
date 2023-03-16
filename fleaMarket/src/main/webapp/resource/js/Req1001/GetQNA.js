@@ -13,12 +13,39 @@ $("#goQnaList").click(function(){
 location.href="QNAList.do"	
 })
 	
-
-//오케이 문구
-function okmsg(){ 
-			alert('수정이 완료되었습니다. 감사합니다.'); return true;
 	
-}
+//수정 
+$("#uptBtn").click(function(){
+	Swal.fire({
+	   icon: 'succcess',
+       text: '수정이 완료되었습니다. 감사합니다.',
+       confirmButtonText: '확인'
+    }).then((result) => {
+       if (result.value) {
+         $("#uptForm").submit();
+       }
+    })   
+})
+//삭제 
+$('#delBtn').on('click', function() {
+    Swal.fire({
+       title: '삭제하시겠습니까?',
+       icon: 'warning',
+       showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+       confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+       cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+       confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+       cancelButtonText: '취소' // cancel 버튼 텍스트 지정
+    }).then((result) => {
+       if (result.value) {
+    	   var qnano = $('#delBtn').data('qnano');
+    	   $('#deleteForm [name=qnano]').val(qnano);
+
+         $("#deleteForm").submit();
+       }
+    })   
+ })
+
 
 $('#QNAAnswerBtn').click(function(){
 

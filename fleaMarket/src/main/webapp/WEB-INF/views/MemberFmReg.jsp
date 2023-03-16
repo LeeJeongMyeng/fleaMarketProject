@@ -67,12 +67,12 @@
 								</div>
 							</div>
 						</div>
-						<div class="card-body px-0 pb-0"></div>
+						<div class="card-body px-0 pb-0" ></div>
 						<form id="frm01" class="form" method="post">
 						<input type="hidden" name="curPage" />
 							<div class="row">
 								<div class="table-responsive mt-3">
-									<table class="table table-flush" id="FleamarketListTable">
+									<table class="table table-flush" id="FleamarketListTable" style="cursor:default">
 										<col width="5%">
 										<col width="30%">
 										<col width="10%">
@@ -81,7 +81,7 @@
 										<col width="10%">
 										<col width="10%">
 										<thead class="thead-light">
-											<tr style="background-color: #ebebeb;">
+											<tr style="background-color: #ebebeb;" >
 												<th>글 번호</th>
 												<th>제목</th>
 												<th>모집공고 시작일</th>

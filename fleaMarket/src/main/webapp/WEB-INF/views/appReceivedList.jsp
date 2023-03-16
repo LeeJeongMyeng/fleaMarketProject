@@ -44,10 +44,23 @@
 			dataType:"json",
 			success:function(data){
 				var msg="";
-				if(approvalwhether=='a'){msg="승인되었습니다"}
-				else{msg="거부되었습니다"}
-				alert(msg)
-				location.reload(); 
+				if(approvalwhether=='a'){
+					msg="승인되었습니다"
+					alertIcon="success"
+				}else{
+					msg="거부되었습니다"
+					alertIcon="warning"
+				}
+				Swal.fire({
+				    icon:alertIcon,
+			        text:msg,
+			        confirmButtonText:'확인'
+				}).then((result) =>{
+					 if(result.isConfirmed){
+						 location.reload(); 
+					 }
+				 })
+				
 			},
 			error:function(xhr,status,err){
 	              console.log(xhr)
@@ -122,7 +135,9 @@
   		text-decoration:underline;
   		cursor:pointer;
   	}
-
+	.table> :not(:first-child) {
+	    border-top: 1px solid currentColor;
+	}
 </style>
 <body class="g-sidenav-show   bg-gray-100">
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
@@ -155,21 +170,40 @@
        -->
       <div class="row">
         <div class="col-12">
-          <div class="card">
+          <div class="card" style="min-height:640px;">
+         	<!-- Card header -->
+			<div class="card-header pb-0">
+				<div class="d-lg-flex">
+					<div>
+						<h5 class="mb-0" style="margin-top: 15%;">받은 신청 조회</h5>
+						<p class="text-sm mb-0">회원님께서 신청 받으신 플리마켓 목록입니다</p>
+					</div>
+					<div class="ms-auto my-auto mt-lg-0 mt-4"></div>
+				</div>
+			</div>
             <div class="table-responsive">
               <div class="dataTable-top">
               	<div class="dataTable-search">
               		<form id="frmSch" class="d-flex"  method="post"> 
-	              		<input name="title" value="${sch.title}" class="form-control" placeholder="제목을 입력하세요" type="text">
-	              		<!-- <button class="btn btn-primary" type="submit">검색</button> -->
-	              		<input type="hidden" name="curPage" value="${sch.curPage}"/>
+              			<div class="input-group mb-3">
+		              		<input name="title" value="${sch.title}" class="form-control" placeholder="제목을 입력하세요" type="text">
+		              		<!-- <button class="btn btn-primary" type="submit">검색</button> -->
+		              		<input type="hidden" name="curPage" value="${sch.curPage}"/>
+		              		<button class="btn btn-outline-primary mb-0" type="submit">검색</button>
+	              		</div>
 	              	</form>
               	</div>
               </div>
               <div class="dataTable-container">
 	              <table class="table table-flush dataTable-table" id="datatable-search">
+	                <col width="10%">
+				   	<col width="20%">
+				   	<col width="15%">
+				   	<col width="15%">
+				   	<col width="15%">
+				   	<col width="25%">
 	                <thead class="thead-light">
-	                  <tr>
+	                  <tr style="background-color: #ebebeb;">
 	                    <th>번호</th>
 	                    <th>제목</th>
 	                    <th>등록일</th>
@@ -262,24 +296,24 @@
                 © <script>
                   document.write(new Date().getFullYear())
                 </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
+               made by
+               <a href="" class="font-weight-bold" target="_blank">CONTIGO</a>
+               for a better FleaMarket.
               </div>
             </div>
             <div class="col-lg-6">
               <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                  <a href="" class="nav-link text-muted" target="_blank">Creative Tim</a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                  <a href="" class="nav-link text-muted" target="_blank">About Us</a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                  <a href="" class="nav-link text-muted" target="_blank">Blog</a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                  <a href="" class="nav-link pe-0 text-muted" target="_blank">License</a>
                 </li>
               </ul>
             </div>

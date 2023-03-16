@@ -36,6 +36,7 @@ $(document).ready(function(){
 	//글쓰기 부분ㅇㅇ
 	$('#editor .ql-editor').keyup(function(){
 	 	var expeditor=$(this).html() 
+	 	console.log(expeditor)
 		$('input[name=content]').val(expeditor); 
 	})
 	
@@ -45,7 +46,7 @@ function CheckQNAInsert(){
 	var sesAuthority='${Login.authority}'
 		if(sesAuthority!='관리자' && $('select[name=category]').val()=='none'){alert('문의유형을 선택바랍니다.'); return false;}
 		if($('input[name=title]').val()==''){alert('문의제목을 입력바랍니다.');return false;}
-		if($('input[name=content]').val()==''){alert('문의내용을 입력부탁드립니다.');return false;}
+		if($('input[name=content]').val()==''||$('input[name=content]').val()=='<p><br></p>'){alert('문의내용을 입력부탁드립니다.');return false;}
 		return true;
 	}
 </script>

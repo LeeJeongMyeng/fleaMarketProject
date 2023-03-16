@@ -60,13 +60,11 @@
 					$(".ApprovalBtnWrap button:nth-child(1)").hide()
 				}else{ // 첨부 파일 있을 때
 					var filelist = files.split(',');
-					
 					filelist.forEach(function(f){
-						
 						str+="<input class='form-control w-50 mb-2' onclick=\"javascript:location.href='downloadAppFile.do?filename="+f+"'\" name='filename' type='text' value='"+f+"' readonly/>"
 					})
-					
 					str += "<input type='file' name='addFile' class='form-control w-50 mb-2' id='addFile' multiple>"
+					str += "<button class='m-1 btn btn-primary' type='button' onclick=\"alldown('downloadAppFileForm')\">전체 다운로드</button>";
 					$(".modal-body > label").show()
 					$(".ApprovalBtnWrap button:nth-child(1)").show()
 				}
@@ -83,15 +81,29 @@
 		})
 	}
 	
+ 	// 신청글 파일 전체 다운로드
+	function alldown(){
+		var len = $('#downloadAppFileForm').children('input[name=filename]').length
+		var start=1;
+		setInterval(function() {
+			$("#downloadAppFileForm input[name=filename]:nth-child("+start+")").click()
+			start++
+			if(start==len){
+				clearInterval()
+			}
+		},500)
+		console.log(nth)
+	}
+	
 	// 내 신청 수정/삭제 유효성 검사
   	function goApp(index,methods){
 		var statusText = $('#datatable-search tbody tr:nth-child('+index+') td:nth-child(4) span').text()
 		if(statusText != '대기'){
-			alert('승인/거부된 신청은 편집할 수 없습니다');
+			cantUptAlert();
 			return false;
 		}
 		if(methods=='uptApp' && $('#addFile').val()==''){
-			alert('파일을 첨부해 주세요');
+			insFileAlert();
 			return false;
 		}
 		console.log(methods+".do")
@@ -107,7 +119,7 @@
 			data:"applicationNo="+applicationNo,
 			dataType:"json",
 			success:function(data){
-				alert("삭제되었습니다")
+				delAlert();
 				location.reload(); 
 			},
 			error:function(xhr,status,err){
@@ -117,6 +129,29 @@
 	        }
 		})
 	}
+ 	
+ 	// alert
+ 	function cantUptAlert(){
+ 		Swal.fire({
+		    icon:'warning',
+	        text:'승인/거부된 신청은 편집할 수 없습니다',
+	        confirmButtonText:'확인'
+		 })
+ 	}
+ 	function insFileAlert(){
+ 		Swal.fire({
+		    icon:'warning',
+	        text:'파일을 첨부해 주세요',
+	        confirmButtonText:'확인'
+	 	})
+ 	}
+ 	function delAlert(){
+ 		Swal.fire({
+		    icon:'warning',
+	        text:'삭제되었습니다',
+	        confirmButtonText:'확인'
+	 	})
+ 	}
 </script>
 </head>
 <style>
@@ -158,14 +193,27 @@
        -->
       <div class="row">
         <div class="col-12">
-          <div class="card">
+          <div class="card" style="min-height:640px;">
+          	<!-- Card header -->
+			<div class="card-header pb-0">
+				<div class="d-lg-flex">
+					<div>
+						<h5 class="mb-0" style="margin-top: 15%;">내 신청 조회</h5>
+						<p class="text-sm mb-0">회원님께서 신청하신 플리마켓 목록입니다</p>
+					</div>
+					<div class="ms-auto my-auto mt-lg-0 mt-4"></div>
+				</div>
+			</div>
             <div class="table-responsive">
               <div class="dataTable-top">
               	<div class="dataTable-search">
               		<form id="frmSch" class="d-flex"  method="post"> 
-	              		<input name="title" value="${sch.title}" class="form-control" placeholder="제목을 입력하세요" type="text">
-	              		<!-- <button class="btn btn-primary" type="submit">검색</button> -->
-	              		<input type="hidden" name="curPage" value="${sch.curPage}"/>
+              			<div class="input-group mb-3">
+		              		<input name="title" value="${sch.title}" class="form-control" placeholder="제목을 입력하세요" type="text">
+		              		<!-- <button class="btn btn-primary" type="submit">검색</button> -->
+		              		<input type="hidden" name="curPage" value="${sch.curPage}"/>
+		              		<button class="btn btn-outline-primary mb-0" type="submit">검색</button>
+	              		</div>
 	              	</form>
               	</div>
               </div>
@@ -178,12 +226,12 @@
 				   	<col width="15%">
 				   	<col width="25%">
 	                <thead class="thead-light">
-	                  <tr>
+	                  <tr style="background-color: #ebebeb;">
 	                    <th>번호</th>
 	                    <th>제목</th>
 	                    <th>등록일</th>
 	                    <th>상태</th>
-	                    <th>작성자</th>
+	                    <th>개최자</th>
 	                    <th>첨부파일</th>
 	                  </tr>
 	                </thead>
@@ -271,24 +319,24 @@
                 © <script>
                   document.write(new Date().getFullYear())
                 </script>,
-                made with <i class="fa fa-heart"></i> by
-                <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative Tim</a>
-                for a better web.
+                made by
+                <a href="" class="font-weight-bold" target="_blank">CONTIGO</a>
+                for a better FleaMarket.
               </div>
             </div>
             <div class="col-lg-6">
               <ul class="nav nav-footer justify-content-center justify-content-lg-end">
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com" class="nav-link text-muted" target="_blank">Creative Tim</a>
+                  <a href="" class="nav-link text-muted" target="_blank">Creative Tim</a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted" target="_blank">About Us</a>
+                  <a href="" class="nav-link text-muted" target="_blank">About Us</a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com/blog" class="nav-link text-muted" target="_blank">Blog</a>
+                  <a href="" class="nav-link text-muted" target="_blank">Blog</a>
                 </li>
                 <li class="nav-item">
-                  <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted" target="_blank">License</a>
+                  <a href="" class="nav-link pe-0 text-muted" target="_blank">License</a>
                 </li>
               </ul>
             </div>

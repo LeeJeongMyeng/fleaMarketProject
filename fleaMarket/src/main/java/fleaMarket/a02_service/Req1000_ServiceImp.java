@@ -85,6 +85,7 @@ public class Req1000_ServiceImp implements Req1000_Service {
 	
 	//로그인 처리
 	public Member Login(Member log) {
+		
 		Member mem=null;
 		//카카오이메일로그인시
 		if(log.getKakaoemail()!=null) { 
@@ -95,6 +96,7 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		//일반로그인
 		}else if(log.getPassword()!=null){ 
 			mem = dao.Login(log.getEmail());
+			
 			if(mem!=null) {
 				if(mem.getPassword().equals("1111") || mem.getPassword().equals("admin")) {
 					mem = log.getPassword().equals(mem.getPassword())?mem:null;

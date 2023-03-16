@@ -22,6 +22,8 @@ public interface Req4002_Dao {
 	public void communityFileUpdate(BoardImg fupt);
 	// 팔로우 조회
 	public List<FollowMemberInfo> followerSelect(FollowMemberInfo index);
+	// 팔로우 조회
+	public int followCheck(Map<String, String> map);
 	// 팔로우 취소
 	public void followmemberdelete(FollowMemberInfo del);
 	// 룸회원 좋아요 갯수 조회

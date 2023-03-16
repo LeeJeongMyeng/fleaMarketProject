@@ -80,9 +80,7 @@ public class Req1001_Controller {
 		// 마이페이지 
 		//http://localhost:7080/fleaMarket/AdminSearch.do 관리자페이지 - 회원조회
 		@RequestMapping("AdminSearch.do")
-		public String AdminSearch(@ModelAttribute("sch")Member sch,Model d) {
-			System.out.println(sch.getAuthority());
-			
+		public String AdminSearch(@ModelAttribute("sch") FApplicationSch sch,Model d) {
 			d.addAttribute("MemberList",service.MemberList(sch));
 				return "AdminSearch";
 		}
@@ -201,9 +199,9 @@ public class Req1001_Controller {
 			//1.이미지테이블의 회원이메일/프로필이름 불러오기
 			ProfileImg pfile = (ProfileImg)service.getMemberProfile(email);
 			//프로필테이블 삭제처리
-			service.DeleteProfile(pfile.getEmail());
+			service.DeleteProfile(email);
 			//탈퇴처리
-			service.DeleteMember(pfile.getEmail());
+			service.DeleteMember(email);
 			//프로필 파일 삭제
 			if(!pfile.getProfileimg().equals("defaultprofile.png")) {
 			fileservice.DeleteFile(profilepath,pfile.getProfileimg());

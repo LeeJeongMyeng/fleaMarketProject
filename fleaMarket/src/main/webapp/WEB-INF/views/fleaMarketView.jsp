@@ -56,16 +56,11 @@
 			$("#appBtn").hide(); // 신청하기 버튼 숨기기
 		}
 		
-	   	// msg 확인 필요
-		if($msg!=""){
-			alert($msg+"\n 내 신청 조회 화면으로 이동합니다")
-		}
-		
 	   	// 모달창 확인 버튼
 		$("[name=regBtn]").click(function(){
 			// 파일 첨부 검사
 			if($("#appFile").val()==""){
-			     alert("파일을 첨부해 주세요");
+				 insFileAlert();
 			     return false;
 			 }
 			return true;
@@ -80,8 +75,7 @@
 			// 모달창 열리지 않게
 			$(this).removeAttr("data-bs-toggle");
 			$(this).removeAttr("data-bs-target");
-			alert("로그인 후 이용해주세요");
-			location.href="${path}/SignIn.do"
+			signInAlert();
 		}else{
 			// 중복 신청 검사
 			var postingNumber = "${fleamarket.postingNumber}"
@@ -98,7 +92,7 @@
 					if(cnt == 0){
 						$("#appModal").click();
 					}else{
-						alert("중복 신청할 수 없습니다")
+						dupAlert();
 					}
 					
 				},
@@ -110,14 +104,60 @@
 			})
 		}
 	}
-   
+    
+	// alert
+	function insFileAlert(){
+		Swal.fire({
+		    icon:'warning',
+	        text:'파일을 첨부해 주세요',
+	        confirmButtonText:'확인'
+	 	})
+	}
+	function signInAlert(){
+		Swal.fire({
+		    icon:'warning',
+	        text:'로그인 후 이용해주세요',
+	        confirmButtonText:'로그인하러가기',
+	        showCancelButton: true,
+	        cancelButtonText:'취소',
+		 }).then((result) =>{
+			 if(result.isConfirmed){
+			 location.href = "${path}/SignIn.do";
+			 }
+		 })
+	}
+	function dupAlert(){
+		Swal.fire({
+		    icon:'warning',
+	        text:'중복 신청하실 수 없습니다',
+	        confirmButtonText:'확인'
+	 	})
+	}
 	function uptBtn(postingNumber){
-  		alert("수정 페이지로 이동하시겠습니까?")
-		location.href="${path}/FleaMarketUptPage.do?postingNumber="+postingNumber
-	}	
+		Swal.fire({
+		    icon:'warning',
+	        text:'수정 페이지로 이동하시겠습니까?',
+	        confirmButtonText:'이동',
+	        showCancelButton: true,
+	        cancelButtonText:'취소',
+		 }).then((result) =>{
+			 if(result.isConfirmed){
+			 location.href = "${path}/FleaMarketUptPage.do?postingNumber="+postingNumber;
+			 }
+		 })
+	}
 	function delBtn(postingNumber){
-		alert("삭제하시겠습니까?")
-		location.href="${path}/FleaMarketDel.do?postingNumber="+postingNumber
+		Swal.fire({
+		    icon:'warning',
+	        text:'삭제하시겠습니까?',
+	        confirmButtonText:'삭제',
+	        showCancelButton: true,
+	        cancelButtonText:'취소',
+		 }).then((result) =>{
+			 if(result.isConfirmed){
+			 location.href = "${path}//FleaMarketDel.do?postingNumber="+postingNumber;
+			 }
+		 })
 	}
   </script>
 </head>
@@ -162,7 +202,7 @@
                     <div class="pswp__scroll-wrap">
                       <!-- Container that holds slides. PhotoSwipe keeps only 3 slides in DOM to save memory. -->
                       <!-- don't modify these 3 pswp__item elements, data is added later on. -->
-                      <div class="pswp__container">
+                      <div class="pswp__container" style="margin-top:50px;">
                         <div class="pswp__item"></div>
                         <div class="pswp__item"></div>
                         <div class="pswp__item"></div>

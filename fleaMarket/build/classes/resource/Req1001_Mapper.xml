@@ -3,21 +3,51 @@
    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
     <mapper namespace="fleaMarket.a03_dao.Req1001_Dao">
+    
+		
+		<sql id="membercheck">
+			where (name || email || nickname) like '%'||#{title}||'%'
+			<choose>
+				<when test="search=='전체'">
+					and authority !='관리자'
+				</when>
+				<otherwise>
+					and authority = #{search}
+				</otherwise>
+			</choose>
+		</sql>
+		    
+    
     	<!-- 회원조회 -->
-    	<select id="MemberList" resultType="Member"
-		parameterType="String">
-		select *
-		from FLEAMARKETMEMBER
-		where (name || email || nickname) like '%'||#{name}||'%'
-		<choose>
-			<when test="authority=='전체'">
-				and authority !='관리자'
-			</when>
-			<otherwise>
-				and authority = #{authority}
-			</otherwise>
-		</choose>
+    	<select id="totMemCnt" resultType="int" parameterType="fapplicationsch">
+			SELECT count(*) FROM FLEAMARKETMEMBER f 
+			where (name || email || nickname) like '%'||#{title}||'%'
+			<choose>
+				<when test="search=='전체'">
+					and authority !='관리자'
+				</when>
+				<otherwise>
+					and authority = #{search}
+				</otherwise>
+			</choose>
 		</select>
+		
+    	<select id="MemberList" resultType="member" parameterType="fapplicationsch">
+			SELECT a.* FROM (select rownum cnt,f.*
+			from FLEAMARKETMEMBER f
+			where (name || email || nickname) like '%'||#{title}||'%'
+			<choose>
+				<when test="search=='전체'">
+					and authority !='관리자'
+				</when>
+				<otherwise>
+					and authority = #{search}
+				</otherwise>
+			</choose>
+			) a
+			WHERE cnt BETWEEN #{start} AND #{end}
+		</select>
+		
 		<!-- 회원정보 수정! -->
 		<update id="UpdateMemberInfo" parameterType="member">
 			UPDATE FLEAMARKETMEMBER

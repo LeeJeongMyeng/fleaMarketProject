@@ -80,7 +80,9 @@ function AddressApi() {
 
 
 // 회원정보 수정
-function UpdateInfo(){
+$("#UptInfoBtn").click(function(){
+	var addresscheck = $('#MemberInfoForm input[name=address]').val()
+	
 	var MemberInfoAddress = $('#MemberInfoForm input[name=address]').val(
 		$('#MemberInfoForm #sample6_postcode').val()
 		+"&"+$('#MemberInfoForm #sample6_address').val()
@@ -98,47 +100,84 @@ function UpdateInfo(){
 		$('#MemberInfoForm input[name=nickname]').focus()
 		return false;
 	}
-	return true;
+	var addresscheck = $('#MemberInfoForm input[name=address]').val()== SessAddress?false:true;
+	var categorycheck = $('#MemberInfoForm select[name=category]').val() == SessCategory?false:true;
+	//console.log($('#MemberInfoForm select[name=category]').val(),SessCategory)
+	var nicknamecheck = $('#MemberInfoForm input[name=nickname]').val() == SessNickname?false:true;
+	var phonenumbercheck = $('#MemberInfoForm input[name=phonenumber]').val() == SessPhonenumber?false:true;
+	var profileimgcheck = $('#MemberInfoForm input[name=profileimgname]').val() == SessProfileimg?false:true;
+	var authcheck = $('#MemberInfoForm input[name=authority]').val() ==SessAuth?false:true;
+	//console.log(addresscheck,categorycheck,nicknamecheck,phonenumbercheck,profileimgcheck,authcheck)
+	if(!addresscheck&&!categorycheck&&!nicknamecheck&&!phonenumbercheck&&!profileimgcheck&&!authcheck){
+		Swal.fire({
+		  icon: 'info',
+		  title: '변경사항이 없습니다.',
+		  showConfirmButton: false,
+		  timer: 1500
+		})
+		return false;
 	}
 	
+  $("#MemberInfoForm").submit();
+});
+	
+//키
 	$('#UpdatePasswordForm input').keyup(function(){
 		$(this).removeClass('is-invalid')
 	})
-		
-	
+//비밀번호 수정 
+$("#uptPassBtn").click(function(){
+    var CurrentPassword = $('#UpdatePasswordForm #CurrentPassword')
+    var uptPassword = $('#UpdatePasswordForm input[name=password]')
+    var uptPassword2 = $('#UpdatePasswordForm #password2')
 
+    if (SessPassword=='1111' && SessPassword!=CurrentPassword.val()) {
+        console.log('여긴가?'+SessPassword+":"+CurrentPassword)
+        CurrentPassword.addClass('is-invalid')
+        Swal.fire({
+            icon: 'error',
+            text: '비밀번호가 일치하지않습니다.'
+        })
+        return false;
+    }
 
-function UpdatePassword(){
-	var CurrentPassword = $('#UpdatePasswordForm #CurrentPassword')
-	var uptPassword = $('#UpdatePasswordForm input[name=password]')
-	var uptPassword2 = $('#UpdatePasswordForm #password2')
-	if(SessPassword=='1111' && SessPassword!=CurrentPassword.val()){
-		console.log('여긴가?'+SessPassword+":"+CurrentPassword)
-		CurrentPassword.addClass('is-invalid')
-		alert('비밀번호가 일치하지않습니다.')
-		return false;
-	}
-	if(SessPassword!='1111' && MatchPassword(CurrentPassword.val())=='false'){
-		console.log('아니면 여긴가?'+SessPassword+":"+CurrentPassword)
-		CurrentPassword.addClass('is-invalid')
-		alert('비밀번호가 일치하지않습니다.')
-		return false;
-	}
-	if(!chkPW(uptPassword.val())){
-		uptPassword.addClass('is-invalid')
-		alert('비밀번호 형식이 올바르지 않습니다..')
-		return false;
-	}
-	if(!chkPW2(uptPassword.val(),uptPassword2.val())){
-		uptPassword2.addClass('is-invalid')
-		alert('1차 비밀번호와 일치하지 않습니다.')
-		return false;
-	}
-	return true;
-}
+    if (SessPassword!='1111' && MatchPassword(CurrentPassword.val())=='false') {
+        console.log('아니면 여긴가?'+SessPassword+":"+CurrentPassword)
+        CurrentPassword.addClass('is-invalid')
+        Swal.fire({
+            icon: 'error',
+            text: '비밀번호가 일치하지않습니다.'
+        })
+        return false;
+    }
 
+    if (!chkPW(uptPassword.val())) {
+        uptPassword.addClass('is-invalid')
+        Swal.fire({
+            icon: 'error',
+            text: '비밀번호 형식이 올바르지 않습니다.'
+        })
+        return false;
+    }
 
+    if (!chkPW2(uptPassword.val(),uptPassword2.val())) {
+        uptPassword2.addClass('is-invalid')
+        Swal.fire({
+            icon: 'error',
+            text: '1차 비밀번호와 일치하지 않습니다.'
+        })
+        return false;
+    }
 
+    if (MatchPassword(uptPassword.val())=='true') {
+        Swal.fire({
+            icon: 'error',
+            text: '기존 비밀번호와 다른 비밀번호를 설정해주세요.'
+        })
+         return false;
+    }  
+    $("#UpdatePasswordForm").submit();
+});
 //비밀번호1 유효성 ----------------------------------------------------------------------
 function chkPW(pass){
 	 var pw = pass;
@@ -167,9 +206,9 @@ function chkPW2(pass1val,pass2val){
 	
 }
 
+//회원탈퇴
 function LeaveMember(){
 	let deletecheck = MatchPassword($('#LeaveMemberForm input[name=password]').val())
-	console.log("zzzzz"+deletecheck)
 	
 	if(deletecheck=='false'){
 		alert("비밀번호가 일치하지 않습니다.")
@@ -185,6 +224,8 @@ function LeaveMember(){
 	}
  return false;
 }
+
+//회원탈퇴, 비번변경시 기존 비번 일치하는지 확인
 function MatchPassword(pass){
 	var MatchResult="";
 	var qstr ="password="+pass+"&sespassword="+SessPassword

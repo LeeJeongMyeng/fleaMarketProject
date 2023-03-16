@@ -215,30 +215,40 @@ li{
                             <a href="${path}/CommunityList.do?category=꿀팁" class="dropdown-item border-radius-md">
                               <span class="ps-3">꿀팁</span>
                             </a>
-                            <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0 mt-3">
-                              <i class="ni ni-box-2 text-primary me-3"></i>
-                              소통
-                            </div>
-                            <a href="${path}/chatting.do" class="dropdown-item border-radius-md">
-                              <span class="ps-3">채팅목록</span>
-                            </a>
-                            <a href="#" onclick="myRoomLoginCk()" class="dropdown-item border-radius-md">
-                              <span class="ps-3">My Room</span>
-                            </a>
                             <script>
-	                            function myRoomLoginCk(){
-	                            	if("${Login.email}"==""){
-	                            		if(confirm("[안내메시지]로그인을 하셔야 MyRoom 이용이 가능합니다.\n로그인하러 가시겠습니까?")){
-	                            			location.href="${path}/SignIn.do"
-	                            		}
-	                            	}else{
-	                            		location.href="${path}/communityMemberRoom.do?email=${Login.email}"
-	                            	}
-	                            }
+                            $(document).ready(function(){
+                            	if("${Login.authority}"=='관리자'){
+                            		$("#managerHideMenu").hide()
+                            	}
+                            	
+                            });
                             </script>
-                            <a href="${path}/communityFollowMember.do?myemail=${Login.email}" class="dropdown-item border-radius-md">
-                              <span class="ps-3">나의 팔로워 목록</span>
-                            </a>
+                            <div id="managerHideMenu">
+	                            <div class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-0 mt-3">
+	                              <i class="ni ni-box-2 text-primary me-3"></i>
+	                              소통
+	                            </div>
+	                            <a href="${path}/chatting.do" class="dropdown-item border-radius-md">
+	                              <span class="ps-3">채팅목록</span>
+	                            </a>
+	                            <a href="#" onclick="myRoomLoginCk()" class="dropdown-item border-radius-md">
+	                              <span class="ps-3">My Room</span>
+	                            </a>
+	                            <script>
+		                            function myRoomLoginCk(){
+		                            	if("${Login.email}"==""){
+		                            		if(confirm("[안내메시지]로그인을 하셔야 MyRoom 이용이 가능합니다.\n로그인하러 가시겠습니까?")){
+		                            			location.href="${path}/SignIn.do"
+		                            		}
+		                            	}else{
+		                            		location.href="${path}/communityMemberRoom.do?email=${Login.email}"
+		                            	}
+		                            }
+	                            </script>
+	                            <a href="${path}/communityFollowMember.do?myemail=${Login.email}" class="dropdown-item border-radius-md">
+	                              <span class="ps-3">나의 팔로워 목록</span>
+	                            </a>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -294,7 +304,7 @@ li{
                     <div class="d-none d-lg-block">
                       <ul class="list-group">
                         <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="QNAList.do">
+                          <a class="dropdown-item py-2 ps-3 border-radius-md" onclick="QnALoginCk()" href="#">
                             <div class="d-flex">
                               <div class="icon h-10 me-3 d-flex mt-1">
                                 <i class="ni ni-single-copy-04 text-primary"></i>
@@ -307,6 +317,17 @@ li{
                             </div>
                           </a>
                         </li>
+                        <script>
+	                            function QnALoginCk(){
+	                            	if("${Login.email}"==""){
+	                            		if(confirm("[안내메시지]로그인을 하셔야 고객센터 이용이 가능합니다.\n로그인하러 가시겠습니까?")){
+	                            			location.href="${path}/SignIn.do"
+	                            		}
+	                            	}else{
+	                            		location.href="QNAList.do"
+	                            	}
+	                            }
+                        </script>
                      <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
   <c:choose>
     <c:when test="${empty Login}">

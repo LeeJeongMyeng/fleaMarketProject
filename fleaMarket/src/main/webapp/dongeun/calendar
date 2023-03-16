@@ -29,3 +29,16 @@ mapper
 		d.addAttribute("callist", service.calList());
 		return "pageJsonReport";
 	}
+	
+	
+//캘린더 등록 
+dao
+public void insertCalendar(FleaMarket ins);
+
+
+
+
+
+
+	
+	

@@ -47,11 +47,18 @@
 				$("#roombusinessnumber").hide()
 				$("#bulbicon").attr("src","${path}/assets/img/small-logos/icon-bulb.svg")
 			}
-			/* $("#followbutton").click(function(){
-				alert("팔로우 추가")
-			}) */
-			
 		})
+		$("#followingbutton").hide()
+		// 팔로우 여부판단
+		var follow = "${followWhether}"
+		if(follow=="1"){ // 팔로우중
+			$("#followingbutton").show()
+			$("#followbutton").hide()
+		}else if(follow=="0"){ // 언팔중
+			$("#followbutton").show()
+			$("#followingbutton").hide()
+		}
+		
 		// 아래 차트 js에 갯수 계산 기능 있음 arrFun(obj)
 		// 팔로우수 넣기
 		var followMembers="${follower}"
@@ -63,12 +70,7 @@
 		
 		// 팔로우 회원 클릭 시, 해당 회원 룸으로 이동 -- 안됨
 		function memberRoom(email){
-			location.href="communityMemberRoom.do?email"+this
-		}
-		// 팔로우 추가하기
-		function followAddFun10(){
-			alert("팔로우추가")
-			//$("#followAddForm").submit()
+			location.href="communityMemberRoom.do?email="+email+"&loginEmail=${Login.email}"
 		}
 		// 룸주인과 로그인 세션 값 비교에 따라 설정값 변경
 		var login=""
@@ -76,6 +78,8 @@
 		if("${Login.email}"!="${roommember.email}"){
 			$("#followAdd").hide()
 			$("#flexSwitchCheckDefault00").hide()
+		}else{
+			$("#follow_chat").hide()
 		}
 		// 내게시글 댓글 정보
 		var boardrepInfos = "${boardreplyInfo}"
@@ -94,6 +98,65 @@
 		$("#meRepCnt").text(arrFun(replyInfos))
 		console.log("내 댓글 정보",replyInfos)
 	});
+	// 팔로우 추가하기
+	function followAddFun(followEmail){
+		if("${Login.email}"==""){
+			if(confirm("[안내메시지] 로그인을 하셔야 팔로우가 가능합니다.\n 로그인화면으로 이동하시겠습니까?")){
+				location.href="${path}/SignIn.do"
+			}
+		}else{
+			location.href="${path}/followAdd.do?roomEmail="+followEmail+"&loginEmail=${Login.email}"
+		}
+	}
+	// 언팔로우하기
+	function unfollowFun(){
+		$("#unFollowForm").submit()
+	}
+	//alert(follow)
+	// 팔로우 성공판단
+	if("${followSuccess}"=="팔로우성공"){
+		alert("[안내메시지] ${Login.email}이 ${followemail}님과 팔로우가 되었습니다.")
+	}
+	//언팔로우 성공판단
+	if("${msg}"=="언팔로우"){
+		alert("[안내메시지] ${Login.email}이 ${unfollowemail}님과 언팔로우가 되었습니다.")
+	}
+	// 정보 공개/비공개
+	$("#flexSwitchCheckDefault00").change(function(){
+		fetch("${path}/communityMemberRoom.do",{
+			method : "POST",
+			header:{
+				"Content-Type": "application/json",
+			},
+			body:JSON.stringify({
+			email:'${roommember.email}',
+			loginEmail:'${Login.email}',
+			hideInfo:'1'
+		}),
+	})
+	    .then(res => res.json())  //응답 결과를 json으로 파싱
+	    .then(data => {
+	    		//***여기서 응답 결과로 실행할 동작을 정의하면 됨***
+	            // [ data.키값 ] 이런 형태로 value 추출 가능 
+	            console.log(data.string); //응답 결과를 console 창에 출력
+	            if($(this).is(":checked")){
+					$("#roomemail").show()
+					$("#roomphonenumber").show()
+					$("#roombusinessnumber").show()
+					$("#bulbicon").attr("src","${path}/resource/community/light-bulb.png")
+					$("#bulbicon").css({"width":"auto","height":"70px"})
+				}else{
+					$("#roomemail").hide()
+					$("#roomphonenumber").hide()
+					$("#roombusinessnumber").hide()
+					$("#bulbicon").attr("src","${path}/assets/img/small-logos/icon-bulb.svg")
+				}
+	    })
+	    .catch(err => { // 오류 발생시 오류를 담아서 보여줌
+	        console.log('Fetch Error',err);
+	    });
+	})
+	
 </script>
 </head>
 
@@ -119,19 +182,49 @@
               </p>
             </div>
           </div>
-          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3">
+          <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3" id="follow_chat">
             <div class="nav-wrapper position-relative end-0">
-              <ul class="nav nav-pills nav-fill p-1" role="tablist">
-                 <li class="nav-item">
-                 <form id="followAddForm" method="post" action="${path}/communityMemberRoom.do">
-                 	<input type="hidden" name="roomEmail" value="${roommember.email}">
-                 </form>
-                  <button id="followbutton" class="nav-link mb-0 px-0 py-1 active d-flex align-items-center justify-content-center" onclick="followAddFun10()" >
+            	<!-- 팔로우 클릭 시, 보낼 데이터 -->
+              	<form id="unFollowForm" method="post" action="${path}/communityFollowDelete.do">
+	                 	<input type="hidden" name="following" value="${roommember.email}">
+	                 	<input type="hidden" name="myemail" value="${Login.email}">
+	            </form>
+	            <table style="width:100%; border-radius:50px; box-shadow:10px 10px 5px grey; height:50px; background:#ECECEC;">
+	            	<col width="50%">
+	            	<col width="50%;">
+	            	<tr style="height:30px;"><td id="followbutton" style="background:white; border-radius:50px;">
+	            			<a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center" onclick="followAddFun('${roommember.email}')" href="#" >
+		                    	<i class="ni ni-fat-add"></i>
+		                    	<span class="ms-2" >팔로우</span>
+		                 	</a>
+	            		</td>
+	            		<td id="followingbutton" style="background:white; border-radius:50px;">
+	            			 <a  class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center" onclick="unfollowFun()" href="#">
+			                    <i class="ni ni-fat-delete"></i>
+			                    <span class="ms-2" >팔로잉</span>
+			                 </a>
+	            		</td>
+	            		<td>
+	            			<a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center" data-bs-toggle="tab" href="" role="tab" aria-selected="false">
+			                    <i class="ni ni-chat-round"></i>
+			                    <span class="ms-2">채팅하기</span>
+		                  	</a>
+	            		</td></tr>
+	            </table>
+	            
+	            
+	            
+              <!-- <ul class="nav nav-pills nav-fill p-1" role="tablist">
+                <li class="nav-item" >
+                  <button id="followbutton" class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center" onclick="followAddFun()" >
                     <i class="ni ni-fat-add"></i>
-                    <!--<i class="ni ni-fat-delete"></i>  -->
-                    <span class="ms-2">팔로우</span>
+                    <span class="ms-2" >팔로우</span>
                   </button>
-                </li>
+                  <button id="followingbutton" class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center">
+                    <i class="ni ni-fat-delete"></i>
+                    <span class="ms-2" >팔로잉</span>
+                  </button>
+               </li>
                 <li class="nav-item" data-bs-toggle="modal" data-bs-target="#chatModal">
                   <a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center" data-bs-toggle="tab" href="" role="tab" aria-selected="false">
                     <i class="ni ni-chat-round"></i>
@@ -140,8 +233,8 @@
                 </li>
 <div class="moving-tab position-absolute nav-link" style="padding: 0px; transition: all 0.5s ease 0s; transform: translate3d(0px, 0px, 0px); width: 50%;">
 	<a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center active">-</a>
-</div>
-              </ul>
+</div> 
+              </ul> -->
             </div>
           </div>
         </div>
@@ -209,7 +302,7 @@
             <div class="d-flex align-items-center justify-content-center">
               <div class="avatar-group">
 	              <c:if test="${not empty follower}">
-	              	<c:forEach var="followers" items="${follower}">
+	              	<c:forEach var="followers" items="${follower}" end="5">
 		                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="${followers.nickname}" >
 		                  <img alt="無" src="${path}/resource/img/Member/profileimg/${followers.profileimg}" style="width:55px;height:45px;" onclick="memberRoom(${followers.email})">
 		                </a>
@@ -225,7 +318,7 @@
             <div class="d-flex align-items-center justify-content-center">
               <div class="avatar-group">
 	              <c:if test="${not empty following}">
-	              	<c:forEach var="followings" items="${following}">
+	              	<c:forEach var="followings" items="${following}" end="5">
 		                <a href="javascript:;" class="avatar avatar-sm rounded-circle" data-toggle="tooltip" data-original-title="${followings.nickname}" >
 		                  <img alt="無" src="${path}/resource/img/Member/profileimg/${followings.profileimg}" style="width:55px;height:45px;" onclick="memberRoom(${followings.email})">
 		                </a>
@@ -530,8 +623,8 @@
 		      			<td><img src="${path}/resource/img/Member/profileimg/${unfollowmem.profileimg}" style="width:40px;height:40px;" alt="無"></td>
 		      			<td>${unfollowmem.email}</td>
 		      			<td>${unfollowmem.nickname}</td>
-		      			<td class="align-middle text-center"><a href="communityMemberRoom.do?email=${unfollowmem.email}" id="roomGo" class="btn btn-outline-primary mt-2"><i class="ni ni-shop"></i></a></td>
-		      			<td class="align-middle text-center"><button id="followinsert" class="btn btn-outline-primary mt-2"><i class="ni ni-fat-add"></i></button></td>
+		      			<td class="align-middle text-center"><a href="communityMemberRoom.do?email=${unfollowmem.email}&loginEmail=${Login.email}" id="roomGo" class="btn btn-outline-primary mt-2"><i class="ni ni-shop"></i></a></td>
+		      			<td class="align-middle text-center"><button id="followinsert" class="btn btn-outline-primary mt-2" onclick="followAddFun('${unfollowmem.email}')"><i class="ni ni-fat-add"></i></button></td>
 		      			</tr>
 		      		</c:forEach>
 		      	</table>
@@ -619,7 +712,7 @@
 		      		<tr><th>카테고리</th><th>게시글명</th><th>댓글내용</th></tr>
 		      		<c:if test="${not empty replyInfo}">
 			      		<c:forEach var="repInfo" items="${replyInfo}">
-			      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${repInfo.communitynumber}&keyword=&type=&shift=registDate&category=${repInfo.category}'">
+			      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${repInfo.communitynumber}&keyword=&type=&shift=registDate&category=${repInfo.category}'" style="cursor:pointer;">
 			      				<td>${repInfo.category}</td>
 			      				<td>${repInfo.title}</td>
 			      				<td>${repInfo.repcontent}</td>
@@ -627,7 +720,7 @@
 			      		</c:forEach>
 		      		</c:if>
 		      		<c:if test="${empty replyInfo}">
-			      		<tr><td colspan="2" style="color:grey; text-align:center;"> 등록한 댓글이 없습니다.</td></tr>
+			      		<tr><td colspan="3" style="color:grey; text-align:center;"> 등록한 댓글이 없습니다.</td></tr>
 		      		</c:if>
 		      		
 		      	</table>
@@ -654,7 +747,7 @@
 		      		<tr><th>이미지</th><th>카테고리</th><th>게시글명</th></tr>
 		      		<c:if test="${not empty adv}">
 			      		<c:forEach var="advlist" items="${adv}">
-			      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${advlist.communitynumber}&keyword=&type=&shift=registDate&category=${advlist.category}'">
+			      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${advlist.communitynumber}&keyword=&type=&shift=registDate&category=${advlist.category}'" style="cursor:pointer;">
 			      				<td><img src="${path}/resource/img/Member/profileimg/${advlist.imgname}" style="width:auto;height:50px;" ></td>
 			      				<td>${advlist.category}</td>
 			      				<td>${advlist.title}</td>

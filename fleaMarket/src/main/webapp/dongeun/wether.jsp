@@ -34,21 +34,24 @@
 }
  .flex-container.center{justify-content: center;}
  tr{
- background:skyblue;
+background: #0081cc;
  color:white;
+ width:100px;
+ font-size:13px;
  }
+ td{
+ height:70px;
+ }
+ table{
+ border:1px solid white;
+ }
+ 
 </style>
 <body>
-<h2>현재 날씨</h2>
-<!-- <h3 class="ctemp">현재온도:</h3>
-<h3 class="lowtemp">최저온도:</h3>
-<h3 class="heighttemp">최고온도:</h3>
-<h3 class="wind">바람:</h3>
-<h3 class="icon"> -->
-<div class="flex-container">
+<div class="flex-container" style="width: 800px;">
 <div class="flex-container center">
 <table>
-   <tr><td>서울</td></tr>
+   <tr><th>서울</th></tr>
    <tr>  
     <td class="icon"></td>
   </tr>
@@ -69,7 +72,7 @@
 </table>
 
 <table>
-   <tr><td>부산</td></tr>
+   <tr><th>부산</th></tr>
    <tr>  
     <td class="icon1"></td>
   </tr>
@@ -90,7 +93,7 @@
 </table>
 
 <table>
-   <tr><td>대전</td></tr>
+   <tr><th>대전</th></tr>
    <tr>  
     <td class="icon2"></td>
   </tr>
@@ -111,7 +114,7 @@
 </table>
 
 <table>
-   <tr><td>제주</td></tr>
+   <tr><th>제주</th></tr>
    <tr>  
     <td class="icon3"></td>
   </tr>
@@ -132,7 +135,7 @@
 </table>
 
 <table>
-   <tr><td>대구</td></tr>
+   <tr><th>대구</th></tr>
    <tr>  
     <td class="icon4"></td>
   </tr>
@@ -153,7 +156,7 @@
 </table>
 
 <table>
-   <tr><td>인천</td></tr>
+   <tr><th>인천</th></tr>
    <tr>  
     <td class="icon5"></td>
   </tr>
@@ -174,7 +177,7 @@
 </table>
 
 <table>
-   <tr><td>천안</td></tr>
+   <tr><th>천안</th></tr>
    <tr>  
     <td class="icon6"></td>
   </tr>
@@ -195,7 +198,7 @@
 </table>
 
 <table>
-   <tr><td>광주</td></tr>
+   <tr><th>광주</th></tr>
    <tr>  
     <td class="icon7"></td>
   </tr>

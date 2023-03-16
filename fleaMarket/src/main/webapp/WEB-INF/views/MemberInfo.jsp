@@ -32,21 +32,31 @@
 </head>
 <script type="text/javascript">
 $(document).ready(function(){
-	var uptmsg = '${uptmsg}'
-		if(uptmsg!=''){
-			alert(uptmsg)
-		}
-	
+	var uptmsg = '${uptmsg}';
+	if (uptmsg !== '') {
+	  Swal.fire({
+	    text: uptmsg,
+	    icon: 'success'
+	  });
+	}
     var LinkMsg = '${LinkMsg}'
     	if(LinkMsg!=''){
-    		alert(LinkMsg)
-    	}
+    	Swal.fire({
+    		text: LinkMsg,
+    		icon: 'success'
+    	});
+    }
 	
 })
 	
 var SessAddress = '${Login.address}' //세션주소값
-var SessCategory = '${Login.category}'
-var SessPassword = '${Login.password}'
+var SessCategory = '${Login.category}' //세션 카테고리
+var SessNickname = '${Login.nickname}' //세션 닉네임
+var SessPhonenumber = '${Login.phonenumber}' //세션 폰번
+var SessProfileimg = '${Login.profileimgname}' //세션 이미지파일명
+var SessAuth = '${Login.authority}' //세션 권한
+
+var SessPassword = '${Login.password}' //세션 비번
 
 </script>
 
@@ -76,11 +86,11 @@ var SessPassword = '${Login.password}'
                 </div>
               </div>
             </div>
-          </div>
+          </div>					
           <!-- Card Basic Info -->
             <h5>내 정보 조회 및 수정</h5>
           <div class="card mt-4" id="basic-info">
-            <form id="MemberInfoForm" action="UpdateMemberInfo.do" method="post" enctype="multipart/form-data" onsubmit="return UpdateInfo()">
+            <form id="MemberInfoForm" action="UpdateMemberInfo.do" method="post" enctype="multipart/form-data">
             <div class="card-body pt-0">
             
             <div class="row mt-2 mb-6">
@@ -204,9 +214,9 @@ var SessPassword = '${Login.password}'
                   </div>
                   <div class="" style="display:flex;">
 
-	                <button type="submit" style="margin-left:auto;" class="btn btn-primary btn-md mb-0">정보수정</button>
+	                <button type="button" id="UptInfoBtn" style="margin-left:auto; cursor:default;" class="btn btn-primary btn-md mb-0">정보수정</button>
 
-                  	<button type="button" style="margin:0 13px;" data-bs-toggle="modal" data-bs-target="#LeaveMemberModal" id="LeaveMemberModalbtn" class="btn btn-outline-danger btn-md mb-0">회원탈퇴</button>                  
+                  	<button type="button" style="margin:0 13px; cursor:default;" data-bs-toggle="modal" data-bs-target="#LeaveMemberModal" id="LeaveMemberModalbtn" class="btn btn-outline-danger btn-md mb-0">회원탈퇴</button>                  
                   </div>
                 </div>          
           </div>
@@ -216,7 +226,7 @@ var SessPassword = '${Login.password}'
             <div class="card-header">
               <h5>비밀번호 변경</h5>
             </div>
-            <form id="UpdatePasswordForm" action="UpdatePassword.do" method="post" onsubmit="return UpdatePassword()">
+            <form id="UpdatePasswordForm" action="UpdatePassword.do" method="post">
            	<input type="hidden" name="email" value="${Login.email }"/>
             <div class="card-body pt-0">
               <label class="form-label">현재 비밀번호</label>
@@ -235,7 +245,7 @@ var SessPassword = '${Login.password}'
                 <div class="invalid-feedback">비밀번호와 일치하지않습니다.</div>	
               </div>
               <div class="" style="display:flex;">
-              <button style="margin:0 13px; margin-left:auto;" class="btn btn-primary mt-3 mb-0">비밀번호 변경</button>
+              <button type="button" id="uptPassBtn" style="margin:0 13px; margin-left:auto; cursor:default;" class="btn btn-primary mt-3 mb-0">비밀번호 변경</button>
             </div>
             </div>
             </form>

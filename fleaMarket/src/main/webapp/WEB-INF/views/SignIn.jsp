@@ -41,10 +41,12 @@ $(document).ready(function(){
 	
 });
 var msg = "${LoginMsg}";
-console.log("dddd",msg)
-		if(msg!=""){
-			alert(msg)
-			}	
+if (msg !== '') {
+	  Swal.fire({
+	    text: msg,
+	    icon: 'error'
+	  });
+	}	
 </script>
 <body class="">
   <div class="container position-sticky z-index-sticky top-0">

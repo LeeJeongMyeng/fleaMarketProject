@@ -60,7 +60,7 @@
 								</div>
 							</div>
 						</div>
-						<form action="QNAUpdate.do" method="post" enctype="multipart/form-data" onsubmit="okmsg('update')">
+						<form id="uptForm" action="QNAUpdate.do" method="post" enctype="multipart/form-data">
 							<div class="row ms-2 mb-3">
 							 
 								<div class="col-2">
@@ -111,20 +111,31 @@
 								 <input name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}" multiple/>
 								 <div id="imgs_wrap" style="display:flex;">
 							</div>	
-   						
+   						</div>
+   						<div align="right">
+							<%--
 							<div class="" style="margin-left:80%;">
-							
-							<c:if test="${Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email }">
-								<button type="submit" class="btn btn-outline-primary btn-md mb-0 me-1">수정</button>
-								<button type="button"  data-bs-toggle="modal" data-bs-target="#QNADeleteModal" id="DeleteQnaModalbtn"  class="btn btn-outline-danger btn-md mb-0 me-1">삭제</button>  <!-- 모달창추가 -->
-							</c:if>
-							<button type="button" id="goQnaList" class="btn btn-outline-secondary btn-md mb-0 me-1">취소</button>	
+							 --%>
+						<%--
+						${(Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email)?'':'none'}
+						  <c:if test="${Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email }">--%>	
+								<button type="button" ${(Login.authority=='관리자' || (qna.method=='q' && Login.email==qna.email))?'':'style="display:none;"'} id="uptBtn" class="btn btn-outline-primary btn-md mb-0 me-1">수정</button>
+							<button type="button" ${(Login.authority=='관리자' || (qna.method=='q' && Login.email==qna.email))?'':'style="display:none;"'} id="delBtn" class="btn btn-outline-danger btn-md mb-0 me-1" data-qnano="${qna.qnano}">삭제</button>
+						<%--  	</c:if>--%>
+							<%--
 							<c:if test="${Login.authority=='관리자' && qna.method=='q'}">
-								<button type="button" class="btn btn-outline-success btn-md mb-0 me-1" id="QNAAnswerBtn">답변</button>  
+							--%>
+								
+							<button type="button" ${Login.authority=='관리자' && qna.method=='q'?'':'style="display:none;"'} class="btn btn-outline-success btn-md mb-0 me-1" id="QNAAnswerBtn">답변</button>  
+							<button type="button" id="goQnaList" class="btn btn-outline-secondary btn-md mb-0 me-1" style="margin-left:auto;">취소</button>	
+							<%--
 							</c:if>
+							 --%> 
+							</div>
 							</form>
+							<%--
 							</div>	
-							
+							--%>
 
 						<c:forEach var="QNAFile" items="${qna2}">
 						<form action="downloadqna.do" method="get">
@@ -180,7 +191,7 @@
 				</div>
 			</footer>
 	</main>
-	<!-- 아이디 비밀번호 찾기 모달창 -->
+<%--
  <!--  <div data-bs-toggle="modal" data-bs-target="#QNADeleteModal" id="#QNADeleteModal"></div> -->
 	<div class="modal fade" id="QNADeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	  <div class="modal-dialog">
@@ -206,7 +217,11 @@
                       </div>
                      </form>
                     </div>
-                  </div>
+                  </div> 
+                  --%>
+                  <form id = "deleteForm" method = "post" action = "${path}/QNADelete.do">
+                  <input type= "hidden" name ="qnano" value = "${qna.qnano}"/>
+               	 </form>
                   <!--single form panel-->
 	      </div>
 	      
@@ -218,7 +233,6 @@
 	  </div>
 	</div> <!-- sns확인모달 모달끝 -->
 <script>
-// 등록 버튼 클릭 시,
 
 
 
@@ -234,6 +248,7 @@ var myDropzone = new Dropzone(drop, {
   addRemoveLinks: true
 
 });
+
 </script>
 <script src="${path}/resource/js/Req1000/fileupload.js"></script>
 <script src="${path}/resource/js/Req1001/GetQNA.js"></script>

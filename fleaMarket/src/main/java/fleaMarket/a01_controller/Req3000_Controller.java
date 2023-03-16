@@ -36,7 +36,7 @@ public class Req3000_Controller {
 		this.service = service;
 	}
 
-	// http://localhost:7081/fleaMarket/calendar.do
+	// http://localhost:7080/fleaMarket/calendar.do
 	@GetMapping("calendar.do")
 	public String calendar() {
 		return "Calendar";
@@ -167,11 +167,4 @@ public class Req3000_Controller {
 		return "FleaMarketOverallCheck";
 	}
 	
-//	http://223.26.182.204:7080/fleaMarket/WetherPage.do
-	@GetMapping("WetherPage.do")
-	public String WetherPage() {
-	
-		return "wether";
-	}
-
 }

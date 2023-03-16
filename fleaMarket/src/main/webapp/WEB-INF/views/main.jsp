@@ -84,9 +84,7 @@
       <div class="row" style="height:400px;">
         <div class="col-lg-6 mb-4 mb-lg-0">
           <div class="card z-index-2 h-100">
-          	<h2>날씨
-          	</h2>
-	<iframe src="http://223.26.182.204:7080/fleaMarket/dongeun/wether.do" style="width:100%;height:100%;">
+	<iframe src="http://localhost:7080/fleaMarket/dongeun/wether.jsp" style="width:100%;height:100%;">
 							    <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
     </iframe>
           </div>

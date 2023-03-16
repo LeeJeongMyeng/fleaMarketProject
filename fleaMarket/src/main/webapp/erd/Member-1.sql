@@ -31,6 +31,10 @@ SELECT * FROM FLEAMARKETMEMBER WHERE name = '이지은' and personalnumber = '94
 SELECT * FROM FLEAMARKETMEMBER WHERE (KAKAOEMAIL || NAVEREMAIL) LIKE '%'||#{snsemail}||'%';
 SELECT EMAIL,KAKAOEMAIL,NAVEREMAIL FROM FLEAMARKETMEMBER 
     		WHERE (KAKAOEMAIL || NAVEREMAIL) LIKE '%'||''||'%';
+   
+    	
+DELETE  FLEAMARKETMEMBER;
+DELETE PROFILE;
     	
 SELECT f.*,p.PROFILEIMG as profileimgname FROM FLEAMARKETMEMBER f,PROFILE p
 WHERE f.EMAIL = p.EMAIL;
@@ -53,18 +57,18 @@ AND PERSONALNUMBER = '950828-1111111';
 
 
 INSERT INTO FLEAMARKETMEMBER values(
-'123@nate.com',
-'!dnfwlq12',
-'맹이',
-'950828-1111111',
+'admin@contigo.com',
+'admin',
+'관리자',
+'111111-1111111',
 '010-5293-0247',
-'창원시 성산구 사파동',
+'쌍용교육센터',
 'm',
 NULL,
 NULL,
 NULL,
 NULL,
-'이정명'
+'콘티고'
 );
 --윤아 연습용 관리자
 INSERT INTO FLEAMARKETMEMBER values(
@@ -82,12 +86,23 @@ NULL,
 '관리자'
 );
 UPDATE FLEAMARKETMEMBER 
-SET KAKAOEMAIL  = null
-WHERE EMAIL ='aoddl56@nate.com';
+SET CATEGORY ='여성의류'
+WHERE EMAIL ='admin@contigo.com';
 
 UPDATE FLEAMARKETMEMBER 
 SET AUTHORITY  = '일반셀러',BUSINESSNUMBER = NULL  
 WHERE EMAIL ='aoddl56@nate.com';
+
+
+SELECT count(*) FROM FLEAMARKETMEMBER f
+WHERE (name || email || nickname) like '%'||'28888'||'%'
+AND authority = '사업자';
+
+SELECT a.* FROM (select rownum cnt,f.*
+from FLEAMARKETMEMBER f
+where (name || email || nickname) like '%'||'28888'||'%'
+and authority = '사업자') a
+WHERE cnt BETWEEN 1 AND 3;
 
 
 ALTER TABLE FLEAMARKETMEMBER MODIFY password varchar2(300);
@@ -104,7 +119,7 @@ profileImg varchar2(200)
 SELECT * FROM PROFILE;
 WHERE EMAIL = 'admin@contigo.com';
 DELETE profile WHERE EMAIL ='28888wjdaud@naver.com';
-INSERT INTO PROFILE VALUES('aoddl56@nate.com','defaultprofile.png');
+INSERT INTO PROFILE VALUES('admin@contigo.com','defaultprofile.png');
 
 UPDATE PROFILE 
 SET EMAIL ='aoddl56@nate.com'

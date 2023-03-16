@@ -50,6 +50,10 @@
 									<h5 class="mb-0">회원목록조회</h5>
 									<p class="text-sm mb-0">검색할 회원명을 하단 검색창에 입력해주세요</p>
 								</div>
+								<c:if test="${empty MemberList}">
+								<img src="/fleaMarket/resource/img/nosearchPage/t1.png" alt="이미지가 없음" style="width:200px;">
+								<h3 style="text-align:center;">검색된 회원이 없습니다.</h3>
+								</c:if>
 								<div class="ms-auto my-auto mt-lg-0 mt-4">
 									<div class="ms-auto my-auto">
 										<div class="modal fade" id="import" tabindex="-1"
@@ -65,14 +69,13 @@
 													<div class="modal-body">
 														<p>선택한 회원을 탈퇴시키겠습니까?</p>
 														<div class="form-check">
-															<input class="form-check-input" type="checkbox" value=""
-																id="importCheck"> 
+															<input class="form-check-input" type="checkbox" value="" id="DeleteCheckOk"> 
 																* 탈퇴처리에 동의하시면 다시 한 번 체크를 해주세요.
 														</div>
 													</div>
 													<div class="modal-footer">
 														<button type="button" class="btn bg-gradient-secondary btn-sm" data-bs-dismiss="modal">취소</button>
-														<button type="button" class="btn bg-gradient-primary btn-sm" onclick="javascript:$('#DeleteMembersForm').submit()">탈퇴</button>
+														<button type="button" class="btn bg-gradient-primary btn-sm" onclick="DeleteMembersFormfun()">탈퇴</button>
 													</div>
 												</div>
 											</div>
@@ -84,25 +87,26 @@
 						</div>
 							<div class="card-body px-0 pb-0">
 							</div>
-							<form id="AdminSearchForm" action="AdminSearch.do" method="post" onsubmit="return false;">
+							<form id="AdminSearchForm" action="AdminSearch.do" method="post">
+							<input type="hidden" name="curPage" value="${sch.curPage}"/>
 							<div class="row">
 								<div class="col-4 input-group mb-3 w-25">
 								  <button class="btn btn-outline-primary bg-primary mb-0 ms-3" type="button" style="color:white;" id="button-addon1" onclick="ResetAuthRadioSubmit()">　검색　</button>
-								  <input type="text" class="form-control form-control-outline-primary ps-2" style="border: 1px solid #5e72e4;"  name="name" value="${sch.name}" placeholder="　회원명을 입력하세요">
+								  <input type="text" class="form-control form-control-outline-primary ps-2" style="border: 1px solid #5e72e4;"  name="title" value="${sch.title}"
+								  onkeypress="javascript:if(event.keyCode == 13){ResetAuthRadioSubmit()}" placeholder="　회원명을 입력하세요">
 								</div>
 								<div class="btn-group col-3" role="group" aria-label="Basic radio toggle button group">
-								  <input type="radio" class="btn-check authorityradio" value="전체" name="authority" id="btnradio1" autocomplete="off" checked>
+								  <input type="radio" class="btn-check authorityradio" value="전체" name="search" id="btnradio1" autocomplete="off" checked>
 								  <label class="btn btn-outline-primary" for="btnradio1">전체</label>
 								
-								  <input type="radio" class="btn-check authorityradio" value="일반셀러" name="authority" id="btnradio2" autocomplete="off">
+								  <input type="radio" class="btn-check authorityradio" value="일반셀러" name="search" id="btnradio2" autocomplete="off">
 								  <label class="btn btn-outline-primary" for="btnradio2">일반셀러</label>
 								
-								  <input type="radio" class="btn-check authorityradio" value="사업자" name="authority" id="btnradio3" autocomplete="off">
+								  <input type="radio" class="btn-check authorityradio" value="사업자" name="search" id="btnradio3" autocomplete="off">
 								  <label class="btn btn-outline-primary" for="btnradio3">사업자</label>
 								</div>
 								<div class="col-2 ms-auto my-auto">
-									<button type="button" class="btn btn-outline-danger btn-md mb-0 me-2 " data-bs-toggle="modal" data-bs-target="#import">회원탈퇴</button>
-									<button class="btn btn-outline-primary btn-md export mb-0 ms-3" data-type="csv" type="button" name="button">Export</button>
+									<button type="button" class="btn btn-outline-danger btn-md mb-0 me-3 " style="float:right" data-bs-toggle="modal" data-bs-target="#import">회원탈퇴</button>
 								</div>
 							</div>
 							</form>
@@ -147,23 +151,32 @@
 									 </tbody>
 								</table>
 								</form>
-							</div>
 							
-							<div class="pagination_wrap">
-								<div class="pagination">
-									<i class="fa-solid" id="PageNationPrevBtn">이전</i>
-									<ol id="numbers">
-									<!-- 페이지네이션 번호들이 오는곳 -->
-									</ol>
-									
-									<i class="fa-solid" id="PageNationNextBtn">다음</i>
-								</div>			
-							</div> 
-							
-						</div>
-					</div>
-				</div>
-			</div>
+							 <div class="d-flex justify-content-center"> 
+							<nav aria-label="Page navigation example">
+											  <ul class="pagination justify-content-center">
+											    <li class="page-item">
+											      <a class="page-link" href="javascript:goPage(${sch.startBlock-1});">
+											        <i class="fa fa-angle-left"></i>
+											        <span class="sr-only">Previous</span>
+											      </a>
+											    </li>
+											    <c:forEach var="cnt" begin="${sch.startBlock}" end="${sch.endBlock}">
+											    	<li class="page-item ${sch.curPage==cnt?'active':''}">
+											    		<a class="page-link" href="javascript:goPage(${cnt});">${cnt}</a>
+											    	</li>
+											    </c:forEach>
+											    <li class="page-item">
+											      <a class="page-link" href="javascript:goPage(${sch.endBlock+1});">
+											        <i class="fa fa-angle-right"></i>
+											        <span class="sr-only">Next</span>
+											      </a>
+											    </li>
+											  </ul>
+    </nav>
+  </div>
+</div>
+		
 			<footer class="footer pt-3  ">
 				<div class="container-fluid">
 					<div class="row align-items-center justify-content-lg-between">
@@ -201,7 +214,7 @@
 	</main>
 <script>
 //검색 후 해당 선택값(전체/일반셀러/사업자) 체크되도록하기 위한 변수
-var SchAuthorityRadioVal = '${sch.authority}'
+var SchAuthorityRadioVal = '${sch.search}'
 console.log(SchAuthorityRadioVal)
 
 
