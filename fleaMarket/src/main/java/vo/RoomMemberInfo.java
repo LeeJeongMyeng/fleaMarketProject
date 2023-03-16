@@ -16,6 +16,7 @@ public class RoomMemberInfo {
 	//커뮤니티 게시글 이미지
 	private String imgname;
 	private String imgpath;
+	private String[] fileNameList; 
 	
 	//커뮤니티 회원정보
 	private String password;
@@ -171,7 +172,21 @@ public class RoomMemberInfo {
 		this.profileimg = profileimg;
 	}
 	public String getImgname() {
-		return imgname;
+		if(this.imgname==null) {
+			return "";
+		}else {
+			return imgname;
+		}
+	}
+	
+	public String[] getFileNameList() {
+		if(this.imgname==null) {
+			this.imgname="";
+		}
+		return this.imgname.split("&SEP&");
+	}
+	public void setFileNameList(String[] fileNameList) {
+		this.fileNameList = fileNameList;
 	}
 	public void setImgname(String imgname) {
 		this.imgname = imgname;

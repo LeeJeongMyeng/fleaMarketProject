@@ -70,7 +70,7 @@
                     <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">구분</th>
                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">이메일</th>
                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">room이동</th>
-                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">채팅하기</th>
+                   <!--  <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">채팅하기</th> -->
                     <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">언팔로우</th>
                   </tr>
                 </thead>
@@ -99,13 +99,13 @@
 	                    	<a href="communityMemberRoom.do?email=${followers.email}&loginEmail=${Login.email}" ><i class="ni ni-shop"></i></a>
 	                      <!-- <button type="button" id="roomGo" class="text-secondary text-sm roomGo" style="border:none; background:none;"><i class="ni ni-shop"></i></button> -->
 	                    </td>
-	                    <td class="align-middle text-center">
-	                     <%--  <a href="chatting.do?myemail=${followers.email}" ><i class="ni ni-chat-round"></i></a> --%>
+	                    <%-- <td class="align-middle text-center">
+	                      <a href="chatting.do?myemail=${followers.email}" ><i class="ni ni-chat-round"></i></a>
 	                      <button type="button" id="chatGo" class="text-secondary text-sm chatGo" 
 	                      	style="border:none; background:none;"
 	                      	data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="ni ni-chat-round"></i>
 	                      </button>
-	                    </td>
+	                    </td> --%>
 	                    <td class="align-middle text-center">
 	                      <a href="communityFollowDelete.do?myemail=${Login.email}&following=${followers.email}" >
 	                      		<i class="ni ni-scissors"></i></a>
@@ -123,6 +123,30 @@
               </table>
             </div>
           </div>
+           <%-- <nav aria-label="Page navigation example" style = "margin-top: 20px;">
+				<ul class="pagination pagination-white justify-content-center" id="pageInfo">
+					<c:if test="${pageMaker.prev}">
+						<li class="page-item"><a class="page-link pagingnum"
+							href="${pageMaker.startPage-1}" tabindex="-1"> <i
+								class="fa fa-angle-left"></i> <span class="sr-only">Previous</span>
+						</a></li>
+					</c:if>
+
+					<c:forEach var="num" begin="${pageMaker.startPage}"
+						end="${pageMaker.endPage}">
+						<li class="page-item ${pageMaker.cri.pageNum == num ? "active":"" }">
+							<a class="page-link" href="${num }">${num }</a>
+						</li>
+					</c:forEach>
+
+					<c:if test="${pageMaker.next }">
+						<li class="page-item"><a class="page-link pagingnum"
+							href="${pageMaker.endPage+1}"> <i
+								class="fa fa-angle-right"></i> <span class="sr-only">Next</span>
+						</a></li>
+					</c:if>
+				</ul>
+			</nav>    --%>      
   </main>
   <!-- Modal 창-->
 	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

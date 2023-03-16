@@ -18,6 +18,8 @@ CREATE TABLE fleamarketmember(
 
 DROP TABLE fleamarketmember;
 SELECT * FROM fleamarketmember;
+DELETE FROM fleamarketmember WHERE email='admin';
+INSERT INTO fleamarketmember values('admin@mail.com','admin','관리자','900101-000000','010-0000-0000','인천','관리자', NULL, NULL, NULL, '기타','관리자');
 INSERT INTO fleamarketmember values('yujin@mail.com','')
 
 -- 유저프로필이미지
@@ -27,6 +29,7 @@ profileImg varchar2(200)
 );
 DROP TABLE Profile;
 SELECT * FROM Profile;
+INSERT INTO Profile values('admin@mail.com','defaultprofile.png');
 
 CREATE TABLE FLEAMARKETQNA(
    qnaNo varchar2(100) NOT NULL,
@@ -328,6 +331,12 @@ WHERE f.following=m.email
 AND f.following=pro.email
 AND myemail='yujin@mail.com';
 
+SELECT * 
+FROM fleamarketmember m, profile p
+WHERE m.email=p.email
+AND authority!='관리자';
+AND m.email!='admin@mail.com';
+
 -- 팔로우가 아닌 회원 추출
 select *
 FROM FLEAMARKETMEMBER m, profile pro
@@ -401,4 +410,37 @@ UPDATE fleamarketmember SET businessnumber='1234567891'
 WHERE email='janexagnes@gmail.com';
 
 
+SELECT LAST.* FROM(
+SELECT ROWNUM RNUM,s.*
+from (select *
+			FROM FLEAMARKETMEMBER m,friend f,profile pro
+			WHERE 1=1
+			AND (m.email LIKE '%'||''||'%'
+			OR m.nickname LIKE '%'||''||'%')
+					AND f.following=pro.email
+					AND f.following=m.email
+					AND myemail='') s ) LAST
+WHERE RNUM BETWEEN 10 AND 20;
 
+SELECT LAST.* FROM(
+SELECT ROWNUM RNUM,temp.*
+FROM (select m.email, m.password, m.nickname, m.personalnumber, m.phonenumber, m.address, m.authority, m.businessnumber, m.kakaoemail, m.naveremail, m.category, m.name, f.myemail, f.FOLLOWING,pro.profileimg
+		FROM FLEAMARKETMEMBER m,friend f,profile pro
+		WHERE (m.email LIKE '%'||''||'%'
+			OR m.nickname LIKE '%'||''||'%')
+				AND f.following=pro.email
+				AND f.following=m.email
+				AND f.myemail='yujin@mail.com') temp) LAST 
+WHERE RNUM BETWEEN 0 AND 20;
+
+SELECT f.* FROM FRIEND f;
+
+select m.email, m.password, m.nickname, m.personalnumber, m.phonenumber, m.address, m.authority, m.businessnumber, m.kakaoemail, m.naveremail, m.category, m.name, f.myemail, f.FOLLOWING,pro.profileimg
+		FROM FLEAMARKETMEMBER m,friend f,profile pro
+		WHERE 1=1
+		AND (m.email LIKE '%'||''||'%'
+			OR m.nickname LIKE '%'||''||'%')
+				AND f.following=pro.email
+				AND f.following=m.email
+				AND myemail='yujin@mail.com';
+SELECT * FROM temp;

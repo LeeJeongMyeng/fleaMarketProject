@@ -119,20 +119,21 @@
 		  // 사진 용량에 따른 유효성체크
 		  function checkExtension(fileName,fileSize){
 
-		      var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+			  var regex = new RegExp("(.*?)\.(jpg|png)$");
 		      var maxSize = 20971520;  //20MB
 		      
-		      if(fileSize >= maxSize){
-		        alert('파일 사이즈 초과');
+		      if(!regex.test(fileName)){
+		    	  alert('[안내메시지]이미지 파일만 등록 가능합니다.');
 		        $("input[type='file']").val("");  //파일 초기화
 		        return false;
 		      }
 		      
-		      if(regex.test(fileName)){
-		        alert('[안내메시지]업로드 불가능한 파일이 있습니다.');
+		      if(fileSize >= maxSize){
+		    	alert('[안내메시지] 파일 사이즈가 초과되었습니다. 다시 넣어주세요.');
 		        $("input[type='file']").val("");  //파일 초기화
 		        return false;
 		      }
+		     
 		      return true;
 		    }
 		  //이미지 넣기

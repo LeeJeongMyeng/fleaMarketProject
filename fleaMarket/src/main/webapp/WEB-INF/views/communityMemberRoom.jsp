@@ -122,16 +122,16 @@
 		alert("[안내메시지] ${Login.email}이 ${unfollowemail}님과 언팔로우가 되었습니다.")
 	}
 	// 정보 공개/비공개
-	$("#flexSwitchCheckDefault00").change(function(){
+	/* $("#flexSwitchCheckDefault00").change(function(){
 		fetch("${path}/communityMemberRoom.do",{
-			method : "POST",
+			method : "GET",
 			header:{
 				"Content-Type": "application/json",
 			},
 			body:JSON.stringify({
 			email:'${roommember.email}',
-			loginEmail:'${Login.email}',
-			hideInfo:'1'
+			loginEmail:'${Login.email}'
+			//hideInfo:'1'
 		}),
 	})
 	    .then(res => res.json())  //응답 결과를 json으로 파싱
@@ -155,7 +155,7 @@
 	    .catch(err => { // 오류 발생시 오류를 담아서 보여줌
 	        console.log('Fetch Error',err);
 	    });
-	})
+	}) */
 	
 </script>
 </head>
@@ -189,27 +189,26 @@
 	                 	<input type="hidden" name="following" value="${roommember.email}">
 	                 	<input type="hidden" name="myemail" value="${Login.email}">
 	            </form>
-	            <table style="width:100%; border-radius:50px; box-shadow:10px 10px 5px grey; height:50px; background:#ECECEC;">
-	            	<col width="50%">
-	            	<col width="50%;">
-	            	<tr style="height:30px;"><td id="followbutton" style="background:white; border-radius:50px;">
+	            <table style="width:50%; border-radius:50px; box-shadow:10px 10px 5px grey; height:50px; background:#ECECEC;">
+	            	<tr style="height:30px;"><td id="followbutton" style="background:#f1f3f5; border-radius:50px; ">
 	            			<a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center" onclick="followAddFun('${roommember.email}')" href="#" >
 		                    	<i class="ni ni-fat-add"></i>
 		                    	<span class="ms-2" >팔로우</span>
 		                 	</a>
 	            		</td>
-	            		<td id="followingbutton" style="background:white; border-radius:50px;">
+	            		<td id="followingbutton" style="border-radius:50px;">
 	            			 <a  class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center" onclick="unfollowFun()" href="#">
 			                    <i class="ni ni-fat-delete"></i>
 			                    <span class="ms-2" >팔로잉</span>
 			                 </a>
 	            		</td>
-	            		<td>
+	            		<!-- <td>
 	            			<a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center" data-bs-toggle="tab" href="" role="tab" aria-selected="false">
 			                    <i class="ni ni-chat-round"></i>
 			                    <span class="ms-2">채팅하기</span>
 		                  	</a>
-	            		</td></tr>
+	            		</td> -->
+	            		</tr>
 	            </table>
 	            
 	            
@@ -420,9 +419,16 @@
 	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
 	                  <div class="card card-blog card-plain">
 	                    <div class="position-relative" style="text-align: center">
-	                      <a class="d-block shadow-xl border-radius-xl">
-	                        <img src="${path}/resource/community/${advlist.imgname}" alt="이미지 없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
-	                      </a>
+		                    <c:if test="${not empty advlist.fileNameList[0]}">
+		                      <a class="d-block shadow-xl border-radius-xl">
+		                        <img src="${path}/resource/community/${advlist.fileNameList[0]}" alt="이미지 없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
+		                      </a>
+		                    </c:if>
+		                    <c:if test="${empty advlist.fileNameList[0]}">
+		                      <a class="d-block shadow-xl border-radius-xl">
+		                        <img src="${path}/resource/community/default_Img.png" alt="이미지 없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
+		                      </a>
+		                    </c:if>
 	                    </div>
 	                    <div class="card-body px-1 pb-0">
 	                      <a href="javascript:;">
@@ -439,8 +445,8 @@
 	               </c:forEach>
                 <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                   <div class="card h-100 card-plain border">
-                    <div class="card-body d-flex flex-column justify-content-center text-center">
-                      <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#boardAddModal">
+                    <div class="card-body d-flex flex-column justify-content-center text-center addView">
+                      <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#advBoardAddModal" data-bs-id="홍보">
                         <i class="fa fa-plus text-secondary mb-3"></i>
                         <h5 class=" text-secondary"> 더 보기 </h5>
                       </a>
@@ -469,9 +475,16 @@
 	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
 	                  <div class="card card-blog card-plain">
 	                    <div class="position-relative" style="text-align: center">
-	                      <a class="d-block shadow-xl border-radius-xl">
-	                        <img src="${path}/resource/community/${idealist.imgname}" alt="이미지 없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
-	                      </a>
+		                     <c:if test="${not empty idealist.fileNameList[0]}">
+			                      <a class="d-block shadow-xl border-radius-xl">
+			                        <img src="${path}/resource/community/${idealist.fileNameList[0]}" alt="이미지 없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
+			                      </a>
+		                     </c:if>
+		                     <c:if test="${empty idealist.fileNameList[0]}">
+			                      <a class="d-block shadow-xl border-radius-xl">
+			                        <img src="${path}/resource/community/default_Img.png" alt="이미지 없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
+			                      </a>
+		                     </c:if>
 	                    </div>
 	                    <div class="card-body px-1 pb-0">
 	                      <a href="javascript:;">
@@ -488,10 +501,10 @@
 	                </c:forEach>
                 <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                   <div class="card h-100 card-plain border">
-                    <div class="card-body d-flex flex-column justify-content-center text-center">
-                      <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#boardAddModal">
+                    <div class="card-body d-flex flex-column justify-content-center text-center addView">
+                      <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#ideaBoardAddModal" data-bs-notifyid="사업아이디어">
                         <i class="fa fa-plus text-secondary mb-3"></i>
-                        <h5 class=" text-secondary"> 더 보기 </h5>
+                        <h5 class="text-secondary"> 더 보기 </h5>
                       </a>
                     </div>
                   </div>
@@ -518,9 +531,16 @@
 	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
 	                  <div class="card card-blog card-plain">
 	                    <div class="position-relative" style="text-align: center">
-	                      <a class="d-block shadow-xl border-radius-xl">
-	                        <img src="${path}/resource/community/${lifelist.imgname}" alt="이미지 없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
-	                      </a>
+		                    <c:if test="${not empty lifelist.fileNameList[0]}">
+		                      <a class="d-block shadow-xl border-radius-xl">
+		                        <img src="${path}/resource/community/${lifelist.fileNameList[0]}" alt="이미지 없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
+		                      </a>
+		                    </c:if>
+		                    <c:if test="${empty lifelist.fileNameList[0]}">
+		                      <a class="d-block shadow-xl border-radius-xl">
+		                        <img src="${path}/resource/community/default_Img.png" alt="이미지 없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
+		                      </a>
+		                    </c:if>
 	                    </div>
 	                    <div class="card-body px-1 pb-0">
 	                      <a href="javascript:;">
@@ -537,8 +557,8 @@
 	                </c:forEach>
                 <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                   <div class="card h-100 card-plain border">
-                    <div class="card-body d-flex flex-column justify-content-center text-center">
-                      <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#boardAddModal">
+                    <div class="card-body d-flex flex-column justify-content-center text-center addView">
+                      <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#lifeBoardAddModal" data-bs-notifyid="사는이야기">
                         <i class="fa fa-plus text-secondary mb-3"></i>
                         <h5 class=" text-secondary"> 더보기 </h5>
                       </a>
@@ -567,9 +587,16 @@
 	                <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
 	                  <div class="card card-blog card-plain">
 	                    <div class="position-relative" style="text-align:center">
+	                    <c:if test="${not empty tiplist.fileNameList[0]}">
 	                      <a class="d-block shadow-xl border-radius-xl">
-	                        <img src="${path}/resource/community/${tiplist.imgname}" alt="이미지없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
+	                        <img src="${path}/resource/community/${tiplist.fileNameList[0]}" alt="이미지없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
 	                      </a>
+	                    </c:if>
+	                    <c:if test="${empty tiplist.fileNameList[0]}">
+	                      <a class="d-block shadow-xl border-radius-xl">
+	                        <img src="${path}/resource/community/default_Img.png" alt="이미지없음" class="img-fluid shadow border-radius-xl" style="height:250px;width:auto;">
+	                      </a>
+	                    </c:if>
 	                    </div>
 	                    <div class="card-body px-1 pb-0">
 	                      <a href="javascript:;">
@@ -586,8 +613,8 @@
 	                </c:forEach>
                 <div class="col-xl-3 col-md-6 mb-xl-0 mb-4">
                   <div class="card h-100 card-plain border">
-                    <div class="card-body d-flex flex-column justify-content-center text-center">
-                      <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#boardAddModal" data-bs-notifyid="꿀팁">
+                    <div class="card-body d-flex flex-column justify-content-center text-center addView">
+                      <a href="javascript:;" data-bs-toggle="modal" data-bs-target="#tipBoardAddModal" data-bs-notifyid="꿀팁">
                         <i class="fa fa-plus text-secondary mb-3"></i>
                         <h5 class=" text-secondary"> 더 보기 </h5>
                       </a>
@@ -610,7 +637,6 @@
 		  <div class="modal-content" style="width:750px;">
 		    <div class="modal-header">
 		      <h5 class="modal-title" id="exampleModalLabel">언팔로우 중인 회원정보<br></h5>
-		      
 		      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 		        <span aria-hidden="true">&times;</span>
 		      </button>
@@ -731,29 +757,39 @@
 		  </div>
 		</div>
 	</div>
-  <!-- 게시글 더 보러가기 모달창 -->
-  <div class="modal fade" id="boardAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+  <!-- 홍보글 더보기 모달창 -->
+  <div class="modal fade" id="advBoardAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered" role="document">
 		  <div class="modal-content" style="width:1200px; margin-left:-50%;">
 		    <div class="modal-header">
-		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님 쓴 게시글 정보<br>
+		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님 쓴 홍보 게시글 정보<br>
 		      <span style="color:grey; font-size:11pt;">＊ 게시글 클릭 시, 게시글 상세조회 페이지로 이동</span></h5>
 		      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
 		        <span aria-hidden="true">&times;</span>
 		      </button>
 		    </div>
 		    <div class="modal-body">
-		      	<table id="boardCntTab" class="table align-items-center mb-0">
-		      		<tr><th>이미지</th><th>카테고리</th><th>게시글명</th></tr>
-		      		<c:if test="${not empty adv}">
-			      		<c:forEach var="advlist" items="${adv}">
-			      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${advlist.communitynumber}&keyword=&type=&shift=registDate&category=${advlist.category}'" style="cursor:pointer;">
-			      				<td><img src="${path}/resource/img/Member/profileimg/${advlist.imgname}" style="width:auto;height:50px;" ></td>
-			      				<td>${advlist.category}</td>
-			      				<td>${advlist.title}</td>
-			      			</tr>
-			      		</c:forEach>
-		      		</c:if>
+		      	<table id="boardViewTab" class="table align-items-center mb-0">
+		      		<thead>
+		      			<tr><th>이미지</th><th>카테고리</th><th>게시글명</th></tr>
+		      		</thead>
+		      		<tbody>
+			      		<c:if test="${not empty adv}">
+				      		<c:forEach var="advlist" items="${adv}">
+				      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${advlist.communitynumber}&keyword=&type=&shift=registDate&category=${advlist.category}'" style="cursor:pointer;">
+				      				<c:if test="${not empty advlist.fileNameList[0]}">
+				      					<td><img src="${path}/resource/community/${advlist.fileNameList[0]}" style="width:auto;height:50px;" ></td>
+				      				</c:if>
+				      				<c:if test="${empty advlist.fileNameList[0]}">
+				      					<td><img src="${path}/resource/community/default_Img.png" style="width:auto;height:50px;" ></td>
+				      				</c:if>
+				      				<td>${advlist.category}</td>
+				      				<td>${advlist.title}</td>
+				      			</tr>
+				      		</c:forEach>
+			      		</c:if>
+		      		</tbody>
 		      	</table>
 		    </div>
 		    <div class="modal-footer">
@@ -762,6 +798,150 @@
 		  </div>
 		</div>
 	</div>
+	<script>
+		/* $(".addView").click(function(){
+			var data = $(this).data('id');
+			alert(data)
+		}); */
+	</script>
+  <!-- 사업아이디어 더보기 모달창 -->
+  <div class="modal fade" id="ideaBoardAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+		  <div class="modal-content" style="width:1200px; margin-left:-50%;">
+		    <div class="modal-header">
+		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님 쓴 사업아이디어 게시글 정보<br>
+		      <span style="color:grey; font-size:11pt;">＊ 게시글 클릭 시, 게시글 상세조회 페이지로 이동</span></h5>
+		      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+		        <span aria-hidden="true">&times;</span>
+		      </button>
+		    </div>
+		    <div class="modal-body">
+		      	<table id="boardViewTab" class="table align-items-center mb-0">
+		      		<thead>
+		      			<tr><th>이미지</th><th>카테고리</th><th>게시글명</th></tr>
+		      		</thead>
+		      		<tbody>
+			      		<c:if test="${not empty idea}">
+				      		<c:forEach var="idealist" items="${idea}">
+				      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${idealist.communitynumber}&keyword=&type=&shift=registDate&category=${idealist.category}'" style="cursor:pointer;">
+				      				<c:if test="${not empty idealist.fileNameList[0]}">
+				      					<td><img src="${path}/resource/community/${idealist.fileNameList[0]}" style="width:auto;height:50px;" ></td>
+				      				</c:if>
+				      				<c:if test="${empty idealist.fileNameList[0]}">
+				      					<td><img src="${path}/resource/community/default_Img.png" style="width:auto;height:50px;" ></td>
+				      				</c:if>
+				      				<td>${idealist.category}</td>
+				      				<td>${idealist.title}</td>
+				      			</tr>
+				      		</c:forEach>
+			      		</c:if>
+		      		</tbody>
+		      	</table>
+		    </div>
+		    <div class="modal-footer">
+		      <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<script>
+		/* $(".addView").click(function(){
+			var data = $(this).data('id');
+			alert(data)
+		}); */
+	</script>
+  <!-- 사는이야기 더보기 모달창 -->
+  <div class="modal fade" id="lifeBoardAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+		  <div class="modal-content" style="width:1200px; margin-left:-50%;">
+		    <div class="modal-header">
+		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님 쓴 사는이야기 게시글 정보<br>
+		      <span style="color:grey; font-size:11pt;">＊ 게시글 클릭 시, 게시글 상세조회 페이지로 이동</span></h5>
+		      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+		        <span aria-hidden="true">&times;</span>
+		      </button>
+		    </div>
+		    <div class="modal-body">
+		      	<table id="boardViewTab" class="table align-items-center mb-0">
+		      		<thead>
+		      			<tr><th>이미지</th><th>카테고리</th><th>게시글명</th></tr>
+		      		</thead>
+		      		<tbody>
+			      		<c:if test="${not empty life}">
+				      		<c:forEach var="lifelist" items="${life}">
+				      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${lifelist.communitynumber}&keyword=&type=&shift=registDate&category=${lifelist.category}'" style="cursor:pointer;">
+				      				<c:if test="${not empty lifelist.fileNameList[0]}">
+				      					<td><img src="${path}/resource/community/${lifelist.fileNameList[0]}" style="width:auto;height:50px;" ></td>
+				      				</c:if>
+				      				<c:if test="${empty lifelist.fileNameList[0]}">
+				      					<td><img src="${path}/resource/community/default_Img.png" style="width:auto;height:50px;" ></td>
+				      				</c:if>
+				      				<td>${lifelist.category}</td>
+				      				<td>${lifelist.title}</td>
+				      			</tr>
+				      		</c:forEach>
+			      		</c:if>
+		      		</tbody>
+		      	</table>
+		    </div>
+		    <div class="modal-footer">
+		      <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<script>
+		/* $(".addView").click(function(){
+			var data = $(this).data('id');
+			alert(data)
+		}); */
+	</script>
+  <!-- 꿀팁 게시글 더보기 모달창 -->
+  <div class="modal fade" id="tipBoardAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+		  <div class="modal-content" style="width:1200px; margin-left:-50%;">
+		    <div class="modal-header">
+		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님 쓴 꿀팁 게시글 정보<br>
+		      <span style="color:grey; font-size:11pt;">＊ 게시글 클릭 시, 게시글 상세조회 페이지로 이동</span></h5>
+		      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+		        <span aria-hidden="true">&times;</span>
+		      </button>
+		    </div>
+		    <div class="modal-body">
+		      	<table id="boardViewTab" class="table align-items-center mb-0">
+		      		<thead>
+		      			<tr><th>이미지</th><th>카테고리</th><th>게시글명</th></tr>
+		      		</thead>
+		      		<tbody>
+			      		<c:if test="${not empty tip}">
+				      		<c:forEach var="tiplist" items="${tip}">
+				      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${tiplist.communitynumber}&keyword=&type=&shift=registDate&category=${tiplist.category}'" style="cursor:pointer;">
+				      				<c:if test="${not empty tiplist.fileNameList[0]}">
+				      					<td><img src="${path}/resource/community/${tiplist.fileNameList[0]}" style="width:auto;height:50px;" ></td>
+				      				</c:if>
+				      				<c:if test="${empty tiplist.fileNameList[0]}">
+				      					<td><img src="${path}/resource/community/default_Img.png" style="width:auto;height:50px;" ></td>
+				      				</c:if>
+				      				<td>${tiplist.category}</td>
+				      				<td>${tiplist.title}</td>
+				      			</tr>
+				      		</c:forEach>
+			      		</c:if>
+		      		</tbody>
+		      	</table>
+		    </div>
+		    <div class="modal-footer">
+		      <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
+		    </div>
+		  </div>
+		</div>
+	</div>
+	<script>
+		/* $(".addView").click(function(){
+			var data = $(this).data('id');
+			alert(data)
+		}); */
+	</script>
   <!--채팅 모달창  -->
   <div class="modal fade" id="chatModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	  <div class="modal-dialog modal-dialog-centered" role="document">

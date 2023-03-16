@@ -30,9 +30,11 @@
 		})
 		var expeditor=$('#edit-deschiption-edit .ql-editor')
 		$("#update").click(function(){
-			if($("input[name='indexNo']").is(":checked")==false){
+			/* if($("input[name='indexNo']").is(":checked")==false){
 				$("#notchecked").attr("checked",true)
 			}
+			수정내용에 따라 인덱스번호 전송
+			*/ 
 			// 유효성체크
 			  if($("input[name='title']").val()==""){
 				  alert("[안내메시지] 제목을 입력하여야 게시글 등록이 가능합니다.")
@@ -98,12 +100,12 @@
   				$("#index5").prop("checked", true)
   			})
   		}) */
-  		$("#imgChange").click(function(){
+  		/* $("#imgChange").click(function(){
   			$("#bigphoto").hide()
   			$("#imgTab").hide()
   			$('#fileClick1').show()
   			
-  		})
+  		}) 하나씩 선택 시, hide 미리보기 처리를 위한 기능*/
   		// 이미지 변경
   		$('#fileClick1').hide()
 	  	$('#fileClick2').hide()
@@ -162,21 +164,21 @@
 		  
 		  // 사진 용량에 따른 유효성체크
 		  function checkExtension(fileName,fileSize){
-
-		      var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
+	
+		      var regex = new RegExp("(.*?)\.(jpg|png)$");
 		      var maxSize = 20971520;  //20MB
 		      
-		      if(fileSize >= maxSize){
-		        alert('파일 사이즈 초과');
+		      if(!regex.test(fileName)){
+		        alert('[안내메시지]이미지 파일만 등록 가능합니다.');
 		        $("input[type='file']").val("");  //파일 초기화
 		        return false;
 		      }
 		      
-		      if(regex.test(fileName)){
-		        alert('[안내메시지]업로드 불가능한 파일이 있습니다.');
-		        $("input[type='file']").val("");  //파일 초기화
-		        return false;
-		      }
+		      if(fileSize >= maxSize){
+			        alert('[안내메시지] 파일 사이즈가 초과되었습니다. 다시 넣어주세요.');
+			        $("input[type='file']").val("");  //파일 초기화
+			        return false;
+			  }
 		      return true;
 		    }
 		  //이미지 넣기
@@ -191,7 +193,7 @@
 		        var str = '<div style="display: inline-flex; padding: 10px;"><li>';
 		        str += '<span>'+fileName+'</span><br>';
 		        //이미지 파일 미리보기
-		        if(f.type.match('image.*')){
+		        if(!f.type.match('image.*')){
 		          	var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
 	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
 	            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
@@ -254,9 +256,16 @@
                 	<div id="preview"></div>
 		             <div class="row" style="margin-left:35%;">
 			              <!-- <label style="border:1px solid black" >  -->
-				               <img id="bigphoto" class="border-radius-lg shadow-lg ms-5 regimg" src="${path}/resource/community/${boardImgArrOne}" 
-				                  			alt="이미지 없음" style="width:auto; height:400px;">
-				                <span id="noImg" class="ms-5" style="color:red;"></span>
+			              		<c:if test="${not empty boardImgArrOne}">
+					               <img id="bigphoto" class="border-radius-lg shadow-lg ms-5 regimg" src="${path}/resource/community/${boardImgArrOne}" 
+					                  			alt="이미지 없음" style="width:auto; height:400px;">
+					                <span id="noImg" class="ms-5" style="color:red;"></span>
+				                </c:if>
+				                <c:if test="${empty boardImgArrOne}">
+				                	<img id="bigphoto" class="border-radius-lg shadow-lg ms-5 regimg" src="${path}/resource/community/default_Img.png" 
+					                  			alt="이미지 없음" style="width:auto; height:400px;">
+					                <span id="noImg" class="ms-5" style="color:red;"></span>
+				                </c:if>
 				                
 			              <!--  </label> -->
 		                  					

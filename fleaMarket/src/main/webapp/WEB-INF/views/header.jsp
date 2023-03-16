@@ -228,9 +228,9 @@ li{
 	                              <i class="ni ni-box-2 text-primary me-3"></i>
 	                              소통
 	                            </div>
-	                            <a href="${path}/chatting.do" class="dropdown-item border-radius-md">
+	                            <%-- <a href="${path}/chatting.do" class="dropdown-item border-radius-md">
 	                              <span class="ps-3">채팅목록</span>
-	                            </a>
+	                            </a> --%>
 	                            <a href="#" onclick="myRoomLoginCk()" class="dropdown-item border-radius-md">
 	                              <span class="ps-3">My Room</span>
 	                            </a>

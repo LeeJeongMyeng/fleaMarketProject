@@ -6,11 +6,13 @@
 
     <mapper namespace="fleaMarket.a03_dao.Req4002_Dao">
     
+    	<!-- 커뮤니티 게시글 등록  -->
     	<insert id="communityInsert" parameterType="capplication">
     		INSERT INTO capplicaion values(communityNumber_seq.nextval,
     		 #{title},#{content},sysdate,NULL,#{category},#{email},#{hashtag},0)
     	</insert>
     	
+    	<!-- 커뮤니티 게시글 파일 등록 -->
     	<insert id="communityFileInsert" parameterType="boardimg">
 			INSERT INTO BoardImg values(#{imgname},#{imgpath},communityNumber_seq.currval)
 		</insert>
@@ -42,11 +44,10 @@
 		
 		<!-- 팔로우 회원 조회(검색) -->
 		<select id="followerSelect" parameterType="followmemberinfo" resultType="followmemberinfo">
-			select *
-			FROM FLEAMARKETMEMBER m,friend f,profile pro
-			WHERE 1=1
-			AND (m.email LIKE '%'||#{keyword}||'%'
-			OR m.nickname LIKE '%'||#{keyword}||'%')
+				select *
+				FROM FLEAMARKETMEMBER m,friend f,profile pro
+				WHERE (m.email LIKE '%'||''||'%'
+					OR m.nickname LIKE '%'||''||'%')
 			<choose>
 				<when test="div==null">
 					AND f.following=pro.email
@@ -61,12 +62,14 @@
 			</choose>
 		</select>
 		
+		<!-- 팔로우여부 체크 -->
 		<select id="followCheck" parameterType="HashMap" resultType="int">
 			SELECT count(*) FROM friend
 			WHERE myemail=#{myEmail}
 			AND FOLLOWING=#{following}
 		</select>
 		
+		<!-- 언팔로우  -->
 		<delete id="followmemberdelete" parameterType="followmemberinfo">
 			DELETE FROM friend
 			WHERE myemail=#{myemail}
@@ -79,6 +82,7 @@
 			SELECT * 
 			FROM fleamarketmember m, profile p
 			WHERE m.email=p.email
+			AND authority!='관리자'
 			<if test="div==null">
 				and m.email=#{email}
 			</if>
@@ -121,8 +125,10 @@
 			</if>
 			ORDER BY repdate desc
 		</select>
+		
 		<!-- 팔로우 회원 추가  -->
 		 <insert id="insertFriend" parameterType="HashMap">
 		 	  INSERT INTO FRIEND VALUES(#{myEmail},#{following})
 		 </insert>
+		 
     </mapper>

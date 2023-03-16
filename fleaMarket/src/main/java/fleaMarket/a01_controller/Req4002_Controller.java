@@ -381,14 +381,29 @@ public class Req4002_Controller {
 		board.setCategory("홍보글");
 		d.addAttribute("adv", service.boardSelect(board));
 		
+//		ArrayList<String> fname1 = new ArrayList<String>();
+//		for(RoomMemberInfo adv:service.boardSelect(board)) {
+//			d.addAttribute("advImg1",adv.getFileNameList());
+//			//fname1.add(adv.getFileNameList());
+//			//System.out.println("홍보글그ㅡ르ㅡ글"+adv.getFileNameList().toString());
+//		}
+		
 		board.setCategory("사업아이디어");
 		d.addAttribute("idea", service.boardSelect(board));
+//		for(RoomMemberInfo idea:service.boardSelect(board)) {
+//			d.addAttribute("ideaImg1", idea.getFileNameList()[0]);
+//		}
 		
 		board.setCategory("사는이야기");
 		d.addAttribute("life", service.boardSelect(board));
-		
+//		for(RoomMemberInfo life:service.boardSelect(board)) {
+//			d.addAttribute("lifeImg1",life.getFileNameList()[0]);
+//		}
 		board.setCategory("꿀팁");
 		d.addAttribute("tip", service.boardSelect(board)); 
+//		for(RoomMemberInfo tip:service.boardSelect(board)) {
+//			d.addAttribute("tipImg1",tip.getFileNameList()[0]);
+//		}
 		
 		// 좋아요 누적처리 및 커뮤니티 정보 (전윤환이 좋아요 테이블따로만들어서 필요없게 됨..기가막히게짯는데 -ㅅ-)
 //		int totlike=0;
