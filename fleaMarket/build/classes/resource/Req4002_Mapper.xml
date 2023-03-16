@@ -46,8 +46,8 @@
 		<select id="followerSelect" parameterType="followmemberinfo" resultType="followmemberinfo">
 				select *
 				FROM FLEAMARKETMEMBER m,friend f,profile pro
-				WHERE (m.email LIKE '%'||''||'%'
-					OR m.nickname LIKE '%'||''||'%')
+				WHERE (m.email LIKE '%'||#{keyword}||'%'
+					OR m.nickname LIKE '%'||#{keyword}||'%')
 			<choose>
 				<when test="div==null">
 					AND f.following=pro.email

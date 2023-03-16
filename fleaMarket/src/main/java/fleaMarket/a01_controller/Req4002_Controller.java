@@ -405,7 +405,7 @@ public class Req4002_Controller {
 //			d.addAttribute("tipImg1",tip.getFileNameList()[0]);
 //		}
 		
-		// 좋아요 누적처리 및 커뮤니티 정보 (전윤환이 좋아요 테이블따로만들어서 필요없게 됨..기가막히게짯는데 -ㅅ-)
+		// 좋아요 누적처리 및 커뮤니티 정보
 //		int totlike=0;
 //		for(RoomMemberInfo e:service.boardSelect(boardMap)) {
 //			totlike += e.getLikecnt();
