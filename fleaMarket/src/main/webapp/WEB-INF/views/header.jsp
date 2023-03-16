@@ -231,14 +231,25 @@ li{
 	                            		if(confirm("[안내메시지]로그인을 하셔야 MyRoom 이용이 가능합니다.\n로그인하러 가시겠습니까?")){
 	                            			location.href="${path}/SignIn.do"
 	                            		}
+	                            	}else if("${Login.authority}"=="관리자"){
+	                            		alert("[안내메시지] 관리자는 MyRoom 이용이 불가합니다.")
 	                            	}else{
 	                            		location.href="${path}/communityMemberRoom.do?email=${Login.email}"
 	                            	}
 	                            }
                             </script>
-                            <a href="${path}/communityFollowMember.do?myemail=${Login.email}" class="dropdown-item border-radius-md">
+                            <a href="#" onclick="followViewLoginCk()" class="dropdown-item border-radius-md">
                               <span class="ps-3">나의 팔로워 목록</span>
                             </a>
+                            <script>
+	                            function followViewLoginCk(){
+	                            	if("${Login.authority}"=="관리자"){
+	                            		alert("[안내메시지] 관리자는 팔로우 조회가 불가능합니다.")
+	                            	}else{
+	                            		location.href="${path}/communityFollowMember.do?myemail=${Login.email}"
+	                            	}
+	                            }
+                            </script>
                           </div>
                         </div>
                       </div>
