@@ -96,7 +96,7 @@
 	        cancelButtonText:'취소',
 		 }).then((result) =>{
 			 if(result.isConfirmed){
-			 location.href = "${path}/FleaMarketUptPage.do?postingNumber="+postingNumber;
+			 location.href = "FleaMarketUptPage.do?postingNumber="+postingNumber;
 			 }
 		 })
 	}
@@ -109,7 +109,7 @@
 	        cancelButtonText:'취소',
 		 }).then((result) =>{
 			 if(result.isConfirmed){
-			 location.href = "${path}//FleaMarketDel.do?postingNumber="+postingNumber;
+			 location.href = "FleaMarketDel.do?postingNumber="+postingNumber;
 			 }
 		 })
 	}
