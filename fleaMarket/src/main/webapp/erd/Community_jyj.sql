@@ -158,7 +158,7 @@ AND c.email='yujin@mail.com'
 ORDER BY registdate desc;
 
 SELECT *
-FROM BoardImg i,capplicaion c
+FROM BoardImg i,capplicaion c;
 WHERE i.communitynumber=c.communitynumber;
 AND c.communitynumber ='1';
 

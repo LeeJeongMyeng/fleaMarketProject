@@ -70,7 +70,7 @@
 		
 		// 팔로우 회원 클릭 시, 해당 회원 룸으로 이동 -- 안됨
 		function memberRoom(email){
-			location.href="communityMemberRoom.do?email"+this
+			location.href="communityMemberRoom.do?email="+email+"&loginEmail=${Login.email}"
 		}
 		// 룸주인과 로그인 세션 값 비교에 따라 설정값 변경
 		var login=""
@@ -99,21 +99,63 @@
 		console.log("내 댓글 정보",replyInfos)
 	});
 	// 팔로우 추가하기
-	function followAddFun(){
+	function followAddFun(followEmail){
 		if("${Login.email}"==""){
 			if(confirm("[안내메시지] 로그인을 하셔야 팔로우가 가능합니다.\n 로그인화면으로 이동하시겠습니까?")){
 				location.href="${path}/SignIn.do"
 			}
 		}else{
-			$("#followAddForm").submit()
+			location.href="${path}/followAdd.do?roomEmail="+followEmail+"&loginEmail=${Login.email}"
 		}
+	}
+	// 언팔로우하기
+	function unfollowFun(){
+		$("#unFollowForm").submit()
 	}
 	//alert(follow)
 	// 팔로우 성공판단
-	if("${followSuccess}"=="성공"){
+	if("${followSuccess}"=="팔로우성공"){
 		alert("[안내메시지] ${Login.email}이 ${followemail}님과 팔로우가 되었습니다.")
-		
 	}
+	//언팔로우 성공판단
+	if("${msg}"=="언팔로우"){
+		alert("[안내메시지] ${Login.email}이 ${unfollowemail}님과 언팔로우가 되었습니다.")
+	}
+	// 정보 공개/비공개
+	$("#flexSwitchCheckDefault00").change(function(){
+		fetch("${path}/communityMemberRoom.do",{
+			method : "POST",
+			header:{
+				"Content-Type": "application/json",
+			},
+			body:JSON.stringify({
+			email:'${roommember.email}',
+			loginEmail:'${Login.email}',
+			hideInfo:'1'
+		}),
+	})
+	    .then(res => res.json())  //응답 결과를 json으로 파싱
+	    .then(data => {
+	    		//***여기서 응답 결과로 실행할 동작을 정의하면 됨***
+	            // [ data.키값 ] 이런 형태로 value 추출 가능 
+	            console.log(data.string); //응답 결과를 console 창에 출력
+	            if($(this).is(":checked")){
+					$("#roomemail").show()
+					$("#roomphonenumber").show()
+					$("#roombusinessnumber").show()
+					$("#bulbicon").attr("src","${path}/resource/community/light-bulb.png")
+					$("#bulbicon").css({"width":"auto","height":"70px"})
+				}else{
+					$("#roomemail").hide()
+					$("#roomphonenumber").hide()
+					$("#roombusinessnumber").hide()
+					$("#bulbicon").attr("src","${path}/assets/img/small-logos/icon-bulb.svg")
+				}
+	    })
+	    .catch(err => { // 오류 발생시 오류를 담아서 보여줌
+	        console.log('Fetch Error',err);
+	    });
+	})
 	
 </script>
 </head>
@@ -142,21 +184,22 @@
           </div>
           <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3" id="follow_chat">
             <div class="nav-wrapper position-relative end-0">
-              	<form id="followAddForm" method="post" action="${path}/followAdd.do">
-	                 	<input type="hidden" name="roomEmail" value="${roommember.email}">
-	                 	<input type="hidden" name="loginEmail" value="${Login.email}">
+            	<!-- 팔로우 클릭 시, 보낼 데이터 -->
+              	<form id="unFollowForm" method="post" action="${path}/communityFollowDelete.do">
+	                 	<input type="hidden" name="following" value="${roommember.email}">
+	                 	<input type="hidden" name="myemail" value="${Login.email}">
 	            </form>
 	            <table style="width:100%; border-radius:50px; box-shadow:10px 10px 5px grey; height:50px; background:#ECECEC;">
 	            	<col width="50%">
 	            	<col width="50%;">
 	            	<tr style="height:30px;"><td id="followbutton" style="background:white; border-radius:50px;">
-	            			<a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center" onclick="followAddFun()" href="" >
+	            			<a class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center" onclick="followAddFun('${roommember.email}')" href="#" >
 		                    	<i class="ni ni-fat-add"></i>
 		                    	<span class="ms-2" >팔로우</span>
 		                 	</a>
 	            		</td>
 	            		<td id="followingbutton" style="background:white; border-radius:50px;">
-	            			 <a  class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center" href="">
+	            			 <a  class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center" onclick="unfollowFun()" href="#">
 			                    <i class="ni ni-fat-delete"></i>
 			                    <span class="ms-2" >팔로잉</span>
 			                 </a>
@@ -581,7 +624,7 @@
 		      			<td>${unfollowmem.email}</td>
 		      			<td>${unfollowmem.nickname}</td>
 		      			<td class="align-middle text-center"><a href="communityMemberRoom.do?email=${unfollowmem.email}&loginEmail=${Login.email}" id="roomGo" class="btn btn-outline-primary mt-2"><i class="ni ni-shop"></i></a></td>
-		      			<td class="align-middle text-center"><button id="followinsert" class="btn btn-outline-primary mt-2" onclick="followAddFun()"><i class="ni ni-fat-add"></i></button></td>
+		      			<td class="align-middle text-center"><button id="followinsert" class="btn btn-outline-primary mt-2" onclick="followAddFun('${unfollowmem.email}')"><i class="ni ni-fat-add"></i></button></td>
 		      			</tr>
 		      		</c:forEach>
 		      	</table>
