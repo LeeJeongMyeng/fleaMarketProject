@@ -100,5 +100,5 @@ where title like '%'||''||'%'
 ORDER BY REGISTDATE DESC;
 
 
-
+SELECT * FROM FLEAMARKETMEMBER;
 	

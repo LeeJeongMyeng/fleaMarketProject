@@ -230,7 +230,7 @@ function displayCenterInfo(result, status) {
 		//파일이름의 확장자
 		var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
 		//검사할 확장자의 배열
-    	var extension = ['.doc','docx','ppt','pptx','xls','pdf','hwp','txt'];
+    	var extension = ['doc','docx','ppt','pptx','xls','pdf','hwp','txt'];
     	
     	extension.forEach(function(element) {
 	        if(ext == element){
@@ -244,16 +244,64 @@ function displayCenterInfo(result, status) {
 		return false;
 		}
 	
-	/*var fileForm = /(.*?)\.(jpg|jpeg|png|gif|bmp|pdf|docx|hwp)$/;
-	 if(!document.aform.pro.value){
-	     alert("첨부파일은 필수");
-	     return false;
-	 }*/
+	
+//제목 입력시 색변환
 
-	/* if(!fileForm.test(document.aform.pro.value)){
-	     alert("첨부할 수 없는 파일입니다.");
-	     return false;
-	 }*/
+	
+/*
+$('input[name=title]').keyup(function(this){
+	
+	//데이터가 들어왔을 경우
+	  if($(this).val()!=''){
+		  this.addClass('is-valid')
+		  
+    //데이터가 없을 경우 		  
+	  }
+});	
+
+
+
+
+var titleVal = $('[name=title]').val()
+var title = $('[name=title]')
+
+$('[name=title]').keyup(function(tt){
+	
+	//데이터가 들어왔을 경우
+	  if($(this).val()!=''){
+		  this.addClass('is-valid')
+		  
+    //데이터가 없을 경우 		  
+	  }else{
+		  this.remove('is-invalid') 
+		  
+	  }
+
+	
+	
+	
+	
+	
+});
+
+	if(titleVal==''){
+		//$('pass1feedback').text('이메일 형식이 맞지않습니다.')
+		title.addClass('is-invalid')
+		return false;
+	}
+    if(data.DuplicateEmail==null){
+		Emaildoc.removeClass('is-invalid')
+		Emaildoc.addClass('is-valid')
+		sendEmail()
+	}else{
+		alert("중복된 이메일이 있습니다. 다시입력바랍니다.")
+		$('#emailfeedback').text('중복된 이메일입니다.')
+		Emaildoc.val('')
+		Emaildoc.focus()
+		Emaildoc.addClass('is-invalid')
+				}
+
+*/
 	 
 	  return true;
 	}

@@ -115,7 +115,6 @@ $(document).ready(function(){
 		<div class="container-fluid py-4"  style="margin-top:100px;">
 			<div class="row">
 				<div class="col-lg-9 col-12 mx-auto">
-				<button id="request">주소설정</button>
 					<form  method="post"  action="fleaMarketins.do" id="aform" onsubmit="return checkForm1()"
 						name="aform" enctype="multipart/form-data">
 						<div class="card card-body mt-4">
@@ -132,23 +131,10 @@ $(document).ready(function(){
 								<div class="col-6">
 									<label class="form-label labelFont">주소 설정</label> 
 									<div class = "s_form">
-									   <input type="button" class="btn btn-primary" onclick="execDaumPostcode()" style="margin-bottom: 9px;" value="우편번호 찾기"><br>									  
-									   <input name = "addrs1" type="text"  id="sample6_address" class="form-control soooo2" style="width:102%;" placeholder="주소">
+									   <input type="button" name="addrs0" class="btn btn-primary" onclick="execDaumPostcode()" style="margin-bottom: 9px;" value="우편번호 찾기"><br>									  
+									   <input name = "addrs1" type="text"  id="sample6_address" class="form-control soooo2" style="width:102%;" placeholder="주소" readonly>
                                        <div class="btn btn-primary" onclick="callAdd()" style="height: 41px;margin-left: 530px;margin-top: -53px;width: 70px;">확인</div>
 									   
-									
-									<script>
-								
-							
-							
-							function callAdd(){
-											alert("등록:"+$("input[name=addrs1]").val())
-											geocoder.addressSearch($("input[name=addrs1]").val(), mafun ); 
-							
-									}
-									
-									
-									</script>
 									   <br>	
 									  
 									   				
@@ -170,13 +156,8 @@ $(document).ready(function(){
 										placeholder="종료일을 선택해주세요" name="closeDate" id="closeDate" onkeyup="keyevent(this)" data-input>
 								</div>
 							</div>
+							
 
-							<!-- 캘린더 -->
-						<!-- 	<div class="card card-calendar">
-								<div class="card-body p-3">
-									<div class="calendar" data-bs-toggle="calendar" id="calendar"></div>
-								</div>
-							</div> -->
 							<iframe src="http://localhost:7080/fleaMarket/calendar.do" style="height: 500px;">
 							    <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
 							</iframe>
@@ -186,7 +167,7 @@ $(document).ready(function(){
 								<div class="col-6">
 									<label class="form-label labelFont">모집 인원</label> <input
 										class="form-control" type="text" name="approvalMaxCnt" 
-										oninput="this.value = this.value.replace(/[^0-9.]/g, '');">
+										oninput="this.value = this.value.replace(/[^0-50.]/g, '');">
 								</div>
 							</div>
 
@@ -284,63 +265,127 @@ $(document).ready(function(){
 	<script src="${path}/assets/js/plugins/flatpickr.min.js"></script>
 	<script src="${path}/assets/js/plugins/dropzone.min.js"></script>
 	
-	<script>
+	
+  <script>
+/*   var today1 = new Date();
 
+  var year = today1.getFullYear();
+  var month = ('0' + (today1.getMonth() + 1)).slice(-2);
+  var day = ('0' + today1.getDate()).slice(-2);
 
-   //템플릿
+  var dateString = year + '-' + month  + '-' + day;
+	
+console.log(dateString);
+	if($('input[name=openDate]').val()<=dateString){
+		alert("오늘 이후로 시간을 설정하세요")
+	}  
+ */
   
-    if (document.getElementById('editor')) {
-      var quill = new Quill('#editor', {
-        theme: 'snow' // Specify theme in configuration
-      });
-    }
+	$('input[name=title]').keyup(function(){
+		
+		//데이터가 들어왔을 경우
+		  if($(this).val()!=''){
+			  $(this).removeClass('is-invalid')
+			  $(this).addClass('is-valid')
+			  
+	    //데이터가 없을 경우 		  
+		  }else{
+				 $(this).removeClass('is-valid')
+				 $(this).addClass('is-invalid')
+			  
+		  }	
+	});	
+	
+	$('input[name=openDate]').on({ 
+		change: function() {
+			console.log("change")
+			if($(this).val()!=''){
+				  $(this).removeClass('is-invalid')
+				  $(this).addClass('is-valid')
+			  }
+		},
+		keyup: function() {
+			console.log("ku")
+			if($(this).val().length!=10){
+				  $(this).removeClass('is-valid')
+				  $(this).addClass('is-invalid')
+			  }
+		} 
+	});
+		
+	$('input[name=closeDate]').on({ 
+		change: function() {
+			console.log("change")
+			if($(this).val()!=''){
+				  $(this).removeClass('is-invalid')
+				  $(this).addClass('is-valid')
+			  }
+		},
+		keyup: function() {
+			console.log("ku")
+			if($(this).val().length!=10){
+				  $(this).removeClass('is-valid')
+				  $(this).addClass('is-invalid')
+			  }
+		} 
+	});
+	
+	
+	
+	$('input[name=approvalMaxCnt]').keyup(function(){
+		
+		//데이터가 들어왔을 경우
+		  if($(this).val()!=''){
+			  $(this).removeClass('is-invalid')
+			  $(this).addClass('is-valid')
+			  
+	    //데이터가 없을 경우 		  
+		  }else{
+				 $(this).removeClass('is-valid')
+				 $(this).addClass('is-invalid')
+			  
+		  }	
+	});	
 
-    if (document.getElementById('choices-multiple-remove-button')) {
-      var element = document.getElementById('choices-multiple-remove-button');
-      const example = new Choices(element, {
-        removeItemButton: true
-      });
-
-      example.setChoices(
-        [{
-            value: 'One',
-            label: 'Label One',
-            disabled: true
-          },
-          {
-            value: 'Two',
-            label: 'Label Two',
-            selected: true
-          },
-          {
-            value: 'Three',
-            label: 'Label Three'
-          },
-        ],
-        'value',
-        'label',
-        false,
-      );
-    }
-
-    if (document.querySelector('.datetimepicker')) {
-      flatpickr('.datetimepicker', {
-        allowInput: true
-      }); // flatpickr
-
-   
-    }
-
-    
-    
-    Dropzone.autoDiscover = false;
-    var drop = document.getElementById('dropzone')
-    var myDropzone = new Dropzone(drop, {
-      url: "/file/post",
-      addRemoveLinks: true
-
-    });
+	$('input[name=recruitmentStartDate]').on({ 
+		change: function() {
+			console.log("change")
+			if($(this).val()!=''){
+				  $(this).removeClass('is-invalid')
+				  $(this).addClass('is-valid')
+			  }
+		},
+		keyup: function() {
+			console.log("ku")
+			if($(this).val().length!=10){
+				  $(this).removeClass('is-valid')
+				  $(this).addClass('is-invalid')
+			  }
+		} 
+	});
+	$('input[name=recruitmentEndDate]').on({ 
+		change: function() {
+			console.log("change")
+			if($(this).val()!=''){
+				  $(this).removeClass('is-invalid')
+				  $(this).addClass('is-valid')
+			  }
+		},
+		keyup: function() {
+			console.log("ku")
+			if($(this).val().length!=10){
+				  $(this).removeClass('is-valid')
+				  $(this).addClass('is-invalid')
+			  }
+		} 
+	});
+	
+	
+	
+	
   </script>
+  
+  
 	<!-- Kanban scripts -->
 	<script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
 	<script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>
@@ -353,6 +398,7 @@ $(document).ready(function(){
 	<script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
 </body>
 
+<script src="${path}/resource/js/Req3000/template.js"></script>
 <!-- <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
 <script src="${path}/resource/js/Req3000/address.js"></script>
 <%--gps --%>
