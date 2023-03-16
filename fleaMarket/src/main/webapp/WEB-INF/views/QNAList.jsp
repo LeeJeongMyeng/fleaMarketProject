@@ -66,7 +66,7 @@ var SessionEmail = '${Login.email}'
 								<div class="card-header pb-0">
 									<div class="d-lg-flex">
 										<div>
-											<h5 class="mb-0">고객센터</h5>
+											<h5 class="mb-0">공지사항 및 문의글 조회</h5>
 											<p class="text-sm mb-0">검색창에 검색할 제목이나 작성자 이메일을 입력해주세요</p>
 										</div>
 										
@@ -84,7 +84,7 @@ var SessionEmail = '${Login.email}'
 
 										<div class="table-responsive">
 												
-												<table class="table table-flush" id="QnAListTable" style="cursor:default"> 
+												<table class="table table-flush" id="QnAListTable" style="cursor:pointer"> 
 												 <colgroup> 
 											   	<col width="5%">
 											   	<col width="5%">
@@ -145,8 +145,8 @@ var SessionEmail = '${Login.email}'
 														</tbody>
 											</table>
 											<c:if test="${ empty QNAList}">
-											    <img src="/fleaMarket/resource/img/nosearchPage/t1.png" alt="이미지가 없음" style="width:200px;">
-											    <h3 style="text-align:center;">검색된 문의글이 없습니다.</h3>
+											    <img src="/fleaMarket/resource/img/nosearchPage/t1.png" class="mx-auto d-block" alt="이미지가 없음" style="width:200px;">
+											    <h4 style="text-align:center;">검색된 문의글이 없습니다.</h4>
 											</c:if>
 											<nav aria-label="Page navigation example">
 											  <ul class="pagination justify-content-center">
@@ -176,7 +176,7 @@ var SessionEmail = '${Login.email}'
 						</div>
 					</div>
 				<br>
-					<button type="button" id="regBtn" class="btn btn-outline-primary btn-sm mb-0" style="float:right; cursor:default;">등록</button>
+					<button type="button" id="regBtn" class="btn btn-outline-primary btn-sm mb-0" style="float:right; cursor:pointer;">등록</button>
 				</div>
 
 			</div>

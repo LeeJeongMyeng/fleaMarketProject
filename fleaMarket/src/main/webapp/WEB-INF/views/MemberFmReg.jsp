@@ -72,7 +72,7 @@
 						<input type="hidden" name="curPage" />
 							<div class="row">
 								<div class="table-responsive mt-3">
-									<table class="table table-flush" id="FleamarketListTable" style="cursor:default">
+									<table class="table table-flush" id="FleamarketListTable" style="cursor:pointer">
 										<col width="5%">
 										<col width="30%">
 										<col width="10%">
@@ -93,7 +93,7 @@
 										</thead>
 										<tbody>
 											<c:forEach var="FleaMarket" items="${FleaMarketList}">
-												<tr ondblclick="goDetail(${FleaMarket.postingNumber})">
+												<tr onclick="goDetail(${FleaMarket.postingNumber})">
 													<td>${FleaMarket.postingNumber}</td>
 													<td>${FleaMarket.title}</td>
 													<td>${FleaMarket.recruitmentStartDate}</td>
@@ -152,5 +152,6 @@
 		</footer>
 	</main>
 	<script src="${path}/resource/js/Req1001/MemberFmReg.js"></script>
+	
 </body>
 </html>
