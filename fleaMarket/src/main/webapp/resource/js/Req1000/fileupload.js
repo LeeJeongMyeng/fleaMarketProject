@@ -4,7 +4,7 @@ $(document).ready(function() {
 	
 //사용 이유 맞는곳에다가 자신 태그 추가하셈	
  $("#qnafiles").on("change", handleImgsFilesSelect); //이미지만 올릴친구
- $("#qnafilesadmin").on("change", handleImgsFilesSelect2); //이미지랑 서류확장자 올릴친구
+ $("#qnafilesadmin, #appFile, #addFile").on("change", handleImgsFilesSelect2); //이미지랑 서류확장자 올릴친구
 });
 
 

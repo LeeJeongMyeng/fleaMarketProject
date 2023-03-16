@@ -74,7 +74,7 @@ public class FMViewController {
 	
 	// 신청글 + 파일첨부 등록
 	@PostMapping("/insApp.do")
-	public String insApp(FApplication ins, RedirectAttributes rttr, MultipartHttpServletRequest appFile){
+	public String insApp(FApplication ins, MultipartHttpServletRequest appFile){
 		
 		service.insApp(ins);
 
@@ -96,7 +96,6 @@ public class FMViewController {
 			 af.setApplicationNo(ins.getApplicationNo());
 			 service.insAppFile(af);
 		}
-		rttr.addFlashAttribute("msg","등록 성공");
 		return "redirect:appMyList.do";
 	}	
 	

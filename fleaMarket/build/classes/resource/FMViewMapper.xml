@@ -43,7 +43,7 @@
 	<select id="appReceivedList" resultType="fapplication" parameterType="fapplicationsch">
 		SELECT *
 		FROM (
-			SELECT rownum cnt,
+			SELECT ROW_NUMBER() over(ORDER BY a.applicationno DESC) cnt,
 					a.applicationno,
 					fm.title,
 					a.applicationdate,
@@ -81,7 +81,7 @@
 	<select id="appMyList" resultType="fapplication" parameterType="fapplicationsch">
 		SELECT *
 		FROM (
-			SELECT rownum cnt,
+			SELECT ROW_NUMBER() over(ORDER BY a.applicationno DESC) cnt,
 					a.applicationno,
 					fm.title,
 					a.applicationdate,

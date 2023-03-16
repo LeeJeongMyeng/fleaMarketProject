@@ -29,116 +29,12 @@
   <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+  <link href="${path}/resource/css/Req3008/appList.css" rel="stylesheet" />
   
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"
    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
    crossorigin="anonymous"></script>
-  <script type="text/javascript">
-	
-	function updateAppRe(applicationNo, approvalwhether){
-		// 유효성 검사
-		$.ajax({
-			url:"updateAppRe.do",
-			type:"post",
-			data:"applicationNo="+applicationNo+"&approvalWhether="+approvalwhether,
-			dataType:"json",
-			success:function(data){
-				var msg="";
-				if(approvalwhether=='a'){
-					msg="승인되었습니다"
-					alertIcon="success"
-				}else{
-					msg="거부되었습니다"
-					alertIcon="warning"
-				}
-				Swal.fire({
-				    icon:alertIcon,
-			        text:msg,
-			        confirmButtonText:'확인'
-				}).then((result) =>{
-					 if(result.isConfirmed){
-						 location.reload(); 
-					 }
-				 })
-				
-			},
-			error:function(xhr,status,err){
-	              console.log(xhr)
-	              console.log(status)
-	              console.log(err)
-	        }
-		})
-	}
-	
-	// 페이징
-	function goPage(cnt){
-		$("[name=curPage]").val(cnt);
-		$("#frmSch").submit()
-	}
-	
-	// 받은 신청 상세 조회 모달창
-    function getFiles(appno){
-    	console.log(appno)
-		$.ajax({
-			url:"appFileView.do",
-			type:"post",
-			data:"applicationNo="+appno,
-			dataType:"json",
-			success:function(data){
-				console.log(data.appFile)
-				var files = data.appFile;
-				var str = "";
-				
-				if(files == null){ // 첨부 파일 없을 때
-					str += "<div class='form-group text-center'>신청을 승인하시겠습니까?</div>"
-					$(".modal-body > label").hide()
-				}else{ // 첨부 파일 있을 때
-					var filelist = files.split(',');
-					filelist.forEach(function(f){
-						str += "<input class='form-control w-50 mb-2' onclick=\"javascript:location.href='downloadAppFile.do?filename="+f+"'\" name='filename' type='text' value='"+f+"' readonly/>"
-					})
-					str += "<button class='m-1 btn btn-primary' type='button' onclick=\"alldown('downloadAppFileForm')\">전체 다운로드</button>";
-				}
-				$('#downloadAppFileForm').html(str)
-				$(".ApprovalBtnWrap button:nth-child(1)").attr("onclick","updateAppRe("+appno+",'a')")
-				$(".ApprovalBtnWrap button:nth-child(2)").attr("onclick","updateAppRe("+appno+",'r')")
-				$('#ApplicaionModalBtn').click() // 모달창
-			},
-			error:function(xhr,status,err){
-	              console.log(xhr)
-	              console.log(status)
-	              console.log(err)
-	        }
-		})
-	}
-	
-	// 신청글 파일 전체 다운로드
-	function alldown(){
-		var len = $('#downloadAppFileForm').children('input[name=filename]').length
-		var start=1;
-		setInterval(function() {
-			$("#downloadAppFileForm input[name=filename]:nth-child("+start+")").click()
-			start++
-			if(start==len){
-				clearInterval()
-			}
-		},500)
-		console.log(nth)
-	}
-
-
-</script>
 </head>
-<style>
-
-  	#downloadAppFileForm input:hover{
-  		text-decoration:underline;
-  		cursor:pointer;
-  	}
-	.table> :not(:first-child) {
-	    border-top: 1px solid currentColor;
-	}
-</style>
 <body class="g-sidenav-show   bg-gray-100">
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
   <main class="main-content position-relative border-radius-lg ">
@@ -367,6 +263,8 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
+  <!-- JS -->
+  <script src="${path}/resource/js/Req3008/appReceivedList.js"></script>
 </body>
 
 </html>

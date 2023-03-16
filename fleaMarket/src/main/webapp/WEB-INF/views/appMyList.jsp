@@ -29,139 +29,12 @@
   <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+  <link href="${path}/resource/css/Req3008/appList.css" rel="stylesheet" />
   
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"
    integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
    crossorigin="anonymous"></script>
-  <script type="text/javascript">
-	
-	// 페이징
-	function goPage(cnt){
-		$("[name=curPage]").val(cnt);
-		$("#frmSch").submit()
-	}
-	
-	// 내 신청 상세 조회 모달창
-    function getFiles(index,appno){
-    	console.log(appno)
-		$.ajax({
-			url:"appFileView.do",
-			type:"post",
-			data:"applicationNo="+appno,
-			dataType:"json",
-			success:function(data){
-				
-				var files = data.appFile;
-				var str = "<input type=\"hidden\" name=\"applicationNo\" value=\""+appno+"\"/>";
-				
-				if(files == null){ // 첨부 파일 없을 때
-					str += "<div class='form-group text-center'>삭제하시겠습니까?</div>"
-					$(".modal-body > label").hide()
-					$(".ApprovalBtnWrap button:nth-child(1)").hide()
-				}else{ // 첨부 파일 있을 때
-					var filelist = files.split(',');
-					filelist.forEach(function(f){
-						str+="<input class='form-control w-50 mb-2' onclick=\"javascript:location.href='downloadAppFile.do?filename="+f+"'\" name='filename' type='text' value='"+f+"' readonly/>"
-					})
-					str += "<input type='file' name='addFile' class='form-control w-50 mb-2' id='addFile' multiple>"
-					str += "<button class='m-1 btn btn-primary' type='button' onclick=\"alldown('downloadAppFileForm')\">전체 다운로드</button>";
-					$(".modal-body > label").show()
-					$(".ApprovalBtnWrap button:nth-child(1)").show()
-				}
-				$('#downloadAppFileForm').html(str)
-				$(".ApprovalBtnWrap button:nth-child(1)").attr("onclick","goApp("+index+",'uptApp')") // 수정 버튼
-				$(".ApprovalBtnWrap button:nth-child(2)").attr("onclick","goApp("+index+",'delApp')") // 삭제 버튼
-				$('#ApplicaionModalBtn').click() // 모달창
-			},
-			error:function(xhr,status,err){
-	              console.log(xhr)
-	              console.log(status)
-	              console.log(err)
-	        }
-		})
-	}
-	
- 	// 신청글 파일 전체 다운로드
-	function alldown(){
-		var len = $('#downloadAppFileForm').children('input[name=filename]').length
-		var start=1;
-		setInterval(function() {
-			$("#downloadAppFileForm input[name=filename]:nth-child("+start+")").click()
-			start++
-			if(start==len){
-				clearInterval()
-			}
-		},500)
-		console.log(nth)
-	}
-	
-	// 내 신청 수정/삭제 유효성 검사
-  	function goApp(index,methods){
-		var statusText = $('#datatable-search tbody tr:nth-child('+index+') td:nth-child(4) span').text()
-		if(statusText != '대기'){
-			cantUptAlert();
-			return false;
-		}
-		if(methods=='uptApp' && $('#addFile').val()==''){
-			insFileAlert();
-			return false;
-		}
-		console.log(methods+".do")
-		$('#downloadAppFileForm').attr({action:methods+".do", method:"post"})
-		$('#downloadAppFileForm').submit()
-  	}
-  
- 	// 내 신청 삭제
-	function delApp(applicationNo){
-		$.ajax({
-			url:"delApp.do",
-			type:"post",
-			data:"applicationNo="+applicationNo,
-			dataType:"json",
-			success:function(data){
-				delAlert();
-				location.reload(); 
-			},
-			error:function(xhr,status,err){
-	              console.log(xhr)
-	              console.log(status)
-	              console.log(err)
-	        }
-		})
-	}
- 	
- 	// alert
- 	function cantUptAlert(){
- 		Swal.fire({
-		    icon:'warning',
-	        text:'승인/거부된 신청은 편집할 수 없습니다',
-	        confirmButtonText:'확인'
-		 })
- 	}
- 	function insFileAlert(){
- 		Swal.fire({
-		    icon:'warning',
-	        text:'파일을 첨부해 주세요',
-	        confirmButtonText:'확인'
-	 	})
- 	}
- 	function delAlert(){
- 		Swal.fire({
-		    icon:'warning',
-	        text:'삭제되었습니다',
-	        confirmButtonText:'확인'
-	 	})
- 	}
-</script>
 </head>
-<style>
-
-  	#downloadAppFileForm input:hover{
-  		text-decoration:underline;
-  		cursor:pointer;
-  	}
-
-</style>
 <body class="g-sidenav-show   bg-gray-100">
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
   <main class="main-content position-relative border-radius-lg ">
@@ -390,6 +263,7 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
+  <!-- JS -->
+  <script src="${path}/resource/js/Req3008/appMyList.js"></script>
 </body>
-
 </html>
