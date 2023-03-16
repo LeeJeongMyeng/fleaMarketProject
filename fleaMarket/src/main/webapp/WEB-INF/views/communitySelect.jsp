@@ -34,6 +34,7 @@
 	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 	<script src="https://kit.fontawesome.com/3aab1ef667.js" crossorigin="anonymous"></script>	
 <style>
+
 .disflex {
 	display: flex;
 	gap: 10px;
@@ -55,6 +56,7 @@
 
 .text-sm {
 	line-height: 3;
+	padding-right:50px;
 }
 
 .btnStyle {
@@ -176,7 +178,7 @@
 									<th>작성자</th>
 									<th>조회수</th>
 									<th>좋아요</th>
-									<th>작성날짜</th>
+									<th style = "padding-left:90px">작성날짜</th>
 									<th>room</th>
 									
 								</tr>
@@ -184,7 +186,9 @@
 							
 				<!-- 전체글 목록  -->
 							<tbody style="text-align: center">
+							   
 								<c:forEach var="lists" items="${list}">
+								
 									<tr>
 										<td>
 											<div class="d-flex">   
@@ -206,16 +210,20 @@
 												&category=${pageMaker.cri.category}
 												">${lists.title }</a></h6>
 										</td>
-										<td class="text-sm">${lists.nickname }</td>
-										<td class="text-sm">${lists.viewCnt }</td>
-										<td class="text-sm">${lists.likeCnt }</td>
-										<td class="text-sm">${lists.registDate }</td>
-										<td style="text-align: center; padding-top: 12px;">
+										<td style = "padding-right:35px" class="text-sm">${lists.nickname }</td>
+										<td style = "padding-right:35px" class="text-sm">${lists.viewCnt }</td>
+										<td style = "padding-right:35px" class="text-sm">${lists.likeCnt }</td>
+										<td style = "padding-right:60px" class="text-sm">${lists.registDate }</td>
+										<td style="text-align: center; padding-top: 12px; padding-right:20px">
 										<a href = "communityMemberRoom.do?email=${lists.email}"><span
 											class="badge badge-secondary badge-sm">room 가기</span></a></td>
 										
 									</tr>
+									
+									
 								</c:forEach>
+								
+								
 							</tbody>
 						</table>
 						<!-- 페이지 네이션  -->
