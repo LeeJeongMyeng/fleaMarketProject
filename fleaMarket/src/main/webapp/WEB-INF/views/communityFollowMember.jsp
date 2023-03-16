@@ -42,6 +42,7 @@
 			
 			var msg = "${msg}"
 			if(msg=="언팔로우"){
+				alert("[안내메시지] ${Login.email}이 ${unfollowemail}님과 언팔로우가 되었습니다.")
 				location.href="${path}/communityFollowMember.do?myemail="+login
 			}
 		});

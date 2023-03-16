@@ -116,6 +116,10 @@
 	// 팔로우 성공판단
 	if("${followSuccess}"=="팔로우성공"){
 		alert("[안내메시지] ${Login.email}이 ${followemail}님과 팔로우가 되었습니다.")
+		 /*  Swal.fire({
+	          text: '팔로우 완료',
+	          icon: 'success'
+	      }); */
 	}
 	//언팔로우 성공판단
 	if("${msg}"=="언팔로우"){
