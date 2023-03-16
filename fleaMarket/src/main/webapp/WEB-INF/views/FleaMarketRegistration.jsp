@@ -132,24 +132,19 @@ $(document).ready(function(){
 								<div class="col-6">
 									<label class="form-label labelFont">주소 설정</label> 
 									<div class = "s_form">
-									   <input type="button" onclick="execDaumPostcode()" style="margin-bottom: 9px;" value="우편번호 찾기"><br>									  
-									   <input name = "addrs1" type="text" onkeyup="callAdd(this)" id="sample6_address" class="form-control soooo2" style="width:102%;" placeholder="주소">
-									
+									   <input type="button" class="btn btn-primary" onclick="execDaumPostcode()" style="margin-bottom: 9px;" value="우편번호 찾기"><br>									  
+									   <input name = "addrs1" type="text"  id="sample6_address" class="form-control soooo2" style="width:102%;" placeholder="주소">
+                                       <div class="btn btn-primary" onclick="callAdd()" style="height: 41px;margin-left: 530px;margin-top: -53px;width: 70px;">확인</div>
+									   
 									
 									<script>
-									
+								
 							
 							
-							function callAdd(ob){
-										//등록 버튼 추가해주기 
-										if(event.keyCode==13){
-											alert("등록:"+ob.value)
-											geocoder.addressSearch(ob.value, mafun );  
-											
-										}
-										//
-										
-										
+							function callAdd(){
+											alert("등록:"+$("input[name=addrs1]").val())
+											geocoder.addressSearch($("input[name=addrs1]").val(), mafun ); 
+							
 									}
 									
 									
@@ -182,7 +177,7 @@ $(document).ready(function(){
 									<div class="calendar" data-bs-toggle="calendar" id="calendar"></div>
 								</div>
 							</div> -->
-							<iframe src="http://localhost:7081/fleaMarket/calendar.do" style="height: 500px;">
+							<iframe src="http://localhost:7080/fleaMarket/calendar.do" style="height: 500px;">
 							    <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
 							</iframe>
  
@@ -216,7 +211,7 @@ $(document).ready(function(){
 
 							<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">장소</label>
+									<label class="form-label labelFont">장소(상세클릭)</label>
 
 								</div>
 
@@ -375,15 +370,7 @@ $('input[name=recruitmentEndDate]').attr("min", today);
  */
   
 
-//파일처리 show/hide 
-/*  $('#choices-gender').change(function() {
-    var result = $('#choices-gender option:selected').val();
-    if (result == 'P') {
-      $('.div1').show();
-    } else {
-      $('.div1').hide();
-    }
-  });  */
+
 </script>
 
 

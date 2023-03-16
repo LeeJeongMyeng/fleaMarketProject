@@ -61,6 +61,12 @@
 			</choose>
 		</select>
 		
+		<select id="followCheck" parameterType="HashMap" resultType="int">
+			SELECT count(*) FROM friend
+			WHERE myemail=#{myEmail}
+			AND FOLLOWING=#{following}
+		</select>
+		
 		<delete id="followmemberdelete" parameterType="followmemberinfo">
 			DELETE FROM friend
 			WHERE myemail=#{myemail}
@@ -116,7 +122,7 @@
 			ORDER BY repdate desc
 		</select>
 		<!-- 팔로우 회원 추가  -->
-		 <insert id="insertFriend" parameterType = "HashMap">
+		 <insert id="insertFriend" parameterType="HashMap">
 		 	  INSERT INTO FRIEND VALUES(#{myEmail},#{following})
 		 </insert>
     </mapper>

@@ -72,7 +72,7 @@
 						<input type="hidden" name="curPage" />
 							<div class="row">
 								<div class="table-responsive mt-3">
-									<table class="table table-flush" id="QnAListTable">
+									<table class="table table-flush" id="QnAListTable"style="cursor:default">
 										<col width="20%">
 										<col width="40%">
 										<col width="15%">

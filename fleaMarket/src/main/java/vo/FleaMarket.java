@@ -17,8 +17,24 @@ public class FleaMarket {
 	private int viewCnt;
 	private String address;
 	private String addrs1;
+	private String backgroundColor;
+	private String textColor;
+
 	
 
+	public String getBackgroundColor() {
+		return backgroundColor;
+	}
+	public String getTextColor() {
+		return textColor;
+	}
+	
+	public void setBackgroundColor(String backgroundColor) {
+		this.backgroundColor = backgroundColor;
+	}
+	public void setTextColor(String textColor) {
+		this.textColor = textColor;
+	}
 	public String getAddrs1() {
 		return addrs1;
 	}

@@ -30,6 +30,7 @@
                 }
         
                 document.getElementById("sample6_address").value = addr;
+             
 
             }
         }).open();

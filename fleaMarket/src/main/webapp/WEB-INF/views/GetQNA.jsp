@@ -120,7 +120,7 @@
 						${(Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email)?'':'none'}
 						  <c:if test="${Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email }">--%>	
 								<button type="submit" ${(Login.authority=='관리자' || (qna.method=='q' && Login.email==qna.email))?'':'style="display:none;"'} class="btn btn-outline-primary btn-md mb-0 me-1">수정</button>
-								<button type="button" ${(Login.authority=='관리자' || (qna.method=='q' && Login.email==qna.email))?'':'style="display:none;"'} data-bs-toggle="modal" data-bs-target="#QNADeleteModal" id="DeleteQnaModalbtn"  class="btn btn-outline-danger btn-md mb-0 me-1">삭제</button>  <!-- 모달창추가 -->
+							<button type="button" ${(Login.authority=='관리자' || (qna.method=='q' && Login.email==qna.email))?'':'style="display:none;"'} id="delBtn" class="btn btn-outline-danger btn-md mb-0 me-1" data-qnano="${qna.qnano}">삭제</button>
 						<%--  	</c:if>--%>
 							<%--
 							<c:if test="${Login.authority=='관리자' && qna.method=='q'}">
@@ -191,7 +191,7 @@
 				</div>
 			</footer>
 	</main>
-	<!-- 아이디 비밀번호 찾기 모달창 -->
+<%--
  <!--  <div data-bs-toggle="modal" data-bs-target="#QNADeleteModal" id="#QNADeleteModal"></div> -->
 	<div class="modal fade" id="QNADeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	  <div class="modal-dialog">
@@ -217,7 +217,11 @@
                       </div>
                      </form>
                     </div>
-                  </div>
+                  </div> 
+                  --%>
+                  <form id = "deleteForm" method = "post" action = "${path}/QNADelete.do">
+                  <input type= "hidden" name ="qnano" value = "${qna.qnano}"/>
+               	 </form>
                   <!--single form panel-->
 	      </div>
 	      
@@ -229,8 +233,26 @@
 	  </div>
 	</div> <!-- sns확인모달 모달끝 -->
 <script>
-// 등록 버튼 클릭 시,
 
+
+$('#delBtn').on('click', function() {
+    Swal.fire({
+       title: '삭제하시겠습니까?',
+       icon: 'warning',
+       showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
+       confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
+       cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
+       confirmButtonText: '확인', // confirm 버튼 텍스트 지정
+       cancelButtonText: '취소' // cancel 버튼 텍스트 지정
+    }).then((result) => {
+       if (result.value) {
+    	   var qnano = $('#delBtn').data('qnano');
+    	   $('#deleteForm [name=qnano]').val(qnano);
+
+         $("#deleteForm").submit();
+       }
+    })   
+ })
 
 
 var quill = new Quill('#editor', {

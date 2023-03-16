@@ -50,6 +50,10 @@
 									<h5 class="mb-0">회원목록조회</h5>
 									<p class="text-sm mb-0">검색할 회원명을 하단 검색창에 입력해주세요</p>
 								</div>
+								<c:if test="${empty MemberList}">
+								<img src="/fleaMarket/resource/img/nosearchPage/t1.png" alt="이미지가 없음" style="width:200px;">
+								<h3 style="text-align:center;">검색된 회원이 없습니다.</h3>
+								</c:if>
 								<div class="ms-auto my-auto mt-lg-0 mt-4">
 									<div class="ms-auto my-auto">
 										<div class="modal fade" id="import" tabindex="-1"

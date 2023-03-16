@@ -49,6 +49,13 @@ public class Req4002_Service {
 		return dao.followerSelect(index);
 	}
 	
+	public int followCheck(String myEmail, String following) {
+		Map<String, String> selckMap = new HashMap<String, String>();
+		selckMap.put("myEmail", myEmail);
+		selckMap.put("following", following);
+		return dao.followCheck(selckMap);
+	}
+	
 	public void followmemberdelete(FollowMemberInfo del) {
 		dao.followmemberdelete(del);
 	}

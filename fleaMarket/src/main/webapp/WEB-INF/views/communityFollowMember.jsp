@@ -75,45 +75,50 @@
                   </tr>
                 </thead>
                 <tbody>
-                <c:forEach var="followers" items="${follower}">
-                  <tr><!-- onclick="goEmail('${followers.email}')" -->
-                    <td>
-                      <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="${path}/resource/img/Member/profileimg/${followers.profileimg}" 
-                          	class="avatar avatar-sm me-3" alt="avatar image">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="mb-0 text-sm">${followers.nickname}</h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="text-sm text-secondary mb-0">${followers.authority}</p>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <p class="text-secondary mb-0 text-sm">${followers.email}</p>
-                    </td>
-                    <td class="align-middle text-center">
-                    	<a href="communityMemberRoom.do?email=${followers.email}" ><i class="ni ni-shop"></i></a>
-                      <!-- <button type="button" id="roomGo" class="text-secondary text-sm roomGo" style="border:none; background:none;"><i class="ni ni-shop"></i></button> -->
-                    </td>
-                    <td class="align-middle text-center">
-                     <%--  <a href="chatting.do?myemail=${followers.email}" ><i class="ni ni-chat-round"></i></a> --%>
-                      <button type="button" id="chatGo" class="text-secondary text-sm chatGo" 
-                      	style="border:none; background:none;"
-                      	data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="ni ni-chat-round"></i>
-                      </button>
-                    </td>
-                    <td class="align-middle text-center">
-                      <a href="communityFollowDelete.do?myemail=${Login.email}&following=${followers.email}" >
-                      		<i class="ni ni-scissors"></i></a>
-                      <!-- <button type="button" id="unfollowGo" class="text-secondary text-sm unfollowGo" style="border:none; background:none;">
-                      		<i class="ni ni-scissors"></i>
-                      </button> -->
-                    </td>
-                  </tr>
-           		 </c:forEach>
+                <c:if test="${not empty follower}" >
+	                <c:forEach var="followers" items="${follower}">
+	                  <tr><!-- onclick="goEmail('${followers.email}')" -->
+	                    <td>
+	                      <div class="d-flex px-2 py-1">
+	                        <div>
+	                          <img src="${path}/resource/img/Member/profileimg/${followers.profileimg}" 
+	                          	class="avatar avatar-sm me-3" alt="avatar image">
+	                        </div>
+	                        <div class="d-flex flex-column justify-content-center">
+	                          <h6 class="mb-0 text-sm">${followers.nickname}</h6>
+	                        </div>
+	                      </div>
+	                    </td>
+	                    <td>
+	                      <p class="text-sm text-secondary mb-0">${followers.authority}</p>
+	                    </td>
+	                    <td class="align-middle text-center text-sm">
+	                      <p class="text-secondary mb-0 text-sm">${followers.email}</p>
+	                    </td>
+	                    <td class="align-middle text-center">
+	                    	<a href="communityMemberRoom.do?email=${followers.email}&loginEmail=${Login.email}" ><i class="ni ni-shop"></i></a>
+	                      <!-- <button type="button" id="roomGo" class="text-secondary text-sm roomGo" style="border:none; background:none;"><i class="ni ni-shop"></i></button> -->
+	                    </td>
+	                    <td class="align-middle text-center">
+	                     <%--  <a href="chatting.do?myemail=${followers.email}" ><i class="ni ni-chat-round"></i></a> --%>
+	                      <button type="button" id="chatGo" class="text-secondary text-sm chatGo" 
+	                      	style="border:none; background:none;"
+	                      	data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="ni ni-chat-round"></i>
+	                      </button>
+	                    </td>
+	                    <td class="align-middle text-center">
+	                      <a href="communityFollowDelete.do?myemail=${Login.email}&following=${followers.email}" >
+	                      		<i class="ni ni-scissors"></i></a>
+	                      <!-- <button type="button" id="unfollowGo" class="text-secondary text-sm unfollowGo" style="border:none; background:none;">
+	                      		<i class="ni ni-scissors"></i>
+	                      </button> -->
+	                    </td>
+	                  </tr>
+	           		 </c:forEach>
+           		 </c:if>
+           		 <c:if test="${empty follower}">
+           		 	<tr><td colspan="6" style="text-align:center;font-weight:bold;color:grey;">팔로우가 없습니다.</td></tr>
+           		 </c:if>
                 </tbody>
               </table>
             </div>

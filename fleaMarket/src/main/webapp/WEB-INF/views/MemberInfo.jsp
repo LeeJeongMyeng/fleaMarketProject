@@ -204,9 +204,9 @@ var SessPassword = '${Login.password}'
                   </div>
                   <div class="" style="display:flex;">
 
-	                <button type="submit" style="margin-left:auto;" class="btn btn-primary btn-md mb-0">정보수정</button>
+	                <button type="submit" style="margin-left:auto; cursor:default;" class="btn btn-primary btn-md mb-0">정보수정</button>
 
-                  	<button type="button" style="margin:0 13px;" data-bs-toggle="modal" data-bs-target="#LeaveMemberModal" id="LeaveMemberModalbtn" class="btn btn-outline-danger btn-md mb-0">회원탈퇴</button>                  
+                  	<button type="button" style="margin:0 13px; cursor:default;" data-bs-toggle="modal" data-bs-target="#LeaveMemberModal" id="LeaveMemberModalbtn" class="btn btn-outline-danger btn-md mb-0">회원탈퇴</button>                  
                   </div>
                 </div>          
           </div>
@@ -235,7 +235,7 @@ var SessPassword = '${Login.password}'
                 <div class="invalid-feedback">비밀번호와 일치하지않습니다.</div>	
               </div>
               <div class="" style="display:flex;">
-              <button style="margin:0 13px; margin-left:auto;" class="btn btn-primary mt-3 mb-0">비밀번호 변경</button>
+              <button style="margin:0 13px; margin-left:auto; cursor:default;" class="btn btn-primary mt-3 mb-0">비밀번호 변경</button>
             </div>
             </div>
             </form>

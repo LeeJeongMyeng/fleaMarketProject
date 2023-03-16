@@ -1,8 +1,9 @@
 package fleaMarket.a02_service;
 
+import java.time.LocalDate;
 import java.util.Arrays;
-
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -34,8 +35,23 @@ public class Req3000_ServiceIns implements Req3000_Service{
 		   }
 	
 	//홍보글 등록
-	public void insertFleaMarket(FleaMarket ins){
-    	dao.insertFleaMarket(ins);
+	public void insertFleaMarket(FleaMarket ins){   	
+		dao.insertFleaMarket(ins);
+		String background="#0404B4";
+		String textColor="##FFFF00";
+		LocalDate open = LocalDate.parse(ins.getOpenDate());
+		LocalDate close = LocalDate.parse(ins.getCloseDate());
+        System.out.println("###########################opendDate:"+open);
+		
+		if(ins.getBackgroundColor()==null) {
+		    ins.setBackgroundColor(background);
+		    ins.setTextColor(textColor);
+		    ins.setOpenDate(open.toString());
+		    ins.setCloseDate(close.toString());
+			dao.insertCalendar(ins);
+		}
+	
+    	
     }
 	
 		

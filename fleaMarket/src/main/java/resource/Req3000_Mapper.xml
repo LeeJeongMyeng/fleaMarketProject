@@ -4,30 +4,24 @@
    "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 
 <mapper namespace="fleaMarket.a03_dao.Req3000_Dao">
-<!-- 
-   <resultMap type="calendar" id="calRst">
-		<result column="email" property="id"/>
-		<result column="openDate" property="openDate"/>
-		<result column="closeDate" property="closeDate"/>
-		<result column="closeDate" property="closeDate"/>
-	</resultMap> 
 
-   <select id="calList" parameterType="string" resultType="fleamarket">
-			SELECT f.POSTINGNUMBER ,f.EMAIL, f.TITLE ,f.OPENDATE ,f.CLOSEDATE,
-	       c.WRITER , f.CONTENT, c.BACKGROUNDCOLOR ,c.TEXTCOLOR ,c.ALLDAY,
-	       c.URL, f.ADDRESS 
-	FROM calendar01 c, FleaMarket f 
-    WHERE f.ADDRESS  LIKE '%'||#{address}||'%';	
-	</select>	 -->
  	<resultMap type="calendar" id="calRst">
 		<result column="start01" property="start"/>
 		<result column="end01" property="end"/>
-		<result column="url" property="urllink"/>
 	</resultMap> 
+
 	
-	<select id="calList" resultMap = "calRst">
+	<select id="calList" resultMap ="calRst">
 		SELECT * FROM calendar01		
 	</select> 
+	
+    <insert id="insertCalendar" parameterType="fleamarket">
+		INSERT INTO calendar01 values( 
+			#{title}, #{openDate},#{closeDate},
+			#{backgroundColor},#{textColor})
+	</insert>
+   	 
+   	
    	 
   	<insert id="insertFleaMarket" parameterType="fleamarket">
 		insert into FleaMarket
@@ -84,8 +78,9 @@
 	
     <select id="getFleaMarketList" parameterType="fleamarket"
 		 resultType="fleamarket">
-		select * from FleaMarket
-		where title like '%'||#{title}||'%'
+				select * from FleaMarket
+			where title like '%'||''||'%'
+			ORDER BY REGISTDATE DESC
 	</select>	
 	
 <!-- 	<select id="FileNum" parameterType="string" resultType="string">

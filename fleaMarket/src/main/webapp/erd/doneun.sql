@@ -92,4 +92,13 @@ FROM fleamarketmember
 -- 외래키
 alter table [추가할테이블명] add constraint [제약조건명] foreign key(컬럼명)
 references [부모테이블명] (PK컬럼명) [ON DELETE CASCADE / ON UPDATE CASECADE];
+
+
+--전체조회
+select * from FleaMarket
+where title like '%'||''||'%'
+ORDER BY REGISTDATE DESC;
+
+
+
 	

@@ -44,10 +44,23 @@
 			dataType:"json",
 			success:function(data){
 				var msg="";
-				if(approvalwhether=='a'){msg="승인되었습니다"}
-				else{msg="거부되었습니다"}
-				alert(msg)
-				location.reload(); 
+				if(approvalwhether=='a'){
+					msg="승인되었습니다"
+					alertIcon="success"
+				}else{
+					msg="거부되었습니다"
+					alertIcon="warning"
+				}
+				Swal.fire({
+				    icon:alertIcon,
+			        text:msg,
+			        confirmButtonText:'확인'
+				}).then((result) =>{
+					 if(result.isConfirmed){
+						 location.reload(); 
+					 }
+				 })
+				
 			},
 			error:function(xhr,status,err){
 	              console.log(xhr)

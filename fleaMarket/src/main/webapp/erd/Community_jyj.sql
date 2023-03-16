@@ -112,12 +112,12 @@ AND c.email=#{email}
 ORDER BY repdate DESC;
 
 
-SELECT * FROM capplicaion
+SELECT * FROM capplicaion;
 WHERE email = 'yujin@gmail.com';
 AND category LIKE '%'||'홍보글'||'%';
 AND  ;
 WHERE communityNumber='comBoard23';
-INSERT INTO capplicaion values(communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','yujin@gmail.com','#태그1 #태그2',0);
+INSERT INTO capplicaion values(communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','wjsdbsghks96@naver.com','#태그1,#태그2',0);
 INSERT INTO capplicaion values(communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','dbwls8382@gmail.com','#태그1 #태그2',0);
 -- 커뮤니티 게시글 해시태그
 CREATE TABLE HashTag
@@ -158,7 +158,7 @@ AND c.email='yujin@mail.com'
 ORDER BY registdate desc;
 
 SELECT *
-FROM BoardImg i,capplicaion c
+FROM BoardImg i,capplicaion c;
 WHERE i.communitynumber=c.communitynumber;
 AND c.communitynumber ='1';
 
@@ -315,6 +315,11 @@ INSERT INTO friend VALUES('two__yoon@naver.com','yujin@gmail.com');
 SELECT * FROM friend;
 select * FROM FLEAMARKETMEMBER;
 SELECT * FROM profile;
+DELETE FROM friend;
+
+SELECT count(*) FROM friend
+WHERE myemail='dbwls8382@naver.com'
+AND FOLLOWING='yujin@mail.com';
 
 -- 팔로우한 회원정보
 select *
@@ -335,7 +340,9 @@ SELECT following
 FROM friend
 WHERE myemail='yujin@mail.com'
 
-SELECT * FROM friend;
+SELECT * FROM friend
+WHERE myemail='yujin@gmail.com'
+AND FOLLOWING='wjsdbsghks96@naver.com';
 
 select *
 FROM FLEAMARKETMEMBER m,friend f,profile pro
@@ -344,7 +351,7 @@ AND (m.email LIKE '%'||''||'%'
 OR m.nickname LIKE '%'||''||'%')
 --AND f.following=pro.email
 --and f.following=m.email
---AND myemail='yujin@gmail.com';
+--AND myemail='yujin@gmail.com'
 AND f.myemail=pro.email
 AND f.myemail = m.email
 AND following='yujin@gmail.com';
