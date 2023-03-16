@@ -27,6 +27,7 @@
   <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+  <link href="${path}/resource/css/Req3008/fmView.css" rel="stylesheet" />
   <!-- 카카오맵 api -->
   <script type="text/javascript"
 	   src="//dapi.kakao.com/v2/maps/sdk.js?appkey=491d6062da8be4de279d8ef2a5a72e75&libraries=services,clusterer,drawing"></script>
@@ -44,15 +45,6 @@
   </script>
 </head>
 <%@include file="header.jsp" %>
-<style>
-#frmfile #imgs_wrap label{
-	font-size: 10px !important;
-	margin-right: 7px;
-}
-#frmfile #imgs_wrap img{
-	width:70px !important; 
-}
-</style>
 <body class="g-sidenav-show   bg-gray-100">
   <div class="min-height-300 bg-primary position-absolute w-100"></div>
 
