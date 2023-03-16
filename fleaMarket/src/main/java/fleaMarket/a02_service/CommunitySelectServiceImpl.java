@@ -248,7 +248,7 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 	public int getDeleteBoard(int communityNumber, String email) {
 		// TODO Auto-generated method stub
 		// 파일 DB 삭제
-		String url = "C:/a01_javaexp/workspace/fleaMarketProject/fleaMarket/src/main/webapp/resource/community/";
+		String url = "C:\\Users\\user\\git\\fleaMarketProject\\fleaMarket\\src\\main\\webapp\\resource\\community";
 		String img = mapper.getCommunityImgList(communityNumber);
 		List<String> slist = new ArrayList<>();
 		//Null 처리 
@@ -269,7 +269,9 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 						s++;
 					}
 			}
+			
 			for(int i=0;i<slist.size();i++) {
+				System.out.println(slist.get(i));
 				//파일 삭제 
 			    fservice.DeleteFile(url, slist.get(i));
 			}
