@@ -122,7 +122,7 @@ function CheckQNAInsert(){
 							<div class="row ms-3 mb-4">
 								<div class="col-2 ms-n2 me-2">
 									<label class="postInsertTitle">작성자</label>
-							 		<input class="multisteps-form__input form-control" name="email" type="text" value="${Login.authority=='관리자'?'관리자':Login.email}" readonly />
+							 		<input class="multisteps-form__input form-control" name="email" type="text" value="${Login.email}" readonly />
 								</div>
 							</div>
 							<div class="mb-3" style="margin-left: 26px;">
