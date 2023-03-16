@@ -45,8 +45,13 @@ $(document).ready(function(){
 })
 	
 var SessAddress = '${Login.address}' //세션주소값
-var SessCategory = '${Login.category}'
-var SessPassword = '${Login.password}'
+var SessCategory = '${Login.category}' //세션 카테고리
+var SessNickname = '${Login.nickname}' //세션 닉네임
+var SessPhonenumber = '${Login.phonenumber}' //세션 폰번
+var SessProfileimg = '${Login.profileimgname}' //세션 이미지파일명
+var SessAuth = '${Login.authority}' //세션 권한
+
+var SessPassword = '${Login.password}' //세션 비번
 
 </script>
 

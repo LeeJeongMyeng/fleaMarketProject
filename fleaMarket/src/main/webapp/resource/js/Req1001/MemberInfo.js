@@ -81,6 +81,9 @@ function AddressApi() {
 
 // 회원정보 수정
 function UpdateInfo(){
+	var addresscheck = $('#MemberInfoForm input[name=address]').val()
+	
+	
 	var MemberInfoAddress = $('#MemberInfoForm input[name=address]').val(
 		$('#MemberInfoForm #sample6_postcode').val()
 		+"&"+$('#MemberInfoForm #sample6_address').val()
@@ -98,16 +101,29 @@ function UpdateInfo(){
 		$('#MemberInfoForm input[name=nickname]').focus()
 		return false;
 	}
+	var addresscheck = $('#MemberInfoForm input[name=address]').val()== SessAddress?false:true;
+	var categorycheck = $('#MemberInfoForm select[name=category]').val() == SessCategory?false:true;
+	//console.log($('#MemberInfoForm select[name=category]').val(),SessCategory)
+	var nicknamecheck = $('#MemberInfoForm input[name=nickname]').val() == SessNickname?false:true;
+	var phonenumbercheck = $('#MemberInfoForm input[name=phonenumber]').val() == SessPhonenumber?false:true;
+	var profileimgcheck = $('#MemberInfoForm input[name=profileimgname]').val() == SessProfileimg?false:true;
+	var authcheck = $('#MemberInfoForm input[name=authority]').val() ==SessAuth?false:true;
+	//console.log(addresscheck,categorycheck,nicknamecheck,phonenumbercheck,profileimgcheck,authcheck)
+	if(!addresscheck&&!categorycheck&&!nicknamecheck&&!phonenumbercheck&&!profileimgcheck&&!authcheck){
+		alert('변경사항이 없습니다.');
+	}
+	
 	return true;
 	}
+	
+	
+	
+	
 	
 	$('#UpdatePasswordForm input').keyup(function(){
 		$(this).removeClass('is-invalid')
 	})
-		
 	
-
-
 function UpdatePassword(){
 	var CurrentPassword = $('#UpdatePasswordForm #CurrentPassword')
 	var uptPassword = $('#UpdatePasswordForm input[name=password]')
