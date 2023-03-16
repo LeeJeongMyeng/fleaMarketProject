@@ -119,7 +119,7 @@ profileImg varchar2(200)
 SELECT * FROM PROFILE;
 WHERE EMAIL = 'admin@contigo.com';
 DELETE profile WHERE EMAIL ='28888wjdaud@naver.com';
-INSERT INTO PROFILE VALUES('aoddl56@nate.com','defaultprofile.png');
+INSERT INTO PROFILE VALUES('admin@contigo.com','defaultprofile.png');
 
 UPDATE PROFILE 
 SET EMAIL ='aoddl56@nate.com'
