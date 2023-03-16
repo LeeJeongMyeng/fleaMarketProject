@@ -60,7 +60,7 @@
 								</div>
 							</div>
 						</div>
-						<form action="QNAUpdate.do" method="post" enctype="multipart/form-data" onsubmit="okmsg('update')">
+						<form id="uptForm" action="QNAUpdate.do" method="post" enctype="multipart/form-data">
 							<div class="row ms-2 mb-3">
 							 
 								<div class="col-2">
@@ -119,7 +119,7 @@
 						<%--
 						${(Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email)?'':'none'}
 						  <c:if test="${Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email }">--%>	
-								<button type="submit" ${(Login.authority=='관리자' || (qna.method=='q' && Login.email==qna.email))?'':'style="display:none;"'} class="btn btn-outline-primary btn-md mb-0 me-1">수정</button>
+								<button type="button" ${(Login.authority=='관리자' || (qna.method=='q' && Login.email==qna.email))?'':'style="display:none;"'} id="uptBtn" class="btn btn-outline-primary btn-md mb-0 me-1">수정</button>
 							<button type="button" ${(Login.authority=='관리자' || (qna.method=='q' && Login.email==qna.email))?'':'style="display:none;"'} id="delBtn" class="btn btn-outline-danger btn-md mb-0 me-1" data-qnano="${qna.qnano}">삭제</button>
 						<%--  	</c:if>--%>
 							<%--
@@ -235,25 +235,6 @@
 <script>
 
 
-$('#delBtn').on('click', function() {
-    Swal.fire({
-       title: '삭제하시겠습니까?',
-       icon: 'warning',
-       showCancelButton: true, // cancel버튼 보이기. 기본은 원래 없음
-       confirmButtonColor: '#3085d6', // confrim 버튼 색깔 지정
-       cancelButtonColor: '#d33', // cancel 버튼 색깔 지정
-       confirmButtonText: '확인', // confirm 버튼 텍스트 지정
-       cancelButtonText: '취소' // cancel 버튼 텍스트 지정
-    }).then((result) => {
-       if (result.value) {
-    	   var qnano = $('#delBtn').data('qnano');
-    	   $('#deleteForm [name=qnano]').val(qnano);
-
-         $("#deleteForm").submit();
-       }
-    })   
- })
-
 
 var quill = new Quill('#editor', {
   modules: { toolbar: true },
@@ -267,6 +248,7 @@ var myDropzone = new Dropzone(drop, {
   addRemoveLinks: true
 
 });
+
 </script>
 <script src="${path}/resource/js/Req1000/fileupload.js"></script>
 <script src="${path}/resource/js/Req1001/GetQNA.js"></script>
