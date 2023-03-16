@@ -8,7 +8,7 @@
 <fmt:requestEncoding value="utf-8"/>     
 <!DOCTYPE html>
 <%--
-
+ds
 
  --%>
 <html>
@@ -57,14 +57,14 @@
       
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="${path}/assets/img/test4.jpg" style="width:100%; height:750px;" alt="First slide">
+          <img src="${path}/assets/img/test4.jpg" style="width:100%; height:700px;" alt="First slide">
         </div>
         
         <div class="carousel-item">
-          <img src="${path}/assets/img/test1.png" style="width:100%; height:100%" alt="Second slide">
+          <img src="${path}/assets/img/test1.png" style="width:100%; height:700%" alt="Second slide">
         </div>
         <div class="carousel-item">
-          <img src="${path}/assets/img/test2.png" style="width:100%; height:750px;" alt="Third slide">
+          <img src="${path}/assets/img/test2.png" style="width:100%; height:700px;" alt="Third slide">
         </div>
          
       </div>
