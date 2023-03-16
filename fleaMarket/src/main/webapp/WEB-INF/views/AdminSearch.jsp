@@ -106,8 +106,7 @@
 								  <label class="btn btn-outline-primary" for="btnradio3">사업자</label>
 								</div>
 								<div class="col-2 ms-auto my-auto">
-									<button type="button" class="btn btn-outline-danger btn-md mb-0 me-2 " data-bs-toggle="modal" data-bs-target="#import">회원탈퇴</button>
-									<button class="btn btn-outline-primary btn-md export mb-0 ms-3" data-type="csv" type="button" name="button">Export</button>
+									<button type="button" class="btn btn-outline-danger btn-md mb-0 me-3 " style="float:right" data-bs-toggle="modal" data-bs-target="#import">회원탈퇴</button>
 								</div>
 							</div>
 							</form>
@@ -152,8 +151,8 @@
 									 </tbody>
 								</table>
 								</form>
-							</div>
 							
+							 <div class="d-flex justify-content-center"> 
 							<nav aria-label="Page navigation example">
 											  <ul class="pagination justify-content-center">
 											    <li class="page-item">
@@ -174,12 +173,10 @@
 											      </a>
 											    </li>
 											  </ul>
-											</nav>
-							
-						</div>
-					</div>
-				</div>
-			</div>
+    </nav>
+  </div>
+</div>
+		
 			<footer class="footer pt-3  ">
 				<div class="container-fluid">
 					<div class="row align-items-center justify-content-lg-between">
