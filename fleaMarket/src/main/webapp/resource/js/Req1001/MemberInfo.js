@@ -150,6 +150,11 @@ function UpdatePassword(){
 		alert('1차 비밀번호와 일치하지 않습니다.')
 		return false;
 	}
+	if(MatchPassword(uptPassword.val())=='true'){
+		alert('기존 비밀번호와 다른 비밀번호를 설정해주세요.');
+		return false;
+	}
+
 	return true;
 }
 
@@ -183,9 +188,9 @@ function chkPW2(pass1val,pass2val){
 	
 }
 
+//회원탈퇴
 function LeaveMember(){
 	let deletecheck = MatchPassword($('#LeaveMemberForm input[name=password]').val())
-	console.log("zzzzz"+deletecheck)
 	
 	if(deletecheck=='false'){
 		alert("비밀번호가 일치하지 않습니다.")
@@ -201,6 +206,8 @@ function LeaveMember(){
 	}
  return false;
 }
+
+//회원탈퇴, 비번변경시 기존 비번 일치하는지 확인
 function MatchPassword(pass){
 	var MatchResult="";
 	var qstr ="password="+pass+"&sespassword="+SessPassword
