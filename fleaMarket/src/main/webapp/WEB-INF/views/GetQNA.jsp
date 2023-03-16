@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
+<c:set var="GQAuth" value="${(Login.authority=='관리자'||Login.email==qna.email) }"/>
 <fmt:requestEncoding value="utf-8" />
 <!DOCTYPE html>
 <html lang="en">
@@ -31,6 +32,8 @@
 <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 </head>
 <script type="text/javascript">
+
+
 
 </script>
 <body class="g-sidenav-show   bg-gray-100">
@@ -100,7 +103,7 @@
 							<input type="hidden" name="secretwhether" value="${qna.secretwhether }"> 
 							<div class="mb-3" style="margin-left: 26px;">
 									<label class="postInsertTitle" style="margin-left: -0.5%;">제목</label>
-									<input class="multisteps-form__input form-control w-50" name="title" type="text" value="${qna.title}"/>
+									<input class="multisteps-form__input form-control w-50" name="title" type="text" value="${qna.title}" readonly/>
 							</div>
 							<div class="mb-7" style="width: 98%; margin-left: 23px; height: 300px;">
 								<label class="mt-4 postInsertTitle" style="margin-left: -0.5%;" >게시글내용</label>
@@ -234,20 +237,16 @@
 	</div> <!-- sns확인모달 모달끝 -->
 <script>
 
-
-
+var SessAuth = '${Login.authority}' //권한
+var SessEmail = '${Login.email}' //이메일
+var check  = (SessAuth=='관리자'||'${qna.email}'==SessEmail)?false:true;
 var quill = new Quill('#editor', {
   modules: { toolbar: true },
-  theme: 'snow'
-});
+  theme: 'snow',
+  readOnly:check,
+}); 
 
-Dropzone.autoDiscover = false;
-var drop = document.getElementById('dropzone')
-var myDropzone = new Dropzone(drop, {
-  url: "/file/post",
-  addRemoveLinks: true
 
-});
 
 </script>
 <script src="${path}/resource/js/Req1000/fileupload.js"></script>

@@ -1,11 +1,11 @@
 $(document).ready(function(){
-	//내용 입력시 input에 할당
-	$('#editor .ql-editor').keyup(function(){
-	 	var expeditor=$(this).html() 
-		$('input[name=content]').val(expeditor); 
-	})
-	
-	
+		//내용 입력시 input에 할당
+		$('#editor .ql-editor').keyup(function(){
+		 	var expeditor=$(this).html() 
+			$('input[name=content]').val(expeditor);
+		})
+			
+		
 });
 
 //뒤로가기
@@ -56,3 +56,4 @@ var anssecretwhether = $('input[name=secretwhether]').val()
 
 location.href="MemberQnAreg.do?method=a&title="+anstitle+"&refno="+ansqnano+"&secretwhether="+anssecretwhether
 })
+
