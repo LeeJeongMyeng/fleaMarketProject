@@ -133,9 +133,10 @@ function displayCenterInfo(result, status) {
 			}        
 	        return false;
 	 }
+	 
 
  	if(!document.aform.bisenessNumber.value){
-		    var bcontent="사업자 번호 등록을 해주세요"
+		    var bcontent="사업자 번호 등록을 해주세요."
 	        alert(bcontent);
 	        if(bcontent){
 				location.href="AdminSearch.do"
