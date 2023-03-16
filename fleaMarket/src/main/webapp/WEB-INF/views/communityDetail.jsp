@@ -28,7 +28,7 @@
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
   <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
   <title>
-    Argon Dashboard 2 PRO by Creative Tim
+    Contigo
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -76,14 +76,14 @@
 								</a>
 								<ul class="dropdown-menu"
 									aria-labelledby="navbarDropdownMenuLink2" style = "display:flex;align-items:center;gap:10px;flex-direction: column;'">
-									<li><button class="btn btn-outline-secondary" id="promptStart" style = "font-size:12px;"><i class="ni ni-air-baloon"></i>신고하기</button></li>
+									<li><button class="btn btn-outline-danger" id="promptStart" style = "font-size:12px;"><i class="ni ni-air-baloon"></i>신고하기</button></li>
 									<li>
 									<!-- Button trigger modal -->
-									<button class="btn btn-outline-secondary" id="updateStart" style = "font-size:12px;"><i class="ni ni-fat-delete"></i>수정하기</button>
+									<button class="btn btn-outline-dark" id="updateStart" style = "font-size:12px;"><i class="fa-solid fa-pencil"></i>수정하기</button>
 								</li>
 									<li>
 									<!-- Button trigger modal -->
-									<button class="btn btn-outline-secondary" id="confirmStart" style = "font-size:12px;"><i class="ni ni-fat-delete"></i>삭제하기</button>
+									<button class="btn btn-outline-warning" id="confirmStart" style = "font-size:12px;"><i class="ni ni-fat-delete"></i>삭제하기</button>
 								</li>
 									
 								</ul>
@@ -160,7 +160,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                   
                   <div class="d-flex mt-3">
                   <div class="flex-shrink-0">
-                    <img alt="Image placeholder" class="avatar rounded-circle" src="${path}/resource/img/Member/profileimg/${detail.profileimg}">
+                    <a href = "communityMemberRoom.do?email=${detail.email}"><img alt="Image placeholder" class="avatar rounded-circle cursor-pointer" src="${path}/resource/img/Member/profileimg/${detail.profileimg}"></a>
                   </div>
                   <div class="flex-grow-1 ms-3">
                     <h6 class="h5 mt-0" style = "line-height:2.5">${detail.nickname }</h6>
@@ -234,85 +234,114 @@ It's a separate element, as animating opacity is faster than rgba(). -->
               
               <div class="mb-1" style = "gap: 15px">
                 <c:forEach var = "rep" items = "${replyList}">
-              <div>
-              <!-- 부모 글  -->
-             
-                <div class="d-flex" style = "height: auto;margin-top: 25px;">
-                <c:if test = "${rep.repclass eq '0'}">
-                  <div class="flex-shrink-0">
-                    <img alt="Image placeholder" class="avatar rounded-circle" src="${path}/resource/img/Member/profileimg/${rep.profileimg}">
-                  </div>
-                  <div class="flex-grow-1 ms-3">
-                    <h6 class="h5 mt-0" style = "display: inline-block">${rep.nickname }</h6>
-	                <c:if test = "${rep.repUpdateDate eq null }">
-                    <b style="margin-left: 10px;font-size: 12px;color: #afaaaa;">${rep.repDate }</b>
-                    </c:if>
-                    <c:if test = "${rep.repUpdateDate ne null }">
-                    <b style="margin-left: 10px;font-size: 12px;color: #afaaaa;">${rep.repUpdateDate } 수정됨</b>
-                    </c:if>
-                    <c:if test = "${rep.isDeleted eq 1 }">
-                    <p class="text-sm"><span>삭제된 댓글입니다.</span></p>
-                    </c:if>
-                    <c:if test = "${rep.isDeleted eq 0 }">
-                    <p id = "cont${rep.replyNo }" class="text-sm"><span>${rep.repcontent }</span></p>
-                     <div class="d-flex" style ="gap:5px;">
-                      <div>
-                        <i class="fa-solid fa-pen-to-square cursor-pointer"></i>
-                      </div>
-                      <span class="text-sm me-2 cursor-pointer" onclick="updateItem(${rep.replyNo})">수정</span>
-                      <div>
-                        <i class="fa-solid fa-trash cursor-pointer"></i>
-                      </div>
-                       <span id = "deleteSpan" class="text-sm me-2 cursor-pointer" onclick = "deleteItem(${rep.replyNo})">삭제</span>
-                      <div>
-                        <i class="ni ni-curved-next me-1 cursor-pointer opacity-6"></i>
-                      </div>
-                      <span class="text-sm me-2 cursor-pointer" onclick="contItem(${rep.replyNo})">댓글 달기</span>
-                    </div>
-                    </c:if>
-                   
-                     </div>
-                 
-                  </c:if>
-            
-                  <c:if test = "${rep.repclass eq '1'}">
-                <div class="d-flex" style ="gap:5px;">
-                <i class="fa-solid fa-arrow-right" style = "margin-top: 15px;
-    font-size: 30px;"></i>
-                  <div class="flex-shrink-0">
-                    <img alt="Image placeholder" class="avatar rounded-circle" src="${path}/resource/img/Member/profileimg/${rep.profileimg}">
-                  </div>
-                  <div class="flex-grow-1 ms-3">
-                    <h6 class="h5 mt-0" style = "display: inline-block">${rep.nickname }</h6>
-                    <c:if test = "${rep.repUpdateDate eq null}">
-                    <b style="margin-left: 10px;font-size: 12px;color: #afaaaa;">${rep.repDate }</b>
-                    </c:if>
-                    <c:if test = "${rep.repUpdateDate ne null}">
-                    <b style="margin-left: 10px;font-size: 12px;color: #afaaaa;">${rep.repUpdateDate } 수정됨</b>
-                    </c:if>
-                    <c:if test = "${rep.isDeleted eq 1 }">
-                    <p class="text-sm"><span>삭제된 댓글입니다.</span></p>
-                    </c:if>
-                    <c:if test = "${rep.isDeleted eq 0 }">
-                    <p id = "cont${rep.replyNo }" class="text-sm" style ="margin-top: 5px;"><span style="font-size:17px">${rep.repcontent }</span></p>
-                    <div class="d-flex" style ="gap:5px;">
-                      <div>
-                        <i class="fa-solid fa-pen-to-square cursor-pointer"></i>
-                      </div>
-                      <span class="text-sm me-2 cursor-pointer" onclick="updateItem(${rep.replyNo})">수정</span>
-                      <div>
-                        <i class="fa-solid fa-trash cursor-pointer"></i>
-                      </div>
-                      <span id = "deleteSpan" class="text-sm me-2 cursor-pointer" onclick = "deleteItem(${rep.replyNo})">삭제</span>
-                    </div>
-                     </c:if>
-                  </div>
-                 
-                </div>
-                </c:if>
-                </div>                                   
-                </div>
-                <div id = "showHide${rep.replyNo}" class="mt-4" style =
+								<div>
+									<!-- 부모 글  -->
+
+									<div class="d-flex" style="height: auto; margin-top: 25px;">
+										<c:if test="${rep.repclass eq '0'}">
+											<div class="flex-shrink-0">
+												<img alt="Image placeholder"
+													style="width: 40px; height: 40px;"
+													class="avatar rounded-circle cursor-pointer"
+													onclick="moveroom(${rep.replyNo})"
+													src="${path}/resource/img/Member/profileimg/${rep.profileimg}">
+											</div>
+											<div class="flex-grow-1 ms-3">
+												<h6 class="h5 mt-0" style="display: inline-block">${rep.nickname }</h6>
+												<c:if test="${rep.repUpdateDate eq null }">
+													<b
+														style="margin-left: 10px; font-size: 12px; color: #afaaaa;">${rep.repDate }</b>
+												</c:if>
+												<c:if test="${rep.repUpdateDate ne null }">
+													<b
+														style="margin-left: 10px; font-size: 12px; color: #afaaaa;">${rep.repUpdateDate }
+														수정됨</b>
+												</c:if>
+												<c:if test="${rep.isDeleted eq 1 }">
+													<p class="text-sm">
+														<span>삭제된 댓글입니다.</span>
+													</p>
+												</c:if>
+												<c:if test="${rep.isDeleted eq 0 }">
+													<p id="cont${rep.replyNo }" class="text-sm">
+														<span>${rep.repcontent }</span>
+													</p>
+													<div class="d-flex" style="gap: 5px;">
+														<div>
+															<i class="fa-solid fa-pen-to-square cursor-pointer"></i>
+														</div>
+														<span class="text-sm me-2 cursor-pointer"
+															onclick="updateItem(${rep.replyNo})">수정</span>
+														<div>
+															<i class="fa-solid fa-trash cursor-pointer"></i>
+														</div>
+														<span id="deleteSpan" class="text-sm me-2 cursor-pointer"
+															onclick="deleteItem(${rep.replyNo})">삭제</span>
+														<div>
+															<i
+																class="ni ni-curved-next me-1 cursor-pointer opacity-6"></i>
+														</div>
+														<span class="text-sm me-2 cursor-pointer"
+															onclick="contItem(${rep.replyNo})">댓글 달기</span>
+													</div>
+												</c:if>
+
+											</div>
+
+										</c:if>
+
+										<c:if test="${rep.repclass eq '1'}">
+											<div class="d-flex" style="gap: 5px;">
+												<span style="margin-top: -15px; font-size: 35px;">↪</span>
+
+												<div class="flex-shrink-0">
+													<img alt="Image placeholder"
+														style="width: 40px; height: 40px;"
+														class="avatar rounded-circle cursor-pointer"
+														onclick="moveroom(${rep.replyNo})"
+														src="${path}/resource/img/Member/profileimg/${rep.profileimg}">
+												</div>
+												<div class="flex-grow-1 ms-3">
+													<h6 class="h5 mt-0" style="display: inline-block">${rep.nickname }</h6>
+													<c:if test="${rep.repUpdateDate eq null}">
+														<b
+															style="margin-left: 10px; font-size: 12px; color: #afaaaa;">${rep.repDate }</b>
+													</c:if>
+													<c:if test="${rep.repUpdateDate ne null}">
+														<b
+															style="margin-left: 10px; font-size: 12px; color: #afaaaa;">${rep.repUpdateDate }
+															수정됨</b>
+													</c:if>
+													<c:if test="${rep.isDeleted eq 1 }">
+														<p class="text-sm">
+															<span>삭제된 댓글입니다.</span>
+														</p>
+													</c:if>
+													<c:if test="${rep.isDeleted eq 0 }">
+														<p id="cont${rep.replyNo }" class="text-sm"
+															style="margin-top: 5px;">
+															<span style="font-size: 15px">${rep.repcontent }</span>
+														</p>
+														<div class="d-flex" style="gap: 5px;">
+															<div>
+																<i class="fa-solid fa-pen-to-square cursor-pointer"></i>
+															</div>
+															<span class="text-sm me-2 cursor-pointer"
+																onclick="updateItem(${rep.replyNo})">수정</span>
+															<div>
+																<i class="fa-solid fa-trash cursor-pointer"></i>
+															</div>
+															<span id="deleteSpan" class="text-sm me-2 cursor-pointer"
+																onclick="deleteItem(${rep.replyNo})">삭제</span>
+														</div>
+													</c:if>
+												</div>
+
+											</div>
+										</c:if>
+									</div>
+								</div>
+								<div id = "showHide${rep.replyNo}" class="mt-4" style =
                 "
                     margin-left: 60px;margin-right: 80px;margin-bottom:25px;display:none"
                 >
@@ -460,6 +489,22 @@ It's a separate element, as animating opacity is faster than rgba(). -->
   <script src="${path}/assets/js/plugins/photoswipe.min.js"></script>
   <script src="${path}/assets/js/plugins/photoswipe-ui-default.min.js"></script>
   <script>
+ function moveroom(idx){
+	 var dpd = $("#deleteReplyForm"+idx);
+	 var emails = dpd.find("input[name='email']").val();
+	 Swal.fire({
+		    icon:'info',
+	        text:'룸으로 이동하시겠습니까?',
+	        confirmButtonColor: '#5e72e4',
+	        confirmButtonText:'룸이동',
+	        showCancelButton: true,
+	        cancelButtonText:'취소',
+	 }).then((result) =>{
+		 if(result.isConfirmed){
+		 location.href = "communityMemberRoom.do?email="+emails;
+		 }
+	 })
+ }
   //댓글 삭제 
  function deleteItem(idx){
 	  var dpd = $("#deleteReplyForm"+idx);

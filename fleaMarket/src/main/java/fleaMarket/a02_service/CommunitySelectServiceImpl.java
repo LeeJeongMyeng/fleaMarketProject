@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import fleaMarket.a03_dao.CommunitySelectDao;
+import fleaMarket.util.FileService;
 import vo.BoardImg;
 import vo.CapplicationList;
 import vo.Criteria;
@@ -22,13 +23,15 @@ import vo.irregularReportVo;
 public class CommunitySelectServiceImpl implements CommunitySelectService {
 	
 	private CommunitySelectDao mapper;	
+	private FileService fservice;
 	/**
 	 * @param dao
 	 * 생성자 주입 
 	 */
 	@Autowired
-	public CommunitySelectServiceImpl(CommunitySelectDao mapper) {
+	public CommunitySelectServiceImpl(CommunitySelectDao mapper,FileService fservice) {
 		this.mapper = mapper;
+		this.fservice= fservice;
 	}
 	// 페이징 처리를 위한 전체 게시물 갯수
 	@Override
@@ -219,7 +222,9 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 	}
 	@Override
 	public String getDeleteLike(int communityNumber,String email) {
-		// TODO Auto-generated method stub\
+		// TODO Auto-generated method stub
+		//파일 삭제 
+		
 		Map<String,Object> map = new HashMap<String,Object>();
 		if(email==null) email = "";
 		map.put("communityNumber",communityNumber);
@@ -242,6 +247,35 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 	@Override
 	public int getDeleteBoard(int communityNumber, String email) {
 		// TODO Auto-generated method stub
+		// 파일 DB 삭제
+		String url = "C:/a01_javaexp/workspace/fleaMarketProject/fleaMarket/src/main/webapp/resource/community/";
+		String img = mapper.getCommunityImgList(communityNumber);
+		List<String> slist = new ArrayList<>();
+		//Null 처리 
+		Optional<String> opt = Optional.ofNullable(img);
+	    String separate = opt.orElse("");
+	    
+	    if(separate!="") {
+	    	StringTokenizer st = new StringTokenizer(separate,"&SEP&");
+	    	int s = 0;
+			//이미지 파일이 한개일때 
+			if(st.countTokens()==1) {
+				slist.add(separate);
+			}
+			//이미지 파일이 여러개일때 
+			if(st.countTokens()>1) {				
+					while(st.hasMoreTokens()) {
+						slist.add(s, st.nextToken());
+						s++;
+					}
+			}
+			for(int i=0;i<slist.size();i++) {
+				//파일 삭제 
+			    fservice.DeleteFile(url, slist.get(i));
+			}
+	    }
+	    
+	    
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("communityNumber",communityNumber);
 		map.put("email", email);

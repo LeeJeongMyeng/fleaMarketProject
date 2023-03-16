@@ -1,5 +1,8 @@
 package fleaMarket.a01_controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 
@@ -184,7 +187,17 @@ public class CommunitySelectController {
 			String referer = request.getHeader("Referer");
 			return "redirect:"+referer;
 		}
-		return "redirect:/CommunityList.do?category="+category;
+		
+		String encodedParam = "";
+		try {
+			encodedParam = URLEncoder.encode(category, "UTF-8");
+			
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return "redirect:/CommunityList.do?category="+encodedParam;
 	}
 	
 	//처리
@@ -239,7 +252,7 @@ public class CommunitySelectController {
 		return "redirect:"+referer;
 	}
 	@PostMapping("updateReply.do")
-	public String updateReport(ReplyVo vo,HttpServletRequest request,RedirectAttributes rttr) {
+	public String updateReport(ReplyVo vo,HttpServletRequest request,RedirectAttributes rttr) throws UnsupportedEncodingException {
 		int result = repservice.updateReply(vo);
 		String msg = "";
 		if(result==1) {
@@ -249,6 +262,7 @@ public class CommunitySelectController {
 		}
 		String referer = request.getHeader("Referer");
 		
+	
 		return "redirect:"+referer;
 	}
 	@PostMapping("deleteReply.do")

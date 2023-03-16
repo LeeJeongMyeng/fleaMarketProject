@@ -15,7 +15,7 @@
 <link rel="apple-touch-icon" sizes="76x76"
 	href="../assets/img/apple-icon.png">
 <link rel="icon" type="image/png" href="${path}/assets/img/favicon.png">
-<title>Argon Dashboard 2 PRO by Creative Tim</title>
+<title>Contigo</title>
 <!--     Fonts and icons     -->
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 
@@ -309,7 +309,7 @@
 </form>
 	<!--   Core JS Files   -->
 	
-	<script src="${path}/assets/js/plugins/datatables.js"></script>
+	
 	<script>
 
 	
@@ -410,21 +410,7 @@
 		});
 	</script>
 	<!-- Kanban scripts -->
-	<script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
-	<script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>
-	<script>
-    var win = navigator.platform.indexOf('Win') > -1;
-    if (win && document.querySelector('#sidenav-scrollbar')) {
-      var options = {
-        damping: '0.5'
-      }
-      Scrollbar.init(document.querySelector('#sidenav-scrollbar'), options);
-    }
-  </script>
-	<!-- Github buttons -->
-	<script async defer src="https://buttons.github.io/buttons.js"></script>
-	<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
-	<script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
+	
 </body>
 
 </html>
