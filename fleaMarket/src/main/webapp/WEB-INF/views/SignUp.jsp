@@ -379,8 +379,8 @@
 			  <label for="check_3" style="font-size: 15px;">마케팅 수신 동의(선택)</label>
 			  <input class="form-check-input" name="Sucb" type="checkbox" id="Trem_3" class="Trem text-dark font-weight-bolder"/>
 		</div>
-	      <div class="modal-footer">
-	        회사소개 | 이용약관 | <strong>개인정보처리방침</strong>
+	      <div class="modal-footer d-flex justify-content-center">
+	      		<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" style="width: 100px; background-color: #5920eb;"></button>
 	      </div>
 	     
 	    </div>

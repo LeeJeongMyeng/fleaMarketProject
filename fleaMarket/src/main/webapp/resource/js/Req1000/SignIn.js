@@ -23,6 +23,9 @@
    window.close();
   }
  function MemberFindModal(method){
+	 $('#MemberFindModal input[name=name]').val('')
+	 $('#MemberFindModal input[name=personalnumber]').val('')
+	 $('#MemberFindModal input[name=email]').val('')
 	 if(method=='id'){
 		 $('#MemberFindTitle').text('아이디 찾기');
 		 $('.MemberFindEmail_Wrap').slideUp();
