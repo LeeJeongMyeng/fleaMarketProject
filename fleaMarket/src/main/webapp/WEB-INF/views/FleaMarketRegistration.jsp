@@ -267,61 +267,7 @@ $(document).ready(function(){
 
 
 	</main>
-<script>
-//템플릿
 
-if (document.getElementById('editor')) {
-  var quill = new Quill('#editor', {
-    theme: 'snow' // Specify theme in configuration
-  });
-}
-
-if (document.getElementById('choices-multiple-remove-button')) {
-  var element = document.getElementById('choices-multiple-remove-button');
-  const example = new Choices(element, {
-    removeItemButton: true
-  });
-
-  example.setChoices(
-    [{
-        value: 'One',
-        label: 'Label One',
-        disabled: true
-      },
-      {
-        value: 'Two',
-        label: 'Label Two',
-        selected: true
-      },
-      {
-        value: 'Three',
-        label: 'Label Three'
-      },
-    ],
-    'value',
-    'label',
-    false,
-  );
-}
-
-if (document.querySelector('.datetimepicker')) {
-  flatpickr('.datetimepicker', {
-    allowInput: true
-  }); // flatpickr
-
-
-}
-
-
-
-Dropzone.autoDiscover = false;
-var drop = document.getElementById('dropzone')
-var myDropzone = new Dropzone(drop, {
-  url: "/file/post",
-  addRemoveLinks: true
-
-});
-</script>
 
 
 
@@ -331,21 +277,9 @@ var myDropzone = new Dropzone(drop, {
 	<script src="${path}/assets/js/plugins/flatpickr.min.js"></script>
 	<script src="${path}/assets/js/plugins/dropzone.min.js"></script>
 	
-	
+	<script src="${path}/resource/js/Req3000/template.js"></script>
   <script>
-/*   var today1 = new Date();
 
-  var year = today1.getFullYear();
-  var month = ('0' + (today1.getMonth() + 1)).slice(-2);
-  var day = ('0' + today1.getDate()).slice(-2);
-
-  var dateString = year + '-' + month  + '-' + day;
-	
-console.log(dateString);
-	if($('input[name=openDate]').val()<=dateString){
-		alert("오늘 이후로 시간을 설정하세요")
-	}  
- */
   
 	$('input[name=title]').keyup(function(){
 		
@@ -466,6 +400,8 @@ console.log(dateString);
 
 
 <!-- <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
+
+
 <script src="${path}/resource/js/Req3000/address.js"></script>
 <%--gps --%>
 <script src="${path}/resource/js/Req3000/gps.js"></script>  
