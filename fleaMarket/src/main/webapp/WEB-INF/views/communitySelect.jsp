@@ -386,7 +386,7 @@
      moveForm.find("input[name='pageNum']").val(1);
      moveForm.submit();
      
-  })
+  });
         //인기글 / 전체글 클릭처리 
       $('button[name=showBtn]').on("click", function(e) {
          let show = $(this).attr('value');
