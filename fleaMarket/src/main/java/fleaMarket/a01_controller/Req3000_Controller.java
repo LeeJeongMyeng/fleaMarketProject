@@ -58,7 +58,7 @@ public class Req3000_Controller {
 	@Value("${fleamarket.upload3}")
 	private String profilepath;
 
-//http://localhost:7080/fleaMarket/fRegistration.do	
+//http://223.26.182.204:7080/fleaMarket/fRegistration.do	
 	@RequestMapping("fRegistration.do")
 	public String fRegistration(Model d, Faddresss ins) {
 		d.addAttribute("add", ins.getAddrs0());
@@ -97,6 +97,7 @@ public class Req3000_Controller {
 	public String FleaMarketUpt(@RequestParam("postingNumber") String postingNumber, FleaMarket upt,
 			RedirectAttributes redirect, List<MultipartFile> pro) {
 		// 업로드 수정
+		
 		// 파일 삭제
 		if (pro.size() != 0) {
 			// 해당 postingNumber의 여러행을 list처리
@@ -104,14 +105,24 @@ public class Req3000_Controller {
 			for (int i = 0; i < filelist.size(); i++) {
 				String sd = filelist.get(i).getFilename();
 				fileservice.DeleteFile(profilepath, sd);
+			
 			}
+		    service.delFfile(postingNumber);
+	    
 
 			// 파일 업로드 후, db에 저장된 정보
-			for (MultipartFile f : pro) {
-				String filename = fileservice.insprofileimg(profilepath, f);
-				FFile fupt = new FFile(filename, profilepath, postingNumber);
-				// 수정하기
-				service.UptFFile(fupt);
+			/*
+			 * for (MultipartFile f : pro) { String filename =
+			 * fileservice.insprofileimg(profilepath, f); FFile fupt = new FFile(filename,
+			 * profilepath, postingNumber); // 수정하기 service.UptFFile(fupt); }
+			 */
+		    
+		    if (pro.size() != 0) {
+
+				String msg = service.uptFleaFileModule(pro, postingNumber);
+
+			
+
 			}
 
 		}

@@ -4,6 +4,7 @@
     %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="path" value="${pageContext.request.contextPath }"/>
 <fmt:requestEncoding value="utf-8"/>     
  <!--
@@ -231,8 +232,9 @@ It's a separate element, as animating opacity is faster than rgba(). -->
               </div>
               <!-- Comments -->
             
-              
+               <c:if test="${fn:length(replyList) > 0}">	
               <div class="mb-1" style = "gap: 15px">
+             						
                 <c:forEach var = "rep" items = "${replyList}">
 								<div>
 									<!-- 부모 글  -->
@@ -364,7 +366,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                   <div class="flex-grow-1 my-auto">
                       <form method = "post" action = "${path}/writeReReply.do" class="align-items-center">
                       <input type = "hidden" name = "communitynumber" value = "${dlist[0].communitynumber}">
-                      <input type = "hidden" name = "groupid" value = "${rep.groupid }"/>
+                      <input type = "hidden" name = "groupid" value = "${rep.groupid }"/>   
                 <div class="d-flex">
                    <textarea name = "content" class="form-control" placeholder="Write your comment" rows="1"></textarea>
                   <button  class="btn bg-gradient-primary mb-0 ms-2" style = "height: 38px;width: 70px;">
@@ -375,7 +377,18 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                   </div>
                 </div>
                  </c:forEach>
-                </div>          
+                
+                   
+                </div>
+                 </c:if>
+                 <c:if test="${fn:length(replyList) eq 0}">
+                 <div style = "display: flex;
+    align-items: center;
+    flex-direction: column;">
+								 <i style = "font-size: 30px;margin-top: 20px;" class="fa-regular fa-comment-dots"></i>
+								 <p style = "margin-top:15px">등록된 댓글이 없습니다.</p>
+								 </div>
+				  </c:if>          
                 <c:if test = "${not empty session}">
                 <div class="d-flex mt-4">
                   <div class="flex-shrink-0">
@@ -399,6 +412,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
             </div>
           </div>
         </div>
+        
         <nav aria-label="Page navigation example" style = "margin-top: 20px;">
 							<ul class="pagination pagination-white justify-content-center" id="pageInfo">
 								<c:if test="${pageMaker.prev}">

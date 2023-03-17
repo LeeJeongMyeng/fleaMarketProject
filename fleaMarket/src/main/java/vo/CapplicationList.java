@@ -12,6 +12,7 @@ public class CapplicationList {
 	private String hashtag;
 	private int viewCnt;
 	private int likeCnt;
+	private int repCnt;
 	private int prevNum;
 	private int nextNum;
 	
@@ -126,6 +127,12 @@ public class CapplicationList {
 	}
 	public void setNextNum(int nextNum) {
 		this.nextNum = nextNum;
+	}
+	public int getRepCnt() {
+		return repCnt;
+	}
+	public void setRepCnt(int repCnt) {
+		this.repCnt = repCnt;
 	}
 	
 	

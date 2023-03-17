@@ -23,4 +23,6 @@ public interface Req3000_Service {
 	public void UptFFile(FFile fupt);
 	//업로드 
 	public String insertFleaFileModule(List<MultipartFile> pro);
+	public void delFfile(String postingNumber);
+	public String uptFleaFileModule(List<MultipartFile> pro, String postingNumber); 
 }

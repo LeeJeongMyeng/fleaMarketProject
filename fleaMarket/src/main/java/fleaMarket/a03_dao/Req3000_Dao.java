@@ -17,6 +17,7 @@ public interface Req3000_Dao {
 	
 	//기존 파일 업로드 등록 
 	public int insprofile(FFile fins);
+	public int uptprofile(FFile fins);
 	
 	//캘린더
 	 public List<Calendar> calList();
@@ -35,6 +36,7 @@ public interface Req3000_Dao {
 	
 	//삭제
 	public void delFleaMarket(String postingNumber);
+	public void delFfile(String postingNumber);
 	
 	//파일 정보 불러오기(삭제) 
 	public List<FFile> DelFail(String postingNumber);

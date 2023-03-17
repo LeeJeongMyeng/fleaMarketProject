@@ -132,38 +132,48 @@ $(document).ready(function(){
 									<label class="form-label labelFont">주소 설정</label> 
 									<div class = "s_form">
 									   <input type="button" name="addrs0" class="btn btn-primary" onclick="execDaumPostcode()" style="margin-bottom: 9px;" value="우편번호 찾기"><br>									  
-									   <input name = "addrs1" type="text"  id="sample6_address" class="form-control soooo2" style="width:102%;" placeholder="주소" readonly>
+									   <input name = "addrs1" type="text"   id="sample6_address"  class="form-control soooo2" style="width:102%;" placeholder="주소" readonly>
                                        <div class="btn btn-primary" onclick="callAdd()" style="height: 41px;margin-left: 530px;margin-top: -53px;width: 70px;">확인</div>
 									   
 									   <br>	
-									  
+									  <script>
+       							    function callAdd(){
+											alert("등록:"+$("input[name=addrs1]").val())
+											geocoder.addressSearch($("input[name=addrs1]").val(), mafun ); 
+							
+									} 
+							
+											
+											
+							
+									
+									  </script>
 									   				
                                     </div>
 							     </div>
 							</div>
-							
 							<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">플리마켓 시작일</label> 
-									<input  class="form-control datetimepicker" type="date"
-										placeholder="시작일을 선택해주세요" name="openDate" id="openDate" data-input>
-								</div>
-									            
-							
-								<div class="col-6">
-									<label class="form-label labelFont">플리마켓 종료일</label><input
-									 class="form-control datetimepicker" type="date"
-										placeholder="종료일을 선택해주세요" name="closeDate" id="closeDate" onkeyup="keyevent(this)" data-input>
-								</div>
-							</div>
-							
+									<label class="form-label labelFont">장소(상세클릭)</label>
 
-							<iframe src="http://localhost:7080/fleaMarket/calendar.do" style="height: 500px;">
-							    <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
-							</iframe>
- 
+								</div>
 
-							<div class="row">
+								<!-- gps -->
+								<div class="map_wrap">
+									<div id="map"
+										style="width: 580px; height: 300px; position: relative; overflow: hidden;"></div>
+									<div class="hAddr">
+
+										<span id="centerAddr2"> </span> <span id="centerAddr3">
+										</span>
+									</div>
+									<input Type="text" name="address" value="">
+									
+								</div>
+								</div>
+							
+							
+									<div class="row">
 								<div class="col-6">
 									<label class="form-label labelFont">모집 인원</label> <input
 										class="form-control" type="text" name="approvalMaxCnt" 
@@ -189,26 +199,28 @@ $(document).ready(function(){
 										data-input>
 								</div>
 							</div>
-
 							<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">장소(상세클릭)</label>
-
+									<label class="form-label labelFont">플리마켓 시작일</label> 
+									<input  class="form-control datetimepicker" type="date"
+										placeholder="시작일을 선택해주세요" name="openDate" id="openDate" data-input>
 								</div>
-
-								<!-- gps -->
-								<div class="map_wrap">
-									<div id="map"
-										style="width: 580px; height: 300px; position: relative; overflow: hidden;"></div>
-									<div class="hAddr">
-
-										<span id="centerAddr2"> </span> <span id="centerAddr3">
-										</span>
-									</div>
-									<input Type="text" name="address" value="">
-									
+									            
+							
+								<div class="col-6">
+									<label class="form-label labelFont">플리마켓 종료일</label><input
+									 class="form-control datetimepicker" type="date"
+										placeholder="종료일을 선택해주세요" name="closeDate" id="closeDate" onkeyup="keyevent(this)" data-input>
 								</div>
-								</div>
+							</div>
+							
+
+							<iframe src="http://localhost:7080/fleaMarket/calendar.do" style="height: 500px;">
+							    <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
+							</iframe>
+ 
+
+					
 
 								<label class="mt-4 labelFont">내용</label>
 
@@ -255,7 +267,61 @@ $(document).ready(function(){
 
 
 	</main>
+<script>
+//템플릿
 
+if (document.getElementById('editor')) {
+  var quill = new Quill('#editor', {
+    theme: 'snow' // Specify theme in configuration
+  });
+}
+
+if (document.getElementById('choices-multiple-remove-button')) {
+  var element = document.getElementById('choices-multiple-remove-button');
+  const example = new Choices(element, {
+    removeItemButton: true
+  });
+
+  example.setChoices(
+    [{
+        value: 'One',
+        label: 'Label One',
+        disabled: true
+      },
+      {
+        value: 'Two',
+        label: 'Label Two',
+        selected: true
+      },
+      {
+        value: 'Three',
+        label: 'Label Three'
+      },
+    ],
+    'value',
+    'label',
+    false,
+  );
+}
+
+if (document.querySelector('.datetimepicker')) {
+  flatpickr('.datetimepicker', {
+    allowInput: true
+  }); // flatpickr
+
+
+}
+
+
+
+Dropzone.autoDiscover = false;
+var drop = document.getElementById('dropzone')
+var myDropzone = new Dropzone(drop, {
+  url: "/file/post",
+  addRemoveLinks: true
+
+});
+</script>
 
 
 
@@ -398,7 +464,7 @@ console.log(dateString);
 	<script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
 </body>
 
-<script src="${path}/resource/js/Req3000/template.js"></script>
+
 <!-- <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
 <script src="${path}/resource/js/Req3000/address.js"></script>
 <%--gps --%>

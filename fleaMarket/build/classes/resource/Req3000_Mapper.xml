@@ -35,6 +35,9 @@
 	<insert id="insprofile" parameterType="ffile">
 		INSERT INTO FFile VALUES(#{filename},#{filePath},fleaMarket_seq.currval)
 	</insert>
+	<insert id="uptprofile" parameterType="ffile">
+		INSERT INTO FFile VALUES(#{filename},#{filePath},#{postingNumber})
+	</insert>
 	
 	<!-- 수정 상세정보 -->
 	<select id="fleaDetail" resultType="fleamarket" parameterType="string">
@@ -68,6 +71,10 @@
     <delete id="delFleaMarket" parameterType="string">
 		delete fleamarket 
 		where postingNumber = #{postingNumber}
+	</delete>
+    <delete id="delFfile" parameterType="string">
+		DELETE FROM ffile WHERE POSTINGNUMBER 
+		 = #{postingNumber}
 	</delete>
 	
 	<select id="DelFail" resultType="ffile" parameterType="string">
