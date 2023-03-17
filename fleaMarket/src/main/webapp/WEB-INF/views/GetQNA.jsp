@@ -68,12 +68,14 @@
 							 
 								<div class="col-2">
 								
-									<label class="postInsertTitle" style="margin-left: -0.5%;">분류</label>
+									
 										<c:if test="${qna.method=='q'}">
-										<input class="multisteps-form__input form-control" name="method" type="text" value="문의사항" readonly />
+										<label class="postInsertTitle" style="margin-left: -0.5%;">문의종류</label>
+										<input class="multisteps-form__input form-control" name="method" type="text" value="${qna.category }" readonly />
 										</c:if>
 										<c:if test="${qna.method!='q'}">
-										<input class="multisteps-form__input form-control" name="method" type="text" value="공지사항" readonly />
+										<label class="postInsertTitle" style="margin-left: -0.5%;">분류</label>
+										<input class="multisteps-form__input form-control" name="method" type="text" value="${qna.category }" readonly />
 										</c:if>
 								</div>
 								<!-- 관리자만 게시글 최종 수정일 확인 가능 -->
@@ -110,35 +112,25 @@
 								<div id="editor">${qna.content}</div>
 								<input type="hidden" id="contentInput" name="content" value="${qna.content }" />
 							</div>
-							<div class="mb-3" style="margin-left: 26px;">
-								 <input name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}" multiple/>
-								 <div id="imgs_wrap" style="display:flex;">
-							</div>	
+							<c:if test="${Login.authority=='관리자'||((qna.method=='q'||qna.method=='a')&&Login.email==qna.email) }">
+								<div class="mb-3" style="margin-left: 26px;">
+									 <input name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}" multiple/>
+									 <div id="imgs_wrap" style="display:flex;">
+								</div>
+							</c:if>	
    						</div>
    						<div align="right">
-							<%--
-							<div class="" style="margin-left:80%;">
-							 --%>
-						<%--
-						${(Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email)?'':'none'}
-						  <c:if test="${Login.authority=='관리자' || qna.method=='q' && Login.email==qna.email }">--%>	
+							
 								<button type="button" ${(Login.authority=='관리자' || (qna.method=='q' && Login.email==qna.email))?'':'style="display:none;"'} id="uptBtn" class="btn btn-outline-primary btn-md mb-0 me-1">수정</button>
 							<button type="button" ${(Login.authority=='관리자' || (qna.method=='q' && Login.email==qna.email))?'':'style="display:none;"'} id="delBtn" class="btn btn-outline-danger btn-md mb-0 me-1" data-qnano="${qna.qnano}">삭제</button>
-						<%--  	</c:if>--%>
-							<%--
-							<c:if test="${Login.authority=='관리자' && qna.method=='q'}">
-							--%>
+					
 								
 							<button type="button" ${Login.authority=='관리자' && qna.method=='q'?'':'style="display:none;"'} class="btn btn-outline-success btn-md mb-0 me-1" id="QNAAnswerBtn">답변</button>  
 							<button type="button" id="goQnaList" class="btn btn-outline-secondary btn-md mb-0 me-1" style="margin-left:auto;">취소</button>	
-							<%--
-							</c:if>
-							 --%> 
+							
 							</div>
 							</form>
-							<%--
-							</div>	
-							--%>
+							
 
 						<c:forEach var="QNAFile" items="${qna2}">
 						<form action="downloadqna.do" method="get">
@@ -194,34 +186,7 @@
 				</div>
 			</footer>
 	</main>
-<%--
- <!--  <div data-bs-toggle="modal" data-bs-target="#QNADeleteModal" id="#QNADeleteModal"></div> -->
-	<div class="modal fade" id="QNADeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content" style="top:119px;">
-	      <div class="modal-header" style="background-color: #e74f58;">
-	        <h3 class="modal-title fs-6 text-center" id="MemberFindTitle" style="color: white;">게시글 삭제</h3>
-			<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      	</div>
-	     
-	      <div class="modal-body">
-			<div class="card multisteps-form__panel p-3 border-radius-xl bg-white js-active" data-animation="FadeIn">
-                    <div class="multisteps-form__content">
-                    <div class="mb-4" style="font-weight:bold;">해당 글을 정말 삭제하시겠습니까??</div>
-                    <form action="QNADelete.do" method="post">
-                      <div class="row">
-                        <input type="hidden" name="qnano" value="${qna.qnano}">
-                        <div class=col-6>
-                       	 	<button class="btn w-100" type="submit" style="background-color:#e74f58; color:white;">삭제</button>
-                        </div>
-                        <div class=col-6>
-                         	<button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">닫기</button>
-                        </div>
-                      </div>
-                     </form>
-                    </div>
-                  </div> 
-                  --%>
+
                   <form id = "deleteForm" method = "post" action = "${path}/QNADelete.do">
                   <input type= "hidden" name ="qnano" value = "${qna.qnano}"/>
                	 </form>

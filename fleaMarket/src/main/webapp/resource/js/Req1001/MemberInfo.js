@@ -89,7 +89,7 @@ $("#UptInfoBtn").click(function(){
 		+"&"+$('#MemberInfoForm #sample6_extraAddress').val()
 		+"&"+$('#MemberInfoForm #sample6_detailAddress').val())
 	//닉네임
-	if($('#MemberInfoForm input[name=nickname]').val().length<2){
+	if($('#MemberInfoForm input[name=nickname]').val().length<3 ||$('#MemberInfoForm input[name=nickname]').val().length>21){
 		$('#MemberInfoForm input[name=nickname]').addClass('is-invalid')
 		$('#MemberInfoForm input[name=nickname]').focus()
 		return false;
@@ -100,6 +100,13 @@ $("#UptInfoBtn").click(function(){
 		$('#MemberInfoForm input[name=nickname]').focus()
 		return false;
 	}
+	
+	if($("#MemberInfo_category").val()=='카테고리 선택'){
+		$("#MemberInfo_category").addClass('is-invalid')
+		$("#MemberInfo_category").focus()
+		return false;//ㅋㅋㅋ
+	}
+	
 	var addresscheck = $('#MemberInfoForm input[name=address]').val()== SessAddress?false:true;
 	var categorycheck = $('#MemberInfoForm select[name=category]').val() == SessCategory?false:true;
 	//console.log($('#MemberInfoForm select[name=category]').val(),SessCategory)

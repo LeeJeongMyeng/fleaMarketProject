@@ -164,7 +164,7 @@ var SessPassword = '${Login.password}' //세션 비번
                   <label class="form-label">닉네임</label>
                  
                     <input id="confirmation" name="nickname" class="form-control" type="text" value="${Login.nickname }">
-                 	 <div class="invalid-feedback">닉네임은 2자이상 부탁드립니다.</div>	
+                 	 <div class="invalid-feedback">닉네임은 2자이상 20자미만 부탁드립니다.</div>	
                  	
                 </div>
                 <div class="col-6">
