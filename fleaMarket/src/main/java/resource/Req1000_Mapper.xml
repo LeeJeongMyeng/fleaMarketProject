@@ -18,7 +18,10 @@
     	and email=#{email}
     	</if>
     	</select>
-    	
+    	<!-- 사업자번호 확인 -->
+    	<select id="checkBusiness" parameterType="string" resultType="int">
+    		select count(*) from fleamarketmember where businessnumber=#{businessnumber}
+    	</select>
     	<!--회원가입 -->
     	<insert id="SignUp" parameterType="member">
     		INSERT INTO FLEAMARKETMEMBER values(
