@@ -97,9 +97,6 @@ public class Req1001_Controller {
 				Model d,HttpSession session) {
 			
 			
-			
-			
-			
 			//유저정보 변경
 			service.UpdateMemberInfo(upt);
 			
@@ -170,20 +167,20 @@ public class Req1001_Controller {
 		
 		// 마이페이지 - 사이트 탈퇴
 		@PostMapping("LeaveMember.do")
-		public String LeaveMember(Member del,Model d,HttpSession session){
+		public String LeaveMember(@RequestParam("email") String email,Model d,HttpSession session){
+			
 			//밑에 모듈처리함
-			DeleteMemberModule(del.getEmail());
+			service.LeaveMember(email);
 			//세션삭제 처리.. ㅂㅂ
 			session.removeAttribute("Login");
 			return "main";
 		}
 		
+		
 		//관리자 페이지 - 회원탈퇴처리 여러개 ㅇㅇ
 		@PostMapping("DeleteMembers.do")
 	    public String DeleteMembers(@RequestParam("email") List<String> email){
-	        for (String c : email) {  		
-	        	DeleteMemberModule(c);	
-	        }
+	       service.DeleteMembers(email);
 	        return "redirect:AdminSearch.do";
 	    }
 		
@@ -194,7 +191,9 @@ public class Req1001_Controller {
 		
 		
 	 //=======================================================================================   
+		//여기를 모두탈퇴처리하는걸로 리뉴얼해야함
 		//탈퇴 처리 모듈화
+		/*
 		public void DeleteMemberModule(String email) {
 			//1.이미지테이블의 회원이메일/프로필이름 불러오기
 			ProfileImg pfile = (ProfileImg)service.getMemberProfile(email);
@@ -207,5 +206,6 @@ public class Req1001_Controller {
 			fileservice.DeleteFile(profilepath,pfile.getProfileimg());
 			}
 		}
+		*/
 		
 	}

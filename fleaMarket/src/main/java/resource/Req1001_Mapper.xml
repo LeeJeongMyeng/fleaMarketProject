@@ -147,6 +147,54 @@
 			WHERE qnano = #{qnano}
 		</select>
 		
+		
+		
+		
+		
+		<!-- ===============회원 삭제시, 얻어올 파일이름 리스트들================ -->
+		<!-- 1.이미지 -->
+		<select id="DeleteProFileList" parameterType="string" resultType="string">
+			SELECT PROFILEIMG  FROM PROFILE WHERE EMAIL = #{email}
+			and profileimg != 'defaultprofile.png'
+		</select>
+		<!-- 1.문의/공지 -->
+		<select id="DeleteQnaFileList" parameterType="string" resultType="string">
+			SELECT CONCAT(FILEPATH,filename) FROM QNAFILE q
+			WHERE QNANO IN (
+			SELECT QNANO  FROM FLEAMARKETQNA f 
+			WHERE email = #{email}
+			OR refno IN (
+			SELECT QNANO  FROM FLEAMARKETQNA f 
+			WHERE email = #{email}
+			))
+			and filename IS NOT NULL
+		</select>
+		<!-- 커뮤니티 파일리스트 -->
+		<select id="DeleteCommunityFileList" parameterType="string" resultType="string">
+			SELECT IMGNAME FROM BOARDIMG b WHERE b.COMMUNITYNUMBER in(
+			SELECT c.COMMUNITYNUMBER  FROM CAPPLICAION c, FLEAMARKETMEMBER f 
+			WHERE c.EMAIL = f.EMAIL AND f.EMAIL = #{email})
+			and IMGNAME IS NOT NULL
+		</select>
+		<!-- 동은 파일리스트 -->
+		<select id="DeleteFleamarketFileList" parameterType="string" resultType="string">
+			SELECT CONCAT(SUBSTR(f2.FILEPATH,INSTR(f2.FILEPATH, '/',-1,3)+1,100),f2.FILENAME) AS filename
+			FROM FLEAMARKET f, FFILE f2 , FLEAMARKETMEMBER fm
+			WHERE f.EMAIL=fm.EMAIL
+			AND f.POSTINGNUMBER =f2.POSTINGNUMBER
+			AND fm.EMAIL LIKE '%'||#{email}||'%'
+			AND f2.FILENAME Is NOT null
+		</select>
+		<!-- 미리 파일리스트 -->
+		<select id="DeleteApplicationFileList" parameterType="string" resultType="string">
+			SELECT FILENAME
+			FROM APPLICATIONFILE f, FAPPLICATION a
+			WHERE f.APPLICATIONNO = a.APPLICATIONNO
+			AND email = '%'||#{email}||'%'
+			AND filename IS NOT null
+		</select>
+		
+		
     </mapper>
     
     

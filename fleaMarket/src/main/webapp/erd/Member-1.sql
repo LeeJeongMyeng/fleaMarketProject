@@ -63,7 +63,7 @@ INSERT INTO FLEAMARKETMEMBER values(
 '111111-1111111',
 '010-5293-0247',
 '쌍용교육센터',
-'m',
+'관리자',
 NULL,
 NULL,
 NULL,
@@ -90,8 +90,8 @@ SET CATEGORY ='여성의류'
 WHERE EMAIL ='admin@contigo.com';
 
 UPDATE FLEAMARKETMEMBER 
-SET AUTHORITY  = '일반셀러',BUSINESSNUMBER = NULL  
-WHERE EMAIL ='aoddl56@nate.com';
+SET AUTHORITY  = '관리자'
+WHERE EMAIL ='admin@contigo.com';
 
 
 SELECT count(*) FROM FLEAMARKETMEMBER f

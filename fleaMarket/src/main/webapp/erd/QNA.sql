@@ -59,7 +59,6 @@ SELECT * FROM qnafile;
 INSERT INTO qnafile values(FLEAMARKETQNA_seq.currval,'file/qna/','20');
 DELETE FLEAMARKETQNA WHERE qnano=54;
 
-ALTER TABLE FLEAMARKETQNA RENAME COLUMN secretwhther TO secretwhether;
 
 
 
@@ -121,11 +120,10 @@ DELETE FLEAMARKETQNA WHERE qnano='41';
 
 
 SELECT qna.* FROM
-			(SELECT rownum cnt,level,f.* FROM fleamarketqna f
-			WHERE 1=1
-			AND f.METHOD != 'n'
-			and (title || email) LIKE '%'||''||'%'
-			START with refno=0
-			CONNECT BY PRIOR qnano=refno
-			ORDER siblings BY qnano DESC) qna
-			WHERE cnt BETWEEN 1 AND 10
+(SELECT rownum cnt,level,f.* FROM fleamarketqna f
+WHERE 1=1
+AND f.METHOD != 'n'
+and (title || email) LIKE '%'||'28888wjdaud@naver.com'||'%'
+START with refno=0
+CONNECT BY PRIOR qnano=refno
+ORDER siblings BY qnano DESC) qna;

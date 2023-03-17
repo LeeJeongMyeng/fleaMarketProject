@@ -31,4 +31,14 @@ public interface Req1001_Dao {
 	public List<QNAFile> getQNAFile(String qnano);
 	//public List<QNAFile> getQNAFileList(String filename);
 	
+	
+	
+	
+	//회원 삭제시 받아올 파일리스트
+	//1.문의/공지
+	public String DeleteProFileList(String email);
+	public List<String> DeleteQnaFileList(String email);
+	public List<String> DeleteCommunityFileList(String email);
+	public List<String> DeleteFleamarketFileList(String email);
+	public List<String> DeleteApplicationFileList(String email);
 }
