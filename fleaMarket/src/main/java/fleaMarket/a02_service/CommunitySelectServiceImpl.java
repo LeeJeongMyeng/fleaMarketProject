@@ -8,11 +8,11 @@ import java.util.Optional;
 import java.util.StringTokenizer;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import fleaMarket.a03_dao.CommunitySelectDao;
 import fleaMarket.util.FileService;
-import vo.BoardImg;
 import vo.CapplicationList;
 import vo.Criteria;
 import vo.irregularReportVo;
@@ -24,6 +24,9 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 	
 	private CommunitySelectDao mapper;	
 	private FileService fservice;
+	
+	@Value("${board.upload2}")
+	private String filePath;
 	/**
 	 * @param dao
 	 * 생성자 주입 
@@ -248,7 +251,7 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 	public int getDeleteBoard(int communityNumber, String email) {
 		// TODO Auto-generated method stub
 		// 파일 DB 삭제
-		String url = "C:\\Users\\user\\git\\fleaMarketProject\\fleaMarket\\src\\main\\webapp\\resource\\community";
+		
 		String img = mapper.getCommunityImgList(communityNumber);
 		List<String> slist = new ArrayList<>();
 		//Null 처리 
@@ -273,7 +276,7 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 			for(int i=0;i<slist.size();i++) {
 				System.out.println(slist.get(i));
 				//파일 삭제 
-			    fservice.DeleteFile(url, slist.get(i));
+			    fservice.DeleteFile(filePath, slist.get(i));
 			}
 	    }
 	    

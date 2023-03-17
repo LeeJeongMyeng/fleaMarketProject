@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8" import="java.util.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="path" value="${pageContext.request.contextPath }" />
 <fmt:requestEncoding value="utf-8" />
@@ -95,8 +96,8 @@
 								<c:if test = "${pageMaker.cri.category eq '사는이야기'}">
 								<p class="text-sm mb-0">사는 이야기를 써주세요</p>
 								</c:if>
-								<c:if test = "${pageMaker.cri.category eq '카테고리'}">
-								<p class="text-sm mb-0">카테고리 공유 ! ! !</p>
+								<c:if test = "${pageMaker.cri.category eq '홍보글'}">
+								<p class="text-sm mb-0">자신의 아이템을 홍보해보세요!</p>
 								</c:if>
 								<c:if test = "${pageMaker.cri.category eq '사업아이디어'}">
 								<p class="text-sm mb-0">사업 아이디어 공유 ! ! !</p>
@@ -186,7 +187,7 @@
 							
 				<!-- 전체글 목록  -->
 							<tbody style="text-align: center">
-							   
+							   <c:if test="${fn:length(list) > 0}">
 								<c:forEach var="lists" items="${list}">
 								
 									<tr>
@@ -208,7 +209,7 @@
 												&type=${pageMaker.cri.type}
 												&shift=${pageMaker.cri.shift}
 												&category=${pageMaker.cri.category}
-												">${lists.title }</a></h6>
+												">${lists.title } &nbsp;&nbsp;<span><i class="fa-solid fa-comment-dots"></i>&nbsp;&nbsp;${lists.repCnt }</span></a></h6>
 										</td>
 										<td style = "padding-right:35px" class="text-sm">${lists.nickname }</td>
 										<td style = "padding-right:35px" class="text-sm">${lists.viewCnt }</td>
@@ -222,10 +223,14 @@
 									
 									
 								</c:forEach>
-								
-								
+								</c:if>
+								<c:if test="${fn:length(list) eq 0}">
+								 <tr><td colspan="6"><img src = "${path }/resource/community/List_none .png" ></img></td></tr>
+								</c:if>
 							</tbody>
+							
 						</table>
+						
 						<!-- 페이지 네이션  -->
 
 						<nav aria-label="Page navigation example">
@@ -333,7 +338,8 @@
 	}
   var insertForm = $("#insertForm");
   $('#insertButton').on("click",function(){
-	  var sessions = '${session}'
+	  var sessions = '${session}';
+	  var authority = '${authority}';
 	  if(sessions == ''){
 		  Swal.fire({
 			    icon:'warning',
@@ -346,7 +352,15 @@
 			 location.href = "${path}/SignIn.do";
 			 }
 		 })
-	 }else{
+	 }else if(sessions!='' || authority =='관리자'){
+		 Swal.fire({
+			    icon:'warning',
+		        text:'관리자는 등록 불가입니다.',
+		        confirmButtonText:'확인',
+		        
+		 })
+	 }
+	  else{
 		  insertForm.find("input[name='category']").val();
 		  insertForm.submit();
 	  }

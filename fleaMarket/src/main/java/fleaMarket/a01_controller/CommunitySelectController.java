@@ -77,12 +77,16 @@ public class CommunitySelectController {
 		Optional<Member> member = Optional.ofNullable((Member)session.getAttribute("Login"));
 		if(member.isPresent()) {
 		    String sessions = member.get().getEmail();
+		    String authority = member.get().getAuthority();
 		    model.addAttribute("session", sessions);
+		    model.addAttribute("authority",authority);
 		}
 	    
 		List<CapplicationList> clist;
 		if(showTemplete.equals("all") || showTemplete == "") {
-			clist = service.getCommunityList(cri);			
+			clist = service.getCommunityList(cri);
+			
+			
 			model.addAttribute("bestValue",showTemplete);
 			model.addAttribute("list",clist);
 			model.addAttribute("pageMaker",new PageDTO(cri,service.getCommunitySelectNum(cri)));

@@ -9,18 +9,18 @@
 		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
 			<choose>
 			    <when test="type == ''.toString()">
-					title like '%'||#{keyword}||'%' or
-					content like '%'||#{keyword}||'%' or
+					c.title like '%'||#{keyword}||'%' or
+					c.content like '%'||#{keyword}||'%' or
 					nickname like '%'||#{keyword}||'%'
 				</when>
 				<when test="type == 'T'.toString()">
-					title like '%'||#{keyword}||'%'
+					c.title like '%'||#{keyword}||'%'
 				</when>
 				<when test="type == 'C'.toString()">
-					content like '%'||#{keyword}||'%'
+					c.content like '%'||#{keyword}||'%'
 				</when>
 				<when test="type == 'W'.toString()">
-					nickname like '%'||#{keyword}||'%'
+					c.nickname like '%'||#{keyword}||'%'
 				</when>
 			</choose>
 		</trim>
@@ -43,15 +43,16 @@ FROM (SELECT ROWNUM RNUM,
                    c.viewCnt,
                    m.nickname,
                    count(c2.COMMUNITYNUMBER) likeCnt,
+                   count(r.REPLYNO) repCnt,
                    CASE
                        WHEN c.viewCnt >= 30 
                            THEN 'T'
                        ELSE 'F'
                        END AS bestType
-            FROM fleamarketmember m,
-                 CAPPLICAION c LEFT OUTER JOIN COMMUNITYHEART c2 on c.communityNumber = c2.communityNumber,
-                 BOARDIMG b
-            WHERE m.EMAIL = c.EMAIL
+           FROM fleamarketmember m,CAPPLICAION c,BOARDIMG b,reply r,COMMUNITYHEART c2
+                 WHERE m.EMAIL = c.EMAIL
+              AND c.COMMUNITYNUMBER = r.COMMUNITYNUMBER(+)
+              AND r.COMMUNITYNUMBER = c2.COMMUNITYNUMBER(+)
               AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER
               AND                               
       ]]>
@@ -67,8 +68,8 @@ FROM (SELECT ROWNUM RNUM,
                    c.registDate,
                    c.updateDate,
                    c.viewCnt,
-                   m.nickname,
-                   c2.COMMUNITYNUMBER
+                   r.COMMUNITYNUMBER,
+                   m.nickname
 		<if test="shift != null and shift !=''">
 			ORDER BY
 
@@ -107,17 +108,18 @@ FROM (SELECT ROWNUM RNUM,
                    c.viewCnt,
                    m.nickname,
                    count(c2.COMMUNITYNUMBER) likeCnt,
+                   count(r.communitynumber) repCnt,
                    CASE
                        WHEN c.viewCnt >= 30 
                            THEN 'T'
                        ELSE 'F'
                        END AS bestType
-            FROM fleamarketmember m,
-                 CAPPLICAION c LEFT OUTER JOIN COMMUNITYHEART c2 on c.communityNumber = c2.communityNumber,
-                 BOARDIMG b
+            FROM fleamarketmember m,CAPPLICAION c,BOARDIMG b,reply r,COMMUNITYHEART c2
             WHERE m.EMAIL = c.EMAIL
-            AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER
-            AND viewCnt >= 30 
+              AND c.COMMUNITYNUMBER = r.COMMUNITYNUMBER(+)
+              AND r.COMMUNITYNUMBER = c2.COMMUNITYNUMBER(+)
+              AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER
+            AND c.viewCnt >= 30 
             AND 
       ]]>
 		<include refid="criteria"></include>
@@ -133,7 +135,8 @@ FROM (SELECT ROWNUM RNUM,
                    c.updateDate,
                    c.viewCnt,
                    m.nickname,
-                   c2.COMMUNITYNUMBER
+                   r.COMMUNITYNUMBER
+                   
 		<if test="shift != null and shift !=''">
 			ORDER BY
 
@@ -177,8 +180,7 @@ FROM (SELECT ROWNUM RNUM,
 		c.category = #{category}
 		AND
 		<include refid="criteria"></include>
-		viewCnt >= 30
-		AND registDate >= SYSDATE -1
+		c.viewCnt >= 30
 	</select>
 	
 	<!-- 커뮤니티 상세 조회 + 이전글 다음글 목록 불러오기 (키워드, 제목, 카테고리) -->
