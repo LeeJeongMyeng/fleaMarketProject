@@ -59,6 +59,9 @@
   </style>
 </head>
 <%@ include file="header.jsp" %>
+<style>
+li{list-style:auto;}
+</style>
 <body class="g-sidenav-show   bg-gray-100">
   
     <!-- End Navbar -->
