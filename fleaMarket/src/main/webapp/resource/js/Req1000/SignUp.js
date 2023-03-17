@@ -361,6 +361,7 @@ var data = {"b_no":[buisnum.val()]};
 			  $("#buisnessnumberfeedback").text('폐업자 혹은 존재하지않는 사업자번호입니다.')
 			  buisnum.addClass('is-invalid');
 		  }else{
+			  checkBusiness(buisnum.val())
 			   buisnum.addClass('is-valid');
 			   buisnum.attr('readonly',true);
 			   $('[name=authority]').val('사업자')
@@ -374,7 +375,22 @@ var data = {"b_no":[buisnum.val()]};
 	});
 } 
 	   
-
+function checkBusiness(businum){
+	$.ajax({
+			url:"checkBusiness.do",
+			type:"post",
+			data:"businessnumber="+businum,
+			dataType:"json",
+			success:function(data){
+				console.log(data.checkBusiness)
+			},
+			error:function(xhr,status,error){
+                  console.log(xhr)
+                  console.log(status)
+                  console.log(error)
+            }
+		})
+}
 
 // 동의약관 전체 체크 처리
 $("#cbx_chkAll").click(function() {
@@ -416,12 +432,12 @@ $('#Trem_2,#Trem_1,#cbx_chkAll').change(function(){
 	//스탭넘기기전 유효성검사
 	function CheckStepHandler(number){
 		if(number==1){
-		if(!OkEamil){alert("이메일 인증을 완료해주세요."); return false;}
-		if(!OkPass2){alert("비밀번호를 알맞게 입력해주세요."); return false;}
-		if(!OkCheckName){alert("기존 회원 여부 체크를 진행해주세요"); return false;}
+		//if(!OkEamil){alert("이메일 인증을 완료해주세요."); return false;}
+		//if(!OkPass2){alert("비밀번호를 알맞게 입력해주세요."); return false;}
+		//if(!OkCheckName){alert("기존 회원 여부 체크를 진행해주세요"); return false;}
 		}else if(number==2){
-		if(!OkPhonenum){alert("핸드폰번호를 정확하게 입력부탁드립니다."); return false;}
-		if(!OkAddress){alert("우편번호 찾기를 통해서 주소기재 부탁드립니다."); return false;}
+		//if(!OkPhonenum){alert("핸드폰번호를 정확하게 입력부탁드립니다."); return false;}
+		//if(!OkAddress){alert("우편번호 찾기를 통해서 주소기재 부탁드립니다."); return false;}
 			console.log($('[name=profileimg]').val())
 			if($('[name=nickname').val().length<2){
 				$('[name=nickname]').val($('[name=email]').val().split('@')[0])
