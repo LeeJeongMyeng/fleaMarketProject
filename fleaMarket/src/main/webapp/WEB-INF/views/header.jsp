@@ -150,9 +150,6 @@ li {
 												} else {
 													location.href = "${path}/fRegistration.do?email=${Login.email}"
 												}
-												if ("${Login.bisenessNumber}" == "") {
-													alert("등록을 위해서는 사업자 번호가 필요합니다.")
-												}
 												
 											}
 										</script>
