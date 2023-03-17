@@ -28,45 +28,62 @@
 <!-- CSS Files -->
 <link id="pagestyle"
 	href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
 <!-- jquery cdn -->
 <script src="https://code.jquery.com/jquery-3.6.3.min.js"
 	integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU="
 	crossorigin="anonymous"></script>
 
-
-<%-- gps --%>
+<%--jquery ui css --%>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<%-- gps --%> 
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=491d6062da8be4de279d8ef2a5a72e75&libraries=services,clusterer,drawing"></script>
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=491d6062da8be4de279d8ef2a5a72e75"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=491d6062da8be4de279d8ef2a5a72e75"></script> 
+	
 <script src="${path}/assets/js/plugins/fullcalendar.min.js"></script>
-<%--모달창 --%>
-<script>
-/* var msg = "${msg}"
-	console.log(msg)
-		if (msg != "") {
-			alert(msg)
-			if (msg + "\n 조회화면으로 이동하시겠습니까?") {
-				location.href = "${path}/totalSearch.do"
-			}
-		} */
-</script>
+<%--주소 설정해주기 --%>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script>
+
 $(document).ready(function(){
 
-$('#editor .ql-editor').keyup(function(){
+	//주소버튼
+	$("#request").click(function(){
+/* 		var addrs1=$('input[name=addrs1]').val();  */
+		
+        $.ajax({
+            type :"POST",            // HTTP method type(GET, POST) 형식이다.
+            url :"calendar.do",      // 컨트롤러에서 대기중인 URL 주소이다.    
+            data:'addrs1='+$('input[name=addrs1]').val(), 
+            success : function(){ // 비동기통신의 성공일경우 success콜백으로 들어옵니다. 'res'는 응답받은 데이터이다.
+                // 응답코드 > 0000
+               /*  alert(res.code); */
+            },
+            error : function(XMLHttpRequest, textStatus, errorThrown){ // 비동기 통신이 실패할경우 error 콜백으로 들어옵니다.
+                alert("통신 실패.")
+            }
+        });
+	});
+	
+	
+	//내용
+	$('#editor .ql-editor').keyup(function(){
+	
+	 	var expeditor=$(this).html() 
+		console.log("dd",expeditor);
+		$('input[name=content]').val(expeditor); 
+	})
 
- 	var expeditor=$(this).html() 
-	console.log("dd",expeditor);
-	$('input[name=content]').val(expeditor); 
-})
-//
 
 
+	
 });
 
 </script>
+
 </head>
 <link href="${path}/resource/css/FleaMarketRe/FleaMarketRe.css"
 	rel="stylesheet" />
@@ -83,7 +100,7 @@ $('#editor .ql-editor').keyup(function(){
 	<main class="main-content position-relative border-radius-lg ">
 
 		<!-- End Navbar -->
-		<div class="container-fluid py-4" style="margin-top:100px;">
+		<div class="container-fluid py-4"  style="margin-top:100px;">
 			<div class="row">
 				<div class="col-lg-9 col-12 mx-auto">
 					<form  method="post"  action="FleaMarketUpt.do" id="aform" onsubmit="return checkForm1()"
@@ -91,62 +108,38 @@ $('#editor .ql-editor').keyup(function(){
 						<div class="card card-body mt-4">
 							<h6 class="mb-0 fleamarket">플리마켓 수정하기</h6>
 							<hr class="horizontal dark my-3">
-							<input type="hidden" name="postingNumber" value="${fleamarket.postingNumber}">
+								<input type="hidden" name="postingNumber" value="${fleamarket.postingNumber}">
 							<input type="hidden" name="email" value="${Login.email}">
 							<input type="hidden" name="bisenessNumber" value="${Login.businessnumber}">
 							<label for="title" class="form-label labelFont">제목</label> 
-							<input type="text" class="form-control" id="projectName" name="title" value="${fleamarket.title}">
+							<input type="text" class="form-control" id="projectName" name="title" value="${fleamarket.title}" style="width:50%;">
 
-
+			                <br>
+                            <!-- 주소지정해주기 -->
 							<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">플리마켓 시작일</label> <input
-										class="form-control datetimepicker" type="text"
-										placeholder="시작일을 선택해주세요" name="openDate" data-input 
-										value="${fleamarket.openDate}">
-								</div>
-								<div class="col-6">
-									<label class="form-label labelFont">플리마켓 종료일</label> <input
-										class="form-control datetimepicker" type="text"
-										placeholder="종료일을 선택해주세요" name="closeDate" data-input
-										value="${fleamarket.closeDate}">
-								</div>
+									<label class="form-label labelFont">주소 설정</label> 
+									<div class = "s_form">
+									   <input type="button" name="addrs0" class="btn btn-primary" onclick="execDaumPostcode()" style="margin-bottom: 9px;" value="우편번호 찾기"><br>									  
+									   <input name = "addrs1" type="text"  id="sample6_address" class="form-control soooo2" style="width:102%;" placeholder="주소" readonly>
+                                       <div class="btn btn-primary" onclick="callAdd()" style="height: 41px;margin-left: 530px;margin-top: -53px;width: 70px;">확인</div>
+									   
+									   <br>	
+									  <script>
+									  function callAdd(){
+											alert("등록:"+$("input[name=addrs1]").val())
+											geocoder.addressSearch($("input[name=addrs1]").val(), mafun ); 
+							
+									}
+									  </script>
+									   				
+                                    </div>
+							     </div>
 							</div>
-
-							<!-- 캘린더 -->
-							<div class="card card-calendar">
-								<div class="card-body p-3">
-									<div class="calendar" data-bs-toggle="calendar" id="calendar"></div>
-								</div>
-							</div>
-
-							<div class="row">
+							
+								<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">모집 인원</label> <input
-										class="form-control" type="text" name="approvalMaxCnt"
-										value="${fleamarket.approvalMaxCnt}">
-								</div>
-							</div>
-
-
-							<div class="row">
-								<div class="col-6">
-									<label class="form-label labelFont">모집 시작일</label> <input
-										class="form-control datetimepicker" type="text"
-										placeholder="시작일을 선택해주세요" name="recruitmentStartDate"
-										data-input value="${fleamarket.recruitmentStartDate}">
-								</div>
-								<div class="col-6">
-									<label class="form-label labelFont">모집 종료일</label> <input
-										class="form-control datetimepicker" type="text"
-										placeholder="종료일을 선택해주세요" name="recruitmentEndDate" data-input
-										value="${fleamarket.recruitmentEndDate}">
-								</div>
-							</div>
-
-							<div class="row">
-								<div class="col-6">
-									<label class="form-label labelFont">장소</label>
+									<label class="form-label labelFont">장소(상세클릭)</label>
 
 								</div>
 
@@ -163,10 +156,65 @@ $('#editor .ql-editor').keyup(function(){
 									
 								</div>
 								</div>
+							
+							
+							<div class="row">
+								<div class="col-6">
+									<label class="form-label labelFont">모집 인원</label> <input
+										class="form-control" type="text" name="approvalMaxCnt" 
+										oninput="this.value = this.value.replace(/[^0-50.]/g, '');"
+										value="${fleamarket.approvalMaxCnt}">
+								</div>
+							</div>
+
+
+							<div class="row">
+								<div class="col-6">
+									<label class="form-label labelFont">모집 시작일</label> <input
+										 class="form-control datetimepicker" type="date"
+										placeholder="시작일을 선택해주세요" name="recruitmentStartDate"
+										id="recruitmentStartDate"
+										data-input value="${fleamarket.recruitmentStartDate}">
+								</div>
+								<div class="col-6">
+									<!-- class="form-control datetimepicker" -->
+									<label class="form-label labelFont">모집 종료일</label> <input
+									 class="form-control datetimepicker" type="date"
+										placeholder="종료일을 선택해주세요" name="recruitmentEndDate" 
+										id="recruitmentEndDate"
+										data-input value="${fleamarket.recruitmentEndDate}">
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="col-6">
+									<label class="form-label labelFont">플리마켓 시작일</label> 
+									<input  class="form-control datetimepicker" type="date"
+										placeholder="시작일을 선택해주세요" name="openDate" id="openDate" data-input
+										value="${fleamarket.openDate}">
+								</div>
+									            
+							
+								<div class="col-6">
+									<label class="form-label labelFont">플리마켓 종료일</label><input
+									 class="form-control datetimepicker" type="date"
+										placeholder="종료일을 선택해주세요" name="closeDate" id="closeDate" onkeyup="keyevent(this)" data-input
+										value="${fleamarket.closeDate}">
+								</div>
+							</div>
+							
+
+							<iframe src="http://localhost:7080/fleaMarket/calendar.do" style="height: 500px;">
+							    <p>현재 사용 중인 브라우저는 iframe 요소를 지원하지 않습니다!</p>
+							</iframe>
+ 
+
+							
+						
 
 								<label class="mt-4 labelFont">내용</label>
 
-								<div id="editor">
+					        	<div id="editor">
 
 									<p id="contents">
 										${fleamarket.content}<br>
@@ -178,26 +226,30 @@ $('#editor .ql-editor').keyup(function(){
 									<div class="col-sm-4 col-6">
 										<label class="form-label mt-4">첨부파일 유무</label> 
 										<select	class="form-control" name="checkForm" id="choices-gender" value="${fleamarket.checkForm}">
-											<option value="N">필요없음</option>
-											<option value="P">개인양식</option>
-											<option value="C">공통파일</option>
+								<option value="" selected="selected">첨부파일 선택</option>
+											<option  value="N">필요없음</option>
+											<option id="P" value="P">개인양식</option>
+											<option  value="C">공통파일</option>
 										</select>
 									</div>
 								</div>
+                                
+						<div class="div1">
 
-							<label class="mt-4 form-label labelFont">첨부파일</label>
-							<div class="row mt-3">
-								<div class="col-2" style="height: 120px;">
-									<input type="file" name="pro" class="form-control"
-										style="width: 230px" multiple>
-									<div id="image_container"></div>
-								</div>
-							</div>
-							
-							</form>
+	                       <label class="mt-4 form-label labelFont">첨부파일</label>
+								<div class="row mt-3">
+		                         <div class="col-2" style="height:120px;">
+                                  <input type="file" name="pro" class="form-control" 
+                                  style="width:230px" id="isFile" multiple>
+		                        </div>
+		                      </div>
+                        </div>
+		             							
+					</form>
 					<div class="d-flex justify-content-end mt-4">
-						<button type="submit" 
+						<button type="submit"
 							class="btn bg-gradient-primary m-0 ms-2">수정하기</button>
+							
 					</div>
 				</div>
 			</div>
@@ -214,59 +266,115 @@ $('#editor .ql-editor').keyup(function(){
 	<script src="${path}/assets/js/plugins/quill.min.js"></script>
 	<script src="${path}/assets/js/plugins/flatpickr.min.js"></script>
 	<script src="${path}/assets/js/plugins/dropzone.min.js"></script>
-	<script>
+	
+	
+  <script>
 
-    
-   //템플릿
-  
-    if (document.getElementById('editor')) {
-      var quill = new Quill('#editor', {
-        theme: 'snow' // Specify theme in configuration
-      });
-    }
+	$('input[name=title]').keyup(function(){
+		
+		//데이터가 들어왔을 경우
+		  if($(this).val()!=''){
+			  $(this).removeClass('is-invalid')
+			  $(this).addClass('is-valid')
+			  
+	    //데이터가 없을 경우 		  
+		  }else{
+				 $(this).removeClass('is-valid')
+				 $(this).addClass('is-invalid')
+			  
+		  }	
+	});	
+	
+	$('input[name=openDate]').on({ 
+		change: function() {
+			console.log("change")
+			if($(this).val()!=''){
+				  $(this).removeClass('is-invalid')
+				  $(this).addClass('is-valid')
+			  }
+		},
+		keyup: function() {
+			console.log("ku")
+			if($(this).val().length!=10){
+				  $(this).removeClass('is-valid')
+				  $(this).addClass('is-invalid')
+			  }
+		} 
+	});
+		
+	$('input[name=closeDate]').on({ 
+		change: function() {
+			console.log("change")
+			if($(this).val()!=''){
+				  $(this).removeClass('is-invalid')
+				  $(this).addClass('is-valid')
+			  }
+		},
+		keyup: function() {
+			console.log("ku")
+			if($(this).val().length!=10){
+				  $(this).removeClass('is-valid')
+				  $(this).addClass('is-invalid')
+			  }
+		} 
+	});
+	
+	
+	
+	$('input[name=approvalMaxCnt]').keyup(function(){
+		
+		//데이터가 들어왔을 경우
+		  if($(this).val()!=''){
+			  $(this).removeClass('is-invalid')
+			  $(this).addClass('is-valid')
+			  
+	    //데이터가 없을 경우 		  
+		  }else{
+				 $(this).removeClass('is-valid')
+				 $(this).addClass('is-invalid')
+			  
+		  }	
+	});	
 
-    if (document.getElementById('choices-multiple-remove-button')) {
-      var element = document.getElementById('choices-multiple-remove-button');
-      const example = new Choices(element, {
-        removeItemButton: true
-      });
-
-      example.setChoices(
-        [{
-            value: 'One',
-            label: 'Label One',
-            disabled: true
-          },
-          {
-            value: 'Two',
-            label: 'Label Two',
-            selected: true
-          },
-          {
-            value: 'Three',
-            label: 'Label Three'
-          },
-        ],
-        'value',
-        'label',
-        false,
-      );
-    }
-
-    if (document.querySelector('.datetimepicker')) {
-      flatpickr('.datetimepicker', {
-        allowInput: true
-      }); // flatpickr
-    }
-
-    Dropzone.autoDiscover = false;
-    var drop = document.getElementById('dropzone')
-    var myDropzone = new Dropzone(drop, {
-      url: "/file/post",
-      addRemoveLinks: true
-
-    });
+	$('input[name=recruitmentStartDate]').on({ 
+		change: function() {
+			console.log("change")
+			if($(this).val()!=''){
+				  $(this).removeClass('is-invalid')
+				  $(this).addClass('is-valid')
+			  }
+		},
+		keyup: function() {
+			console.log("ku")
+			if($(this).val().length!=10){
+				  $(this).removeClass('is-valid')
+				  $(this).addClass('is-invalid')
+			  }
+		} 
+	});
+	$('input[name=recruitmentEndDate]').on({ 
+		change: function() {
+			console.log("change")
+			if($(this).val()!=''){
+				  $(this).removeClass('is-invalid')
+				  $(this).addClass('is-valid')
+			  }
+		},
+		keyup: function() {
+			console.log("ku")
+			if($(this).val().length!=10){
+				  $(this).removeClass('is-valid')
+				  $(this).addClass('is-invalid')
+			  }
+		} 
+	});
+	
+	
+	
+	
   </script>
+  
+  
 	<!-- Kanban scripts -->
 	<script src="${path}/assets/js/plugins/dragula/dragula.min.js"></script>
 	<script src="${path}/assets/js/plugins/jkanban/jkanban.js"></script>
@@ -278,245 +386,18 @@ $('#editor .ql-editor').keyup(function(){
 	<!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
 	<script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
 </body>
-<script>
-var toDay = new Date().toISOString().split("T")[0];
-var calendar = new FullCalendar.Calendar(document.getElementById("calendar"), {
-    initialView: "dayGridMonth",
-    headerToolbar: {
-      start: 'title', // will normally be on the left. if RTL, will be on the right
-      center: '',
-      end: 'today prev,next' // will normally be on the right. if RTL, will be on the left
-    },
-    selectable: true,
-    editable: true,
-    initialDate: toDay,
-    //캘린더 정보 불러오기 
-    events:function(info, successCallback, failureCallback){
-		$.ajax({
-			type:"post",
-			url:"/springweb/calendarAjax.do",
-			dataType:"json",
-			success:function(data){
-				console.log(data.callist)
-				successCallback(data.callist)
-			},
-			error:function(err){
-				console.log(err)
-			}
-		})
-	}
 
-  });
-
-  calendar.render();
+<script src="${path}/resource/js/Req3000/template.js"></script>
+<!-- <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
+<script src="${path}/resource/js/Req3000/address.js"></script>
+<%--gps --%>
+<script src="${path}/resource/js/Req3000/gps2.js"></script>  
 
 
-  //gps 
-var container = document.getElementById('map');// 지도를 표시할 div 
-var options = {
-   center: new kakao.maps.LatLng(33.450701, 126.570667),// 지도의 중심좌표
-   level: 3 // 지도의 확대 레벨
-};
-
-//지도를 생성합니다    
-var map = new kakao.maps.Map(container, options);
-
-// 주소-좌표 변환 객체를 생성합니다
-var geocoder = new kakao.maps.services.Geocoder();
-
-var marker = new kakao.maps.Marker(), // 클릭한 위치를 표시할 마커
-    infowindow = new kakao.maps.InfoWindow({zindex:1}); 
-
-// 현재 지도 중심좌표로 주소를 검색해서 지도 좌측 상단에 표시
-searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-
-// 지도를 클릭했을 때 클릭 위치 좌표에 대한 주소정보를 표시하도록 이벤트를 등록합니다
-// 중심 좌표나 확대 수준이 변경됐을 때 지도 중심 좌표에 대한 주소 정보를 표시하도록 이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'idle', function() {
-    searchAddrFromCoords(map.getCenter(), displayCenterInfo);
-});
-function searchAddrFromCoords(coords, callback) {// 좌표로 주소 정보를 요청합니다
-   geocoder.coord2RegionCode(coords.getLng(), coords.getLat(), callback);         
-}
-
-function searchDetailAddrFromCoords(coords, callback) {// 좌표로 상세 주소 정보를 요청합니다
-   geocoder.coord2Address(coords.getLng(), coords.getLat(), callback);
-   
-}
 
 
-//지도 좌측상단에 지도 중심좌표에 대한 주소정보를 표출하는 함수입니다
-function displayCenterInfo(result, status) {
-   if (status === kakao.maps.services.Status.OK) {
-     var infoDiv = document.getElementById('centerAddr');
 
-       for(var i = 0; i < result.length; i++) {
-           // 행정동의 region_type 값은 'H' 이므로
-           if (result[i].region_type === 'H') {
-               infoDiv.innerHTML = result[i].address_name;
-               break;
-           }
-       }
-   }    
-} 
 
-/* function serar */
-//동에 대한 default 
-geocoder.addressSearch('${fleamarket.address}', function(result, status) {
-   var infoDiv2 = document.getElementById('centerAddr2'); 
-   var infoDiv3 = document.getElementById('centerAddr3'); 
-
-    // 정상적으로 검색이 완료됐으면 
-     if (status === kakao.maps.services.Status.OK) {
-
-        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
-
-        // 결과값으로 받은 위치를 마커로 표시합니다
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: coords
-        });
-
-        // 인포윈도우로 장소에 대한 설명을 표시합니다
-        var infowindow = new kakao.maps.InfoWindow({
-           content: '<div style="width:150px;text-align:center;padding:6px 0;">요기!</div>'
-        });
-        infowindow.open(map, marker);
-
-        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
-        map.setCenter(coords);
-        
-        var infoDiv = document.getElementById('centerAddr'); 
- 
-        for(var i = 0; i < result.length; i++) {
-            // 행정동의 region_type 값은 'H' 이므로
-            if (result[i].region_type === 'H') {         
-                infoDiv.innerHTML = result[i].address_name;       
-                break;
-            }
-        }
-    }
-     kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-           searchDetailAddrFromCoords(mouseEvent.latLng, function(result, status) {
-               if (status === kakao.maps.services.Status.OK) {
-                   var detailAddr2 = !!result[0].road_address ? result[0].road_address.address_name : '';
-                   detailAddr3 = result[0].address.address_name;
-                        
-                         
-                      /* console.log("도로명주소:"+result[0].road_address.address_name)
-                      console.log("지번주소:"+result[0].address.address_name) */
-                   
-                   var content = '<div class="bAddr">' +
-                                   '<span class="title">주소정보</span>' + 
-                                   detailAddr2 + 
-                               '</div>';
-
-                   // 마커를 클릭한 위치에 표시합니다 
-                   marker.setPosition(mouseEvent.latLng);
-                   marker.setMap(map);
-
-                   // 인포윈도우에 클릭한 위치에 대한 법정동 상세 주소정보를 표시합니다
-                   infowindow.setContent(content);
-                   infowindow.open(map, marker);
-                   infoDiv=detailAddr2;
-                   infoDiv2.innerHTML=detailAddr2;
-                   infoDiv3.innerHTML=detailAddr3;
-                   
-                   // 지도 선택한 부분 input 들어감 
-                   var aform = document.querySelector("#aform")
-                   aform.address.value = document.getElementById("centerAddr3").innerText;
-           
-                   
-               }   
-           });
-       });
-
-});    
-//파일 업로드 
-  var sel_files = [];
-$(document).ready(function() {
-    $("#Prodimg").on("change", handleImgsFilesSelect); //input file의상태가 변하면 함수실행
-}); 
-function handleImgsFilesSelect(e) {
-	var filesnameval="";
-	$(".imgs_wrap").empty()
-	sel_files=[];
-    var files = e.target.files; // 해당 파일들을 선택
-    var filesArr = Array.prototype.slice.call(files); //파일명을 배열화
-
-    filesArr.forEach(function(f) {
-        if(!f.type.match("image.*")) {
-            alert("확장자는 이미지 확장자만 가능합니다.");
-            return;
-        }
-        sel_files.push(f.name); // 이미지만 걸러서 다시 배열화
-
-     /*    var reader = new FileReader();
-        reader.onload = function(e) {
-            var img_html = "<img src=\"" + e.target.result + "\" />";
-            $(".imgs_wrap").append(img_html);
-        }
-        reader.readAsDataURL(f); */
-    });
-    
-    
-    for(var i=0; i<sel_files.length; i++){
-    	if(i==sel_files.length-1){
-    	filesnameval+=sel_files[i]
-    	}else{
-    	filesnameval+=sel_files[i]+","
-    	}
-    }
-    
-    
-    $("input[name=filePath]").val(filesnameval)
-
-}
- 
-
-//필수항목 조건식 
- function checkForm1(){	
-if(!document.aform.title.value){
-        alert("글제목을 입력하세요");
-        return false;
- }
-	    
- if(!document.aform.openDate.value){
-     alert("플리마켓 시작일을 입력하세요");
-     return false;
- }
- 
- if(!document.aform.closeDate.value){
-     alert("플리마켓 종료일을 입력하세요");
-     return false;
- }
- 
- if(!document.aform.approvalMaxCnt.value){
-     alert("모집인원을 입력해주세요");
-     return false;
- }
- if(!document.aform.recruitmentStartDate.value){
-     alert("모집시작일을 입력해주세요");
-     return false;
- }
- if(!document.aform.recruitmentEndDate.value){
-     alert("모집종료일을 입력해주세요");
-     return false;
- }
- if(!document.aform.address.value){
-     alert("장소를 선택해주세요");
-     return false;
- }
- if(!document.aform.content.value){
-     alert("내용 적어주세요");
-     return false;
- }
- 
-  return true;
-}
-
-  
-</script>
 
 
 </html>

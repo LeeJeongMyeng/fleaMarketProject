@@ -82,6 +82,33 @@ public class Req3000_ServiceIns implements Req3000_Service{
 		}
 		 return msg;
 		}	
+	public String uptFleaFileModule(List<MultipartFile> pro, String postingNumber) {
+		FFile fins = null;
+		int result=0; 
+		String msg="";
+		for(MultipartFile f:pro){
+			//HashMap으로 파일이름과 경로를 반환함
+			// 이미지 확장자냐에 따른 경로 심기.
+			String imgArra[] = {"gif","jpg","jpe","png","bmp","ico","apng","jfif"};    
+			
+			String subpath = (Arrays.asList(imgArra).indexOf(
+					f.getOriginalFilename().split("\\.")[1])==-1)?"fleafile/":"img/fleaMarket/";
+			//업로드 
+			fileservice.insprofileimg(profilepath+subpath, f); 
+			
+			//등록파일 vo객체에 set값 할당(for문 돌면서 계속 할당)
+			fins= new FFile(f.getOriginalFilename(),profilepath+subpath,postingNumber); 
+			
+			result=dao.uptprofile(fins);
+			if(result>=1) {
+				msg="수정 성공";
+			}else {
+				msg = "수정 실패";
+			}
+			// int result == 1 일떼 STRING RESULT = "성공" 
+		}
+		return msg;
+	}	
 		
 	//파일처리
 	public int insprofile(FFile fins) {
@@ -124,6 +151,8 @@ public class Req3000_ServiceIns implements Req3000_Service{
 	    return  dao.DelFail(postingNumber);
 	}
 
-	
+	public void delFfile(String postingNumber) {
+		dao.delFfile(postingNumber);
+	}
 	
 }
