@@ -202,14 +202,10 @@
                                     
                                     <img class="w-10 ms-3"
                                        src="${path }/resource/community/${lists.imgName}">
-                                    <h6 class="ms-3 my-auto"><a href ="${path}
-                                    /CommunityDetail.do?communityNumber=${lists.communitynumber}
-                                    &pageNum=${pageMaker.cri.pageNum} 
-                                    &keyword=${pageMaker.cri.keyword}
-                                    &type=${pageMaker.cri.type}
-                                    &shift=${pageMaker.cri.shift}
-                                    &category=${pageMaker.cri.category}
-                                    ">${lists.title } &nbsp;&nbsp;<span><i class="fa-solid fa-comment-dots"></i>&nbsp;&nbsp;${lists.repCnt }</span></a></h6>
+                                    <h6 class="ms-3 my-auto">
+                                    <a href ="${path}/CommunityDetail.do?communityNumber=${lists.communitynumber}&pageNum=${pageMaker.cri.pageNum}&keyword=${pageMaker.cri.keyword}&type=${pageMaker.cri.type}&shift=${pageMaker.cri.shift}&category=${pageMaker.cri.category}">
+                                    ${lists.title }<span><i class="fa-solid fa-comment-dots"></i>${lists.repCnt }</span></a>
+                                    </h6>
                               </td>
                               <td style = "padding-right:35px" class="text-sm">${lists.nickname }</td>
                               <td style = "padding-right:35px" class="text-sm">${lists.viewCnt }</td>
