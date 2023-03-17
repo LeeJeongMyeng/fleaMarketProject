@@ -104,7 +104,7 @@ $("#UptInfoBtn").click(function(){
 	if($("#MemberInfo_category").val()=='카테고리 선택'){
 		$("#MemberInfo_category").addClass('is-invalid')
 		$("#MemberInfo_category").focus()
-		return false;
+		return false;//ㅋㅋㅋ
 	}
 	
 	var addresscheck = $('#MemberInfoForm input[name=address]').val()== SessAddress?false:true;
