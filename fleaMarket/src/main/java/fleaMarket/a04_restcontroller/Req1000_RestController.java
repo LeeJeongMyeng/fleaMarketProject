@@ -120,4 +120,9 @@ public class Req1000_RestController {
 		d.addAttribute("CheckGetQNA",qnano);
 		return "pageJsonReport";
 	}
+	@PostMapping("checkBusiness.do")
+	public String checkBusiness(@RequestParam("businessnumber") String businessnumber,Model d) {
+		d.addAttribute("checkBusiness",service.checkBusiness(businessnumber));
+		return "pageJsonReport";
+	}
 }

@@ -331,10 +331,10 @@ function RenderImg(input) {
 	  
 	  
 // 사업자번호 확인 api
-
+var buisnum = $('[name=businessnumber]')
 function exp0101(){
 	
-var buisnum = $('[name=businessnumber]')
+
 buisnum.removeClass('is-invalid');
 if(buisnum.val().length<10){
 	$("#buisnessnumberfeedback").text('사업자 번호를 10자리입니다.')
@@ -361,12 +361,9 @@ var data = {"b_no":[buisnum.val()]};
 			  $("#buisnessnumberfeedback").text('폐업자 혹은 존재하지않는 사업자번호입니다.')
 			  buisnum.addClass('is-invalid');
 		  }else{
+			  //있으면 중복검샄ㅋ!
 			  checkBusiness(buisnum.val())
-			   buisnum.addClass('is-valid');
-			   buisnum.attr('readonly',true);
-			   $('[name=authority]').val('사업자')
-			   OkbOkBusiness=true;
-			   alert('사업자 확인되었습니다. 감사합니다.')
+			   
 		  }
 	  },
 	  error: function(result) {
@@ -382,7 +379,20 @@ function checkBusiness(businum){
 			data:"businessnumber="+businum,
 			dataType:"json",
 			success:function(data){
-				console.log(data.checkBusiness)
+				if(data.checkBusiness==0){
+					 buisnum.removeClass('is-invalid');
+					 buisnum.addClass('is-valid');
+					 buisnum.attr('readonly',true);
+					 $('[name=authority]').val('사업자')
+					 OkbOkBusiness=true;
+					 alert('사업자 확인되었습니다. 감사합니다.')
+				}else{
+					 buisnum.addClass('is-invalid');
+					 alert('이미 가입되어있는 사업자 번호입니다. 다시 입력 바랍니다.')
+					 buisnum.val('')
+					 buisnum.focus()
+				}
+				
 			},
 			error:function(xhr,status,error){
                   console.log(xhr)

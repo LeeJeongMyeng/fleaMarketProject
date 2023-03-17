@@ -28,5 +28,5 @@ public interface Req1000_Dao {
 	public void QNAFileDelete(String qnano);
 	public void QNADelete(String qnano);
 	public void QNAAnswerUpdate(String qnano);
-	
+	public int checkBusiness(String businessnumber);
 }

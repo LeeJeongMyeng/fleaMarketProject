@@ -228,6 +228,9 @@ public class Req1000_ServiceImp implements Req1000_Service {
 		          qf.setFilename2(file.getOriginalFilename());
 		      return qf;
 	   }
+	public int checkBusiness(String businessnumber) {
+		return dao.checkBusiness(businessnumber);
+	}
 }
 
 

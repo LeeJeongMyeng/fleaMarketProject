@@ -37,5 +37,6 @@ public interface Req1000_Service  {
 	public void QNADelete(String qnano);
 	//답변글에 대한 문의글 상태 변경
 	public void QNAAnswerUpdate(String qnano);
+	public int checkBusiness(String businessnumber);
 	
 }

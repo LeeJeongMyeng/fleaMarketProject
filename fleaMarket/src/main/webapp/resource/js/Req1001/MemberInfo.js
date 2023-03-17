@@ -260,9 +260,8 @@ function MatchPassword(pass){
 
 
 //사업자 확인 api ----------------------------------------------------------------------
-function exp0101(){
-	
 var buisnum = $('#BusinessUpdateModal input[name=businessnumber]')
+function exp0101(){
 buisnum.removeClass('is-invalid');
 if(buisnum.val().length<10){
 	$("#buisnessnumberfeedback").text('사업자 번호를 10자리입니다.')
@@ -288,17 +287,8 @@ var data = {"b_no":[buisnum.val()]};
 	      if(buisstatus=='폐업자' || buisstatus==''){
 			  buisnum.addClass('is-invalid');
 		  }else{
-			  $('#MemberInfoForm input[name=authority]').val('사업자')
-			  $('#MemberInfoForm input[name=businessnumber]').val(buisnum.val())
-			   buisnum.addClass('is-valid');
-			   buisnum.attr('readonly',true);
-			   console.log(buisnum.val())
-			   if(confirm('사업자 확인되었습니다. 사업자로 전환하시겠습니까?')){
-				   
-				   $('#MemberInfoForm').submit()
-				}else{
-					location.reload()
-				}
+			  checkBusiness(buisnum.val())
+			 
 		  	}
 	  },
 	  error: function(result) {
@@ -306,6 +296,41 @@ var data = {"b_no":[buisnum.val()]};
 	  }
 	});
 } 
+
+function checkBusiness(businum){
+	$.ajax({
+			url:"checkBusiness.do",
+			type:"post",
+			data:"businessnumber="+businum,
+			dataType:"json",
+			success:function(data){
+				if(data.checkBusiness==0){
+					  $('#MemberInfoForm input[name=authority]').val('사업자')
+					  $('#MemberInfoForm input[name=businessnumber]').val(buisnum.val())
+					   buisnum.addClass('is-valid');
+					   buisnum.attr('readonly',true);
+					   console.log(buisnum.val())
+					   if(confirm('사업자 확인되었습니다. 사업자로 전환하시겠습니까?')){
+						   $('#MemberInfoForm').submit()
+						}else{
+							location.reload()
+						}
+				}else{
+					 buisnum.addClass('is-invalid');
+					 alert('이미 가입되어있는 사업자 번호입니다. 다시 입력 바랍니다.')
+					 buisnum.val('')
+					 buisnum.focus()
+				}
+				
+			},
+			error:function(xhr,status,error){
+                  console.log(xhr)
+                  console.log(status)
+                  console.log(error)
+            }
+		})
+}
+
 //기본이미지로 변경하기----------------------------------------------------------------------
 function ChangeDefualtProfile(){
 	$('#MemberInfoForm input[name=profileimgname]').val('defaultprofile.png')
