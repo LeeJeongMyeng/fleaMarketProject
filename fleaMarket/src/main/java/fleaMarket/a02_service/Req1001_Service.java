@@ -332,6 +332,7 @@ public void LeaveMember(String email) {
 		List<String> d = Arrays.asList(c.split(","));
 		AFLS.addAll(d);
 	}
+	System.out.println(AFLS.size());
 	totfileLists.add(AFLS);
 	 
 	 
