@@ -214,7 +214,7 @@ var quill = new Quill('#editor', {
 
 
 </script>
-<script src="${path}/resource/js/Req1000/fileupload.js"></script>
+<script src="${path}/resource/js/Req1000/fileupload2.js"></script>
 <script src="${path}/resource/js/Req1001/GetQNA.js"></script>
 </body>
 </html>

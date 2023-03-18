@@ -224,7 +224,7 @@ function displayCenterInfo(result, status) {
 	 var fileForm0 = /(.*?)\.(docx|hwp)$/;
 	 
 	 var fileArr = Array.from(document.getElementById('isFile').files);// 이벤트로 넘어온 파일들을 배열형식으로 담음(FileList -> Array)
-     //파일이 배열로 잘 바뀌엇는지 확인
+     //파일이 배열로 잘 바뀌엇는지 확인ㅋ
      console.log(fileArr);
      var filecheck = false;
      for(var i=fileArr.length-1; i>=0; i--){
