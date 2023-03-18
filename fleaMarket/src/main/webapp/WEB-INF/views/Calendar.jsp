@@ -84,8 +84,9 @@
 
 </style>
 </head>
-<body>
+<body class="mt-5">
 
+    <h1 style="margin-left: 39%;color:#646EFF;">플리마켓 일정표</h1>
   	<div id='calendar'></div>
   
 </body>
