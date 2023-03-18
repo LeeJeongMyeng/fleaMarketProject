@@ -1,4 +1,5 @@
 DROP TABLE FLEAMARKETQNA;
+DROP TABLE qnafile;
 CREATE TABLE FLEAMARKETQNA(
 	qnaNo varchar2(100) NOT NULL,
 	title varchar2(100),
@@ -8,7 +9,7 @@ CREATE TABLE FLEAMARKETQNA(
 	email varchar2(50) NOT NULL,
 	method char,
 	category varchar2(100),
-	status varchar2(10),
+	status varchar2(100),
 	refno varchar2(100),
 	secretwhether char,
 	PRIMARY KEY (qnaNo));
@@ -30,22 +31,27 @@ to_CHAR(sysdate,'YYYY-MM-DD'),
 #{category});
 
 INSERT INTO FLEAMARKETQNA values(
-FLEAMARKETQNA_seq.currval,
-'제목','내용',
+0,
+'0','0',
 to_CHAR(sysdate,'YYYY-MM-DD'),
 to_CHAR(sysdate,'YYYY-MM-DD'),
-'이메일','h',
-'카테고리');
+'이메일','j',
+'j','-',null,'j');
 
+DELETE fleamarketqna;
 
+SELECT * FROM FLEAMARKETQNA f ;
 
+ALTER TABLE FLEAMARKETQNA MODIFY status varchar2(100);
 
 SELECT * FROM FLEAMARKETQNA;
 SELECT * FROM FLEAMARKETMEMBER;
 SELECT * FROM PROFILE p ;
 SELECT * FROM FLEAMARKETQNA WHERE QNANO = FLEAMARKETQNA_seq.currval;
 
-UPDATE FLEAMARKETQNA SET STATUS ='-' WHERE METHOD='n' or METHOD='a';
+UPDATE FLEAMARKETQNA SET QNANO =0 WHERE EMAIL ='admin@contigo.com';
+
+UPDATE FLEAMARKETQNA SET REFNO  =0 WHERE qnano=160;
 ALTER TABLE FLEAMARKETQNA ADD Secretwhther char;
 ------------------------------------------------------------------
 CREATE TABLE QNAFile
@@ -119,11 +125,22 @@ where cnt between #{start} and #{end}
 DELETE FLEAMARKETQNA WHERE qnano='41';
 
 
-SELECT qna.* FROM
+SELECT count(*) FROM QNAFILE q;
+
+
+
+
+SELECT qna.*,qf.qfilecnt FROM
 (SELECT rownum cnt,level,f.* FROM fleamarketqna f
 WHERE 1=1
 AND f.METHOD != 'n'
-and (title || email) LIKE '%'||'28888wjdaud@naver.com'||'%'
+and (title || email) LIKE '%'||''||'%'
 START with refno=0
 CONNECT BY PRIOR qnano=refno
-ORDER siblings BY qnano DESC) qna;
+ORDER siblings BY qnano DESC) qna,
+(SELECT qnano,count(*) qfilecnt FROM qnafile GROUP BY QNANO) qf
+WHERE qna.qnano = qf.qnano(+)
+and cnt BETWEEN #{START} AND #{END}
+ORDER BY cnt;
+
+ ;

@@ -31,11 +31,20 @@
 <!-- CSS Files -->
 <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
 </head>
-<script type="text/javascript">
+<style>
+input[type=file]::file-selector-button {
+  width: 130px;
+  height: 40px;
+  background-image: linear-gradient(90deg,#7F69D5,#5E72E4);
+/* background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+ */color:white;
+  border: 1px solid rgb(77,77,77);
+  border-radius: 8px;
+  cursor: pointer;
+  
+}
 
-
-
-</script>
+</style>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
 
@@ -113,7 +122,7 @@
 								<input type="hidden" id="contentInput" name="content" value="${qna.content }" />
 							</div>
 							<c:if test="${Login.authority=='관리자'||((qna.method=='q'||qna.method=='a')&&Login.email==qna.email) }">
-								<div class="mb-3" style="margin-left: 26px;">
+								<div class="mb-3 mt-3" style="margin-left: 26px;">
 									 <input name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}" multiple/>
 									 <div id="imgs_wrap" style="display:flex;">
 								</div>
@@ -214,7 +223,7 @@ var quill = new Quill('#editor', {
 
 
 </script>
-<script src="${path}/resource/js/Req1000/fileupload2.js"></script>
+<script src="${path}/resource/js/Req1000/fileupload.js"></script>
 <script src="${path}/resource/js/Req1001/GetQNA.js"></script>
 </body>
 </html>

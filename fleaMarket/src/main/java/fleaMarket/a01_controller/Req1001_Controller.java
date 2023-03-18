@@ -54,6 +54,7 @@ public class Req1001_Controller {
 		public String QNAList(@ModelAttribute("sch") FApplicationSch sch,Model d){
 			d.addAttribute("QNAListNotics",service.QNAListNotics());
 			d.addAttribute("QNAList", service.QNAList(sch));
+			d.addAttribute("NoAnswerQnaList",service.NoAnswerQnaList());
 			return "QNAList";
 		}
 		// 문의사항 첨부 파일 다운로드

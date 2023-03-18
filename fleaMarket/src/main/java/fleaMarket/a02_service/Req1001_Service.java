@@ -171,6 +171,11 @@ public class Req1001_Service {
 				}
 		return dao.FleaMarketList(sch);
 	}
+	//공지사항 리스트
+	public List<QNA> QNAListNotics(){
+		return dao.QNAListNotics();
+	}
+	//문의/답변 리스트
 	public List<QNA> MemberQNAList(FApplicationSch sch){
 		if(sch.getTitle()==null) sch.setTitle("");
 		// 1. 총페이지 수
@@ -220,12 +225,14 @@ public class Req1001_Service {
 				}
 		return dao.MemberQNAList(sch);
 	}
+	//미답변글 갯수
+	public int NoAnswerQnaList() {
+		return dao.NoAnswerQnaList();
+	}
 	public ProfileImg getMemberProfile(String email) {
 		return dao.getMemberProfile(email);
 	}
-	public List<QNA> QNAListNotics(){
-		return dao.QNAListNotics();
-	}
+	
 	public List<QNA> QNAList(FApplicationSch sch){
 		if(sch.getTitle()==null) sch.setTitle("");
 		// 1. 총페이지 수
@@ -291,13 +298,13 @@ public void DeleteMembers(List<String> email) {
 	
 //회원 삭제시 받아올 파일리스트들
 public void LeaveMember(String email) {
-	// 경로,파일List를 담을 MapList
-	List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
+	
 	//파일 경로 리스트
 	List<String> filepaths = Arrays.asList(profilepath,qnafilepath,communityfilepath,fleamarketfilepath,applicationfilepath);
 	//파일 이름 리스트의 리스트 ㅋㅋ!!
 	List<List<String>> totfileLists = new ArrayList<List<String>>();
-	
+	// 경로,파일List를 담을 MapList
+	List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
 	
 	//1.프로필 이미지
 	String profile =  dao.DeleteProFileList(email);

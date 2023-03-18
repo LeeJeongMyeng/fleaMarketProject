@@ -57,7 +57,7 @@ AND PERSONALNUMBER = '950828-1111111';
 
 
 INSERT INTO FLEAMARKETMEMBER values(
-'admin@contigo.com',
+'이메일',
 'admin',
 '관리자',
 '111111-1111111',
@@ -92,6 +92,7 @@ WHERE EMAIL ='admin@contigo.com';
 UPDATE FLEAMARKETMEMBER 
 SET AUTHORITY  = '관리자'
 WHERE EMAIL ='admin@contigo.com';
+
 
 
 SELECT count(*) FROM FLEAMARKETMEMBER f

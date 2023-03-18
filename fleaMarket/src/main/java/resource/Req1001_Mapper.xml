@@ -107,7 +107,8 @@
 		<select id="QNAListNotics" resultType="qna">
 			SELECT * FROM FLEAMARKETQNA
 			WHERE METHOD = 'n'
-			ORDER BY qnano DESC
+			and qnano!=0
+			ORDER BY qnano DESC 
 		</select>
 		<select id="totCnt" resultType="int">
 			SELECT count(*) FROM FLEAMARKETQNA
@@ -115,15 +116,21 @@
 			AND (title || EMAIL) LIKE '%'||#{title}||'%'
 		</select>
 		<select id="QNAList" resultType="qna" parameterType="fapplicationsch">
-			SELECT qna.* FROM
+			SELECT qna.*,qf.qfilecnt FROM
 			(SELECT rownum cnt,level,f.* FROM fleamarketqna f
 			WHERE 1=1
 			AND f.METHOD != 'n'
-			and (title || email) LIKE '%'||#{title}||'%'
+			and (title || email || status) LIKE '%'||#{title}||'%'
 			START with refno=0
 			CONNECT BY PRIOR qnano=refno
-			ORDER siblings BY qnano DESC) qna
-			WHERE cnt BETWEEN #{start} AND #{end}
+			ORDER siblings BY qnano DESC) qna,
+			(SELECT qnano,count(*) qfilecnt FROM qnafile GROUP BY QNANO) qf
+			WHERE qna.qnano = qf.qnano(+)
+			and cnt BETWEEN #{start} AND #{end}
+			ORDER BY cnt
+		</select>
+		<select id="NoAnswerQnaList" resultType="int">
+			select count(*) from fleamarketqna where status = '미답변'
 		</select>
 		<!-- 내가 쓴 문의글 조회 -->
 		<select id="totCnt3" resultType="int">

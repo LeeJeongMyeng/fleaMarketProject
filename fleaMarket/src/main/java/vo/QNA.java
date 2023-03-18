@@ -13,6 +13,7 @@ public class QNA {
 	private String secretwhether;
 	private String status;
 	private String cnt;//페이징
+	private String qfilecnt;
 	public String getQnano() {
 		return qnano;
 	}
@@ -85,6 +86,12 @@ public class QNA {
 	}
 	public void setSecretwhether(String secretwhether) {
 		this.secretwhether = secretwhether;
+	}
+	public String getQfilecnt() {
+		return qfilecnt;
+	}
+	public void setQfilecnt(String qfilecnt) {
+		this.qfilecnt = qfilecnt;
 	}
 	
 	

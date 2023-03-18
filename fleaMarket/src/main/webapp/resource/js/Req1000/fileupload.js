@@ -66,9 +66,9 @@ function handleImgsFilesSelect(e) {
         reader.onload = function(e) {
         	var str = e.target.result
         	if(str.indexOf('image')==-1){
-                var img_html = "<div style='text-align:center;'><label class='postInsertTitle' style='font-size:20px'>"+f.name+"</label><br><img src=\"https://cdn-icons-png.flaticon.com/512/8473/8473155.png\" ondblclick='deletefile("+index+")' style='width:150px;'></div>";
+                var img_html = "<div style='text-align:center;'><label class='postInsertTitle' style='font-size:13px'>"+f.name+"</label><br><img src=\"https://cdn-icons-png.flaticon.com/512/8473/8473155.png\" ondblclick='deletefile("+index+")' style='width:150px;'></div>";
         	}else{
-                var img_html = "<div style='text-align:center;'><label class='postInsertTitle' style='font-size:20px'>"+f.name+"</label><br><img src=\"" + e.target.result + "\" ondblclick='deletefile("+index+",\""+filetagid+"\")' style='width:150px;'></div>";
+                var img_html = "<div style='text-align:center;'><label class='postInsertTitle' style='font-size:13px'>"+f.name+"</label><br><img src=\"" + e.target.result + "\" ondblclick='deletefile("+index+",\""+filetagid+"\")' style='width:150px;'></div>";
         	}
             $("#imgs_wrap").append(img_html);
         }

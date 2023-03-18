@@ -11,7 +11,7 @@
 --capplicaion 커뮤니티게시글
 --BoardImg 커뮤니티게시글파일
 
-SELECT * FROM QNAFILE q ;
+SELECT * FROM FLEAMARKETMEMBER;
 --커뮤니티=============================================================================================
 CREATE TABLE capplicaion
 (
@@ -125,7 +125,7 @@ DROP TABLE ApplicationFile;
 
 
 ---------------------------------------------------------------------------------
-SELECT * FROM FLEAMARKETMEMBER;
+SELECT * FROM FLEAMARKETQNA ;
 SELECT PROFILEIMG  FROM PROFILE WHERE EMAIL = 'kim_se_0@naver.com' AND PROFILEIMG != 'defaultprofile.png';
 SELECT * FROM FLEAMARKET;
 SELECT * FROM PROFILE;
@@ -137,15 +137,19 @@ WHERE f.EMAIL=fm.EMAIL AND
 f.POSTINGNUMBER =f2.POSTINGNUMBER AND 
 fm.EMAIL LIKE '%'||'ehddms2909@gmail.com'||'%';
 
+DELETE fleamarketqna;
 
-
+UPDATE FLEAMARKETQNA SET TITLE ='0',EMAIL='zzzzz',METHOD='g',CATEGORY='x',SECRETWHETHER='j'
 
 --------------------------------------------------------------------------
 
 
+--** 같은 테이블의 pk를 fk로 쓰기 ㅋㅋ!!!
+ALTER TABLE FLEAMARKETQNA DROP CONSTRAINT FOREIGN KEY cascade;
 
 
-
+SELECT * FROM FLEAMARKETqna;
+SELECT * FROM FLEAMARKETMEMBER;
 
 
 -- 1.
@@ -154,10 +158,10 @@ SELECT profileimg FROM profile WHERE email='28888wjdaud@naver.com';
 SELECT * FROM QNAFILE
 WHERE qnano in (SELECT qnano FROM FLEAMARKETQNA WHERE email = '28888wjdaud@naver.com');
 
+
+
 --qna파일리스트
-SELECT * FROM FLEAMARKETMEMBER f2 ;
-SELECT * FROM PROFILE p ;
-UPDATE profile SET PROFILEIMG ='프사1.jfif' WHERE email='';
+SELECT * FROM FLEAMARKETQNA;
 SELECT CONCAT(FILEPATH,filename) FROM QNAFILE q
 WHERE QNANO IN (
 SELECT QNANO  FROM FLEAMARKETQNA f 
@@ -166,7 +170,7 @@ OR refno IN (
 SELECT QNANO  FROM FLEAMARKETQNA f 
 WHERE email = 'wjuuuuu@gmail.com'
 ))
-and filename IS NOT NULL ;
+and filename IS NOT NULL;
 
 
 
@@ -199,4 +203,35 @@ AND f.POSTINGNUMBER =f2.POSTINGNUMBER
 AND fm.EMAIL LIKE '%'||''||'%'
 AND f2.FILENAME Is NOT null;
 
+SELECT * FROM ffile;
+
+SELECT CONCAT(f2.FILEPATH,f2.FILENAME) AS filename
+FROM FLEAMARKET f, FFILE f2 , FLEAMARKETMEMBER fm
+WHERE f.EMAIL=fm.EMAIL
+AND f.POSTINGNUMBER =f2.POSTINGNUMBER
+AND fm.EMAIL LIKE '%'||''||'%'
+AND f2.FILENAME Is NOT null;
+
 SELECT SUBSTR(f2.FILEPATH,INSTR(f2.FILEPATH, '/',-1,3)+1,100) AS FILEPATH  FROM ffile f2;
+
+
+
+
+
+
+
+
+
+
+SELECT qna.* FROM
+			(SELECT rownum cnt,level,f.* FROM fleamarketqna f
+			WHERE 1=1
+			AND f.METHOD != 'n'
+			and (title || email) LIKE '%'||#{title}||'%'
+			START with refno=0
+			CONNECT BY PRIOR qnano=refno
+			ORDER siblings BY qnano DESC) qna
+			WHERE cnt BETWEEN #{start} AND #{end};
+
+UPDATE  FLEAMARKETQNA  SET refno=0;
+			

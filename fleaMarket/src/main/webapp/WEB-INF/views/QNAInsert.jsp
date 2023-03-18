@@ -34,14 +34,25 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	//글쓰기 부분ㅇㅇ
-	$('#editor .ql-editor').keyup(function(){
-	 	var expeditor=$(this).html() 
-	 	console.log(expeditor)
-		$('input[name=content]').val(expeditor); 
-	})
 	
+	
+	$('#editor .ql-editor').on({ 
+		keyup: function(e) {
+			
+	        	 var expeditor=$('#editor .ql-editor').html()
+			 	
+				$('input[name=content]').val(expeditor);
+	         }
+		
+	});
 	
 })
+
+function triggerback(){
+	var e = jQuery.Event( "keydown", { keyCode: 13 } );
+	$('#editor .ql-editor').trigger( e );
+}
+
 function CheckQNAInsert(){
 	var sesAuthority='${Login.authority}'
 		if(sesAuthority!='관리자' && $('select[name=category]').val()=='none'){alert('문의유형을 선택바랍니다.'); return false;}
@@ -50,6 +61,19 @@ function CheckQNAInsert(){
 		return true;
 	}
 </script>
+<style>
+input[type=file]::file-selector-button {
+  width: 130px;
+  height: 40px;
+  background-image: linear-gradient(90deg,#7F69D5,#5E72E4);
+/* background-image: linear-gradient(-20deg, #2b5876 0%, #4e4376 100%);
+ */color:white;
+  border: 1px solid rgb(77,77,77);
+  border-radius: 8px;
+  cursor: pointer;
+  
+}
+</style>
 <body class="g-sidenav-show   bg-gray-100">
 	<div class="min-height-300 bg-primary position-absolute w-100"></div>
 
@@ -142,7 +166,7 @@ function CheckQNAInsert(){
 							</div>
 								<input type="hidden" id="contentInput" name="content"/>
 							<div class="mb-3" style="margin-left: 26px;">
-								 <input name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}"  multiple/>
+								 <input class="mt-3" name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}"  multiple/>
 							</div>
 							<label class="postInsertTitle">이미지 미리보기 <span style="color:red;">(이미지를 '더블클릭'시 해당파일이 제외됩니다.)</span></label>
 							 <div id="imgs_wrap" style="display:flex;">

@@ -73,13 +73,16 @@ var SessionEmail = '${Login.email}'
 										<div class="ms-auto my-auto mt-lg-0 mt-4">
 										<form id="SeachQNAForm" action="QNAList.do" method="post">
 											<div class="input-group mb-3">
-												<input type="text" name="title" class="form-control" placeholder="　제목/작성자 입력하세요" >
+												<input type="text" name="title" class="form-control" placeholder="제목/작성자/답변상태" >
 												<input type="hidden" name="curPage" value="${sch.curPage}"/>
 												<button class="btn btn-outline-primary mb-0" type="submit" >검색</button>
 											</div>
 										</form>
 										</div>
 									</div>
+									<c:if test="${Login.authority=='관리자'}">
+									<div class="d-flex justify-content-end me-3" style="font-weight:bold; color:red;">미답변 : ${NoAnswerQnaList }</div>
+									</c:if>
 									<div class="card-body px-0 pb-0">
 
 										<div class="table-responsive">
@@ -125,11 +128,13 @@ var SessionEmail = '${Login.email}'
 																		${QNA.cnt}
 																	</td>
 																	<td>${QNA.qnano}</td>
-																	<td style="text-align:left;  padding-left:20px;"">
+																	<td style="text-align:left;  padding-left:20px;">
 																		<c:if test="${QNA.method=='a'}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;↪</c:if>
 																		<c:if test="${QNA.secretwhether=='y'}">  
 																		<img src="${path}/resource/img/lock.png" style="width:18px; height:18px;"></c:if>
 																		 ${QNA.title}
+																		 <c:if test="${not empty QNA.qfilecnt}">
+																		 <img src="${path}/resource/img/file.png" style="width:13px; height:13px;"></c:if>
 																	 </td>
 																	<td>${QNA.regdate}</td>
 																	<td>${QNA.email}</td>
