@@ -166,15 +166,8 @@
 	                    </div>
 	                </c:if>
                     <c:choose>
-	                    <c:when test="${Login.email != fleamarket.email}">	
+	                    <c:when test="${Login.email == fleamarket.email || Login.authority=='관리자'}">	
 							<div class="row mt-4">
-			                    <div class="col-lg-5 ms-auto">
-			                      <button id="appBtn" class="btn btn-primary mb-0 mt-lg-auto w-100" type="button" onclick="appCheck()">신청하기</button>
-			                    </div>
-			                </div>
-			            </c:when>
-		            	<c:otherwise>
-			            		<div class="row mt-4">
 			                    <div class="row ms-auto text-end">
 				                    <div class="col-6"></div>
 			                    	<div class="col-3">  
@@ -187,6 +180,13 @@
 			                    	</div>
 								</div>	                    
 		                    </div>
+			            </c:when>
+		            	<c:otherwise>
+		            	<div class="row mt-4">
+			                    <div class="col-lg-5 ms-auto">
+			                      <button id="appBtn" class="btn btn-primary mb-0 mt-lg-auto w-100" type="button" onclick="appCheck()">신청하기</button>
+			                    </div>
+			                </div>
 						</c:otherwise>
 					</c:choose>
                   </div>
