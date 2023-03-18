@@ -1,3 +1,4 @@
+ 
 DROP TABLE calendar01 CASCADE CONSTRAINTS;	
 		create table calendar01(
 			title varchar2(100),
@@ -27,7 +28,7 @@ DROP SEQUENCE cal01_seq;
 			'#0404B4','#FFFF00',1,'https://fullcalendar.io/docs/event-display');
 		SELECT * FROM calendar01;
 	
-	
+
 		
 	
 	

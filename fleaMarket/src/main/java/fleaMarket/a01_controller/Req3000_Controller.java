@@ -104,22 +104,21 @@ public class Req3000_Controller {
 			// 해당 postingNumber의 여러행을 list처리
 			List<FFile> filelist = service.DelFail(postingNumber);
 			for (int i = 0; i < filelist.size(); i++) {
+				//파일이름
 				String sd = filelist.get(i).getFilename();
-				fileservice.DeleteFile(profilepath, sd);
+				//파일경로
+				String filepath = filelist.get(i).getFilePath();
+				//파일 삭제 처리 서비스
+				fileservice.DeleteFile(filepath, sd);
 			
 			}
+			
+			//DB에 해당 postingNumber에 해당하는 데이터 삭제
 		    service.delFfile(postingNumber);
-	    
-
-			// 파일 업로드 후, db에 저장된 정보
-			/*
-			 * for (MultipartFile f : pro) { String filename =
-			 * fileservice.insprofileimg(profilepath, f); FFile fupt = new FFile(filename,
-			 * profilepath, postingNumber); // 수정하기 service.UptFFile(fupt); }
-			 */
-		    
+	        
+		    //삭제 후 -> 재등록 처리 
 		    if (pro.size() != 0) {
-
+                //파일 등록
 				String msg = service.uptFleaFileModule(pro, postingNumber);
 
 			
@@ -143,7 +142,8 @@ public class Req3000_Controller {
 
 		for (int i = 0; i < filelist.size(); i++) {
 			String sd = filelist.get(i).getFilename();
-			fileservice.DeleteFile(profilepath, sd);
+			String filepath = filelist.get(i).getFilePath();
+			fileservice.DeleteFile(filepath, sd);
 		}
 		// 플리마켓 테이블 삭제
 		service.delFleaMarket(postingNumber);

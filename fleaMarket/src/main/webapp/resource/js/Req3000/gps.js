@@ -135,14 +135,15 @@ function displayCenterInfo(result, status) {
 	 }
 	 
 
- 	if(!document.aform.bisenessNumber.value){
+/* 	if(!document.aform.bisenessNumber.value){
 		    var bcontent="사업자 번호 등록을 해주세요."
 	        alert(bcontent);
 	        if(bcontent){
-				location.href="AdminSearch.do"
+				location.href="MemberInfo.do"
 			} 
 	        return false;
-	 } 
+	 } */
+	 
 	if(!document.aform.title.value){
 	        alert("글제목을 입력하세요");
 	        return false;

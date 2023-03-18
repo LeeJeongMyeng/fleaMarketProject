@@ -122,8 +122,19 @@ $(document).ready(function(){
 							<hr class="horizontal dark my-3"><%--value="${Login.email}" --%>
 							<input type="hidden" name="email" value="${Login.email}">
 							<input type="hidden" name="bisenessNumber" value="${Login.businessnumber}">
+							<script>
+							  
+							  var bsno='${Login.businessnumber}';
+							  console.log(bsno);
+							  
+							  if(bsno==""){
+								  location.href="AdminSearch.do"
+							  }
+							</script>
+							
+							
 							<label for="title" class="form-label labelFont">제목</label> 
-							<input type="text" class="form-control" id="projectName" name="title" style="width:50%;">
+							<input type="text" class="form-control" id="projectName" name="title" style="width:50%;" minlength='2'>
 
 			                <br>
                             <!-- 주소지정해주기 -->
@@ -136,18 +147,6 @@ $(document).ready(function(){
                                        <div class="btn btn-primary" onclick="callAdd()" style="height: 41px;margin-left: 530px;margin-top: -53px;width: 70px;">확인</div>
 									   
 									   <br>	
-									  <script>
-       							    function callAdd(){
-											alert("등록:"+$("input[name=addrs1]").val())
-											geocoder.addressSearch($("input[name=addrs1]").val(), mafun ); 
-							
-									} 
-							
-											
-											
-							
-									
-									  </script>
 									   				
                                     </div>
 							     </div>
@@ -245,10 +244,11 @@ $(document).ready(function(){
 								</div>
                                 
 						<div class="div1">
-
+	                 
 	                       <label class="mt-4 form-label labelFont">첨부파일</label>
 								<div class="row mt-3">
 		                         <div class="col-2" style="height:120px;">
+		                          <p class="text-sm mb-0">이미지 파일은 최소 1장 이상입니다.</p>
                                   <input type="file" name="pro" class="form-control" 
                                   style="width:230px" id="isFile" multiple  accept="">
 		                        </div>
@@ -279,6 +279,21 @@ $(document).ready(function(){
 	
 	<script src="${path}/resource/js/Req3000/template.js"></script>
   <script>
+
+  
+/*  function bsno1(){
+	 
+	 var bsno=($("input[name=bisenessNumber]").val();
+	  if(bsno==null ||bsno==""){
+		  location.href="AdminSearch.do"
+	  }
+ } */
+  
+  function callAdd(){
+		alert("등록:"+$("input[name=addrs1]").val())
+		geocoder.addressSearch($("input[name=addrs1]").val(), mafun ); 
+
+} 
 
   
 	$('input[name=title]').keyup(function(){
