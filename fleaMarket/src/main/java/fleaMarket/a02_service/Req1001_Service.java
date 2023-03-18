@@ -291,8 +291,8 @@ public void DeleteMembers(List<String> email) {
 	
 //회원 삭제시 받아올 파일리스트들
 public void LeaveMember(String email) {
+	// 경로,파일List를 담을 MapList
 	List<Map<String, Object>> listmap = new ArrayList<Map<String, Object>>();
-	Map<String, Object> map;
 	//파일 경로 리스트
 	List<String> filepaths = Arrays.asList(profilepath,qnafilepath,communityfilepath,fleamarketfilepath,applicationfilepath);
 	//파일 이름 리스트의 리스트 ㅋㅋ!!
@@ -336,6 +336,7 @@ public void LeaveMember(String email) {
 	 
 	 
     //파일경로 리스트,파일 이름리스트를 ==> 맵형식으로 바꿈 ==> 리스트맵에 할당 
+	Map<String, Object> map;
 	for(int i=0; i<filepaths.size()-1; i++) {
 		 map = new HashMap<String,Object>();
 		 map.put("filepath", filepaths.get(i));
