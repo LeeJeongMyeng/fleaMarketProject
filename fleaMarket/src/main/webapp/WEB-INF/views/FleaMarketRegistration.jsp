@@ -124,12 +124,12 @@ $(document).ready(function(){
 							<input type="hidden" name="bisenessNumber" value="${Login.businessnumber}">
 							<script>
 							  
-							  var bsno='${Login.businessnumber}';
+						/* 	  var bsno='${Login.businessnumber}';
 							  console.log(bsno);
 							  
 							  if(bsno==""){
 								  location.href="AdminSearch.do"
-							  }
+							  } */
 							</script>
 							
 							
@@ -140,11 +140,11 @@ $(document).ready(function(){
                             <!-- 주소지정해주기 -->
 							<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">주소 설정</label> 
+									<label class="form-label labelFont">1차 주소 설정</label> 
 									<div class = "s_form">
 									   <input type="button" name="addrs0" class="btn btn-primary" onclick="execDaumPostcode()" style="margin-bottom: 9px;" value="우편번호 찾기"><br>									  
 									   <input name = "addrs1" type="text"   id="sample6_address"  class="form-control soooo2" style="width:102%;" placeholder="주소" readonly>
-                                       <div class="btn btn-primary" onclick="callAdd()" style="height: 41px;margin-left: 530px;margin-top: -53px;width: 70px;">확인</div>
+                                       <div class="btn btn-primary" onclick="callAdd()" style="height: 41px;margin-left: 530px;margin-top: -53px;width: 92px;">1차 주소</div>
 									   
 									   <br>	
 									   				
@@ -153,7 +153,7 @@ $(document).ready(function(){
 							</div>
 							<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">장소(상세클릭)</label>
+									<label class="form-label labelFont">2차 주소 상세설정(클릭!!)</label>
 
 								</div>
 
@@ -166,7 +166,7 @@ $(document).ready(function(){
 										<span id="centerAddr2"> </span> <span id="centerAddr3">
 										</span>
 									</div>
-									<input Type="text" name="address" value="">
+									<input Type="hidden" name="address" value="">
 									
 								</div>
 								</div>
@@ -237,8 +237,8 @@ $(document).ready(function(){
 										<select	class="form-control" name="checkForm" id="choices-gender">
 								<option value="" selected="selected">첨부파일 선택</option>
 											<option  value="N">필요없음</option>
-											<option id="P" value="P">개인양식</option>
-											<option  value="C">공통파일</option>
+											<option id="P" value="P">개인양식(사진+첨부양식)</option>
+											<option  value="C">공통파일(사진)</option>
 										</select>
 									</div>
 								</div>
@@ -246,12 +246,13 @@ $(document).ready(function(){
 						<div class="div1">
 	                 
 	                       <label class="mt-4 form-label labelFont">첨부파일</label>
+	                         <p class="text-sm mb-0" style="width:236px;">*이미지 파일은 최소 1장 이상입니다.</p>
 								<div class="row mt-3">
-		                         <div class="col-2" style="height:120px;">
-		                          <p class="text-sm mb-0">이미지 파일은 최소 1장 이상입니다.</p>
+		                          <div class="col-2" style="height:120px;"> 
+		                        
                                   <input type="file" name="pro" class="form-control" 
                                   style="width:230px" id="isFile" multiple  accept="">
-		                        </div>
+		                      </div> 
 		                      </div>
                         </div>
 		             							
@@ -281,21 +282,30 @@ $(document).ready(function(){
   <script>
 
   
-/*  function bsno1(){
-	 
-	 var bsno=($("input[name=bisenessNumber]").val();
-	  if(bsno==null ||bsno==""){
-		  location.href="AdminSearch.do"
-	  }
- } */
-  
-  function callAdd(){
+
+ //주소 확인 버튼  
+/*   function callAdd(){
 		alert("등록:"+$("input[name=addrs1]").val())
 		geocoder.addressSearch($("input[name=addrs1]").val(), mafun ); 
 
 } 
-
+ */
+ 
+function callAdd(){
+		Swal.fire({
+		    icon:'warning',
+	        text:'주소:'+$("input[name=addrs1]").val(),
+	        confirmButtonText:'등록',
+	        showCancelButton: true,
+	        cancelButtonText:'취소',
+		 }).then((result) =>{
+			 geocoder.addressSearch($("input[name=addrs1]").val(), mafun ); 
+		 })
+	}
   
+
+ 
+ 
 	$('input[name=title]').keyup(function(){
 		
 		//데이터가 들어왔을 경우

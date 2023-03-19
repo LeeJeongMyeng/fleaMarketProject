@@ -123,6 +123,7 @@ function displayCenterInfo(result, status) {
 //유효성체크
 
      
+  
 	//필수항목 조건식 
 	 function checkForm1(){	
 	if(!document.aform.email.value){
@@ -220,7 +221,7 @@ function displayCenterInfo(result, status) {
 	     alert("첨부파일은 필수");
 	     return false;
 	 }
-	 
+	 //첨부파일 확인을 위한 유효성 체크 
 	 var fileForm0 = /(.*?)\.(docx|hwp)$/;
 	 
 	 var fileArr = Array.from(document.getElementById('isFile').files);// 이벤트로 넘어온 파일들을 배열형식으로 담음(FileList -> Array)
@@ -232,6 +233,7 @@ function displayCenterInfo(result, status) {
 		//파일이름의 확장자
 		var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
 		//검사할 확장자의 배열
+	
     	var extension = ['doc','docx','ppt','pptx','xls','pdf','hwp','txt'];
     	
     	extension.forEach(function(element) {
@@ -245,66 +247,8 @@ function displayCenterInfo(result, status) {
 		alert("개인양식일때는 첨부파일 필수 입니다.")
 		return false;
 		}
-	
-	
-//제목 입력시 색변환
-
-	
-/*
-$('input[name=title]').keyup(function(this){
-	
-	//데이터가 들어왔을 경우
-	  if($(this).val()!=''){
-		  this.addClass('is-valid')
-		  
-    //데이터가 없을 경우 		  
-	  }
-});	
-
-
-
-
-var titleVal = $('[name=title]').val()
-var title = $('[name=title]')
-
-$('[name=title]').keyup(function(tt){
-	
-	//데이터가 들어왔을 경우
-	  if($(this).val()!=''){
-		  this.addClass('is-valid')
-		  
-    //데이터가 없을 경우 		  
-	  }else{
-		  this.remove('is-invalid') 
-		  
-	  }
-
-	
-	
-	
-	
-	
-});
-
-	if(titleVal==''){
-		//$('pass1feedback').text('이메일 형식이 맞지않습니다.')
-		title.addClass('is-invalid')
-		return false;
-	}
-    if(data.DuplicateEmail==null){
-		Emaildoc.removeClass('is-invalid')
-		Emaildoc.addClass('is-valid')
-		sendEmail()
-	}else{
-		alert("중복된 이메일이 있습니다. 다시입력바랍니다.")
-		$('#emailfeedback').text('중복된 이메일입니다.')
-		Emaildoc.val('')
-		Emaildoc.focus()
-		Emaildoc.addClass('is-invalid')
-				}
-
-*/
-	 
+		 
 	  return true;
 	}
+	         
 	          

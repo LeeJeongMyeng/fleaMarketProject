@@ -57,8 +57,7 @@ public class Req3000_Controller {
 
 	@Value("${fleamarket.upload3}")
 	private String profilepath;
-
-//http://localhost:7080/fleaMarket/fRegistration.do	
+//	http://localhost:7080/fleaMarket/fRegistration.do
 //http://223.26.182.204:7080/fleaMarket/fRegistration.do	
 	@RequestMapping("fRegistration.do")
 	public String fRegistration(Model d, Faddresss ins) {
