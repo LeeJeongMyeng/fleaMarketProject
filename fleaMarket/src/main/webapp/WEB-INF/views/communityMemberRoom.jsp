@@ -662,22 +662,27 @@
 		    <div class="modal-body">
 		      	<table class="table align-items-center mb-0">
 		      		<tr><th>프로필</th><th>이메일</th><th>닉네임</th><th>room구경가기</th><th>팔로우</th></tr>
+		      		<c:if test="${empty unfollowMember}">
+		      		<tr><td colspan="5" style="text-align:center;">언팔로우 중인 회원이 없습니다.</td></tr>
+		      		</c:if>
 		      	</table>
-		      		<c:forEach var="unfollowmem" items="${unfollowMember}">
-		      			<div class="flex-item6"> 
-			      			<!-- <tr> -->
-			      			<img style="margin-left:1%; width:40px;height:40px" src="${path}/resource/img/Member/profileimg/${unfollowmem.profileimg}" alt="無">
-			      			<div style="margin-left: 10%; margin-top: -3.5%;" >${unfollowmem.email}</div>
-			      			<div style="margin-left: 35%; margin-top: -3%;">${unfollowmem.nickname}</div>
-			      			<div style="margin-left: 15%; margin-top: -4%;" class="align-middle text-center"><a href="communityMemberRoom.do?email=${unfollowmem.email}&loginEmail=${Login.email}" id="roomGo" class="btn btn-outline-primary mt-2"><i class="ni ni-shop"></i></a></div>
-			      			<div style="margin-left: 73%; margin-top: -7.5%;" class="align-middle text-center"><button id="followinsert" class="btn btn-outline-primary mt-2" onclick="followAddFun('${unfollowmem.email}')"><i class="ni ni-fat-add"></i></button></div>
-			      			<!-- </tr> -->
-		      			</div>
-		      		</c:forEach>
+		      		<c:if test="${not empty unfollowMember}">
+			      		<c:forEach var="unfollowmem" items="${unfollowMember}">
+			      			<div class="flex-item6"> 
+				      			<!-- <tr> -->
+				      			<img style="margin-left:1%; width:40px;height:40px" src="${path}/resource/img/Member/profileimg/${unfollowmem.profileimg}" alt="無">
+				      			<div style="margin-left: 10%; margin-top: -3.5%;" >${unfollowmem.email}</div>
+				      			<div style="margin-left: 35%; margin-top: -3%;">${unfollowmem.nickname}</div>
+				      			<div style="margin-left: 15%; margin-top: -4%;" class="align-middle text-center"><a href="communityMemberRoom.do?email=${unfollowmem.email}&loginEmail=${Login.email}" id="roomGo" class="btn btn-outline-primary mt-2"><i class="ni ni-shop"></i></a></div>
+				      			<div style="margin-left: 73%; margin-top: -7.5%;" class="align-middle text-center"><button id="followinsert" class="btn btn-outline-primary mt-2" onclick="followAddFun('${unfollowmem.email}')"><i class="ni ni-fat-add"></i></button></div>
+				      			<!-- </tr> -->
+			      			</div>
+			      		</c:forEach>
+		      		</c:if>
 		     
 		    </div>
 		    <div class="modal-footer">
-		    	<div class="pagination1">
+		    	<div class="pagination6">
 		           <i class="ni ni-bold-left fa-arrow-left"></i>
 		            <ol id="numbers6">
 		            <!-- 페이지네이션 번호들이 오는곳 -->

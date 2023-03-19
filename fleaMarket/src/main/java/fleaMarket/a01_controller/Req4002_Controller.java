@@ -319,7 +319,7 @@ public class Req4002_Controller {
 		d.addAttribute("roommember", service.roomMemberInfo(memInfoMap).get(0));
 		System.out.println("룸회원정보:"+service.roomMemberInfo(memInfoMap).get(0));
 		// 언팔중인 회원 정보
-		memInfoMap.put("dive", "unfollowMem");
+		memInfoMap.put("div", "unfollowMem");
 		d.addAttribute("unfollowMember", service.roomMemberInfo(memInfoMap));
 		System.out.println("언팔한회원정보"+service.roomMemberInfo(memInfoMap));
 		
