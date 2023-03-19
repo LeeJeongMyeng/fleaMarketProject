@@ -142,7 +142,7 @@ $(document).ready(function(){
 								<div class="col-6">
 									<label class="form-label labelFont"><span style="color:red;">*</span>행사/플리마켓 진행 장소 선택</label> 
 									<div class = "s_form">
-									   <input type="button" name="addrs0" class="btn btn-primary" onclick="execDaumPostcode()" style="margin-bottom: 9px;" value="우편번호 찾기"><br>									  
+									   <input type="button" name="addrs0" class="btn btn-primary" onclick="execDaumPostcode()" style="margin-bottom: 9px;" value="장소 검색"><br>									  
 									   <input name = "addrs1" type="text"   id="sample6_address"  class="form-control soooo2" style="width:102%;" placeholder="주소" readonly>
 									   <br>	
 									   				
