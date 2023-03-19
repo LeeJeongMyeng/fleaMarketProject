@@ -135,7 +135,7 @@ input[type=file]::file-selector-button {
 					
 								
 							<button type="button" ${Login.authority=='관리자' && qna.method=='q'?'':'style="display:none;"'} class="btn btn-outline-success btn-md mb-0 me-1" id="QNAAnswerBtn">답변</button>  
-							<button type="button" id="goQnaList" class="btn btn-outline-secondary btn-md mb-0 me-1" style="margin-left:auto;">취소</button>	
+							<button type="button" id="goQnaList" class="btn btn-outline-secondary btn-md mb-0 me-1" style="margin-left:auto;">목록</button>	
 							
 							</div>
 							</form>

@@ -79,8 +79,6 @@ if (msg !== '') {
                     </div>
                     <div class="row">
 	                    <div class="form-check form-switch col-6">
-	                      <input class="form-check-input" type="checkbox" id="rememberMe">
-	                      <label class="form-check-label" for="rememberMe">이 계정 기억하기</label>
 	                    </div>
                         <div class="col-6" id="Memberfind_Wrap">
                            <button type="button" onclick="MemberFindModal('id')">아이디 찾기</button>	
