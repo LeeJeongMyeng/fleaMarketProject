@@ -30,7 +30,18 @@
                 }
         
                 document.getElementById("sample6_address").value = addr;
-             
+                Swal.fire({
+				    icon:'warning',
+			        text:'주소:'+$("input[name=addrs1]").val(),
+			        confirmButtonText:'등록',
+			        showCancelButton: true,
+			        cancelButtonText:'취소',
+				 }).then(result =>{
+					 if(result.isConfirmed){
+						 $("input[name=address]").val(addr)
+					 }
+					// geocoder.addressSearch($("input[name=addrs1]").val(), mafun ); 
+				 })
 
             }
         }).open();

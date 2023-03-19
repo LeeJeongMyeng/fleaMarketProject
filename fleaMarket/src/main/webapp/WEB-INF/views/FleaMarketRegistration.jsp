@@ -133,19 +133,17 @@ $(document).ready(function(){
 							</script>
 							
 							
-							<label for="title" class="form-label labelFont">제목</label> 
+							<label for="title" class="form-label labelFont"><span style="color:red;">*</span>제목</label> 
 							<input type="text" class="form-control" id="projectName" name="title" style="width:50%;" minlength='2'>
 
 			                <br>
                             <!-- 주소지정해주기 -->
 							<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">1차 주소 설정</label> 
+									<label class="form-label labelFont"><span style="color:red;">*</span>행사/플리마켓 진행 장소 선택</label> 
 									<div class = "s_form">
 									   <input type="button" name="addrs0" class="btn btn-primary" onclick="execDaumPostcode()" style="margin-bottom: 9px;" value="우편번호 찾기"><br>									  
 									   <input name = "addrs1" type="text"   id="sample6_address"  class="form-control soooo2" style="width:102%;" placeholder="주소" readonly>
-                                       <div class="btn btn-primary" onclick="callAdd()" style="height: 41px;margin-left: 530px;margin-top: -53px;width: 92px;">1차 주소</div>
-									   
 									   <br>	
 									   				
                                     </div>
@@ -153,7 +151,8 @@ $(document).ready(function(){
 							</div>
 							<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">2차 주소 상세설정(클릭!!)</label>
+									<label class="form-label labelFont">진행장소 상세설정<span style="color:red;">(클릭!!)</span></label><br>
+									<label class="form-label labelFont">( 참가 인원들이 알 수 있도록 상세한 위치를 조절해주세요! ^^ )</label>
 
 								</div>
 
@@ -166,7 +165,7 @@ $(document).ready(function(){
 										<span id="centerAddr2"> </span> <span id="centerAddr3">
 										</span>
 									</div>
-									<input Type="hidden" name="address" value="">
+									<input Type="text" name="address" value="">
 									
 								</div>
 								</div>
@@ -174,7 +173,7 @@ $(document).ready(function(){
 							
 									<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">모집 인원</label> <input
+									<label class="form-label labelFont"><span style="color:red;">*</span>모집 인원</label> <input
 										class="form-control" type="text" name="approvalMaxCnt" 
 										oninput="this.value = this.value.replace(/[^0-50.]/g, '');">
 								</div>
@@ -183,7 +182,7 @@ $(document).ready(function(){
 
 							<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">모집 시작일</label> <input
+									<label class="form-label labelFont"><span style="color:red;">*</span>모집 시작일</label> <input
 										 class="form-control datetimepicker" type="date"
 										placeholder="시작일을 선택해주세요" name="recruitmentStartDate"
 										id="recruitmentStartDate"
@@ -191,7 +190,7 @@ $(document).ready(function(){
 								</div>
 								<div class="col-6">
 									<!-- class="form-control datetimepicker" -->
-									<label class="form-label labelFont">모집 종료일</label> <input
+									<label class="form-label labelFont"><span style="color:red;">*</span>모집 종료일</label> <input
 									 class="form-control datetimepicker" type="date"
 										placeholder="종료일을 선택해주세요" name="recruitmentEndDate" 
 										id="recruitmentEndDate"
@@ -200,14 +199,14 @@ $(document).ready(function(){
 							</div>
 							<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">플리마켓 시작일</label> 
+									<label class="form-label labelFont"><span style="color:red;">*</span>플리마켓 시작일</label> 
 									<input  class="form-control datetimepicker" type="date"
 										placeholder="시작일을 선택해주세요" name="openDate" id="openDate" data-input>
 								</div>
 									            
 							
 								<div class="col-6">
-									<label class="form-label labelFont">플리마켓 종료일</label><input
+									<label class="form-label labelFont"><span style="color:red;">*</span>플리마켓 종료일</label><input
 									 class="form-control datetimepicker" type="date"
 										placeholder="종료일을 선택해주세요" name="closeDate" id="closeDate" onkeyup="keyevent(this)" data-input>
 								</div>
@@ -221,7 +220,7 @@ $(document).ready(function(){
 
 					
 
-								<label class="mt-4 labelFont">내용</label>
+								<label class="mt-4 labelFont"><span style="color:red;">*</span>내용</label>
 
 								<div id="editor" style="height:294px;">
 
@@ -233,7 +232,7 @@ $(document).ready(function(){
 
 								<div class="row">
 									<div class="col-sm-4 col-6">
-										<label class="form-label mt-4">첨부파일 유무</label> 
+										<label class="form-label mt-4"><span style="color:red;">*</span>첨부파일 유무</label> 
 										<select	class="form-control" name="checkForm" id="choices-gender">
 								<option value="" selected="selected">첨부파일 선택</option>
 											<option  value="N">필요없음</option>
@@ -283,28 +282,6 @@ $(document).ready(function(){
 
   
 
- //주소 확인 버튼  
-/*   function callAdd(){
-		alert("등록:"+$("input[name=addrs1]").val())
-		geocoder.addressSearch($("input[name=addrs1]").val(), mafun ); 
-
-} 
- */
- 
-function callAdd(){
-		Swal.fire({
-		    icon:'warning',
-	        text:'주소:'+$("input[name=addrs1]").val(),
-	        confirmButtonText:'등록',
-	        showCancelButton: true,
-	        cancelButtonText:'취소',
-		 }).then((result) =>{
-			 geocoder.addressSearch($("input[name=addrs1]").val(), mafun ); 
-		 })
-	}
-  
-
- 
  
 	$('input[name=title]').keyup(function(){
 		
