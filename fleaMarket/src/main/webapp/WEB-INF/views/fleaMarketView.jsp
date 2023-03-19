@@ -123,17 +123,24 @@
                 </div>
                 <div class="col-lg-5 mx-auto">
                   <input type="hidden" name="writer" value="${fleamarket.email}">
-                  <h3 class="mt-lg-0 mt-4">${fleamarket.title}</h3>
-                  <div class="rating">
-                    <i class="fas" aria-hidden="true" style="line-height:25px;">플리마켓 기간<br>${fleamarket.openDate} - ${fleamarket.closeDate}</i>
-                  </div>
-                  <br>
-                  <br>
+                  <h3 class="mt-lg-0 mt-4 ">${fleamarket.title}</h3>
                   <h6 class="mb-0 mt-3">모집기간</h6>
                   <h5>${fleamarket.recruitmentStartDate} - ${fleamarket.recruitmentEndDate}</h5>
                   <span class="badge"></span>
+                  <br>
+                  <br>
+                  <div class="rating" style="width:100%; margin-bottom:10px;">
+                    <i class="fas" aria-hidden="true" style="line-height:25px; width:60%;">
+                    	플리마켓 기간<br>
+                   		${fleamarket.openDate} - ${fleamarket.closeDate}
+                    </i>
+                    <i class="fas" aria-hidden="true" style="line-height:25px;">
+                    	작성자<br>
+                   		${fleamarket.email}
+                    </i>
+                  </div>
                   <hr style="border:solid 1px gray;">
-                  <p  style="margin-top:15px;">
+                  <p style="margin-top:15px;">
                   ${fleamarket.content}
                   </p>
                   <div class="row mt-4">
@@ -152,7 +159,7 @@
                      </div>
                   </div>
                   <c:if test="${fleamarket.checkForm == 'P'}">	
-	                    <div class="col-12"> <!-- 첨부파일 -->
+	                    <div class="col-12 mt-4"> <!-- 첨부파일 -->
 	                      <label>파일 다운로드</label>
 	                      <c:forEach var="noimg" items="${noimgfiles}">
 							<form action="downloadFFile.do" method="get">
@@ -257,7 +264,7 @@
 	          	</c:when>
 	          	<c:otherwise>
 		            <div class="form-group text-center">신청 파일을 첨부해 주세요</div>
-		          	<label>파일 첨부</label>
+		          	<label>파일 첨부<span style="color:red;"> (이미지를 '더블클릭'시 해당 파일이 제외됩니다.)</span></label>
 		         	<div class="row mt-3">
 		              <div class="col-md-12">
 		                <input type="file" name="appFile" class="form-control col-md-12 mb-3" id="appFile" multiple>

@@ -24,4 +24,5 @@ public interface FMViewDao {
 	public String appFileView(int applicationNo);
 	public void delApp(int applicationNo);
 	public void uptApp(ApplicationFile upt);
+	public String getprofile(String email);
 }

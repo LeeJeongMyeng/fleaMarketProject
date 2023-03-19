@@ -117,6 +117,8 @@
 		FROM FApplication 
 		WHERE applicationno = #{applicationno}
 	</delete>
-	
+	<select id="getprofile" parameterType="string" resultType="string">
+		select profileimg from profile where email=#{email}
+	</select>
 </mapper>		
 		

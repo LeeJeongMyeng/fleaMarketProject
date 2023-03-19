@@ -56,6 +56,9 @@ public class FMViewService {
 		return map;
 		
 	}
+	public String getprofile(String email) {
+		return dao.getprofile(email);
+	}
 	
 	// 신청 중복 검사
 	public int duplicateApp(FApplication sch) {
