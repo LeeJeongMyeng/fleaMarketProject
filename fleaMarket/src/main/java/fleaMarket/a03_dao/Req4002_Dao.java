@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import vo.BoardImg;
+import vo.Criteria;
 import vo.Capplication;
 import vo.FollowMemberInfo;
 import vo.RoomMemberInfo;
@@ -22,6 +23,8 @@ public interface Req4002_Dao {
 	public void communityFileUpdate(BoardImg fupt);
 	// 팔로우 조회
 	public List<FollowMemberInfo> followerSelect(FollowMemberInfo index);
+	// 팔로우 페이징 처리 조회
+	public List<FollowMemberInfo> followerSelectPage(Criteria cri);
 	// 팔로우 조회
 	public int followCheck(Map<String, String> map);
 	// 팔로우 취소

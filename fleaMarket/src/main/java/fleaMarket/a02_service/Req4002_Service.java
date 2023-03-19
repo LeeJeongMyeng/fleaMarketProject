@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import fleaMarket.a03_dao.Req4002_Dao;
 import vo.BoardImg;
+import vo.Criteria;
 import vo.Capplication;
 import vo.FollowMemberInfo;
 import vo.RoomMemberInfo;
@@ -47,6 +48,11 @@ public class Req4002_Service {
 		if(index.getMyemail()==null) index.setMyemail("");
 		//if(index.getDiv()==null) index.setDiv("");
 		return dao.followerSelect(index);
+	}
+	
+	public List<FollowMemberInfo> followerSelectPage(Criteria cri) {
+		if(cri.getMyemail()==null) cri.setMyemail("");
+		return dao.followerSelectPage(cri);
 	}
 	
 	public int followCheck(String myEmail, String following) {

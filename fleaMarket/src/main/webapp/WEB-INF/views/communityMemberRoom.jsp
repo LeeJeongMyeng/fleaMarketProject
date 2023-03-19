@@ -14,6 +14,21 @@
 <html>
 <head>
 <title>팔로우 회원room</title>
+<style>
+	*{
+	   margin:0px;
+	   padding:0px;
+	   color: #444444;
+	   box-sizing:border-box;
+	}
+	a{
+	   text-decoration: none;
+	}
+	li{
+	    list-style:none;
+	 }
+
+</style>
 <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
@@ -26,10 +41,12 @@
   <!-- Font Awesome Icons -->
   <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   <link href="${path}/assets/css/nucleo-svg.css" rel="stylesheet" />
+  <link href="${path}/resource/css/Community/CommunityBoard.css" rel="stylesheet" />
   <!-- CSS Files -->
   <link id="pagestyle" href="${path}/assets/css/argon-dashboard.css?v=2.0.5" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
   <script src="${path}/resource/js/Req4002/room.js"></script>
+  
 </head>
 <script type="text/javascript">
 	$(document).ready(function(){
@@ -116,10 +133,6 @@
 	// 팔로우 성공판단
 	if("${followSuccess}"=="팔로우성공"){
 		alert("[안내메시지] ${Login.email}이 ${followemail}님과 팔로우가 되었습니다.")
-		 /*  Swal.fire({
-	          text: '팔로우 완료',
-	          icon: 'success'
-	      }); */
 	}
 	//언팔로우 성공판단
 	if("${msg}"=="언팔로우"){
@@ -251,9 +264,9 @@
 		        <div class="card-body" style="margin-left:2%;">
 		          <div class="d-flex">
 		            <p class="mb-0">정보 미노출/노출</p>
-		            <div class="form-check form-switch ms-auto">
+		            <!-- <div class="form-check form-switch ms-auto">
 		              <input class="form-check-input ms-0" type="checkbox" checked id="flexSwitchCheckDefault00">
-		            </div>
+		            </div> -->
 		          </div>
 		          <img id="bulbicon" class="img-fluid pt-3 pb-2" src="${path}/resource/community/light-bulb.png" alt="bulb_icon" style="width:auto; height:70px;">
 		          <p class="mb-0">e-mail  :  <span id="roomemail"> ${roommember.email}</span></p>
@@ -637,8 +650,9 @@
   </main>
   <!-- 팔로우 추가 회원(언팔중인 회원) 보러가기 모달창 -->
   <div class="modal fade w-500" id="unfollModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="flex-container6">	
 		<div class="modal-dialog modal-dialog-centered" role="document" style="width:800px;">
-		  <div class="modal-content" style="width:750px;">
+		  <div class="modal-content" style="width:1200px; margin-left: -60%; margin-top: 40%;  margin-right: -25%;">
 		    <div class="modal-header">
 		      <h5 class="modal-title" id="exampleModalLabel">언팔로우 중인 회원정보<br></h5>
 		      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
@@ -648,22 +662,33 @@
 		    <div class="modal-body">
 		      	<table class="table align-items-center mb-0">
 		      		<tr><th>프로필</th><th>이메일</th><th>닉네임</th><th>room구경가기</th><th>팔로우</th></tr>
-		      		<c:forEach var="unfollowmem" items="${unfollowMember}">
-		      			<tr>
-		      			<td><img src="${path}/resource/img/Member/profileimg/${unfollowmem.profileimg}" style="width:40px;height:40px;" alt="無"></td>
-		      			<td>${unfollowmem.email}</td>
-		      			<td>${unfollowmem.nickname}</td>
-		      			<td class="align-middle text-center"><a href="communityMemberRoom.do?email=${unfollowmem.email}&loginEmail=${Login.email}" id="roomGo" class="btn btn-outline-primary mt-2"><i class="ni ni-shop"></i></a></td>
-		      			<td class="align-middle text-center"><button id="followinsert" class="btn btn-outline-primary mt-2" onclick="followAddFun('${unfollowmem.email}')"><i class="ni ni-fat-add"></i></button></td>
-		      			</tr>
-		      		</c:forEach>
 		      	</table>
+		      		<c:forEach var="unfollowmem" items="${unfollowMember}">
+		      			<div class="flex-item6"> 
+			      			<!-- <tr> -->
+			      			<img style="margin-left:1%; width:40px;height:40px" src="${path}/resource/img/Member/profileimg/${unfollowmem.profileimg}" alt="無">
+			      			<div style="margin-left: 10%; margin-top: -3.5%;" >${unfollowmem.email}</div>
+			      			<div style="margin-left: 35%; margin-top: -3%;">${unfollowmem.nickname}</div>
+			      			<div style="margin-left: 15%; margin-top: -4%;" class="align-middle text-center"><a href="communityMemberRoom.do?email=${unfollowmem.email}&loginEmail=${Login.email}" id="roomGo" class="btn btn-outline-primary mt-2"><i class="ni ni-shop"></i></a></div>
+			      			<div style="margin-left: 73%; margin-top: -7.5%;" class="align-middle text-center"><button id="followinsert" class="btn btn-outline-primary mt-2" onclick="followAddFun('${unfollowmem.email}')"><i class="ni ni-fat-add"></i></button></div>
+			      			<!-- </tr> -->
+		      			</div>
+		      		</c:forEach>
+		     
 		    </div>
 		    <div class="modal-footer">
+		    	<div class="pagination1">
+		           <i class="ni ni-bold-left fa-arrow-left"></i>
+		            <ol id="numbers6">
+		            <!-- 페이지네이션 번호들이 오는곳 -->
+		            </ol>
+		           <i class="ni ni-bold-right fa-arrow-right"></i>  
+	         	</div> 
 		      <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
 		    </div>
 		  </div>
 		</div>
+	 </div>
 	</div>
   <!-- 카테고리별 게시글 갯수정보 모달창  -->
 	<div class="modal fade" id="boardCategoryCntModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -728,8 +753,9 @@
 	</div>
   <!-- 댓글보러가기 모달창 -->
   <div class="modal fade" id="repModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="flex-container1">	
 		<div class="modal-dialog modal-dialog-centered" role="document">
-		  <div class="modal-content" style="width:1200px; margin-left:-50%;">
+		  <div class="modal-content" style="width:1200px; margin-left: -54%; margin-top: 40%; margin-right: -20%;">
 		    <div class="modal-header">
 		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님이 쓴 댓글 정보<br>
 		      <span style="color:grey; font-size:11pt;">＊ 게시글 클릭 시, 게시글 상세조회 페이지로 이동</span></h5>
@@ -740,32 +766,42 @@
 		    <div class="modal-body">
 		      	<table id="boardCntTab" class="table align-items-center mb-0">
 		      		<tr><th>카테고리</th><th>게시글명</th><th>댓글내용</th></tr>
-		      		<c:if test="${not empty replyInfo}">
-			      		<c:forEach var="repInfo" items="${replyInfo}">
-			      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${repInfo.communitynumber}&keyword=&type=&shift=registDate&category=${repInfo.category}'" style="cursor:pointer;">
-			      				<td>${repInfo.category}</td>
-			      				<td>${repInfo.title}</td>
-			      				<td>${repInfo.repcontent}</td>
-			      			</tr>
-			      		</c:forEach>
-		      		</c:if>
 		      		<c:if test="${empty replyInfo}">
 			      		<tr><td colspan="3" style="color:grey; text-align:center;"> 등록한 댓글이 없습니다.</td></tr>
 		      		</c:if>
-		      		
 		      	</table>
+		      		<c:if test="${not empty replyInfo}">
+				      		<c:forEach var="repInfo" items="${replyInfo}">
+					      		<div class="flex-item1" onclick="location.href='${path}/CommunityDetail.do?communityNumber=${repInfo.communitynumber}&keyword=&type=&shift=registDate&category=${repInfo.category}'" style="cursor:pointer;"> 
+						      			<%-- <tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${repInfo.communitynumber}&keyword=&type=&shift=registDate&category=${repInfo.category}'" style="cursor:pointer;"> --%>
+					      				<div id="category" style="margin-top: 3%;">${repInfo.category}</div>
+					      				<div id="title" style="margin-left:34%;margin-top: -40px;">${repInfo.title}</div>
+					      				<div id="repcontent" style="margin-left:70%;margin-top: -27px;">${repInfo.repcontent}</div>
+						      			<!-- </tr> -->
+					      		</div>
+				      		</c:forEach>
+		      		</c:if>
 		    </div>
 		    <div class="modal-footer">
+			    <div class="pagination1">
+		           <i class="ni ni-bold-left fa-arrow-left"></i>
+		            <ol id="numbers1">
+		            <!-- 페이지네이션 번호들이 오는곳 -->
+		            </ol>
+		           <i class="ni ni-bold-right fa-arrow-right"></i>  
+	         	</div> 
 		      <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
 		    </div>
 		  </div>
 		</div>
+	  </div>
 	</div>
 
   <!-- 홍보글 더보기 모달창 -->
   <div class="modal fade" id="advBoardAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  	<div class="flex-container2">
 		<div class="modal-dialog modal-dialog-centered" role="document">
-		  <div class="modal-content" style="width:1200px; margin-left:-50%;">
+		  <div class="modal-content" style="width:1200px; margin-left: -60%; margin-top: 40%;  margin-right: -25%;">
 		    <div class="modal-header">
 		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님 쓴 홍보 게시글 정보<br>
 		      <span style="color:grey; font-size:11pt;">＊ 게시글 클릭 시, 게시글 상세조회 페이지로 이동</span></h5>
@@ -778,29 +814,37 @@
 		      		<thead>
 		      			<tr><th>이미지</th><th>카테고리</th><th>게시글명</th></tr>
 		      		</thead>
-		      		<tbody>
-			      		<c:if test="${not empty adv}">
-				      		<c:forEach var="advlist" items="${adv}">
-				      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${advlist.communitynumber}&keyword=&type=&shift=registDate&category=${advlist.category}'" style="cursor:pointer;">
-				      				<c:if test="${not empty advlist.fileNameList[0]}">
-				      					<td><img src="${path}/resource/community/${advlist.fileNameList[0]}" style="width:auto;height:50px;" ></td>
-				      				</c:if>
-				      				<c:if test="${empty advlist.fileNameList[0]}">
-				      					<td><img src="${path}/resource/community/default_Img.png" style="width:auto;height:50px;" ></td>
-				      				</c:if>
-				      				<td>${advlist.category}</td>
-				      				<td>${advlist.title}</td>
-				      			</tr>
-				      		</c:forEach>
-			      		</c:if>
-		      		</tbody>
 		      	</table>
+		      	<c:if test="${not empty adv}">
+		      		<c:forEach var="advlist" items="${adv}">
+			      		<div class="flex-item2" onclick="location.href='${path}/CommunityDetail.do?communityNumber=${advlist.communitynumber}&keyword=&type=&shift=registDate&category=${advlist.category}'" style="cursor:pointer;">
+			      			<c:if test="${empty advlist.fileNameList[0]}">
+			      				<div id="img" style="margin-top:3%; margin-left: 2%;"><img src="${path}/resource/community/default_Img.png" style="width:auto;height:50px;" ></div>
+			      			</c:if>
+			      			<%-- <tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${advlist.communitynumber}&keyword=&type=&shift=registDate&category=${advlist.category}'" style="cursor:pointer;"> --%>
+		      				<c:if test="${not empty advlist.fileNameList[0]}">
+		      					<div id="img" style="margin-top:3%; margin-left: 2%;"><img src="${path}/resource/community/${advlist.fileNameList[0]}" style="width:auto;height:50px;" ></div>
+		      				</c:if>
+		      				<div id="category" style="margin-left:33%; margin-top: -40px;">${advlist.category}</div>
+		      				<div id="title" style="margin-left:68%; margin-top: -27px;">${advlist.title}</div>
+			      			<!-- </tr> -->
+			      		</div>
+		      		</c:forEach>
+	      		</c:if>
 		    </div>
 		    <div class="modal-footer">
+		    	<div class="pagination2">
+		           <i class="ni ni-bold-left fa-arrow-left"></i>
+		            <ol id="numbers2">
+		            <!-- 페이지네이션 번호들이 오는곳 -->
+		            </ol>
+		           <i class="ni ni-bold-right fa-arrow-right"></i> 
+	         	</div> 
 		      <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
 		    </div>
 		  </div>
 		</div>
+	  </div>
 	</div>
 	<script>
 		/* $(".addView").click(function(){
@@ -810,8 +854,9 @@
 	</script>
   <!-- 사업아이디어 더보기 모달창 -->
   <div class="modal fade" id="ideaBoardAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="flex-container3">	
 		<div class="modal-dialog modal-dialog-centered" role="document">
-		  <div class="modal-content" style="width:1200px; margin-left:-50%;">
+		  <div class="modal-content" style="width:1200px; margin-left: -60%; margin-top: 40%;  margin-right: -25%;">
 		    <div class="modal-header">
 		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님 쓴 사업아이디어 게시글 정보<br>
 		      <span style="color:grey; font-size:11pt;">＊ 게시글 클릭 시, 게시글 상세조회 페이지로 이동</span></h5>
@@ -824,29 +869,37 @@
 		      		<thead>
 		      			<tr><th>이미지</th><th>카테고리</th><th>게시글명</th></tr>
 		      		</thead>
-		      		<tbody>
-			      		<c:if test="${not empty idea}">
-				      		<c:forEach var="idealist" items="${idea}">
-				      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${idealist.communitynumber}&keyword=&type=&shift=registDate&category=${idealist.category}'" style="cursor:pointer;">
+		      	</table>
+	      		<c:if test="${not empty idea}">
+			      		<c:forEach var="idealist" items="${idea}">
+			      			<div class="flex-item3" onclick="location.href='${path}/CommunityDetail.do?communityNumber=${idealist.communitynumber}&keyword=&type=&shift=registDate&category=${idealist.category}'" style="cursor:pointer;">
+				      			<%-- <tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${idealist.communitynumber}&keyword=&type=&shift=registDate&category=${idealist.category}'" style="cursor:pointer;"> --%>
 				      				<c:if test="${not empty idealist.fileNameList[0]}">
-				      					<td><img src="${path}/resource/community/${idealist.fileNameList[0]}" style="width:auto;height:50px;" ></td>
+				      					<div id="img" style="margin-top:3%; margin-left: 2%;"><img src="${path}/resource/community/${idealist.fileNameList[0]}" style="width:auto;height:50px;" ></div>
 				      				</c:if>
 				      				<c:if test="${empty idealist.fileNameList[0]}">
-				      					<td><img src="${path}/resource/community/default_Img.png" style="width:auto;height:50px;" ></td>
+				      					<div id="img" style="margin-top:3%; margin-left: 2%;"><img src="${path}/resource/community/default_Img.png" style="width:auto;height:50px;" ></div>
 				      				</c:if>
-				      				<td>${idealist.category}</td>
-				      				<td>${idealist.title}</td>
-				      			</tr>
-				      		</c:forEach>
-			      		</c:if>
-		      		</tbody>
-		      	</table>
+				      				<div id="category" style="margin-left:33%;margin-top: -40px;">${idealist.category}</div>
+				      				<div id="title" style="margin-left:68%;margin-top: -27px;">${idealist.title}</div>
+				      			<!-- </tr> -->
+			      			</div>
+			      		</c:forEach>
+		      	</c:if>
 		    </div>
 		    <div class="modal-footer">
-		      <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
+		    	<div class="pagination3">
+		           <i class="ni ni-bold-left fa-arrow-left"></i>
+		            <ol id="numbers3">
+		            <!-- 페이지네이션 번호들이 오는곳 -->
+		            </ol>
+		           <i class="ni ni-bold-right fa-arrow-right"></i> 
+	         	</div> 
+		      	<button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
 		    </div>
 		  </div>
 		</div>
+	 </div>
 	</div>
 	<script>
 		/* $(".addView").click(function(){
@@ -856,8 +909,9 @@
 	</script>
   <!-- 사는이야기 더보기 모달창 -->
   <div class="modal fade" id="lifeBoardAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="flex-container4">	
 		<div class="modal-dialog modal-dialog-centered" role="document">
-		  <div class="modal-content" style="width:1200px; margin-left:-50%;">
+		  <div class="modal-content" style="width:1200px; margin-left: -60%; margin-top: 40%;  margin-right: -25%;">
 		    <div class="modal-header">
 		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님 쓴 사는이야기 게시글 정보<br>
 		      <span style="color:grey; font-size:11pt;">＊ 게시글 클릭 시, 게시글 상세조회 페이지로 이동</span></h5>
@@ -870,29 +924,37 @@
 		      		<thead>
 		      			<tr><th>이미지</th><th>카테고리</th><th>게시글명</th></tr>
 		      		</thead>
-		      		<tbody>
-			      		<c:if test="${not empty life}">
-				      		<c:forEach var="lifelist" items="${life}">
-				      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${lifelist.communitynumber}&keyword=&type=&shift=registDate&category=${lifelist.category}'" style="cursor:pointer;">
+		      	</table>
+		      		<c:if test="${not empty life}">
+			      		<c:forEach var="lifelist" items="${life}">
+			      			<div class="flex-item4" onclick="location.href='${path}/CommunityDetail.do?communityNumber=${lifelist.communitynumber}&keyword=&type=&shift=registDate&category=${lifelist.category}'" style="cursor:pointer;">
+				      			<%-- <tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${lifelist.communitynumber}&keyword=&type=&shift=registDate&category=${lifelist.category}'" style="cursor:pointer;"> --%>
 				      				<c:if test="${not empty lifelist.fileNameList[0]}">
-				      					<td><img src="${path}/resource/community/${lifelist.fileNameList[0]}" style="width:auto;height:50px;" ></td>
+				      					<div id="img" style="margin-top:3%; margin-left: 2%;"><img src="${path}/resource/community/${lifelist.fileNameList[0]}" style="width:auto;height:50px;" ></div>
 				      				</c:if>
 				      				<c:if test="${empty lifelist.fileNameList[0]}">
-				      					<td><img src="${path}/resource/community/default_Img.png" style="width:auto;height:50px;" ></td>
+				      					<div id="img" style="margin-top:3%; margin-left: 2%;"><img src="${path}/resource/community/default_Img.png" style="width:auto;height:50px;" ></div>
 				      				</c:if>
-				      				<td>${lifelist.category}</td>
-				      				<td>${lifelist.title}</td>
-				      			</tr>
-				      		</c:forEach>
-			      		</c:if>
-		      		</tbody>
-		      	</table>
+				      				<div id="category" style="margin-left:32%;margin-top: -40px;">${lifelist.category}</div>
+				      				<div id="title" style="margin-left:68%;margin-top: -27px;">${lifelist.title}</div>
+				      			<!-- </tr> -->
+			      			</div>
+			      		</c:forEach>
+		      		</c:if>
 		    </div>
 		    <div class="modal-footer">
-		      <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
+		    	<div class="pagination4">
+		           <i class="ni ni-bold-left fa-arrow-left"></i>
+		            <ol id="numbers4">
+		            <!-- 페이지네이션 번호들이 오는곳 -->
+		            </ol>
+		           <i class="ni ni-bold-right fa-arrow-right"></i> 
+	         	</div> 
+		       <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
 		    </div>
 		  </div>
 		</div>
+	 </div>
 	</div>
 	<script>
 		/* $(".addView").click(function(){
@@ -902,8 +964,9 @@
 	</script>
   <!-- 꿀팁 게시글 더보기 모달창 -->
   <div class="modal fade" id="tipBoardAddModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="flex-container5">
 		<div class="modal-dialog modal-dialog-centered" role="document">
-		  <div class="modal-content" style="width:1200px; margin-left:-50%;">
+		  <div class="modal-content" style="width:1200px; margin-left: -60%; margin-top: 40%;  margin-right: -25%;">
 		    <div class="modal-header">
 		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님 쓴 꿀팁 게시글 정보<br>
 		      <span style="color:grey; font-size:11pt;">＊ 게시글 클릭 시, 게시글 상세조회 페이지로 이동</span></h5>
@@ -916,29 +979,37 @@
 		      		<thead>
 		      			<tr><th>이미지</th><th>카테고리</th><th>게시글명</th></tr>
 		      		</thead>
-		      		<tbody>
-			      		<c:if test="${not empty tip}">
-				      		<c:forEach var="tiplist" items="${tip}">
-				      			<tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${tiplist.communitynumber}&keyword=&type=&shift=registDate&category=${tiplist.category}'" style="cursor:pointer;">
-				      				<c:if test="${not empty tiplist.fileNameList[0]}">
-				      					<td><img src="${path}/resource/community/${tiplist.fileNameList[0]}" style="width:auto;height:50px;" ></td>
-				      				</c:if>
-				      				<c:if test="${empty tiplist.fileNameList[0]}">
-				      					<td><img src="${path}/resource/community/default_Img.png" style="width:auto;height:50px;" ></td>
-				      				</c:if>
-				      				<td>${tiplist.category}</td>
-				      				<td>${tiplist.title}</td>
-				      			</tr>
-				      		</c:forEach>
-			      		</c:if>
-		      		</tbody>
 		      	</table>
+	      		<c:if test="${not empty tip}">
+		      		<c:forEach var="tiplist" items="${tip}">
+			      		<div class="flex-item5" onclick="location.href='${path}/CommunityDetail.do?communityNumber=${tiplist.communitynumber}&keyword=&type=&shift=registDate&category=${tiplist.category}'" style="cursor:pointer;">
+			      			<%-- <tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${tiplist.communitynumber}&keyword=&type=&shift=registDate&category=${tiplist.category}'" style="cursor:pointer;"> --%>
+			      				<c:if test="${not empty tiplist.fileNameList[0]}">
+			      					<div id="img" style="margin-top:3%; margin-left: 2%;"><img src="${path}/resource/community/${tiplist.fileNameList[0]}" style="width:auto;height:50px;" ></div>
+			      				</c:if>
+			      				<c:if test="${empty tiplist.fileNameList[0]}">
+			      					<div id="img" style="margin-top:3%; margin-left: 2%;"><img src="${path}/resource/community/default_Img.png" style="width:auto;height:50px;" ></div>
+			      				</c:if>
+			      				<div id="category" style="margin-left:32%; margin-top: -40px;">${tiplist.category}</div>
+			      				<div id="title" style="margin-left:68%; margin-top: -27px;">${tiplist.title}</div>
+			      			<!-- </tr> -->
+		      			</div>
+		      		</c:forEach>
+	      		</c:if>
 		    </div>
 		    <div class="modal-footer">
+			     <div class="pagination5">
+		           <i class="ni ni-bold-left fa-arrow-left"></i>
+		            <ol id="numbers5">
+		            <!-- 페이지네이션 번호들이 오는곳 -->
+		            </ol>
+		           <i class="ni ni-bold-right fa-arrow-right"></i> 
+	       		</div> 
 		      <button type="button" class="btn bg-gradient-secondary" data-bs-dismiss="modal">닫기</button>
 		    </div>
 		  </div>
 		</div>
+	 </div>
 	</div>
 	<script>
 		/* $(".addView").click(function(){
@@ -1321,6 +1392,18 @@
         },
       },
     });
+  </script>
+  <script src="${path}/resource/js/Req4002/commonfunction.js"></script>
+  <script>
+  // 페이지 처리
+  //----------------------------------8개데이터가 나오면 next 숫자 창출력--------------------------------------
+  	callPageSelector(".flex-item1","#numbers1",".pagination1 .fa-arrow-left",".pagination1 .fa-arrow-right") //flex-item, pagination 값주기 (각각의 클래스명 넣기)
+  	callPageSelector(".flex-item2","#numbers2",".pagination2 .fa-arrow-left",".pagination2 .fa-arrow-right") //flex-item, pagination 값주기 (각각의 클래스명 넣기)
+  	callPageSelector(".flex-item3","#numbers3",".pagination3 .fa-arrow-left",".pagination3 .fa-arrow-right") //flex-item, pagination 값주기 (각각의 클래스명 넣기)
+  	callPageSelector(".flex-item4","#numbers4",".pagination4 .fa-arrow-left",".pagination4 .fa-arrow-right") //flex-item, pagination 값주기 (각각의 클래스명 넣기)
+  	callPageSelector(".flex-item5","#numbers5",".pagination5 .fa-arrow-left",".pagination5 .fa-arrow-right") //flex-item, pagination 값주기 (각각의 클래스명 넣기)
+  	callPageSelector(".flex-item6","#numbers6",".pagination6 .fa-arrow-left",".pagination6 .fa-arrow-right") //flex-item, pagination 값주기 (각각의 클래스명 넣기)
+ 
   </script>
   
   <!-- Github buttons -->

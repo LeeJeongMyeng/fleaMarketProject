@@ -66,10 +66,27 @@ CREATE TABLE capplicaion
 	category varchar2(50), -- 카테고리
 	email varchar2(50) NOT NULL, -- 이메일(FK)
 	-- 구분자 #
-	hashtag varchar2(100), -- 해시태그
+	hashtag varchar2(600), -- 해시태그
 	viewCnt number, -- 조회수
 	PRIMARY KEY (communityNumber)
 );
+
+-- 커뮤니티 게시글
+CREATE TABLE capplicaion
+(
+   communityNumber number NOT NULL, -- 커뮤니티번호
+   title varchar2(100), -- 제목
+   content varchar2(2000), -- 커뮤니티 내용
+   registDate date, -- 등록날짜
+   updateDate date, -- 수정날짜 
+   category varchar2(50), -- 카테고리
+   email varchar2(50) NOT NULL, -- 이메일(FK)
+   -- 구분자 #
+   hashtag varchar2(1000), -- 해시태그
+   viewCnt number, -- 조회수
+   PRIMARY KEY (communityNumber)
+);
+
 CREATE SEQUENCE communityNumber_seq
 		increment by 1
 		start with 0
@@ -82,7 +99,8 @@ SELECT communityNumber_seq.currval FROM dual;
 	
 DROP TABLE capplicaion CASCADE CONSTRAINTS;
 SELECT * FROM capplicaion;
-
+SELECT * FROM FLEAMARKETMEMBER f ;
+DELETE FROM capplicaion;
 
 UPDATE capplicaion 
 SET likecnt='5'
@@ -120,7 +138,7 @@ WHERE email = 'yujin@gmail.com';
 AND category LIKE '%'||'홍보글'||'%';
 AND  ;
 WHERE communityNumber='comBoard23';
-INSERT INTO capplicaion values(communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','wjsdbsghks96@naver.com','#태그1,#태그2',0);
+INSERT INTO capplicaion values(communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','test@gmail.com','#태그1,#태그2',0);
 INSERT INTO capplicaion values(communityNumber_seq.nextval, '제목','내용',sysdate,NULL,'사는이야기','dbwls8382@gmail.com','#태그1 #태그2',0);
 -- 커뮤니티 게시글 해시태그
 CREATE TABLE HashTag
@@ -226,10 +244,26 @@ CREATE TABLE REPLY (
   groupOrderid NUMBER, -- 순서 NUMBER
   groupid NUMBER, --  그룹 나누기.(모 댓글과 대댓글은 같은값)
   repDate DATE,
+  repupdatedate DATE, 
+  isdeleted NUMBER,
   PRIMARY KEY(replyNo)
 );
 DROP TABLE REPLY;
-INSERT INTO reply values(reply_seq.nextval,1,'test@gmail.com','멍청해요',0,0,0, sysdate);
+
+CREATE SEQUENCE rep_seq
+		increment by 1
+		start with 0
+		MINVALUE 0
+		MAXVALUE 100000;
+DROP SEQUENCE rep_seq;
+
+SELECT * FROM REPLY;
+DELETE FROM reply;
+SELECT * FROM CAPPLICAION c ;
+INSERT INTO reply values(reply_seq.nextval,0,'dbwls8382@naver.com','멍청해요',0,0,1, sysdate,NULL,1);
+INSERT INTO reply values(reply_seq.nextval,13,'dbwls8382@naver.com',rep_seq.nextval,0,0,1, sysdate,NULL,1);
+INSERT INTO reply values(reply_seq.nextval,0,'dbwls8382@naver.com','멍청해요',0,0,1, sysdate,NULL,1);
+INSERT INTO reply values(reply_seq.nextval,0,'dbwls8382@naver.com','멍청해요',0,0,1, sysdate,NULL,1);
 INSERT INTO reply values(reply_seq.nextval,1,'test2@gmail.com','멍청해요',0,0,0, sysdate);
 INSERT INTO reply values(reply_seq.nextval,0,'yujin@mail.com','멍청해요',0,0,0, sysdate);
 INSERT INTO reply values(reply_seq.nextval,'ㅇㅇ너도', sysdate,'comBoard1','ehddms2909@naver.com',0);
@@ -307,8 +341,8 @@ CREATE TABLE friend
 );
 DROP TABLE friend CASCADE CONSTRAINTS;
 
-INSERT INTO friend VALUES('yujin@mail.com','test@gmail.com');
-INSERT INTO friend VALUES('yujin@mail.com','test2@naver.com');
+INSERT INTO friend VALUES('dbwls8382@naver.com','ehddms2909@naver.com');
+INSERT INTO friend VALUES('dbwls8382@naver.com','wjsdbsghks96@naver.com');
 INSERT INTO friend VALUES('yujin@mail.com','28888wjdaud@naver.com');
 INSERT INTO friend VALUES('yujin@gmail.com','pucoca@naver.com');
 INSERT INTO friend VALUES('yujin@gmail.com','aoddl56@nate.com');
@@ -403,7 +437,7 @@ and m.email='yujin@gmail.com';
 
 SELECT * 
 FROM fleamarketmember m, profile p
-WHERE m.email=p.email -- 회원/프로필
+WHERE m.email=p.email; -- 회원/프로필
 and m.email='yujin@gmail.com';
 
 UPDATE fleamarketmember SET businessnumber='1234567891'
@@ -431,7 +465,7 @@ FROM (select m.email, m.password, m.nickname, m.personalnumber, m.phonenumber, m
 				AND f.following=pro.email
 				AND f.following=m.email
 				AND f.myemail='yujin@mail.com') temp) LAST 
-WHERE RNUM BETWEEN 0 AND 20;
+WHERE RNUM BETWEEN 0 AND 10;
 
 SELECT f.* FROM FRIEND f;
 

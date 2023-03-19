@@ -11,3 +11,4 @@ function arrFun(obj){
 		return arr.length
 	}
 }
+

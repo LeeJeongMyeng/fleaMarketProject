@@ -28,6 +28,43 @@
 		$("#edit-deschiption-edit").keyup(function(){
 			$("#textCnt").text(expeditor.text().length)
 		})
+		
+		// 해시태그
+		$("#tagHide").hide()
+		$("#hashTagCancel").hide()
+		/* var hashTagshow = ""
+		hashTagshow += "<select class='form-control' name='hashtag' id='choices-tags-edit' multiple >"
+		hashTagshow += "<option selected>#홍보</option>"
+		hashTagshow += "<option selected>#맛집</option>"
+		hashTagshow += "<option selected>#3대학원</option>"
+		hashTagshow += "<option selected>#재테크</option>"
+		hashTagshow += "<option selected>#나를 이기자</option>"
+		hashTagshow += "<option selected>#장수</option>"
+		hashTagshow += "<option selected>#건강</option>"
+		hashTagshow += " </select>" */
+		
+		$("#hashTag").click(function(){
+			$("#regHashTag").hide()
+			//$("#tagHide").html(hashTagshow)
+			$("#tagHide").show()
+			$(this).hide()
+			$("#hashTagCancel").show()
+			
+		})
+		
+		$("#hashTagCancel").click(function(){
+			$(this).hide()
+			$("#hashTag").show()
+			$("#tagHide").hide()
+			$("#regHashTag").show()
+		})
+		 $('#edit-deschiption .ql-editor').keyup(function(){
+			  if(($('#edit-deschiption .ql-editor').html().indexOf('<img src='))!=-1){
+				 alert("[안내메시지] 이미지는 따로 등록하셔야 합니다.")
+				 $('#edit-deschiption .ql-editor').text("")
+			  }
+		 })
+		
 		var expeditor=$('#edit-deschiption-edit .ql-editor')
 		$("#update").click(function(){
 			/* if($("input[name='indexNo']").is(":checked")==false){
@@ -54,6 +91,8 @@
 				  $("form").submit()
 			  }
   		})
+  		
+  		
   		/* 
   		// 큰사진 클릭 시, file값 클릭
   		$("#bigphoto").click(function(){
@@ -100,12 +139,12 @@
   				$("#index5").prop("checked", true)
   			})
   		}) */
-  		/* $("#imgChange").click(function(){
+  		$("#imgChange").click(function(){
   			$("#bigphoto").hide()
   			$("#imgTab").hide()
   			$('#fileClick1').show()
-  			
-  		}) 하나씩 선택 시, hide 미리보기 처리를 위한 기능*/
+  			//$('#photoUptwh').val('upt')
+  		}) //하나씩 선택 시, hide 미리보기 처리를 위한 기능
   		// 이미지 변경
   		$('#fileClick1').hide()
 	  	$('#fileClick2').hide()
@@ -116,7 +155,7 @@
 	  	$('#fileClick7').hide()
 		  //div 내용 비워주기
 		      //$('#preview').empty();
-		      
+	  	var fileCnt = 0
 	    $("input[type='file']").change(function(e){
 			if($('#uploadFile1').val()!=""){
 				  $('#fileClick1').hide()
@@ -153,6 +192,8 @@
 		      var files = e.target.files;
 		      var arr =Array.prototype.slice.call(files);
 		      
+		      fileCnt += files.length
+		      
 		      //업로드 가능 파일인지 체크
 		      for(var i=0;i<files.length;i++){
 		        if(!checkExtension(files[i].name,files[i].size)){
@@ -162,27 +203,33 @@
 		      preview(arr);
 		    });//file change
 		  
-		  // 사진 용량에 따른 유효성체크
+			// 사진 용량에 따른 유효성체크
 		  function checkExtension(fileName,fileSize){
-	
-		      var regex = new RegExp("(.*?)\.(jpg|png)$");
+			  
+			  var regex = new RegExp("(.*?)\.(jpg|png|jpeg|jpe|jfif|gif|webp)$");
 		      var maxSize = 20971520;  //20MB
 		      
 		      if(!regex.test(fileName)){
-		        alert('[안내메시지]이미지 파일만 등록 가능합니다.');
+		    	  alert('[안내메시지]이미지 파일만 등록 가능합니다.');
 		        $("input[type='file']").val("");  //파일 초기화
 		        return false;
 		      }
 		      
 		      if(fileSize >= maxSize){
-			        alert('[안내메시지] 파일 사이즈가 초과되었습니다. 다시 넣어주세요.');
-			        $("input[type='file']").val("");  //파일 초기화
-			        return false;
-			  }
+		    	alert('[안내메시지] 파일 사이즈가 초과되었습니다. 다시 넣어주세요.');
+		        $("input[type='file']").val("");  //파일 초기화
+		        return false;
+		      }
+		      if (fileCnt >6){
+		    	  alert('[안내메시지]사진은 6장이상 등록이 불가합니다.');
+		    	  fileCnt=0 // 전에 입력받은 파일갯수 초기화해줘야함
+		    	  return false;
+		      }
 		      return true;
 		    }
 		  //이미지 넣기
 		  function preview(arr){
+			  //alert(arr.length)
 		      arr.forEach(function(f){
 		        //파일명이 길면 파일명...으로 처리
 		        var fileName = f.name;
@@ -193,7 +240,7 @@
 		        var str = '<div style="display: inline-flex; padding: 10px;"><li>';
 		        str += '<span>'+fileName+'</span><br>';
 		        //이미지 파일 미리보기
-		        if(!f.type.match('image.*')){
+		        if(f.type.match('image.*')){
 		          	var reader = new FileReader(); //파일을 읽기 위한 FileReader객체 생성
 	          		reader.onload = function (e) { //파일 읽어들이기를 성공했을때 호출되는 이벤트 핸들러
 	            	str += '<img src="'+e.target.result+'" title="'+f.name+'" width=auto height=100 />';
@@ -207,7 +254,7 @@
 		        }
 		      });//arr.forEach
 		    }
-	}); 
+	}) 
 	
 	
 	function updateImpossible(what){
@@ -239,10 +286,11 @@
 	<jsp:include page="header.jsp"></jsp:include>
 	<form method="post" enctype="multipart/form-data" action="${path}/communityUpdate.do"><!--  -->
 	  <input type="hidden" name="communitynumber" value="${boardInfo.getCommunitynumber()}">
+	  <input type="hidden" name="photoUptwh">
       <div class="row mt-4">
          <div class="card h-100" style="margin-top:8%;">
            <div class="card-body" >
-             <h5 class="font-weight-bolder" style="text-align:center; font-size:20pt;"><span>"${boardInfo.category}" 커뮤니티</span> 게시글 변경</h5>
+             <h5 class="font-weight-bolder" style="text-align:center; font-size:20pt;"><span>${boardInfo.category}</span> 게시글 변경</h5>
              <div class="row">
                <div class="col-12">
                  <div class="card-body">
@@ -257,12 +305,12 @@
 		             <div class="row" style="margin-left:35%;">
 			              <!-- <label style="border:1px solid black" >  -->
 			              		<c:if test="${not empty boardImgArrOne}">
-					               <img id="bigphoto" class="border-radius-lg shadow-lg ms-5 regimg" src="${path}/resource/community/${boardImgArrOne}" 
+					               <img id="bigphoto" class="border-radius-lg shadow-lg ms-4 regimg" src="${path}/resource/community/${boardImgArrOne}" 
 					                  			alt="이미지 없음" style="width:auto; height:400px;">
 					                <span id="noImg" class="ms-5" style="color:red;"></span>
 				                </c:if>
 				                <c:if test="${empty boardImgArrOne}">
-				                	<img id="bigphoto" class="border-radius-lg shadow-lg ms-5 regimg" src="${path}/resource/community/default_Img.png" 
+				                	<img id="bigphoto" class="border-radius-lg shadow-lg ms-4 regimg" src="${path}/resource/community/default_Img.png" 
 					                  			alt="이미지 없음" style="width:auto; height:400px;">
 					                <span id="noImg" class="ms-5" style="color:red;"></span>
 				                </c:if>
@@ -328,17 +376,29 @@
                 </div>
                 <input type="hidden" id="contentInput" name="content"/>
               </div>
+            
             <div class="row" style="--bs-gutter-x:0;">
-               <label class="mt-4 postUpdateTitle">태그(#)</label><!-- 선택된값을 select되어있게 설정해야함..  -->
-                <select class="form-control" name="hashtag" id="choices-tags-edit" multiple>
-	                    <option selected>#홍보</option>
-	                    <option selected>#맛집</option>
-	                    <option selected>#3대학원</option>
-	                    <option selected>#재테크</option>
-	                    <option selected>#나를 이기자</option>
-	                    <option selected>#장수</option>
-	                    <option selected>#건강</option><!-- 태그 테이블에서 콤보박스 생성  -->
-                </select>
+               <label class="mt-4 postUpdateTitle">해시 태그(#)
+               <button type="button" class="btn btn-outline-primary" id="hashTag" style="width:130px; height:40px;">해시태그 수정</button>
+               <button type="button" class="btn btn-outline-primary" id="hashTagCancel" style="width:160px; height:40px;">해시태그 수정취소</button>
+               </label><!-- 선택된값을 select되어있게 설정해야함..  -->
+               <c:if test="${not empty boardInfo.hashtag}">
+               		<input id="regHashTag" type="text" name="hashtag" class="form-control" value="${boardInfo.hashtag}" readonly>
+               </c:if>
+               <c:if test="${empty boardInfo.hashtag}">
+               		<input id="regHashTag" type="text" name="hashtag" class="form-control" value="등록하신 해시태그가 없습니다." readonly>
+               </c:if>
+               <div id="tagHide">
+	                <select class="form-control" name="hashtag" id="choices-tags-edit" multiple >
+		                    <option selected>#홍보</option>
+		                    <option selected>#맛집</option>
+		                    <option selected>#3대학원</option>
+		                    <option selected>#재테크</option>
+		                    <option selected>#나를 이기자</option>
+		                    <option selected>#장수</option>
+		                    <option selected>#건강</option><!-- 태그 테이블에서 콤보박스 생성  -->
+	                </select>
+                </div>
             </div>
           </div>
              <button class="btn btn-primary" type="button" id="update" style="margin-top:2%; margin-left:28%; width:50%; font-size:18pt;">수정</button>

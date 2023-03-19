@@ -23,9 +23,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import fleaMarket.a02_service.Req4002_Service;
 import fleaMarket.util.FileService;
 import vo.BoardImg;
+import vo.Criteria;
 import vo.Capplication;
 import vo.FollowMemberInfo;
-import vo.Member;
+import vo.PageDTO;
 import vo.RoomMemberInfo;
 
 @Controller
@@ -151,10 +152,11 @@ public class Req4002_Controller {
 	
 	// 파일 업데이트 기능메서드 (아직 구성중)
 	@PostMapping("communityUpdate.do")
-	public String communityUpdate(@RequestParam("updateFile") List<MultipartFile> mfiles, Capplication upt,RedirectAttributes rttr) { //,@RequestParam("indexNo") List<String> idx
+	public String communityUpdate(@RequestParam("updateFile") List<MultipartFile> mfiles,@RequestParam(value="photoUptDiv", required = false) String photoUptDiv, Capplication upt,RedirectAttributes rttr) { //,@RequestParam("indexNo") List<String> idx
 		service.communityUpdate(upt); // text형들 수정
 		BoardImg f = new BoardImg();
-		if(mfiles!=null) {
+		
+		if(mfiles!=null ) { //&& photoUptDiv!=null - 아니 근데 null이 아니면 인데 왜실행됨? 
 			f.setImgname(multifileFun(mfiles));
 			f.setCommunitynumber(upt.getCommunitynumber());
 			System.out.println("수정할 파일명"+f);
@@ -249,9 +251,14 @@ public class Req4002_Controller {
 	}
 	
 	@RequestMapping("communityFollowMember.do")
-	public String communityFollowMember(FollowMemberInfo sel, Model d,HttpSession session) {
+	public String communityFollowMember(FollowMemberInfo sel, Criteria cri,Model d,HttpSession session) {
 		session.getAttribute("Login");
 		d.addAttribute("follower", service.followerSelect(sel));
+		//List<FollowMemberInfo> list = service.followerSelectPage(cri);
+		//System.out.println("팔로우 갯수 : "+service.followerSelect(sel).size()); 
+		//d.addAttribute("pageMaker", new PageDTO(cri, list.size()));
+		//System.out.println("페이징 팔로우 갯수 : "+service.followerSelectPage(cri));
+		//d.addAttribute("follower", list);
 		//System.out.println(service.followerSelect(sel));
 		return "communityFollowMember";
 	}
@@ -312,7 +319,7 @@ public class Req4002_Controller {
 		d.addAttribute("roommember", service.roomMemberInfo(memInfoMap).get(0));
 		System.out.println("룸회원정보:"+service.roomMemberInfo(memInfoMap).get(0));
 		// 언팔중인 회원 정보
-		memInfoMap.put("div", "unfollowMem");
+		memInfoMap.put("dive", "unfollowMem");
 		d.addAttribute("unfollowMember", service.roomMemberInfo(memInfoMap));
 		System.out.println("언팔한회원정보"+service.roomMemberInfo(memInfoMap));
 		
@@ -363,47 +370,19 @@ public class Req4002_Controller {
 			}
 		}
 		board.setRegistDateMonth("");
-			//카테고리별
-//		System.out.println("getImgname"+board.getImgname());
-//		String[] firstImg;
-//		for(RoomMemberInfo a:service.boardSelect(board)) {
-//			//System.out.println(a.getImgname());
-//				if(a.getImgname()!=null) {
-//					firstImg = a.getImgname().split("&SEP&");
-//					System.out.println("사진 첫번쨰"+firstImg[0]);
-////					board.setImgname(firstImg[0]);
-//				}else {
-//					//board.setImgname("default_Img.png");
-//				}
-//		}
-//		System.out.println("사진배열:"+board.getImgname());
+		//카테고리별
 		
 		board.setCategory("홍보글");
 		d.addAttribute("adv", service.boardSelect(board));
 		
-//		ArrayList<String> fname1 = new ArrayList<String>();
-//		for(RoomMemberInfo adv:service.boardSelect(board)) {
-//			d.addAttribute("advImg1",adv.getFileNameList());
-//			//fname1.add(adv.getFileNameList());
-//			//System.out.println("홍보글그ㅡ르ㅡ글"+adv.getFileNameList().toString());
-//		}
-		
 		board.setCategory("사업아이디어");
 		d.addAttribute("idea", service.boardSelect(board));
-//		for(RoomMemberInfo idea:service.boardSelect(board)) {
-//			d.addAttribute("ideaImg1", idea.getFileNameList()[0]);
-//		}
 		
 		board.setCategory("사는이야기");
 		d.addAttribute("life", service.boardSelect(board));
-//		for(RoomMemberInfo life:service.boardSelect(board)) {
-//			d.addAttribute("lifeImg1",life.getFileNameList()[0]);
-//		}
+		
 		board.setCategory("꿀팁");
 		d.addAttribute("tip", service.boardSelect(board)); 
-//		for(RoomMemberInfo tip:service.boardSelect(board)) {
-//			d.addAttribute("tipImg1",tip.getFileNameList()[0]);
-//		}
 		
 		// 좋아요 누적처리 및 커뮤니티 정보
 //		int totlike=0;

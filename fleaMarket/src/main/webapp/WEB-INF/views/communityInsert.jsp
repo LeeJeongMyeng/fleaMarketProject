@@ -29,6 +29,7 @@
   <script src="${path}/resource/js/Req4002/commonfunction.js"></script>
   <script type="text/javascript">
 	  $(document).ready(function(e){
+		  
 		  // 카테고리에 따른 selcted 처리
 		  var categoryVal="${category}"
 		  $("#categorySelect").val(categoryVal).prop("selected",true);
@@ -37,6 +38,13 @@
 		   var expeditor=$('#edit-deschiption .ql-editor')
 		  $("#edit-deschiption").keyup(function(){
 			 $("#textCnt").text(expeditor.text().length)
+		  })
+
+		  $('#edit-deschiption .ql-editor').keyup(function(){
+			  if(($('#edit-deschiption .ql-editor').html().indexOf('<img src='))!=-1){
+				 alert("[안내메시지] 이미지는 따로 등록하셔야 합니다.")
+				 $('#edit-deschiption .ql-editor').text("")
+			  }
 		  })
 		  
 		  // 등록 버튼 클릭 시,
@@ -70,7 +78,7 @@
 	  	$('#uploadFile7').hide()
 		  //div 내용 비워주기
 		      //$('#preview').empty();
-		      
+	  	var fileCnt = 0
 	    $("input[type='file']").change(function(e){
 			if($('#uploadFile1').val()!=""){
 				  $('#uploadFile1').hide()
@@ -107,19 +115,22 @@
 		      var files = e.target.files;
 		      var arr =Array.prototype.slice.call(files);
 		      
+		      
+		      fileCnt += files.length
+		      
 		      //업로드 가능 파일인지 체크
 		      for(var i=0;i<files.length;i++){
 		        if(!checkExtension(files[i].name,files[i].size)){
-		          return false;
+		        	return false;
 		        }
 		      }
 		      preview(arr);
 		    });//file change
-		  
+		 
 		  // 사진 용량에 따른 유효성체크
 		  function checkExtension(fileName,fileSize){
-
-			  var regex = new RegExp("(.*?)\.(jpg|png)$");
+			  
+			  var regex = new RegExp("(.*?)\.(jpg|png|jpeg|jpe|jfif|gif|webp)$");
 		      var maxSize = 20971520;  //20MB
 		      
 		      if(!regex.test(fileName)){
@@ -133,11 +144,16 @@
 		        $("input[type='file']").val("");  //파일 초기화
 		        return false;
 		      }
-		     
+		      if (fileCnt >6){
+		    	  alert('[안내메시지]사진은 6장이상 등록이 불가합니다.');
+		    	  fileCnt=0 // 전에 입력받은 파일갯수 초기화해줘야함
+		    	  return false;
+		      }
 		      return true;
 		    }
 		  //이미지 넣기
 		  function preview(arr){
+			  //alert(arr.length)
 		      arr.forEach(function(f){
 		        //파일명이 길면 파일명...으로 처리
 		        var fileName = f.name;
@@ -255,7 +271,7 @@
 						        <input type="file" name="mediaFile" id="uploadFile5" class="form-control" multiple style="width:780px;">
 						        <input type="file" name="mediaFile" id="uploadFile6" class="form-control" multiple style="width:780px;">
 						        <input type="file" id="uploadFile7" class="form-control" multiple style="width:780px;">
-						        <div id="preview"></div>
+						        <div id="preview" style="width:100%;"></div>
 						      </td>
 						    </tr>
 						  </table>
