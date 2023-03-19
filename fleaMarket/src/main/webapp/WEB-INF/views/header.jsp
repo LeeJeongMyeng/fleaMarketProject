@@ -125,7 +125,7 @@ li {
 												<li
 													class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
 													<a class="dropdown-item py-2 ps-3 border-radius-md"
-													onclick="registration()">
+													onclick="registration()" href="#">
 														<div class="d-flex">
 															<div class="icon h-10 me-3 d-flex mt-1">
 																<i class="ni ni-laptop text-primary"></i>
@@ -142,28 +142,24 @@ li {
 											</ul>
 										</div>
 										<script>
-											function registration() {
-												if ("${Login.email}" == "") {
-													if (confirm("[안내메시지]로그인을 하여야 이용이 가능합니다.\n로그인하러 가시겠습니까?")) {
-														location.href = "${path}/SignIn.do"
-													}
-												} else {
-													location.href = "${path}/fRegistration.do?email=${Login.email}"
-												}
-												
-												
-												
-												
-												
-											}										
+										function registration() {
+											  if ("${Login.email}" == "") {
+											    Swal.fire({
+											      title: "로그인을 하셔야 플리마켓 등록 페이지 이용이 가능합니다.",
+											      icon: "warning",
+											      showCancelButton: true,
+											      confirmButtonText: "로그인",
+											      cancelButtonText: "취소",
+											    }).then((result) => {
+											      if (result.isConfirmed) {
+											        location.href = "${path}/SignIn.do";
+											      }
+											    });
+											  } else {
+											    location.href = "${path}/fRegistration.do?email=${Login.email}";
+											  }
+											}
 										</script>
-
-
-
-
-
-
-
 										<!-- responsive -->
 										<div class="row d-lg-none">
 											<div class="col-md-12">
@@ -282,21 +278,48 @@ li {
 																class="ps-3">My Room</span>
 															</a>
 															<script>
-																function myRoomLoginCk() {
-																	if ("${Login.email}" == "") {
-																		if (confirm("[안내메시지]로그인을 하셔야 MyRoom 이용이 가능합니다.\n로그인하러 가시겠습니까?")) {
-																			location.href = "${path}/SignIn.do"
-																		}
-																	} else {
-																		location.href = "${path}/communityMemberRoom.do?email=${Login.email}"
-																	}
+															function myRoomLoginCk() {
+																  if ("${Login.email}" == "") {
+																    Swal.fire({
+																      title: "로그인을 하셔야 MyRoom 페이지 이용이 가능합니다.",
+																      icon: "warning",
+																      showCancelButton: true,
+																      confirmButtonText: "로그인",
+																      cancelButtonText: "취소",
+																    }).then((result) => {
+																      if (result.isConfirmed) {
+																        location.href = "${path}/SignIn.do";
+																      }
+																    });
+																  } else {
+																    location.href = "${path}/communityMemberRoom.do?email=${Login.email}";
+																  }
 																}
 															</script>
 															<a
-																href="${path}/communityFollowMember.do?myemail=${Login.email}"
+																onclick="followLoginCk()" href="#"
 																class="dropdown-item border-radius-md"> <span
 																class="ps-3">나의 팔로워 목록</span>
 															</a>
+																<script>
+																function followLoginCk() {
+																  if ("${Login.email}" == "") {
+																    Swal.fire({
+																      title: "로그인을 하셔야 팔로워 목록 페이지 이용이 가능합니다.",
+																      icon: "warning",
+																      showCancelButton: true,
+																      confirmButtonText: "로그인",
+																      cancelButtonText: "취소",
+																    }).then((result) => {
+																      if (result.isConfirmed) {
+																        location.href = "${path}/SignIn.do";
+																      }
+																    });
+																  } else {
+																    location.href = "${path}/communityFollowMember.do?myemail=${Login.email}";
+																  }
+																}
+															</script>
 														</div>
 													</div>
 												</div>
@@ -371,14 +394,22 @@ li {
 												</a>
 												</li>
 												<script>
-													function QnALoginCk() {
-														if ("${Login.email}" == "") {
-															if (confirm("[안내메시지]로그인을 하셔야 고객센터 이용이 가능합니다.\n로그인하러 가시겠습니까?")) {
-																location.href = "${path}/SignIn.do"
-															}
-														} else {
-															location.href = "QNAList.do"
-														}
+												function QnALoginCk() {
+													  if ("${Login.email}" == "") {
+													    Swal.fire({
+													      title: "로그인을 하셔야 고객센터 페이지 이용이 가능합니다.",
+													      icon: "warning",
+													      showCancelButton: true,
+													      confirmButtonText: "로그인",
+													      cancelButtonText: "취소",
+													    }).then((result) => {
+													      if (result.isConfirmed) {
+													        location.href = "${path}/SignIn.do";
+													      }
+													    });
+													  } else {
+													    location.href = "QNAList.do";
+													  }
 													}
 												</script>
 												<li
