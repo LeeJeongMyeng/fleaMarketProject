@@ -41,7 +41,6 @@
 				data:qstr,
 				dataType:"json",
 				success:function(data){
-					console.log(data.duplicateApp);
 					var cnt=data.duplicateApp;
 					
 					if(cnt == 0){
@@ -75,7 +74,7 @@
 		Swal.fire({
 		    icon:'warning',
 	        text:'로그인 후 이용해주세요',
-	        confirmButtonText:'로그인하러가기',
+	        confirmButtonText:'로그인',
 	        showCancelButton: true,
 	        cancelButtonText:'취소',
 		 }).then((result) =>{
@@ -105,8 +104,9 @@
 		    icon:'warning',
 	        text:'삭제하시겠습니까?',
 	        confirmButtonText:'삭제',
-	        showCancelButton: true,
+	        showCancelButton:true,
 	        cancelButtonText:'취소',
+	        cancelButtonColor:'#d33',
 		 }).then((result) =>{
 			 if(result.isConfirmed){
 			 location.href = "FleaMarketDel.do?postingNumber="+postingNumber;

@@ -6,7 +6,6 @@
 	
 	// 내 신청 상세 조회 모달창
     function getFiles(index,appno){
-    	console.log(appno)
 		$.ajax({
 			url:"appFileView.do",
 			type:"post",
@@ -68,7 +67,6 @@
 			insFileAlert();
 			return false;
 		}
-		console.log(methods+".do")
 		$('#downloadAppFileForm').attr({action:methods+".do", method:"post"})
 		$('#downloadAppFileForm').submit()
   	}

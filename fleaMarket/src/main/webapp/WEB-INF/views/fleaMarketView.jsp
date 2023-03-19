@@ -125,18 +125,21 @@
                   <input type="hidden" name="writer" value="${fleamarket.email}">
                   <h3 class="mt-lg-0 mt-4">${fleamarket.title}</h3>
                   <div class="rating">
-                    <i class="fas" aria-hidden="true">${fleamarket.openDate} - ${fleamarket.closeDate}</i>
+                    <i class="fas" aria-hidden="true" style="line-height:25px;">플리마켓 기간<br>${fleamarket.openDate} - ${fleamarket.closeDate}</i>
                   </div>
+                  <br>
                   <br>
                   <h6 class="mb-0 mt-3">모집기간</h6>
                   <h5>${fleamarket.recruitmentStartDate} - ${fleamarket.recruitmentEndDate}</h5>
                   <span class="badge"></span>
+                  <hr style="border:solid 1px gray;">
                   <p  style="margin-top:15px;">
                   ${fleamarket.content}
                   </p>
                   <div class="row mt-4">
                   	<!-- gps -->
                      <div class="map_wrap">
+                        <label>진행 장소</label>
                         <div id="map"
                            style="width: 580px; height: 300px; position: relative; overflow: hidden;"></div>
                         <div class="hAddr">

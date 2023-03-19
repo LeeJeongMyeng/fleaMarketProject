@@ -41,14 +41,12 @@
 	
 	// 받은 신청 상세 조회 모달창
     function getFiles(appno){
-    	console.log(appno)
 		$.ajax({
 			url:"appFileView.do",
 			type:"post",
 			data:"applicationNo="+appno,
 			dataType:"json",
 			success:function(data){
-				console.log(data.appFile)
 				var files = data.appFile;
 				var str = "";
 				
@@ -86,5 +84,4 @@
 				clearInterval()
 			}
 		},500)
-		console.log(nth)
 	}

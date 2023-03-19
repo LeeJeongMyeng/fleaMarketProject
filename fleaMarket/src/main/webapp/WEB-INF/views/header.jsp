@@ -139,6 +139,34 @@ li {
 														</div>
 												</a>
 												</li>
+												<li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
+						                          <a class="dropdown-item py-2 ps-3 border-radius-md" onclick="myApp()" href="#">
+						                            <div class="d-flex">
+						                              <div class="icon h-10 me-3 d-flex mt-1">
+						                                <i class="ni ni-single-copy-04 text-primary"></i>
+						                              </div>
+						                              <div class="w-100 d-flex align-items-center justify-content-between">
+						                                <div>
+						                                  <p class="dropdown-header text-dark p-0">내 신청 조회</p>
+						                                </div>
+						                              </div>
+						                            </div>
+						                          </a>
+						                        </li>
+						                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
+						                          <a class="dropdown-item py-2 ps-3 border-radius-md" onclick="rApp()" href="#">
+						                            <div class="d-flex">
+						                              <div class="icon h-10 me-3 d-flex mt-1">
+						                                <i class="ni ni-single-copy-04 text-primary"></i>
+						                              </div>
+						                              <div class="w-100 d-flex align-items-center justify-content-between">
+						                                <div>
+						                                  <p class="dropdown-header text-dark p-0">받은 신청 조회</p>
+						                                </div>
+						                              </div>
+						                            </div>
+						                          </a>
+						                        </li>
 											</ul>
 										</div>
 										<script>
@@ -159,6 +187,40 @@ li {
 											    location.href = "${path}/fRegistration.do?email=${Login.email}";
 											  }
 											}
+										function myApp(){
+			                            	if ("${Login.email}" == "") {
+											    Swal.fire({
+											      title: "로그인을 하셔야 플리마켓 내 신청 페이지 이용이 가능합니다.",
+											      icon: "warning",
+											      showCancelButton: true,
+											      confirmButtonText: "로그인",
+											      cancelButtonText: "취소",
+											    }).then((result) => {
+											      if (result.isConfirmed) {
+											        location.href = "${path}/SignIn.do";
+											      }
+											    });
+											  } else {
+											    location.href = "${path}/appMyList.do?email=${Login.email}";
+											  }
+			                            }
+			                            function rApp(){
+			                            	if ("${Login.email}" == "") {
+											    Swal.fire({
+											      title: "로그인을 하셔야 플리마켓 받은 신청 페이지 이용이 가능합니다.",
+											      icon: "warning",
+											      showCancelButton: true,
+											      confirmButtonText: "로그인",
+											      cancelButtonText: "취소",
+											    }).then((result) => {
+											      if (result.isConfirmed) {
+											        location.href = "${path}/SignIn.do";
+											      }
+											    });
+											  } else {
+											    location.href = "${path}/appReceivedList.do?email=${Login.email}";
+											  }
+			                            }
 										</script>
 										<!-- responsive -->
 										<div class="row d-lg-none">
