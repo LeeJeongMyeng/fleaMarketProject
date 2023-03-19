@@ -30,44 +30,75 @@
             border: 1px solid lightgray;
             border-radius: 10px;
             margin:5px;
-            background-color:SEASHELL;
+            background-color:white;
 }
  .flex-container.center{justify-content: center;}
+ /*   #0081cc*/
  tr{
-background: #0081cc;
- color:white;
+background:#81DAF5;
+ color:black;
  width:100px;
  font-size:13px;
  }
  td{
  height:70px;
+ color:red;
  }
  table{
  border:1px solid white;
  }
  
+ th{
+ background:white;
+ text-align:center;
+ }
+ 
+table{
+width:90px;
+}
 </style>
 <body>
 <div class="flex-container" style="width: 800px;">
-<div class="flex-container center">
+<!-- <div class="flex-container center"> -->
+
 <table>
-   <tr><th>서울</th></tr>
+   <tr><th>정보</th></tr>
    <tr>  
-    <td class="icon"></td>
+   <th></th>
   </tr>
   <tr>
-    <td class="ctemp">현재온도:</td>
+   <th>현재온도:</th>
   </tr>
   <tr>  
-    <td class="lowtemp">최저온도:</td>
+    <th>최저온도:</th>
   </tr>
    
   <tr>  
-    <td class="heighttemp">최고온도:</td>
+    <th>최고온도:</th>
   </tr>
       
   <tr>  
-    <td class="wind">바람:</td>
+    <th>바람:</th>
+  </tr>
+</table>
+<table>
+   <tr><th>서울</th></tr>
+   <tr>  
+   <td class="icon"></td>
+  </tr>
+  <tr>
+   <td class="ctemp"></td>
+  </tr>
+  <tr>  
+    <td class="lowtemp"></td>
+  </tr>
+   
+  <tr>  
+    <td class="heighttemp"></td>
+  </tr>
+      
+  <tr>  
+    <td class="wind"></td>
   </tr>
 </table>
 
@@ -77,18 +108,18 @@ background: #0081cc;
     <td class="icon1"></td>
   </tr>
   <tr>
-    <td class="ctemp1">현재온도:</td>
+    <td class="ctemp1"></td>
   </tr>
   <tr>  
-    <td class="lowtemp1">최저온도:</td>
+    <td class="lowtemp1"></td>
   </tr>
    
   <tr>  
-    <td class="heighttemp1">최고온도:</td>
+    <td class="heighttemp1"></td>
   </tr>
       
   <tr>  
-    <td class="wind1">바람:</td>
+    <td class="wind1"></td>
   </tr>
 </table>
 
@@ -98,18 +129,18 @@ background: #0081cc;
     <td class="icon2"></td>
   </tr>
   <tr>
-    <td class="ctemp2">현재온도:</td>
+    <td class="ctemp2"></td>
   </tr>
   <tr>  
-    <td class="lowtemp2">최저온도:</td>
+    <td class="lowtemp2"></td>
   </tr>
    
   <tr>  
-    <td class="heighttemp2">최고온도:</td>
+    <td class="heighttemp2"></td>
   </tr>
       
   <tr>  
-    <td class="wind2">바람:</td>
+    <td class="wind2"></td>
   </tr>
 </table>
 
@@ -119,18 +150,18 @@ background: #0081cc;
     <td class="icon3"></td>
   </tr>
   <tr>
-    <td class="ctemp3">현재온도:</td>
+    <td class="ctemp3"></td>
   </tr>
   <tr>  
-    <td class="lowtemp3">최저온도:</td>
+    <td class="lowtemp3"></td>
   </tr>
    
   <tr>  
-    <td class="heighttemp3">최고온도:</td>
+    <td class="heighttemp3"></td>
   </tr>
       
   <tr>  
-    <td class="wind3">바람:</td>
+    <td class="wind3"></td>
   </tr>
 </table>
 
@@ -140,18 +171,18 @@ background: #0081cc;
     <td class="icon4"></td>
   </tr>
   <tr>
-    <td class="ctemp4">현재온도:</td>
+    <td class="ctemp4"></td>
   </tr>
   <tr>  
-    <td class="lowtemp4">최저온도:</td>
+    <td class="lowtemp4"></td>
   </tr>
    
   <tr>  
-    <td class="heighttemp4">최고온도:</td>
+    <td class="heighttemp4"></td>
   </tr>
       
   <tr>  
-    <td class="wind4">바람:</td>
+    <td class="wind4"></td>
   </tr>
 </table>
 
@@ -161,18 +192,18 @@ background: #0081cc;
     <td class="icon5"></td>
   </tr>
   <tr>
-    <td class="ctemp5">현재온도:</td>
+    <td class="ctemp5"></td>
   </tr>
   <tr>  
-    <td class="lowtemp5">최저온도:</td>
+    <td class="lowtemp5"></td>
   </tr>
    
   <tr>  
-    <td class="heighttemp5">최고온도:</td>
+    <td class="heighttemp5"></td>
   </tr>
       
   <tr>  
-    <td class="wind5">바람:</td>
+    <td class="wind5"></td>
   </tr>
 </table>
 
@@ -182,18 +213,18 @@ background: #0081cc;
     <td class="icon6"></td>
   </tr>
   <tr>
-    <td class="ctemp6">현재온도:</td>
+    <td class="ctemp6"></td>
   </tr>
   <tr>  
-    <td class="lowtemp6">최저온도:</td>
+    <td class="lowtemp6"></td>
   </tr>
    
   <tr>  
-    <td class="heighttemp6">최고온도:</td>
+    <td class="heighttemp6"></td>
   </tr>
       
   <tr>  
-    <td class="wind6">바람:</td>
+    <td class="wind6"></td>
   </tr>
 </table>
 
@@ -203,23 +234,23 @@ background: #0081cc;
     <td class="icon7"></td>
   </tr>
   <tr>
-    <td class="ctemp7">현재온도:</td>
+    <td class="ctemp7"></td>
   </tr>
   <tr>  
-    <td class="lowtemp7">최저온도:</td>
+    <td class="lowtemp7"></td>
   </tr>
    
   <tr>  
-    <td class="heighttemp7">최고온도:</td>
+    <td class="heighttemp7"></td>
   </tr>
       
   <tr>  
-    <td class="wind7">바람:</td>
+    <td class="wind7"></td>
   </tr>
 </table>
 
 
-</div>
+<!-- </div> -->
 
 </div>
 <!--    <img alt="" src="https://openweathermap.org/img/wn/10d@2x.png"> -->

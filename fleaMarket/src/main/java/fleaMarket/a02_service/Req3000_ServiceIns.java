@@ -37,24 +37,19 @@ public class Req3000_ServiceIns implements Req3000_Service{
 	//홍보글 등록
 	public void insertFleaMarket(FleaMarket ins){   	
 	    //플리마켓 홍보글 등록
-		dao.insertFleaMarket(ins);
-		
-		
+		dao.insertFleaMarket(ins);		
 		//캘린더 등록
 		String background="#8C8CFF";
 		String textColor="##FFFF00";
 		LocalDate open = LocalDate.parse(ins.getOpenDate());
 		LocalDate close = LocalDate.parse(ins.getCloseDate());
-        System.out.println("###########################opendDate:"+open);
 		if(ins.getBackgroundColor()==null) {
 		    ins.setBackgroundColor(background);
 		    ins.setTextColor(textColor);
 		    ins.setOpenDate(open.toString());
 		    ins.setCloseDate(close.toString());
 			dao.insertCalendar(ins);
-		}
-	
-    	
+		}   	
     }
 	
 	//홍보 첨부파일 등록	

@@ -13,6 +13,7 @@ ds
  --%>
 <html>
 <head>
+ <%@ include file="/WEB-INF/views/header.jsp" %>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="${path}/assets/img/apple-icon.png">
@@ -42,7 +43,7 @@ ds
 </head>
 
 <body class="g-sidenav-show   bg-gray-100">
-   <%@ include file="/WEB-INF/views/header.jsp" %>
+  
 
    	<!-- 배너  -->
 	<div class="mask bg-gradient-primary" style=" width:100%; height:1px; margin-top:8%;"></div>
@@ -237,7 +238,7 @@ ds
   <script src="${path}/assets/js/plugins/leaflet.js"></script>
   <script src="${path}/assets/js/plugins/nouislider.min.js"></script>
   <script>
-    var ctx1 = document.getElementById("chart-line").getContext("2d");
+ /*     var ctx1 = document.getElementById("chart-line").getContext("2d"); 
 
     var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
 
@@ -316,7 +317,7 @@ ds
           },
         },
       },
-    });
+    }); */
   </script>
   
 

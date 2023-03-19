@@ -181,18 +181,32 @@ li {
 										</div>
 										<script>
 										function registration() {
-											  if ("${Login.email}" == "") {
+											var titleval = "로그인을 하셔야 플리마켓 등록 페이지 이용이 가능합니다."
+											var path = "${path}/SignIn.do"
+											var SessAuth = '${Login.authority}'
+											var comfirmval = "로그인"
+											//로그인 후 사업자 번호가 없을 때
+											if(SessAuth!='' && SessAuth!='사업자'){
+												titleval = "사업자 변환 후 이용가능합니다!\n회원정보창 이동하시겠습니까";
+												console.log(SessAuth);
+												path = "MemberInfo.do";
+												comfirmval = '이동'
+											}
+											//로그인 x
+											  if (SessAuth!='' || SessAuth=='사업자') {
 											    Swal.fire({
-											      title: "로그인을 하셔야 플리마켓 등록 페이지 이용이 가능합니다.",
+											      title:titleval,
 											      icon: "warning",
 											      showCancelButton: true,
-											      confirmButtonText: "로그인",
+											      confirmButtonText: comfirmval,
 											      cancelButtonText: "취소",
 											    }).then((result) => {
 											      if (result.isConfirmed) {
-											        location.href = "${path}/SignIn.do";
+											       location.href =path; 
+											  
 											      }
 											    });
+											    //사업자 번호 있을때
 											  } else {
 											    location.href = "${path}/fRegistration.do?email=${Login.email}";
 											  }

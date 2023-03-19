@@ -108,8 +108,7 @@ public class Req3000_Controller {
 				//파일경로
 				String filepath = filelist.get(i).getFilePath();
 				//파일 삭제 처리 서비스
-				fileservice.DeleteFile(filepath, sd);
-			
+				fileservice.DeleteFile(filepath, sd);		
 			}
 			
 			//DB에 해당 postingNumber에 해당하는 데이터 삭제
@@ -119,11 +118,7 @@ public class Req3000_Controller {
 		    if (pro.size() != 0) {
                 //파일 등록
 				String msg = service.uptFleaFileModule(pro, postingNumber);
-
-			
-
 			}
-
 		}
 
 		// 글목록 수정
