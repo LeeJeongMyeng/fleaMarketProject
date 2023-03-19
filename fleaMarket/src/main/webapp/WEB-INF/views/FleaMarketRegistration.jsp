@@ -165,7 +165,7 @@ $(document).ready(function(){
 										<span id="centerAddr2"> </span> <span id="centerAddr3">
 										</span>
 									</div>
-									<input Type="text" name="address" value="">
+									<input Type="hidden" name="address" value="">
 									
 								</div>
 								</div>
