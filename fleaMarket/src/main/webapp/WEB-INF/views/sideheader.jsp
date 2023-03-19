@@ -105,11 +105,18 @@ li{
 				</c:when>
 				<%--회원으로 들어오면 나오는 메뉴들 --%>
 				<c:otherwise>
-					<div class="collapse " id="pagesExamples">
+					<div class="collapse" id="pagesExamples">
 						<ul class="nav ms-4">
 							<li class="nav-item active">
 								<a class="nav-link" href="AdminSearch.do">
 								  <span class="sidenav-normal">회원목록조회<b class="caret"></b></span>
+								</a>
+							</li>	
+						</ul>
+						<ul class="nav ms-4">
+							<li class="nav-item active">
+								<a class="nav-link" href="show.do">
+								  <span class="sidenav-normal">커뮤니티 신고관리<b class="caret"></b></span>
 								</a>
 							</li>	
 						</ul>

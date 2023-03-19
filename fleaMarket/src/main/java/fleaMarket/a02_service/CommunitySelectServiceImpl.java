@@ -15,6 +15,7 @@ import fleaMarket.a03_dao.CommunitySelectDao;
 import fleaMarket.util.FileService;
 import vo.CapplicationList;
 import vo.Criteria;
+import vo.guestBookVo;
 import vo.irregularReportVo;
 
 
@@ -297,5 +298,42 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 		
 		return result;
 	}
+	@Override
+	public List<irregularReportVo> getIrrReportList(Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.getIrrReportList(cri);
+	}
+	@Override
+	public int getIrrNum(Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.getIrrNum(cri);
+	}
+	@Override
+	public List<guestBookVo> guestBookList(Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.guestBookList(cri);
+	}
+	@Override
+	public int getGuestBookNum(Criteria cri) {
+		// TODO Auto-generated method stub
+		return mapper.guestBookNum(cri);
+	}
+	@Override
+	public int insertGuestBook(guestBookVo vo) {
+		// TODO Auto-generated method stub
+		return mapper.insertGuestBook(vo);
+	}
+	@Override
+	public int updateGuestBook(guestBookVo vo) {
+		// TODO Auto-generated method stub
+		return mapper.updateGuestBook(vo);
+	}
+	@Override
+	public int deleteGuestBook(int guestBookid) {
+		// TODO Auto-generated method stub
+		return mapper.deleteGuestBook(guestBookid);
+	}
+	
+	
 		
 }

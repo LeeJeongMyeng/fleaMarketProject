@@ -3,6 +3,7 @@ package vo;
 
 public class Criteria {
 	private int communityNumber;
+	private String email;
 	private int pageNum;
 	private int amount;
 	private String type;	//검색
@@ -73,6 +74,14 @@ public class Criteria {
 
 	public void setCommunityNumber(int communityNumber) {
 		this.communityNumber = communityNumber;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 

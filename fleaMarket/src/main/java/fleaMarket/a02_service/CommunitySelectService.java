@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import vo.CapplicationList;
 import vo.Criteria;
+import vo.guestBookVo;
 import vo.irregularReportVo;
 
 @Service
@@ -42,9 +43,19 @@ public interface CommunitySelectService {
 	 public String getInsertLike(int communityNumber,String email);
 	 //좋아요 delete
 	 public String getDeleteLike(int communityNumber,String email);
-	
 	 //조회수 
 	 public void updateViewCnt(int communityNumber);
 	 public int insertIrrReport(irregularReportVo vo);
-	 
+	 public List<irregularReportVo> getIrrReportList(Criteria cri);
+	 public int getIrrNum(Criteria cri);
+	 public List<guestBookVo> guestBookList(Criteria cri);
+	 public int getGuestBookNum(Criteria cri);
+	 public int insertGuestBook(guestBookVo vo);
+	 public int updateGuestBook(guestBookVo vo);
+	 public int deleteGuestBook(int guestBookid);
 }
+	 
+	
+	 
+	 
+	 

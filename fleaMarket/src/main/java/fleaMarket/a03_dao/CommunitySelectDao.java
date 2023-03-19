@@ -4,6 +4,7 @@ import java.util.Map;
 
 import vo.CapplicationList;
 import vo.Criteria;
+import vo.guestBookVo;
 import vo.irregularReportVo;
 
 public interface CommunitySelectDao {
@@ -41,4 +42,19 @@ public interface CommunitySelectDao {
 	public int insertIrrReport(irregularReportVo vo);
 	//중복확인
 	public int getCountReport(irregularReportVo vo);
+	//관리자 신고목록 가져오기 
+	public List<irregularReportVo> getIrrReportList(Criteria cri);
+	
+	public int getIrrNum(Criteria cri);
+	//방명록 조회 
+	public List<guestBookVo> guestBookList(Criteria cri);
+	
+	public int guestBookNum(Criteria cri);
+	
+	public int insertGuestBook(guestBookVo vo);
+	
+	public int updateGuestBook(guestBookVo vo);
+	
+	public int deleteGuestBook(int guestBookid);
+	
 }

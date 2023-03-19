@@ -56,11 +56,15 @@
   gap: 40px;
   margin-top: 15px;
   }
+  
+  
   </style>
 </head>
 <%@ include file="header.jsp" %>
 <style>
-li{list-style:auto;}
+#so1 li{
+  list-style:auto;
+  }
 </style>
 <body class="g-sidenav-show   bg-gray-100">
   
@@ -186,7 +190,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                
               </div>
                     </div>
-                    <div>
+                    <div id = "so1">
                     <p class="mb-4">
                     ${detail.content }
                    </p>
@@ -479,7 +483,8 @@ It's a separate element, as animating opacity is faster than rgba(). -->
  <!-- 삭제 게시물 폼 -->
  <form id="infoForm" method="post" action = "${path }/deleteBoard.do">
 							<input type="hidden" name="communityNumber" value="${dlist[0].communitynumber}"> 
-							<input type="hidden" name="category" value = "${category}">					
+							<input type="hidden" name="category" value = "${category}">
+							<input type="hidden" name ="email" value = "${dlist[0].email }">					
 </form>
 
 <!-- 신고사유 폼  -->
@@ -664,7 +669,12 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 	     title: '삭제 완료',
 	 })
  }
- 
+ if(Result==='삭제'){
+	 Swal.fire({
+		 icon: 'success',
+	     title: '삭제 완료',
+	 })
+ }
  $('#updateStart').click(function(){
 	 if(myEmail!=following){
 		 Swal.fire({
@@ -706,7 +716,14 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 			 
 		     var session = '${session}';
 		    	//삭제조건이 맞을때, 작성자 == 세션 
-		    	if(session!=''){
+		     var email = '${dlist[0].email}'
+		    	 if(email==session){
+					 Swal.fire({
+						 icon:'error',
+						 title:'작성자는 신고하실 수 없습니다.'
+					 })
+			     }
+		    	 else if(session!=''){
 		    		$('input[name=irrType]').attr('value',elm.value);
 		    		irrForm.submit();
 		    	}else{
@@ -744,8 +761,10 @@ It's a separate element, as animating opacity is faster than rgba(). -->
 	      if (result.isConfirmed) {
 	    	var writer = '${dlist[0].email}';
 	    	var session = '${session}';
-	    	//삭제조건이 맞을때, 작성자 == 세션 
-	    	if(writer == session){
+	    	//삭제조건이 맞을때, 작성자 == 세션
+	    	if(session == 'admin@contigo.com'){
+	    		infoForm.submit();
+	    	}else if(writer == session){
 	    		infoForm.submit();
 	    	}else if(session==''){
 	    		Swal.fire({
@@ -802,9 +821,17 @@ function contItem(idx){
     var communityNumber = '${dlist[0].communitynumber}';
     var following = '${dlist[0].email}';
     console.log(myEmail);
-    //팔로우, 팔로잉 처리    
+    //팔로우, 팔로잉 처리
+    
     $("#followButton").on("click", function(e) {
-    	if(myEmail!=null && myEmail!=""){
+    	if(myEmail == following){
+        	Swal.fire({
+    			icon:'warning',
+    			text:'자기자신을 팔로잉할 수 없습니다.',
+    			
+    	})
+        }
+    	else if(myEmail!=null && myEmail!=""){
     	fetch("${path}/selectFriend.do?communityNumber=${dlist[0].communitynumber}&myEmail=${session}")
     	.then(res => res.json())
     	.then(data => {

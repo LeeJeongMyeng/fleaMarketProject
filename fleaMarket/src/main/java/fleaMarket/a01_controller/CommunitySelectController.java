@@ -2,7 +2,6 @@ package fleaMarket.a01_controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
-import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Optional;
 
@@ -181,16 +180,18 @@ public class CommunitySelectController {
 		return "communityDetail";
 	}
 	@PostMapping("deleteBoard.do")
-	public String deleteBoard(@RequestParam int communityNumber,@RequestParam String category,HttpSession session,HttpServletRequest request) {
+	public String deleteBoard(@RequestParam int communityNumber,@RequestParam String email,@RequestParam String category,HttpSession session,HttpServletRequest request,RedirectAttributes rttr) {
 		Member member = (Member)session.getAttribute("Login");
 		Optional<String> opt = Optional.ofNullable(member.getEmail());
 		//세션이 없을때 
-		String email = opt.orElse("");
-		int result = service.getDeleteBoard(communityNumber,email);
-		if(result == 0) {
-			String referer = request.getHeader("Referer");
-			return "redirect:"+referer;
+		String emails = opt.orElse("");
+		//관리자 추가 
+		if(emails.equals("admin@contigo.com")) {
+			int result = service.getDeleteBoard(communityNumber,email);
 		}
+		
+		int result = service.getDeleteBoard(communityNumber,email);
+		if(result == 1) {rttr.addFlashAttribute("msg","삭제");}
 		
 		String encodedParam = "";
 		try {
