@@ -48,6 +48,8 @@
 
 <script>
 
+
+
 $(document).ready(function(){
 
 	//주소버튼
@@ -77,8 +79,6 @@ $(document).ready(function(){
 		$('input[name=content]').val(expeditor); 
 	})
 
-
-
 	
 });
 
@@ -107,39 +107,32 @@ $(document).ready(function(){
 						name="aform" enctype="multipart/form-data">
 						<div class="card card-body mt-4">
 							<h6 class="mb-0 fleamarket">플리마켓 수정하기</h6>
-							<hr class="horizontal dark my-3">
-								<input type="hidden" name="postingNumber" value="${fleamarket.postingNumber}">
+							<hr class="horizontal dark my-3"><%--value="${Login.email}" --%>
+							<input type="hidden" name="postingNumber" value="${fleamarket.postingNumber}">
 							<input type="hidden" name="email" value="${Login.email}">
 							<input type="hidden" name="bisenessNumber" value="${Login.businessnumber}">
-							<label for="title" class="form-label labelFont">제목</label> 
-							<input type="text" class="form-control" id="projectName" name="title" value="${fleamarket.title}" style="width:50%;">
+			
+							
+							<label for="title" class="form-label labelFont"><span style="color:red;">*</span>제목</label> 
+							<input type="text" class="form-control" id="projectName" name="title" value="${fleamarket.title}" style="width:50%;" minlength='2'>
 
 			                <br>
                             <!-- 주소지정해주기 -->
 							<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">주소 설정</label> 
+									<label class="form-label labelFont"><span style="color:red;">*</span>행사/플리마켓 진행 장소 선택</label> 
 									<div class = "s_form">
-									   <input type="button" name="addrs0" class="btn btn-primary" onclick="execDaumPostcode()" style="margin-bottom: 9px;" value="우편번호 찾기"><br>									  
-									   <input name = "addrs1" type="text"  id="sample6_address" class="form-control soooo2" style="width:102%;" placeholder="주소" readonly>
-                                       <div class="btn btn-primary" onclick="callAdd()" style="height: 41px;margin-left: 530px;margin-top: -53px;width: 70px;">확인</div>
-									   
+									   <input type="button" name="addrs0" class="btn btn-primary" onclick="execDaumPostcode()" style="margin-bottom: 9px;" value="장소 검색"><br>									  
+									   <input name = "addrs1" type="text"   id="sample6_address"  class="form-control soooo2" style="width:102%;" placeholder="주소" readonly>
 									   <br>	
-									  <script>
-									  function callAdd(){
-											alert("등록:"+$("input[name=addrs1]").val())
-											geocoder.addressSearch($("input[name=addrs1]").val(), mafun ); 
-							
-									}
-									  </script>
 									   				
                                     </div>
 							     </div>
 							</div>
-							
-								<div class="row">
+							<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">장소(상세클릭)</label>
+									<label class="form-label labelFont">진행장소 상세설정<span style="color:red;">(클릭!!)</span></label><br>
+									<label class="form-label labelFont">( 참가 인원들이 알 수 있도록 상세한 위치를 조절해주세요! ^^ )</label>
 
 								</div>
 
@@ -152,15 +145,15 @@ $(document).ready(function(){
 										<span id="centerAddr2"> </span> <span id="centerAddr3">
 										</span>
 									</div>
-									<input Type="text" name="address" value="${fleamarket.address}">
+									<input Type="hidden" name="address" value="${fleamarket.address}">
 									
 								</div>
 								</div>
 							
 							
-							<div class="row">
+									<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">모집 인원</label> <input
+									<label class="form-label labelFont"><span style="color:red;">*</span>모집 인원</label> <input
 										class="form-control" type="text" name="approvalMaxCnt" 
 										oninput="this.value = this.value.replace(/[^0-50.]/g, '');"
 										value="${fleamarket.approvalMaxCnt}">
@@ -170,7 +163,7 @@ $(document).ready(function(){
 
 							<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">모집 시작일</label> <input
+									<label class="form-label labelFont"><span style="color:red;">*</span>모집 시작일</label> <input
 										 class="form-control datetimepicker" type="date"
 										placeholder="시작일을 선택해주세요" name="recruitmentStartDate"
 										id="recruitmentStartDate"
@@ -178,17 +171,16 @@ $(document).ready(function(){
 								</div>
 								<div class="col-6">
 									<!-- class="form-control datetimepicker" -->
-									<label class="form-label labelFont">모집 종료일</label> <input
+									<label class="form-label labelFont"><span style="color:red;">*</span>모집 종료일</label> <input
 									 class="form-control datetimepicker" type="date"
 										placeholder="종료일을 선택해주세요" name="recruitmentEndDate" 
 										id="recruitmentEndDate"
 										data-input value="${fleamarket.recruitmentEndDate}">
 								</div>
 							</div>
-							
 							<div class="row">
 								<div class="col-6">
-									<label class="form-label labelFont">플리마켓 시작일</label> 
+									<label class="form-label labelFont"><span style="color:red;">*</span>플리마켓 시작일</label> 
 									<input  class="form-control datetimepicker" type="date"
 										placeholder="시작일을 선택해주세요" name="openDate" id="openDate" data-input
 										value="${fleamarket.openDate}">
@@ -196,7 +188,7 @@ $(document).ready(function(){
 									            
 							
 								<div class="col-6">
-									<label class="form-label labelFont">플리마켓 종료일</label><input
+									<label class="form-label labelFont"><span style="color:red;">*</span>플리마켓 종료일</label><input
 									 class="form-control datetimepicker" type="date"
 										placeholder="종료일을 선택해주세요" name="closeDate" id="closeDate" onkeyup="keyevent(this)" data-input
 										value="${fleamarket.closeDate}">
@@ -209,12 +201,11 @@ $(document).ready(function(){
 							</iframe>
  
 
-							
-						
+					
 
-								<label class="mt-4 labelFont">내용</label>
+								<label class="mt-4 labelFont"><span style="color:red;">*</span>내용</label>
 
-					        	<div id="editor">
+								<div id="editor" style="height:294px;">
 
 									<p id="contents">
 										${fleamarket.content}<br>
@@ -224,24 +215,26 @@ $(document).ready(function(){
 
 								<div class="row">
 									<div class="col-sm-4 col-6">
-										<label class="form-label mt-4">첨부파일 유무</label> 
+										<label class="form-label mt-4"><span style="color:red;">*</span>첨부파일 유무</label> 
 										<select	class="form-control" name="checkForm" id="choices-gender" value="${fleamarket.checkForm}">
 								<option value="" selected="selected">첨부파일 선택</option>
 											<option  value="N">필요없음</option>
-											<option id="P" value="P">개인양식</option>
-											<option  value="C">공통파일</option>
+											<option id="P" value="P">개인양식(사진+첨부양식)</option>
+											<option  value="C">공통파일(사진)</option>
 										</select>
 									</div>
 								</div>
                                 
 						<div class="div1">
-
+	                 
 	                       <label class="mt-4 form-label labelFont">첨부파일</label>
+	                         <p class="text-sm mb-0" style="width:236px;">*이미지 파일은 최소 1장 이상입니다.</p>
 								<div class="row mt-3">
-		                         <div class="col-2" style="height:120px;">
+		                          <div class="col-2" style="height:120px;"> 
+		                        
                                   <input type="file" name="pro" class="form-control" 
-                                  style="width:230px" id="isFile" multiple>
-		                        </div>
+                                  style="width:230px" id="isFile" multiple  accept="">
+		                      </div> 
 		                      </div>
                         </div>
 		             							
@@ -267,9 +260,12 @@ $(document).ready(function(){
 	<script src="${path}/assets/js/plugins/flatpickr.min.js"></script>
 	<script src="${path}/assets/js/plugins/dropzone.min.js"></script>
 	
-	
+	<script src="${path}/resource/js/Req3000/template.js"></script>
   <script>
 
+  
+
+ 
 	$('input[name=title]').keyup(function(){
 		
 		//데이터가 들어왔을 경우
@@ -387,13 +383,28 @@ $(document).ready(function(){
 	<script src="${path}/assets/js/argon-dashboard.min.js?v=2.0.5"></script>
 </body>
 
-<script src="${path}/resource/js/Req3000/template.js"></script>
+
 <!-- <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script> -->
+
+
 <script src="${path}/resource/js/Req3000/address.js"></script>
 <%--gps --%>
 <script src="${path}/resource/js/Req3000/gps2.js"></script>  
 
+<script>
+/* 
+var now_utc = Date.now()
+var timeOff = new Date().getTimezoneOffset()*60000;
+var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
+$('input[name=openDate]').attr("min", today);
+$('input[name=closeDate]').attr("min", today);
+$('input[name=recruitmentStartDate]').attr("min", today);
+$('input[name=recruitmentEndDate]').attr("min", today);
+ */
+  
 
+
+</script>
 
 
 

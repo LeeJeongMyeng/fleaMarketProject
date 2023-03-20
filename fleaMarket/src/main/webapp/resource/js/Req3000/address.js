@@ -38,9 +38,9 @@
 			        cancelButtonText:'취소',
 				 }).then(result =>{
 					 if(result.isConfirmed){
-						 $("input[name=address]").val(addr)
+						// $("input[name=address]").val(addr)
 					 }
-					// geocoder.addressSearch($("input[name=addrs1]").val(), mafun ); 
+					 geocoder.addressSearch($("input[name=addrs1]").val(), mafun ); 
 				 })
 
             }
