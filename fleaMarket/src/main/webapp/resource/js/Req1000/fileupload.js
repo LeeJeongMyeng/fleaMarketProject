@@ -98,9 +98,9 @@ function handleImgsFilesSelect2(e) {
         reader.onload = function(e) {
         	var str = e.target.result
         	if(str.indexOf('image')==-1){
-                var img_html = "<div style='text-align:center;'><label class='postInsertTitle' style='font-size:20px'>"+f.name+"</label><br><img src=\"https://cdn-icons-png.flaticon.com/512/8473/8473155.png\" ondblclick='deletefile("+index+",\""+filetagid+"\")' style='width:150px;'></div>";
+                var img_html = "<div style='text-align:center;'><label class='postInsertTitle' style='font-size:13px'>"+f.name+"</label><br><img src=\"https://cdn-icons-png.flaticon.com/512/8473/8473155.png\" style='width:150px;'><br><button style=\"border:none;background: gray;color: white;font-weight: bold;margin-top: 5px;\" onclick='deletefile("+index+",\""+filetagid+"\")'>X</button></div>";
         	}else{
-                var img_html = "<div style='text-align:center;'><label class='postInsertTitle' style='font-size:20px'>"+f.name+"</label><br><img src=\"" + e.target.result + "\" ondblclick='deletefile("+index+",\""+filetagid+"\")' style='width:150px;'></div>";
+                var img_html = "<div style='text-align:center;'><label class='postInsertTitle' style='font-size:13px'>"+f.name+"</label><br><img src=\"" + e.target.result + "\" style='width:150px;'><br><button style=\"border:none;background: gray;color: white;font-weight: bold;margin-top: 5px;\" onclick='deletefile("+index+",\""+filetagid+"\")'>X</button></div>";
         	}
             $("#imgs_wrap").append(img_html);
         }

@@ -193,8 +193,8 @@ REFERENCES fleamarketmember (email)
 ON DELETE CASCADE;
 
 UPDATE fleamarket
-SET email = 'miri7575@naver.com' 
-WHERE email = 'test@naver.com' ;
+SET checkform = 'P' 
+WHERE postingnumber = 37 ;
 
 -- 내 신청
 SELECT *
