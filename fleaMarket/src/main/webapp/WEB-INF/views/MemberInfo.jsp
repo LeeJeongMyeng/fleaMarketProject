@@ -191,7 +191,7 @@ var SessPassword = '${Login.password}' //세션 비번
 						  <input type="text" class="form-control form-control-sm  mt-n3" id="sample6_extraAddress" placeholder="참고항목" readonly><br>
 						  <input type="text" class="form-control form-control-sm  mt-n3 mb-5" id="sample6_detailAddress" placeholder="상세주소" readonly>
 			              <div class="invalid-feedback">주소를 입력해주세요.</div>
-			              <input type="hidden" name="address"/> <%--실제 주소로 입력될 input --%>
+			              <input type="hidden" name="address" value="${Login.address}"/> <%--실제 주소로 입력될 input --%>
 		              </div>  
                   </div>
                   <div class="col-6">
