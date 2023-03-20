@@ -51,7 +51,6 @@ public class Req4002_Service {
 	}
 	
 	public List<FollowMemberInfo> followerSelectPage(Criteria cri) {
-		if(cri.getMyemail()==null) cri.setMyemail("");
 		return dao.followerSelectPage(cri);
 	}
 	
