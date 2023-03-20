@@ -43,17 +43,15 @@ FROM (SELECT ROWNUM RNUM,
                    c.viewCnt,
                    m.nickname,
                    count(c2.COMMUNITYNUMBER) likeCnt,
-                   count(r.REPLYNO) repCnt,
                    CASE
                        WHEN c.viewCnt >= 30 
                            THEN 'T'
                        ELSE 'F'
                        END AS bestType
-           FROM fleamarketmember m,CAPPLICAION c,BOARDIMG b,reply r,COMMUNITYHEART c2
+           FROM fleamarketmember m,CAPPLICAION c,BOARDIMG b,COMMUNITYHEART c2
                  WHERE m.EMAIL = c.EMAIL
-              AND c.COMMUNITYNUMBER = r.COMMUNITYNUMBER(+)
-              AND r.COMMUNITYNUMBER = c2.COMMUNITYNUMBER(+)
-              AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER
+              AND c.COMMUNITYNUMBER = c2.COMMUNITYNUMBER(+)
+              AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER 
               AND                               
       ]]>
 		<include refid="criteria"></include>
@@ -68,7 +66,6 @@ FROM (SELECT ROWNUM RNUM,
                    c.registDate,
                    c.updateDate,
                    c.viewCnt,
-                   r.COMMUNITYNUMBER,
                    m.nickname
 		<if test="shift != null and shift !=''">
 			ORDER BY
@@ -86,8 +83,7 @@ FROM (SELECT ROWNUM RNUM,
 		</if> 
 		
 		<![CDATA[
-	  DESC	) TEMP 
-) LAST 
+	  DESC	) TEMP ) LAST 
         WHERE RNUM BETWEEN (#{pageNum}-1)* ${amount} AND #{pageNum} * #{amount}
      ]]>
 
@@ -108,17 +104,15 @@ FROM (SELECT ROWNUM RNUM,
                    c.viewCnt,
                    m.nickname,
                    count(c2.COMMUNITYNUMBER) likeCnt,
-                   count(r.communitynumber) repCnt,
                    CASE
                        WHEN c.viewCnt >= 30 
                            THEN 'T'
                        ELSE 'F'
                        END AS bestType
-            FROM fleamarketmember m,CAPPLICAION c,BOARDIMG b,reply r,COMMUNITYHEART c2
+            FROM fleamarketmember m,CAPPLICAION c,BOARDIMG b,COMMUNITYHEART c2
             WHERE m.EMAIL = c.EMAIL
-              AND c.COMMUNITYNUMBER = r.COMMUNITYNUMBER(+)
-              AND r.COMMUNITYNUMBER = c2.COMMUNITYNUMBER(+)
-              AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER
+              AND c.COMMUNITYNUMBER = c2.COMMUNITYNUMBER(+)
+              AND c.COMMUNITYNUMBER = b.COMMUNITYNUMBER 
             AND c.viewCnt >= 30 
             AND 
       ]]>
@@ -134,9 +128,8 @@ FROM (SELECT ROWNUM RNUM,
                    c.registDate,
                    c.updateDate,
                    c.viewCnt,
-                   m.nickname,
-                   r.COMMUNITYNUMBER
-                   
+                   m.nickname
+                                     
 		<if test="shift != null and shift !=''">
 			ORDER BY
 

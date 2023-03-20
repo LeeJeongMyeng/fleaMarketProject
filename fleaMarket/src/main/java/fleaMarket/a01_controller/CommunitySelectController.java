@@ -266,7 +266,7 @@ public class CommunitySelectController {
 			msg = "fail";
 		}
 		String referer = request.getHeader("Referer");
-		
+		//ㅎ
 	
 		return "redirect:"+referer;
 	}

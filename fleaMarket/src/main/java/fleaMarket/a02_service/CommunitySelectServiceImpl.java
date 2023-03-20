@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import fleaMarket.a03_dao.CommunitySelectDao;
+import fleaMarket.a03_dao.ReplyDao;
 import fleaMarket.util.FileService;
 import vo.CapplicationList;
 import vo.Criteria;
@@ -23,8 +24,10 @@ import vo.irregularReportVo;
 @Service
 public class CommunitySelectServiceImpl implements CommunitySelectService {
 	
-	private CommunitySelectDao mapper;	
+	private CommunitySelectDao mapper;
+	private ReplyDao rmapper;
 	private FileService fservice;
+	
 	
 	@Value("${board.upload2}")
 	private String filePath;
@@ -33,9 +36,10 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 	 * 생성자 주입 
 	 */
 	@Autowired
-	public CommunitySelectServiceImpl(CommunitySelectDao mapper,FileService fservice) {
+	public CommunitySelectServiceImpl(CommunitySelectDao mapper,ReplyDao rmapper,FileService fservice) {
 		this.mapper = mapper;
-		this.fservice= fservice;
+		this.rmapper = rmapper;
+		this.fservice = fservice;
 	}
 	// 페이징 처리를 위한 전체 게시물 갯수
 	@Override
@@ -81,6 +85,12 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 				}
 			}
 		}
+		// 댓글 수 처리 
+		for(int i = 0;i<clist.size();i++) {
+			int s = rmapper.getReplyCnt(clist.get(i).getCommunitynumber());
+			clist.get(i).setRepCnt(s);
+		}
+		
 		return clist;
 	}
 	@Override
@@ -119,6 +129,11 @@ public class CommunitySelectServiceImpl implements CommunitySelectService {
 				}
 			}
 		}
+		// 댓글 수 처리 
+				for(int i = 0;i<clist.size();i++) {
+					int s = rmapper.getReplyCnt(clist.get(i).getCommunitynumber());
+					clist.get(i).setRepCnt(s);
+				}
 		return clist;
 	
 	}
