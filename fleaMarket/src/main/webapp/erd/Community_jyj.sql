@@ -103,24 +103,25 @@ SELECT * FROM FLEAMARKETMEMBER f ;
 DELETE FROM capplicaion;
 
 UPDATE capplicaion 
-SET likecnt='5'
-WHERE communityNumber='comBoard20';
+SET updatedate=null
+WHERE communityNumber=21;
 
 UPDATE capplicaion 
-SET registdate='20230203'
-WHERE communityNumber='123';
+SET hashtag='#3대학원,#나를 이기자'
+WHERE communityNumber=21;
 
 UPDATE capplicaion 
 SET title='',
 	content='',
-	hashtag='#태그할수 있을까?',
+	hashtag='#3대학원,#나를 이기자',
 	updatedate=sysdate
 WHERE communityNumber='comBoard23';
 --mm IN (SELECT TO_CHAR(REGISTDATE, 'yyyy-mm-dd')
 SELECT *
 FROM BoardImg i,capplicaion c
 WHERE i.communitynumber=c.communitynumber
-and email = 'yujin@gmail.com'
+AND c.COMMUNITYNUMBER=21;
+and email = 'yujin@gmail.com';
 AND category LIKE '%'||''||'%'
 AND  TO_CHAR(REGISTDATE, 'mm') LIKE '%'||'05'||'%';
 --registdate IN (SELECT registdate * FROM capplicaion WHERE TO_CHAR(registdate,'mm')='03')
@@ -359,11 +360,11 @@ WHERE myemail='dbwls8382@naver.com'
 AND FOLLOWING='yujin@mail.com';
 
 -- 팔로우한 회원정보
-select *
+select profileimg,nickname, m.email
 FROM FLEAMARKETMEMBER m,friend f,profile pro
 WHERE f.following=m.email
 AND f.following=pro.email
-AND myemail='yujin@mail.com';
+AND myemail='dbwls8382@naver.com';
 
 SELECT * 
 FROM fleamarketmember m, profile p

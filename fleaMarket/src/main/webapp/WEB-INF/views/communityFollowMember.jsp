@@ -97,7 +97,9 @@
 	                      <p class="text-secondary mb-0 text-sm">${followers.email}</p>
 	                    </td>
 	                    <td class="align-middle text-center">
-	                    	<a href="communityMemberRoom.do?email=${followers.email}&loginEmail=${Login.email}" ><i class="ni ni-shop"></i></a>
+	                    	<a href="communityMemberRoom.do?email=${followers.email}&loginEmail=${Login.email}" >
+	                    		<i class="ni ni-shop"></i>
+	                    	</a>
 	                      <!-- <button type="button" id="roomGo" class="text-secondary text-sm roomGo" style="border:none; background:none;"><i class="ni ni-shop"></i></button> -->
 	                    </td>
 	                    <%-- <td class="align-middle text-center">

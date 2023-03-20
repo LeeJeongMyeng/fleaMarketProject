@@ -59,6 +59,7 @@
 			$("#regHashTag").show()
 		})
 		 $('#edit-deschiption .ql-editor').keyup(function(){
+			 alert($('#edit-deschiption .ql-editor').html().indexOf('<img src='))
 			  if(($('#edit-deschiption .ql-editor').html().indexOf('<img src='))!=-1){
 				 alert("[안내메시지] 이미지는 따로 등록하셔야 합니다.")
 				 $('#edit-deschiption .ql-editor').text("")
