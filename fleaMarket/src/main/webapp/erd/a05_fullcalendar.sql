@@ -29,6 +29,9 @@ DROP SEQUENCE cal01_seq;
 		SELECT * FROM calendar01;
 	
 
-		
+delete from calendar01;		
 	
-	
+UPDATE calendar01 
+SET TITLE='홍대 플리마켓'
+WHERE START01  ='2023-03-24';
+     

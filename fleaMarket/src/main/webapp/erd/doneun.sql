@@ -23,6 +23,7 @@ CREATE TABLE FleaMarket
    PRIMARY KEY (postingNumber)
 );
 SELECT * FROM FleaMarket;
+delete from FleaMarket where POSTINGNUMBER =5;
 
 DROP SEQUENCE fleaMarket_seq;
 --파일 시퀀스 번호
@@ -101,4 +102,38 @@ ORDER BY REGISTDATE DESC;
 
 
 SELECT * FROM FLEAMARKETMEMBER;
+
+
+
+
+
+
+SELECT * FROM FFILE f  ;
+
+
+
+--	{"gif","jpg","jpe","png","bmp","ico","apng","jfif"}; 
+
+	SELECT nvl(FILENAME,'없음') FROM(
+		SELECT ROWNUM rn,f.FILENAME 
+		FROM ffile f
+		WHERE ROWNUM <=2 AND 
+		POSTINGNUMBER = 2)
+	WHERE FILENAME LIKE '%.jpg' OR 
+          FILENAME LIKE '%.gif'OR 
+          FILENAME LIKE '%.jpe'OR 
+          FILENAME LIKE '%.png'OR 
+          FILENAME LIKE '%.bmp'OR 
+          FILENAME LIKE '%.ico'OR 
+          FILENAME LIKE '%.apng'OR 
+          FILENAME LIKE '%.jfif';
+          
+
+
+
+
+
+
+
+
 	

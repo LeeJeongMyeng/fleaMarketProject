@@ -24,6 +24,7 @@ import fleaMarket.util.FileService;
 import vo.ApplicationFile;
 import vo.FApplication;
 import vo.FApplicationSch;
+import vo.FleaMarket;
 import vo.Member;
 
 @Controller
@@ -49,7 +50,10 @@ public class FMViewController {
 		 map = service.devideFmFile(postingNumber); //map 1.imgfiles 2.noimgfiles
 		d.addAttribute("imgfiles",map.get("imgfiles"));
 		d.addAttribute("noimgfiles",map.get("noimgfiles"));
-		d.addAttribute("fleamarket",service.fmView(postingNumber));
+		FleaMarket fm = service.fmView(postingNumber);
+		d.addAttribute("fleamarket",fm);
+		d.addAttribute("getprofile",fm.getEmail());
+		
 		return "fleaMarketView";
 	}
 	

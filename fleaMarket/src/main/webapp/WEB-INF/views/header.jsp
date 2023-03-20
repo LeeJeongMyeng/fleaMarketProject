@@ -139,88 +139,78 @@ li {
 														</div>
 												</a>
 												</li>
-												<li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-						                          <a class="dropdown-item py-2 ps-3 border-radius-md" onclick="myApp()" href="#">
-						                            <div class="d-flex">
-						                              <div class="icon h-10 me-3 d-flex mt-1">
-						                                <i class="ni ni-single-copy-04 text-primary"></i>
-						                              </div>
-						                              <div class="w-100 d-flex align-items-center justify-content-between">
-						                                <div>
-						                                  <p class="dropdown-header text-dark p-0">내 신청 조회</p>
-						                                </div>
-						                              </div>
-						                            </div>
-						                          </a>
-						                        </li>
-						                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-						                          <a class="dropdown-item py-2 ps-3 border-radius-md" onclick="rApp()" href="#">
-						                            <div class="d-flex">
-						                              <div class="icon h-10 me-3 d-flex mt-1">
-						                                <i class="ni ni-single-copy-04 text-primary"></i>
-						                              </div>
-						                              <div class="w-100 d-flex align-items-center justify-content-between">
-						                                <div>
-						                                  <p class="dropdown-header text-dark p-0">받은 신청 조회</p>
-						                                </div>
-						                              </div>
-						                            </div>
-						                          </a>
-						                        </li>
+						                        <c:choose>
+						                        	<c:when test="${empty Login}">
+													</c:when>
+													<c:otherwise>
+														<c:if test="${Login.authority!='관리자'}">
+															<li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
+									                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="#">
+									                            <div class="d-flex">
+									                              <div class="icon h-10 me-3 d-flex mt-1">
+									                                <i class="ni ni-single-copy-04 text-primary"></i>
+									                              </div>
+									                              <div class="w-100 d-flex align-items-center justify-content-between">
+									                                <div>
+									                                  <p class="dropdown-header text-dark p-0">내 신청 조회</p>
+									                                </div>
+									                              </div>
+									                            </div>
+									                          </a>
+									                        </li>
+									                    </c:if>
+														<c:if test="${Login.authority=='사업자'}">
+									                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
+									                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="#">
+									                            <div class="d-flex">
+									                              <div class="icon h-10 me-3 d-flex mt-1">
+									                                <i class="ni ni-single-copy-04 text-primary"></i>
+									                              </div>
+									                              <div class="w-100 d-flex align-items-center justify-content-between">
+									                                <div>
+									                                  <p class="dropdown-header text-dark p-0">받은 신청 조회</p>
+									                                </div>
+									                              </div>
+									                            </div>
+									                          </a>
+									                        </li>
+									                   </c:if>
+									               </c:otherwise>
+								               </c:choose>
 											</ul>
 										</div>
 										<script>
 										function registration() {
-											  if ("${Login.email}" == "") {
+											var titleval = "로그인을 하셔야 플리마켓 등록 페이지 이용이 가능합니다."
+											var path = "${path}/SignIn.do"
+											var SessAuth = '${Login.authority}'
+											var comfirmval = "로그인"
+											//로그인 후 사업자 번호가 없을 때
+											if(SessAuth!='' && SessAuth!='사업자'){
+												titleval = "사업자 변환 후 이용가능합니다!\n회원정보창 이동하시겠습니까";
+												console.log(SessAuth);
+												path = "MemberInfo.do";
+												comfirmval = '이동'
+											}
+											//로그인 x
+											  if (SessAuth!='' || SessAuth=='사업자') {
 											    Swal.fire({
-											      title: "로그인을 하셔야 플리마켓 등록 페이지 이용이 가능합니다.",
+											      title:titleval,
 											      icon: "warning",
 											      showCancelButton: true,
-											      confirmButtonText: "로그인",
+											      confirmButtonText: comfirmval,
 											      cancelButtonText: "취소",
 											    }).then((result) => {
 											      if (result.isConfirmed) {
-											        location.href = "${path}/SignIn.do";
+											       location.href =path; 
+											  
 											      }
 											    });
+											    //사업자 번호 있을때
 											  } else {
 											    location.href = "${path}/fRegistration.do?email=${Login.email}";
 											  }
 											}
-										function myApp(){
-			                            	if ("${Login.email}" == "") {
-											    Swal.fire({
-											      title: "로그인을 하셔야 플리마켓 내 신청 페이지 이용이 가능합니다.",
-											      icon: "warning",
-											      showCancelButton: true,
-											      confirmButtonText: "로그인",
-											      cancelButtonText: "취소",
-											    }).then((result) => {
-											      if (result.isConfirmed) {
-											        location.href = "${path}/SignIn.do";
-											      }
-											    });
-											  } else {
-											    location.href = "${path}/appMyList.do?email=${Login.email}";
-											  }
-			                            }
-			                            function rApp(){
-			                            	if ("${Login.email}" == "") {
-											    Swal.fire({
-											      title: "로그인을 하셔야 플리마켓 받은 신청 페이지 이용이 가능합니다.",
-											      icon: "warning",
-											      showCancelButton: true,
-											      confirmButtonText: "로그인",
-											      cancelButtonText: "취소",
-											    }).then((result) => {
-											      if (result.isConfirmed) {
-											        location.href = "${path}/SignIn.do";
-											      }
-											    });
-											  } else {
-											    location.href = "${path}/appReceivedList.do?email=${Login.email}";
-											  }
-			                            }
 										</script>
 										<!-- responsive -->
 										<div class="row d-lg-none">
