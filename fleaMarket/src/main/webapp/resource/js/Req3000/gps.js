@@ -134,17 +134,7 @@ function displayCenterInfo(result, status) {
 			}        
 	        return false;
 	 }
-	 
-
-/* 	if(!document.aform.bisenessNumber.value){
-		    var bcontent="사업자 번호 등록을 해주세요."
-	        alert(bcontent);
-	        if(bcontent){
-				location.href="MemberInfo.do"
-			} 
-	        return false;
-	 } */
-	 
+	 	 
 	if(!document.aform.title.value){
 	        alert("글제목을 입력하세요");
 	        return false;
@@ -208,7 +198,21 @@ function displayCenterInfo(result, status) {
          alert("모집일을 다시 설정해 주세요");
          return false;
      }
-	 	 
+     var checkval = $("#checkform option:selected").val();
+	 	 if(checkval==''){
+        alert("첨부파일 유무 체크바랍니다")
+        return false;
+      }
+	 if(document.aform.checkForm.value==""){
+	     alert("첨부파일 유무를 선택해주세요");
+	     return false;
+	 }
+	 
+
+	 if(!document.aform.address.value){
+	     alert("장소를 선택해주세요");
+	     return false;
+	 }
 	 if(!document.aform.address.value){
 	     alert("장소를 선택해주세요");
 	     return false;

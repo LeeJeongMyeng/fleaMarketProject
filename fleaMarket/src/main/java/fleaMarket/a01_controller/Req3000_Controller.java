@@ -97,9 +97,11 @@ public class Req3000_Controller {
 	public String FleaMarketUpt(@RequestParam("postingNumber") String postingNumber, FleaMarket upt,
 			RedirectAttributes redirect, List<MultipartFile> pro) {
 		// 업로드 수정
-		
+		// 글목록 수정
+		service.UptFleaMarket(upt);		
+				
 		// 파일 삭제
-		if (pro.size() != 0) {
+		if (pro.size() != 0 && !pro.get(0).getOriginalFilename().equals("")) {
 			// 해당 postingNumber의 여러행을 list처리
 			List<FFile> filelist = service.DelFail(postingNumber);
 			for (int i = 0; i < filelist.size(); i++) {
@@ -108,21 +110,14 @@ public class Req3000_Controller {
 				//파일경로
 				String filepath = filelist.get(i).getFilePath();
 				//파일 삭제 처리 서비스
-				fileservice.DeleteFile(filepath, sd);		
-			}
-			
-			//DB에 해당 postingNumber에 해당하는 데이터 삭제
-		    service.delFfile(postingNumber);
-	        
-		    //삭제 후 -> 재등록 처리 
-		    if (pro.size() != 0) {
-                //파일 등록
+				fileservice.DeleteFile(filepath, sd);	
+				//삭제 후 -> 재등록 처리 
 				String msg = service.uptFleaFileModule(pro, postingNumber);
-			}
+				//DB에 해당 postingNumber에 해당하는 데이터 삭제
+			    service.delFfile(postingNumber);
+		        
+			}		    
 		}
-
-		// 글목록 수정
-		service.UptFleaMarket(upt);
 		return "redirect:totalSearch.do";
 	}
 

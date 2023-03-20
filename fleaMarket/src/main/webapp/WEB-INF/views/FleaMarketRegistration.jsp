@@ -243,8 +243,8 @@ $(document).ready(function(){
 								<div class="row">
 									<div class="col-sm-4 col-6">
 										<label class="form-label mt-4"><span style="color:red;">*</span>첨부파일 유무</label> 
-										<select	class="form-control" name="checkForm" id="choices-gender">
-								<option value="" selected="selected">첨부파일 선택</option>
+										<select	class="form-control" name="checkForm" id="checkform">
+								<option value="" >첨부파일 선택</option>
 											<option  value="N">필요없음</option>
 											<option id="P" value="P">개인양식(사진+첨부양식)</option>
 											<option  value="C">공통파일(사진)</option>
@@ -393,7 +393,7 @@ $(document).ready(function(){
 	});
 	
 	
-	
+			          
 	
   </script>
   
@@ -416,26 +416,7 @@ $(document).ready(function(){
 
 <script src="${path}/resource/js/Req3000/address.js"></script>
 <%--gps --%>
-<script src="${path}/resource/js/Req3000/gps.js"></script>  
-
-<script>
-/* 
-var now_utc = Date.now()
-var timeOff = new Date().getTimezoneOffset()*60000;
-var today = new Date(now_utc-timeOff).toISOString().split("T")[0];
-$('input[name=openDate]').attr("min", today);
-$('input[name=closeDate]').attr("min", today);
-$('input[name=recruitmentStartDate]').attr("min", today);
-$('input[name=recruitmentEndDate]').attr("min", today);
- */
-  
-
-
-</script>
-
-
-
-
+<script src="${path}/resource/js/Req3000/gps.js"></script>
 
 
 </html>

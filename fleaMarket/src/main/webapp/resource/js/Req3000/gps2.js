@@ -120,9 +120,139 @@ function displayCenterInfo(result, status) {
                 
      }  
 
-
+//유효성체크
 
      
   
+	//필수항목 조건식 
+	 function checkForm1(){	
+	if(!document.aform.email.value){
+		    var loginState="로그인을 하셔야합니다."
+		    alert(loginState)
+		    if(loginState+"\n 로그인 화면으로 이동하시겠습니까?"){
+				location.href="SignIn.do"
+			}        
+	        return false;
+	 }
+	 	 
+	if(!document.aform.title.value){
+	        alert("글제목을 입력하세요");
+	        return false;
+	 }
+	 // 플리마켓 유효성체크
+	  var startDate = $('#openDate').val();
+      var endDate = $('#closeDate').val();
+      //-을 구분자로 연,월,일로 잘라내어 배열로 반환
+      var startArray = startDate.split('-');
+      var endArray = endDate.split('-');   
+      //배열에 담겨있는 연,월,일을 사용해서 Date 객체 생성
+      var start_date = new Date(startArray[0], startArray[1], startArray[2]);
+      var end_date = new Date(endArray[0], endArray[1], endArray[2]);	 
+	 if(start_date.getTime() > end_date.getTime()) {
+
+         alert(" 플리마켓 종료날짜보다 시작날짜가 작아야합니다.");
+         return false;
+     }
+		 
+	 if(!document.aform.openDate.value){
+	     alert("플리마켓 시작일을 입력하세요");
+	     return false;
+	 }
+	 
+	 if(!document.aform.closeDate.value){
+	     alert("플리마켓 종료일을 입력하세요");
+	     return false;
+	 }
+	 
+	 if(!document.aform.approvalMaxCnt.value){
+	     alert("모집인원을 입력해주세요");
+	     return false;
+	 }
+      //모집일 유효성 체크 
+	  var startDate1 = $('#recruitmentStartDate').val();
+      var endDate1 = $('#recruitmentEndDate').val();
+      //-을 구분자로 연,월,일로 잘라내어 배열로 반환
+      var startArray1 = startDate1.split('-');
+      var endArray1 = endDate1.split('-');   
+      //배열에 담겨있는 연,월,일을 사용해서 Date 객체 생성
+      var start_date1 = new Date(startArray1[0], startArray1[1], startArray1[2]);
+      var end_date1 = new Date(endArray1[0], endArray1[1], endArray1[2]);	 
+	 if(start_date1.getTime() > end_date1.getTime()) {
+
+         alert("모집종료 날짜보다 시작날이 작아야합니다.");
+         return false;
+     }
+	 
+	 if(!document.aform.recruitmentStartDate.value){
+	     alert("모집시작일을 입력해주세요");
+	     return false;
+	 }
+	 if(!document.aform.recruitmentEndDate.value){
+	     alert("모집종료일을 입력해주세요");
+	     return false;
+	 }
+	 
+	 //모집마지막일이 
+	 if(end_date1.getTime() > start_date.getTime()) {
+
+         alert("모집일을 다시 설정해 주세요");
+         return false;
+     }
+     var checkval = $("#checkform option:selected").val();
+	 	 if(checkval==''){
+        alert("첨부파일 유무 체크바랍니다")
+        return false;
+      }
+	 if(document.aform.checkForm.value==""){
+	     alert("첨부파일 유무를 선택해주세요");
+	     return false;
+	 }
+	 
+
+	 if(!document.aform.address.value){
+	     alert("장소를 선택해주세요");
+	     return false;
+	 }
+	 if(!document.aform.address.value){
+	     alert("장소를 선택해주세요");
+	     return false;
+	 }
+	 if(!document.aform.content.value){
+	     alert("내용 적어주세요");
+	     return false;
+	 }
+	  if(!document.aform.pro.value){
+	     alert("첨부파일은 필수");
+	     return false;
+	 }
+	 //첨부파일 확인을 위한 유효성 체크 
+	 var fileForm0 = /(.*?)\.(docx|hwp)$/;
+	 
+	 var fileArr = Array.from(document.getElementById('isFile').files);// 이벤트로 넘어온 파일들을 배열형식으로 담음(FileList -> Array)
+     //파일이 배열로 잘 바뀌엇는지 확인ㅋ
+     console.log(fileArr);
+     var filecheck = false;
+     for(var i=fileArr.length-1; i>=0; i--){
+		 var fileName = fileArr[i].name
+		//파일이름의 확장자
+		var ext = fileName.substring(fileName.lastIndexOf('.') + 1);
+		//검사할 확장자의 배열
 	
+    	var extension = ['doc','docx','ppt','pptx','xls','pdf','hwp','txt'];
+    	
+    	extension.forEach(function(element) {
+	        if(ext == element){
+	            filecheck = true;
+	        }
+    	})
+	 }
+	
+	if(document.aform.checkForm.value=="P"&&filecheck==false){
+		alert("개인양식일때는 첨부파일 필수 입니다.")
+		return false;
+		}
+		 
+	  return true;
+	}
+	         
 	          
