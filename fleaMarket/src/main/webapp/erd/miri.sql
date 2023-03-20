@@ -177,15 +177,13 @@ SELECT * FROM fleamarket;
 SELECT * FROM FApplication;
 SELECT * FROM ApplicationFile;
 
-TRUNCATE TABLE FApplication;
-
    	
-INSERT INTO FApplication VALUES (1,'28888wjdaud@naver.com',FApplication_seq.nextval,sysdate,null);
+INSERT INTO FApplication VALUES (37,'ehddms2909@naver.com',FApplication_seq.nextval,sysdate,null);
 INSERT INTO FApplication VALUES (7,'test@naver.com',FApplication_seq.nextval,sysdate,null);
 INSERT INTO FApplication VALUES (1,'miri7575@naver.com',FApplication_seq.nextval,sysdate,'a');
 INSERT INTO ffile VALUES ('양식 작성 방법.txt','C:/Users/gram/git/fleaMarketProject/fleaMarket/src/main/webapp/resource/img/fleaMarket/','1');
-INSERT INTO ApplicationFile VALUES ('플리마켓 신청 양식.docx,market.jpg',79);
-DELETE FROM fleamarket WHERE postingNumber = '32';
+INSERT INTO ApplicationFile VALUES ('플리마켓 신청 양식.docx',22);
+DELETE FROM fleamarket WHERE postingNumber = '33';
 DELETE FROM FApplication WHERE applicationno = 52;
 DELETE FROM ApplicationFile WHERE applicationno = 50;
 

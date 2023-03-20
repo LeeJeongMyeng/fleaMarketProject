@@ -145,7 +145,7 @@ li {
 													<c:otherwise>
 														<c:if test="${Login.authority!='관리자'}">
 															<li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-									                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="#">
+									                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="appMyList.do">
 									                            <div class="d-flex">
 									                              <div class="icon h-10 me-3 d-flex mt-1">
 									                                <i class="ni ni-single-copy-04 text-primary"></i>
@@ -161,7 +161,7 @@ li {
 									                    </c:if>
 														<c:if test="${Login.authority=='사업자'}">
 									                        <li class="nav-item dropdown dropdown-hover dropdown-subitem list-group-item border-0 p-0">
-									                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="#">
+									                          <a class="dropdown-item py-2 ps-3 border-radius-md" href="appReceivedList.do">
 									                            <div class="d-flex">
 									                              <div class="icon h-10 me-3 d-flex mt-1">
 									                                <i class="ni ni-single-copy-04 text-primary"></i>
