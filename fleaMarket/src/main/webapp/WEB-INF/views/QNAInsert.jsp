@@ -166,9 +166,10 @@ input[type=file]::file-selector-button {
 							</div>
 								<input type="hidden" id="contentInput" name="content"/>
 							<div class="mb-3" style="margin-left: 26px;">
-								 <input class="mt-3" name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}"  multiple/>
+								<label class="postInsertTitle" class="mt-3">이미지파일 이외는 첨부 되지않습니다.<span style="color:red;">!!</span></label><br>
+								 <input class="" name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}"  multiple/>
 							</div>
-							<label class="postInsertTitle">이미지 미리보기 <span style="color:red;">(이미지를 '더블클릭'시 해당파일이 제외됩니다.)</span></label>
+							<label class="postInsertTitle">이미지 미리보기 <span style="color:red;">(x버튼 클릭시 해당 파일만 제거)</span></label>
 							 <div id="imgs_wrap" style="display:flex;">
    							 </div>
    							
