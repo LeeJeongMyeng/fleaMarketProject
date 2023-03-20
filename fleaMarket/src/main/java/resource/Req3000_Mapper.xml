@@ -86,7 +86,7 @@
     <select id="getFleaMarketList" parameterType="fleamarket"
 		 resultType="fleamarket">
 				select * from FleaMarket
-			where title like '%'||''||'%'
+			where title like '%'||#{title}||'%'
 			ORDER BY REGISTDATE DESC
 	</select>	
 	
@@ -96,7 +96,7 @@
       SELECT nvl(FILENAME,'없음') FROM(
 		SELECT ROWNUM rn,f.FILENAME 
 		FROM ffile f
-		WHERE ROWNUM <=2 AND 
+		WHERE ROWNUM <2 AND 
 		POSTINGNUMBER = #{postingNumber})
 	WHERE FILENAME LIKE '%.jpg' OR 
           FILENAME LIKE '%.gif'OR 
