@@ -180,7 +180,7 @@ li {
 											</ul>
 										</div>
 										<script>
-										f/* unction registration() {
+										/* function registration() {
 											  if ("${Login.email}" == "") {
 											    Swal.fire({
 											      title: "로그인을 하셔야 등록할 수 있습니다.",
