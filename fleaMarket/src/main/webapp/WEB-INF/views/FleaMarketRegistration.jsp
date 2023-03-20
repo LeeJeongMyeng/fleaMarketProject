@@ -47,16 +47,16 @@
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 <script>
-var msg = "${msg}";
+/* var msg = "${msg}";
 var alert = function(alertIcon, msg) {
 	Swal.fire({
 	    icon:alertIcon,
         text:msg,
         confirmButtonText:'확인'
 	 })
-}
+} */
 
-/* 
+
 var msg = "${msg}"
 	if (msg != "") {
 		alert(msg)
@@ -64,7 +64,7 @@ var msg = "${msg}"
 			location.href = "${path}/totalSearch.do"
 		}
 	}
- */
+ 
 
 
 $(document).ready(function(){
