@@ -89,7 +89,7 @@ $("#UptInfoBtn").click(function(){
 		+"&"+$('#MemberInfoForm #sample6_extraAddress').val()
 		+"&"+$('#MemberInfoForm #sample6_detailAddress').val())
 	//닉네임
-	if($('#MemberInfoForm input[name=nickname]').val().length<3 ||$('#MemberInfoForm input[name=nickname]').val().length>21){
+	if($('#MemberInfoForm input[name=nickname]').val().length<2 ||$('#MemberInfoForm input[name=nickname]').val().length>21){
 		$('#MemberInfoForm input[name=nickname]').addClass('is-invalid')
 		$('#MemberInfoForm input[name=nickname]').focus()
 		return false;
