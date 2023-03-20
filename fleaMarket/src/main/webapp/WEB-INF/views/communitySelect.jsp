@@ -212,7 +212,7 @@
                               <td style = "padding-right:35px" class="text-sm">${lists.likeCnt }</td>
                               <td style = "padding-right:60px" class="text-sm">${lists.registDate }</td>
                               <td style="text-align: center; padding-top: 12px; padding-right:20px">
-                              <a href = "communityMemberRoom.do?email=${lists.email}"><span
+                              <a href = "communityMemberRoom.do?email=${lists.email}&loginEmail=${Login.email}"><span
                                  class="badge badge-secondary badge-sm">room 가기</span></a></td>
                               
                            </tr>

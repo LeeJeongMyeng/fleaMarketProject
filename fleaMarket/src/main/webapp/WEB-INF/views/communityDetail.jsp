@@ -99,7 +99,7 @@
 
 							<div class="row">
                 <div class="col-xl-5 col-lg-6 text-center">
-                  <img class="w-100 border-radius-lg shadow-lg mx-auto" src="${path }/resource/community/${imgList[0]}" alt="chair">
+                  <img class="w-100 border-radius-lg shadow-lg mx-auto" src="${path }/resource/community/${imgList[0]}" alt="이미지없음">
                   <div class="my-gallery d-flex mt-4 pt-2" itemscope itemtype="http://schema.org/ImageGallery">
                   <c:forEach var = "img" items = "${imgList}" begin = "1" end = "5">
                     <figure class="ms-2 me-3" itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject">
@@ -168,7 +168,7 @@ It's a separate element, as animating opacity is faster than rgba(). -->
                   
                   <div class="d-flex mt-3">
                   <div class="flex-shrink-0">
-                    <a href = "communityMemberRoom.do?email=${detail.email}"><img alt="Image placeholder" class="avatar rounded-circle cursor-pointer" src="${path}/resource/img/Member/profileimg/${detail.profileimg}"></a>
+                    <a href = "communityMemberRoom.do?email=${detail.email}&loginEmail=${Login.email}"><img alt="Image placeholder" class="avatar rounded-circle cursor-pointer" src="${path}/resource/img/Member/profileimg/${detail.profileimg}"></a>
                   </div>
                   <div class="flex-grow-1 ms-3">
                     <h6 class="h5 mt-0" style = "line-height:2.5">${detail.nickname }</h6>
