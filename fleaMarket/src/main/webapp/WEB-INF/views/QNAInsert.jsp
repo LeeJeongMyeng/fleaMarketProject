@@ -55,9 +55,16 @@ function triggerback(){
 
 function CheckQNAInsert(){
 	var sesAuthority='${Login.authority}'
-		if(sesAuthority!='관리자' && $('select[name=category]').val()=='none'){alert('문의유형을 선택바랍니다.'); return false;}
-		if($('input[name=title]').val()==''){alert('문의제목을 입력바랍니다.');return false;}
-		if($('input[name=content]').val()==''||$('input[name=content]').val()=='<p><br></p>'){alert('문의내용을 입력부탁드립니다.');return false;}
+		if(sesAuthority!='관리자' && $('select[name=category]').val()=='none'){
+			alert('문의유형을 선택바랍니다.'); return false;
+			}
+		if($('input[name=title]').val()==''){alert('문의제목을 입력바랍니다.');
+			return false;
+		}
+		if($('input[name=content]').val()==''||$('input[name=content]').val()=='<p><br></p>'){
+			alert('문의내용을 입력부탁드립니다.');
+			return false;
+		}
 		return true;
 	}
 </script>
@@ -167,7 +174,8 @@ input[type=file]::file-selector-button {
 								<input type="hidden" id="contentInput" name="content"/>
 							<div class="mb-3" style="margin-left: 26px;">
 								<label class="postInsertTitle" class="mt-3">이미지파일 이외는 첨부 되지않습니다.<span style="color:red;">!!</span></label><br>
-								 <input class="" name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}"  multiple/>
+								 <input class="" name="qnafiles" type="file" id="${Login.authority=='관리자'?'qnafilesadmin':'qnafiles'}"
+								   multiple/>
 							</div>
 							<label class="postInsertTitle">이미지 미리보기 <span style="color:red;">(x버튼 클릭시 해당 파일만 제거)</span></label>
 							 <div id="imgs_wrap" style="display:flex;">
