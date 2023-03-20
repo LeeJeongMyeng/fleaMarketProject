@@ -181,6 +181,23 @@ li {
 										</div>
 										<script>
 										function registration() {
+											  if ("${Login.email}" == "") {
+											    Swal.fire({
+											      title: "로그인을 하셔야 등록할 수 있습니다.",
+											      icon: "warning",
+											      showCancelButton: true,
+											      confirmButtonText: "로그인",
+											      cancelButtonText: "취소",
+											    }).then((result) => {
+											      if (result.isConfirmed) {
+											        location.href = "${path}/SignIn.do";
+											      }
+											    });
+											  } else {
+												  location.href = "${path}/fRegistration.do?email=${Login.email}";
+											  }
+											}
+										/*function registration() {
 											var titleval = "로그인을 하셔야 플리마켓 등록 페이지 이용이 가능합니다."
 											var path = "${path}/SignIn.do"
 											var SessAuth = '${Login.authority}'
@@ -193,7 +210,7 @@ li {
 												comfirmval = '이동'
 											}
 											//로그인 x
-											  if (SessAuth!='' || SessAuth=='사업자') {
+											  if (SessAuth!=''|| SessAuth!='사업자') {
 											    Swal.fire({
 											      title:titleval,
 											      icon: "warning",
@@ -210,7 +227,7 @@ li {
 											  } else {
 											    location.href = "${path}/fRegistration.do?email=${Login.email}";
 											  }
-											}
+											} */
 										</script>
 										<!-- responsive -->
 										<div class="row d-lg-none">
