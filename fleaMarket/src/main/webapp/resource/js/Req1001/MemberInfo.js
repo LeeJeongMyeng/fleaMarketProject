@@ -340,10 +340,10 @@ function ChangeDefualtProfile(){
 //네이버연동-------------------------------------------------------------
 
  //네이버 로그인 로고
-  	var naver_id_login = new naver_id_login("WQO4B5GCMQKA06XHFOuA", "http://localhost:8090/fleaMarket/MemberInfo.do");
+  	var naver_id_login = new naver_id_login("WQO4B5GCMQKA06XHFOuA", "http://223.26.182.204:7080/fleaMarket/MemberInfo.do");
   	var state = naver_id_login.getUniqState();
   	naver_id_login.setButton("white", 3,40);
-  	naver_id_login.setDomain("http://localhost:8090/fleaMarket/MemberInfo.do");
+  	naver_id_login.setDomain("http://223.26.182.204:7080/fleaMarket/MemberInfo.do");
   	naver_id_login.setState(state);
   	naver_id_login.setPopup();
   	naver_id_login.init_naver_id_login();
