@@ -62,7 +62,6 @@ public class FMViewService {
 	
 	// 신청 중복 검사
 	public int duplicateApp(FApplication sch) {
-		System.out.println("#####################"+dao.duplicateApp(sch));
 		return dao.duplicateApp(sch);
 	}
 	

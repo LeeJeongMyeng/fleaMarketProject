@@ -60,7 +60,7 @@ public class FMViewController {
 	// 홍보글 파일 다운로드
 	@GetMapping("downloadFFile.do")
 	public String downloadFFile(@RequestParam("filename") String filename, Model d) {
-		d.addAttribute("downloadPath",fmPath);
+		d.addAttribute("downloadPath",fmPath+"fleafile/");
 		d.addAttribute("downloadName",filename);
 		return "downloadView";
 	}
