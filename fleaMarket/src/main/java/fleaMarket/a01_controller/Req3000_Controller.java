@@ -76,7 +76,7 @@ public class Req3000_Controller {
 			String msg = service.insertFleaFileModule(pro);
 
 			rttr.addFlashAttribute("msg", msg);
-
+ 
 		}
 		// redirect로는 model를 받아 줄 수 없음 RedirectAttributes 사용을 해야함
 		return "redirect:fRegistration.do"; // 조회페이지로 이동
@@ -110,17 +110,17 @@ public class Req3000_Controller {
 				//파일경로
 				String filepath = filelist.get(i).getFilePath();
 				//파일 삭제 처리 서비스
-				fileservice.DeleteFile(filepath, sd);	
-				//삭제 후 -> 재등록 처리 
-				String msg = service.uptFleaFileModule(pro, postingNumber);
-				//DB에 해당 postingNumber에 해당하는 데이터 삭제
-			    service.delFfile(postingNumber);
-		        
+				fileservice.DeleteFile(filepath, sd);			        
 			}		    
+			//DB에 해당 postingNumber에 해당하는 데이터 삭제
+		    service.delFfile(postingNumber);
+		    
+			//삭제 후 -> 재등록 처리 
+			String msg = service.uptFleaFileModule(pro, postingNumber);
 		}
 		return "redirect:totalSearch.do";
 	}
-
+	
 //삭제하기	
 
 //삭제버튼 클릭시	
