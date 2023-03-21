@@ -97,7 +97,7 @@
 		SELECT ROWNUM rn,f.FILENAME 
 		FROM ffile f
 		WHERE ROWNUM <2 and ROWNUM>0 and
-		POSTINGNUMBER = ${POSTINGNUMBER})
+		POSTINGNUMBER = #{postingNumber})
 	WHERE FILENAME LIKE '%.jpg' OR 
           FILENAME LIKE '%.gif'OR 
           FILENAME LIKE '%.jpe'OR 
