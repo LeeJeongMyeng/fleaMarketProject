@@ -209,14 +209,11 @@ function displayCenterInfo(result, status) {
 	 }
 	 
 
-	 if(!document.aform.address.value){
+/*	 if(!document.aform.address.value){
 	     alert("장소를 선택해주세요");
 	     return false;
-	 }
-	 if(!document.aform.address.value){
-	     alert("장소를 선택해주세요");
-	     return false;
-	 }
+	 }*/
+
 	 if(!document.aform.content.value){
 	     alert("내용 적어주세요");
 	     return false;

@@ -93,19 +93,19 @@
 
 	<select id="FileNum" parameterType="string" resultType="string">
 	<![CDATA[
- 	SELECT nvl(FILENAME,'없음') FROM(
+	SELECT nvl(FILENAME,'없음') filename FROM(
 		SELECT ROWNUM rn,f.FILENAME 
 		FROM ffile f
-		WHERE ROWNUM <2 and ROWNUM>0 and
-		POSTINGNUMBER = #{postingNumber})
-	WHERE FILENAME LIKE '%.jpg' OR 
+		WHERE FILENAME LIKE '%.jpg' OR 
           FILENAME LIKE '%.gif'OR 
           FILENAME LIKE '%.jpe'OR 
           FILENAME LIKE '%.png'OR 
           FILENAME LIKE '%.bmp'OR 
           FILENAME LIKE '%.ico'OR 
           FILENAME LIKE '%.apng'OR 
-          FILENAME LIKE '%.jfif'
+          FILENAME LIKE '%.jfif' and
+		POSTINGNUMBER = #{POSTINGNUMBER})
+			WHERE ROWNUM=1
 	    ]]>
 	</select>	 
 </mapper>
