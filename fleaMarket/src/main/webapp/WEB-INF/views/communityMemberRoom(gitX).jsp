@@ -8,8 +8,8 @@
 <fmt:requestEncoding value="utf-8"/>     
 <!DOCTYPE html>
 <%--
-	언팔로우변경
-변경!!!
+
+
  --%>
 <html>
 <head>
@@ -199,7 +199,6 @@
               </p>
             </div>
           </div>
-          <!-- 언팔로우 변경 후후대ㅏㅐ아ㅔㅈ바에배-->
           <div class="col-lg-4 col-md-6 my-sm-auto ms-sm-auto me-sm-0 mx-auto mt-3" id="follow_chat">
             <div class="nav-wrapper position-relative end-0">
             	<!-- 팔로우 클릭 시, 보낼 데이터 -->
@@ -217,7 +216,7 @@
 	            		<td id="followingbutton" style="border-radius:50px;">
 	            			 <a  class="nav-link mb-0 px-0 py-1 d-flex align-items-center justify-content-center" onclick="unfollowFun()" href="#">
 			                    <i class="ni ni-fat-delete"></i>
-			                    <span class="ms-2" >언팔로우</span>
+			                    <span class="ms-2" >팔로잉</span>
 			                 </a>
 	            		</td>
 	            		<!-- <td>
