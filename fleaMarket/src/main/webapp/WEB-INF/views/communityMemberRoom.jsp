@@ -264,7 +264,7 @@
 		      <div class="card" style="width:600px;">
 		        <div class="card-body" style="margin-left:2%;">
 		          <div class="d-flex">
-		            <p class="mb-0">${roommember.nickname}정보</p>
+		            <p class="mb-0">${roommember.nickname}님의 정보</p>
 		            <!-- <div class="form-check form-switch ms-auto">
 		              <input class="form-check-input ms-0" type="checkbox" checked id="flexSwitchCheckDefault00">
 		            </div> -->
