@@ -362,7 +362,7 @@
           <div class="card h-100">
             <div class="card-header pb-0 p-3">
               <div class="d-flex justify-content-between">
-                <h6 class="mb-0">카테고리별 ${roommember.nickname}님의 게시글 갯수</h6>
+                <h6 class="mb-0">카테고리별 ${roommember.nickname}님의 게시글 개수</h6>
                 <button type="button" class="btn btn-icon-only btn-rounded btn-outline-secondary mb-0 ms-2 btn-sm d-flex align-items-center justify-content-center" 
                 		data-bs-toggle="modal" data-bs-target="#boardCategoryCntModal">
                   <i class="fas fa-info" aria-hidden="true"></i>
@@ -761,7 +761,7 @@
   <div class="modal fade" id="repModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="flex-container1">	
 		<div class="modal-dialog modal-dialog-centered" role="document">
-		  <div class="modal-content" style="width:1200px; margin-left: -54%; margin-top: 40%; margin-right: -20%;">
+		  <div class="modal-content" style="width:1400px; margin-left: -80%; margin-top: 45%; margin-right: -72%;">
 		    <div class="modal-header">
 		      <h5 class="modal-title" id="exampleModalLabel">${roommember.nickname}님이 쓴 댓글 정보<br>
 		      <span style="color:grey; font-size:11pt;">＊ 게시글 클릭 시, 게시글 상세조회 페이지로 이동</span></h5>
@@ -782,7 +782,7 @@
 						      			<%-- <tr onclick="location.href='${path}/CommunityDetail.do?communityNumber=${repInfo.communitynumber}&keyword=&type=&shift=registDate&category=${repInfo.category}'" style="cursor:pointer;"> --%>
 					      				<div id="category" style="margin-top: 3%;">${repInfo.category}</div>
 					      				<div id="title" style="margin-left:34%;margin-top: -40px;">${repInfo.title}</div>
-					      				<div id="repcontent" style="margin-left:70%;margin-top: -27px;">${repInfo.repcontent}</div>
+					      				<div id="repcontent" style="margin-left:65%;margin-top: -27px;">${repInfo.repcontent}</div>
 						      			<!-- </tr> -->
 					      		</div>
 				      		</c:forEach>
